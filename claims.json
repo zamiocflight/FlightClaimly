@@ -1,0 +1,52 @@
+[
+  {
+    "flightNumber": "test",
+    "date": "2025-07-12",
+    "from": "TLV",
+    "to": "CPH",
+    "name": "David",
+    "email": "david.v.hedlund@gmail.com",
+    "bookingNumber": "LOT123",
+    "receivedAt": "2025-07-29T19:45:04.897Z"
+  },
+  {
+    "flightNumber": "test",
+    "date": "2025-07-12",
+    "from": "TLV",
+    "to": "CPH",
+    "name": "David",
+    "email": "david.v.hedlund@gmail.com",
+    "bookingNumber": "LOT123",
+    "receivedAt": "2025-07-29T19:45:28.051Z"
+  },
+  {
+    "flightNumber": "test",
+    "date": "2025-07-12",
+    "from": "TLV",
+    "to": "CPH",
+    "name": "David",
+    "email": "david.v.hedlund@gmail.com",
+    "bookingNumber": "LOT123",
+    "receivedAt": "2025-07-29T19:49:44.342Z"
+  },
+  {
+    "flightNumber": "Lot",
+    "date": "2025-05-05",
+    "from": "TLV",
+    "to": "CPH",
+    "name": "David",
+    "email": "david.v.hedlund@gmail.com",
+    "bookingNumber": "LOT123",
+    "receivedAt": "2025-07-29T19:56:50.130Z"
+  },
+  {
+    "flightNumber": "Lot",
+    "date": "2025-05-05",
+    "from": "TLV",
+    "to": "CPH",
+    "name": "David",
+    "email": "david.v.hedlund@gmail.com",
+    "bookingNumber": "LOT123",
+    "receivedAt": "2025-07-29T19:59:59.253Z"
+  }
+]
