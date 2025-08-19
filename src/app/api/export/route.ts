@@ -1,8 +1,8 @@
+// src/app/api/export/route.ts
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-// Typ för våra claims
 type Claim = {
   flightNumber: string;
   date: string;
@@ -15,37 +15,32 @@ type Claim = {
   status: string;
 };
 
-// Typad CSV-konverterare (utan explicit any)
-function convertToCSV<T extends Record<string, unknown>>(data: T[]): string {
-  if (data.length === 0) return '';
+// Fasta headers (helt typat, noll any)
+const HEADERS: (keyof Claim)[] = [
+  'flightNumber',
+  'date',
+  'from',
+  'to',
+  'name',
+  'email',
+  'bookingNumber',
+  'receivedAt',
+  'status',
+];
 
-  const header = Object.keys(data[0] as Record<string, unknown>);
+function convertToCSV(data: Claim[]): string {
+  if (data.length === 0) return '';
+  const headerLine = HEADERS.join(',');
+
   const rows = data.map((obj) =>
-    header
-      .map((field) => {
-        const raw = (obj as Record<string, unknown>)[field];
-        let val = '';
-        if (raw == null) {
-          val = '';
-        } else if (
-          typeof raw === 'string' ||
-          typeof raw === 'number' ||
-          typeof raw === 'boolean'
-        ) {
-          val = String(raw);
-        } else {
-          try {
-            val = JSON.stringify(raw);
-          } catch {
-            val = String(raw);
-          }
-        }
-        return `"${val.replace(/"/g, '""')}"`;
-      })
-      .join(',')
+    HEADERS.map((field) => {
+      const raw = obj[field];
+      const val = String(raw ?? '');
+      return `"${val.replace(/"/g, '""')}"`;
+    }).join(',')
   );
 
-  return [header.join(','), ...rows].join('\n');
+  return [headerLine, ...rows].join('\n');
 }
 
 export async function GET() {
@@ -53,15 +48,13 @@ export async function GET() {
 
   try {
     const fileData = fs.existsSync(filePath) ? fs.readFileSync(filePath, 'utf8') : '[]';
-
-    // Säg till TS att detta är en lista av Claim
     const claims: Claim[] = JSON.parse(fileData);
 
     if (claims.length === 0) {
       return new NextResponse('No data', { status: 204 });
     }
 
-    const csv = convertToCSV<Claim>(claims);
+    const csv = convertToCSV(claims);
 
     return new NextResponse(csv, {
       status: 200,
