@@ -20,12 +20,13 @@ export default function AdminPage() {
   const [statusFilter, setStatusFilter] = useState('Alla');
   const router = useRouter();
 
-  useEffect(() => {
-    const token = localStorage.getItem('adminToken');
-    if (token !== 'flight-auth') {
-      router.push('/login');
-    }
-  }, []);
+ useEffect(() => {
+  const token = localStorage.getItem('adminToken');
+  if (token !== 'flight-auth') {
+    router.push('/login');
+  }
+}, [router]);
+
 
   useEffect(() => {
     fetch('/api/claims')
