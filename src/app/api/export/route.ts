@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-// ✅ Typ för våra claims
+// Typ för våra claims
 type Claim = {
   flightNumber: string;
   date: string;
@@ -15,7 +15,7 @@ type Claim = {
   status: string;
 };
 
-// ✅ Generisk CSV-converter utan any
+// Typad CSV-konverterare (utan explicit any)
 function convertToCSV<T extends Record<string, unknown>>(data: T[]): string {
   if (data.length === 0) return '';
 
@@ -24,21 +24,22 @@ function convertToCSV<T extends Record<string, unknown>>(data: T[]): string {
     header
       .map((field) => {
         const raw = (obj as Record<string, unknown>)[field];
-        // Gör om värdet till text
         let val = '';
         if (raw == null) {
           val = '';
-        } else if (typeof raw === 'string' || typeof raw === 'number' || typeof raw === 'boolean') {
+        } else if (
+          typeof raw === 'string' ||
+          typeof raw === 'number' ||
+          typeof raw === 'boolean'
+        ) {
           val = String(raw);
         } else {
-          // Fångar t.ex. objekt/arrayer på ett säkert sätt
           try {
             val = JSON.stringify(raw);
           } catch {
             val = String(raw);
           }
         }
-        // Escape av citattecken enligt CSV-standard
         return `"${val.replace(/"/g, '""')}"`;
       })
       .join(',')
@@ -53,7 +54,7 @@ export async function GET() {
   try {
     const fileData = fs.existsSync(filePath) ? fs.readFileSync(filePath, 'utf8') : '[]';
 
-    // ✅ Säg till TS vad det är för typ
+    // Säg till TS att detta är en lista av Claim
     const claims: Claim[] = JSON.parse(fileData);
 
     if (claims.length === 0) {
