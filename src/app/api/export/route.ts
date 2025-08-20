@@ -1,15 +1,24 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { Claim } from '@/types/claim';
+import { Claim } from '@/types/claim'; // Byt till relativ import om alias inte funkar
 
 const HEADERS: (keyof Claim)[] = [
-  'flightNumber', 'date', 'from', 'to', 'name', 'email', 'bookingNumber', 'receivedAt', 'status',
+  'flightNumber',
+  'date',
+  'from',
+  'to',
+  'name',
+  'email',
+  'bookingNumber',
+  'receivedAt',
+  'status',
 ];
 
 function convertToCSV(data: Claim[]): string {
   if (data.length === 0) return '';
   const headerLine = HEADERS.join(',');
+
   const rows = data.map((obj) =>
     HEADERS.map((field) => {
       const raw = obj[field];
@@ -17,6 +26,7 @@ function convertToCSV(data: Claim[]): string {
       return `"${val.replace(/"/g, '""')}"`;
     }).join(',')
   );
+
   return [headerLine, ...rows].join('\n');
 }
 
