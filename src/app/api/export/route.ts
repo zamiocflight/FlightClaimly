@@ -1,37 +1,15 @@
-// src/app/api/export/route.ts
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { Claim } from '@/types/claim';
 
-type Claim = {
-  flightNumber: string;
-  date: string;
-  from: string;
-  to: string;
-  name: string;
-  email: string;
-  bookingNumber: string;
-  receivedAt: string;
-  status: string;
-};
-
-// Fasta headers (helt typat, noll any)
 const HEADERS: (keyof Claim)[] = [
-  'flightNumber',
-  'date',
-  'from',
-  'to',
-  'name',
-  'email',
-  'bookingNumber',
-  'receivedAt',
-  'status',
+  'flightNumber', 'date', 'from', 'to', 'name', 'email', 'bookingNumber', 'receivedAt', 'status',
 ];
 
 function convertToCSV(data: Claim[]): string {
   if (data.length === 0) return '';
   const headerLine = HEADERS.join(',');
-
   const rows = data.map((obj) =>
     HEADERS.map((field) => {
       const raw = obj[field];
@@ -39,7 +17,6 @@ function convertToCSV(data: Claim[]): string {
       return `"${val.replace(/"/g, '""')}"`;
     }).join(',')
   );
-
   return [headerLine, ...rows].join('\n');
 }
 

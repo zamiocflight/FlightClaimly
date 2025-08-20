@@ -28,6 +28,7 @@ export default function AdminPage() {
 }, [router]);
 
 
+
   useEffect(() => {
     fetch('/api/claims')
       .then((res) => res.json())
