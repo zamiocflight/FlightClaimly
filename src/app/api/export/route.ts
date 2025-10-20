@@ -1,7 +1,7 @@
+// src/app/api/export/route.ts
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-import { Claim } from '@/types/claim'; // Byt till relativ import om alias inte funkar
+import { readClaims } from '../../../lib/claims';
+import { Claim } from '../../../types/claim';
 
 const HEADERS: (keyof Claim)[] = [
   'flightNumber',
@@ -31,11 +31,8 @@ function convertToCSV(data: Claim[]): string {
 }
 
 export async function GET() {
-  const filePath = path.join(process.cwd(), 'claims.json');
-
   try {
-    const fileData = fs.existsSync(filePath) ? fs.readFileSync(filePath, 'utf8') : '[]';
-    const claims: Claim[] = JSON.parse(fileData);
+    const claims = readClaims();
 
     if (claims.length === 0) {
       return new NextResponse('No data', { status: 204 });

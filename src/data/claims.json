@@ -1,0 +1,166 @@
+[
+  {
+    "flightNumber": "TEST",
+    "date": "2025-10-03",
+    "from": "CPH",
+    "to": "AMS",
+    "name": "DAVIDO",
+    "email": "david.v.hedlund@gmail.com",
+    "bookingNumber": "FFF",
+    "receivedAt": "228dc9f6-3787-4df1-b57e-c09f89fcb5ab",
+    "status": "new",
+    "updatedAt": "2025-10-20T09:20:33.234Z",
+    "attachments": []
+  },
+  {
+    "flightNumber": "TEST",
+    "date": "2025-10-03",
+    "from": "CPH",
+    "to": "TLV",
+    "name": "Davve",
+    "email": "david.v.hedlund@gmail.com",
+    "bookingNumber": "YES",
+    "receivedAt": "c39c7bc0-4eef-482c-9c3b-bdf8a5371c4c",
+    "status": "new",
+    "updatedAt": "2025-10-20T09:13:50.369Z",
+    "attachments": []
+  },
+  {
+    "flightNumber": "TEST",
+    "date": "2025-09-30",
+    "from": "CPH",
+    "to": "AMS",
+    "name": "Davve",
+    "email": "david.v.hedlund@gmail.com",
+    "bookingNumber": "TEST",
+    "receivedAt": "b8f7cb08-c432-4242-bb64-cdce487451a9",
+    "status": "new",
+    "updatedAt": "2025-10-20T09:03:10.841Z",
+    "attachments": [
+      {
+        "filename": "1760950990839-8weekmassbuildinghypertrophyworkout.pdf",
+        "size": 94805,
+        "path": "/Users/davidhedlund/flightclaimly/src/data/uploads/b8f7cb08-c432-4242-bb64-cdce487451a9/1760950990839-8weekmassbuildinghypertrophyworkout.pdf",
+        "uploadedAt": "2025-10-20T09:03:10.840Z",
+        "contentType": "application/pdf"
+      }
+    ]
+  },
+  {
+    "flightNumber": "TEST",
+    "date": "2025-09-30",
+    "from": "CPH",
+    "to": "LAX",
+    "name": "David TEST",
+    "email": "david.v.hedlund@gmail.com",
+    "bookingNumber": "ABC234",
+    "receivedAt": "69b75224-0549-46ee-a90a-10a6acc53a6c",
+    "status": "new",
+    "updatedAt": "2025-10-20T08:46:50.263Z",
+    "attachments": []
+  },
+  {
+    "flightNumber": "DAVIDS123",
+    "date": "2025-10-16",
+    "from": "LAX",
+    "to": "CPH",
+    "name": "David",
+    "email": "david.v.hedlund@gmail.com",
+    "bookingNumber": "ABC123",
+    "receivedAt": "f7e3439d-d64a-496f-be56-d961325e56b3",
+    "status": "new",
+    "updatedAt": "2025-10-17T16:07:38.117Z",
+    "attachments": []
+  },
+  {
+    "flightNumber": "DAVID123",
+    "date": "2025-10-16",
+    "from": "CPH",
+    "to": "AMS",
+    "name": "Davido ",
+    "email": "david.v.hedlund@gmail.com",
+    "bookingNumber": "ABC123",
+    "receivedAt": "1b690f49-7dfd-42ce-baf8-d91e7d1f6fca",
+    "status": "new",
+    "updatedAt": "2025-10-17T16:01:34.529Z",
+    "attachments": []
+  },
+  {
+    "flightNumber": "123",
+    "date": "2025-10-03",
+    "from": "CPH",
+    "to": "AMAS",
+    "name": "David Victor",
+    "email": "david.v.hedlund@gmail.com",
+    "bookingNumber": "ABC123",
+    "receivedAt": "f7f08fac-6ea0-4fe8-ad61-a99fca49c4ce",
+    "status": "new",
+    "updatedAt": "2025-10-17T13:49:11.474Z",
+    "attachments": [
+      {
+        "filename": "1760708951468-8weekmassbuildinghypertrophyworkout.pdf",
+        "size": 94805,
+        "path": "/Users/davidhedlund/flightclaimly/src/data/uploads/f7f08fac-6ea0-4fe8-ad61-a99fca49c4ce/1760708951468-8weekmassbuildinghypertrophyworkout.pdf",
+        "uploadedAt": "2025-10-17T13:49:11.469Z",
+        "contentType": "application/pdf"
+      }
+    ]
+  },
+  {
+    "flightNumber": "LH123",
+    "date": "2025-10-01",
+    "from": "CPH",
+    "to": "LAX",
+    "name": "David Victor Hedlund",
+    "email": "david.v.hedlund@gmail.com",
+    "bookingNumber": "ABC123",
+    "receivedAt": "3bfe17d1-a315-48ac-8a1f-4f66e63455e3",
+    "status": "new",
+    "updatedAt": "2025-10-09T13:42:09.590Z",
+    "attachments": [
+      {
+        "filename": "1760017329585-7842_05_web.pdf",
+        "size": 83148,
+        "path": "/Users/davidhedlund/flightclaimly/src/data/uploads/3bfe17d1-a315-48ac-8a1f-4f66e63455e3/1760017329585-7842_05_web.pdf",
+        "uploadedAt": "2025-10-09T13:42:09.586Z",
+        "contentType": "application/pdf"
+      }
+    ]
+  },
+  {
+    "flightNumber": "LH123",
+    "date": "2025-10-02",
+    "from": "CPH",
+    "to": "LAX",
+    "name": "David Victor Hedlund",
+    "email": "david.v.hedlund@gmail.com",
+    "bookingNumber": "ABC123",
+    "receivedAt": "2da15a35-5989-479e-991c-18c6a82feec6",
+    "status": "new",
+    "updatedAt": "2025-10-09T13:08:32.222Z"
+  },
+  {
+    "flightNumber": "SK456",
+    "date": "2025-10-10",
+    "from": "ARN",
+    "to": "CPH",
+    "name": "Bosse Test",
+    "email": "bosse@example.com",
+    "bookingNumber": "DEF456",
+    "receivedAt": "b8da6347-510f-4be2-aba8-bb9421871487",
+    "status": "new",
+    "updatedAt": "2025-10-09T12:54:50.398Z"
+  },
+  {
+    "flightNumber": "SK123",
+    "date": "2025-10-08",
+    "from": "CPH",
+    "to": "ARN",
+    "name": "Anna Example",
+    "email": "anna@example.com",
+    "bookingNumber": "ABC123",
+    "receivedAt": "test-123",
+    "status": "approved",
+    "updatedAt": "2025-10-09T12:20:55.782Z"
+  }
+]

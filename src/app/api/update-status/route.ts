@@ -1,31 +1,48 @@
+// src/app/api/update-status/route.ts
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { readClaims, writeClaims } from '@/lib/claims';
 import { Claim } from '@/types/claim';
 
-export async function POST(request: Request) {
-  const { index, newStatus } = await request.json();
+const ALLOWED = ['Obehandlad', 'Under behandling', 'Klar'];
 
-  if (typeof index !== 'number' || !newStatus) {
-    return NextResponse.json({ error: 'index (number) och newStatus krävs' }, { status: 400 });
-  }
+// ✅ Test-GET så du kan se att routen lever i browsern
+export async function GET() {
+  return NextResponse.json({ ok: true, route: '/api/update-status' });
+}
 
-  const filePath = path.join(process.cwd(), 'claims.json');
-
+export async function POST(req: Request) {
   try {
-    const fileData = fs.existsSync(filePath) ? fs.readFileSync(filePath, 'utf8') : '[]';
-    const claims: Claim[] = JSON.parse(fileData);
+    const body = await req.json();
+    const { email, bookingNumber, receivedAt, newStatus } = body;
 
-    if (index < 0 || index >= claims.length) {
-      return NextResponse.json({ error: 'Ogiltigt index' }, { status: 400 });
+    if (!newStatus) return NextResponse.json({ error: 'Saknar newStatus' }, { status: 400 });
+    if (!ALLOWED.includes(newStatus)) {
+      return NextResponse.json({ error: `Ogiltig status: ${newStatus}` }, { status: 400 });
     }
 
-    claims[index].status = String(newStatus);
-    fs.writeFileSync(filePath, JSON.stringify(claims, null, 2));
+    const claims: Claim[] = readClaims();
+    if (!claims.length) return NextResponse.json({ error: 'Inga claims' }, { status: 404 });
 
-    return NextResponse.json({ ok: true });
+    // 1) matcha på receivedAt (unikast), 2) fallback email+bookingNumber
+    let idx = typeof receivedAt === 'string'
+      ? claims.findIndex(c => c.receivedAt === receivedAt)
+      : -1;
+    if (idx === -1 && email && bookingNumber) {
+      idx = claims.findIndex(c => c.email === email && c.bookingNumber === bookingNumber);
+    }
+    if (idx === -1) {
+      return NextResponse.json(
+        { error: 'Hittade ingen claim (receivedAt och/eller email+bookingNumber)' },
+        { status: 404 }
+      );
+    }
+
+    claims[idx] = { ...claims[idx], status: newStatus };
+    writeClaims(claims);
+
+    return NextResponse.json({ success: true, updated: claims[idx] });
   } catch (error) {
-    console.error('💥 Status-uppdatering misslyckades:', error);
+    console.error('💥 update-status error:', error);
     return NextResponse.json({ error: 'Serverfel' }, { status: 500 });
   }
 }

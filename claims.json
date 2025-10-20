@@ -7,7 +7,8 @@
     "name": "David",
     "email": "david.v.hedlund@gmail.com",
     "bookingNumber": "LOT123",
-    "receivedAt": "2025-07-29T19:45:04.897Z"
+    "receivedAt": "2025-07-29T19:45:04.897Z",
+    "status": "Klar"
   },
   {
     "flightNumber": "test",
@@ -17,7 +18,8 @@
     "name": "David",
     "email": "david.v.hedlund@gmail.com",
     "bookingNumber": "LOT123",
-    "receivedAt": "2025-07-29T19:45:28.051Z"
+    "receivedAt": "2025-07-29T19:45:28.051Z",
+    "status": "Under behandling"
   },
   {
     "flightNumber": "test",
@@ -27,7 +29,8 @@
     "name": "David",
     "email": "david.v.hedlund@gmail.com",
     "bookingNumber": "LOT123",
-    "receivedAt": "2025-07-29T19:49:44.342Z"
+    "receivedAt": "2025-07-29T19:49:44.342Z",
+    "status": "Obehandlad"
   },
   {
     "flightNumber": "Lot",
@@ -37,7 +40,8 @@
     "name": "David",
     "email": "david.v.hedlund@gmail.com",
     "bookingNumber": "LOT123",
-    "receivedAt": "2025-07-29T19:56:50.130Z"
+    "receivedAt": "2025-07-29T19:56:50.130Z",
+    "status": "Klar"
   },
   {
     "flightNumber": "Lot",
@@ -47,6 +51,18 @@
     "name": "David",
     "email": "david.v.hedlund@gmail.com",
     "bookingNumber": "LOT123",
-    "receivedAt": "2025-07-29T19:59:59.253Z"
+    "receivedAt": "2025-07-29T19:59:59.253Z",
+    "status": "Obehandlad"
+  },
+  {
+    "flightNumber": "SK1420",
+    "date": "2025-08-10",
+    "from": "BUD",
+    "to": "CPH",
+    "name": "Test Person",
+    "email": "test@example.com",
+    "bookingNumber": "ABC123",
+    "receivedAt": "2025-08-25T18:49:40.634Z",
+    "status": "Obehandlad"
   }
 ]
