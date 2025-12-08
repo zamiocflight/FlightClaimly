@@ -1,9 +1,10 @@
 // src/app/thanks/page.tsx
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+
 
 type SavedAttachment = {
   filename: string;
@@ -12,7 +13,8 @@ type SavedAttachment = {
   contentType?: string;
 };
 
-export default function ThanksPage() {
+function ThanksPageInner() {
+
   const sp = useSearchParams();
 
   // 1) Läs claim-id från URL, fallback till localStorage om saknas
@@ -563,5 +565,18 @@ export default function ThanksPage() {
         </div>
       )}
     </main>
+  );
+}
+export default function ThanksPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-slate-100 flex items-center justify-center">
+          <p className="text-sm text-slate-600">Laddar sidan…</p>
+        </main>
+      }
+    >
+      <ThanksPageInner />
+    </Suspense>
   );
 }
