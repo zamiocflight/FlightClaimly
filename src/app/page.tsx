@@ -521,7 +521,7 @@ export default function Home() {
               <p className="mt-1 text-[11px] text-slate-700/80">
                 Tar ca 2 minuter. Inget att betala om du inte får ersättning –{' '}
                 <a href="/terms" className="underline">
-                  läs mer om vår avgift (20 %).
+                  läs mer om vår avgift.
                 </a>
               </p>
             </div>
@@ -582,17 +582,12 @@ export default function Home() {
               <h3 className="text-base md:text-lg font-semibold mb-1">
                 Snabb förhandskontroll
               </h3>
-              <p className="text-[11px] md:text-xs text-slate-600 mb-4">
-                Ange ditt flyg – vi gör en snabb bedömning om du kan ha rätt
-                till ersättning enligt{' '}
-                <a
-                  href="/rights"
-                  className="underline underline-offset-2 decoration-emerald-500/70"
-                >
-                  EU261
-                </a>
-                .
-              </p>
+              <p className="text-xs text-slate-600 mt-1">
+  Ange ditt flyg – vi gör en snabb bedömning om du kan ha rätt till ersättning enligt{' '}
+  <a href="/rights" className="font-semibold text-slate-900">
+    EU261
+  </a>.
+</p>
 
               <form onSubmit={handleQuickCheck} className="grid grid-cols-1 gap-3">
                 <Input
