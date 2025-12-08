@@ -1,48 +1,103 @@
-// src/app/api/update-status/route.ts
 import { NextResponse } from 'next/server';
-import { readClaims, writeClaims } from '@/lib/claims';
-import { Claim } from '@/types/claim';
+import { getClaimById, updateClaimStatus, type Claim } from '@/lib/claims';
+import { sendStatusEmail } from '@/lib/statusEmail';
 
-const ALLOWED = ['Obehandlad', 'Under behandling', 'Klar'];
-
-// ✅ Test-GET så du kan se att routen lever i browsern
-export async function GET() {
-  return NextResponse.json({ ok: true, route: '/api/update-status' });
-}
+type AllowedStatus =
+  | 'new'
+  | 'processing'
+  | 'sent_to_airline'
+  | 'paid_out'
+  | 'rejected';
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { email, bookingNumber, receivedAt, newStatus } = body;
+    const { id, status } = body as { id?: string; status?: string };
 
-    if (!newStatus) return NextResponse.json({ error: 'Saknar newStatus' }, { status: 400 });
-    if (!ALLOWED.includes(newStatus)) {
-      return NextResponse.json({ error: `Ogiltig status: ${newStatus}` }, { status: 400 });
-    }
+    console.log('🔵 API fick ID:', JSON.stringify(id), 'status:', status);
 
-    const claims: Claim[] = readClaims();
-    if (!claims.length) return NextResponse.json({ error: 'Inga claims' }, { status: 404 });
-
-    // 1) matcha på receivedAt (unikast), 2) fallback email+bookingNumber
-    let idx = typeof receivedAt === 'string'
-      ? claims.findIndex(c => c.receivedAt === receivedAt)
-      : -1;
-    if (idx === -1 && email && bookingNumber) {
-      idx = claims.findIndex(c => c.email === email && c.bookingNumber === bookingNumber);
-    }
-    if (idx === -1) {
+    if (!id || !status) {
       return NextResponse.json(
-        { error: 'Hittade ingen claim (receivedAt och/eller email+bookingNumber)' },
-        { status: 404 }
+        { error: 'Missing id or status' },
+        { status: 400 },
       );
     }
 
-    claims[idx] = { ...claims[idx], status: newStatus };
-    writeClaims(claims);
+    const internal = normalizeStatusInput(status) as AllowedStatus;
 
-    return NextResponse.json({ success: true, updated: claims[idx] });
-  } catch (error) {
-    console.error('💥 update-status error:', error);
-    return NextResponse.json({ error: 'Serverfel' }, { status: 500 });
+    // 1) Finns ärendet i DB?
+    const existing = await getClaimById(id);
+    if (!existing) {
+      console.error('❌ Claim not found in DB for id:', id);
+      return NextResponse.json(
+        { error: 'Claim not found' },
+        { status: 404 },
+      );
+    }
+
+    // 2) Uppdatera status i DB
+    const updated: Claim = await updateClaimStatus(id, internal);
+
+    // Viktigt: tracking-ID = receivedAt (det som används i claims.json / public-API)
+    const trackingId = String(updated.receivedAt ?? id);
+
+    console.log('🔍 update-status tracking-id', {
+      requestId: id,
+      trackingId,
+      receivedAt: updated.receivedAt,
+    });
+
+    // 3) Försök skicka statusmail via vår helper
+    let emailSent = false;
+    if (updated.email) {
+      try {
+        await sendStatusEmail({
+          id: trackingId, // 👈 detta hamnar i /track/[id]
+          email: updated.email,
+          name: updated.name,
+          status: internal as any, // matchar StatusCode i statusEmail.ts
+          flightNumber: updated.flightNumber,
+          from: updated.from,
+          to: updated.to,
+          flightDate: (updated as any).date ?? null,
+          // publicToken kan kopplas på senare om vi vill ha ?t=...
+          lang: 'sv',
+        });
+        emailSent = true;
+      } catch (err) {
+        emailSent = false;
+        console.error('Kunde inte skicka statusmail:', err);
+      }
+    }
+
+    return NextResponse.json(
+      { ok: true, claim: updated, emailSent },
+      { status: 200 },
+    );
+  } catch (err) {
+    console.error('Error in /api/update-status:', err);
+    return NextResponse.json({ error: 'Internal error' }, { status: 500 });
   }
+}
+
+function normalizeStatusInput(status: string): AllowedStatus {
+  const s = status.toLowerCase().trim();
+
+  if (
+    s === 'new' ||
+    s === 'processing' ||
+    s === 'sent_to_airline' ||
+    s === 'paid_out' ||
+    s === 'rejected'
+  ) {
+    return s;
+  }
+
+  if (s.includes('klar') || s.includes('utbetald')) return 'paid_out';
+  if (s.includes('under behandling')) return 'processing';
+  if (s.includes('skickat')) return 'sent_to_airline';
+  if (s.includes('avslag')) return 'rejected';
+  if (s.includes('obehandlad')) return 'new';
+
+  return 'new';
 }

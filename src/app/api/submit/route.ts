@@ -1,38 +1,30 @@
-// src/app/api/submit/route.ts
+export const runtime = 'nodejs';
+
 import { NextResponse } from 'next/server';
-import { readClaims, writeClaims } from '@/lib/claims';
-import { Claim } from '@/types/claim';
+import { addClaim } from '@/lib/claims';
+import { z } from 'zod';
+
+const CreateSchema = z.object({
+  flightNumber: z.string().min(2),
+  date: z.string().min(4),
+  from: z.string().min(2),
+  to: z.string().min(2),
+  name: z.string().min(2),
+  email: z.string().email(),
+  bookingNumber: z.string().min(2),
+});
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-
-    const required = ['flightNumber','date','from','to','name','email','bookingNumber'] as const;
-    for (const k of required) {
-      if (!body[k]) {
-        return NextResponse.json({ error: `Saknar fält: ${k}` }, { status: 400 });
-      }
+    const body = await req.json().catch(() => ({}));
+    const parsed = CreateSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: 'Invalid payload', details: parsed.error.flatten() }, { status: 400 });
     }
-
-    const newClaim: Claim = {
-      flightNumber: String(body.flightNumber).trim(),
-      date: String(body.date).trim(),
-      from: String(body.from).trim(),
-      to: String(body.to).trim(),
-      name: String(body.name).trim(),
-      email: String(body.email).trim(),
-      bookingNumber: String(body.bookingNumber).trim(),
-      receivedAt: new Date().toISOString(),
-      status: 'Obehandlad', // ✅ default
-    };
-
-    const claims = readClaims();
-    claims.push(newClaim);
-    writeClaims(claims);
-
-    return NextResponse.json({ success: true, claim: newClaim }, { status: 201 });
-  } catch (err) {
-    console.error('💥 submit error:', err);
+    const claim = await addClaim(parsed.data);
+    return NextResponse.json({ ok: true, claim }, { status: 201 });
+  } catch (e) {
+    console.error('submit route error', e);
     return NextResponse.json({ error: 'Serverfel' }, { status: 500 });
   }
 }

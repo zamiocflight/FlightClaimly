@@ -1,3 +1,10 @@
+export type ClaimStatus =
+  | "new"
+  | "processing"
+  | "sent_to_airline"
+  | "paid_out"
+  | "rejected";
+
 export type Claim = {
   flightNumber: string;
   date: string;
@@ -7,5 +14,5 @@ export type Claim = {
   email: string;
   bookingNumber: string;
   receivedAt: string;
-  status: string;
+  status: ClaimStatus;
 };

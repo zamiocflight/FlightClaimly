@@ -1,51 +1,54 @@
+// src/app/login/page.tsx
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-
-const USERNAME = 'admin';
-const PASSWORD = 'FlightClaimly123';
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const router = useRouter();
+  const [pw, setPw] = useState('');
+  const [err, setErr] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (username === USERNAME && password === PASSWORD) {
-      localStorage.setItem('adminToken', 'flight-auth');
-      router.push('/admin');
-    } else {
-      setError('Fel användarnamn eller lösenord.');
+  async function submit() {
+    setErr(null);
+    setLoading(true);
+    try {
+      const r = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pw }),
+      });
+      if (!r.ok) throw new Error('Fel lösenord');
+      window.location.href = '/admin';
+    } catch (e: any) {
+      setErr(e?.message ?? 'Kunde inte logga in');
+    } finally {
+      setLoading(false);
     }
-  };
+  }
 
   return (
-    <main className="max-w-md mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">🔐 Admin Login</h1>
-      <form onSubmit={handleLogin} className="flex flex-col gap-4">
-        <input
-          type="text"
-          placeholder="Användarnamn"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="border p-2 rounded"
-        />
-        <input
-          type="password"
-          placeholder="Lösenord"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="border p-2 rounded"
-        />
-        {error && <p className="text-red-600">{error}</p>}
-        <button type="submit" className="bg-black text-white p-2 rounded">
-          Logga in
+    <main className="min-h-screen flex items-center justify-center bg-slate-50 p-6">
+      <div className="w-full max-w-sm rounded-xl border bg-white p-6 shadow-sm">
+        <h1 className="mb-4 text-xl font-semibold">Admin login</h1>
+        <label className="block text-sm">
+          <span className="mb-1 block text-slate-700">Lösenord</span>
+          <input
+            type="password"
+            value={pw}
+            onChange={(e) => setPw(e.target.value)}
+            className="w-full rounded-lg border px-3 py-2"
+            placeholder="••••••••"
+          />
+        </label>
+        {err && <p className="mt-2 text-sm text-red-600">{err}</p>}
+        <button
+          onClick={submit}
+          disabled={loading || !pw}
+          className="mt-4 w-full rounded-lg bg-slate-900 px-4 py-2 font-semibold text-white disabled:opacity-60"
+        >
+          {loading ? 'Loggar in…' : 'Logga in'}
         </button>
-      </form>
+      </div>
     </main>
   );
 }

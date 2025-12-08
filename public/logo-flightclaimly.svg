@@ -1,0 +1,10 @@
+<svg width="720" height="120" viewBox="0 0 720 120" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .wm {
+      font: 800 64px/1.05 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Noto Sans", sans-serif;
+      fill: #0F172A;
+      letter-spacing: 0;
+    }
+  </style>
+  <text x="0" y="82" class="wm">FLIGHTCLAIMLY</text>
+</svg>

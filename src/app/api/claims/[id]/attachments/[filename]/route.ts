@@ -1,7 +1,11 @@
+// src/app/api/claims/[id]/attachments/[filename]/route.ts
+export const runtime = 'nodejs';
+
 import { NextResponse } from 'next/server';
 import { promises as fs } from 'fs';
 import path from 'path';
 import { getClaims } from '@/lib/claims';
+import { uploadsRoot } from '@/lib/paths';
 
 export async function GET(
   _req: Request,
@@ -9,22 +13,16 @@ export async function GET(
 ) {
   try {
     const { id, filename } = await ctx.params;
-    if (!id || !filename) {
-      return NextResponse.json({ error: 'Missing parameters' }, { status: 400 });
-    }
-
-    // Verifiera att filen verkligen tillhör claimet
     const claims = await getClaims();
-    const claim = claims.find(c => c.receivedAt === id || (c as any).id === id);
+    const claim = claims.find(c => c.receivedAt === id);
     if (!claim) return NextResponse.json({ error: 'Claim not found' }, { status: 404 });
 
-    const att = (claim.attachments || []).find(a => a.filename === filename);
+    const att = (claim.attachments ?? []).find(a => a.filename === filename);
     if (!att) return NextResponse.json({ error: 'File not found' }, { status: 404 });
 
-    // Begränsa sökväg till vår uploads-katalog
-    const uploadsRoot = path.join(process.cwd(), 'src', 'data', 'uploads');
-    const filePath = path.join(uploadsRoot, id, filename);
-    if (!filePath.startsWith(path.join(uploadsRoot, id))) {
+    const root = uploadsRoot();
+    const filePath = path.join(root, id, filename);
+    if (!filePath.startsWith(path.join(root, id))) {
       return NextResponse.json({ error: 'Invalid path' }, { status: 400 });
     }
 

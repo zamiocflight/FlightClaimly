@@ -1,78 +1,76 @@
 // src/app/api/claims/route.ts
-export const runtime = 'nodejs';
-
 import { NextResponse } from 'next/server';
-import { z } from 'zod';
-import { getClaims, addClaim } from '@/lib/claims';
-import { sendMail } from '@/lib/mailer';
+import { addClaim } from '@/lib/claims';
 
-const CreateSchema = z.object({
-  flightNumber: z.string().min(2),
-  date: z.string().min(4),
-  from: z.string().min(2),
-  to: z.string().min(2),
-  name: z.string().min(2),
-  email: z.string().email(),
-  bookingNumber: z.string().min(2),
-});
-
-// GET /api/claims
-export async function GET() {
-  try {
-    const claims = await getClaims();
-    return NextResponse.json(claims);
-  } catch (error) {
-    console.error('💥 Failed to read claims:', error);
-    return NextResponse.json({ error: 'Serverfel' }, { status: 500 });
-  }
-}
-
-// POST /api/claims
 export async function POST(req: Request) {
   try {
-    const body = await req.json().catch(() => ({}));
-    const parsed = CreateSchema.safeParse(body);
-    if (!parsed.success) {
+    const body = await req.json();
+
+    const {
+      flightNumber,
+      date,
+      from,
+      to,
+      name,
+      email,
+      bookingNumber,
+      phone,
+    } = body ?? {};
+
+    // Enkel validering (samma som innan)
+    if (
+      !flightNumber ||
+      !date ||
+      !from ||
+      !to ||
+      !name ||
+      !email ||
+      !bookingNumber
+    ) {
       return NextResponse.json(
-        { error: 'Invalid payload', details: parsed.error.flatten() },
+        {
+          error:
+            'Saknar nödvändig information. Fyll i flygnummer, datum, från, till, namn, e-post och bokningsnummer.',
+        },
         { status: 400 }
       );
     }
 
-    const claim = await addClaim(parsed.data);
+    // Generera tracking-id (uuid)
+    const id = crypto.randomUUID();
 
-    // Skicka ETT mail till kund, BCC till admin för att undvika rate limit
-    const adminTo = process.env.ADMIN_EMAIL || process.env.FROM_EMAIL || parsed.data.email;
+    // Kör Supabase-insert via vårt bibliotek
+    const claim = await addClaim({
+      id,
+      flightNumber,
+      date,
+      from,
+      to,
+      name,
+      email,
+      bookingNumber,
+      phone: phone ?? null,
+    });
 
-    try {
-      const r = await sendMail({
-        to: parsed.data.email,
-        bcc: adminTo,
-        subject: 'Vi har mottagit din ersättningsförfrågan',
-        text:
-`Hej ${parsed.data.name},
+    console.log('✅ /api/claims – NYTT ärende skapat i Supabase:', claim);
 
-Vi har mottagit ditt ärende och börjar handlägga det.
-Ärende-ID: ${claim.receivedAt}
+    // Dummy-precheck (samma som innan)
+    const precheck = {
+      eligible: true,
+      reason: 'Preliminär bedömning: flyget kan vara ersättningsberättigat enligt EU261.',
+      amount: 400,
+      amountHint: 400,
+    };
 
-Flyg: ${parsed.data.flightNumber} ${parsed.data.from} → ${parsed.data.to}
-Datum: ${parsed.data.date}
-Bokningsnummer: ${parsed.data.bookingNumber}
-
-Vi hör av oss om vi behöver mer information.
-
-Vänliga hälsningar,
-FlightClaimly`,
-      });
-      if ((r as any)?.skipped) console.log('[mail] SKIPPED (no SMTP)');
-      else console.log('[mail] skickat', (r as any)?.messageId || '');
-    } catch (e) {
-      console.warn('[mail] utskick misslyckades:', e);
-    }
-
-    return NextResponse.json({ ok: true, claim }, { status: 201 });
-  } catch (e) {
-    console.error('💥 Create claim error:', e);
-    return NextResponse.json({ error: 'Serverfel' }, { status: 500 });
+    return NextResponse.json({
+      id: claim.id,
+      precheck,
+    });
+  } catch (err) {
+    console.error('❌ ERROR i /api/claims:', err);
+    return NextResponse.json(
+      { error: 'Internt fel när ärendet skulle sparas.' },
+      { status: 500 }
+    );
   }
 }

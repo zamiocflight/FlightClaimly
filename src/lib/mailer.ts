@@ -1,54 +1,52 @@
 // src/lib/mailer.ts
 import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
-let _transporter: nodemailer.Transporter | null = null;
+type MailOpts = { to: string; subject: string; text: string };
 
-export function getTransporter() {
-  if (_transporter) return _transporter;
+const FROM = process.env.MAIL_FROM || process.env.FROM_EMAIL || 'FlightClaimly <no-reply@example.com>';
 
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;
+// ---- Provider 1: Resend ----
+const RESEND_KEY = process.env.RESEND_API_KEY;
+const resend = RESEND_KEY ? new Resend(RESEND_KEY) : null;
 
-  if (!SMTP_HOST || !SMTP_PORT) {
-    console.warn('[mail] SMTP not configured; skipping emails');
-    return null;
-  }
-
-  _transporter = nodemailer.createTransport({
-    host: SMTP_HOST,
-    port: Number(SMTP_PORT),
-    secure: Number(SMTP_PORT) === 465,
-    auth: SMTP_USER && SMTP_PASS ? { user: SMTP_USER, pass: SMTP_PASS } : undefined,
-    pool: true,
-    rateDelta: 1000,
-    rateLimit: 1,
-  });
-
-  return _transporter;
+// ---- Provider 2: SMTP (Nodemailer) ----
+let _smtp: nodemailer.Transporter | null = null;
+function getSmtp() {
+  if (_smtp) return _smtp;
+  const host = process.env.SMTP_HOST;
+  const port = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : undefined;
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+  if (!host || !port || !user || !pass) return null;
+  _smtp = nodemailer.createTransport({ host, port, auth: { user, pass } });
+  return _smtp;
 }
 
-export async function sendMail(opts: {
-  to: string | string[];
-  subject: string;
-  html?: string;
-  text?: string;
-  from?: string;
-  cc?: string | string[];
-  bcc?: string | string[];
-}) {
-  const tx = getTransporter();
-  if (!tx) return { skipped: true };
+// ---- Unified API ----
+export async function sendMail(opts: MailOpts) {
+  // Prefer Resend if key exists
+  if (resend) {
+    try {
+      const r = await resend.emails.send({
+        from: FROM,
+        to: opts.to,
+        subject: opts.subject,
+        text: opts.text,
+      });
+      return { provider: 'resend', ...r };
+    } catch (e) {
+      console.warn('[mail][resend] error -> falling back to SMTP if available:', e);
+    }
+  }
 
-  const from = opts.from || process.env.FROM_EMAIL || 'FlightClaimly <no-reply@localhost>';
+  // Fallback to SMTP
+  const smtp = getSmtp();
+  if (smtp) {
+    const r = await smtp.sendMail({ from: FROM, ...opts });
+    return { provider: 'smtp', ...r };
+  }
 
-  const info = await tx.sendMail({
-    from,
-    to: opts.to,
-    cc: opts.cc,
-    bcc: opts.bcc,
-    subject: opts.subject,
-    text: opts.text,
-    html: opts.html ?? opts.text,
-  });
-
-  return { messageId: info.messageId };
+  console.log('[mail] SKIPPED (no provider configured):', opts.subject);
+  return { skipped: true };
 }
