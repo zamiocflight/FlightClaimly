@@ -1,21 +1,27 @@
 // /middleware.ts
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import {NextResponse} from 'next/server';
+import type {NextRequest} from 'next/server';
+import createMiddleware from 'next-intl/middleware';
 
 const PROTECTED_PREFIXES = ['/admin', '/api/admin'];
 
-export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+// next-intl middleware (SV/EN)
+const intlMiddleware = createMiddleware({
+  locales: ['sv', 'en'],
+  defaultLocale: 'sv'
+});
 
-  // skydda /admin* och /api/admin*
+export function middleware(req: NextRequest) {
+  const {pathname} = req.nextUrl;
+
+  // 1) Admin-skydd (behåll exakt som innan)
   if (PROTECTED_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + '/'))) {
     const sess = req.cookies.get('admin_session')?.value;
     if (!sess) {
-      // API → 401 json, annars redirect till /login
       if (pathname.startsWith('/api/')) {
-        return new NextResponse(JSON.stringify({ error: 'Unauthorized' }), {
+        return new NextResponse(JSON.stringify({error: 'Unauthorized'}), {
           status: 401,
-          headers: { 'content-type': 'application/json' },
+          headers: {'content-type': 'application/json'}
         });
       }
       const url = req.nextUrl.clone();
@@ -24,6 +30,16 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  return NextResponse.next();
+  // 2) i18n routing (lägger /en, /sv, cookies osv)
+  return intlMiddleware(req);
 }
 
+// Viktigt: matcha både sidor + API som ska skyddas
+export const config = {
+  matcher: [
+    '/',
+    '/(sv|en)/:path*',
+    '/admin/:path*',
+    '/api/admin/:path*'
+  ]
+};

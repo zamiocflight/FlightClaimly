@@ -1,9 +1,18 @@
 // next.config.js
+const createNextIntlPlugin = require('next-intl/plugin');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    ignoreDuringBuilds: true, // 👈 Låt build gå igenom trots lint-fel
+    ignoreDuringBuilds: true,
+  },
+  experimental: {
+    serverActions: {},
   },
 };
 
-module.exports = nextConfig;
+// Koppla next-intl till src/i18n/request.ts (viktigt!)
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
+
+module.exports = withNextIntl(nextConfig);
+

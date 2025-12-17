@@ -1,9 +1,10 @@
 'use client';
 
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
+import { useTranslations } from 'next-intl';
 
 /* ---------- Form state ---------- */
 type FormState = {
@@ -35,9 +36,13 @@ const INITIAL: FormState = {
 type TrackStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export default function Home() {
+  const t = useTranslations();
+
   const [form, setForm] = useState<FormState>(INITIAL);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+
+  // resten av din kod är oförändrad
 
   // 🔹 Två steg i formuläret
   const [step, setStep] = useState<'quick' | 'details'>('quick');
@@ -55,6 +60,9 @@ export default function Home() {
   // 🔹 Mobilmeny
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
+  // 🔹 Ref för steg 2 – så vi kan scrolla ned dit
+  const detailsRef = useRef<HTMLDivElement | null>(null);
+
   async function handleTrackSubmit(e: FormEvent) {
     e.preventDefault();
     setTrackStatus('loading');
@@ -71,21 +79,16 @@ export default function Home() {
 
       if (!res.ok) {
         setTrackStatus('error');
-        setTrackMessage(
-          data?.error ||
-            'Kunde inte skicka länken just nu. Försök igen om en stund.'
-        );
+        setTrackMessage(data?.error || t('track.messages.errorGeneric'));
         return;
       }
 
       setTrackStatus('success');
-      setTrackMessage(
-        'Om vi hittar ett ärende kopplat till den här e-posten skickar vi en säker spårningslänk inom några minuter.'
-      );
+      setTrackMessage(t('track.messages.success'));
     } catch (e) {
       console.error(e);
       setTrackStatus('error');
-      setTrackMessage('Tekniskt fel – försök igen om en stund.');
+      setTrackMessage(t('track.messages.errorTechnical'));
     }
   }
 
@@ -99,18 +102,30 @@ export default function Home() {
 
     if (!flightNumber || !date || !from || !to) {
       setQuickStatus('ineligible');
-      setQuickMessage(
-        'Fyll i flygnummer, datum, från och till för att vi ska kunna kontrollera.'
-      );
+      setQuickMessage(t('precheck.quick.frontend.missingFields'));
       return;
     }
 
+    // Simulerad snabbkoll
     setTimeout(() => {
       setQuickStatus('eligible');
-      setQuickMessage(
-        'Bra nyheter! Ditt flyg ser ut att kunna vara ersättningsberättigat enligt EU261. Fyll i dina uppgifter nedan så sköter vi resten.'
-      );
+      // ❗Ingen positiv text i steg 1
+      setQuickMessage(null);
+
+      // Gå till steg 2
       setStep('details');
+
+      // Mjuk scroll ner till steg 2 / "Dina uppgifter"
+      if (detailsRef.current) {
+        const rect = detailsRef.current.getBoundingClientRect();
+        const offset = 140; // justera vid behov
+        const targetY = rect.top + window.scrollY - offset;
+
+        window.scrollTo({
+          top: targetY,
+          behavior: 'smooth',
+        });
+      }
     }, 400);
   }
 
@@ -135,7 +150,7 @@ export default function Home() {
           serverMsg = await r.text();
         }
         console.error('API /api/claims error:', r.status, serverMsg);
-        throw new Error(serverMsg || 'Kunde inte skicka, försök igen.');
+        throw new Error(serverMsg || t('errors.sendFailed'));
       }
 
       const data = await r.json();
@@ -147,7 +162,7 @@ export default function Home() {
         data?.claim?.received_at ||
         data?.receivedAt;
 
-      if (!id) throw new Error('Inget ärende-ID i svar.');
+      if (!id) throw new Error(t('errors.noClaimId'));
       try {
         localStorage.setItem('lastClaimId', String(id));
       } catch {}
@@ -167,7 +182,7 @@ export default function Home() {
       window.location.href = `/thanks?${q.toString()}`;
     } catch (e: any) {
       console.error(e);
-      setErr(e?.message ?? 'Nätverksfel. Försök igen.');
+      setErr(e?.message ?? t('errors.network'));
     } finally {
       setLoading(false);
     }
@@ -219,40 +234,40 @@ export default function Home() {
           <div className="hidden md:flex items-center gap-6">
             <nav className="flex items-center gap-8 text-[15px] font-semibold text-slate-900">
               <a href="#how" className="hover:text-slate-700 transition-colors">
-                Få kompensation
+                {t('nav.compensation')}
               </a>
               <a
                 href="/delays"
                 className="hover:text-slate-700 transition-colors"
               >
-                Flygförseningar
+                {t('nav.delays')}
               </a>
               <a
                 href="/cancellations"
                 className="hover:text-slate-700 transition-colors"
               >
-                Flyginställningar
+                {t('nav.cancellations')}
               </a>
               <a
                 href="/rights"
                 className="hover:text-slate-700 transition-colors"
               >
-                Dina rättigheter
+                {t('nav.rights')}
               </a>
               <a href="/faq" className="hover:text-slate-700 transition-colors">
-                FAQ
+                {t('nav.faq')}
               </a>
               <a
                 href="/about"
                 className="hover:text-slate-700 transition-colors"
               >
-                Om oss
+                {t('nav.about')}
               </a>
               <a
                 href="/contact"
                 className="hover:text-slate-700 transition-colors"
               >
-                Kontakt
+                {t('nav.contact')}
               </a>
             </nav>
 
@@ -260,8 +275,9 @@ export default function Home() {
             <button
               type="button"
               className="text-[14px] font-medium text-slate-500 hover:text-slate-900 transition-colors"
+              aria-label={t('header.language.aria')}
             >
-              SV ▾
+              {t('header.language.label')}
             </button>
 
             {/* Följ ärende */}
@@ -271,7 +287,7 @@ export default function Home() {
               className="inline-flex items-center gap-2 rounded-md border border-slate-900/10 bg-slate-900 px-4 py-2 text-[14px] font-semibold text-white shadow-sm hover:bg-slate-800 hover:shadow-md transition"
             >
               <UserCircleIcon className="h-5 w-5" />
-              Följ ärende
+              {t('track.button')}
             </button>
           </div>
 
@@ -280,9 +296,9 @@ export default function Home() {
             type="button"
             className="md:hidden inline-flex items-center justify-center px-2.5 py-2 text-slate-900"
             onClick={() => setIsMobileNavOpen(true)}
-            aria-label="Öppna meny"
+            aria-label={t('mobileNav.openAria')}
           >
-            <span className="sr-only">Öppna meny</span>
+            <span className="sr-only">{t('mobileNav.openSr')}</span>
             <span className="flex flex-col gap-1.5">
               <span className="block h-[2px] w-5 rounded-full bg-slate-900" />
               <span className="block h-[2px] w-5 rounded-full bg-slate-900" />
@@ -301,13 +317,13 @@ export default function Home() {
             <div className="w-72 max-w-full h-full bg-white shadow-2xl flex flex-col">
               <div className="flex items-center justify-between px-4 py-4 border-b border-slate-200">
                 <span className="text-sm font-semibold text-slate-900">
-                  Meny
+                  {t('mobileNav.title')}
                 </span>
                 <button
                   type="button"
                   onClick={() => setIsMobileNavOpen(false)}
                   className="text-slate-400 hover:text-slate-700"
-                  aria-label="Stäng meny"
+                  aria-label={t('mobileNav.closeAria')}
                 >
                   ✕
                 </button>
@@ -319,49 +335,49 @@ export default function Home() {
                   className="block py-1.5"
                   onClick={() => setIsMobileNavOpen(false)}
                 >
-                  Få kompensation
+                  {t('nav.compensation')}
                 </a>
                 <a
                   href="/delays"
                   className="block py-1.5"
                   onClick={() => setIsMobileNavOpen(false)}
                 >
-                  Flygförseningar
+                  {t('nav.delays')}
                 </a>
                 <a
                   href="/cancellations"
                   className="block py-1.5"
                   onClick={() => setIsMobileNavOpen(false)}
                 >
-                  Flyginställningar
+                  {t('nav.cancellations')}
                 </a>
                 <a
                   href="/rights"
                   className="block py-1.5"
                   onClick={() => setIsMobileNavOpen(false)}
                 >
-                  Dina rättigheter
+                  {t('nav.rights')}
                 </a>
                 <a
                   href="/faq"
                   className="block py-1.5"
                   onClick={() => setIsMobileNavOpen(false)}
                 >
-                  FAQ
+                  {t('nav.faq')}
                 </a>
                 <a
                   href="/about"
                   className="block py-1.5"
                   onClick={() => setIsMobileNavOpen(false)}
                 >
-                  Om oss
+                  {t('nav.about')}
                 </a>
                 <a
                   href="/contact"
                   className="block py-1.5"
                   onClick={() => setIsMobileNavOpen(false)}
                 >
-                  Kontakt
+                  {t('nav.contact')}
                 </a>
               </nav>
 
@@ -372,7 +388,7 @@ export default function Home() {
                   className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
                 >
                   <UserCircleIcon className="h-5 w-5" />
-                  Följ ärende
+                  {t('track.button')}
                 </button>
               </div>
             </div>
@@ -386,12 +402,10 @@ export default function Home() {
               <div className="mb-4 flex items-start justify-between gap-4">
                 <div>
                   <h2 className="text-lg font-semibold text-slate-900">
-                    Följ ditt ärende
+                    {t('track.title')}
                   </h2>
                   <p className="mt-1 text-sm text-slate-600">
-                    Ange den e-postadress du använde när du skickade in ditt
-                    ärende. Om vi hittar ett ärende skickar vi en säker länk där
-                    du kan följa status.
+                    {t('track.description')}
                   </p>
                 </div>
 
@@ -399,6 +413,7 @@ export default function Home() {
                   type="button"
                   onClick={() => setIsTrackModalOpen(false)}
                   className="text-slate-400 hover:text-slate-600 text-lg leading-none"
+                  aria-label={t('track.closeAria')}
                 >
                   ✕
                 </button>
@@ -407,14 +422,14 @@ export default function Home() {
               <form onSubmit={handleTrackSubmit} className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700">
-                    E-postadress
+                    {t('track.emailLabel')}
                   </label>
                   <input
                     type="email"
                     required
                     value={trackEmail}
                     onChange={(e) => setTrackEmail(e.target.value)}
-                    placeholder="din@mail.se"
+                    placeholder={t('track.emailPlaceholder')}
                     className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900/10"
                   />
                 </div>
@@ -437,7 +452,7 @@ export default function Home() {
                     onClick={() => setIsTrackModalOpen(false)}
                     className="text-sm font-medium text-slate-500 hover:text-slate-800"
                   >
-                    Avbryt
+                    {t('track.cancel')}
                   </button>
                   <div className="flex items-center gap-2">
                     {trackStatus === 'success' && (
@@ -445,7 +460,7 @@ export default function Home() {
                         type="submit"
                         className="text-xs text-slate-500 hover:text-slate-800 underline"
                       >
-                        Hittade du inte länken? Skicka igen
+                        {t('track.resend')}
                       </button>
                     )}
                     <button
@@ -454,8 +469,8 @@ export default function Home() {
                       className="inline-flex items-center justify-center rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       {trackStatus === 'loading'
-                        ? 'Skickar länk…'
-                        : 'Skicka länk'}
+                        ? t('track.sending')
+                        : t('track.send')}
                     </button>
                   </div>
                 </div>
@@ -470,43 +485,31 @@ export default function Home() {
           <div className="order-1 md:order-1">
             {/* Badge – trygghet & erbjudande */}
             <div className="inline-flex flex-wrap items-center gap-2 text-[11px] font-semibold tracking-[0.18em] text-emerald-900/90">
-              <span>EU261 / UK261</span>
+              <span>{t('hero.badges.eu')}</span>
               <span>•</span>
-              <span>LÄGSTA AVGIFT</span>
+              <span>{t('hero.badges.fee')}</span>
               <span>•</span>
-              <span>NO WIN, NO FEE</span>
+              <span>{t('hero.badges.noWinNoFee')}</span>
             </div>
 
-           <h1 className="mt-3 max-w-3xl text-[26px] sm:text-[30px] md:text-[38px] font-black leading-snug md:leading-tight tracking-[-0.5px] text-slate-950 drop-shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
-  Få upp till 600&nbsp;€ i ersättning för försenade eller inställda
-  flyg – utan krångel.
-</h1>
-
+            <h1 className="mt-3 max-w-3xl text-[26px] sm:text-[30px] md:text-[38px] font-black leading-snug md:leading-tight tracking-[-0.5px] text-slate-950 drop-shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
+              {t('hero.title')}
+            </h1>
 
             <p className="mt-3 text-sm sm:text-base text-slate-700 max-w-xl">
-              Kolla om ditt{' '}
-              <a
-                href="/delays"
-                className="hover:text-slate-900 transition-colors"
-              >
-                försenade flyg
+              {t('hero.subtitle.beforeDelayed')}{' '}
+              <a href="/delays" className="hover:text-slate-900 transition-colors">
+                {t('hero.subtitle.delayedLink')}
               </a>{' '}
-              eller{' '}
-              <a
-                href="/cancellations"
-                className="hover:text-slate-900 transition-colors"
-              >
-                inställda flyg
+              {t('hero.subtitle.between')}{' '}
+              <a href="/cancellations" className="hover:text-slate-900 transition-colors">
+                {t('hero.subtitle.cancelledLink')}
               </a>{' '}
-              ger rätt till ersättning enligt{' '}
-              <a
-                href="/rights"
-                className="hover:text-slate-900 transition-colors"
-              >
-                EU261
+              {t('hero.subtitle.afterCancelled')}{' '}
+              <a href="/rights" className="hover:text-slate-900 transition-colors">
+                {t('hero.subtitle.eu261Link')}
               </a>
-              . Vi hjälper dig att kräva ersättning från flygbolaget – du
-              betalar bara om du får pengar utbetalda.
+              {t('hero.subtitle.afterEu261')}
             </p>
 
             <div className="mt-5 flex flex-col sm:flex-row sm:items-center gap-3">
@@ -514,15 +517,16 @@ export default function Home() {
                 href="#precheck"
                 className="inline-flex w-full sm:w-auto items-center justify-center rounded-md border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-sm whitespace-nowrap transition-all duration-150 ease-out hover:bg-slate-800 hover:shadow-md hover:-translate-y-[1px] active:scale-[0.98]"
               >
-                Kolla mitt flyg nu
+                {t('hero.cta')}
               </a>
 
               {/* Liten trygghetsrad under knappen */}
               <p className="mt-1 text-[11px] text-slate-700/80">
-                Tar ca 2 minuter. Inget att betala om du inte får ersättning –{' '}
+                {t('hero.trust.beforeLink')}{' '}
                 <a href="/terms" className="underline">
-                  läs mer om vår avgift.
+                  {t('hero.trust.link')}
                 </a>
+                {t('hero.trust.afterLink')}
               </p>
             </div>
           </div>
@@ -548,14 +552,11 @@ export default function Home() {
                   1
                 </span>
 
-                <span
-                  className={
-                    step === 'quick' ? 'text-slate-900' : 'text-slate-500'
-                  }
-                >
-                  Kolla ditt flyg
+                <span className={step === 'quick' ? 'text-slate-900' : 'text-slate-500'}>
+                  {t('precheck.steps.step1')}
                 </span>
               </div>
+
               <div className="flex items-center gap-2">
                 <span
                   className={
@@ -567,66 +568,60 @@ export default function Home() {
                   2
                 </span>
 
-                <span
-                  className={
-                    step === 'details' ? 'text-slate-900' : 'text-slate-500'
-                  }
-                >
-                  Fyll i dina uppgifter
+                <span className={step === 'details' ? 'text-slate-900' : 'text-slate-500'}>
+                  {t('precheck.steps.step2')}
                 </span>
               </div>
             </div>
 
             {/* Steg 1 – snabb förhandskontroll */}
-            <div className="mb-5">
+            <div className="mb-5 space-y-3">
               <h3 className="text-base md:text-lg font-semibold mb-1">
-                Snabb förhandskontroll
+                {t('precheck.quick.title')}
               </h3>
+
               <p className="text-xs text-slate-600 mt-1">
-  Ange ditt flyg – vi gör en snabb bedömning om du kan ha rätt till ersättning enligt{' '}
-  <a href="/rights" className="font-semibold text-slate-900">
-    EU261
-  </a>.
-</p>
+                {t('precheck.quick.descBeforeLink')}{' '}
+                <a href="/rights" className="font-semibold text-slate-900">
+                  {t('precheck.quick.eu261Link')}
+                </a>
+                {t('precheck.quick.descAfterLink')}
+              </p>
 
               <form onSubmit={handleQuickCheck} className="grid grid-cols-1 gap-3">
                 <Input
-                  label="Flygnummer"
-                  placeholder="t.ex. SK1420"
+                  label={t('precheck.quick.labels.flightNumber')}
+                  placeholder={t('precheck.quick.placeholders.flightNumber')}
                   value={form.flightNumber}
-                  onChange={(v) =>
-                    setForm({ ...form, flightNumber: v.toUpperCase() })
-                  }
+                  onChange={(v) => setForm({ ...form, flightNumber: v.toUpperCase() })}
                 />
                 <Input
-                  label="Datum"
+                  label={t('precheck.quick.labels.date')}
                   type="date"
                   value={form.date}
                   onChange={(v) => setForm({ ...form, date: v })}
                 />
+
                 <div className="grid grid-cols-2 gap-3">
                   <Input
-                    label="Från"
-                    placeholder="CPH"
+                    label={t('precheck.quick.labels.from')}
+                    placeholder={t('precheck.quick.placeholders.from')}
                     value={form.from}
-                    onChange={(v) =>
-                      setForm({ ...form, from: v.toUpperCase() })
-                    }
+                    onChange={(v) => setForm({ ...form, from: v.toUpperCase() })}
                   />
                   <Input
-                    label="Till"
-                    placeholder="ARN"
+                    label={t('precheck.quick.labels.to')}
+                    placeholder={t('precheck.quick.placeholders.to')}
                     value={form.to}
-                    onChange={(v) =>
-                      setForm({ ...form, to: v.toUpperCase() })
-                    }
+                    onChange={(v) => setForm({ ...form, to: v.toUpperCase() })}
                   />
                 </div>
 
                 <div>
                   <span className="mb-1 block text-xs font-medium text-slate-800">
-                    Mellanlandning
+                    {t('precheck.quick.labels.connectionTitle')}
                   </span>
+
                   <div className="flex flex-wrap gap-3 text-xs">
                     <label className="inline-flex items-center gap-1">
                       <input
@@ -642,8 +637,9 @@ export default function Home() {
                           })
                         }
                       />
-                      <span>Direktflyg</span>
+                      <span>{t('precheck.quick.labels.direct')}</span>
                     </label>
+
                     <label className="inline-flex items-center gap-1">
                       <input
                         type="radio"
@@ -654,13 +650,11 @@ export default function Home() {
                           setForm({
                             ...form,
                             hasConnection: 'connection',
-                            connections: form.connections.length
-                              ? form.connections
-                              : [''],
+                            connections: form.connections.length ? form.connections : [''],
                           })
                         }
                       />
-                      <span>Med mellanlandning</span>
+                      <span>{t('precheck.quick.labels.withConnection')}</span>
                     </label>
                   </div>
 
@@ -676,24 +670,20 @@ export default function Home() {
                               next[index] = e.target.value;
                               setForm({ ...form, connections: next });
                             }}
-                            placeholder="t.ex. FRA, DOH eller Paris CDG"
+                            placeholder={t('precheck.quick.placeholders.connection')}
                             className="w-full rounded-lg border border-slate-300 bg-white/95 px-3 py-2 text-xs text-slate-900 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
                           />
+
                           {index > 0 && (
                             <button
                               type="button"
                               onClick={() => {
-                                const next = form.connections.filter(
-                                  (_, i) => i !== index
-                                );
-                                setForm({
-                                  ...form,
-                                  connections: next.length ? next : [''],
-                                });
+                                const next = form.connections.filter((_, i) => i !== index);
+                                setForm({ ...form, connections: next.length ? next : [''] });
                               }}
                               className="text-[11px] text-slate-500 hover:text-red-600"
                             >
-                              Ta bort
+                              {t('precheck.quick.actions.remove')}
                             </button>
                           )}
                         </div>
@@ -703,94 +693,89 @@ export default function Home() {
                         <button
                           type="button"
                           onClick={() =>
-                            setForm({
-                              ...form,
-                              connections: [...form.connections, ''],
-                            })
+                            setForm({ ...form, connections: [...form.connections, ''] })
                           }
                           className="text-[11px] font-medium text-emerald-700 hover:text-emerald-800"
                         >
-                          + Lägg till ytterligare en flygplats
+                          {t('precheck.quick.actions.addAirport')}
                         </button>
                       )}
                     </div>
                   )}
                 </div>
 
-                {quickMessage && (
-                  <p
-                    className={`text-xs ${
-                      quickStatus === 'ineligible'
-                        ? 'text-red-600'
-                        : 'text-emerald-700'
-                    }`}
-                  >
-                    {quickMessage}
-                  </p>
-                )}
+                {quickMessage && <p className="text-xs text-red-600">{quickMessage}</p>}
 
                 <button
                   type="submit"
                   className="
-  inline-flex items-center justify-center
-  w-full sm:w-auto
-  rounded-xl px-5 py-2.5
-  font-semibold text-sm
-  text-white
-  bg-emerald-600
-  shadow-[0_2px_4px_rgba(0,0,0,0.06)]
-  hover:bg-emerald-700 hover:shadow-[0_3px_6px_rgba(0,0,0,0.10)]
-  active:scale-[0.98]
-  transition-all duration-150
-  disabled:opacity-60 disabled:cursor-not-allowed
-"
+          inline-flex items-center justify-center
+          w-full sm:w-auto
+          rounded-xl px-5 py-2.5
+          font-semibold text-sm
+          text-white
+          bg-emerald-600
+          shadow-[0_2px_4px_rgba(0,0,0,0.06)]
+          hover:bg-emerald-700 hover:shadow-[0_3px_6px_rgba(0,0,0,0.10)]
+          active:scale-[0.98]
+          transition-all duration-150
+          disabled:opacity-60 disabled:cursor-not-allowed
+        "
                   disabled={quickStatus === 'checking'}
                 >
                   {quickStatus === 'checking'
-                    ? 'Kontrollerar…'
-                    : 'Kolla mitt flyg'}
+                    ? t('precheck.quick.submit.checking')
+                    : t('precheck.quick.submit.default')}
                 </button>
               </form>
             </div>
 
             {/* Steg 2 – detaljer */}
             {step === 'details' && (
-              <>
+              <div ref={detailsRef}>
                 <div className="h-px bg-slate-200 my-3" />
-                <form
-                  onSubmit={handleFullSubmit}
-                  className="grid grid-cols-1 gap-3"
-                >
+
+                <form onSubmit={handleFullSubmit} className="grid grid-cols-1 gap-3">
+                  {/* Liten "Bra nyheter!"-rad */}
+                  <div className="flex items-start gap-2 mb-1">
+                    <div className="mt-[2px] text-emerald-600 text-base">✔️</div>
+                    <p className="text-xs md:text-sm text-emerald-700 leading-snug">
+                      <span className="font-semibold">
+                        {t('precheck.details.goodNewsStrong')}
+                      </span>{' '}
+                      {t('precheck.details.goodNewsText')}
+                    </p>
+                  </div>
+
                   <h3 className="text-sm font-semibold text-slate-900">
-                    Dina uppgifter
+                    {t('precheck.details.title')}
                   </h3>
+
                   <Input
-                    label="Fullständigt namn"
-                    placeholder="Ditt namn"
+                    label={t('precheck.details.labels.fullName')}
+                    placeholder={t('precheck.details.placeholders.fullName')}
                     value={form.name}
                     onChange={(v) => setForm({ ...form, name: v })}
                   />
                   <Input
-                    label="E-post"
+                    label={t('precheck.details.labels.email')}
                     type="email"
-                    placeholder="din@mail.se"
+                    placeholder={t('precheck.details.placeholders.email')}
                     value={form.email}
                     onChange={(v) => setForm({ ...form, email: v })}
                   />
                   <Input
-                    label="Telefonnummer"
+                    label={t('precheck.details.labels.phone')}
                     type="tel"
-                    placeholder="+46 70 123 45 67"
+                    placeholder={t('precheck.details.placeholders.phone')}
                     value={form.phone}
                     onChange={(v) => setForm({ ...form, phone: v })}
                   />
                   <Input
-                    label="Bokningsnummer"
-                    placeholder="ABC123"
+                    label={t('precheck.details.labels.bookingNumber')}
+                    placeholder={t('precheck.details.placeholders.bookingNumber')}
                     value={form.bookingNumber}
-                    onChange={(v) =>
-                      setForm({ ...form, bookingNumber: v })
-                    }
+                    onChange={(v) => setForm({ ...form, bookingNumber: v })}
                   />
 
                   {err && (
@@ -803,48 +788,43 @@ export default function Home() {
                     type="submit"
                     disabled={loading}
                     className="
-  inline-flex items-center justify-center
-  w-full sm:w-auto
-  rounded-xl px-5 py-2.5
-  font-semibold text-sm
-  text-white
-  bg-emerald-600
-  shadow-[0_2px_4px_rgba(0,0,0,0.06)]
-  hover:bg-emerald-700 hover:shadow-[0_3px_6px_rgba(0,0,0,0.10)]
-  active:scale-[0.98]
-  transition-all duration-150
-  disabled:opacity-60 disabled:cursor-not-allowed
-"
+            inline-flex items-center justify-center
+            w-full sm:w-auto
+            rounded-xl px-5 py-2.5
+            font-semibold text-sm
+            text-white
+            bg-emerald-600
+            shadow-[0_2px_4px_rgba(0,0,0,0.06)]
+            hover:bg-emerald-700 hover:shadow-[0_3px_6px_rgba(0,0,0,0.10)]
+            active:scale-[0.98]
+            transition-all duration-150
+            disabled:opacity-60 disabled:cursor-not-allowed
+          "
                   >
-                    {loading ? 'Skickar in ärendet…' : 'Skicka in ärendet'}
+                    {loading
+                      ? t('precheck.details.submit.sending')
+                      : t('precheck.details.submit.default')}
                   </button>
 
                   <p className="mt-1 text-[11px] text-slate-600">
-                    Genom att skicka godkänner du våra{' '}
+                    {t('precheck.details.consent.before')}{' '}
                     <a className="underline" href="/terms">
-                      Terms
+                      {t('precheck.details.consent.terms')}
                     </a>{' '}
-                    &{' '}
+                    {t('precheck.details.consent.and')}{' '}
                     <a className="underline" href="/privacy">
-                      Privacy
+                      {t('precheck.details.consent.privacy')}
                     </a>
-                    .
+                    {t('precheck.details.consent.after')}
                   </p>
 
-                  <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] text-slate-600">
-                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-100">
-                      GDPR-anpassat
-                    </span>
-                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-100">
-                      No win, no fee –{' '}
-                      <span className="font-semibold">20 % vid vinst</span>
-                    </span>
-                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-100">
-                      Snabb handläggning
-                    </span>
+                  <div className="mt-3 flex flex-wrap items-center gap-4 text-[11px] text-slate-500">
+                    <span>{t('precheck.details.trust.gdpr')}</span>
+                    <span>{t('precheck.details.trust.noWinNoFee')}</span>
+                    <span>{t('precheck.details.trust.fastHandling')}</span>
                   </div>
                 </form>
-              </>
+              </div>
             )}
           </div>
         </section>
@@ -855,7 +835,7 @@ export default function Home() {
             href="#how"
             className="inline-flex items-center gap-1 text-[15px] font-semibold text-slate-800 hover:text-slate-900 transition-colors"
           >
-            Läs mer
+            {t('sections.readMore')}
             <span className="text-slate-400 text-base animate-bounce">↓</span>
           </a>
         </div>
@@ -868,24 +848,18 @@ export default function Home() {
               <div className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 shadow-sm ring-1 ring-slate-200 mb-3">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                 <span className="text-[11px] font-semibold tracking-[0.18em] text-slate-600 uppercase">
-                  Så funkar det
+                  {t('how.badge')}
                 </span>
               </div>
               <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 mb-4">
-                Dina 3 enkla steg till kompensation
+                {t('how.title')}
               </h2>
               <p className="mt-2 text-sm text-slate-600 max-w-xl">
-                Vi gör processen så enkel som möjligt: du skickar in ditt flyg,
-                vi tar fighten med flygbolaget och du får ersättningen utbetald
-                enligt{' '}
-                <a
-                  href="/rights"
-                  className="hover:text-slate-900 transition-colors"
-
-                >
-                  dina rättigheter i EU261
+                {t('how.desc.before')}{' '}
+                <a href="/rights" className="hover:text-slate-900 transition-colors">
+                  {t('how.desc.link')}
                 </a>
-                .
+                {t('how.desc.after')}
               </p>
             </div>
 
@@ -895,12 +869,10 @@ export default function Home() {
                 <div className="absolute -left-3 top-1 hidden h-10 w-px bg-gradient-to-b from-emerald-500/60 via-emerald-400/40 to-transparent md:block" />
                 <CardStep
                   n="1"
-                  title="Skicka in ditt flyg"
+                  title={t('how.steps.1.title')}
                   icon={<IconStep1 className="h-4 w-4 text-emerald-600" />}
                 >
-                  Fyll i flygnummer, datum och rutt. Vi gör en snabb
-                  förhandskoll och bekräftar om ditt ärende kan vara
-                  ersättningsberättigat enligt EU261.
+                  {t('how.steps.1.body')}
                 </CardStep>
               </div>
 
@@ -908,12 +880,10 @@ export default function Home() {
                 <div className="absolute -left-3 top-1 hidden h-10 w-px bg-gradient-to-b from-emerald-500/60 via-emerald-400/40 to-transparent md:block" />
                 <CardStep
                   n="2"
-                  title="Vi driver ärendet"
+                  title={t('how.steps.2.title')}
                   icon={<IconStep2 className="h-4 w-4 text-emerald-600" />}
                 >
-                  Du lägger till dina uppgifter och bilagor. Vi kontaktar
-                  flygbolaget, sköter allt formellt och håller dig uppdaterad
-                  längs vägen via mail och din ärendesida.
+                  {t('how.steps.2.body')}
                 </CardStep>
               </div>
 
@@ -921,12 +891,10 @@ export default function Home() {
                 <div className="absolute -left-3 top-1 hidden h-10 w-px bg-gradient-to-b from-emerald-500/60 via-emerald-400/40 to-transparent md:block" />
                 <CardStep
                   n="3"
-                  title="Du får din ersättning"
+                  title={t('how.steps.3.title')}
                   icon={<IconStep3 className="h-4 w-4 text-emerald-600" />}
                 >
-                  När flygbolaget betalar gör vi en utbetalning till dig, minus
-                  vår avgift. Inget resultat – ingen avgift. Du får en tydlig
-                  sammanställning på vad som betalats ut.
+                  {t('how.steps.3.body')}
                 </CardStep>
               </div>
             </div>
@@ -946,27 +914,21 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-3 text-[14px] font-semibold text-slate-900">
             <div className="flex justify-start items-center gap-2">
               <span className="text-emerald-600 text-lg">✓</span>
-              <a
-                href="/rights"
-                className="hover:text-slate-950 transition-colors"
-              >
-                EU261–rättigheter
+              <a href="/rights" className="hover:text-slate-950 transition-colors">
+                {t('trustRow.eu261')}
               </a>
             </div>
 
             <div className="flex justify-center items-center gap-2 mt-3 sm:mt-0">
               <span className="text-emerald-600 text-lg">✓</span>
-              <a
-                href="/terms"
-                className="hover:text-slate-950 transition-colors"
-              >
-                No win, no fee (20 %)
+              <a href="/terms" className="hover:text-slate-950 transition-colors">
+                {t('trustRow.lowFee')}
               </a>
             </div>
 
             <div className="flex justify-end items-center gap-2 mt-3 sm:mt-0">
               <span className="text-emerald-600 text-lg">✓</span>
-              <span>GDPR-säker hantering</span>
+              <span>{t('trustRow.gdpr')}</span>
             </div>
           </div>
         </div>
@@ -976,7 +938,7 @@ export default function Home() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-18 pb-16 md:pt-20 md:pb-20">
             <div className="mb-10 max-w-3xl">
               <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 mb-4">
-                Varför välja FlightClaimly?
+                {t('why.title')}
               </h2>
             </div>
 
@@ -984,48 +946,39 @@ export default function Home() {
               {/* Peace of mind */}
               <div className="max-w-sm">
                 <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-700 mb-2">
-                  Peace of mind
+                  {t('why.cards.peace.badge')}
                 </div>
                 <h3 className="text-[16px] font-semibold text-slate-900 mb-2">
-                  Vi tar fighten – du kan slappna av
+                  {t('why.cards.peace.title')}
                 </h3>
                 <p className="text-sm leading-relaxed text-slate-600">
-                  Vi sköter all kontakt med flygbolaget åt dig. Inga långa
-                  mejltrådar, ingen juridisk djungel – du får tydliga
-                  statusuppdateringar och kan fokusera på jobbet, familjen
-                  eller nästa resa.
+                  {t('why.cards.peace.body')}
                 </p>
               </div>
 
               {/* Lägst avgift */}
               <div className="max-w-sm">
                 <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-700 mb-2">
-                  Lägst avgift
+                  {t('why.cards.fee.badge')}
                 </div>
                 <h3 className="text-[16px] font-semibold text-slate-900 mb-2">
-                  Mer pengar i fickan än hos konkurrenterna
+                  {t('why.cards.fee.title')}
                 </h3>
                 <p className="text-sm leading-relaxed text-slate-600">
-                  Vår standardavgift är 20&nbsp;% – bland de lägsta i Norden.
-                  Många konkurrenter tar mer betalt eller gömmer kostnader i
-                  det finstilta. Vi är transparenta med våra villkor och du
-                  behåller en större del av din ersättning.
+                  {t('why.cards.fee.body')}
                 </p>
               </div>
 
               {/* Smart & rättvist */}
               <div className="max-w-sm">
                 <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-700 mb-2">
-                  Smart &amp; rättvist
+                  {t('why.cards.smart.badge')}
                 </div>
                 <h3 className="text-[16px] font-semibold text-slate-900 mb-2">
-                  Automatiserat där det går – jurist när det behövs
+                  {t('why.cards.smart.title')}
                 </h3>
                 <p className="text-sm leading-relaxed text-slate-600">
-                  Vi använder smart teknik för att snabba upp processen i
-                  enkla fall. Behövs jurist tar vi kostnaden uppfront och drar
-                  den endast vid vinst. Du betalar aldrig ur egen ficka och får
-                  alltid veta villkoren i förväg.
+                  {t('why.cards.smart.body')}
                 </p>
               </div>
             </div>
@@ -1044,19 +997,17 @@ export default function Home() {
                   </span>
                 </Link>
                 <p className="text-sm text-slate-400 max-w-md">
-                  Vi hjälper resenärer att få den ersättning de har rätt till
-                  enligt EU261 – utan förskottskostnader, dolda avgifter eller
-                  juridiskt krångel.
+                  {t('footer.pitch')}
                 </p>
                 <div className="flex flex-wrap gap-2 text-[11px] text-slate-400">
                   <span className="inline-flex items-center rounded-full border border-slate-700/70 px-2 py-1">
-                    No win, no fee – 20&nbsp;%
+                    {t('footer.badges.lowFee')}
                   </span>
                   <span className="inline-flex items-center rounded-full border border-slate-700/70 px-2 py-1">
-                    EU261 / UK261
+                    {t('footer.badges.eu')}
                   </span>
                   <span className="inline-flex items-center rounded-full border border-slate-700/70 px-2 py-1">
-                    GDPR-anpassad hantering
+                    {t('footer.badges.gdpr')}
                   </span>
                 </div>
               </div>
@@ -1064,23 +1015,17 @@ export default function Home() {
               {/* Länkar – tjänster */}
               <div>
                 <h3 className="text-xs font-semibold tracking-[0.16em] uppercase text-slate-400 mb-3">
-                  Tjänster
+                  {t('footer.columns.services')}
                 </h3>
                 <ul className="space-y-2 text-sm">
                   <li>
-                    <Link
-                      href="#how"
-                      className="hover:text-white transition-colors"
-                    >
-                      Få kompensation
+                    <Link href="#how" className="hover:text-white transition-colors">
+                      {t('nav.compensation')}
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href="/delays"
-                      className="hover:text-white transition-colors"
-                    >
-                      Flygförseningar
+                    <Link href="/delays" className="hover:text-white transition-colors">
+                      {t('nav.delays')}
                     </Link>
                   </li>
                   <li>
@@ -1088,15 +1033,12 @@ export default function Home() {
                       href="/cancellations"
                       className="hover:text-white transition-colors"
                     >
-                      Flyginställningar
+                      {t('nav.cancellations')}
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href="/rights"
-                      className="hover:text-white transition-colors"
-                    >
-                      Dina rättigheter (EU261)
+                    <Link href="/rights" className="hover:text-white transition-colors">
+                      {t('footer.links.rightsLabel')}
                     </Link>
                   </li>
                 </ul>
@@ -1105,47 +1047,32 @@ export default function Home() {
               {/* Länkar – bolag & kontakt */}
               <div>
                 <h3 className="text-xs font-semibold tracking-[0.16em] uppercase text-slate-400 mb-3">
-                  Om FlightClaimly
+                  {t('footer.columns.company')}
                 </h3>
                 <ul className="space-y-2 text-sm">
                   <li>
-                    <Link
-                      href="/about"
-                      className="hover:text-white transition-colors"
-                    >
-                      Om oss
+                    <Link href="/about" className="hover:text-white transition-colors">
+                      {t('nav.about')}
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href="/faq"
-                      className="hover:text-white transition-colors"
-                    >
-                      FAQ
+                    <Link href="/faq" className="hover:text-white transition-colors">
+                      {t('nav.faq')}
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href="/contact"
-                      className="hover:text-white transition-colors"
-                    >
-                      Kontakt
+                    <Link href="/contact" className="hover:text-white transition-colors">
+                      {t('nav.contact')}
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href="/terms"
-                      className="hover:text-white transition-colors"
-                    >
-                      Terms
+                    <Link href="/terms" className="hover:text-white transition-colors">
+                      {t('footer.links.terms')}
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href="/privacy"
-                      className="hover:text-white transition-colors"
-                    >
-                      Privacy
+                    <Link href="/privacy" className="hover:text-white transition-colors">
+                      {t('footer.links.privacy')}
                     </Link>
                   </li>
                 </ul>
@@ -1155,13 +1082,9 @@ export default function Home() {
             {/* Bottom bar */}
             <div className="mt-8 border-t border-slate-800 pt-4 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
               <p className="text-xs text-slate-500">
-                © {new Date().getFullYear()} FlightClaimly. Alla rättigheter
-                förbehållna.
+                {t('footer.bottom.copyright', { year: new Date().getFullYear() })}
               </p>
-              <p className="text-xs text-slate-500">
-                FlightClaimly är en fristående aktör och inte affilierad med
-                flygbolagen. Vi arbetar på uppdrag av dig som resenär.
-              </p>
+              <p className="text-xs text-slate-500">{t('footer.bottom.disclaimer')}</p>
             </div>
           </div>
         </footer>
@@ -1224,13 +1147,15 @@ function CardStep({
   icon?: React.ReactNode;
   children: React.ReactNode;
 }) {
+  const t = useTranslations();
+
   return (
     <div className="space-y-2">
       {/* Rad 1: ikon + STEG X */}
       <div className="flex items-center gap-2">
         {icon && <span className="inline-flex">{icon}</span>}
         <span className="text-xs font-semibold tracking-[0.18em] text-emerald-700 uppercase">
-          Steg {n}
+          {t('how.stepLabel', { n })}
         </span>
       </div>
 

@@ -1,0 +1,222 @@
+{
+  "errors": {
+    "sendFailed": "Couldn’t submit right now — please try again.",
+    "noClaimId": "No claim ID returned from the server.",
+    "network": "Network error. Please try again."
+  },
+
+  "header": {
+    "language": {
+      "label": "EN ▾",
+      "aria": "Change language"
+    }
+  },
+
+  "mobileNav": {
+    "title": "Menu",
+    "openAria": "Open menu",
+    "openSr": "Open menu",
+    "closeAria": "Close menu"
+  },
+
+  "nav": {
+    "compensation": "Get compensation",
+    "delays": "Flight delays",
+    "cancellations": "Flight cancellations",
+    "rights": "Your rights",
+    "faq": "FAQ",
+    "about": "About us",
+    "contact": "Contact",
+    "track": "Track claim",
+    "langLabel": "Language"
+  },
+
+  "track": {
+    "button": "Track claim",
+    "title": "Track your claim",
+    "description": "Enter the email address you used when you submitted your claim. If we find a match, we’ll send you a secure tracking link.",
+    "closeAria": "Close",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "cancel": "Cancel",
+    "resend": "Didn’t receive it? Send again",
+    "send": "Send link",
+    "sending": "Sending…",
+    "messages": {
+      "success": "If we find a claim connected to this email, we’ll send a secure tracking link within a few minutes.",
+      "errorGeneric": "Couldn’t send the link right now. Please try again in a moment.",
+      "errorTechnical": "Technical error — please try again in a moment."
+    }
+  },
+
+  "sections": {
+    "readMore": "Learn more"
+  },
+
+  "how": {
+    "badge": "How it works",
+    "title": "3 simple steps to compensation",
+    "desc": {
+      "before": "We keep it simple: you submit your flight, we handle the airline, and you receive compensation under",
+      "link": "EU261 passenger rights",
+      "after": "."
+    },
+    "stepLabel": "Step {n}",
+    "steps": {
+      "1": {
+        "title": "Submit your flight",
+        "body": "Enter your flight number, date and route. We run a quick pre-check and confirm whether your case may qualify under EU261."
+      },
+      "2": {
+        "title": "We handle the claim",
+        "body": "Add your details and documents. We contact the airline, manage the formal process, and keep you updated by email and on your claim page."
+      },
+      "3": {
+        "title": "Get paid",
+        "body": "Once the airline pays, we transfer your compensation to you minus our fee. No result — no fee. You’ll always receive a clear payout summary."
+      }
+    }
+  },
+
+  "trustRow": {
+    "eu261": "EU261 rights",
+    "lowFee": "No win, no fee — low fee",
+    "gdpr": "GDPR-safe handling"
+  },
+
+  "why": {
+    "title": "Why choose FlightClaimly?",
+    "cards": {
+      "peace": {
+        "badge": "Peace of mind",
+        "title": "We deal with the airline — you relax",
+        "body": "We handle all communication with the airline for you. No long email threads, no legal maze — just clear status updates so you can focus on life and your next trip."
+      },
+      "fee": {
+        "badge": "Low fee",
+        "title": "You keep more than with competitors",
+        "body": "Our fee is among the lowest in the Nordics. Many competitors charge more or hide costs in the fine print. We keep it transparent so you keep a larger share of your compensation."
+      },
+      "smart": {
+        "badge": "Smart & fair",
+        "title": "Automated when possible — legal help when needed",
+        "body": "We use smart tech to speed up straightforward cases. If legal help is needed, we cover it up front and only deduct it if we win. You never pay out of pocket and always know the terms in advance."
+      }
+    }
+  },
+
+  "footer": {
+    "pitch": "We help passengers get the compensation they’re entitled to under EU261 — with no upfront costs, no hidden fees, and no legal hassle.",
+    "badges": {
+      "lowFee": "No win, no fee — low fee",
+      "eu": "EU261 / UK261",
+      "gdpr": "GDPR-compliant handling"
+    },
+    "columns": {
+      "services": "Services",
+      "company": "About FlightClaimly"
+    },
+    "links": {
+      "rightsLabel": "Your rights (EU261)",
+      "terms": "Terms",
+      "privacy": "Privacy"
+    },
+    "bottom": {
+      "copyright": "© {year} FlightClaimly. All rights reserved.",
+      "disclaimer": "FlightClaimly is an independent service and not affiliated with airlines. We act on your behalf as a passenger."
+    }
+  },
+
+  "hero": {
+    "badges": {
+      "eu": "EU261 / UK261",
+      "fee": "LOW FEE",
+      "noWinNoFee": "NO WIN, NO FEE"
+    },
+    "title": "Get up to €600 compensation for delayed or cancelled flights — without the hassle.",
+    "subtitle": {
+      "beforeDelayed": "Check if your",
+      "delayedLink": "delayed flight",
+      "between": "or",
+      "cancelledLink": "cancelled flight",
+      "afterCancelled": "qualifies for compensation under",
+      "eu261Link": "EU261",
+      "afterEu261": ". We handle your claim with the airline — you only pay if you get paid."
+    },
+    "cta": "Check my flight now",
+    "trust": {
+      "beforeLink": "Takes about 2 minutes. No payment unless you receive compensation —",
+      "link": "learn more about our fee.",
+      "afterLink": ""
+    }
+  },
+
+  "precheck": {
+    "steps": {
+      "step1": "Check your flight",
+      "step2": "Enter your details"
+    },
+    "quick": {
+      "title": "Quick eligibility check",
+      "descBeforeLink": "Enter your flight details — we’ll quickly estimate whether you may be entitled to compensation under",
+      "eu261Link": "EU261",
+      "descAfterLink": ".",
+      "labels": {
+        "flightNumber": "Flight number",
+        "date": "Date",
+        "from": "From",
+        "to": "To",
+        "connectionTitle": "Connection",
+        "direct": "Direct flight",
+        "withConnection": "With a connection"
+      },
+      "placeholders": {
+        "flightNumber": "e.g. SK1420",
+        "from": "CPH",
+        "to": "ARN",
+        "connection": "e.g. FRA, DOH or Paris CDG"
+      },
+      "actions": {
+        "remove": "Remove",
+        "addAirport": "+ Add another airport"
+      },
+      "submit": {
+        "default": "Check my flight",
+        "checking": "Checking…"
+      }
+    },
+    "details": {
+      "goodNewsStrong": "Good news!",
+      "goodNewsText": "It looks like your flight may qualify for compensation under EU261. Enter your details and we’ll take it from here.",
+      "title": "Your details",
+      "labels": {
+        "fullName": "Full name",
+        "email": "Email",
+        "phone": "Phone number",
+        "bookingNumber": "Booking reference"
+      },
+      "placeholders": {
+        "fullName": "Your name",
+        "email": "you@email.com",
+        "phone": "+44 20 1234 5678",
+        "bookingNumber": "ABC123"
+      },
+      "submit": {
+        "default": "Submit my claim",
+        "sending": "Submitting your claim…"
+      },
+      "consent": {
+        "before": "By submitting, you agree to our",
+        "terms": "Terms",
+        "and": "&",
+        "privacy": "Privacy",
+        "after": "."
+      },
+      "trust": {
+        "gdpr": "GDPR-ready",
+        "noWinNoFee": "No win, no fee",
+        "fastHandling": "Fast handling"
+      }
+    }
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "errors": {
+    "sendFailed": "Kunde inte skicka, försök igen.",
+    "noClaimId": "Inget ärende-ID i svar.",
+    "network": "Nätverksfel. Försök igen."
+  },
+
+  "header": {
+    "language": {
+      "label": "SV ▾",
+      "aria": "Byt språk"
+    }
+  },
+
+  "mobileNav": {
+    "title": "Meny",
+    "openAria": "Öppna meny",
+    "openSr": "Öppna meny",
+    "closeAria": "Stäng meny"
+  },
+
+  "nav": {
+    "compensation": "Få kompensation",
+    "delays": "Flygförseningar",
+    "cancellations": "Flyginställningar",
+    "rights": "Dina rättigheter",
+    "faq": "FAQ",
+    "about": "Om oss",
+    "contact": "Kontakt",
+    "track": "Följ ärende",
+    "langLabel": "Språk"
+  },
+
+  "track": {
+    "button": "Följ ärende",
+    "title": "Följ ditt ärende",
+    "description": "Ange den e-postadress du använde när du skickade in ditt ärende. Om vi hittar ett ärende skickar vi en säker länk där du kan följa status.",
+    "closeAria": "Stäng",
+    "emailLabel": "E-postadress",
+    "emailPlaceholder": "din@mail.se",
+    "cancel": "Avbryt",
+    "resend": "Hittade du inte länken? Skicka igen",
+    "send": "Skicka länk",
+    "sending": "Skickar länk…",
+    "messages": {
+      "success": "Om vi hittar ett ärende kopplat till den här e-posten skickar vi en säker spårningslänk inom några minuter.",
+      "errorGeneric": "Kunde inte skicka länken just nu. Försök igen om en stund.",
+      "errorTechnical": "Tekniskt fel – försök igen om en stund."
+    }
+  },
+
+  "sections": {
+    "readMore": "Läs mer"
+  },
+
+  "how": {
+    "badge": "Så funkar det",
+    "title": "Dina 3 enkla steg till kompensation",
+    "desc": {
+      "before": "Vi gör processen så enkel som möjligt: du skickar in ditt flyg, vi tar fighten med flygbolaget och du får ersättningen utbetald enligt",
+      "link": "dina rättigheter i EU261",
+      "after": "."
+    },
+    "stepLabel": "Steg {n}",
+    "steps": {
+      "1": {
+        "title": "Skicka in ditt flyg",
+        "body": "Fyll i flygnummer, datum och rutt. Vi gör en snabb förhandskoll och bekräftar om ditt ärende kan vara ersättningsberättigat enligt EU261."
+      },
+      "2": {
+        "title": "Vi driver ärendet",
+        "body": "Du lägger till dina uppgifter och bilagor. Vi kontaktar flygbolaget, sköter allt formellt och håller dig uppdaterad längs vägen."
+      },
+      "3": {
+        "title": "Du får din ersättning",
+        "body": "När flygbolaget betalar gör vi en utbetalning till dig, minus vår avgift. Inget resultat – ingen avgift."
+      }
+    }
+  },
+
+  "trustRow": {
+    "eu261": "EU261–rättigheter",
+    "lowFee": "No win, no fee – låg avgift",
+    "gdpr": "GDPR-säker hantering"
+  },
+
+  "why": {
+    "title": "Varför välja FlightClaimly?",
+    "cards": {
+      "peace": {
+        "badge": "Trygghet",
+        "title": "Vi tar fighten – du kan slappna av",
+        "body": "Vi sköter all kontakt med flygbolaget åt dig och håller dig uppdaterad hela vägen."
+      },
+      "fee": {
+        "badge": "Lägst avgift",
+        "title": "Mer pengar i fickan",
+        "body": "Vi har en av de lägsta avgifterna i Norden och är helt transparenta."
+      },
+      "smart": {
+        "badge": "Smart & rättvist",
+        "title": "Teknik + jurist när det behövs",
+        "body": "Automatiserat där det går, juridisk hjälp när det krävs – utan risk för dig."
+      }
+    }
+  },
+
+  "footer": {
+    "pitch": "Vi hjälper resenärer att få den ersättning de har rätt till enligt EU261 – utan förskottskostnader.",
+    "badges": {
+      "lowFee": "No win, no fee – låg avgift",
+      "eu": "EU261 / UK261",
+      "gdpr": "GDPR-anpassad hantering"
+    },
+    "columns": {
+      "services": "Tjänster",
+      "company": "Om FlightClaimly"
+    },
+    "links": {
+      "rightsLabel": "Dina rättigheter (EU261)",
+      "terms": "Terms",
+      "privacy": "Privacy"
+    },
+    "bottom": {
+      "copyright": "© {year} FlightClaimly. Alla rättigheter förbehållna.",
+      "disclaimer": "FlightClaimly är en fristående aktör och inte affilierad med flygbolagen."
+    }
+  },
+
+  "hero": {
+    "badges": {
+      "eu": "EU261 / UK261",
+      "fee": "LÅG AVGIFT",
+      "noWinNoFee": "NO WIN, NO FEE"
+    },
+    "title": "Få upp till 600 € i ersättning för försenade eller inställda flyg – utan krångel.",
+    "subtitle": {
+      "beforeDelayed": "Kolla om ditt",
+      "delayedLink": "försenade flyg",
+      "between": "eller",
+      "cancelledLink": "inställda flyg",
+      "afterCancelled": "ger rätt till ersättning enligt",
+      "eu261Link": "EU261",
+      "afterEu261": ". Vi hjälper dig att kräva ersättning från flygbolaget – du betalar bara om du får pengar utbetalda."
+    },
+    "cta": "Kolla mitt flyg nu",
+    "trust": {
+      "beforeLink": "Tar ca 2 minuter. Inget att betala om du inte får ersättning –",
+      "link": "läs mer om vår avgift.",
+      "afterLink": ""
+    }
+  },
+
+  "precheck": {
+    "steps": {
+      "step1": "Kolla ditt flyg",
+      "step2": "Fyll i dina uppgifter"
+    },
+    "quick": {
+      "title": "Snabb förhandskontroll",
+      "descBeforeLink": "Ange ditt flyg – vi gör en snabb bedömning om du kan ha rätt till ersättning enligt",
+      "eu261Link": "EU261",
+      "descAfterLink": ".",
+      "labels": {
+        "flightNumber": "Flygnummer",
+        "date": "Datum",
+        "from": "Från",
+        "to": "Till",
+        "connectionTitle": "Mellanlandning",
+        "direct": "Direktflyg",
+        "withConnection": "Med mellanlandning"
+      },
+      "placeholders": {
+        "flightNumber": "t.ex. SK1420",
+        "from": "CPH",
+        "to": "ARN",
+        "connection": "t.ex. FRA, DOH eller Paris CDG"
+      },
+      "actions": {
+        "remove": "Ta bort",
+        "addAirport": "+ Lägg till ytterligare en flygplats"
+      },
+      "submit": {
+        "default": "Kolla mitt flyg",
+        "checking": "Kontrollerar…"
+      }
+    },
+    "details": {
+      "goodNewsStrong": "Bra nyheter!",
+      "goodNewsText": "Mycket tyder på att ditt flyg kan vara ersättningsberättigat enligt EU261.",
+      "title": "Dina uppgifter",
+      "labels": {
+        "fullName": "Fullständigt namn",
+        "email": "E-post",
+        "phone": "Telefonnummer",
+        "bookingNumber": "Bokningsnummer"
+      },
+      "placeholders": {
+        "fullName": "Ditt namn",
+        "email": "din@mail.se",
+        "phone": "+46 70 123 45 67",
+        "bookingNumber": "ABC123"
+      },
+      "submit": {
+        "default": "Skicka in ärendet",
+        "sending": "Skickar in ärendet…"
+      },
+      "consent": {
+        "before": "Genom att skicka godkänner du våra",
+        "terms": "Terms",
+        "and": "&",
+        "privacy": "Privacy",
+        "after": "."
+      },
+      "trust": {
+        "gdpr": "GDPR-anpassat",
+        "noWinNoFee": "No win, no fee",
+        "fastHandling": "Snabb handläggning"
+      }
+    }
+  }
+}
