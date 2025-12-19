@@ -1,0 +1,175 @@
+// src/app/[locale]/compensation/CompensationClient.tsx
+"use client";
+
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+
+export default function CompensationClient() {
+  const t = useTranslations("compensation");
+
+  return (
+    <main className="min-h-screen bg-white">
+      <div className="max-w-3xl mx-auto px-6 py-12 text-slate-900">
+        {/* Header */}
+        <header className="mb-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-600">
+            {t("badge")}
+          </p>
+          <h1 className="mt-2 text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
+            {t("title")}
+          </h1>
+          <p className="mt-3 text-sm md:text-base text-slate-600">
+            {t("intro")}
+          </p>
+        </header>
+
+        <section className="space-y-8 text-sm md:text-base text-slate-700">
+          {/* Snabb överblick */}
+          <div>
+            <h2 className="text-lg font-semibold text-slate-900">
+              {t("sections.overview.title")}
+            </h2>
+            <p className="mt-2">
+              {t("sections.overview.p1.before")}{" "}
+              <span className="font-medium">
+                {t("sections.overview.p1.highlight")}
+              </span>
+              {t("sections.overview.p1.after")}
+            </p>
+            <ul className="mt-2 ml-5 list-disc space-y-1">
+              <li>{t("sections.overview.list.0")}</li>
+              <li>{t("sections.overview.list.1")}</li>
+              <li>{t("sections.overview.list.2")}</li>
+            </ul>
+            <p className="mt-2 text-sm text-slate-600">{t("sections.overview.note")}</p>
+          </div>
+
+          {/* Tabell */}
+          <div>
+            <h2 className="text-lg font-semibold text-slate-900">
+              {t("sections.table.title")}
+            </h2>
+            <p className="mt-2">{t("sections.table.intro")}</p>
+
+            <div className="mt-4 overflow-x-auto rounded-lg border border-slate-200">
+              <table className="min-w-full divide-y divide-slate-200 text-sm">
+                <thead className="bg-slate-50">
+                  <tr>
+                    <th className="px-4 py-3 text-left font-semibold text-slate-800">
+                      {t("sections.table.head.distance")}
+                    </th>
+                    <th className="px-4 py-3 text-left font-semibold text-slate-800">
+                      {t("sections.table.head.type")}
+                    </th>
+                    <th className="px-4 py-3 text-left font-semibold text-slate-800">
+                      {t("sections.table.head.amount")}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-200 bg-white">
+                  <tr>
+                    <td className="px-4 py-3">{t("sections.table.rows.0.distance")}</td>
+                    <td className="px-4 py-3">{t("sections.table.rows.0.type")}</td>
+                    <td className="px-4 py-3 font-medium">{t("sections.table.rows.0.amount")}</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-3">{t("sections.table.rows.1.distance")}</td>
+                    <td className="px-4 py-3">{t("sections.table.rows.1.type")}</td>
+                    <td className="px-4 py-3 font-medium">{t("sections.table.rows.1.amount")}</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-3">{t("sections.table.rows.2.distance")}</td>
+                    <td className="px-4 py-3">{t("sections.table.rows.2.type")}</td>
+                    <td className="px-4 py-3 font-medium">{t("sections.table.rows.2.amount")}</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-3">{t("sections.table.rows.3.distance")}</td>
+                    <td className="px-4 py-3">{t("sections.table.rows.3.type")}</td>
+                    <td className="px-4 py-3 font-medium">{t("sections.table.rows.3.amount")}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p className="mt-2 text-sm text-slate-600">{t("sections.table.note")}</p>
+          </div>
+
+          {/* Halvering */}
+          <div>
+            <h2 className="text-lg font-semibold text-slate-900">
+              {t("sections.reduction.title")}
+            </h2>
+            <p className="mt-2">{t("sections.reduction.p1")}</p>
+            <ul className="mt-2 ml-5 list-disc space-y-1">
+              <li>{t("sections.reduction.list.0")}</li>
+              <li>{t("sections.reduction.list.1")}</li>
+              <li>{t("sections.reduction.list.2")}</li>
+            </ul>
+            <p className="mt-2 text-sm text-slate-600">{t("sections.reduction.note")}</p>
+          </div>
+
+          {/* Störningar */}
+          <div>
+            <h2 className="text-lg font-semibold text-slate-900">
+              {t("sections.types.title")}
+            </h2>
+            <p className="mt-2">{t("sections.types.p1")}</p>
+            <ul className="mt-2 ml-5 list-disc space-y-1">
+              <li>{t("sections.types.list.0")}</li>
+              <li>{t("sections.types.list.1")}</li>
+              <li>{t("sections.types.list.2")}</li>
+            </ul>
+            <p className="mt-2 text-sm text-slate-600">
+              {t("sections.types.note.before")}{" "}
+              <Link
+                href="/rights"
+                className="font-medium text-slate-900 underline-offset-2 hover:underline"
+              >
+                {t("sections.types.note.link")}
+              </Link>
+              .
+            </p>
+          </div>
+
+          {/* Exempel */}
+          <div>
+            <h2 className="text-lg font-semibold text-slate-900">
+              {t("sections.examples.title")}
+            </h2>
+            <ul className="mt-2 ml-5 list-disc space-y-1">
+              <li>{t("sections.examples.list.0")}</li>
+              <li>{t("sections.examples.list.1")}</li>
+              <li>{t("sections.examples.list.2")}</li>
+            </ul>
+            <p className="mt-2 text-sm text-slate-600">{t("sections.examples.note")}</p>
+          </div>
+
+          {/* Missförstånd */}
+          <div>
+            <h2 className="text-lg font-semibold text-slate-900">
+              {t("sections.myths.title")}
+            </h2>
+            <ul className="mt-2 ml-5 list-disc space-y-1">
+              <li>{t("sections.myths.list.0")}</li>
+              <li>{t("sections.myths.list.1")}</li>
+              <li>{t("sections.myths.list.2")}</li>
+            </ul>
+            <p className="mt-2 text-sm text-slate-600">{t("sections.myths.note")}</p>
+          </div>
+        </section>
+
+        <footer className="mt-10 border-t border-slate-200 pt-6 text-sm text-slate-600">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <p>{t("footer.lead")}</p>
+            <Link
+              href="/#precheck"
+              className="inline-flex items-center justify-center rounded-full border border-slate-900 bg-slate-900 px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-slate-800"
+            >
+              {t("footer.cta")}
+            </Link>
+          </div>
+        </footer>
+      </div>
+    </main>
+  );
+}

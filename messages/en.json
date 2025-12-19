@@ -218,5 +218,737 @@
         "fastHandling": "Fast handling"
       }
     }
+  },
+
+  "faq": {
+    "badge": "FAQ",
+    "title": "Frequently asked questions about flight compensation",
+    "intro": "Here we’ve collected answers to the most common questions about compensation for delayed or cancelled flights and how FlightClaimly works.",
+    "jsonld": {
+      "eligibilityAnswer": "As a general rule, you may be eligible for compensation if you arrived at your final destination more than three hours late, your flight was cancelled on short notice, you were denied boarding despite a valid ticket, and the trip departed from the EU or was operated by an EU carrier.",
+      "securityAnswer": "Yes. We use your information only to handle your case and meet legal obligations. More details are available in our privacy policy."
+    },
+    "items": {
+      "eu261": {
+        "q": "What is flight compensation under EU261?",
+        "a": "EU261 is an EU regulation that gives passengers the right to financial compensation when flights are heavily delayed, cancelled, or when boarding is denied, under certain conditions. The compensation level depends on factors such as flight distance."
+      },
+      "eligibility": {
+        "q": "When am I entitled to compensation?",
+        "lead": "As a general rule, you may be entitled to compensation if:",
+        "bullets": [
+          "you arrived at your final destination more than 3 hours late",
+          "your flight was cancelled on short notice",
+          "you were denied boarding despite a valid ticket",
+          "the trip departed from an EU country or was operated by an EU airline"
+        ]
+      },
+     "amount": {
+  "q": "How much money can I receive?",
+  "lead": "Compensation under EU261 is typically between",
+  "highlight": "€250 and €600 per person",
+  "tail": ", depending on the flight distance and the type of journey.",
+  "a": "Compensation under EU261 is typically between €250 and €600 per person, depending on the flight distance and the type of journey."
+},
+      "perPerson": {
+        "q": "Is compensation per person or per booking?",
+        "a": "Compensation is paid per passenger, not per booking. If you’re travelling as a group, the total amount can therefore be significant."
+      },
+      "timeLimit": {
+        "q": "How far back can I claim compensation?",
+        "a": "It depends on which country’s rules apply, but in many cases you can claim compensation several years after the travel date."
+      },
+      "cause": {
+        "q": "Does it matter what caused the delay?",
+        "a": "Yes. The airline may avoid paying compensation if the disruption was caused by so-called “extraordinary circumstances”."
+      },
+      "businessModel": {
+        "q": "How does FlightClaimly make money?",
+        "lead": "We operate on a",
+        "highlight": "no win, no fee",
+        "a": "FlightClaimly works on a no win, no fee basis. It costs nothing to submit a case, and we only charge a percentage of the compensation you actually receive."
+      },
+      "process": {
+        "q": "How does the process work in practice?",
+        "lead": "In short:",
+        "steps": [
+          "you enter your flight details and personal information",
+          "we assess the case and contact the airline",
+          "we handle responses, objections, and any additional documentation",
+          "if we win, you receive your compensation"
+        ]
+      },
+      "timing": {
+        "q": "How long does it take to get an answer?",
+        "a": "Some cases are resolved in a few weeks, while others can take longer."
+      },
+      "documents": {
+        "q": "Which documents do I need?",
+        "lead": "The most important ones are:",
+        "list": [
+          "booking confirmation",
+          "boarding pass",
+          "communication from the airline"
+        ]
+      },
+      "security": {
+        "q": "Is my information safe with you?",
+        "lead": "Yes. We use your information only to handle your case. More details are available in our",
+        "linkText": "privacy policy"
+      },
+      "contact": {
+        "q": "I can’t find the answer — what should I do?",
+        "lead": "Email us at"
+      }
+    },
+    "footer": {
+      "lead": "Ready to see if your flight could qualify for compensation?",
+      "cta": "Check my flight"
+    }
+  },
+  "cancellations": {
+  "meta": {
+    "title": "Cancelled flight — compensation under EU261 | FlightClaimly",
+    "description": "Cancelled flight? Learn when you may be entitled to €250–€600 under EU261, the difference between rerouting and refunds, and how FlightClaimly handles your claim with the airline."
+  },
+  "badge": "Cancelled flights",
+  "title": "Cancelled flight — your rights to compensation under EU261",
+  "intro": "When a flight is cancelled, your entire trip is affected — sometimes with rerouting, sometimes with a ruined holiday or missed meetings. EU261 gives you strong rights for cancelled flights. Here we cover the basics and how FlightClaimly can help.",
+  "sections": {
+    "whenIsCancelled": {
+      "title": "When is a flight considered cancelled?",
+      "p1": "A flight is considered cancelled when the original flight is not operated and passengers either:",
+      "list": [
+        "are rebooked onto another flight, or",
+        "receive a refund instead of travelling"
+      ],
+      "note": "Major schedule changes can also be treated as a cancellation in practice — we’ll help assess that when you submit your claim."
+    },
+    "whenMoney": {
+      "title": "When can you receive financial compensation?",
+      "p1": "You may be entitled to compensation under EU261 if:",
+      "list": [
+        "the flight is cancelled on short notice (usually less than 14 days before departure)",
+        "the rerouting causes you to arrive significantly later than planned",
+        "the airline is responsible for the reason behind the cancellation"
+      ],
+      "note": "The exact rules depend on when you were informed and what alternative travel was offered. FlightClaimly helps you work out what applies in your case."
+    },
+    "amount": {
+      "title": "How much compensation can you receive?",
+      "p1": "The compensation amount depends on the flight distance and how much your journey is affected. Common fixed amounts under EU261 include:",
+      "list": [
+        "up to €250 for shorter flights (approx. 0–1,500 km)",
+        "up to €400 for mid-range flights within the EU or up to 3,500 km",
+        "up to €600 for longer international flights"
+      ],
+      "note": "Amounts may be reduced if the airline offers rerouting that gets you to your destination with only a small delay. We analyse this for you when you submit your claim."
+    },
+    "rerouteOrRefund": {
+      "title": "Rerouting or refund — you have the right to choose",
+      "p1": "When a flight is cancelled, you usually have the right to choose between:",
+      "list": [
+        "rerouting to a later flight as soon as possible, or",
+        "a refund of the ticket price for the segment you could not travel"
+      ],
+      "p2": "In some situations, you may also be entitled to reimbursement of extra costs — for example hotel or transport — if you are forced to stay longer at your destination."
+    },
+    "extraordinary": {
+      "title": "When can the airline refuse compensation?",
+      "p1": "The airline may avoid paying compensation if the cancellation was caused by “extraordinary circumstances”, for example:",
+      "list": [
+        "severe weather or natural disasters",
+        "security threats or airspace closures",
+        "strikes the airline cannot control"
+      ],
+      "p2": {
+        "before": "Technical issues, staff shortages or internal airline problems often do",
+        "strong": "not",
+        "after": "count as extraordinary circumstances. Many rejections are incorrect — we can help you push back."
+      }
+    },
+    "examples": {
+      "title": "Examples: when you may be entitled to compensation",
+      "list": [
+        "You’re notified 3 days before departure that your flight is cancelled, and the offered rerouting makes you arrive many hours later — compensation may apply.",
+        "The airline cancels your evening flight due to a technical issue and rebooks you to the next day — you may be entitled to both compensation and hotel.",
+        "Your flight is cancelled the same day without a clear explanation and you have to buy a new ticket with another airline — this may also qualify."
+      ]
+    },
+    "links": {
+      "title": "Want to go deeper into the rules?",
+      "p1": {
+        "before": "On the page",
+        "linkText": "Your rights",
+        "after": "you’ll find a broader overview of EU261 and which situations are covered."
+      },
+      "p2": {
+        "before": "You can also read our",
+        "linkText": "FAQ",
+        "after": "with short answers to common questions."
+      }
+    }
+  },
+  "footer": {
+    "lead": "Was your flight cancelled? Check if you could be entitled to up to €600 — it only takes a minute.",
+    "cta": "Check my flight"
   }
+},
+"compensation": {
+  "meta": {
+    "title": "EU261 compensation amounts – €250, €400 and €600 | FlightClaimly",
+    "description": "See which EU261/UK261 compensation amount you may be entitled to – €250, €400 or €600 per person depending on distance and delay."
+  },
+  "badge": "Compensation amounts",
+  "title": "EU261 compensation amounts – €250, €400 and €600",
+  "intro": "EU Regulation 261/2004 (“EU261”) provides fixed compensation levels when your flight is heavily delayed, cancelled or you are denied boarding.",
+  "sections": {
+    "overview": {
+      "title": "Quick overview — how much can you receive?",
+      "p1": {
+        "before": "Compensation under EU261 is usually between ",
+        "highlight": "€250 and €600 per person",
+        "after": ". The amount mainly depends on:"
+      },
+      "list": [
+        "the flight distance",
+        "whether the flight is within the EU or international",
+        "how much delay or disruption you experienced"
+      ],
+      "note": "Ticket price doesn’t matter — two passengers on the same flight usually receive the same compensation amount."
+    }
+  },
+  "footer": {
+    "lead": "Want to see which compensation amount could apply to your trip?",
+    "cta": "Check my flight"
+  }
+},
+"contact": {
+  "badge": "Contact",
+  "title": "Contact FlightClaimly",
+  "intro": "Do you have questions about a claim, EU261 rules, or how the process works? You’re always welcome to get in touch. We’ll respond as quickly as we can.",
+  "email": {
+    "title": "Email",
+    "lead": "The easiest way to reach us is by email:",
+    "note": "We’ll get back to you as soon as possible. During busy periods, response times may be slightly longer."
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "before": "Many questions are already answered in our ",
+    "link": "FAQ",
+    "after": ", where you’ll find clear answers about compensation, the process, and different situations."
+  },
+  "rights": {
+    "title": "Your rights",
+    "lead": "Want to learn more about your rights under EU261? Visit:",
+    "link": "Your rights"
+  },
+  "case": {
+    "title": "Do you have an ongoing claim?",
+    "p1": "You can track the status at any time using the link you received by email when you submitted your claim.",
+    "before": "Lost the link? No problem — email us at",
+    "after": "and we’ll send it again."
+  },
+  "footer": {
+    "lead": "Want to check if your flight qualifies for compensation? It only takes a minute.",
+    "cta": "Check my flight"
+  }
+},
+"delays": {
+  "meta": {
+    "title": "Delayed flight – compensation under EU261 | FlightClaimly",
+    "description": "Delayed flight? See when you may be entitled to €250–€600 compensation under EU261/UK261, what counts as a major delay, and how FlightClaimly helps you pursue your claim."
+  },
+  "badge": "Flight delays",
+  "title": "Delayed flight — how to get compensation under EU261",
+  "intro": "A delayed flight can ruin plans, connections and holidays. EU261 gives you strong passenger rights — in many cases you may be entitled to compensation when you arrive late. Here are the basics.",
+  "sections": {
+    "when": {
+      "title": "When does a delay count as a major delay?",
+      "p1": {
+        "before": "Under EU261, it’s mainly the",
+        "highlight": "arrival time",
+        "after": "that matters. You may be entitled to compensation when you:"
+      },
+      "list": [
+        "arrive 3 hours or more after the scheduled time",
+        "miss connections and reach your final destination significantly late",
+        "wait for a long time without reasonable assistance from the airline"
+      ],
+      "note": "Shorter delays usually don’t qualify for compensation, but may still give you a right to meals, drinks or rebooking. We help you assess what applies in your case."
+    },
+    "amount": {
+      "title": "How much can you receive for a delay?",
+      "p1": "Compensation levels for major delays are similar to cancellations and depend on the flight distance:",
+      "list": [
+        "up to €250 for shorter flights (approx. 0–1,500 km)",
+        "up to €400 for mid-distance flights within the EU or up to 3,500 km",
+        "up to €600 for longer international flights"
+      ],
+      "note": "In some cases, amounts may be reduced if the airline rebooks you and you still arrive with a relatively small delay. That’s something we calculate for you."
+    },
+    "care": {
+      "title": "Your rights while you wait",
+      "p1": "In addition to financial compensation, longer delays may give you a right to:",
+      "list": [
+        "meals and refreshments in a reasonable amount",
+        "two free phone calls or messages",
+        "hotel accommodation if you have to stay overnight",
+        "transport between the airport and the hotel",
+        "rebooking to a later departure, or a refund in some cases"
+      ],
+      "note": "Always keep receipts — you can often claim reimbursement for necessary expenses afterwards if the airline didn’t assist you at the airport."
+    },
+    "exceptions": {
+      "title": "When can the airline avoid paying compensation?",
+      "p1": "In some situations, the airline may cite “extraordinary circumstances” and deny compensation, for example:",
+      "list": [
+        "severe weather or natural disasters",
+        "airport closures or airspace restrictions",
+        "security threats or events outside the airline’s control"
+      ],
+      "p2": {
+        "before": "Technical faults, staff shortages or planning mistakes are usually",
+        "highlight": "not",
+        "after": "valid reasons to deny compensation. Many passengers get rejected the first time — that’s where we can help you escalate."
+      }
+    },
+    "examples": {
+      "title": "Examples: when you may be entitled to compensation",
+      "list": [
+        "Your flight from Stockholm to Barcelona lands 3 hours and 45 minutes late — you may be entitled to compensation.",
+        "You miss your long-haul connection due to a delay on the first leg and reach your final destination more than 3 hours late — the whole journey may be covered.",
+        "The flight is delayed 4 hours due to a technical fault — often compensable."
+      ]
+    },
+    "links": {
+      "title": "Want to learn more about the rules?",
+      "rights": {
+        "before": "On the page",
+        "link": "Your rights",
+        "after": "you’ll find a broader overview of EU261 and what applies to cancellations, overbooking and other situations."
+      },
+      "faq": {
+        "before": "You can also check our",
+        "link": "FAQ",
+        "after": "for short answers to common questions."
+      }
+    }
+  },
+  "footer": {
+    "lead": "Had a delayed flight? Check if you may be entitled to compensation — it only takes a minute.",
+    "cta": "Check my flight"
+  }
+},
+"login": {
+  "title": "Admin login",
+  "passwordLabel": "Password",
+  "passwordPlaceholder": "••••••••",
+  "submit": "Log in",
+  "loading": "Logging in…",
+  "errors": {
+    "invalidPassword": "Incorrect password",
+    "generic": "Could not log in"
+  }
+},
+"privacy": {
+  "badge": "Privacy",
+  "title": "Privacy policy for FlightClaimly",
+  "intro": "Your privacy is important to us. On this page we explain what data we collect, why we collect it, how it is used, and what rights you have.",
+
+  "controller": {
+    "title": "Data controller",
+    "body": "FlightClaimly (“we”, “us”) is the data controller responsible for the processing of personal data in connection with our flight compensation service."
+  },
+
+  "dataCollected": {
+    "title": "What data do we collect?",
+    "intro": "When you use our service, we may process the following categories of personal data:",
+    "items": [
+      "contact details (name, email address, phone number)",
+      "booking information (booking reference, flight number, dates, routes)",
+      "tickets and boarding passes (documents, PDFs, images)",
+      "information about delays, cancellations, or other disruptions",
+      "communication with you (emails, messages)",
+      "technical data (IP address, device, browser) where necessary for security and operation"
+    ]
+  },
+
+  "purpose": {
+    "title": "Why do we process your data?",
+    "intro": "We process your personal data in order to:",
+    "items": [
+      "assess whether you are entitled to compensation under EU261",
+      "create and manage your claim with the airline",
+      "communicate with you about the status of your case",
+      "handle payouts when compensation is granted",
+      "comply with legal obligations (e.g. accounting)",
+      "improve and secure our service"
+    ]
+  },
+
+  "legalBasis": {
+    "title": "Legal basis for processing",
+    "intro": "The processing of your personal data is primarily based on:",
+    "items": [
+      "<strong>Contract</strong> – when processing data to handle your claim against the airline",
+      "<strong>Legal obligation</strong> – when we are required to retain data under applicable law",
+      "<strong>Legitimate interest</strong> – limited technical data used to ensure security and operation"
+    ]
+  },
+
+  "retention": {
+    "title": "How long do we retain your data?",
+    "intro": "We retain your data for as long as necessary to:",
+    "items": [
+      "handle and conclude your claim",
+      "manage potential complaints or disputes related to the case",
+      "comply with legal obligations"
+    ],
+    "note": "When the data is no longer needed, it is securely deleted or anonymised."
+  },
+
+  "sharing": {
+    "title": "Who do we share your data with?",
+    "intro": "We only share your data with parties necessary to deliver the service, such as:",
+    "items": [
+      "airlines and their representatives",
+      "legal partners or representatives connected to your case",
+      "IT service providers (hosting, email) with appropriate agreements in place"
+    ],
+    "note": "We do not sell your personal data to third parties."
+  },
+
+  "rights": {
+    "title": "Your rights",
+    "intro": "As a data subject, you have the right to:",
+    "items": [
+      "request access to the personal data we process about you",
+      "request correction of inaccurate or incomplete data",
+      "request deletion of data when it is no longer necessary",
+      "object to or request restriction of certain processing",
+      "request data portability in certain cases"
+    ],
+    "contactBefore": "If you wish to exercise any of these rights, please contact us at"
+  },
+
+  "complaints": {
+    "title": "Complaints",
+    "body": "If you believe that we process your personal data in violation of applicable data protection laws, you have the right to lodge a complaint with the relevant supervisory authority."
+  },
+
+  "changes": {
+    "title": "Changes to this policy",
+    "body": "We may update this privacy policy from time to time. The latest version is always published on this page."
+  },
+
+  "footer": {
+    "before": "If you have questions about how we handle your personal data, please contact us at"
+  }
+},
+"rights": {
+  "meta": {
+    "title": "EU261 — your passenger rights | FlightClaimly",
+    "description": "Learn your rights under EU261/UK261 for delayed, cancelled, and overbooked flights. See when you may be entitled to €250–€600 and how FlightClaimly helps you get paid."
+  },
+  "badge": "Your rights",
+  "title": "Your passenger rights under EU261",
+  "intro": "EU Regulation 261/2004 (\"EU261\") gives you strong rights as an air passenger in case of delays, cancellations, or denied boarding. Here we explain the basics — and how FlightClaimly can help you get the compensation you’re entitled to.",
+
+  "whenApplies": {
+    "title": "When does EU261 apply?",
+    "intro": "EU261 applies in the following situations:",
+    "bullets": [
+      "the flight departs from a country in the EU/EEA or the United Kingdom",
+      "the flight arrives into the EU/EEA/UK with an EU-based airline",
+      "you have a confirmed booking and checked in on time"
+    ],
+    "note": "Some connecting flights and itineraries with stopovers may also be covered, depending on how your ticket is booked. We help you assess this."
+  },
+
+  "covered": {
+    "title": "Which situations are covered?",
+    "lead": "You may be entitled to compensation if:",
+    "bullets": [
+      "your flight is heavily delayed at arrival (often 3 hours or more)",
+      "your flight is cancelled on short notice",
+      "you are denied boarding due to overbooking"
+    ],
+    "after": "In addition to compensation, you may be entitled to meals, drinks, hotel accommodation, and rebooking depending on the length of the disruption and your journey."
+  },
+
+  "amounts": {
+    "title": "How much compensation can you receive?",
+    "intro": "Compensation mainly depends on flight distance and how much your journey was affected. Typical EU261 amounts are:",
+    "bullets": [
+      "up to €250 for short flights (approx. 0–1,500 km)",
+      "up to €400 for medium-haul flights within the EU or up to 3,500 km",
+      "up to €600 for long-haul international flights"
+    ],
+    "note": "The exact amount can vary depending on route, delay length, and any rebooking offered. FlightClaimly helps you calculate the correct level for your trip."
+  },
+
+  "exceptions": {
+    "title": "When are you not entitled to compensation?",
+    "intro": "The airline may avoid paying compensation if the delay or cancellation was caused by so-called \"extraordinary circumstances\", for example:",
+    "bullets": [
+      "severe weather or natural disasters",
+      "security risks or airspace closures",
+      "strikes outside the airline’s control (e.g. airport staff or air traffic control)"
+    ],
+    "afterBeforeStrong": "Technical issues or planning failures are often ",
+    "afterStrong": "not",
+    "afterTail": " considered extraordinary circumstances. Many airline rejections are incorrect — we can help you appeal."
+  },
+
+  "save": {
+    "title": "What should you keep?",
+    "intro": "To pursue a claim, it helps if you have:",
+    "bullets": [
+      "booking confirmation or ticket (preferably as PDF or image)",
+      "boarding pass if you managed to check in",
+      "receipts for meals, hotel, or transport",
+      "a short description of what happened (times, messages from the airline)"
+    ],
+    "note": "You can upload everything when you create a case with us — we’ll help you organise it."
+  },
+
+  "links": {
+    "title": "Want to learn more about specific situations?",
+    "lead": "Read more about:",
+    "delaysText": "Flight delays",
+    "delaysAfter": " — what applies to long delays.",
+    "cancellationsText": "Flight cancellations",
+    "cancellationsAfter": " — your rights when a flight is cancelled.",
+    "faqText": "Frequently asked questions",
+    "faqAfter": " — short answers to the most common questions."
+  },
+
+  "footer": {
+    "lead": "Think your flight is covered by EU261? Check now if you may be entitled to compensation — it only takes a minute.",
+    "cta": "Check if I’m entitled to compensation"
+  }
+},
+"terms": {
+  "badge": "Terms",
+  "title": "Terms of Use for FlightClaimly",
+  "intro": "These terms describe how FlightClaimly works and the rights and obligations that apply when you use our service to pursue flight compensation claims.",
+
+  "sections": {
+    "service": {
+      "title": "1. About the service",
+      "text": "FlightClaimly is a service that helps air passengers investigate and pursue compensation claims under EU261 and similar regulations. We act as your representative towards the airline.",
+      "note": "By submitting a case via our website, you accept these terms."
+    },
+
+    "usage": {
+      "title": "2. Your use of the service",
+      "intro": "You agree to:",
+      "bullets": [
+        "provide accurate and complete information about your flight",
+        "not submit claims you know to be incorrect or misleading",
+        "inform us if you have already hired another party for the same claim"
+      ],
+      "note": "We reserve the right to discontinue handling a case if the information provided is incorrect or if the conditions for a valid claim are not met."
+    },
+
+    "power": {
+      "title": "3. Representation and power of attorney",
+      "text": "To pursue your claim, we may need to act as your representative towards the airline. By using the service, you authorise us to contact the airline on your behalf.",
+      "note": "In some cases, we may ask you to sign a separate power of attorney or mandate, for example if the case needs escalation."
+    },
+
+    "fees": {
+      "title": "4. Fees and compensation",
+      "lead": "FlightClaimly operates on a",
+      "highlight": "no win, no fee",
+      "bullets": [
+        "there is no cost to submit a claim",
+        "we only charge a fee if we successfully obtain compensation",
+        "our fee is a percentage of the compensation you receive"
+      ],
+      "note": "The applicable percentage and any additional conditions are clearly stated when you approve that we handle your claim."
+    },
+
+    "payout": {
+      "title": "5. Payment to you",
+      "intro": "When compensation has been paid by the airline, payment may be made either:",
+      "bullets": [
+        "directly to FlightClaimly, after which your share is forwarded to you, or",
+        "directly to you, with our fee deducted according to a separate agreement"
+      ],
+      "note": "We aim to process payments as soon as possible after compensation has been received and identified."
+    },
+
+    "liability": {
+      "title": "6. Liability and limitations",
+      "text1": "We cannot guarantee that a claim will result in compensation. Each case is assessed based on available information and applicable regulations.",
+      "text2": "FlightClaimly is not liable for indirect damages, such as loss of profit, and our liability is generally limited to the fee paid for the service."
+    },
+
+    "privacy": {
+      "title": "7. Personal data and privacy",
+      "text": "We process personal data in accordance with applicable data protection laws. More information is available in our",
+      "link": "privacy policy"
+    },
+
+    "changes": {
+      "title": "8. Changes to the terms",
+      "text": "We may update these terms when necessary. The latest version is always available on our website."
+    },
+
+    "contact": {
+      "title": "9. Contact",
+      "text": "If you have any questions about these terms, you are welcome to contact us at"
+    }
+  },
+
+  "footer": "By using FlightClaimly, you confirm that you have read and understood these terms."
+},
+"thanks": {
+  "brandTagline": "We handle the airline — you avoid the hassle.",
+  "backHome": "← Back to homepage",
+
+  "header": {
+    "badge": "FLIGHTCLAIMLY • YOUR CLAIM IS REGISTERED",
+    "title": "Thank you! We’ve received your claim.",
+    "claimId": "Claim ID",
+    "intro": "The next step is to confirm your authorization and upload supporting documents on this page. Once that’s done, we’ll start handling your case immediately and contact the airline on your behalf."
+  },
+
+  "precheck": {
+    "badge": "Preliminary assessment",
+    "eligibleTitle": "Good news — you appear to be eligible for compensation.",
+    "eligibleFallback": "Preliminary assessment: the flight may qualify for compensation under EU261.",
+    "eligibleNote": "This is not a guarantee, but a strong initial indication. Once you confirm authorization and upload documents, we’ll begin pursuing the claim with the airline.",
+    "unclearTitle": "Unclear — we’ll review this manually.",
+    "unclearFallback": "Please submit supporting documents and we’ll review your case manually.",
+    "amountPrefix": "Estimated amount:"
+  },
+
+  "upload": {
+    "title": "Upload documents",
+    "intro": "The authorization allows us to pursue the claim with the airline. Please also upload your boarding pass, booking confirmation, and receipts if you had additional expenses.",
+    "list": [
+      "Digital authorization (LoA) — required",
+      "Boarding pass or e-ticket",
+      "Booking confirmation",
+      "Receipts for additional expenses (if applicable)"
+    ]
+  },
+
+  "loa": {
+    "title": "Digital authorization (LoA)",
+    "description": "By entering your name and checking the box, you authorize FlightClaimly to represent you towards the airline in this case.",
+    "viewText": "View authorization text",
+    "nameLabel": "Full name (signature)",
+    "namePlaceholder": "Your full name",
+    "consent": "I authorize FlightClaimly (Letter of Authorization) to represent me towards the airline in this case.",
+    "error": "Please enter your name and check the box for the authorization to be valid."
+  },
+
+  "attachments": {
+    "title": "Additional documents (optional)",
+    "description": "You may upload boarding passes, booking confirmations, and receipts. Multiple files can be uploaded at once.",
+    "choose": "Choose files",
+    "types": "PDF, JPG, PNG, HEIC. A few files at a time."
+  },
+
+  "actions": {
+    "submit": "Confirm authorization and upload",
+    "submitting": "Processing…",
+    "later": "You can always add more documents later by contacting us if needed."
+  },
+
+  "success": {
+    "title": "Authorization confirmed!",
+    "text": "Thank you — we’ll start handling your claim immediately. You’ll receive emails when the status changes and can follow everything via your tracking link."
+  },
+
+  "errors": {
+    "missingId": "We couldn’t find your claim ID. Please return to the homepage and submit the form again.",
+    "generic": "❌ We couldn’t complete the step. Please try again."
+  },
+
+  "security": {
+    "badge": "Secure file transfer",
+    "text": "Your files are stored encrypted and used only to handle your claim. They are shared only with the airline and, if necessary, legal partners related to this specific case.",
+    "independentTitle": "Independent service",
+    "independentText": "FlightClaimly is an independent service and not affiliated with any airline. We always act on your behalf as a passenger."
+  },
+
+  "loaText": {
+    "title": "Authorization — FlightClaimly",
+    "intro": "I hereby authorize FlightClaimly to represent me in matters relating to flight compensation under EU Regulation 261/2004.",
+    "bullets": [
+      "Communicate with the airline on my behalf.",
+      "Submit claims and follow up the case.",
+      "Receive responses and decisions from the airline.",
+      "Cooperate with legal partners if required for this case."
+    ],
+    "note": "The authorization applies only to this specific case and can be revoked in writing at any time."
+  },
+
+  "loading": "Loading page…",
+  "home": "Back to homepage"
+},
+"about": {
+  "badge": "About us",
+  "title": "We help you get compensation when your flight goes wrong",
+  "intro": "FlightClaimly is an EU-based service that makes it easy to claim compensation from airlines under EU261. The goal is simple: get you the money you’re entitled to — without hassle, stress, or legal friction.",
+
+  "why": {
+    "title": "Why FlightClaimly exists",
+    "p1": "Every year, large amounts of flight compensation never reach passengers. Many people don’t have the time, don’t know the rules, or get rejected the first time and give up.",
+    "p2": "FlightClaimly was built to make the process as simple as possible: you enter your flight details, upload your booking — we handle the rest and pursue the claim with the airline for you."
+  },
+
+  "how": {
+    "title": "How it works",
+    "steps": [
+      "You submit your flight details and what happened.",
+      "We assess your case under EU261 rules.",
+      "We pursue the claim with the airline on your behalf.",
+      "You only pay if you get paid."
+    ],
+    "note": "Everything is handled digitally — fast, secure, and transparent."
+  },
+
+  "model": {
+    "title": "Our model — simple and transparent",
+    "p1": "We believe in one simple principle:",
+    "p1Strong": "no win, no fee",
+    "p1b": " That means we only earn money when you do.",
+    "bullets": [
+      "creating a case is free",
+      "we only charge if you receive compensation",
+      "our fee is clear before you approve anything"
+    ],
+    "note": "No compensation from the airline = no cost to you."
+  },
+
+  "trust": {
+    "title": "Clarity and peace of mind",
+    "p1": "You should always know where your case stands. That’s why you can track the process and see:",
+    "bullets": [
+      "when we receive your case",
+      "when we review it",
+      "when it’s sent to the airline",
+      "when compensation is paid out"
+    ],
+    "p2": "You’ll also get status update emails — so you don’t have to chase support or log into unnecessary portals."
+  },
+
+  "independent": {
+    "title": "Independent and on your side",
+    "p1": "FlightClaimly works under EU passenger rights (EU261/2004) and is independent from airlines. Our only job is to represent you and ensure the rules are applied in practice — not just on paper.",
+    "p2": "We deal with airline bureaucracy so you can focus on your trip — not forms and fine print."
+  },
+
+  "footer": {
+    "cta": "Has your flight been disrupted? Check if you’re eligible — it only takes a minute.",
+    "primary": "Get compensation",
+    "secondary": "Contact & partnerships"
+  }
+}
 }

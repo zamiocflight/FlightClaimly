@@ -2,7 +2,7 @@
 
 import React, { FormEvent, useState, useRef } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '../../i18n/navigation';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
 import { useTranslations } from 'next-intl';
 
@@ -231,65 +231,57 @@ export default function Home() {
           </Link>
 
           {/* Desktop: meny + språk + Följ ärende */}
-          <div className="hidden md:flex items-center gap-6">
-            <nav className="flex items-center gap-8 text-[15px] font-semibold text-slate-900">
-              <a href="#how" className="hover:text-slate-700 transition-colors">
-                {t('nav.compensation')}
-              </a>
-              <a
-                href="/delays"
-                className="hover:text-slate-700 transition-colors"
-              >
-                {t('nav.delays')}
-              </a>
-              <a
-                href="/cancellations"
-                className="hover:text-slate-700 transition-colors"
-              >
-                {t('nav.cancellations')}
-              </a>
-              <a
-                href="/rights"
-                className="hover:text-slate-700 transition-colors"
-              >
-                {t('nav.rights')}
-              </a>
-              <a href="/faq" className="hover:text-slate-700 transition-colors">
-                {t('nav.faq')}
-              </a>
-              <a
-                href="/about"
-                className="hover:text-slate-700 transition-colors"
-              >
-                {t('nav.about')}
-              </a>
-              <a
-                href="/contact"
-                className="hover:text-slate-700 transition-colors"
-              >
-                {t('nav.contact')}
-              </a>
-            </nav>
+<div className="hidden md:flex items-center gap-6">
+  <nav className="flex items-center gap-8 text-[15px] font-semibold text-slate-900">
+    <a href="#how" className="hover:text-slate-700 transition-colors">
+      {t('nav.compensation')}
+    </a>
 
-            {/* Språk – placeholder tills vidare */}
-            <button
-              type="button"
-              className="text-[14px] font-medium text-slate-500 hover:text-slate-900 transition-colors"
-              aria-label={t('header.language.aria')}
-            >
-              {t('header.language.label')}
-            </button>
+    <Link href="/delays" className="hover:text-slate-700 transition-colors">
+      {t('nav.delays')}
+    </Link>
 
-            {/* Följ ärende */}
-            <button
-              type="button"
-              onClick={openTrackModal}
-              className="inline-flex items-center gap-2 rounded-md border border-slate-900/10 bg-slate-900 px-4 py-2 text-[14px] font-semibold text-white shadow-sm hover:bg-slate-800 hover:shadow-md transition"
-            >
-              <UserCircleIcon className="h-5 w-5" />
-              {t('track.button')}
-            </button>
-          </div>
+    <Link href="/cancellations" className="hover:text-slate-700 transition-colors">
+      {t('nav.cancellations')}
+    </Link>
+
+    <Link href="/rights" className="hover:text-slate-700 transition-colors">
+      {t('nav.rights')}
+    </Link>
+
+    <Link href="/faq" className="hover:text-slate-700 transition-colors">
+      {t('nav.faq')}
+    </Link>
+
+    <Link href="/about" className="hover:text-slate-700 transition-colors">
+      {t('nav.about')}
+    </Link>
+
+    <Link href="/contact" className="hover:text-slate-700 transition-colors">
+      {t('nav.contact')}
+    </Link>
+  </nav>
+
+  {/* Språk – placeholder tills vidare */}
+  <button
+    type="button"
+    className="text-[14px] font-medium text-slate-500 hover:text-slate-900 transition-colors"
+    aria-label={t('header.language.aria')}
+  >
+    {t('header.language.label')}
+  </button>
+
+  {/* Följ ärende */}
+  <button
+    type="button"
+    onClick={openTrackModal}
+    className="inline-flex items-center gap-2 rounded-md border border-slate-900/10 bg-slate-900 px-4 py-2 text-[14px] font-semibold text-white shadow-sm hover:bg-slate-800 hover:shadow-md transition"
+  >
+    <UserCircleIcon className="h-5 w-5" />
+    {t('track.button')}
+  </button>
+</div>
+
 
           {/* Mobil: hamburger */}
           <button

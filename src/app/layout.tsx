@@ -66,12 +66,9 @@ export default function RootLayout({
         <footer className="border-t mt-10">
           <div className="max-w-7xl mx-auto px-6 py-6 text-sm text-gray-600 flex flex-wrap items-center gap-4">
             <span>© {new Date().getFullYear()} FlightClaimly</span>
-            <a href="/terms" className="underline">
-              Terms
-            </a>
-            <a href="/privacy" className="underline">
-              Privacy
-            </a>
+            <a href="./terms" className="underline">Terms</a>
+<a href="./privacy" className="underline">Privacy</a>
+
             <span className="text-gray-400">
               Independent service — not affiliated with airlines
             </span>
