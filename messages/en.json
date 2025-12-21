@@ -2,7 +2,8 @@
   "errors": {
     "sendFailed": "Couldn’t submit right now — please try again.",
     "noClaimId": "No claim ID returned from the server.",
-    "network": "Network error. Please try again."
+    "network": "Network error. Please try again.",
+      "invalidFlightNumber": "Please enter a valid flight number (e.g. SK123)."
   },
 
   "header": {
@@ -394,35 +395,6 @@
     "cta": "Check my flight"
   }
 },
-"compensation": {
-  "meta": {
-    "title": "EU261 compensation amounts – €250, €400 and €600 | FlightClaimly",
-    "description": "See which EU261/UK261 compensation amount you may be entitled to – €250, €400 or €600 per person depending on distance and delay."
-  },
-  "badge": "Compensation amounts",
-  "title": "EU261 compensation amounts – €250, €400 and €600",
-  "intro": "EU Regulation 261/2004 (“EU261”) provides fixed compensation levels when your flight is heavily delayed, cancelled or you are denied boarding.",
-  "sections": {
-    "overview": {
-      "title": "Quick overview — how much can you receive?",
-      "p1": {
-        "before": "Compensation under EU261 is usually between ",
-        "highlight": "€250 and €600 per person",
-        "after": ". The amount mainly depends on:"
-      },
-      "list": [
-        "the flight distance",
-        "whether the flight is within the EU or international",
-        "how much delay or disruption you experienced"
-      ],
-      "note": "Ticket price doesn’t matter — two passengers on the same flight usually receive the same compensation amount."
-    }
-  },
-  "footer": {
-    "lead": "Want to see which compensation amount could apply to your trip?",
-    "cta": "Check my flight"
-  }
-},
 "contact": {
   "badge": "Contact",
   "title": "Contact FlightClaimly",
@@ -451,6 +423,113 @@
   },
   "footer": {
     "lead": "Want to check if your flight qualifies for compensation? It only takes a minute.",
+    "cta": "Check my flight"
+  }
+},
+"compensation": {
+  "meta": {
+    "title": "EU261 compensation amounts – €250, €400 and €600 | FlightClaimly",
+    "description": "See which EU261/UK261 compensation amount you may be entitled to – €250, €400 or €600 per person depending on distance and delay."
+  },
+  "badge": "Compensation amounts",
+  "title": "EU261 compensation amounts – €250, €400 and €600",
+  "intro": "EU Regulation 261/2004 (“EU261”) provides fixed compensation levels when your flight is heavily delayed, cancelled or you are denied boarding.",
+  "sections": {
+    "overview": {
+      "title": "Quick overview — how much can you receive?",
+      "p1": {
+        "before": "Compensation under EU261 is usually between ",
+        "highlight": "€250 and €600 per person",
+        "after": ". The amount mainly depends on:"
+      },
+      "list": [
+        "the flight distance",
+        "whether the flight is within the EU or international",
+        "how much delay or disruption you experienced"
+      ],
+      "note": "Ticket price doesn’t matter — two passengers on the same flight usually receive the same compensation amount."
+    },
+
+    "table": {
+      "title": "EU261 compensation levels",
+      "intro": "The amount mainly depends on flight distance and the type of disruption. The table below provides an overview.",
+      "head": {
+        "distance": "Distance",
+        "type": "When it applies",
+        "amount": "Compensation"
+      },
+      "rows": [
+        {
+          "distance": "Up to 1,500 km",
+          "type": "Delay ≥ 3 hours / cancelled flight",
+          "amount": "€250"
+        },
+        {
+          "distance": "1,500–3,500 km",
+          "type": "Delay ≥ 3 hours / cancelled flight",
+          "amount": "€400"
+        },
+        {
+          "distance": "Over 3,500 km (within EU)",
+          "type": "Delay ≥ 3 hours / cancelled flight",
+          "amount": "€400"
+        },
+        {
+          "distance": "Over 3,500 km (outside EU)",
+          "type": "Delay ≥ 3 hours / cancelled flight",
+          "amount": "€600"
+        }
+      ],
+      "note": "We help you determine whether your case qualifies for compensation."
+    },
+
+    "reduction": {
+      "title": "When can compensation be reduced?",
+      "p1": "If you are rebooked and arrive close to the original arrival time, the compensation may in some cases be reduced by 50%.",
+      "list": [
+        "Short distances: minor arrival delay",
+        "Medium distances: moderate arrival delay",
+        "Long distances: limited arrival delay"
+      ],
+      "note": "The assessment is always based on the actual arrival time and the airline’s actions."
+    },
+
+    "types": {
+      "title": "Which disruptions are covered?",
+      "p1": "EU261 may entitle you to compensation in cases such as:",
+      "list": [
+        "Delays (often ≥ 3 hours on arrival)",
+        "Cancelled flights",
+        "Denied boarding (overbooking)"
+      ],
+      "note": {
+        "before": "Read more about your rights on the page ",
+        "link": "Your rights"
+      }
+    },
+
+    "examples": {
+      "title": "Examples",
+      "list": [
+        "Flight arrives 3h 20m late → may qualify for compensation.",
+        "Flight is cancelled on the day of departure → may qualify for compensation and rebooking.",
+        "You are denied boarding due to overbooking → may qualify for compensation."
+      ],
+      "note": "Eligibility depends on the reason for the disruption."
+    },
+
+    "myths": {
+      "title": "Common misconceptions",
+      "list": [
+        "It only applies if the ticket was bought directly from the airline.",
+        "You must complain at the airport immediately.",
+        "All delays qualify for compensation."
+      ],
+      "note": "We help you assess whether your case is eligible."
+    }
+  },
+  "footer": {
+    "lead": "Want to see which compensation amount could apply to your trip?",
     "cta": "Check my flight"
   }
 },
@@ -949,6 +1028,26 @@
     "cta": "Has your flight been disrupted? Check if you’re eligible — it only takes a minute.",
     "primary": "Get compensation",
     "secondary": "Contact & partnerships"
+  },
+  "email": {
+  "footer": {
+    "disclaimer": {
+      "title": "Confidentiality",
+      "p1": "This email and any attachments are intended only for the designated recipient. If you received this message by mistake, please reply to let us know and then delete it.",
+      "p2": "We process personal data to handle your case. Learn more in our Privacy Policy and Terms."
+    },
+    "links": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms"
+    },
+    "errors": {
+  "required": "Please fill in all required fields.",
+  "invalidFlightNumber": "Please enter a valid flight number (e.g. SK123).",
+  "network": "Something went wrong. Please try again.",
+  "noResult": "We couldn’t verify this flight, but you can still submit your claim."
+}
   }
 }
 }
+}
+

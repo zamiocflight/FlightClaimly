@@ -2,7 +2,8 @@
   "errors": {
     "sendFailed": "Kunde inte skicka, försök igen.",
     "noClaimId": "Inget ärende-ID i svar.",
-    "network": "Nätverksfel. Försök igen."
+    "network": "Nätverksfel. Försök igen.",
+      "invalidFlightNumber": "Ange ett giltigt flightnummer (t.ex. SK123)."
   },
 
   "header": {
@@ -394,35 +395,6 @@
     "cta": "Kolla mitt flyg"
   }
 },
-"compensation": {
-  "meta": {
-    "title": "Ersättningsbelopp enligt EU261 – 250, 400 och 600 € | FlightClaimly",
-    "description": "Se vilka ersättningsbelopp du kan få enligt EU261/UK261 – 250, 400 eller 600 € per person beroende på flygsträcka och försening."
-  },
-  "badge": "Ersättningsbelopp",
-  "title": "Ersättningsbelopp enligt EU261 – 250, 400 och 600 €",
-  "intro": "EU-förordning 261/2004 (”EU261”) ger rätt till fasta ersättningsnivåer när ditt flyg är kraftigt försenat, inställt eller vid nekad ombordstigning.",
-  "sections": {
-    "overview": {
-      "title": "Snabb överblick – hur mycket kan du få?",
-      "p1": {
-        "before": "Ersättningen enligt EU261 ligger normalt mellan ",
-        "highlight": "250 € och 600 € per person",
-        "after": ". Beloppet beror i huvudsak på:"
-      },
-      "list": [
-        "hur lång flygsträckan är",
-        "om flyget är inom EU eller internationellt",
-        "hur mycket försening eller påverkan du drabbats av"
-      ],
-      "note": "Det spelar alltså mindre roll vad biljetten kostade – två passagerare på samma flyg får normalt samma ersättningsbelopp."
-    }
-  },
-  "footer": {
-    "lead": "Vill du se vilket ersättningsbelopp som kan gälla för just din resa?",
-    "cta": "Kolla mitt flyg"
-  }
-},
 "contact": {
   "badge": "Kontakt",
   "title": "Kontakta FlightClaimly",
@@ -451,6 +423,114 @@
   },
   "footer": {
     "lead": "Vill du kolla om ditt flyg ger rätt till ersättning? Det tar bara någon minut.",
+    "cta": "Kolla mitt flyg"
+  }
+},
+
+"compensation": {
+  "meta": {
+    "title": "Ersättningsbelopp enligt EU261 – 250, 400 och 600 € | FlightClaimly",
+    "description": "Se vilka ersättningsbelopp du kan få enligt EU261/UK261 – 250, 400 eller 600 € per person beroende på flygsträcka och försening."
+  },
+  "badge": "Ersättningsbelopp",
+  "title": "Ersättningsbelopp enligt EU261 – 250, 400 och 600 €",
+  "intro": "EU-förordning 261/2004 (”EU261”) ger rätt till fasta ersättningsnivåer när ditt flyg är kraftigt försenat, inställt eller vid nekad ombordstigning.",
+  "sections": {
+    "overview": {
+      "title": "Snabb överblick – hur mycket kan du få?",
+      "p1": {
+        "before": "Ersättningen enligt EU261 ligger normalt mellan ",
+        "highlight": "250 € och 600 € per person",
+        "after": ". Beloppet beror i huvudsak på:"
+      },
+      "list": [
+        "hur lång flygsträckan är",
+        "om flyget är inom EU eller internationellt",
+        "hur mycket försening eller påverkan du drabbats av"
+      ],
+      "note": "Det spelar alltså mindre roll vad biljetten kostade – två passagerare på samma flyg får normalt samma ersättningsbelopp."
+    },
+
+    "table": {
+      "title": "Ersättningsnivåer enligt EU261",
+      "intro": "Beloppen beror främst på flygsträcka och typ av störning. Tabellen nedan ger en översikt.",
+      "head": {
+        "distance": "Distans",
+        "type": "När gäller",
+        "amount": "Ersättning"
+      },
+      "rows": [
+        {
+          "distance": "Upp till 1 500 km",
+          "type": "Försening ≥ 3 timmar / inställt flyg",
+          "amount": "250 €"
+        },
+        {
+          "distance": "1 500–3 500 km",
+          "type": "Försening ≥ 3 timmar / inställt flyg",
+          "amount": "400 €"
+        },
+        {
+          "distance": "Över 3 500 km (inom EU)",
+          "type": "Försening ≥ 3 timmar / inställt flyg",
+          "amount": "400 €"
+        },
+        {
+          "distance": "Över 3 500 km (utanför EU)",
+          "type": "Försening ≥ 3 timmar / inställt flyg",
+          "amount": "600 €"
+        }
+      ],
+      "note": "Vi hjälper dig att avgöra om ditt case är ersättningsberättigat."
+    },
+
+    "reduction": {
+      "title": "När kan ersättningen reduceras?",
+      "p1": "Vid ombokning som gör att du anländer nära den ursprungliga ankomsttiden kan ersättningen i vissa fall halveras.",
+      "list": [
+        "Kortare distanser: liten försening vid ankomst",
+        "Medeldistanser: måttlig försening vid ankomst",
+        "Långdistanser: begränsad försening vid ankomst"
+      ],
+      "note": "Bedömningen baseras alltid på faktisk ankomsttid och flygbolagets åtgärder."
+    },
+
+    "types": {
+      "title": "Vilka störningar omfattas?",
+      "p1": "EU261 kan ge rätt till ersättning vid bland annat:",
+      "list": [
+        "Förseningar (ofta ≥ 3 timmar vid ankomst)",
+        "Inställda flyg",
+        "Nekad ombordstigning (överbokning)"
+      ],
+      "note": {
+        "before": "Läs mer om dina rättigheter på sidan ",
+        "link": "Dina rättigheter"
+      }
+    },
+
+    "examples": {
+      "title": "Exempel",
+      "list": [
+        "Flyget landar 3h 20m sent → kan ge rätt till ersättning.",
+        "Flyget ställs in samma dag → kan ge rätt till ersättning och ombokning.",
+        "Du nekas ombordstigning på grund av överbokning → kan ge rätt till ersättning."
+      ],
+      "note": "Rätten till ersättning påverkas av orsaken till störningen."
+    },
+
+    "myths": {
+      "title": "Vanliga missförstånd",
+      "list": [
+        "Det gäller bara om biljetten köpts direkt från flygbolaget.",
+        "Man måste klaga direkt på flygplatsen.",
+        "Alla förseningar ger rätt till ersättning."
+      ],
+      "note": "Vi hjälper dig att avgöra om ditt case är ersättningsberättigat."
+    }
+  },
+  "footer": {
+    "lead": "Vill du se vilket ersättningsbelopp som kan gälla för just din resa?",
     "cta": "Kolla mitt flyg"
   }
 },
@@ -646,6 +726,7 @@
     "before": "Har du frågor om hur vi hanterar dina personuppgifter? Hör av dig på"
   }
 },
+
 "rights": {
   "meta": {
     "title": "EU261 – dina rättigheter som flygpassagerare | FlightClaimly",
@@ -729,6 +810,7 @@
     "cta": "Kolla om jag har rätt till ersättning"
   }
 },
+
 "terms": {
   "badge": "Villkor",
   "title": "Användarvillkor för FlightClaimly",
@@ -950,6 +1032,27 @@
     "cta": "Har ditt flyg drabbats? Kolla om du har rätt till ersättning – det tar bara någon minut.",
     "primary": "Få kompensation",
     "secondary": "Kontakt & samarbeten"
+  },
+  "email": {
+  "footer": {
+    "disclaimer": {
+      "title": "Konfidentialitet",
+      "p1": "Detta e-postmeddelande och eventuella bilagor är avsedda enbart för angiven mottagare. Om du har fått meddelandet av misstag ber vi dig att svara på e-postmeddelandet och därefter radera det.",
+      "p2": "Vi behandlar personuppgifter i samband med handläggningen av ditt ärende. Läs mer i vår integritetspolicy och våra villkor."
+    },
+    "links": {
+      "privacy": "Integritetspolicy",
+      "terms": "Villkor"
+    },
+    "errors": {
+  "required": "Fyll i alla obligatoriska fält.",
+  "invalidFlightNumber": "Ange ett giltigt flightnummer (t.ex. SK123).",
+  "network": "Något gick fel. Försök igen.",
+  "noResult": "Vi kunde inte verifiera flyget, men du kan ändå skicka in ärendet."
+}
   }
 }
 }
+
+}
+
