@@ -63,6 +63,13 @@ export default function Home() {
   // 🔹 Ref för steg 2 – så vi kan scrolla ned dit
   const detailsRef = useRef<HTMLDivElement | null>(null);
 
+  // ✅ NYTT: minimal flightNumber-validering (v1)
+  // Accept: "SK123", "LH 400", "FR1234" etc. (2–3 bokstäver + 1–4 siffror)
+  function isValidFlightNumber(input: string) {
+    const s = input.trim().toUpperCase().replace(/\s+/g, '');
+    return /^[A-Z]{2,3}\d{1,4}$/.test(s);
+  }
+
   async function handleTrackSubmit(e: FormEvent) {
     e.preventDefault();
     setTrackStatus('loading');
@@ -105,6 +112,14 @@ export default function Home() {
       setQuickMessage(t('precheck.quick.frontend.missingFields'));
       return;
     }
+
+    // ✅ NYTT: flight number format check (v1)
+  if (!isValidFlightNumber(flightNumber)) {
+  setQuickStatus('ineligible');
+  setQuickMessage(t('errors.invalidFlightNumber'));
+  return;
+}
+
 
     // Simulerad snabbkoll
     setTimeout(() => {

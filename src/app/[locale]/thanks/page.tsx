@@ -1,4 +1,4 @@
-// src/app/[locale]/thanks/page.tsx
+// src/app/thanks/page.tsx
 'use client';
 
 import React, { Suspense, useEffect, useMemo, useState } from 'react';
@@ -389,4 +389,3 @@ export default function ThanksPage() {
     </Suspense>
   );
 }
-
