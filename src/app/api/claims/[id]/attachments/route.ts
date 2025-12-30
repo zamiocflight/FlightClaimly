@@ -2,32 +2,27 @@
 export const runtime = 'nodejs';
 
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { createClient } from '@supabase/supabase-js';
 
 type IncomingFile = {
   filename: string;
   size: number;
-  path: string;
+  path: string; // "<claimId>/<filename>"
   contentType?: string;
 };
 
-type Claim = {
-  flightNumber: string;
-  date?: string | null;
-  from: string;
-  to: string;
-  name: string;
-  email: string;
-  bookingNumber: string;
-  receivedAt: string; // används som "id"
-  status?: string;
-  publicToken?: string;
-  connections?: string[];
-  attachments?: IncomingFile[];
-  attachmentsSummary?: { filename: string; uploadedAt: string }[];
-  [key: string]: any;
-};
+function supabaseAdmin() {
+ const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!url || !serviceKey) {
+    throw new Error('Missing Supabase env vars (SUPABASE_URL or SUPABASE_SERVICE_ROLE)');
+  }
+
+  return createClient(url, serviceKey, {
+    auth: { persistSession: false },
+  });
+}
 
 export async function POST(
   req: Request,
@@ -35,73 +30,54 @@ export async function POST(
 ) {
   try {
     const { id } = await ctx.params;
-
-    if (!id) {
-      return NextResponse.json({ error: 'Missing id' }, { status: 400 });
-    }
+    if (!id) return NextResponse.json({ error: 'Missing id' }, { status: 400 });
 
     const body = await req.json().catch(() => null);
     if (!body || !Array.isArray(body.files)) {
-      return NextResponse.json(
-        { error: 'Missing files array in body' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Missing files array in body' }, { status: 400 });
     }
 
     const files = body.files as IncomingFile[];
+    const sb = supabaseAdmin();
 
-    const filePath = path.join(process.cwd(), 'claims.json');
-    if (!fs.existsSync(filePath)) {
-      return NextResponse.json(
-        { error: 'claims.json not found' },
-        { status: 500 }
-      );
+    const { data: row, error: readErr } = await sb
+      .from('claims')
+      .select('attachments')
+      .eq('received_at', id) // <-- du valde received_at
+      .single();
+
+    if (readErr || !row) {
+      return NextResponse.json({ error: 'Claim not found for this id' }, { status: 404 });
     }
 
-    const raw = fs.readFileSync(filePath, 'utf8');
-    const claims = (JSON.parse(raw) as Claim[]) || [];
-
-    // Hitta rätt claim via receivedAt (det id vi skickar från frontend)
-    const idx = claims.findIndex((c) => c.receivedAt === id);
-    if (idx === -1) {
-      return NextResponse.json(
-        { error: 'Claim not found for this id' },
-        { status: 404 }
-      );
-    }
-
+    const existing = Array.isArray(row.attachments) ? row.attachments : [];
     const now = new Date().toISOString();
 
-    // Lägg till rå-metadata (för admin / internt)
-    const existingAttachments = Array.isArray(claims[idx].attachments)
-      ? claims[idx].attachments!
-      : [];
-    const nextAttachments = existingAttachments.concat(files);
-
-    // Lägg till enklare summary (för tracking-sidan)
-    const existingSummary = Array.isArray(claims[idx].attachmentsSummary)
-      ? claims[idx].attachmentsSummary!
-      : [];
-
-    const newSummary = files.map((f) => ({
-      filename: f.filename,
-      uploadedAt: now,
-    }));
-
-    claims[idx].attachments = nextAttachments;
-    claims[idx].attachmentsSummary = existingSummary.concat(newSummary);
-
-    fs.writeFileSync(filePath, JSON.stringify(claims, null, 2), 'utf8');
-
-    return NextResponse.json(
-      {
-        ok: true,
-        count: files.length,
-      },
-      { status: 200 }
+    const next = existing.concat(
+      files.map((f) => ({
+        path: f.path,
+        filename: f.filename,
+        size: f.size,
+        contentType: f.contentType ?? null,
+        uploadedAt: now,
+      }))
     );
-  } catch (e) {
-    console.error('Attachment metadata error (file-based):', e);
-    return NextResponse.json({ error: 'Server error' }, { status: 500 });
+
+    const { error: updErr } = await sb
+      .from('claims')
+      .update({ attachments: next, updated_at: now })
+      .eq('received_at', id);
+
+    if (updErr) {
+      return NextResponse.json({ error: 'Failed to update claim' }, { status: 500 });
+    }
+
+    return NextResponse.json({ ok: true, count: files.length }, { status: 200 });
+  } catch (e: any) {
+    console.error('Attachments route error:', e);
+    return NextResponse.json(
+      { error: 'Server error', details: String(e?.message ?? e) },
+      { status: 500 }
+    );
   }
 }
