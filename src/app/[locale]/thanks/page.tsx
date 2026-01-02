@@ -1,4 +1,4 @@
-// src/app/thanks/page.tsx
+// src/app/[locale]thanks/page.tsx
 'use client';
 
 import React, { Suspense, useEffect, useMemo, useState } from 'react';
@@ -46,7 +46,8 @@ function ThanksPageInner() {
   const [loaConsent, setLoaConsent] = useState(false);
   const [loaError, setLoaError] = useState<string | null>(null);
 
-  const [files, setFiles] = useState<FileList | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
+
   const [busy, setBusy] = useState(false);
   const [uploaded, setUploaded] = useState(false);
   const [err, setErr] = useState<string | null>(null);
@@ -73,7 +74,7 @@ function ThanksPageInner() {
     try {
       const saved: SavedAttachment[] = [];
       const uploadFiles: File[] = [];
-      if (files?.length) uploadFiles.push(...Array.from(files));
+      if (files.length) uploadFiles.push(...files);
 
       if (uploadFiles.length > 0) {
         for (const f of uploadFiles) {
@@ -113,7 +114,7 @@ function ThanksPageInner() {
       }
 
       setUploaded(true);
-      setFiles(null);
+      setFiles([]);
       const fileEl = document.getElementById('fileInput') as HTMLInputElement | null;
       if (fileEl) fileEl.value = '';
     } catch {
@@ -269,21 +270,36 @@ function ThanksPageInner() {
                         </p>
 
                         <label className="flex items-center justify-between gap-3 rounded-xl border px-3 py-3 cursor-pointer">
-                          <span className="text-sm font-semibold">
-                            {t('attachments.choose')}
-                          </span>
-                          <span className="text-[11px] text-slate-500">
-                            {t('attachments.types')}
-                          </span>
-                          <input
-                            id="fileInput"
-                            type="file"
-                            multiple
-                            className="hidden"
-                            onChange={(e) => setFiles(e.target.files)}
-                            accept=".pdf,.jpg,.jpeg,.png,.heic,.heif"
-                          />
-                        </label>
+  <span className="text-sm font-semibold">
+    {t('attachments.choose')}
+  </span>
+  <span className="text-[11px] text-slate-500">
+    {t('attachments.types')}
+  </span>
+
+<input
+  id="fileInput"
+  type="file"
+  multiple
+  className="hidden"
+  onChange={(e) => setFiles(e.target.files ? Array.from(e.target.files) : [])}
+  accept=".pdf,.jpg,.jpeg,.png,.heic,.heif"
+/>
+</label>
+
+{/* 👇 VIKTIGT: UTANFÖR label */}
+{files.length > 0 && (
+  <div className="mt-2 rounded-lg bg-slate-50 border px-3 py-2">
+    <ul className="space-y-1 text-xs text-slate-700">
+      {files.map((file, i) => (
+        <li key={i} className="flex items-center gap-2">
+          📎 <span>{file.name}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
                       </div>
 
                       <div className="flex flex-col gap-2">
