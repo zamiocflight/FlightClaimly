@@ -63,7 +63,7 @@ export async function POST(req: Request) {
         })[0] || matches[matches.length - 1];
 
     // I din data är receivedAt själva ärende-ID:t
-    const latestClaimId = (latestClaim as any).receivedAt;
+    const latestClaimId = (latestClaim as any).id ?? (latestClaim as any).receivedAt;
     if (!latestClaimId) {
       console.error('Hittade inget receivedAt på claim:', latestClaim);
       return NextResponse.json(

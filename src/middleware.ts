@@ -1,4 +1,3 @@
-// src/middleware.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
@@ -6,41 +5,55 @@ import createMiddleware from "next-intl/middleware";
 const intlMiddleware = createMiddleware({
   locales: ["sv", "en"],
   defaultLocale: "sv",
-  localePrefix: "always", // tvingar /sv/... och /en/...
+  localePrefix: "always", // gäller ALLA vanliga sidor
 });
 
 const PROTECTED_PREFIXES = ["/admin"];
-const PUBLIC_ROUTES_WITHOUT_LOCALE = ["/login", "/admin", "/favicon.ico"];
+const PUBLIC_ROUTES_WITHOUT_LOCALE = [
+  "/login",
+  "/admin",
+  "/favicon.ico",
+  "/track", // 👈 VIKTIGT: tillåt tracking utan intl
+];
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // ✅ Tillåt alltid login/logout API (annars blir det en omöjlig loop)
-  if (pathname === "/api/admin/login" || pathname === "/api/admin/logout") {
+  // ✅ Tillåt admin-auth API
+  if (
+    pathname === "/api/admin/login" ||
+    pathname === "/api/admin/logout"
+  ) {
     return NextResponse.next();
   }
 
-  // ✅ Skippa locale-routing för API
+  // ✅ Skippa locale-routing för ALLA API-routes
   if (pathname.startsWith("/api")) {
     return NextResponse.next();
   }
 
-  // ✅ Skippa locale för vissa routes (t.ex. /admin och /login ska inte bli /en/...)
+  // ✅ Skippa locale-routing för tracking (VIKTIG FIX)
+  if (pathname.startsWith("/track") || pathname.match(/^\/(sv|en)\/track/)) {
+    return NextResponse.next();
+  }
+
+  // ✅ Skippa locale för vissa publika routes
   if (
     PUBLIC_ROUTES_WITHOUT_LOCALE.some(
       (p) => pathname === p || pathname.startsWith(p + "/")
     )
   ) {
-    // Men kör fortfarande auth-skydd för /admin nedan
-    // (dvs returnera inte här om det är /admin – vi vill skydda den)
+    // fortsätt – admin-skydd körs längre ner
   } else {
-    // Allt annat: next-intl
+    // 🌍 Allt annat går via next-intl
     return intlMiddleware(req);
   }
 
-  // 1) Admin-skydd (gäller /admin och /admin/...)
+  // 🔒 Admin-skydd
   if (
-    PROTECTED_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + "/"))
+    PROTECTED_PREFIXES.some(
+      (p) => pathname === p || pathname.startsWith(p + "/")
+    )
   ) {
     const sess = req.cookies.get("admin_session")?.value;
     if (!sess) {
