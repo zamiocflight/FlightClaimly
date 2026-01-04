@@ -1,6 +1,6 @@
 // src/app/[locale]/layout.tsx
-import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import type { Metadata } from "next";
 import { locales } from "@/i18n/routing";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import Providers from "./providers";
@@ -11,29 +11,27 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata(
-  { params }: { params: { locale: string } }
-): Promise<Metadata> {
-  const { locale } = params;
+const SITE_URL = "https://www.flightclaimly.com";
 
-  const baseUrl = "https://www.flightclaimly.com";
-  const url = `${baseUrl}/${locale}`;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const safeLocale = locale ?? "sv";
 
   return {
+    metadataBase: new URL(SITE_URL),
     alternates: {
-      canonical: url,
+      canonical: `/${locale}`,
       languages: {
-        sv: `${baseUrl}/sv`,
-        en: `${baseUrl}/en`,
+        sv: "/sv",
+        en: "/en",
       },
-    },
-    openGraph: {
-      url,
-      locale: locale === "sv" ? "sv_SE" : "en_US",
     },
   };
 }
-
 
 export default async function LocaleLayout({
   children,
