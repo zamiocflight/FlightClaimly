@@ -77,7 +77,7 @@ export async function POST(req: Request) {
       req.headers.get('origin') ||
       'http://localhost:3000';
 
-    const trackUrl = `${origin.replace(/\/$/, '')}/track/${latestClaimId}`;
+    const trackUrl = `${origin.replace(/\/$/, '')}/en/track/${latestClaimId}`;
 
     console.log('Skickar track-länk till', email, '=>', trackUrl);
 
