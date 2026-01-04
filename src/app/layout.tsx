@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
+import { headers } from "next/headers";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -42,13 +43,17 @@ const orgJsonLd = {
   sameAs: [] as string[],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // next-intl sätter denna headern per request
+  const h = await headers();
+  const locale = h.get("x-next-intl-locale") ?? "sv";
+
   return (
-    <html lang="sv">
+    <html lang={locale}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-gray-900 bg-white`}
       >
@@ -66,8 +71,12 @@ export default function RootLayout({
         <footer className="border-t mt-10">
           <div className="max-w-7xl mx-auto px-6 py-6 text-sm text-gray-600 flex flex-wrap items-center gap-4">
             <span>© {new Date().getFullYear()} FlightClaimly</span>
-            <a href="./terms" className="underline">Terms</a>
-<a href="./privacy" className="underline">Privacy</a>
+            <a href="./terms" className="underline">
+              Terms
+            </a>
+            <a href="./privacy" className="underline">
+              Privacy
+            </a>
 
             <span className="text-gray-400">
               Independent service — not affiliated with airlines

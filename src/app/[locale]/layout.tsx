@@ -1,8 +1,8 @@
 // src/app/[locale]/layout.tsx
-import type { ReactNode } from 'react';
-import { locales } from '@/i18n/routing';
-import { getMessages, setRequestLocale } from 'next-intl/server';
-import Providers from './providers';
+import type { ReactNode } from "react";
+import { locales } from "@/i18n/routing";
+import { getMessages, setRequestLocale } from "next-intl/server";
+import Providers from "./providers";
 
 export const dynamicParams = false;
 
@@ -12,7 +12,7 @@ export function generateStaticParams() {
 
 export default async function LocaleLayout({
   children,
-  params
+  params,
 }: {
   children: ReactNode;
   params: Promise<{ locale: string }>;
