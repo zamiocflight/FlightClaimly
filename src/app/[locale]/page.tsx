@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { Link } from '../../i18n/navigation';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
 import { useTranslations } from 'next-intl';
+export { generateMetadata } from "./page.server";
+
 
 /* ---------- Form state ---------- */
 type FormState = {
