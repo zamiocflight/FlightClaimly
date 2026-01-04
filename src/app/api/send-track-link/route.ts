@@ -62,37 +62,40 @@ export async function POST(req: Request) {
           return db - da;
         })[0] || matches[matches.length - 1];
 
-    // I din data är receivedAt själva ärende-ID:t
-    const latestClaimId = (latestClaim as any).id ?? (latestClaim as any).receivedAt;
-    if (!latestClaimId) {
-      console.error('Hittade inget receivedAt på claim:', latestClaim);
-      return NextResponse.json(
-        { error: 'Kunde inte hitta ett ärende-ID för denna e-post.' },
-        { status: 500 }
-      );
-    }
+    // Använd PUBLIC token för tracking (inte receivedAt / timestamp)
+const latestClaimToken =
+  (latestClaim as any).publicToken ?? (latestClaim as any).viewerToken;
 
-    const origin =
-      process.env.NEXT_PUBLIC_APP_URL ||
-      req.headers.get('origin') ||
-      'http://localhost:3000';
+if (!latestClaimToken) {
+  console.error('Hittade ingen publicToken på claim:', latestClaim);
+  return NextResponse.json(
+    { error: 'Kunde inte hitta tracking-token för denna e-post.' },
+    { status: 500 }
+  );
+}
 
-    const trackUrl = `${origin.replace(/\/$/, '')}/en/track/${latestClaimId}`;
+const origin =
+  process.env.NEXT_PUBLIC_APP_URL ||
+  req.headers.get('origin') ||
+  'http://localhost:3000';
 
-    console.log('Skickar track-länk till', email, '=>', trackUrl);
+const trackUrl = `${origin.replace(/\/$/, '')}/en/track/${latestClaimToken}`;
 
-    await resend.emails.send({
-      from: 'FlightClaimly <onboarding@resend.dev>',
-      to: email,
-      subject: 'Följ ditt ärende hos FlightClaimly',
-      html: `
-        <p>Hej,</p>
-        <p>Här är din direkta länk för att följa ditt ärende hos FlightClaimly:</p>
-        <p><a href="${trackUrl}">${trackUrl}</a></p>
-        <p>Om du inte har startat något ärende hos oss kan du ignorera detta meddelande.</p>
-        <p>Vänliga hälsningar,<br/>FlightClaimly</p>
-      `,
-    });
+console.log('Skickar track-länk till', email, '=>', trackUrl);
+
+await resend.emails.send({
+  from: 'FlightClaimly <onboarding@resend.dev>',
+  to: email,
+  subject: 'Följ ditt ärende hos FlightClaimly',
+  html: `
+    <p>Hej,</p>
+    <p>Här är din direkta länk för att följa ditt ärende hos FlightClaimly:</p>
+    <p><a href="${trackUrl}">${trackUrl}</a></p>
+    <p>Om du inte har startat något ärende hos oss kan du ignorera detta meddelande.</p>
+    <p>Vänliga hälsningar,<br/>FlightClaimly</p>
+  `,
+});
+
 
     return NextResponse.json({
       ok: true,
