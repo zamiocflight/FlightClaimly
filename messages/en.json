@@ -222,6 +222,10 @@
   },
 
   "faq": {
+      "meta": {
+    "title": "Frequently asked questions about flight compensation | FlightClaimly",
+    "description": "Answers to common questions about EU261, flight delays, cancellations, compensation amounts, and how FlightClaimly helps you claim what you are owed."
+  },
     "badge": "FAQ",
     "title": "Frequently asked questions about flight compensation",
     "intro": "Here we’ve collected answers to the most common questions about compensation for delayed or cancelled flights and how FlightClaimly works.",
@@ -396,6 +400,10 @@
   }
 },
 "contact": {
+    "meta": {
+  "title": "Contact FlightClaimly | Support and questions",
+  "description": "Contact FlightClaimly with questions about your case, EU261, or how the process works. We’ll get back to you as soon as possible."
+},
   "badge": "Contact",
   "title": "Contact FlightClaimly",
   "intro": "Do you have questions about a claim, EU261 rules, or how the process works? You’re always welcome to get in touch. We’ll respond as quickly as we can.",
@@ -631,6 +639,10 @@
   }
 },
 "privacy": {
+    "meta": {
+  "title": "Privacy policy | FlightClaimly",
+  "description": "Learn how FlightClaimly processes personal data, what we collect, why we collect it, and your rights under GDPR."
+},
   "badge": "Privacy",
   "title": "Privacy policy for FlightClaimly",
   "intro": "Your privacy is important to us. On this page we explain what data we collect, why we collect it, how it is used, and what rights you have.",
@@ -809,6 +821,10 @@
   }
 },
 "terms": {
+    "meta": {
+  "title": "Terms of service | FlightClaimly",
+  "description": "Read FlightClaimly’s terms of service, including how the service works, fees, payouts, liability, and contact details."
+},
   "badge": "Terms",
   "title": "Terms of Use for FlightClaimly",
   "intro": "These terms describe how FlightClaimly works and the rights and obligations that apply when you use our service to pursue flight compensation claims.",
@@ -972,6 +988,10 @@
   "home": "Back to homepage"
 },
 "about": {
+    "meta": {
+  "title": "About FlightClaimly | Claim flight compensation without hassle",
+  "description": "Learn how FlightClaimly helps you pursue EU261 flight compensation from start to payout — fast, secure, and transparent."
+},
   "badge": "About us",
   "title": "We help you get compensation when your flight goes wrong",
   "intro": "FlightClaimly is an EU-based service that makes it easy to claim compensation from airlines under EU261. The goal is simple: get you the money you’re entitled to — without hassle, stress, or legal friction.",

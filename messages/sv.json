@@ -222,6 +222,10 @@
   },
 
   "faq": {
+      "meta": {
+    "title": "Vanliga frågor om flygkompensation | FlightClaimly",
+    "description": "Svar på vanliga frågor om EU261, flygförseningar, inställda flyg, ersättning och hur FlightClaimly hjälper dig att få rätt kompensation."
+  },
     "badge": "FAQ",
     "title": "Vanliga frågor om flygkompensation",
     "intro": "Här har vi samlat svar på de vanligaste frågorna om ersättning vid försenade eller inställda flyg och hur FlightClaimly fungerar.",
@@ -396,6 +400,10 @@
   }
 },
 "contact": {
+    "meta": {
+  "title": "Kontakta FlightClaimly | Support och frågor",
+  "description": "Kontakta FlightClaimly för frågor om ditt ärende, EU261, eller hur processen fungerar. Vi svarar så snabbt vi kan."
+},
   "badge": "Kontakt",
   "title": "Kontakta FlightClaimly",
   "intro": "Har du frågor om ett ärende, om EU261-reglerna eller om hur processen fungerar? Du är alltid välkommen att höra av dig. Vi svarar så snabbt vi kan.",
@@ -632,6 +640,10 @@
   }
 },
 "privacy": {
+    "meta": {
+  "title": "Integritetspolicy | FlightClaimly",
+  "description": "Läs hur FlightClaimly behandlar personuppgifter, vilka uppgifter vi samlar in, syftet med behandlingen och dina rättigheter enligt GDPR."
+},
   "badge": "Integritet",
   "title": "Integritetspolicy för FlightClaimly",
   "intro": "Din integritet är viktig för oss. På denna sida förklarar vi vilka uppgifter vi samlar in, varför vi gör det, hur vi använder dem och vilka rättigheter du har.",
@@ -812,6 +824,10 @@
 },
 
 "terms": {
+    "meta": {
+  "title": "Användarvillkor | FlightClaimly",
+  "description": "Läs användarvillkoren för FlightClaimly, inklusive hur tjänsten fungerar, avgifter, utbetalningar, ansvar och kontaktvägar."
+},
   "badge": "Villkor",
   "title": "Användarvillkor för FlightClaimly",
   "intro": "Dessa villkor beskriver hur FlightClaimly fungerar och vilka rättigheter och skyldigheter som gäller när du använder vår tjänst för att driva krav på flygkompensation.",
@@ -976,6 +992,10 @@
 },
 
 "about": {
+     "meta": {
+    "title": "Om FlightClaimly | Flygkompensation utan krångel",
+    "description": "Läs om FlightClaimly och hur vi hjälper dig att driva ditt EU261-ärende från start till utbetalning — snabbt, tryggt och transparent."
+  },
   "badge": "Om oss",
   "title": "Vi hjälper dig få ersättning när flyget strulat",
   "intro": "FlightClaimly är en EU-baserad tjänst som gör det enkelt att kräva ersättning från flygbolag enligt EU261. Målet är att du ska få de pengar du har rätt till – utan krångel, stress eller juridiska hinder.",
