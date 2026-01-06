@@ -54,7 +54,7 @@ export async function sendStatusEmail(
   const lang: Lang = args.lang || 'sv';
 
 const trackingUrl = args.id
-  ? buildTrackUrl(args.id, args.publicToken)
+  ? buildTrackUrl(args.id, args.publicToken, lang)
   : undefined;
 console.log("DEBUG sendStatusEmail", {
   id: args.id,
@@ -111,10 +111,13 @@ const { error } = await resend.emails.send({
 
 // ---------- layout / helpers ----------
 
-function buildTrackUrl(id: string, publicToken?: string) {
+function buildTrackUrl(id: string, publicToken?: string, lang: Lang = 'sv') {
   const base = appUrl.replace(/\/$/, '');
   const tokenPart = publicToken ? `?t=${encodeURIComponent(publicToken)}` : '';
-  return `${base}${trackingPath}/${encodeURIComponent(id)}${tokenPart}`;
+
+  // om env råkar vara satt till "/track" vill vi ändå ha /{lang}/track
+  const cleanTrackingPath = (trackingPath || '/track').replace(/^\/+/, ''); // "track"
+  return `${base}/${lang}/${cleanTrackingPath}/${encodeURIComponent(id)}${tokenPart}`;
 }
 
 function buildFlightLine(
