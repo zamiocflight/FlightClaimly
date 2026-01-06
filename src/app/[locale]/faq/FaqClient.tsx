@@ -1,7 +1,7 @@
 // src/app/[locale]/faq/page.tsx
 "use client";
 
-
+import { Link } from "@/i18n/navigation";
 import Script from "next/script";
 import { useTranslations } from "next-intl";
 
@@ -202,12 +202,13 @@ export default function FaqPage() {
   </h2>
   <p className="mt-2">
     {t("items.security.lead")}{" "}
-    <a
-      href="/privacy"
-      className="font-medium text-slate-900 underline-offset-2 hover:underline"
-    >
-      {t("items.security.linkText")}
-    </a>
+  <Link
+  href="/privacy"
+  className="font-medium text-slate-900 underline-offset-2 hover:underline"
+>
+  {t("items.security.linkText")}
+</Link>
+
     .
   </p>
 </div>
@@ -233,12 +234,12 @@ export default function FaqPage() {
           <footer className="mt-10 border-t border-slate-200 pt-6 text-sm text-slate-600">
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
               <p>{t("footer.lead")}</p>
-              <a
-                href="/#precheck"
-                className="inline-flex items-center justify-center rounded-full border border-slate-900 bg-slate-900 px-5 py-2 text-xs font-semibold text-white shadow-sm whitespace-nowrap transition-all duration-200 ease-out hover:bg-slate-800 hover:shadow-md active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
-              >
-                {t("footer.cta")}
-              </a>
+              <Link
+  href="/#precheck"
+  className="inline-flex items-center justify-center rounded-full ..."
+>
+  {t("footer.cta")}
+</Link>
             </div>
           </footer>
         </div>

@@ -1,6 +1,7 @@
 // src/app/[locale]/terms/TermsClient.tsx
 "use client";
 
+import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 
 export default function TermsClient() {
@@ -111,12 +112,13 @@ export default function TermsClient() {
             </h2>
             <p className="mt-2">
               {t("sections.privacy.text")}{" "}
-              <a
-                href="/privacy"
-                className="font-medium text-slate-900 underline-offset-2 hover:underline"
-              >
-                {t("sections.privacy.link")}
-              </a>
+              <Link
+  href="/privacy"
+  className="font-medium text-slate-900 underline-offset-2 hover:underline"
+>
+  {t("sections.privacy.link")}
+</Link>
+
               .
             </p>
           </div>

@@ -15,16 +15,15 @@ export async function POST(req: Request) {
 
     const sb = supabaseAdmin();
 
-    // ✅ Hämta senaste claim för e-post direkt från Supabase
+    // 🔹 Hämta senaste claim inkl locale
     const { data: latest, error } = await sb
       .from('claims')
-      .select('received_at, viewer_token, updated_at')
+      .select('received_at, viewer_token, updated_at, locale')
       .eq('email', email.toLowerCase())
       .order('updated_at', { ascending: false })
       .limit(1)
       .maybeSingle();
 
-    // Om inget hittas: neutral 200 (säkerhet)
     if (!latest || error) {
       console.log('Inga claims hittades för', email, 'error:', error?.message);
       return NextResponse.json({
@@ -34,19 +33,21 @@ export async function POST(req: Request) {
       });
     }
 
-    const claimId = latest.received_at as string;          // ✅ TRACKING-ID (uuid)
+    const claimId = latest.received_at as string;
     const viewerToken = (latest.viewer_token as string) || null;
+
+    // 🔹 Locale: från claim → fallback en
+    const locale = (latest.locale as string) || 'en';
 
     const origin =
       process.env.NEXT_PUBLIC_APP_URL ||
       req.headers.get('origin') ||
       'http://localhost:3000';
 
-    // Just nu hardcode /en (sen gör vi locale dynamiskt när vi sparar locale per claim)
     const base = origin.replace(/\/$/, '');
     const trackUrl = viewerToken
-      ? `${base}/en/track/${claimId}?t=${encodeURIComponent(viewerToken)}`
-      : `${base}/en/track/${claimId}`;
+      ? `${base}/${locale}/track/${claimId}?t=${encodeURIComponent(viewerToken)}`
+      : `${base}/${locale}/track/${claimId}`;
 
     console.log('Skickar track-länk till', email, '=>', trackUrl);
 

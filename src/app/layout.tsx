@@ -14,15 +14,18 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL = "https://www.flightclaimly.com";
+
 export const metadata: Metadata = {
-  title: "FlightClaimly – Få upp till 600 € i ersättning för försenade eller inställda flyg",
+  title:
+    "FlightClaimly – Få upp till 600 € i ersättning för försenade eller inställda flyg",
   description:
     "Kolla om ditt flyg ger rätt till ersättning på några sekunder. FlightClaimly driver ditt EU261-krav mot flygbolaget – du betalar bara vid vinst (no win, no fee). Låg avgift, tydliga statusuppdateringar och trygg hantering.",
   openGraph: {
     title: "FlightClaimly – Ersättning för försenade eller inställda flyg",
     description:
       "Vi hjälper dig få upp till 600 € i ersättning enligt EU261. Snabb koll av ditt flyg, låg avgift och no win, no fee.",
-    url: "https://flightclaimly.com",
+    url: SITE_URL,
     siteName: "FlightClaimly",
     type: "website",
   },
@@ -38,9 +41,16 @@ const orgJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "FlightClaimly",
-  url: "https://flightclaimly.com",
-  logo: "https://flightclaimly.com/logo-flightclaimly.svg",
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo-flightclaimly.svg`,
   sameAs: [] as string[],
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "FlightClaimly",
+  url: SITE_URL,
 };
 
 export default async function RootLayout({
@@ -51,6 +61,7 @@ export default async function RootLayout({
   // next-intl sätter denna headern per request
   const h = await headers();
   const locale = h.get("x-next-intl-locale") ?? "sv";
+  const localePrefix = `/${locale}`;
 
   return (
     <html lang={locale}>
@@ -66,15 +77,25 @@ export default async function RootLayout({
           {JSON.stringify(orgJsonLd)}
         </Script>
 
+        {/* Schema.org WebSite */}
+        <Script
+          id="website-jsonld"
+          type="application/ld+json"
+          strategy="afterInteractive"
+        >
+          {JSON.stringify(websiteJsonLd)}
+        </Script>
+
         {children}
 
         <footer className="border-t mt-10">
           <div className="max-w-7xl mx-auto px-6 py-6 text-sm text-gray-600 flex flex-wrap items-center gap-4">
             <span>© {new Date().getFullYear()} FlightClaimly</span>
-            <a href="./terms" className="underline">
+
+            <a href={`${localePrefix}/terms`} className="underline">
               Terms
             </a>
-            <a href="./privacy" className="underline">
+            <a href={`${localePrefix}/privacy`} className="underline">
               Privacy
             </a>
 

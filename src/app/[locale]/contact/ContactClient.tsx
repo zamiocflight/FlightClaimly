@@ -91,9 +91,8 @@ export default function ContactClient() {
         <footer className="mt-10 border-t border-slate-200 pt-6 text-sm text-slate-600">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <p>{t("footer.lead")}</p>
-            <Link
-              href="/"
-              className="
+
+            <Link href="/#precheck" className="
                 inline-flex items-center justify-center
                 rounded-full border border-slate-900
                 bg-slate-900 px-5 py-2 text-xs font-semibold text-white
