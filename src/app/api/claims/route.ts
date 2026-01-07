@@ -3,24 +3,27 @@ export const runtime = 'nodejs';
 
 import { NextResponse } from 'next/server';
 import { addClaim } from '@/lib/claims';
-import { Resend } from 'resend';
+import { sendStatusEmail } from '@/lib/statusEmail';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+type Lang = 'sv' | 'en';
 
-function detectLocale(req: Request, bodyLocale?: unknown) {
+function detectLocale(req: Request, bodyLocale?: unknown): Lang {
   // 1) body.locale (bäst om ni skickar från UI)
-  if (typeof bodyLocale === 'string' && (bodyLocale === 'sv' || bodyLocale === 'en')) {
+  if (
+    typeof bodyLocale === 'string' &&
+    (bodyLocale === 'sv' || bodyLocale === 'en')
+  ) {
     return bodyLocale;
   }
 
   // 2) referer /sv/... eller /en/...
   const referer = req.headers.get('referer') || '';
   const m = referer.match(/\/(sv|en)(\/|$)/);
-  if (m?.[1]) return m[1];
+  if (m?.[1] === 'sv' || m?.[1] === 'en') return m[1];
 
   // 3) accept-language (grov fallback)
-  const al = req.headers.get('accept-language') || '';
-  if (al.toLowerCase().includes('sv')) return 'sv';
+  const al = (req.headers.get('accept-language') || '').toLowerCase();
+  if (al.includes('sv')) return 'sv';
 
   return 'en';
 }
@@ -53,10 +56,10 @@ export async function POST(req: Request) {
 
     const locale = detectLocale(req, bodyLocale);
 
-    // Generera tracking-id (uuid)
+    // tracking-id (uuid)
     const id = crypto.randomUUID();
 
-    // Spara claim (locale sparas inte här än – kräver addClaim/tabell)
+    // Spara claim
     const claim = await addClaim({
       id,
       flightNumber,
@@ -71,32 +74,30 @@ export async function POST(req: Request) {
 
     console.log('✅ /api/claims – NYTT ärende skapat i Supabase:', claim);
 
-    // Bygg tracking-url korrekt
+    // (valfritt men nice för UI/debug)
     const base =
       process.env.NEXT_PUBLIC_APP_URL ||
       req.headers.get('origin') ||
       'http://localhost:3000';
-
     const trackingUrl = `${String(base).replace(/\/$/, '')}/${locale}/track/${claim.id}`;
 
-    // Skicka bekräftelsemail (non-blocking fail: vi vill inte faila claimen om mail strular)
+    // ✅ Skicka bekräftelsemail med SAMMA snygga template (non-blocking)
     try {
-      const res = await resend.emails.send({
-        from: 'FlightClaimly <onboarding@resend.dev>',
-        to: String(email).toLowerCase(),
-        subject: 'Vi har tagit emot ditt ärende – följ status här',
-        html: `
-          <p>Hej ${name},</p>
-          <p>Vi har tagit emot ditt ärende hos FlightClaimly.</p>
-          <p>Du kan följa status här:</p>
-          <p><a href="${trackingUrl}">${trackingUrl}</a></p>
-          <p>Vänliga hälsningar,<br/>FlightClaimly</p>
-        `,
+      const ok = await sendStatusEmail({
+        id: claim.id,
+        email: String(email).toLowerCase(),
+        name,
+        status: 'new',
+        flightNumber,
+        from,
+        to,
+        flightDate: date,
+        lang: locale,
       });
 
-      console.log('✅ Bekräftelsemail skickat:', { to: email, trackingUrl, id: res?.data?.id });
+      console.log('✅ Onboarding-mail skickat:', { ok, to: email, trackingUrl });
     } catch (mailErr) {
-      console.error('❌ Kunde inte skicka bekräftelsemail (claim sparad ändå):', mailErr);
+      console.error('❌ Kunde inte skicka onboarding-mail (claim sparad ändå):', mailErr);
     }
 
     // Dummy-precheck (som innan)
@@ -110,7 +111,6 @@ export async function POST(req: Request) {
     return NextResponse.json({
       id: claim.id,
       precheck,
-      // kan vara nice för UI/debug:
       trackingUrl,
       locale,
     });
