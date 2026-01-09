@@ -3,13 +3,13 @@ import type { NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 
 const intlMiddleware = createMiddleware({
-  locales: ["sv", "en"], // <-- håll dessa "live" tills da/de har copy
+  locales: ["sv", "en","da"], // <-- håll dessa "live" tills da/de har copy
   defaultLocale: "sv",
   localePrefix: "always",
 });
 
 // Språk som finns i routing.ts men INTE är live ännu
-const DISABLED_LOCALES = new Set(["da", "de"]);
+const DISABLED_LOCALES = new Set(["de"]);
 
 const PROTECTED_PREFIXES = ["/admin"];
 const PUBLIC_ROUTES_WITHOUT_LOCALE = [
@@ -37,7 +37,7 @@ export function middleware(req: NextRequest) {
 
   // ✅ 6.3: Redirecta disabled locales till /sv (innan allt annat)
   // Matchar "/da" eller "/da/..." (samma för de)
-  const matchDisabled = pathname.match(/^\/(da|de)(\/|$)/);
+  const matchDisabled = pathname.match(/^\/(de)(\/|$)/);
   if (matchDisabled) {
     const locale = matchDisabled[1];
     return redirectDisabledLocale(req, locale);

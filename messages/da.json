@@ -1,0 +1,1011 @@
+{
+  "errors": {
+    "sendFailed": "Kunne ikke sende, prøv igen.",
+    "noClaimId": "Intet sags-ID i svaret.",
+    "network": "Netværksfejl. Prøv igen.",
+    "invalidFlightNumber": "Indtast et gyldigt flynummer (f.eks. SK123)."
+  },
+  "header": {
+    "language": {
+      "label": "DA ▾",
+      "aria": "Skift sprog"
+    }
+  },
+  "mobileNav": {
+    "title": "Menu",
+    "openAria": "Åbn menu",
+    "openSr": "Åbn menu",
+    "closeAria": "Luk menu"
+  },
+  "nav": {
+    "compensation": "Få kompensation",
+    "delays": "Flyforsinkelser",
+    "cancellations": "Aflyste fly",
+    "rights": "Dine rettigheder",
+    "faq": "FAQ",
+    "about": "Om os",
+    "contact": "Kontakt",
+    "track": "Følg sag",
+    "langLabel": "Sprog"
+  },
+  "track": {
+    "button": "Følg sag",
+    "title": "Følg din sag",
+    "description": "Indtast den e-mailadresse, du brugte, da du indsendte din sag. Hvis vi finder en sag, sender vi et sikkert link, hvor du kan følge status.",
+    "closeAria": "Luk",
+    "emailLabel": "E-mailadresse",
+    "emailPlaceholder": "din@mail.se",
+    "cancel": "Annuller",
+    "resend": "Fandt du ikke linket? Send igen",
+    "send": "Send link",
+    "sending": "Sender link…",
+    "messages": {
+      "success": "Hvis vi finder en sag knyttet til denne e-mail, sender vi et sikkert sporingslink inden for få minutter.",
+      "errorGeneric": "Kunne ikke sende linket lige nu. Prøv igen om et øjeblik.",
+      "errorTechnical": "Teknisk fejl – prøv igen om et øjeblik."
+    }
+  },
+  "sections": {
+    "readMore": "Læs mere"
+  },
+  "how": {
+    "badge": "Sådan fungerer det",
+    "title": "Dine 3 enkle trin til kompensation",
+    "desc": {
+      "before": "Vi gør processen så enkel som muligt: du indsender dit fly, vi tager kampen med flyselskabet, og du får kompensationen udbetalt i henhold til",
+      "link": "dine rettigheder i EU261",
+      "after": "."
+    },
+    "stepLabel": "Trin {n}",
+    "steps": {
+      "1": {
+        "title": "Indsend dit fly",
+        "body": "Udfyld flynummer, dato og rute. Vi laver et hurtigt forhåndstjek og bekræfter, om din sag kan være berettiget til kompensation efter EU261."
+      },
+      "2": {
+        "title": "Vi håndterer sagen",
+        "body": "Du tilføjer dine oplysninger og bilag. Vi kontakter flyselskabet, tager os af alt formelt og holder dig opdateret undervejs."
+      },
+      "3": {
+        "title": "Du får din kompensation",
+        "body": "Når flyselskabet betaler, udbetaler vi til dig minus vores gebyr. Intet resultat – intet gebyr."
+      }
+    }
+  },
+  "trustRow": {
+    "eu261": "EU261-rettigheder",
+    "lowFee": "No win, no fee – lavt gebyr",
+    "gdpr": "GDPR-sikker håndtering"
+  },
+  "why": {
+    "title": "Hvorfor vælge FlightClaimly?",
+    "cards": {
+      "peace": {
+        "badge": "Tryghed",
+        "title": "Vi tager kampen – du kan slappe af",
+        "body": "Vi håndterer al kontakt med flyselskabet for dig og holder dig opdateret hele vejen."
+      },
+      "fee": {
+        "badge": "Lavest gebyr",
+        "title": "Flere penge i lommen",
+        "body": "Vi har et af de laveste gebyrer i Norden og er helt transparente."
+      },
+      "smart": {
+        "badge": "Smart & fair",
+        "title": "Teknologi + jurist når det er nødvendigt",
+        "body": "Automatiseret hvor det kan lade sig gøre, juridisk hjælp når det kræves – uden risiko for dig."
+      }
+    }
+  },
+  "footer": {
+    "pitch": "Vi hjælper rejsende med at få den kompensation, de har ret til efter EU261 – uden forudgående omkostninger.",
+    "badges": {
+      "lowFee": "No win, no fee – lavt gebyr",
+      "eu": "EU261 / UK261",
+      "gdpr": "GDPR-tilpasset håndtering"
+    },
+    "columns": {
+      "services": "Tjenester",
+      "company": "Om FlightClaimly"
+    },
+    "links": {
+      "rightsLabel": "Dine rettigheder (EU261)",
+      "terms": "Vilkår",
+      "privacy": "Privatlivspolitik"
+    },
+    "bottom": {
+      "copyright": "© {year} FlightClaimly. Alle rettigheder forbeholdes.",
+      "disclaimer": "FlightClaimly er en uafhængig aktør og ikke tilknyttet flyselskaberne."
+    }
+  },
+  "hero": {
+    "badges": {
+      "eu": "EU261 / UK261",
+      "fee": "LAVT GEBYR",
+      "noWinNoFee": "NO WIN, NO FEE"
+    },
+    "title": "Få op til 600 € i kompensation for forsinkede eller aflyste fly – uden besvær.",
+    "subtitle": {
+      "beforeDelayed": "Tjek om dit",
+      "delayedLink": "forsinkede fly",
+      "between": "eller",
+      "cancelledLink": "aflyste fly",
+      "afterCancelled": "giver ret til kompensation efter",
+      "eu261Link": "EU261",
+      "afterEu261": ". Vi hjælper dig med at kræve kompensation fra flyselskabet – du betaler kun, hvis du får penge udbetalt."
+    },
+    "cta": "Tjek mit fly nu",
+    "trust": {
+      "beforeLink": "Tager ca. 2 minutter. Intet at betale, hvis du ikke får kompensation –",
+      "link": "læs mere om vores gebyr.",
+      "afterLink": ""
+    }
+  },
+  "precheck": {
+    "steps": {
+      "step1": "Tjek dit fly",
+      "step2": "Udfyld dine oplysninger"
+    },
+    "quick": {
+      "title": "Hurtigt forhåndstjek",
+      "descBeforeLink": "Indtast dit fly – vi laver en hurtig vurdering af, om du kan have ret til kompensation efter",
+      "eu261Link": "EU261",
+      "descAfterLink": ".",
+      "labels": {
+        "flightNumber": "Flynummer",
+        "date": "Dato",
+        "from": "Fra",
+        "to": "Til",
+        "connectionTitle": "Mellemlanding",
+        "direct": "Direkte fly",
+        "withConnection": "Med mellemlanding"
+      },
+      "placeholders": {
+        "flightNumber": "f.eks. SK1420",
+        "from": "CPH",
+        "to": "ARN",
+        "connection": "f.eks. FRA, DOH eller Paris CDG"
+      },
+      "actions": {
+        "remove": "Fjern",
+        "addAirport": "+ Tilføj endnu en lufthavn"
+      },
+      "submit": {
+        "default": "Tjek mit fly",
+        "checking": "Tjekker…"
+      }
+    },
+    "details": {
+      "goodNewsStrong": "Gode nyheder!",
+      "goodNewsText": "Meget tyder på, at dit fly kan være berettiget til kompensation efter EU261.",
+      "title": "Dine oplysninger",
+      "labels": {
+        "fullName": "Fulde navn",
+        "email": "E-mail",
+        "phone": "Telefonnummer",
+        "bookingNumber": "Bookingnummer"
+      },
+      "placeholders": {
+        "fullName": "Dit navn",
+        "email": "din@mail.se",
+        "phone": "+46 70 123 45 67",
+        "bookingNumber": "ABC123"
+      },
+      "submit": {
+        "default": "Indsend sagen",
+        "sending": "Indsender sagen…"
+      },
+      "consent": {
+        "before": "Ved at indsende accepterer du vores",
+        "terms": "Vilkår",
+        "and": "&",
+        "privacy": "Privatlivspolitik",
+        "after": "."
+      },
+      "trust": {
+        "gdpr": "GDPR-tilpasset",
+        "noWinNoFee": "No win, no fee",
+        "fastHandling": "Hurtig behandling"
+      }
+    }
+  },
+  "faq": {
+    "meta": {
+      "title": "Ofte stillede spørgsmål om flykompensation | FlightClaimly",
+      "description": "Svar på ofte stillede spørgsmål om EU261, flyforsinkelser, aflyste fly, kompensation og hvordan FlightClaimly hjælper dig med at få den rette kompensation."
+    },
+    "badge": "FAQ",
+    "title": "Ofte stillede spørgsmål om flykompensation",
+    "intro": "Her har vi samlet svar på de mest almindelige spørgsmål om kompensation ved forsinkede eller aflyste fly og hvordan FlightClaimly fungerer.",
+    "jsonld": {
+      "eligibilityAnswer": "Som hovedregel kan du have ret til kompensation, hvis du ankom til slutdestinationen mere end tre timer forsinket, flyet blev aflyst med kort varsel, du blev nægtet ombordstigning trods gyldig billet, og rejsen afgår fra EU eller blev opereret af et EU-selskab.",
+      "securityAnswer": "Ja. Vi bruger dine oplysninger udelukkende til at håndtere din sag og opfylde retlige forpligtelser. Mere information findes i vores privatlivspolitik."
+    },
+    "items": {
+      "eu261": {
+        "q": "Hvad er flykompensation efter EU261?",
+        "a": "EU261 er en EU-forordning, som giver passagerer ret til økonomisk kompensation, når fly er kraftigt forsinkede, aflyste eller ved nægtet ombordstigning, under visse betingelser. Kompensationsniveauet afhænger bl.a. af flydistancen."
+      },
+      "eligibility": {
+        "q": "Hvornår har jeg ret til kompensation?",
+        "lead": "Som hovedregel kan du have ret til kompensation hvis:",
+        "bullets": [
+          "du ankom til slutdestinationen mere end 3 timer forsinket",
+          "flyet blev aflyst med kort varsel",
+          "du blev nægtet ombordstigning trods gyldig billet",
+          "rejsen afgik fra et EU-land eller blev opereret af et EU-flyselskab"
+        ]
+      },
+      "amount": {
+        "q": "Hvor mange penge kan jeg få?",
+        "lead": "Kompensationen efter EU261 ligger normalt mellem",
+        "highlight": "250 € og 600 € pr. person",
+        "tail": ", afhængigt af flydistancen og rejsens type.",
+        "a": "Kompensationen efter EU261 ligger normalt mellem 250 € og 600 € pr. person, afhængigt af flydistancen og rejsens type."
+      },
+      "perPerson": {
+        "q": "Gælder kompensationen pr. person eller pr. booking?",
+        "a": "Kompensationen gælder pr. passager, ikke pr. booking. Er I flere sammen, kan beløbet derfor blive betydeligt."
+      },
+      "timeLimit": {
+        "q": "Hvor langt tilbage kan jeg kræve kompensation?",
+        "a": "Det afhænger af, hvilket land der er relevant, men i mange tilfælde kan du kræve kompensation flere år efter rejsedatoen."
+      },
+      "cause": {
+        "q": "Spiller det nogen rolle, hvad der forårsagede forsinkelsen?",
+        "a": "Ja. Flyselskabet kan slippe for at betale kompensation, hvis der er tale om såkaldte “ekstraordinære omstændigheder”."
+      },
+      "businessModel": {
+        "q": "Hvordan tjener FlightClaimly penge?",
+        "lead": "Vi arbejder efter princippet",
+        "highlight": "no win, no fee",
+        "a": "FlightClaimly arbejder efter princippet no win, no fee. Det koster ingenting at indsende en sag, og vi tager kun betaling som en procentdel af den kompensation, du faktisk får udbetalt."
+      },
+      "process": {
+        "q": "Hvordan foregår processen helt konkret?",
+        "lead": "Kort fortalt:",
+        "steps": [
+          "du udfylder dit fly og dine oplysninger",
+          "vi foretager en vurdering og kontakter flyselskabet",
+          "vi håndterer svar, indsigelser og supplerende oplysninger",
+          "ved medhold får du kompensationen udbetalt"
+        ]
+      },
+      "timing": {
+        "q": "Hvor lang tid tager det, før jeg får svar?",
+        "a": "Nogle sager løses på få uger, andre kan tage længere tid."
+      },
+      "documents": {
+        "q": "Hvilke dokumenter har jeg brug for?",
+        "lead": "Det vigtigste er:",
+        "list": [
+          "bookingbekræftelse",
+          "boardingkort",
+          "kommunikation fra flyselskabet"
+        ]
+      },
+      "security": {
+        "q": "Er mine oplysninger sikre hos jer?",
+        "lead": "Ja. Vi bruger dine oplysninger udelukkende til at håndtere din sag. Mere info i vores",
+        "linkText": "privatlivspolitik"
+      },
+      "contact": {
+        "q": "Jeg kan ikke finde svaret – hvad gør jeg?",
+        "lead": "Skriv til os på"
+      }
+    },
+    "footer": {
+      "lead": "Klar til at se, om dit fly kan give kompensation?",
+      "cta": "Tjek mit fly"
+    }
+  },
+  "cancellations": {
+    "meta": {
+      "title": "Aflyst fly – kompensation efter EU261 | FlightClaimly",
+      "description": "Aflyst fly? Lær hvornår du har ret til 250–600 € i kompensation efter EU261, forskellen på ombooking og tilbagebetaling, og hvordan FlightClaimly håndterer dit krav mod flyselskabet."
+    },
+    "badge": "Aflyste fly",
+    "title": "Aflyst fly – dine rettigheder til kompensation efter EU261",
+    "intro": "Når et fly aflyses, påvirker det hele rejsen – nogle gange med ombookinger, andre gange med ødelagt ferie eller tabte møder. EU261 giver dig stærke rettigheder ved aflyste fly. Her gennemgår vi det vigtigste og hvordan FlightClaimly kan hjælpe dig.",
+    "sections": {
+      "whenIsCancelled": {
+        "title": "Hvornår regnes et fly som aflyst?",
+        "p1": "Et fly anses som aflyst, når den oprindelige flyvning ikke gennemføres, og passagererne enten:",
+        "list": [
+          "ombookes til et andet fly, eller",
+          "får billetprisen refunderet i stedet for at rejse"
+        ],
+        "note": "Også store ændringer i tidsplanen kan i praksis regnes som aflysning – det hjælper vi dig med at vurdere, når du indsender din sag."
+      },
+      "whenMoney": {
+        "title": "Hvornår kan du få økonomisk kompensation?",
+        "p1": "Du kan have ret til kompensation efter EU261 hvis:",
+        "list": [
+          "flyet aflyses med kort varsel (typisk mindre end 14 dage før afgang)",
+          "ombookingen gør, at du ankommer betydeligt senere end planlagt",
+          "flyselskabet er ansvarligt for årsagen til aflysningen"
+        ],
+        "note": "De præcise regler afhænger af, hvornår du blev informeret, og hvilken alternativ rejse der blev tilbudt. FlightClaimly hjælper dig med at beregne, hvad der gælder i din situation."
+      },
+      "amount": {
+        "title": "Hvor meget kan du få i kompensation?",
+        "p1": "Kompensationsstørrelsen afhænger af flydistancen og hvor meget din rejse påvirkes. Almindelige standardbeløb efter EU261 er:",
+        "list": [
+          "op til 250 € for korte flyvninger (ca. 0–1.500 km)",
+          "op til 400 € for mellemlange flyvninger inden for EU eller op til 3.500 km",
+          "op til 600 € for lange internationale flyvninger"
+        ],
+        "note": "Beløbene kan justeres, hvis flyselskabet tilbyder en ombooking, så du stadig ankommer med relativt lille forsinkelse. Det analyserer vi for dig, når du indsender din sag."
+      },
+      "rerouteOrRefund": {
+        "title": "Ombooking eller tilbagebetaling – du har ret til at vælge",
+        "p1": "Når et fly aflyses, har du som regel ret til at vælge mellem:",
+        "list": [
+          "ombooking til en senere afgang så hurtigt som muligt, eller",
+          "tilbagebetaling af billetprisen for den strækning, du ikke kunne rejse"
+        ],
+        "p2": "I nogle situationer kan du også have ret til at få dækket ekstra omkostninger, f.eks. hotel eller transport, hvis du tvinges til at blive længere på destinationen."
+      },
+      "extraordinary": {
+        "title": "Hvornår kan flyselskabet afvise kompensation?",
+        "p1": "Flyselskabet kan slippe for at betale kompensation, hvis aflysningen skyldes “ekstraordinære omstændigheder”, f.eks.:",
+        "list": [
+          "alvorligt vejr eller naturkatastrofer",
+          "sikkerhedstrusler eller lukning af luftrum",
+          "strejker som flyselskabet ikke kan kontrollere"
+        ],
+        "p2": {
+          "before": "Tekniske fejl, personalemangel eller interne problemer hos flyselskabet regnes derimod ofte",
+          "strong": "ikke",
+          "after": "som ekstraordinære omstændigheder. Mange afslag er forkerte – der kan vi hjælpe dig med at gå videre."
+        }
+      },
+      "examples": {
+        "title": "Eksempler: hvornår du kan have ret til kompensation",
+        "list": [
+          "Du får besked 3 dage før afgang, at dit fly er aflyst, og tilbydes en ombooking hvor du ankommer mange timer senere – kompensation kan være relevant.",
+          "Flyselskabet aflyser dit aftensfly pga. teknisk fejl og ombooker dig til næste dag – du kan have ret til både kompensation og hotel.",
+          "Dit fly aflyses samme dag uden klar forklaring, og du tvinges til at købe en ny billet med et andet selskab – dette kan også være kompensationsberettiget."
+        ]
+      },
+      "links": {
+        "title": "Vil du fordybe dig i reglerne?",
+        "p1": {
+          "before": "På siden",
+          "linkText": "Dine rettigheder",
+          "after": "finder du en bredere gennemgang af EU261 og hvilke situationer der er dækket."
+        },
+        "p2": {
+          "before": "Du kan også læse vores",
+          "linkText": "FAQ",
+          "after": "med korte svar på ofte stillede spørgsmål."
+        }
+      }
+    },
+    "footer": {
+      "lead": "Er dit fly blevet aflyst? Tjek om du kan få op til 6.000 kr. i kompensation – det tager kun et minut.",
+      "cta": "Tjek mit fly"
+    }
+  },
+  "contact": {
+    "meta": {
+      "title": "Kontakt FlightClaimly | Support og spørgsmål",
+      "description": "Kontakt FlightClaimly med spørgsmål om din sag, EU261, eller hvordan processen fungerer. Vi svarer så hurtigt vi kan."
+    },
+    "badge": "Kontakt",
+    "title": "Kontakt FlightClaimly",
+    "intro": "Har du spørgsmål om en sag, om EU261-reglerne eller om hvordan processen fungerer? Du er altid velkommen til at kontakte os. Vi svarer så hurtigt vi kan.",
+    "email": {
+      "title": "E-mail",
+      "lead": "Du når os nemmest via e-mail:",
+      "note": "Vi vender tilbage så hurtigt vi kan. Ved høj belastning kan svartiden være lidt længere."
+    },
+    "faq": {
+      "title": "Ofte stillede spørgsmål",
+      "before": "Mange spørgsmål er allerede besvaret i vores ",
+      "link": "FAQ",
+      "after": ". Der finder du korte og tydelige svar om kompensation, proces og hvad der gælder i forskellige situationer."
+    },
+    "rights": {
+      "title": "Dine rettigheder",
+      "lead": "Vil du læse mere om hvad du har ret til efter EU261? Besøg:",
+      "link": "Dine rettigheder"
+    },
+    "case": {
+      "title": "Har du en igangværende sag?",
+      "p1": "Du kan følge status når som helst via linket, du fik i e-mailen, da du oprettede sagen.",
+      "before": "Har du mistet linket? Ingen problem – skriv til os på",
+      "after": "så sender vi det igen."
+    },
+    "footer": {
+      "lead": "Vil du tjekke om dit fly giver ret til kompensation? Det tager kun et minut.",
+      "cta": "Tjek mit fly"
+    }
+  },
+  "compensation": {
+    "meta": {
+      "title": "Kompensationsbeløb efter EU261 – 250, 400 og 600 € | FlightClaimly",
+      "description": "Se hvilke kompensationsbeløb du kan få efter EU261/UK261 – 250, 400 eller 600 € pr. person afhængigt af flydistance og forsinkelse."
+    },
+    "badge": "Kompensationsbeløb",
+    "title": "Kompensationsbeløb efter EU261 – 250, 400 og 600 €",
+    "intro": "EU-forordning 261/2004 (”EU261”) giver ret til faste kompensationsniveauer, når dit fly er kraftigt forsinket, aflyst eller ved nægtet ombordstigning.",
+    "sections": {
+      "overview": {
+        "title": "Hurtigt overblik – hvor meget kan du få?",
+        "p1": {
+          "before": "Kompensationen efter EU261 ligger normalt mellem ",
+          "highlight": "250 € og 600 € pr. person",
+          "after": ". Beløbet afhænger primært af:"
+        },
+        "list": [
+          "hvor lang flydistancen er",
+          "om flyet er inden for EU eller internationalt",
+          "hvor stor forsinkelse eller påvirkning du er ramt af"
+        ],
+        "note": "Billetprisen betyder altså mindre – to passagerer på samme fly får normalt samme kompensationsbeløb."
+      },
+      "table": {
+        "title": "Kompensationsniveauer efter EU261",
+        "intro": "Beløbene afhænger primært af flydistance og typen af forstyrrelse. Tabellen nedenfor giver et overblik.",
+        "head": {
+          "distance": "Distance",
+          "type": "Hvornår gælder det",
+          "amount": "Kompensation"
+        },
+        "rows": [
+          {
+            "distance": "Op til 1.500 km",
+            "type": "Forsinkelse ≥ 3 timer / aflyst fly",
+            "amount": "250 €"
+          },
+          {
+            "distance": "1.500–3.500 km",
+            "type": "Forsinkelse ≥ 3 timer / aflyst fly",
+            "amount": "400 €"
+          },
+          {
+            "distance": "Over 3.500 km (inden for EU)",
+            "type": "Forsinkelse ≥ 3 timer / aflyst fly",
+            "amount": "400 €"
+          },
+          {
+            "distance": "Over 3.500 km (uden for EU)",
+            "type": "Forsinkelse ≥ 3 timer / aflyst fly",
+            "amount": "600 €"
+          }
+        ],
+        "note": "Vi hjælper dig med at afgøre, om din sag er kompensationsberettiget."
+      },
+      "reduction": {
+        "title": "Hvornår kan kompensationen reduceres?",
+        "p1": "Ved ombooking, hvor du ankommer tæt på den oprindelige ankomsttid, kan kompensationen i nogle tilfælde halveres.",
+        "list": [
+          "Korte distancer: lille forsinkelse ved ankomst",
+          "Mellemdistancer: moderat forsinkelse ved ankomst",
+          "Lange distancer: begrænset forsinkelse ved ankomst"
+        ],
+        "note": "Vurderingen baseres altid på faktisk ankomsttid og flyselskabets tiltag."
+      },
+      "types": {
+        "title": "Hvilke forstyrrelser er omfattet?",
+        "p1": "EU261 kan give ret til kompensation ved bl.a.:",
+        "list": [
+          "Forsinkelser (ofte ≥ 3 timer ved ankomst)",
+          "Aflyste fly",
+          "Nægtet ombordstigning (overbooking)"
+        ],
+        "note": {
+          "before": "Læs mere om dine rettigheder på siden ",
+          "link": "Dine rettigheder"
+        }
+      },
+      "examples": {
+        "title": "Eksempler",
+        "list": [
+          "Flyet lander 3t 20m for sent → kan give ret til kompensation.",
+          "Flyet aflyses samme dag → kan give ret til kompensation og ombooking.",
+          "Du nægtes ombordstigning pga. overbooking → kan give ret til kompensation."
+        ],
+        "note": "Retten til kompensation påvirkes af årsagen til forstyrrelsen."
+      },
+      "myths": {
+        "title": "Almindelige misforståelser",
+        "list": [
+          "Det gælder kun, hvis billetten er købt direkte hos flyselskabet.",
+          "Man skal klage med det samme i lufthavnen.",
+          "Alle forsinkelser giver ret til kompensation."
+        ],
+        "note": "Vi hjælper dig med at afgøre, om din sag er kompensationsberettiget."
+      }
+    },
+    "footer": {
+      "lead": "Vil du se hvilket kompensationsbeløb der kan gælde for netop din rejse?",
+      "cta": "Tjek mit fly"
+    }
+  },
+  "delays": {
+    "meta": {
+      "title": "Forsinket fly – kompensation efter EU261 | FlightClaimly",
+      "description": "Forsinket fly? Se hvornår du har ret til 250–600 € i kompensation efter EU261/UK261, hvad der regnes som kraftig forsinkelse, og hvordan FlightClaimly hjælper dig med at håndtere kravet."
+    },
+    "badge": "Flyforsinkelser",
+    "title": "Forsinket fly – sådan får du kompensation efter EU261",
+    "intro": "Et forsinket fly kan ødelægge planer, forbindelser og ferier. EU261 giver dig som passager stærke rettigheder – i mange tilfælde har du ret til kompensation, når du ankommer sent. Her forklarer vi det vigtigste.",
+    "sections": {
+      "when": {
+        "title": "Hvornår regnes et fly som kraftigt forsinket?",
+        "p1": {
+          "before": "For EU261 er det især",
+          "highlight": "ankomsttidspunktet",
+          "after": "der er afgørende. Du kan have ret til kompensation når du:"
+        },
+        "list": [
+          "ankommer 3 timer eller mere efter planlagt tid",
+          "mister forbindelser og når slutdestinationen kraftigt forsinket",
+          "må vente længe uden rimelig hjælp fra flyselskabet"
+        ],
+        "note": "Mindre forsinkelser giver oftest ingen kompensation, men kan stadig give ret til mad, drikke eller ombooking. Vi hjælper dig med at vurdere, hvad der gælder i din sag."
+      },
+      "amount": {
+        "title": "Hvor meget kan du få ved forsinkelse?",
+        "p1": "Kompensationsniveauerne ved kraftige forsinkelser ligner dem ved aflyste fly og afhænger af flydistancen:",
+        "list": [
+          "op til 250 € for korte flyvninger (ca. 0–1.500 km)",
+          "op til 400 € for mellemlange flyvninger inden for EU eller op til 3.500 km",
+          "op til 600 € for lange internationale flyvninger"
+        ],
+        "note": "I nogle tilfælde kan beløbene reduceres, hvis flyselskabet tilbyder ombooking, så du stadig ankommer med relativt lille forsinkelse. Det regner vi på for dig."
+      },
+      "care": {
+        "title": "Dine rettigheder mens du venter",
+        "p1": "Ud over økonomisk kompensation kan du ved længere forsinkelser have ret til:",
+        "list": [
+          "mad og drikke i rimeligt omfang",
+          "to gratis telefonopkald eller beskeder",
+          "hotelovernatning, hvis du skal blive natten over",
+          "transport mellem lufthavn og hotel",
+          "ombooking til en senere afgang, eller tilbagebetaling i visse tilfælde"
+        ],
+        "note": "Gem altid kvitteringer – du kan ofte kræve refusion af nødvendige udlæg efterfølgende, hvis flyselskabet ikke hjalp dig på stedet."
+      },
+      "exceptions": {
+        "title": "Hvornår kan flyselskabet slippe for at betale kompensation?",
+        "p1": "I visse situationer kan flyselskabet henvise til “ekstraordinære omstændigheder” og afvise kompensation, f.eks.:",
+        "list": [
+          "alvorligt vejr eller naturkatastrofer",
+          "lukkede lufthavne eller restriktioner i luftrummet",
+          "sikkerhedstrusler eller hændelser uden for flyselskabets kontrol"
+        ],
+        "p2": {
+          "before": "Tekniske fejl, mangel på personale eller planlægningsfejl er derimod oftest",
+          "highlight": "ikke",
+          "after": "gyldige grunde til at afvise kompensation. Mange passagerer får nej første gang – der kan vi hjælpe dig med at gå videre."
+        }
+      },
+      "examples": {
+        "title": "Eksempler: hvornår du kan have ret til kompensation",
+        "list": [
+          "Dit fly fra Stockholm til Barcelona lander 3 timer og 45 minutter senere end planlagt – du kan have ret til kompensation.",
+          "Du mister dit langdistancefly efter en forsinkelse på første strækning og når slutdestinationen mere end 3 timer for sent – hele rejsen kan være omfattet.",
+          "Flyet er 4 timer forsinket pga. en teknisk fejl – ofte kompensationsberettiget."
+        ]
+      },
+      "links": {
+        "title": "Vil du læse mere om reglerne?",
+        "rights": {
+          "before": "På siden",
+          "link": "Dine rettigheder",
+          "after": "finder du en bredere gennemgang af EU261 og hvad der gælder ved aflyste fly, overbooking og andre situationer."
+        },
+        "faq": {
+          "before": "Du kan også kigge i vores",
+          "link": "FAQ",
+          "after": "hvor vi svarer kort på ofte stillede spørgsmål."
+        }
+      }
+    },
+    "footer": {
+      "lead": "Har du oplevet et forsinket fly? Tjek om du kan få op til 6.000 kr. i kompensation – det tager kun et minut.",
+      "cta": "Tjek mit fly"
+    }
+  },
+  "login": {
+    "title": "Admin login",
+    "passwordLabel": "Adgangskode",
+    "passwordPlaceholder": "••••••••",
+    "submit": "Log ind",
+    "loading": "Logger ind…",
+    "errors": {
+      "invalidPassword": "Forkert adgangskode",
+      "generic": "Kunne ikke logge ind"
+    }
+  },
+  "privacy": {
+    "meta": {
+      "title": "Privatlivspolitik | FlightClaimly",
+      "description": "Læs hvordan FlightClaimly behandler personoplysninger, hvilke oplysninger vi indsamler, formålet med behandlingen og dine rettigheder efter GDPR."
+    },
+    "badge": "Privatliv",
+    "title": "Privatlivspolitik for FlightClaimly",
+    "intro": "Dit privatliv er vigtigt for os. På denne side forklarer vi, hvilke oplysninger vi indsamler, hvorfor vi gør det, hvordan vi bruger dem, og hvilke rettigheder du har.",
+    "controller": {
+      "title": "Dataansvarlig",
+      "body": "FlightClaimly (”vi”, ”os”) er dataansvarlig for behandling af personoplysninger i forbindelse med vores service til flykompensation."
+    },
+    "dataCollected": {
+      "title": "Hvilke oplysninger indsamler vi?",
+      "intro": "Når du bruger vores service, kan vi behandle følgende typer personoplysninger:",
+      "items": [
+        "kontaktoplysninger (navn, e-mail, telefonnummer)",
+        "bookinginformation (bookingnummer, flynummer, dato, ruter)",
+        "billetter og boardingkort (dokumenter, PDF’er, billeder)",
+        "oplysninger om forsinkelse, aflysning eller anden forstyrrelse",
+        "kommunikation med dig (e-mail, beskeder)",
+        "teknisk information (IP-adresse, enhed, browser) i det omfang det er nødvendigt for sikkerhed og drift"
+      ]
+    },
+    "purpose": {
+      "title": "Hvorfor behandler vi dine oplysninger?",
+      "intro": "Vi behandler dine personoplysninger for at kunne:",
+      "items": [
+        "vurdere om du har ret til kompensation efter EU261",
+        "oprette og håndtere din sag over for flyselskabet",
+        "kommunikere med dig om sagens status",
+        "håndtere udbetalinger når kompensation godkendes",
+        "opfylde retlige forpligtelser (f.eks. bogføring)",
+        "forbedre og sikre vores service"
+      ]
+    },
+    "legalBasis": {
+      "title": "Retsgrundlag for behandling",
+      "intro": "Behandlingen af dine personoplysninger baseres primært på:",
+      "items": [
+        "<strong>Aftale</strong> – for at kunne håndtere dit krav over for flyselskabet",
+        "<strong>Retlig forpligtelse</strong> – f.eks. bogføringsregler",
+        "<strong>Legitim interesse</strong> – sikkerhed og drift"
+      ]
+    },
+    "retention": {
+      "title": "Hvor længe opbevarer vi dine oplysninger?",
+      "intro": "Vi opbevarer dine oplysninger så længe det er nødvendigt for at:",
+      "items": [
+        "håndtere og afslutte din sag",
+        "håndtere eventuelle klager eller tvister",
+        "opfylde retlige forpligtelser"
+      ],
+      "note": "Når oplysningerne ikke længere er nødvendige, sletter eller anonymiserer vi dem på en sikker måde."
+    },
+    "sharing": {
+      "title": "Hvem deler vi dine oplysninger med?",
+      "intro": "Vi deler kun dine oplysninger med parter, der er nødvendige for at levere servicen:",
+      "items": [
+        "flyselskaber og deres repræsentanter",
+        "juridiske repræsentanter eller samarbejdspartnere",
+        "IT-leverandører (hosting, e-mail)"
+      ],
+      "note": "Vi sælger ikke dine personoplysninger videre til tredjeparter."
+    },
+    "rights": {
+      "title": "Dine rettigheder",
+      "intro": "Som registreret har du ret til at:",
+      "items": [
+        "anmode om indsigt i hvilke oplysninger vi behandler",
+        "anmode om rettelse af forkerte oplysninger",
+        "anmode om sletning når oplysningerne ikke længere er nødvendige",
+        "gøre indsigelse mod eller begrænse behandling",
+        "anmode om dataportabilitet i visse tilfælde"
+      ],
+      "contactBefore": "Vil du gøre brug af en af disse rettigheder? Kontakt os via"
+    },
+    "complaints": {
+      "title": "Klage",
+      "body": "Hvis du mener, at vi behandler dine oplysninger i strid med gældende regler, kan du indgive en klage til den relevante datatilsynsmyndighed."
+    },
+    "changes": {
+      "title": "Ændringer i denne politik",
+      "body": "Vi kan opdatere denne privatlivspolitik efter behov. Den seneste version er altid offentliggjort her."
+    },
+    "footer": {
+      "before": "Har du spørgsmål om hvordan vi håndterer dine personoplysninger? Skriv til"
+    }
+  },
+  "rights": {
+    "meta": {
+      "title": "EU261 – dine rettigheder som flypassager | FlightClaimly",
+      "description": "Lær dine rettigheder efter EU261/UK261 ved forsinkede, aflyste og overbookede fly. Se hvornår du har ret til 250–600 € i kompensation og hvordan FlightClaimly hjælper dig med at få pengene udbetalt."
+    },
+    "badge": "Dine rettigheder",
+    "title": "Dine rettigheder som flypassager efter EU261",
+    "intro": "EU-forordning 261/2004 (\"EU261\") giver dig som flypassager stærke rettigheder ved forsinkede, aflyste eller overbookede fly. Her forklarer vi det vigtigste – og hvordan FlightClaimly kan hjælpe dig med at få den kompensation, du har ret til.",
+    "whenApplies": {
+      "title": "Hvornår gælder EU261?",
+      "intro": "EU261 gælder i følgende situationer:",
+      "bullets": [
+        "flyet afgår fra et land inden for EU/EØS eller Storbritannien",
+        "flyet ankommer til EU/EØS/Storbritannien med et EU-baseret flyselskab",
+        "du har en bekræftet booking og mødte rettidigt op til check-in"
+      ],
+      "note": "Også visse forbindelsesfly og rejser med mellemlandinger kan være omfattet, afhængigt af hvordan billetten er booket. Det hjælper vi dig med at vurdere."
+    },
+    "covered": {
+      "title": "Hvilke situationer er omfattet?",
+      "lead": "Du kan have ret til kompensation hvis:",
+      "bullets": [
+        "dit fly er kraftigt forsinket ved ankomst (ofte 3 timer eller mere)",
+        "dit fly aflyses med kort varsel",
+        "du nægtes ombordstigning pga. overbooking"
+      ],
+      "after": "Ud over økonomisk kompensation kan du have ret til mad, drikke, hotel og ombooking afhængigt af hvor længe du er ramt, og hvor lang din rejse er."
+    },
+    "amounts": {
+      "title": "Hvor meget kan du få i kompensation?",
+      "intro": "Kompensationen afhænger primært af flydistancen og hvor meget din rejse er påvirket. Almindelige standardbeløb efter EU261 er:",
+      "bullets": [
+        "op til 250 € for korte flyvninger (ca. 0–1.500 km)",
+        "op til 400 € for mellemlange flyvninger inden for EU eller op til 3.500 km",
+        "op til 600 € for lange internationale flyvninger"
+      ],
+      "note": "Det præcise beløb kan variere afhængigt af rute, forsinkelsens længde og tilbudt ombooking. FlightClaimly hjælper dig med at beregne det rette niveau for netop din rejse."
+    },
+    "exceptions": {
+      "title": "Hvornår har du ikke ret til kompensation?",
+      "intro": "Flyselskabet kan slippe for at betale kompensation, hvis forsinkelsen eller aflysningen skyldes såkaldte “ekstraordinære omstændigheder”, f.eks.:",
+      "bullets": [
+        "alvorligt vejr eller naturkatastrofer",
+        "sikkerhedsrisici eller lukning af luftrum",
+        "strejker uden for flyselskabets kontrol (f.eks. lufthavnspersonale eller flyveledere)"
+      ],
+      "afterBeforeStrong": "Tekniske problemer eller mangler i planlægningen regnes ofte ",
+      "afterStrong": "ikke",
+      "afterTail": " som ekstraordinære omstændigheder. Mange afslag fra flyselskaber er forkerte – der kan vi hjælpe dig med at klage."
+    },
+    "save": {
+      "title": "Hvad bør du gemme?",
+      "intro": "For at føre en sag er det en god idé at have:",
+      "bullets": [
+        "bookingbekræftelse eller billet (gerne som PDF eller billede)",
+        "boardingkort hvis du nåede at checke ind",
+        "eventuelle kvitteringer for mad, hotel eller transport",
+        "kort beskrivelse af hvad der skete (tider, beskeder fra flyselskabet)"
+      ],
+      "note": "Du kan uploade det hele direkte, når du opretter en sag hos os – vi hjælper dig med at sortere det."
+    },
+    "links": {
+      "title": "Vil du vide mere om specifikke situationer?",
+      "lead": "Læs mere om:",
+      "delaysText": "Forsinkede fly",
+      "delaysAfter": " – hvad der gælder ved lange forsinkelser.",
+      "cancellationsText": "Aflyste fly",
+      "cancellationsAfter": " – dine rettigheder når flyet aflyses.",
+      "faqText": "Ofte stillede spørgsmål",
+      "faqAfter": " – korte svar på det de fleste spørger om."
+    },
+    "footer": {
+      "lead": "Tror du, at dit fly er omfattet af EU261? Tjek med det samme om du har ret til kompensation – det tager kun et minut.",
+      "cta": "Tjek om jeg har ret til kompensation"
+    }
+  },
+  "terms": {
+    "meta": {
+      "title": "Brugervilkår | FlightClaimly",
+      "description": "Læs brugervilkårene for FlightClaimly, herunder hvordan servicen fungerer, gebyrer, udbetalinger, ansvar og kontaktmuligheder."
+    },
+    "badge": "Vilkår",
+    "title": "Brugervilkår for FlightClaimly",
+    "intro": "Disse vilkår beskriver hvordan FlightClaimly fungerer, og hvilke rettigheder og forpligtelser der gælder, når du bruger vores service til at føre krav om flykompensation.",
+    "sections": {
+      "service": {
+        "title": "1. Om servicen",
+        "text": "FlightClaimly er en service, der hjælper flypassagerer med at undersøge og føre krav om kompensation efter EU261 og lignende regelsæt. Vi agerer som din repræsentant over for flyselskabet.",
+        "note": "Ved at indsende en sag via vores website accepterer du disse vilkår."
+      },
+      "usage": {
+        "title": "2. Din brug af servicen",
+        "intro": "Du forpligter dig til at:",
+        "bullets": [
+          "give korrekte og fuldstændige oplysninger om dit fly",
+          "ikke oprette sager som du ved er forkerte eller vildledende",
+          "informere os, hvis du allerede har engageret en anden til det samme krav"
+        ],
+        "note": "Vi forbeholder os retten til at stoppe håndteringen af en sag, hvis vi vurderer at oplysningerne er forkerte, eller hvis betingelserne for kravet ikke er opfyldt."
+      },
+      "power": {
+        "title": "3. Repræsentation og fuldmagt",
+        "text": "For at kunne føre dit krav skal vi nogle gange agere som din repræsentant over for flyselskabet. Ved at bruge servicen accepterer du, at vi kontakter flyselskabet i dit navn og varetager dine interesser i forbindelse med sagen.",
+        "note": "I nogle tilfælde kan vi bede dig underskrive en separat fuldmagt eller en særlig aftale, f.eks. hvis sagen skal eskaleres."
+      },
+      "fees": {
+        "title": "4. Gebyrer og betaling",
+        "lead": "FlightClaimly arbejder efter princippet",
+        "highlight": "no win, no fee",
+        "bullets": [
+          "det koster ingenting at indsende en sag",
+          "vi tager kun betaling, hvis vi lykkes med at få kompensation fra flyselskabet",
+          "vores gebyr er en procentdel af den kompensation, du modtager"
+        ],
+        "note": "Den aktuelle procentsats og eventuelle øvrige vilkår fremgår tydeligt, når du accepterer, at vi fører din sag."
+      },
+      "payout": {
+        "title": "5. Udbetaling til dig",
+        "intro": "Når flyselskabet har udbetalt kompensation, kan udbetaling ske enten:",
+        "bullets": [
+          "direkte til FlightClaimly, hvorefter vi viderefører din andel til dig, eller",
+          "direkte til dig, efter fradrag af vores gebyr efter særskilt aftale"
+        ],
+        "note": "Vi tilstræber at gennemføre udbetalinger så hurtigt som muligt, efter at kompensationen er modtaget og identificeret."
+      },
+      "liability": {
+        "title": "6. Ansvar og begrænsninger",
+        "text1": "Vi kan ikke garantere, at et krav fører til kompensation. Vurderingen sker altid ud fra tilgængelige oplysninger og gældende regler.",
+        "text2": "FlightClaimly er ikke ansvarlig for indirekte tab, såsom tabt fortjeneste eller følgeomkostninger, og vores ansvar er normalt begrænset til det gebyr, du har betalt for servicen."
+      },
+      "privacy": {
+        "title": "7. Personoplysninger og privatliv",
+        "text": "Vi behandler personoplysninger i overensstemmelse med gældende databeskyttelseslovgivning. Mere information om hvordan vi håndterer dine oplysninger, findes i vores",
+        "link": "privatlivspolitik"
+      },
+      "changes": {
+        "title": "8. Ændringer af vilkårene",
+        "text": "Vi kan opdatere disse vilkår efter behov. Den seneste version findes altid på vores website."
+      },
+      "contact": {
+        "title": "9. Kontakt",
+        "text": "Har du spørgsmål til disse vilkår, er du velkommen til at kontakte os på"
+      }
+    },
+    "footer": "Ved at bruge FlightClaimly bekræfter du, at du har læst og forstået disse vilkår."
+  },
+  "thanks": {
+    "brandTagline": "Vi fører din sag mod flyselskabet – du slipper for besværet.",
+    "backHome": "← Til forsiden",
+    "header": {
+      "badge": "FLIGHTCLAIMLY • DIN SAG ER REGISTRERET",
+      "title": "Tak! Vi har modtaget din sag.",
+      "claimId": "Sags-ID",
+      "intro": "Næste skridt er, at du bekræfter fuldmagt og uploader dokumentation her på siden. Når det er gjort, begynder vi at behandle sagen med det samme og kontakter flyselskabet på dine vegne."
+    },
+    "precheck": {
+      "badge": "Foreløbig vurdering",
+      "eligibleTitle": "Gode nyheder – det ser ud til, at du har ret til kompensation.",
+      "eligibleFallback": "Foreløbig vurdering: flyet kan være berettiget til kompensation efter EU261.",
+      "eligibleNote": "Det er ingen garanti, men et stærkt første signal. Når du har bekræftet fuldmagt og uploadet bilag, begynder vi at føre kravet mod flyselskabet.",
+      "unclearTitle": "Uklart – vi gennemgår manuelt.",
+      "unclearFallback": "Indsend gerne dokumentation, så gennemgår vi din sag manuelt.",
+      "amountPrefix": "Indikation:"
+    },
+    "upload": {
+      "title": "Upload dokumentation",
+      "intro": "Fuldmagten giver os ret til at føre sagen mod flyselskabet. Tilføj også gerne boardingkort, bookingbekræftelse og kvitteringer, hvis du har haft ekstra omkostninger.",
+      "list": [
+        "Digital fuldmagt (LoA) – obligatorisk",
+        "Boardingkort eller e-billet",
+        "Bookingbekræftelse",
+        "Kvitteringer for ekstra omkostninger (hvis du har haft det)"
+      ]
+    },
+    "loa": {
+      "title": "Digital fuldmagt (LoA)",
+      "description": "Ved at udfylde dit navn og sætte kryds i feltet giver du FlightClaimly ret til at repræsentere dig over for flyselskabet i denne sag.",
+      "viewText": "Vis fuldmagtstekst",
+      "nameLabel": "Fulde navn (underskrift)",
+      "namePlaceholder": "Dit fulde navn",
+      "consent": "Jeg giver FlightClaimly fuldmagt (Letter of Authorization) til at repræsentere mig over for flyselskabet i denne sag.",
+      "error": "Udfyld dit navn og sæt kryds i feltet, for at fuldmagten er gyldig."
+    },
+    "attachments": {
+      "title": "Øvrige bilag (valgfrit)",
+      "description": "Tilføj gerne boardingkort, bookingbekræftelse og kvitteringer. Du kan uploade flere filer på én gang.",
+      "choose": "Vælg filer",
+      "types": "PDF, JPG, PNG, HEIC. Maks. få filer ad gangen."
+    },
+    "actions": {
+      "submit": "Bekræft fuldmagt og upload",
+      "submitting": "Behandler…",
+      "later": "Du kan altid supplere med flere bilag senere ved at kontakte os, hvis det er nødvendigt."
+    },
+    "success": {
+      "title": "Fuldmagt bekræftet!",
+      "text": "Tak – vi begynder at behandle din sag med det samme. Du får e-mail, når status opdateres, og kan følge alt via dit sporingslink."
+    },
+    "errors": {
+      "missingId": "Kunne ikke finde dit sags-ID. Gå tilbage til forsiden og indsend formularen igen.",
+      "generic": "❌ Kunne ikke gennemføre trinnet. Prøv igen."
+    },
+    "security": {
+      "badge": "Sikker filoverførsel",
+      "text": "Dine filer lagres krypteret og bruges kun til at håndtere din sag. Vi deler dem ikke med andre end flyselskabet og eventuelt juridisk repræsentant knyttet til netop denne sag.",
+      "independentTitle": "Uafhængig aktør",
+      "independentText": "FlightClaimly er en uafhængig aktør og ikke tilknyttet noget flyselskab. Vi arbejder altid på vegne af dig som rejsende."
+    },
+    "loaText": {
+      "title": "Fuldmagt – FlightClaimly",
+      "intro": "Jeg giver hermed FlightClaimly ret til at repræsentere mig i sagen om flykompensation efter EU-forordning 261/2004.",
+      "bullets": [
+        "Kommunikere med flyselskabet i mit navn.",
+        "Indsende krav og følge sagen op.",
+        "Modtage svar og afgørelser fra flyselskabet.",
+        "Samarbejde med juridisk repræsentant, hvis det er nødvendigt for denne sag."
+      ],
+      "note": "Fuldmagten gælder kun denne specifikke sag og kan til enhver tid tilbagekaldes skriftligt."
+    },
+    "loading": "Indlæser siden…",
+    "home": "Til forsiden"
+  },
+  "about": {
+    "meta": {
+      "title": "Om FlightClaimly | Flykompensation uden besvær",
+      "description": "Læs om FlightClaimly og hvordan vi hjælper dig med at føre din EU261-sag fra start til udbetaling — hurtigt, trygt og transparent."
+    },
+    "badge": "Om os",
+    "title": "Vi hjælper dig med at få kompensation, når flyet driller",
+    "intro": "FlightClaimly er en EU-baseret service, der gør det nemt at kræve kompensation fra flyselskaber efter EU261. Målet er, at du får de penge, du har ret til – uden besvær, stress eller juridiske barrierer.",
+    "why": {
+      "title": "Hvorfor findes FlightClaimly?",
+      "p1": "Hvert år går store beløb i flykompensation aldrig til passagererne. Mange orker ikke, ved ikke hvordan reglerne fungerer, eller får nej første gang og giver op.",
+      "p2": "FlightClaimly blev skabt for at gøre processen så enkel som muligt: du udfylder dit fly, uploader din booking – vi klarer resten og fører sagen mod flyselskabet for dig."
+    },
+    "how": {
+      "title": "Sådan fungerer servicen",
+      "steps": [
+        "Du udfylder dine flydetaljer og hvad der skete.",
+        "Vi analyserer sagen ud fra EU261-reglerne.",
+        "Vi fører kravet mod flyselskabet for dig.",
+        "Du betaler først, når du får kompensation."
+      ],
+      "note": "Alt håndteres digitalt – hurtigt, trygt og transparent."
+    },
+    "model": {
+      "title": "Vores model – enkel og transparent",
+      "p1": "Vi tror på et enkelt princip:",
+      "p1Strong": "no win, no fee",
+      "p1b": " Det betyder, at vi kun tjener penge, når du gør.",
+      "bullets": [
+        "det koster ingenting at oprette en sag",
+        "vi tager kun betaling, hvis du faktisk får kompensation",
+        "vores gebyr er tydeligt og fremgår, før du accepterer"
+      ],
+      "note": "Ingen kompensation fra flyselskabet = ingen omkostninger til FlightClaimly."
+    },
+    "trust": {
+      "title": "Fokus på tydelighed og tryghed",
+      "p1": "Vi vil have, at du altid ved, hvor din sag står. Derfor kan du følge processen via vores sporingsside, hvor du ser:",
+      "bullets": [
+        "hvornår vi har modtaget din sag",
+        "hvornår vi gennemgår den",
+        "hvornår den er sendt til flyselskabet",
+        "hvornår kompensation er udbetalt"
+      ],
+      "p2": "Du får også e-mail, når status opdateres, så du slipper for at jagte kundeservice eller logge ind i unødvendige portaler."
+    },
+    "independent": {
+      "title": "Uafhængige og på din side",
+      "p1": "FlightClaimly arbejder udelukkende efter EU’s passagerrettigheder (EU261/2004) og er uafhængig af flyselskaberne. Vores eneste opgave er at repræsentere dig som passager og sikre, at reglerne følges i praksis – ikke kun på papir.",
+      "p2": "Vi tager kampen mod flyselskaber og bureaukrati, så du kan fokusere på din rejse – ikke paragraffer og formularer."
+    },
+    "footer": {
+      "cta": "Har dit fly været ramt? Tjek om du har ret til kompensation – det tager kun et minut.",
+      "primary": "Få kompensation",
+      "secondary": "Kontakt & samarbejder"
+    },
+    "email": {
+      "footer": {
+        "disclaimer": {
+          "title": "Fortrolighed",
+          "p1": "Denne e-mail og eventuelle bilag er udelukkende beregnet til den angivne modtager. Hvis du har modtaget beskeden ved en fejl, beder vi dig svare på e-mailen og derefter slette den.",
+          "p2": "Vi behandler personoplysninger i forbindelse med behandlingen af din sag. Læs mere i vores privatlivspolitik og vores vilkår."
+        },
+        "links": {
+          "privacy": "Privatlivspolitik",
+          "terms": "Vilkår"
+        },
+        "errors": {
+          "required": "Udfyld alle obligatoriske felter.",
+          "invalidFlightNumber": "Indtast et gyldigt flynummer (f.eks. SK123).",
+          "network": "Noget gik galt. Prøv igen.",
+          "noResult": "Vi kunne ikke verificere flyet, men du kan stadig indsende sagen."
+        }
+      }
+    }
+  }
+}
