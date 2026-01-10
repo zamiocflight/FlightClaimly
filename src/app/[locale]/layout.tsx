@@ -19,7 +19,6 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const safeLocale = locale ?? "sv";
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -28,6 +27,8 @@ export async function generateMetadata({
       languages: {
         sv: "/sv",
         en: "/en",
+        da: "/da",
+        de: "/de",
       },
     },
   };

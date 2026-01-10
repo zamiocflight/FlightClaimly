@@ -1,11 +1,14 @@
 import { NextResponse } from 'next/server';
 import { getClaimById, updateClaimStatus, type Claim } from '@/lib/claims';
 import { sendStatusEmail } from '@/lib/statusEmail';
+import { ensurePayoutToken } from '@/lib/claims';
+
 
 type AllowedStatus =
   | 'new'
   | 'processing'
   | 'sent_to_airline'
+  | 'approved'
   | 'paid_out'
   | 'rejected';
 
@@ -48,27 +51,38 @@ export async function POST(req: Request) {
     });
 
     // 3) Försök skicka statusmail via vår helper
-    let emailSent = false;
-    if (updated.email) {
-      try {
-        await sendStatusEmail({
-          id: trackingId, // 👈 detta hamnar i /track/[id]
-          email: updated.email,
-          name: updated.name,
-          status: internal as any, // matchar StatusCode i statusEmail.ts
-          flightNumber: updated.flightNumber,
-          from: updated.from,
-          to: updated.to,
-          flightDate: (updated as any).date ?? null,
-          // publicToken kan kopplas på senare om vi vill ha ?t=...
-          lang: 'sv',
-        });
-        emailSent = true;
-      } catch (err) {
-        emailSent = false;
-        console.error('Kunde inte skicka statusmail:', err);
-      }
+let emailSent = false;
+
+if (updated.email) {
+  try {
+    let payoutToken: string | undefined = undefined;
+
+    // 🔒 Endast när vi sätter approved vill vi skapa/återanvända payout-token
+    if (internal === 'approved') {
+      const res = await ensurePayoutToken(trackingId);
+      payoutToken = res.token;
     }
+
+    await sendStatusEmail({
+      id: trackingId, // 👈 detta hamnar i /track/[id]
+      email: updated.email,
+      name: updated.name,
+      status: internal as any, // matchar StatusCode i statusEmail.ts
+      flightNumber: updated.flightNumber,
+      from: updated.from,
+      to: updated.to,
+      flightDate: (updated as any).date ?? null,
+      publicToken: payoutToken, // 👈 används för ?t=... i payout-länken
+      lang: 'sv',
+    });
+
+    emailSent = true;
+  } catch (err) {
+    emailSent = false;
+    console.error('Kunde inte skicka statusmail:', err);
+  }
+}
+
 
     return NextResponse.json(
       { ok: true, claim: updated, emailSent },
@@ -83,21 +97,23 @@ export async function POST(req: Request) {
 function normalizeStatusInput(status: string): AllowedStatus {
   const s = status.toLowerCase().trim();
 
-  if (
-    s === 'new' ||
-    s === 'processing' ||
-    s === 'sent_to_airline' ||
-    s === 'paid_out' ||
-    s === 'rejected'
-  ) {
-    return s;
-  }
+if (
+  s === 'new' ||
+  s === 'processing' ||
+  s === 'sent_to_airline' ||
+  s === 'approved' ||
+  s === 'paid_out' ||
+  s === 'rejected'
+) {
+  return s;
+}
 
-  if (s.includes('klar') || s.includes('utbetald')) return 'paid_out';
-  if (s.includes('under behandling')) return 'processing';
-  if (s.includes('skickat')) return 'sent_to_airline';
-  if (s.includes('avslag')) return 'rejected';
-  if (s.includes('obehandlad')) return 'new';
+if (s.includes('klar') || s.includes('utbetald')) return 'paid_out';
+if (s.includes('godkänd') || s.includes('godkand') || s.includes('approved')) return 'approved';
+if (s.includes('under behandling')) return 'processing';
+if (s.includes('skickat')) return 'sent_to_airline';
+if (s.includes('avslag')) return 'rejected';
+if (s.includes('obehandlad')) return 'new';
 
   return 'new';
 }

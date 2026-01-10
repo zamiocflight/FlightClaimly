@@ -21,6 +21,7 @@ export type StatusCode =
   | 'new'
   | 'processing'
   | 'sent_to_airline'
+  | 'approved'
   | 'paid_out'
   | 'rejected';
 
@@ -56,11 +57,22 @@ export async function sendStatusEmail(
 const trackingUrl = args.id
   ? buildTrackUrl(args.id, args.publicToken, lang)
   : undefined;
-console.log("DEBUG sendStatusEmail", {
+
+const payoutUrl =
+  args.status === 'approved' && args.id
+    ? buildPayoutUrl(args.id, args.publicToken, lang)
+    : undefined;
+
+const ctaUrl = payoutUrl || trackingUrl;
+
+console.log('DEBUG sendStatusEmail', {
   id: args.id,
   publicToken: args.publicToken,
-  trackingUrl
+  trackingUrl,
+  payoutUrl,
+  ctaUrl,
 });
+
 
 const flightLine = buildFlightLine(lang, {
   flightNumber: args.flightNumber,
@@ -79,13 +91,21 @@ const flightLine = buildFlightLine(lang, {
     return false;
   }
 
-  const html = wrapEmailLayout({
-    lang,
-    subject,
-    innerHtml,
-    trackingUrl,
-    flightLine,
-  });
+ const ctaLabel =
+  args.status === 'approved'
+    ? lang === 'sv'
+      ? 'Lämna kontouppgifter'
+      : 'Add bank details'
+    : undefined;
+
+const html = wrapEmailLayout({
+  lang,
+  subject,
+  innerHtml,
+  ctaUrl,
+  ctaLabel,
+  flightLine,
+});
 
 const { error } = await resend.emails.send({
   from: `FlightClaimly <${fromEmail}>`,
@@ -119,6 +139,11 @@ function buildTrackUrl(id: string, publicToken?: string, lang: Lang = 'sv') {
   const cleanTrackingPath = (trackingPath || '/track').replace(/^\/+/, ''); // "track"
   return `${base}/${lang}/${cleanTrackingPath}/${encodeURIComponent(id)}${tokenPart}`;
 }
+function buildPayoutUrl(id: string, publicToken?: string, lang: Lang = 'sv') {
+  const base = appUrl.replace(/\/$/, '');
+  const tokenPart = publicToken ? `?t=${encodeURIComponent(publicToken)}` : '';
+  return `${base}/${lang}/payout/${encodeURIComponent(id)}${tokenPart}`;
+}
 
 function buildFlightLine(
   lang: Lang,
@@ -151,12 +176,15 @@ function wrapEmailLayout(opts: {
   lang: Lang;
   subject: string;
   innerHtml: string;
-  trackingUrl?: string;
+  ctaUrl?: string;
+  ctaLabel?: string;
   flightLine: string;
 }) {
-  const { lang, innerHtml, trackingUrl, flightLine } = opts;
+  const { lang, innerHtml, ctaUrl, ctaLabel, flightLine } = opts;
 
-  const ctaLabel = lang === 'sv' ? 'Följ ditt ärende' : 'View your case';
+  const defaultCtaLabel = lang === 'sv' ? 'Följ ditt ärende' : 'View your case';
+  const finalCtaLabel = ctaLabel || defaultCtaLabel;
+
 
   const autoText =
     lang === 'sv'
@@ -168,28 +196,29 @@ function wrapEmailLayout(opts: {
       ? 'Vi driver in din ersättning – du slipper bråka med flygbolaget.'
       : 'We collect your compensation – you avoid the fight with the airline.';
 
-  const trackingBlock = trackingUrl
-    ? `
+const ctaBlock = ctaUrl
+  ? `
       <tr>
         <td align="left" style="padding: 10px 0 20px 0;">
-          <a href="${trackingUrl}"
+          <a href="${ctaUrl}"
              style="display:inline-block;padding:12px 24px;border-radius:9999px;
                     background-color:#0f172a;color:#f9fafb;font-size:14px;
                     font-weight:600;text-decoration:none;">
-            ${ctaLabel}
+            ${finalCtaLabel}
           </a>
         </td>
       </tr>
       <tr>
         <td align="left" style="padding: 0 0 8px 0;color:#64748b;font-size:13px;">
-          <a href="${trackingUrl}"
+          <a href="${ctaUrl}"
              style="color:#64748b;text-decoration:underline;word-break:break-all;">
-            ${trackingUrl}
+            ${ctaUrl}
           </a>
         </td>
       </tr>
     `
-    : '';
+  : '';
+
 
   const flightLineRow = `
     <tr>
@@ -280,7 +309,7 @@ function wrapEmailLayout(opts: {
               <td style="padding:26px 30px 30px 30px;background-color:#ffffff;">
                 <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
                   ${innerHtml}
-                  ${trackingBlock}
+                  ${ctaBlock}
                   ${flightLineRow}
                   ${footerBlock}
                 </table>
@@ -374,7 +403,15 @@ function buildStatusContent(
             'Vi bevakar ärendet och återkommer så snart vi får ett besked eller om flygbolaget ber om mer information.',
           ]),
         };
-
+              case 'approved':
+        return {
+          subject: 'Din ersättning är godkänd – lämna kontouppgifter',
+          innerHtml: wrapCopy('Din ersättning är godkänd', [
+            'Bra nyheter – ditt ärende är godkänt.',
+            'För att vi ska kunna betala ut ersättningen behöver vi dina kontouppgifter (IBAN). Det tar bara en minut.',
+            'Klicka på knappen nedan för att lämna kontouppgifter.',
+          ]),
+        };
       case 'paid_out':
         return {
           subject: 'Grattis! Din ersättning är utbetald 🎉',
@@ -435,6 +472,15 @@ function buildStatusContent(
           'We have now submitted your compensation claim to the airline.',
           'Response times vary, but most airlines reply within 2–8 weeks. Sometimes it may take longer depending on workload and case complexity.',
           'We will monitor your case and get back to you as soon as we receive a response or if the airline asks for more information.',
+        ]),
+      };
+          case 'approved':
+      return {
+        subject: 'Your compensation is approved – add your bank details',
+        innerHtml: wrapCopy('Your compensation is approved', [
+          'Good news — your case has been approved.',
+          'To pay out your compensation, we need your bank details (IBAN). It only takes a minute.',
+          'Click the button below to add your bank details.',
         ]),
       };
 

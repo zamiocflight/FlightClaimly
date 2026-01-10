@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { getAllClaims } from '@/lib/claims'; // du har denna redan
+import { getClaims } from '@/lib/claims';
+
 
 export const runtime = 'nodejs';
 
@@ -15,7 +16,7 @@ function toCsvRow(values: (string | number | null | undefined)[]) {
 
 export async function GET() {
   try {
-    const claims = await getAllClaims();
+    const claims = await getClaims();
 
     const headers = [
       'id',

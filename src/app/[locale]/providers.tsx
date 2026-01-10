@@ -1,4 +1,4 @@
-// src/app/[locale]/Providers.tsx (eller var den ligger)
+// src/app/[locale]/providers.tsx
 "use client";
 
 import { NextIntlClientProvider } from "next-intl";

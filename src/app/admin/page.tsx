@@ -3,8 +3,10 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
+const ENABLE_QUICK_STATUS = false;
+
 type ClaimAdmin = {
-  id: string; // receivedAt
+  id: string; // receivedAt (primary key used in API)
   flightNumber: string;
   date: string;
   from: string;
@@ -13,44 +15,67 @@ type ClaimAdmin = {
   email: string;
   bookingNumber: string;
   receivedAt: string;
-  statusInternal: string; // new | processing | sent_to_airline | paid_out | rejected
-  statusLabel: string;    // svensk label
-  connections: string[];  // mellanlandningar
+  statusInternal: string; // new | processing | sent_to_airline | approved | paid_out | rejected
+  statusLabel: string; // svensk label
+  connections: string[]; // mellanlandningar
   attachmentsCount: number; // antal bilagor
+  payoutDetailsSubmittedAt?: string | null;
+  payoutIbanLast4?: string | null;
 };
 
 const STATUS_OPTIONS: { value: string; label: string }[] = [
-  { value: 'new', valueLabel: 'Obehandlad' },
-  { value: 'processing', valueLabel: 'Under behandling' },
-  { value: 'sent_to_airline', valueLabel: 'Skickat till flygbolaget' },
-  { value: 'paid_out', valueLabel: 'Ersättning utbetald' },
-  { value: 'rejected', valueLabel: 'Avslaget' },
-].map((s) => ({ value: s.value, label: s.valueLabel }));
+  { value: 'new', label: 'Obehandlad' },
+  { value: 'processing', label: 'Under behandling' },
+  { value: 'sent_to_airline', label: 'Skickat till flygbolaget' },
+  { value: 'approved', label: 'Ersättning godkänd' },
+  { value: 'paid_out', label: 'Ersättning utbetald' },
+  { value: 'rejected', label: 'Avslag' },
+];
 
 export default function AdminPage() {
   const [claims, setClaims] = useState<ClaimAdmin[]>([]);
   const [loading, setLoading] = useState(true);
   const [savingId, setSavingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [emailInfoId, setEmailInfoId] = useState<string | null>(null); // visar “mail skickat”
+  const [emailInfoId, setEmailInfoId] = useState<string | null>(null);
   const [search, setSearch] = useState('');
+  const [showArchived, setShowArchived] = useState(false);
 
   useEffect(() => {
-    const load = async () => {
-      try {
-        const res = await fetch('/api/admin/claims', { cache: 'no-store' });
-        if (!res.ok) throw new Error('Kunde inte hämta ärenden');
-        const data = (await res.json()) as ClaimAdmin[];
-        setClaims(data);
-      } catch (e: any) {
-        console.error(e);
-        setError(e?.message ?? 'Tekniskt fel.');
-      } finally {
-        setLoading(false);
-      }
-    };
-    load();
-  }, []);
+  const load = async () => {
+    try {
+      setLoading(true);
+
+      const endpoint = showArchived
+        ? '/api/admin/archived-claims'
+        : '/api/admin/claims';
+
+      const res = await fetch(endpoint, { cache: 'no-store' });
+      if (!res.ok) throw new Error('Kunde inte hämta ärenden');
+
+      const data = (await res.json()) as any[];
+
+// 🔑 normalisera – id MÅSTE alltid finnas
+const normalized: ClaimAdmin[] = data.map((c, i) => ({
+  ...c,
+  id: c.id ?? c.receivedAt ?? `row-${i}`,
+}));
+
+setClaims(normalized);
+    } catch (e: any) {
+      console.error(e);
+      setError(e?.message ?? 'Tekniskt fel.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  load();
+}, [showArchived]);
+
+const handleDownloadCsv = () => {
+  window.open('/api/admin/export-csv', '_blank', 'noopener,noreferrer');
+};
 
   const filteredClaims = useMemo(() => {
     if (!search.trim()) return claims;
@@ -93,17 +118,12 @@ export default function AdminPage() {
       const data = await res.json().catch(() => ({}));
       const emailSent = !!data.emailSent;
 
-      // uppdatera lokalt
       setClaims((prev) =>
         prev.map((c) =>
           c.id === id
-            ? {
-                ...c,
-                statusInternal: status,
-                statusLabel: statusLabelSv(status),
-              }
-            : c,
-        ),
+            ? { ...c, statusInternal: status, statusLabel: statusLabelSv(status) }
+            : c
+        )
       );
 
       if (emailSent) {
@@ -119,6 +139,96 @@ export default function AdminPage() {
       setSavingId(null);
     }
   }
+
+  async function archiveClaim(id: string) {
+    const ok = window.confirm(
+      'Arkivera ärendet?\n\nDetta tar bort ärendet från listan men kan återställas senare.'
+    );
+    if (!ok) return;
+
+    try {
+      setSavingId(id);
+      setError(null);
+
+      const res = await fetch('/api/admin/archive-claim', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Kunde inte arkivera ärendet');
+      }
+
+      // UX: ta bort direkt ur listan
+      setClaims((prev) => prev.filter((c) => c.id !== id));
+    } catch (e: any) {
+      console.error(e);
+      setError(e?.message ?? 'Tekniskt fel vid arkivering.');
+    } finally {
+      setSavingId(null);
+    }
+  }
+
+  async function unarchiveClaim(id: string) {
+    if (!id) {
+  setError('Missing id');
+  return;
+}
+    const ok = window.confirm(
+      'Återställa ärendet?\n\nDetta flyttar tillbaka ärendet till aktiva listan.'
+    );
+    if (!ok) return;
+
+    try {
+      setSavingId(id);
+      setError(null);
+
+      const res = await fetch('/api/admin/unarchive-claim', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Kunde inte återställa ärendet');
+      }
+
+      // UX: ta bort direkt ur arkivlistan (den flyttas till aktiva)
+      setClaims((prev) => prev.filter((c) => c.id !== id));
+    } catch (e: any) {
+      console.error(e);
+      setError(e?.message ?? 'Tekniskt fel vid återställning.');
+    } finally {
+      setSavingId(null);
+    }
+  }
+
+  async function resendPayoutLink(id: string) {
+  try {
+    setSavingId(id);
+    const res = await fetch('/api/admin/resend-payout-link', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, lang: 'sv' }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data?.error || 'Kunde inte skicka länk');
+
+    alert('✅ Payout-länk skickad igen');
+  } catch (e: any) {
+    alert(`❌ ${e?.message || 'Tekniskt fel'}`);
+  } finally {
+    setSavingId(null);
+  }
+}
+
+async function markAsPaidOut(id: string) {
+  await updateStatus(id, 'paid_out');
+}
 
   if (loading) {
     return (
@@ -155,8 +265,7 @@ export default function AdminPage() {
             </h1>
             <p className="text-[11px] text-slate-400 mt-1">
               {claims.length} ärenden totalt
-              {search.trim() &&
-                ` • ${filteredClaims.length} matchar sökningen`}
+              {search.trim() && ` • ${filteredClaims.length} matchar sökningen`}
             </p>
           </div>
           <div className="hidden sm:flex items-center gap-2 text-[11px] text-slate-400">
@@ -188,6 +297,21 @@ export default function AdminPage() {
               className="w-full rounded-md border border-slate-700 bg-slate-900/80 px-3 py-1.5 text-[13px] text-slate-50 placeholder:text-slate-500 outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500/60"
             />
           </div>
+
+          <button
+            type="button"
+            onClick={() => setShowArchived((v) => !v)}
+            className="rounded-full border border-slate-700 bg-slate-900/80 px-3 py-2 text-[11px] font-semibold text-slate-100 hover:bg-slate-900 whitespace-nowrap"
+          >
+            {showArchived ? 'Visa aktiva' : 'Visa arkiverade'}
+          </button>
+<button
+  type="button"
+  onClick={handleDownloadCsv}
+  className="inline-flex items-center gap-2 rounded-xl border border-slate-700/60 bg-slate-900/60 px-3 py-2 text-sm font-semibold text-slate-100 hover:bg-slate-900"
+>
+  Ladda ner CSV
+</button>
 
           <div className="text-[11px] text-slate-400">
             <p>
@@ -222,6 +346,7 @@ export default function AdminPage() {
                 <Th>Åtgärd</Th>
               </tr>
             </thead>
+
             <tbody className="divide-y divide-slate-900/70">
               {filteredClaims.map((c, rowIdx) => {
                 const isSaving = savingId === c.id;
@@ -229,16 +354,15 @@ export default function AdminPage() {
 
                 const connectionsText =
                   c.connections && c.connections.length > 0
-                    ? c.connections
-                        .filter((x) => x && x.trim().length > 0)
-                        .join(', ')
+                    ? c.connections.filter((x) => x?.trim()).join(', ')
                     : '—';
 
                 const statusBadge = getStatusBadge(c.statusInternal);
 
                 return (
-                  <tr
-                    key={c.id}
+                  <tr key={`${c.receivedAt}-${rowIdx}`}
+
+
                     className={
                       rowIdx % 2 === 0
                         ? 'bg-slate-950/40 hover:bg-slate-900/60'
@@ -255,9 +379,7 @@ export default function AdminPage() {
 
                     <Td>
                       <div className="flex flex-col">
-                        <span className="font-medium text-slate-50">
-                          {c.name}
-                        </span>
+                        <span className="font-medium text-slate-50">{c.name}</span>
                       </div>
                     </Td>
 
@@ -292,6 +414,7 @@ export default function AdminPage() {
                         <span className="font-mono text-[11px] text-slate-100">
                           {c.bookingNumber}
                         </span>
+
                         <span className="inline-flex items-center gap-1 text-[11px]">
                           <span
                             className={
@@ -322,6 +445,11 @@ export default function AdminPage() {
                           <span className="h-1.5 w-1.5 rounded-full bg-current" />
                           <span>{c.statusLabel}</span>
                         </span>
+                        {needsPayoutDetails(c) && (
+  <span className="ml-2 inline-flex whitespace-nowrap rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-800">
+    Väntar på kontouppgifter
+  </span>
+)}
 
                         {/* Select för ändring */}
                         <select
@@ -334,12 +462,10 @@ export default function AdminPage() {
                                   ? {
                                       ...x,
                                       statusInternal: e.target.value,
-                                      statusLabel: statusLabelSv(
-                                        e.target.value,
-                                      ),
+                                      statusLabel: statusLabelSv(e.target.value),
                                     }
-                                  : x,
-                              ),
+                                  : x
+                              )
                             )
                           }
                         >
@@ -350,11 +476,20 @@ export default function AdminPage() {
                           ))}
                         </select>
 
-                        {isSaving && (
-                          <span className="text-[10px] text-amber-300">
-                            Sparar…
-                          </span>
+                        {/* (Avstängt) */}
+                        {ENABLE_QUICK_STATUS && (
+                          <QuickStatusButtons
+                            id={c.id}
+                            currentStatus={c.statusInternal}
+                            isSaving={isSaving}
+                            onSetStatus={(id, status) => updateStatus(id, status)}
+                          />
                         )}
+
+                        {isSaving && (
+                          <span className="text-[10px] text-amber-300">Sparar…</span>
+                        )}
+
                         {showEmailInfo && !isSaving && (
                           <span className="text-[10px] text-emerald-300 flex items-center gap-1">
                             <span>📨</span>
@@ -367,14 +502,55 @@ export default function AdminPage() {
                     <Td>
                       <button
                         type="button"
-                        onClick={() => updateStatus(c.receivedAt, c.statusInternal)}
+                        onClick={() => updateStatus(c.id, c.statusInternal)}
                         disabled={savingId === c.id}
                         className="rounded-full bg-sky-500 px-3 py-1 text-[11px] font-semibold text-slate-950 shadow-sm hover:bg-sky-400 disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap"
                       >
-                        {savingId === c.id
-                          ? 'Sparar…'
-                          : 'Spara & skicka mail'}
+                        {savingId === c.id ? 'Sparar…' : 'Spara & skicka mail'}
                       </button>
+                        {canResendPayoutLink(c) && (
+  <button
+    type="button"
+    disabled={savingId === c.id}
+    onClick={() => resendPayoutLink(c.id)}
+    className="mt-2 inline-flex items-center rounded-lg border border-amber-400/60 bg-amber-500/10 px-3 py-1.5 text-xs font-semibold text-amber-200 hover:bg-amber-500/15 disabled:opacity-50"
+  >
+    Skicka payout-länk igen
+  </button>
+)}
+
+{canMarkPaidOut(c) && (
+  <button
+    type="button"
+    disabled={savingId === c.id}
+    onClick={() => markAsPaidOut(c.id)}
+    className="mt-2 inline-flex items-center rounded-lg border border-emerald-400/60 bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold text-emerald-200 hover:bg-emerald-500/15 disabled:opacity-50"
+  >
+    Markera utbetalt
+  </button>
+)}
+
+                      {!showArchived && (
+                        <button
+                          type="button"
+                          onClick={() => archiveClaim(c.receivedAt)}
+                          disabled={savingId === c.id}
+                          className="mt-2 rounded-full border border-rose-400/60 px-3 py-1 text-[11px] font-semibold text-rose-300 hover:bg-rose-500/10 disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap"
+                        >
+                          Arkivera
+                        </button>
+                      )}
+
+                      {showArchived && (
+                        <button
+                          type="button"
+                          onClick={() => unarchiveClaim(c.receivedAt)}
+                          disabled={savingId === c.id}
+                          className="mt-2 rounded-full border border-emerald-400/60 px-3 py-1 text-[11px] font-semibold text-emerald-300 hover:bg-emerald-500/10 disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap"
+                        >
+                          Återställ
+                        </button>
+                      )}
                     </Td>
                   </tr>
                 );
@@ -420,10 +596,7 @@ function Td({
   colSpan?: number;
 }) {
   return (
-    <td
-      className="px-3 py-2 align-top text-[11px] text-slate-50"
-      colSpan={colSpan}
-    >
+    <td className="px-3 py-2 align-top text-[11px] text-slate-50" colSpan={colSpan}>
       {children}
     </td>
   );
@@ -437,47 +610,89 @@ function statusLabelSv(status: string): string {
       return 'Under behandling';
     case 'sent_to_airline':
       return 'Skickat till flygbolaget';
+    case 'approved':
+      return 'Ersättning godkänd';
     case 'paid_out':
       return 'Ersättning utbetald';
     case 'rejected':
-      return 'Avslaget';
+      return 'Avslag';
     default:
       return status;
   }
 }
 
 function getStatusBadge(status: string): { className: string } {
-  // styr bara färg på badge via Tailwind-klasser
   switch (status) {
     case 'new':
-      return {
-        className:
-          'bg-slate-900/80 text-slate-100 border border-slate-600/80',
-      };
+      return { className: 'bg-slate-900/80 text-slate-100 border border-slate-600/80' };
     case 'processing':
-      return {
-        className:
-          'bg-amber-500/10 text-amber-200 border border-amber-400/70',
-      };
+      return { className: 'bg-amber-500/10 text-amber-200 border border-amber-400/70' };
     case 'sent_to_airline':
-      return {
-        className:
-          'bg-sky-500/10 text-sky-200 border border-sky-400/70',
-      };
+      return { className: 'bg-sky-500/10 text-sky-200 border border-sky-400/70' };
+    case 'approved':
+      return { className: 'bg-violet-500/10 text-violet-200 border border-violet-400/70' };
     case 'paid_out':
-      return {
-        className:
-          'bg-emerald-500/15 text-emerald-200 border border-emerald-400/70',
-      };
+      return { className: 'bg-emerald-500/15 text-emerald-200 border border-emerald-400/70' };
     case 'rejected':
-      return {
-        className:
-          'bg-rose-500/10 text-rose-200 border border-rose-400/70',
-      };
+      return { className: 'bg-rose-500/10 text-rose-200 border border-rose-400/70' };
     default:
-      return {
-        className:
-          'bg-slate-900/80 text-slate-100 border border-slate-600/80',
-      };
+      return { className: 'bg-slate-900/80 text-slate-100 border border-slate-600/80' };
   }
+}
+
+function canResendPayoutLink(c: ClaimAdmin) {
+  return c.statusInternal === 'approved' && !c.payoutDetailsSubmittedAt;
+}
+
+function canMarkPaidOut(c: ClaimAdmin) {
+  return c.statusInternal === 'approved' && !!c.payoutDetailsSubmittedAt;
+}
+
+
+function needsPayoutDetails(c: ClaimAdmin) {
+  return (
+    c.statusInternal === 'approved' &&
+    !c.payoutDetailsSubmittedAt
+  );
+}
+/* ===== Quick status buttons (feature flag) ===== */
+/* (Kvar för framtiden, men avstängt med ENABLE_QUICK_STATUS=false) */
+function QuickStatusButtons({
+  id,
+  currentStatus,
+  isSaving,
+  onSetStatus,
+}: {
+  id: string;
+  currentStatus: string;
+  isSaving: boolean;
+  onSetStatus: (id: string, status: string) => void;
+}) {
+ const ACTIONS: { status: string; label: string }[] = [
+  { status: 'processing', label: 'Under behandling' },
+  { status: 'sent_to_airline', label: 'Skickat' },
+  { status: 'approved', label: 'Godkänd' },
+  { status: 'paid_out', label: 'Utbetald' },
+  { status: 'rejected', label: 'Avslag' },
+];
+
+  return (
+    <div className="mt-2 flex flex-wrap gap-2">
+      {ACTIONS.map((a) => {
+        const active = currentStatus === a.status;
+        return (
+          <button
+            key={a.status}
+            type="button"
+            onClick={() => onSetStatus(id, a.status)}
+            disabled={isSaving || active}
+            className="rounded-full border border-slate-700 bg-slate-950/60 px-2.5 py-1 text-[10px] font-semibold text-slate-200 hover:bg-slate-900/70 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+            title="Spara + skicka statusmail"
+          >
+            {a.label}
+          </button>
+        );
+      })}
+    </div>
+  );
 }

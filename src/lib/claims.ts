@@ -34,6 +34,18 @@ export type Claim = {
   status: string;                         // DB: status
   updatedAt: string;                      // DB: updated_at (ISO)
 
+    // Payout (bank details)
+  payoutAccountHolder?: string | null;        // DB: payout_account_holder
+  payoutIban?: string | null;                  // DB: payout_iban
+  payoutIbanLast4?: string | null;             // DB: payout_iban_last4
+  payoutDetailsSubmittedAt?: string | null;    // DB: payout_details_submitted_at
+
+  payoutToken?: string | null;
+  payoutTokenCreatedAt?: string | null;
+  payoutTokenExpiresAt?: string | null;
+
+  
+
   // Bilagor
   attachments?: Attachment[];             // DB: attachments (jsonb)
 
@@ -58,6 +70,21 @@ type ClaimRow = {
   status: string;
   updated_at: string;
   attachments: Attachment[] | null;
+
+  payout_account_holder: string | null;
+  payout_iban: string | null;
+  payout_iban_last4: string | null;
+  payout_details_submitted_at: string | null;
+  payoutToken?: string | null;
+  payoutTokenCreatedAt?: string | null;
+  payoutTokenExpiresAt?: string | null;
+  payout_token: string | null;
+  payout_token_created_at: string | null;
+  payout_token_expires_at: string | null;
+
+  payoutAccountHolder?: string | null;
+  payoutIbanLast4?: string | null;
+  payoutDetailsSubmittedAt?: string | null;
 
   viewer_token: string | null;
   viewer_token_created_at: string | null;
@@ -85,6 +112,16 @@ function fromRow(r: ClaimRow): Claim {
     viewerTokenCreatedAt: r.viewer_token_created_at,
     phone: r.phone,
     sentToAirlineAt: r.sent_to_airline_at,
+    payoutAccountHolder: r.payout_account_holder,
+    payoutIban: r.payout_iban,
+    payoutIbanLast4: r.payout_iban_last4,
+    payoutDetailsSubmittedAt: r.payout_details_submitted_at,
+    payoutToken: r.payout_token,
+payoutTokenCreatedAt: r.payout_token_created_at,
+payoutTokenExpiresAt: r.payout_token_expires_at,
+
+  
+
   };
 }
 
@@ -134,6 +171,7 @@ export async function getClaims(): Promise<Claim[]> {
   const { data, error } = await sb
     .from('claims')
     .select('*')
+    .is('archived_at', null) // 👈 HÄR: visa bara ej arkiverade
     .order('updated_at', { ascending: false });
 
   if (error) throw error;
@@ -215,6 +253,9 @@ export async function addClaim(input: {
 /**
  * Uppdatera status (new/processing/sent_to_airline/paid_out/rejected …).
  */
+/**
+ * Uppdatera status (new/processing/sent_to_airline/paid_out/rejected …).
+ */
 export async function updateClaimStatus(
   id: string,
   newStatus: string
@@ -243,17 +284,86 @@ export async function updateClaimStatus(
   return fromRow(data);
 }
 
+export async function updateClaimPayoutDetails(
+  id: string,
+  input: { accountHolder: string; iban: string }
+): Promise<Claim> {
+  const sb = supabaseAdmin();
+
+  const nowIso = new Date().toISOString();
+  const cleanAccountHolder = input.accountHolder.trim();
+  const cleanIban = input.iban.replace(/\s+/g, '').toUpperCase();
+  const last4 = cleanIban.slice(-4);
+
+  const { data, error } = await sb
+    .from('claims')
+    .update({
+      payout_account_holder: cleanAccountHolder,
+      payout_iban: cleanIban,
+      payout_iban_last4: last4,
+      payout_details_submitted_at: nowIso,
+      updated_at: nowIso,
+    })
+    .eq('received_at', id)
+    .select('*')
+    .single<ClaimRow>();
+
+  if (error) throw error;
+  return fromRow(data);
+}
+export async function ensurePayoutToken(id: string): Promise<{ token: string; expiresAt: string }> {
+  const sb = supabaseAdmin();
+
+  // Hämta token-fält
+  const { data, error } = await sb
+    .from('claims')
+    .select('payout_token, payout_token_expires_at')
+    .eq('received_at', id)
+    .maybeSingle();
+
+  if (error) throw error;
+  if (!data) throw new Error('NOT_FOUND');
+
+  // Om token finns och inte gått ut → returnera
+  const existingToken = data.payout_token as string | null;
+  const existingExpires = data.payout_token_expires_at as string | null;
+
+  if (existingToken && existingExpires && new Date(existingExpires) > new Date()) {
+    return { token: existingToken, expiresAt: existingExpires };
+  }
+
+  // Skapa ny token (MVP: uuid är OK)
+  const token = crypto.randomUUID();
+  const now = new Date();
+  const expiresAt = new Date(now.getTime() + 1000 * 60 * 60 * 24 * 30).toISOString(); // 30 dagar
+
+  const { error: updErr } = await sb
+    .from('claims')
+    .update({
+      payout_token: token,
+      payout_token_created_at: now.toISOString(),
+      payout_token_expires_at: expiresAt,
+      updated_at: now.toISOString(),
+    })
+    .eq('received_at', id);
+
+  if (updErr) throw updErr;
+
+  return { token, expiresAt };
+}
+
 /**
  * Lägg till en bilaga i attachments-arrayen (jsonb).
  */
-export async function appendAttachment(id: string, att: Attachment): Promise<Claim> {
+export async function appendAttachment(
+  id: string,
+  att: Attachment
+): Promise<Claim> {
   const sb = supabaseAdmin();
 
   // 1) Hämta befintligt
   const current = await getClaimById(id);
   if (!current) {
-    // Viktigt: NOT_FOUND betyder att ID:t inte finns i DB.
-    // Kontrollera att du skickar rätt id (received_at) från /thanks vid upload.
     throw new Error('NOT_FOUND');
   }
 
@@ -270,18 +380,4 @@ export async function appendAttachment(id: string, att: Attachment): Promise<Cla
 
   if (error) throw error;
   return fromRow(data);
-}
-export async function getAllClaims() {
-  try {
-    const fs = await import('fs/promises');
-    const path = `${process.cwd()}/data/claims.json`;
-
-    const raw = await fs.readFile(path, 'utf8');
-    const data = JSON.parse(raw);
-
-    return Array.isArray(data) ? data : [];
-  } catch (e) {
-    console.error('getAllClaims error:', e);
-    return [];
-  }
 }
