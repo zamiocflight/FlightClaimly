@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { Link } from '../../i18n/navigation';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
 import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
+
 
 /* ---------- Form state ---------- */
 type FormState = {
@@ -278,14 +280,8 @@ export default function Home() {
     </Link>
   </nav>
 
-  {/* Språk – placeholder tills vidare */}
-  <button
-    type="button"
-    className="text-[14px] font-medium text-slate-500 hover:text-slate-900 transition-colors"
-    aria-label={t('header.language.aria')}
-  >
-    {t('header.language.label')}
-  </button>
+ <LanguageSwitcher />
+
 
   {/* Följ ärende */}
   {/* ✅ fc-track-btn = hook för DE-only CSS för att minska knappen */}
@@ -1298,5 +1294,67 @@ function IconStep3(props: React.SVGProps<SVGSVGElement>) {
         strokeLinecap="round"
       />
     </svg>
+  );
+}
+function LanguageSwitcher() {
+  const t = useTranslations();
+  const [open, setOpen] = React.useState(false);
+
+  const LOCALES = ['sv', 'en', 'da', 'de', 'pl', 'fi'] as const;
+
+  function currentLocale() {
+    if (typeof window === 'undefined') return 'sv';
+    const seg = window.location.pathname.split('/')[1];
+    return LOCALES.includes(seg as any) ? seg : 'sv';
+  }
+
+  const active = useLocale();
+
+  function go(nextLocale: string) {
+    if (typeof window === 'undefined') return;
+
+    const { pathname, search, hash } = window.location;
+    const re = new RegExp(`^\\/(${LOCALES.join('|')})(?=\\/|$)`, 'i');
+
+    const nextPath = re.test(pathname)
+      ? pathname.replace(re, `/${nextLocale}`)
+      : `/${nextLocale}${pathname.startsWith('/') ? '' : '/'}${pathname}`;
+
+    window.location.href = `${nextPath}${search}${hash}`;
+  }
+
+ return (
+  <div className="relative z-[60]">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="inline-flex items-center gap-2 text-[14px] font-medium text-slate-500 hover:text-slate-900 transition-colors"
+        aria-label={t('header.language.aria')}
+      >
+        {active.toUpperCase()}
+        <span className="text-slate-400">▾</span>
+      </button>
+
+      {open && (
+<div className="absolute right-0 mt-2 w-36 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg z-[60]">
+          {LOCALES.map((loc) => (
+            <button
+              key={loc}
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                go(loc);
+              }}
+              className={`w-full px-3 py-2 text-left text-sm hover:bg-slate-50 ${
+                loc === active ? 'font-semibold text-slate-900' : 'text-slate-700'
+              }`}
+              role="menuitem"
+            >
+              {loc.toUpperCase()}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
