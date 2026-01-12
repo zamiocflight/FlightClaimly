@@ -1,1073 +1,1078 @@
 {
   "errors": {
-    "sendFailed": "Couldn’t submit right now — please try again.",
-    "noClaimId": "No claim ID returned from the server.",
-    "network": "Network error. Please try again.",
-      "invalidFlightNumber": "Please enter a valid flight number (e.g. SK123)."
+    "sendFailed": "Konnte nicht gesendet werden. Bitte versuche es erneut.",
+    "noClaimId": "Keine Vorgangs-ID in der Antwort.",
+    "network": "Netzwerkfehler. Bitte versuche es erneut.",
+    "invalidFlightNumber": "Bitte gib eine gültige Flugnummer ein (z. B. SK123)."
   },
 
   "header": {
     "language": {
-      "label": "EN ▾",
-      "aria": "Change language"
+      "label": "DE ▾",
+      "aria": "Sprache wechseln"
     }
   },
 
   "mobileNav": {
-    "title": "Menu",
-    "openAria": "Open menu",
-    "openSr": "Open menu",
-    "closeAria": "Close menu"
+    "title": "Menü",
+    "openAria": "Menü öffnen",
+    "openSr": "Menü öffnen",
+    "closeAria": "Menü schließen"
   },
 
   "nav": {
-    "compensation": "Get compensation",
-    "delays": "Flight delays",
-    "cancellations": "Flight cancellations",
-    "rights": "Your rights",
+    "compensation": "Entschädigung erhalten",
+    "delays": "Flugverspätungen",
+    "cancellations": "Flugannullierungen",
+    "rights": "Deine Rechte",
     "faq": "FAQ",
-    "about": "About us",
-    "contact": "Contact",
-    "track": "Track claim",
-    "langLabel": "Language"
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "track": "Vorgang verfolgen",
+    "langLabel": "Sprache"
   },
 
   "track": {
-    "button": "Track claim",
-    "title": "Track your claim",
-    "description": "Enter the email address you used when you submitted your claim. If we find a match, we’ll send you a secure tracking link.",
-    "closeAria": "Close",
-    "emailLabel": "Email address",
-    "emailPlaceholder": "you@example.com",
-    "cancel": "Cancel",
-    "resend": "Didn’t receive it? Send again",
-    "send": "Send link",
-    "sending": "Sending…",
+    "button": "Vorgang verfolgen",
+    "title": "Verfolge deinen Vorgang",
+    "description": "Gib die E-Mail-Adresse ein, die du beim Einreichen deines Vorgangs verwendet hast. Wenn wir einen Vorgang finden, senden wir dir einen sicheren Link, über den du den Status verfolgen kannst.",
+    "closeAria": "Schließen",
+    "emailLabel": "E-Mail-Adresse",
+    "emailPlaceholder": "deine@mail.de",
+    "cancel": "Abbrechen",
+    "resend": "Link nicht gefunden? Erneut senden",
+    "send": "Link senden",
+    "sending": "Link wird gesendet…",
     "messages": {
-      "success": "If we find a claim connected to this email, we’ll send a secure tracking link within a few minutes.",
-      "errorGeneric": "Couldn’t send the link right now. Please try again in a moment.",
-      "errorTechnical": "Technical error — please try again in a moment."
+      "success": "Wenn wir einen Vorgang finden, der mit dieser E-Mail verknüpft ist, senden wir dir innerhalb weniger Minuten einen sicheren Tracking-Link.",
+      "errorGeneric": "Der Link konnte gerade nicht gesendet werden. Bitte versuche es in Kürze erneut.",
+      "errorTechnical": "Technischer Fehler – bitte versuche es in Kürze erneut."
     }
   },
 
   "sections": {
-    "readMore": "Learn more"
+    "readMore": "Mehr lesen"
   },
 
   "how": {
-    "badge": "How it works",
-    "title": "3 simple steps to compensation",
+    "badge": "So funktioniert’s",
+    "title": "Deine 3 einfachen Schritte zur Entschädigung",
     "desc": {
-      "before": "We keep it simple: you submit your flight, we handle the airline, and you receive compensation under",
-      "link": "EU261 passenger rights",
+      "before": "Wir machen den Prozess so einfach wie möglich: Du reichst deinen Flug ein, wir übernehmen den Streit mit der Airline und du bekommst die Entschädigung ausgezahlt gemäß",
+      "link": "deinen Rechten nach EU261",
       "after": "."
     },
-    "stepLabel": "Step {n}",
+    "stepLabel": "Schritt {n}",
     "steps": {
       "1": {
-        "title": "Submit your flight",
-        "body": "Enter your flight number, date and route. We run a quick pre-check and confirm whether your case may qualify under EU261."
+        "title": "Reiche deinen Flug ein",
+        "body": "Gib Flugnummer, Datum und Route an. Wir machen einen schnellen Vorabcheck und bestätigen, ob dein Vorgang gemäß EU261 voraussichtlich entschädigungsberechtigt ist."
       },
       "2": {
-        "title": "We handle the claim",
-        "body": "Add your details and documents. We contact the airline, manage the formal process, and keep you updated by email and on your claim page."
+        "title": "Wir treiben den Vorgang voran",
+        "body": "Du ergänzt deine Angaben und Anhänge. Wir kontaktieren die Airline, erledigen alles Formelle und halten dich unterwegs auf dem Laufenden."
       },
       "3": {
-        "title": "Get paid",
-        "body": "Once the airline pays, we transfer your compensation to you minus our fee. No result — no fee. You’ll always receive a clear payout summary."
+        "title": "Du erhältst deine Entschädigung",
+        "body": "Sobald die Airline zahlt, zahlen wir an dich aus – abzüglich unserer Gebühr. Kein Ergebnis – keine Gebühr."
       }
     }
   },
 
   "trustRow": {
-    "eu261": "EU261 rights",
-    "lowFee": "No win, no fee — low fee",
-    "gdpr": "GDPR-safe handling"
+    "eu261": "EU261-Rechte",
+    "lowFee": "No win, no fee – niedrige Gebühr",
+    "gdpr": "DSGVO-sichere Abwicklung"
   },
 
   "why": {
-    "title": "Why choose FlightClaimly?",
+    "title": "Warum FlightClaimly wählen?",
     "cards": {
       "peace": {
-        "badge": "Peace of mind",
-        "title": "We deal with the airline — you relax",
-        "body": "We handle all communication with the airline for you. No long email threads, no legal maze — just clear status updates so you can focus on life and your next trip."
+        "badge": "Sicherheit",
+        "title": "Wir übernehmen den Streit – du kannst dich entspannen",
+        "body": "Wir kümmern uns um den gesamten Kontakt mit der Airline und halten dich bis zum Abschluss auf dem Laufenden."
       },
       "fee": {
-        "badge": "Low fee",
-        "title": "You keep more than with competitors",
-        "body": "Our fee is among the lowest in the Nordics. Many competitors charge more or hide costs in the fine print. We keep it transparent so you keep a larger share of your compensation."
+        "badge": "Niedrigste Gebühr",
+        "title": "Mehr Geld in deiner Tasche",
+        "body": "Wir haben eine der niedrigsten Gebühren in Nordeuropa und sind vollkommen transparent."
       },
       "smart": {
         "badge": "Smart & fair",
-        "title": "Automated when possible — legal help when needed",
-        "body": "We use smart tech to speed up straightforward cases. If legal help is needed, we cover it up front and only deduct it if we win. You never pay out of pocket and always know the terms in advance."
+        "title": "Technologie + Jurist, wenn nötig",
+        "body": "Automatisiert, wo möglich, juristische Hilfe, wo erforderlich – ohne Risiko für dich."
       }
     }
   },
 
   "footer": {
-    "pitch": "We help passengers get the compensation they’re entitled to under EU261 — with no upfront costs, no hidden fees, and no legal hassle.",
+    "pitch": "Wir helfen Reisenden, die Entschädigung zu erhalten, auf die sie gemäß EU261 Anspruch haben – ohne Vorkosten.",
     "badges": {
-      "lowFee": "No win, no fee — low fee",
+      "lowFee": "No win, no fee – niedrige Gebühr",
       "eu": "EU261 / UK261",
-      "gdpr": "GDPR-compliant handling"
+      "gdpr": "DSGVO-konforme Abwicklung"
     },
     "columns": {
-      "services": "Services",
-      "company": "About FlightClaimly"
+      "services": "Leistungen",
+      "company": "Über FlightClaimly"
     },
     "links": {
-      "rightsLabel": "Your rights (EU261)",
-      "terms": "Terms",
-      "privacy": "Privacy"
+      "rightsLabel": "Deine Rechte (EU261)",
+      "terms": "Nutzungsbedingungen",
+      "privacy": "Datenschutzerklärung"
     },
     "bottom": {
-      "copyright": "© {year} FlightClaimly. All rights reserved.",
-      "disclaimer": "FlightClaimly is an independent service and not affiliated with airlines. We act on your behalf as a passenger."
+      "copyright": "© {year} FlightClaimly. Alle Rechte vorbehalten.",
+      "disclaimer": "FlightClaimly ist ein unabhängiger Anbieter und nicht mit den Fluggesellschaften verbunden."
     }
   },
 
   "hero": {
     "badges": {
       "eu": "EU261 / UK261",
-      "fee": "LOW FEE",
+      "fee": "NIEDRIGE GEBÜHR",
       "noWinNoFee": "NO WIN, NO FEE"
     },
-    "title": "Get up to €600 compensation for delayed or cancelled flights — without the hassle.",
+    "title": "Erhalte bis zu 600 € Entschädigung für verspätete oder annullierte Flüge – ohne Stress.",
     "subtitle": {
-      "beforeDelayed": "Check if your",
-      "delayedLink": "delayed flight",
-      "between": "or",
-      "cancelledLink": "cancelled flight",
-      "afterCancelled": "qualifies for compensation under",
+      "beforeDelayed": "Prüfe, ob dein",
+      "delayedLink": "verspäteter Flug",
+      "between": "oder",
+      "cancelledLink": "annullierter Flug",
+      "afterCancelled": "dir eine Entschädigung gemäß",
       "eu261Link": "EU261",
-      "afterEu261": ". We handle your claim with the airline — you only pay if you get paid."
+      "afterEu261": "einbringt. Wir helfen dir, die Entschädigung von der Airline einzufordern – du zahlst nur, wenn du Geld ausgezahlt bekommst."
     },
-    "cta": "Check my flight now",
+    "cta": "Jetzt Flug prüfen",
     "trust": {
-      "beforeLink": "Takes about 2 minutes. No payment unless you receive compensation —",
-      "link": "learn more about our fee.",
+      "beforeLink": "Dauert ca. 2 Minuten. Nichts zu zahlen, wenn du keine Entschädigung erhältst –",
+      "link": "mehr über unsere Gebühr erfahren.",
       "afterLink": ""
     }
   },
 
   "precheck": {
     "steps": {
-      "step1": "Check your flight",
-      "step2": "Enter your details"
+      "step1": "Flug prüfen",
+      "step2": "Deine Daten eingeben"
     },
     "quick": {
-      "title": "Quick eligibility check",
-      "descBeforeLink": "Enter your flight details — we’ll quickly estimate whether you may be entitled to compensation under",
+      "title": "Schneller Vorabcheck",
+      "descBeforeLink": "Gib deinen Flug ein – wir prüfen kurz, ob du gemäß",
       "eu261Link": "EU261",
-      "descAfterLink": ".",
+      "descAfterLink": "Anspruch auf Entschädigung haben könntest.",
       "labels": {
-        "flightNumber": "Flight number",
-        "date": "Date",
-        "from": "From",
-        "to": "To",
-        "connectionTitle": "Connection",
-        "direct": "Direct flight",
-        "withConnection": "With a connection"
+        "flightNumber": "Flugnummer",
+        "date": "Datum",
+        "from": "Von",
+        "to": "Nach",
+        "connectionTitle": "Zwischenstopp",
+        "direct": "Direktflug",
+        "withConnection": "Mit Zwischenstopp"
       },
       "placeholders": {
-        "flightNumber": "e.g. SK1420",
+        "flightNumber": "z. B. SK1420",
         "from": "CPH",
         "to": "ARN",
-        "connection": "e.g. FRA, DOH or Paris CDG"
+        "connection": "z. B. FRA, DOH oder Paris CDG"
       },
       "actions": {
-        "remove": "Remove",
-        "addAirport": "+ Add another airport"
+        "remove": "Entfernen",
+        "addAirport": "+ Weiteren Flughafen hinzufügen"
       },
       "submit": {
-        "default": "Check my flight",
-        "checking": "Checking…"
+        "default": "Meinen Flug prüfen",
+        "checking": "Wird geprüft…"
       }
     },
     "details": {
-      "goodNewsStrong": "Good news!",
-      "goodNewsText": "It looks like your flight may qualify for compensation under EU261. Enter your details and we’ll take it from here.",
-      "title": "Your details",
+      "goodNewsStrong": "Gute Nachrichten!",
+      "goodNewsText": "Vieles spricht dafür, dass dein Flug gemäß EU261 entschädigungsberechtigt sein könnte.",
+      "title": "Deine Angaben",
       "labels": {
-        "fullName": "Full name",
-        "email": "Email",
-        "phone": "Phone number",
-        "bookingNumber": "Booking reference"
+        "fullName": "Vollständiger Name",
+        "email": "E-Mail",
+        "phone": "Telefonnummer",
+        "bookingNumber": "Buchungsnummer"
       },
       "placeholders": {
-        "fullName": "Your name",
-        "email": "you@email.com",
-        "phone": "+44 20 1234 5678",
+        "fullName": "Dein Name",
+        "email": "deine@mail.de",
+        "phone": "+49 151 234 56 78",
         "bookingNumber": "ABC123"
       },
       "submit": {
-        "default": "Submit my claim",
-        "sending": "Submitting your claim…"
+        "default": "Vorgang einreichen",
+        "sending": "Vorgang wird gesendet…"
       },
       "consent": {
-        "before": "By submitting, you agree to our",
-        "terms": "Terms",
-        "and": "&",
-        "privacy": "Privacy",
-        "after": "."
+        "before": "Durch das Absenden stimmst du unseren",
+        "terms": "Nutzungsbedingungen",
+        "and": "und der",
+        "privacy": "Datenschutzerklärung",
+        "after": "zu."
       },
       "trust": {
-        "gdpr": "GDPR-ready",
+        "gdpr": "DSGVO-konform",
         "noWinNoFee": "No win, no fee",
-        "fastHandling": "Fast handling"
+        "fastHandling": "Schnelle Bearbeitung"
       }
     }
   },
 
   "faq": {
-      "meta": {
-    "title": "Frequently asked questions about flight compensation | FlightClaimly",
-    "description": "Answers to common questions about EU261, flight delays, cancellations, compensation amounts, and how FlightClaimly helps you claim what you are owed."
-  },
+    "meta": {
+      "title": "Häufige Fragen zur Flugentschädigung | FlightClaimly",
+      "description": "Antworten auf häufige Fragen zu EU261, Flugverspätungen, Flugannullierungen, Entschädigung und wie FlightClaimly dir hilft, die richtige Entschädigung zu erhalten."
+    },
     "badge": "FAQ",
-    "title": "Frequently asked questions about flight compensation",
-    "intro": "Here we’ve collected answers to the most common questions about compensation for delayed or cancelled flights and how FlightClaimly works.",
+    "title": "Häufige Fragen zur Flugentschädigung",
+    "intro": "Hier haben wir Antworten auf die häufigsten Fragen zur Entschädigung bei verspäteten oder annullierten Flügen und dazu, wie FlightClaimly funktioniert, gesammelt.",
     "jsonld": {
-      "eligibilityAnswer": "As a general rule, you may be eligible for compensation if you arrived at your final destination more than three hours late, your flight was cancelled on short notice, you were denied boarding despite a valid ticket, and the trip departed from the EU or was operated by an EU carrier.",
-      "securityAnswer": "Yes. We use your information only to handle your case and meet legal obligations. More details are available in our privacy policy."
+      "eligibilityAnswer": "Grundsätzlich kannst du Anspruch auf Entschädigung haben, wenn du mehr als drei Stunden verspätet am Endziel ankommst, der Flug kurzfristig annulliert wurde, dir trotz gültigem Ticket die Beförderung verweigert wurde und die Reise in der EU startete oder von einer EU-Airline durchgeführt wurde.",
+      "securityAnswer": "Ja. Wir verwenden deine Daten ausschließlich zur Bearbeitung deines Vorgangs und zur Erfüllung rechtlicher Pflichten. Weitere Informationen findest du in unserer Datenschutzerklärung."
     },
     "items": {
       "eu261": {
-        "q": "What is flight compensation under EU261?",
-        "a": "EU261 is an EU regulation that gives passengers the right to financial compensation when flights are heavily delayed, cancelled, or when boarding is denied, under certain conditions. The compensation level depends on factors such as flight distance."
+        "q": "Was ist Flugentschädigung nach EU261?",
+        "a": "EU261 ist eine EU-Verordnung, die Fluggästen unter bestimmten Voraussetzungen einen Anspruch auf finanzielle Entschädigung bei starken Verspätungen, Annullierungen oder Nichtbeförderung einräumt. Die Höhe der Entschädigung hängt unter anderem von der Flugstrecke ab."
       },
       "eligibility": {
-        "q": "When am I entitled to compensation?",
-        "lead": "As a general rule, you may be entitled to compensation if:",
+        "q": "Wann habe ich Anspruch auf Entschädigung?",
+        "lead": "Grundsätzlich kannst du Anspruch auf Entschädigung haben, wenn:",
         "bullets": [
-          "you arrived at your final destination more than 3 hours late",
-          "your flight was cancelled on short notice",
-          "you were denied boarding despite a valid ticket",
-          "the trip departed from an EU country or was operated by an EU airline"
+          "du mehr als 3 Stunden verspätet am Endziel ankommst",
+          "der Flug kurzfristig annulliert wurde",
+          "dir trotz gültigem Ticket die Beförderung verweigert wurde",
+          "die Reise in einem EU-Land startete oder von einer EU-Fluggesellschaft durchgeführt wurde"
         ]
       },
-     "amount": {
-  "q": "How much money can I receive?",
-  "lead": "Compensation under EU261 is typically between",
-  "highlight": "€250 and €600 per person",
-  "tail": ", depending on the flight distance and the type of journey.",
-  "a": "Compensation under EU261 is typically between €250 and €600 per person, depending on the flight distance and the type of journey."
-},
+      "amount": {
+        "q": "Wie viel Geld kann ich erhalten?",
+        "lead": "Die Entschädigung nach EU261 liegt normalerweise zwischen",
+        "highlight": "250 € und 600 € pro Person",
+        "tail": ", abhängig von der Flugstrecke und der Art der Reise.",
+        "a": "Die Entschädigung nach EU261 liegt normalerweise zwischen 250 € und 600 € pro Person, abhängig von der Flugstrecke und der Art der Reise."
+      },
       "perPerson": {
-        "q": "Is compensation per person or per booking?",
-        "a": "Compensation is paid per passenger, not per booking. If you’re travelling as a group, the total amount can therefore be significant."
+        "q": "Gilt die Entschädigung pro Person oder pro Buchung?",
+        "a": "Die Entschädigung gilt pro Passagier, nicht pro Buchung. Seid ihr mehrere Personen, kann die Gesamtsumme daher erheblich sein."
       },
       "timeLimit": {
-        "q": "How far back can I claim compensation?",
-        "a": "It depends on which country’s rules apply, but in many cases you can claim compensation several years after the travel date."
+        "q": "Wie lange rückwirkend kann ich Entschädigung verlangen?",
+        "a": "Das hängt davon ab, welches Land anwendbar ist – in vielen Fällen kannst du mehrere Jahre nach dem Reisedatum Entschädigung verlangen."
       },
       "cause": {
-        "q": "Does it matter what caused the delay?",
-        "a": "Yes. The airline may avoid paying compensation if the disruption was caused by so-called “extraordinary circumstances”."
+        "q": "Spielt es eine Rolle, was die Verspätung verursacht hat?",
+        "a": "Ja. Die Fluggesellschaft kann von der Zahlung befreit sein, wenn sogenannte „außergewöhnliche Umstände“ vorliegen."
       },
       "businessModel": {
-        "q": "How does FlightClaimly make money?",
-        "lead": "We operate on a",
+        "q": "Wie verdient FlightClaimly Geld?",
+        "lead": "Wir arbeiten nach dem Prinzip",
         "highlight": "no win, no fee",
-        "a": "FlightClaimly works on a no win, no fee basis. It costs nothing to submit a case, and we only charge a percentage of the compensation you actually receive."
+        "a": "FlightClaimly arbeitet nach dem Prinzip no win, no fee. Das Einreichen eines Vorgangs ist kostenlos, und wir berechnen nur eine prozentuale Gebühr von der Entschädigung, die du tatsächlich ausgezahlt bekommst."
       },
       "process": {
-        "q": "How does the process work in practice?",
-        "lead": "In short:",
+        "q": "Wie läuft der Prozess praktisch ab?",
+        "lead": "Kurz gesagt:",
         "steps": [
-          "you enter your flight details and personal information",
-          "we assess the case and contact the airline",
-          "we handle responses, objections, and any additional documentation",
-          "if we win, you receive your compensation"
+          "du gibst deinen Flug und deine Angaben ein",
+          "wir prüfen und kontaktieren die Fluggesellschaft",
+          "wir bearbeiten Antworten, Einwände und Nachforderungen",
+          "bei Erfolg bekommst du die Entschädigung ausgezahlt"
         ]
       },
       "timing": {
-        "q": "How long does it take to get an answer?",
-        "a": "Some cases are resolved in a few weeks, while others can take longer."
+        "q": "Wie lange dauert es, bis ich eine Antwort bekomme?",
+        "a": "Manche Vorgänge werden in wenigen Wochen gelöst, andere können länger dauern."
       },
       "documents": {
-        "q": "Which documents do I need?",
-        "lead": "The most important ones are:",
+        "q": "Welche Dokumente benötige ich?",
+        "lead": "Am wichtigsten sind:",
         "list": [
-          "booking confirmation",
-          "boarding pass",
-          "communication from the airline"
+          "Buchungsbestätigung",
+          "Boardingpass",
+          "Kommunikation der Fluggesellschaft"
         ]
       },
       "security": {
-        "q": "Is my information safe with you?",
-        "lead": "Yes. We use your information only to handle your case. More details are available in our",
-        "linkText": "privacy policy"
+        "q": "Sind meine Daten bei euch sicher?",
+        "lead": "Ja. Wir verwenden deine Daten ausschließlich zur Bearbeitung deines Vorgangs. Mehr dazu in unserer",
+        "linkText": "Datenschutzerklärung"
       },
       "contact": {
-        "q": "I can’t find the answer — what should I do?",
-        "lead": "Email us at"
+        "q": "Ich finde keine Antwort – was soll ich tun?",
+        "lead": "Schreib uns an"
       }
     },
     "footer": {
-      "lead": "Ready to see if your flight could qualify for compensation?",
-      "cta": "Check my flight"
+      "lead": "Bereit zu prüfen, ob dein Flug Anspruch auf Entschädigung hat?",
+      "cta": "Meinen Flug prüfen"
     }
   },
+
   "cancellations": {
-  "meta": {
-    "title": "Cancelled flight — compensation under EU261 | FlightClaimly",
-    "description": "Cancelled flight? Learn when you may be entitled to €250–€600 under EU261, the difference between rerouting and refunds, and how FlightClaimly handles your claim with the airline."
-  },
-  "badge": "Cancelled flights",
-  "title": "Cancelled flight — your rights to compensation under EU261",
-  "intro": "When a flight is cancelled, your entire trip is affected — sometimes with rerouting, sometimes with a ruined holiday or missed meetings. EU261 gives you strong rights for cancelled flights. Here we cover the basics and how FlightClaimly can help.",
-  "sections": {
-    "whenIsCancelled": {
-      "title": "When is a flight considered cancelled?",
-      "p1": "A flight is considered cancelled when the original flight is not operated and passengers either:",
-      "list": [
-        "are rebooked onto another flight, or",
-        "receive a refund instead of travelling"
-      ],
-      "note": "Major schedule changes can also be treated as a cancellation in practice — we’ll help assess that when you submit your claim."
-    },
-    "whenMoney": {
-      "title": "When can you receive financial compensation?",
-      "p1": "You may be entitled to compensation under EU261 if:",
-      "list": [
-        "the flight is cancelled on short notice (usually less than 14 days before departure)",
-        "the rerouting causes you to arrive significantly later than planned",
-        "the airline is responsible for the reason behind the cancellation"
-      ],
-      "note": "The exact rules depend on when you were informed and what alternative travel was offered. FlightClaimly helps you work out what applies in your case."
-    },
-    "amount": {
-      "title": "How much compensation can you receive?",
-      "p1": "The compensation amount depends on the flight distance and how much your journey is affected. Common fixed amounts under EU261 include:",
-      "list": [
-        "up to €250 for shorter flights (approx. 0–1,500 km)",
-        "up to €400 for mid-range flights within the EU or up to 3,500 km",
-        "up to €600 for longer international flights"
-      ],
-      "note": "Amounts may be reduced if the airline offers rerouting that gets you to your destination with only a small delay. We analyse this for you when you submit your claim."
-    },
-    "rerouteOrRefund": {
-      "title": "Rerouting or refund — you have the right to choose",
-      "p1": "When a flight is cancelled, you usually have the right to choose between:",
-      "list": [
-        "rerouting to a later flight as soon as possible, or",
-        "a refund of the ticket price for the segment you could not travel"
-      ],
-      "p2": "In some situations, you may also be entitled to reimbursement of extra costs — for example hotel or transport — if you are forced to stay longer at your destination."
-    },
-    "extraordinary": {
-      "title": "When can the airline refuse compensation?",
-      "p1": "The airline may avoid paying compensation if the cancellation was caused by “extraordinary circumstances”, for example:",
-      "list": [
-        "severe weather or natural disasters",
-        "security threats or airspace closures",
-        "strikes the airline cannot control"
-      ],
-      "p2": {
-        "before": "Technical issues, staff shortages or internal airline problems often do",
-        "strong": "not",
-        "after": "count as extraordinary circumstances. Many rejections are incorrect — we can help you push back."
-      }
-    },
-    "examples": {
-      "title": "Examples: when you may be entitled to compensation",
-      "list": [
-        "You’re notified 3 days before departure that your flight is cancelled, and the offered rerouting makes you arrive many hours later — compensation may apply.",
-        "The airline cancels your evening flight due to a technical issue and rebooks you to the next day — you may be entitled to both compensation and hotel.",
-        "Your flight is cancelled the same day without a clear explanation and you have to buy a new ticket with another airline — this may also qualify."
-      ]
-    },
-    "links": {
-      "title": "Want to go deeper into the rules?",
-      "p1": {
-        "before": "On the page",
-        "linkText": "Your rights",
-        "after": "you’ll find a broader overview of EU261 and which situations are covered."
-      },
-      "p2": {
-        "before": "You can also read our",
-        "linkText": "FAQ",
-        "after": "with short answers to common questions."
-      }
-    }
-  },
-  "footer": {
-    "lead": "Was your flight cancelled? Check if you could be entitled to up to €600 — it only takes a minute.",
-    "cta": "Check my flight"
-  }
-},
-"contact": {
     "meta": {
-  "title": "Contact FlightClaimly | Support and questions",
-  "description": "Contact FlightClaimly with questions about your case, EU261, or how the process works. We’ll get back to you as soon as possible."
-},
-  "badge": "Contact",
-  "title": "Contact FlightClaimly",
-  "intro": "Do you have questions about a claim, EU261 rules, or how the process works? You’re always welcome to get in touch. We’ll respond as quickly as we can.",
-  "email": {
-    "title": "Email",
-    "lead": "The easiest way to reach us is by email:",
-    "note": "We’ll get back to you as soon as possible. During busy periods, response times may be slightly longer."
-  },
-  "faq": {
-    "title": "Frequently asked questions",
-    "before": "Many questions are already answered in our ",
-    "link": "FAQ",
-    "after": ", where you’ll find clear answers about compensation, the process, and different situations."
-  },
-  "rights": {
-    "title": "Your rights",
-    "lead": "Want to learn more about your rights under EU261? Visit:",
-    "link": "Your rights"
-  },
-  "case": {
-    "title": "Do you have an ongoing claim?",
-    "p1": "You can track the status at any time using the link you received by email when you submitted your claim.",
-    "before": "Lost the link? No problem — email us at",
-    "after": "and we’ll send it again."
-  },
-  "footer": {
-    "lead": "Want to check if your flight qualifies for compensation? It only takes a minute.",
-    "cta": "Check my flight"
-  }
-},
-"compensation": {
-  "meta": {
-    "title": "EU261 compensation amounts – €250, €400 and €600 | FlightClaimly",
-    "description": "See which EU261/UK261 compensation amount you may be entitled to – €250, €400 or €600 per person depending on distance and delay."
-  },
-  "badge": "Compensation amounts",
-  "title": "EU261 compensation amounts – €250, €400 and €600",
-  "intro": "EU Regulation 261/2004 (“EU261”) provides fixed compensation levels when your flight is heavily delayed, cancelled or you are denied boarding.",
-  "sections": {
-    "overview": {
-      "title": "Quick overview — how much can you receive?",
-      "p1": {
-        "before": "Compensation under EU261 is usually between ",
-        "highlight": "€250 and €600 per person",
-        "after": ". The amount mainly depends on:"
-      },
-      "list": [
-        "the flight distance",
-        "whether the flight is within the EU or international",
-        "how much delay or disruption you experienced"
-      ],
-      "note": "Ticket price doesn’t matter — two passengers on the same flight usually receive the same compensation amount."
+      "title": "Flug annulliert – Entschädigung nach EU261 | FlightClaimly",
+      "description": "Flug annulliert? Erfahre, wann du Anspruch auf 250–600 € Entschädigung nach EU261 hast, den Unterschied zwischen Umbuchung und Erstattung und wie FlightClaimly deinen Anspruch gegenüber der Airline durchsetzt."
     },
-
-    "table": {
-      "title": "EU261 compensation levels",
-      "intro": "The amount mainly depends on flight distance and the type of disruption. The table below provides an overview.",
-      "head": {
-        "distance": "Distance",
-        "type": "When it applies",
-        "amount": "Compensation"
+    "badge": "Annullierte Flüge",
+    "title": "Flug annulliert – deine Rechte auf Entschädigung nach EU261",
+    "intro": "Wenn ein Flug annulliert wird, kann das die gesamte Reise durcheinanderbringen – manchmal mit Umbuchungen, manchmal mit einem ruinierten Urlaub oder verpassten Terminen. EU261 gibt dir starke Rechte bei annullierten Flügen. Hier erklären wir die Grundlagen und wie FlightClaimly dir helfen kann.",
+    "sections": {
+      "whenIsCancelled": {
+        "title": "Wann gilt ein Flug als annulliert?",
+        "p1": "Ein Flug gilt als annulliert, wenn der ursprünglich geplante Flug nicht durchgeführt wird und Passagiere entweder:",
+        "list": [
+          "auf einen anderen Flug umgebucht werden oder",
+          "statt zu reisen den Ticketpreis erstattet bekommen"
+        ],
+        "note": "Auch größere Flugplanänderungen können in der Praxis als Annullierung gelten – das helfen wir dir einzuschätzen, wenn du deinen Vorgang einreichst."
       },
-      "rows": [
-        {
-          "distance": "Up to 1,500 km",
-          "type": "Delay ≥ 3 hours / cancelled flight",
-          "amount": "€250"
-        },
-        {
-          "distance": "1,500–3,500 km",
-          "type": "Delay ≥ 3 hours / cancelled flight",
-          "amount": "€400"
-        },
-        {
-          "distance": "Over 3,500 km (within EU)",
-          "type": "Delay ≥ 3 hours / cancelled flight",
-          "amount": "€400"
-        },
-        {
-          "distance": "Over 3,500 km (outside EU)",
-          "type": "Delay ≥ 3 hours / cancelled flight",
-          "amount": "€600"
+      "whenMoney": {
+        "title": "Wann kannst du eine finanzielle Entschädigung erhalten?",
+        "p1": "Du kannst Anspruch auf Entschädigung nach EU261 haben, wenn:",
+        "list": [
+          "der Flug kurzfristig annulliert wird (oft weniger als 14 Tage vor Abflug)",
+          "die Umbuchung dazu führt, dass du deutlich später als geplant ankommst",
+          "die Fluggesellschaft für die Ursache der Annullierung verantwortlich ist"
+        ],
+        "note": "Die genauen Regeln hängen davon ab, wann du informiert wurdest und welche alternative Reise dir angeboten wurde. FlightClaimly hilft dir, zu berechnen, was in deinem Fall gilt."
+      },
+      "amount": {
+        "title": "Wie viel Entschädigung kannst du erhalten?",
+        "p1": "Die Höhe der Entschädigung hängt von der Flugstrecke ab und davon, wie stark deine Reise beeinträchtigt wurde. Übliche Pauschalbeträge nach EU261 sind:",
+        "list": [
+          "bis zu 250 € für kurze Flüge (ca. 0–1.500 km)",
+          "bis zu 400 € für mittlere Flüge innerhalb der EU oder bis 3.500 km",
+          "bis zu 600 € für längere internationale Flüge"
+        ],
+        "note": "Die Beträge können reduziert werden, wenn die Airline eine Umbuchung anbietet, mit der du nur relativ kurz verspätet ankommst. Wir analysieren das für dich, wenn du deinen Vorgang einreichst."
+      },
+      "rerouteOrRefund": {
+        "title": "Umbuchung oder Erstattung – du hast das Wahlrecht",
+        "p1": "Wenn ein Flug annulliert wird, hast du meist das Recht, zwischen Folgendem zu wählen:",
+        "list": [
+          "Umbuchung auf einen späteren Flug so schnell wie möglich oder",
+          "Erstattung des Ticketpreises für den Teil der Reise, den du nicht antreten konntest"
+        ],
+        "p2": "In bestimmten Situationen kannst du außerdem Anspruch auf Erstattung zusätzlicher Kosten haben, z. B. für Hotel oder Transport, wenn du länger bleiben musst."
+      },
+      "extraordinary": {
+        "title": "Wann kann die Airline die Entschädigung verweigern?",
+        "p1": "Die Airline kann von der Zahlung befreit sein, wenn die Annullierung auf „außergewöhnliche Umstände“ zurückzuführen ist, z. B.:",
+        "list": [
+          "schweres Unwetter oder Naturkatastrophen",
+          "Sicherheitsbedrohungen oder Luftraumsperrungen",
+          "Streiks, die die Airline nicht kontrollieren kann"
+        ],
+        "p2": {
+          "before": "Technische Defekte, Personalmangel oder interne Probleme der Airline gelten dagegen oft",
+          "strong": "nicht",
+          "after": "als außergewöhnliche Umstände. Viele Ablehnungen sind falsch – dabei helfen wir dir, weiterzugehen."
         }
-      ],
-      "note": "We help you determine whether your case qualifies for compensation."
-    },
-
-    "reduction": {
-      "title": "When can compensation be reduced?",
-      "p1": "If you are rebooked and arrive close to the original arrival time, the compensation may in some cases be reduced by 50%.",
-      "list": [
-        "Short distances: minor arrival delay",
-        "Medium distances: moderate arrival delay",
-        "Long distances: limited arrival delay"
-      ],
-      "note": "The assessment is always based on the actual arrival time and the airline’s actions."
-    },
-
-    "types": {
-      "title": "Which disruptions are covered?",
-      "p1": "EU261 may entitle you to compensation in cases such as:",
-      "list": [
-        "Delays (often ≥ 3 hours on arrival)",
-        "Cancelled flights",
-        "Denied boarding (overbooking)"
-      ],
-      "note": {
-        "before": "Read more about your rights on the page ",
-        "link": "Your rights"
+      },
+      "examples": {
+        "title": "Beispiele: wann du Anspruch auf Entschädigung haben könntest",
+        "list": [
+          "Du wirst 3 Tage vor Abflug informiert, dass dein Flug annulliert ist, und erhältst eine Umbuchung, bei der du viele Stunden später ankommst – eine Entschädigung kann in Frage kommen.",
+          "Die Airline annulliert deinen Abendflug wegen eines technischen Defekts und bucht dich auf den nächsten Tag um – du kannst sowohl Anspruch auf Entschädigung als auch auf ein Hotel haben.",
+          "Dein Flug wird am selben Tag ohne klare Begründung annulliert und du musst ein neues Ticket bei einer anderen Airline kaufen – auch das kann entschädigungsrelevant sein."
+        ]
+      },
+      "links": {
+        "title": "Möchtest du die Regeln vertiefen?",
+        "p1": {
+          "before": "Auf der Seite",
+          "linkText": "Deine Rechte",
+          "after": "findest du eine breitere Übersicht über EU261 und welche Situationen erfasst sind."
+        },
+        "p2": {
+          "before": "Du kannst auch unsere",
+          "linkText": "FAQ",
+          "after": "mit kurzen Antworten auf häufige Fragen lesen."
+        }
       }
     },
-
-    "examples": {
-      "title": "Examples",
-      "list": [
-        "Flight arrives 3h 20m late → may qualify for compensation.",
-        "Flight is cancelled on the day of departure → may qualify for compensation and rebooking.",
-        "You are denied boarding due to overbooking → may qualify for compensation."
-      ],
-      "note": "Eligibility depends on the reason for the disruption."
-    },
-
-    "myths": {
-      "title": "Common misconceptions",
-      "list": [
-        "It only applies if the ticket was bought directly from the airline.",
-        "You must complain at the airport immediately.",
-        "All delays qualify for compensation."
-      ],
-      "note": "We help you assess whether your case is eligible."
+    "footer": {
+      "lead": "Wurde dein Flug annulliert? Prüfe, ob du bis zu 600 € Entschädigung erhalten kannst – das dauert nur eine Minute.",
+      "cta": "Meinen Flug prüfen"
     }
   },
-  "footer": {
-    "lead": "Want to see which compensation amount could apply to your trip?",
-    "cta": "Check my flight"
-  }
-},
-"delays": {
-  "meta": {
-    "title": "Delayed flight – compensation under EU261 | FlightClaimly",
-    "description": "Delayed flight? See when you may be entitled to €250–€600 compensation under EU261/UK261, what counts as a major delay, and how FlightClaimly helps you pursue your claim."
+
+  "contact": {
+    "meta": {
+      "title": "FlightClaimly kontaktieren | Support und Fragen",
+      "description": "Kontaktiere FlightClaimly bei Fragen zu deinem Vorgang, EU261 oder dem Ablauf. Wir antworten so schnell wie möglich."
+    },
+    "badge": "Kontakt",
+    "title": "FlightClaimly kontaktieren",
+    "intro": "Hast du Fragen zu einem Vorgang, zu den EU261-Regeln oder dazu, wie der Prozess funktioniert? Du kannst dich jederzeit melden. Wir antworten so schnell wie möglich.",
+    "email": {
+      "title": "E-Mail",
+      "lead": "Am einfachsten erreichst du uns per E-Mail:",
+      "note": "Wir melden uns so bald wie möglich. Bei hoher Auslastung kann die Antwortzeit etwas länger sein."
+    },
+    "faq": {
+      "title": "Häufige Fragen",
+      "before": "Viele Fragen sind bereits in unseren ",
+      "link": "FAQ",
+      "after": "beantwortet. Dort findest du kurze und klare Antworten zu Entschädigung, Ablauf und dazu, was in verschiedenen Situationen gilt."
+    },
+    "rights": {
+      "title": "Deine Rechte",
+      "lead": "Möchtest du mehr darüber lesen, worauf du nach EU261 Anspruch hast? Besuche:",
+      "link": "Deine Rechte"
+    },
+    "case": {
+      "title": "Hast du einen laufenden Vorgang?",
+      "p1": "Du kannst den Status jederzeit über den Link verfolgen, den du per E-Mail erhalten hast, als du den Vorgang erstellt hast.",
+      "before": "Hast du den Link verloren? Kein Problem – schreib uns an",
+      "after": ", dann senden wir ihn erneut."
+    },
+    "footer": {
+      "lead": "Möchtest du prüfen, ob dein Flug Anspruch auf Entschädigung hat? Das dauert nur eine Minute.",
+      "cta": "Meinen Flug prüfen"
+    }
   },
-  "badge": "Flight delays",
-  "title": "Delayed flight — how to get compensation under EU261",
-  "intro": "A delayed flight can ruin plans, connections and holidays. EU261 gives you strong passenger rights — in many cases you may be entitled to compensation when you arrive late. Here are the basics.",
-  "sections": {
-    "when": {
-      "title": "When does a delay count as a major delay?",
-      "p1": {
-        "before": "Under EU261, it’s mainly the",
-        "highlight": "arrival time",
-        "after": "that matters. You may be entitled to compensation when you:"
+
+  "compensation": {
+    "meta": {
+      "title": "Entschädigungsbeträge nach EU261 – 250, 400 und 600 € | FlightClaimly",
+      "description": "Sieh, welche Entschädigungsbeträge du nach EU261/UK261 erhalten kannst – 250, 400 oder 600 € pro Person, abhängig von Flugstrecke und Verspätung."
+    },
+    "badge": "Entschädigungsbeträge",
+    "title": "Entschädigungsbeträge nach EU261 – 250, 400 und 600 €",
+    "intro": "Die EU-Verordnung 261/2004 („EU261“) sieht feste Entschädigungsbeträge vor, wenn dein Flug stark verspätet ist, annulliert wurde oder dir die Beförderung verweigert wurde.",
+    "sections": {
+      "overview": {
+        "title": "Schneller Überblick – wie viel kannst du erhalten?",
+        "p1": {
+          "before": "Die Entschädigung nach EU261 liegt normalerweise zwischen ",
+          "highlight": "250 € und 600 € pro Person",
+          "after": ". Der Betrag hängt hauptsächlich ab von:"
+        },
+        "list": [
+          "der Länge der Flugstrecke",
+          "ob der Flug innerhalb der EU oder international ist",
+          "wie stark die Verspätung bzw. Beeinträchtigung ist"
+        ],
+        "note": "Der Ticketpreis spielt also eine geringere Rolle – zwei Passagiere auf demselben Flug erhalten in der Regel denselben Entschädigungsbetrag."
       },
-      "list": [
-        "arrive 3 hours or more after the scheduled time",
-        "miss connections and reach your final destination significantly late",
-        "wait for a long time without reasonable assistance from the airline"
-      ],
-      "note": "Shorter delays usually don’t qualify for compensation, but may still give you a right to meals, drinks or rebooking. We help you assess what applies in your case."
-    },
-    "amount": {
-      "title": "How much can you receive for a delay?",
-      "p1": "Compensation levels for major delays are similar to cancellations and depend on the flight distance:",
-      "list": [
-        "up to €250 for shorter flights (approx. 0–1,500 km)",
-        "up to €400 for mid-distance flights within the EU or up to 3,500 km",
-        "up to €600 for longer international flights"
-      ],
-      "note": "In some cases, amounts may be reduced if the airline rebooks you and you still arrive with a relatively small delay. That’s something we calculate for you."
-    },
-    "care": {
-      "title": "Your rights while you wait",
-      "p1": "In addition to financial compensation, longer delays may give you a right to:",
-      "list": [
-        "meals and refreshments in a reasonable amount",
-        "two free phone calls or messages",
-        "hotel accommodation if you have to stay overnight",
-        "transport between the airport and the hotel",
-        "rebooking to a later departure, or a refund in some cases"
-      ],
-      "note": "Always keep receipts — you can often claim reimbursement for necessary expenses afterwards if the airline didn’t assist you at the airport."
-    },
-    "exceptions": {
-      "title": "When can the airline avoid paying compensation?",
-      "p1": "In some situations, the airline may cite “extraordinary circumstances” and deny compensation, for example:",
-      "list": [
-        "severe weather or natural disasters",
-        "airport closures or airspace restrictions",
-        "security threats or events outside the airline’s control"
-      ],
-      "p2": {
-        "before": "Technical faults, staff shortages or planning mistakes are usually",
-        "highlight": "not",
-        "after": "valid reasons to deny compensation. Many passengers get rejected the first time — that’s where we can help you escalate."
+      "table": {
+        "title": "Entschädigungsstufen nach EU261",
+        "intro": "Die Beträge hängen vor allem von Flugstrecke und Art der Störung ab. Die Tabelle unten gibt einen Überblick.",
+        "head": {
+          "distance": "Distanz",
+          "type": "Wann gilt es",
+          "amount": "Entschädigung"
+        },
+        "rows": [
+          {
+            "distance": "Bis zu 1.500 km",
+            "type": "Verspätung ≥ 3 Stunden / annullierter Flug",
+            "amount": "250 €"
+          },
+          {
+            "distance": "1.500–3.500 km",
+            "type": "Verspätung ≥ 3 Stunden / annullierter Flug",
+            "amount": "400 €"
+          },
+          {
+            "distance": "Über 3.500 km (innerhalb der EU)",
+            "type": "Verspätung ≥ 3 Stunden / annullierter Flug",
+            "amount": "400 €"
+          },
+          {
+            "distance": "Über 3.500 km (außerhalb der EU)",
+            "type": "Verspätung ≥ 3 Stunden / annullierter Flug",
+            "amount": "600 €"
+          }
+        ],
+        "note": "Wir helfen dir zu beurteilen, ob dein Vorgang entschädigungsberechtigt ist."
+      },
+      "reduction": {
+        "title": "Wann kann die Entschädigung reduziert werden?",
+        "p1": "Bei einer Umbuchung, durch die du nahe an der ursprünglich geplanten Ankunftszeit ankommst, kann die Entschädigung in bestimmten Fällen halbiert werden.",
+        "list": [
+          "Kurze Strecken: geringe Verspätung bei Ankunft",
+          "Mittlere Strecken: moderate Verspätung bei Ankunft",
+          "Lange Strecken: begrenzte Verspätung bei Ankunft"
+        ],
+        "note": "Die Bewertung basiert immer auf der tatsächlichen Ankunftszeit und den Maßnahmen der Airline."
+      },
+      "types": {
+        "title": "Welche Störungen sind erfasst?",
+        "p1": "EU261 kann unter anderem Anspruch auf Entschädigung geben bei:",
+        "list": [
+          "Verspätungen (oft ≥ 3 Stunden bei Ankunft)",
+          "Annullierten Flügen",
+          "Nichtbeförderung (Überbuchung)"
+        ],
+        "note": {
+          "before": "Mehr zu deinen Rechten findest du auf der Seite ",
+          "link": "Deine Rechte"
+        }
+      },
+      "examples": {
+        "title": "Beispiele",
+        "list": [
+          "Der Flug landet 3 Std. 20 Min. zu spät → kann Anspruch auf Entschädigung geben.",
+          "Der Flug wird am selben Tag annulliert → kann Anspruch auf Entschädigung und Umbuchung geben.",
+          "Dir wird wegen Überbuchung die Beförderung verweigert → kann Anspruch auf Entschädigung geben."
+        ],
+        "note": "Der Anspruch auf Entschädigung hängt von der Ursache der Störung ab."
+      },
+      "myths": {
+        "title": "Häufige Irrtümer",
+        "list": [
+          "Es gilt nur, wenn das Ticket direkt bei der Airline gekauft wurde.",
+          "Man muss sich sofort am Flughafen beschweren.",
+          "Jede Verspätung führt zu einer Entschädigung."
+        ],
+        "note": "Wir helfen dir zu beurteilen, ob dein Vorgang entschädigungsberechtigt ist."
       }
     },
-    "examples": {
-      "title": "Examples: when you may be entitled to compensation",
-      "list": [
-        "Your flight from Stockholm to Barcelona lands 3 hours and 45 minutes late — you may be entitled to compensation.",
-        "You miss your long-haul connection due to a delay on the first leg and reach your final destination more than 3 hours late — the whole journey may be covered.",
-        "The flight is delayed 4 hours due to a technical fault — often compensable."
+    "footer": {
+      "lead": "Möchtest du wissen, welcher Entschädigungsbetrag für deine Reise gelten könnte?",
+      "cta": "Meinen Flug prüfen"
+    }
+  },
+
+  "delays": {
+    "meta": {
+      "title": "Flug verspätet – Entschädigung nach EU261 | FlightClaimly",
+      "description": "Flug verspätet? Erfahre, wann du Anspruch auf 250–600 € Entschädigung nach EU261/UK261 hast, was als erhebliche Verspätung gilt und wie FlightClaimly dir hilft, den Anspruch durchzusetzen."
+    },
+    "badge": "Flugverspätungen",
+    "title": "Flug verspätet – so erhältst du Entschädigung nach EU261",
+    "intro": "Ein verspäteter Flug kann Pläne, Anschlüsse und Urlaube ruinieren. EU261 gibt dir als Passagier starke Rechte – in vielen Fällen hast du Anspruch auf Entschädigung, wenn du spät ankommst. Hier erklären wir die Grundlagen.",
+    "sections": {
+      "when": {
+        "title": "Wann gilt ein Flug als erheblich verspätet?",
+        "p1": {
+          "before": "Für EU261 ist vor allem die",
+          "highlight": "Ankunftszeit",
+          "after": "entscheidend. Du kannst Anspruch auf Entschädigung haben, wenn du:"
+        },
+        "list": [
+          "3 Stunden oder mehr nach der geplanten Zeit ankommst",
+          "Anschlüsse verpasst und das Endziel erheblich verspätet erreichst",
+          "lange warten musst, ohne angemessene Hilfe durch die Airline"
+        ],
+        "note": "Kleinere Verspätungen führen meist nicht zu einer Entschädigung, können aber Anspruch auf Verpflegung, Kommunikation oder Umbuchung geben. Wir helfen dir einzuschätzen, was in deinem Fall gilt."
+      },
+      "amount": {
+        "title": "Wie viel kannst du bei Verspätung erhalten?",
+        "p1": "Die Entschädigungsstufen bei erheblichen Verspätungen ähneln denen bei annullierten Flügen und hängen von der Flugstrecke ab:",
+        "list": [
+          "bis zu 250 € für kurze Flüge (ca. 0–1.500 km)",
+          "bis zu 400 € für mittlere Flüge innerhalb der EU oder bis 3.500 km",
+          "bis zu 600 € für längere internationale Flüge"
+        ],
+        "note": "In manchen Fällen können die Beträge reduziert werden, wenn die Airline eine Umbuchung anbietet, mit der du nur relativ kurz verspätet ankommst. Das berechnen wir für dich."
+      },
+      "care": {
+        "title": "Deine Rechte während der Wartezeit",
+        "p1": "Zusätzlich zur finanziellen Entschädigung kannst du bei längeren Verspätungen Anspruch haben auf:",
+        "list": [
+          "Essen und Getränke in angemessenem Umfang",
+          "zwei kostenlose Telefonate oder Nachrichten",
+          "Hotelübernachtung, wenn du über Nacht bleiben musst",
+          "Transport zwischen Flughafen und Hotel",
+          "Umbuchung auf einen späteren Abflug oder in bestimmten Fällen Erstattung"
+        ],
+        "note": "Bewahre immer Belege auf – oft kannst du notwendige Auslagen nachträglich erstattet bekommen, wenn die Airline dir vor Ort nicht geholfen hat."
+      },
+      "exceptions": {
+        "title": "Wann kann die Airline von der Zahlung befreit sein?",
+        "p1": "In bestimmten Situationen kann sich die Airline auf „außergewöhnliche Umstände“ berufen und die Entschädigung verweigern, z. B.:",
+        "list": [
+          "schweres Unwetter oder Naturkatastrophen",
+          "geschlossene Flughäfen oder Luftraumbeschränkungen",
+          "Sicherheitsbedrohungen oder Ereignisse außerhalb der Kontrolle der Airline"
+        ],
+        "p2": {
+          "before": "Technische Defekte, Personalmangel oder Planungsfehler gelten dagegen meist",
+          "highlight": "nicht",
+          "after": "als gültige Gründe. Viele Passagiere erhalten zunächst eine Ablehnung – dabei helfen wir dir, weiterzugehen."
+        }
+      },
+      "examples": {
+        "title": "Beispiele: wann du Anspruch auf Entschädigung haben könntest",
+        "list": [
+          "Dein Flug von Stockholm nach Barcelona landet 3 Stunden und 45 Minuten später als geplant – du kannst Anspruch auf Entschädigung haben.",
+          "Du verpasst deinen Langstreckenflug nach einer Verspätung auf der ersten Strecke und erreichst das Endziel mehr als 3 Stunden zu spät – die gesamte Reise kann erfasst sein.",
+          "Der Flug ist wegen eines technischen Defekts 4 Stunden verspätet – oft entschädigungsrelevant."
+        ]
+      },
+      "links": {
+        "title": "Möchtest du mehr über die Regeln erfahren?",
+        "rights": {
+          "before": "Auf der Seite",
+          "link": "Deine Rechte",
+          "after": "findest du eine breitere Übersicht über EU261 und was bei annullierten Flügen, Überbuchung und anderen Situationen gilt."
+        },
+        "faq": {
+          "before": "Du kannst auch in unsere",
+          "link": "FAQ",
+          "after": "schauen, wo wir häufige Fragen kurz beantworten."
+        }
+      }
+    },
+    "footer": {
+      "lead": "War dein Flug verspätet? Prüfe, ob du bis zu 600 € Entschädigung erhalten kannst – das dauert nur eine Minute.",
+      "cta": "Meinen Flug prüfen"
+    }
+  },
+
+  "login": {
+    "title": "Admin-Login",
+    "passwordLabel": "Passwort",
+    "passwordPlaceholder": "••••••••",
+    "submit": "Anmelden",
+    "loading": "Anmeldung…",
+    "errors": {
+      "invalidPassword": "Falsches Passwort",
+      "generic": "Anmeldung nicht möglich"
+    }
+  },
+
+  "privacy": {
+    "meta": {
+      "title": "Datenschutzerklärung | FlightClaimly",
+      "description": "Erfahre, wie FlightClaimly personenbezogene Daten verarbeitet, welche Daten wir erheben, zu welchen Zwecken und welche Rechte du nach der DSGVO hast."
+    },
+    "badge": "Datenschutz",
+    "title": "Datenschutzerklärung von FlightClaimly",
+    "intro": "Deine Privatsphäre ist uns wichtig. Auf dieser Seite erklären wir, welche Daten wir erheben, warum wir das tun, wie wir sie verwenden und welche Rechte du hast.",
+
+    "controller": {
+      "title": "Verantwortlicher",
+      "body": "FlightClaimly („wir“, „uns“) ist Verantwortlicher für die Verarbeitung personenbezogener Daten im Zusammenhang mit unserem Service zur Flugentschädigung."
+    },
+
+    "dataCollected": {
+      "title": "Welche Daten erheben wir?",
+      "intro": "Wenn du unseren Service nutzt, können wir folgende Arten personenbezogener Daten verarbeiten:",
+      "items": [
+        "Kontaktdaten (Name, E-Mail, Telefonnummer)",
+        "Buchungsinformationen (Buchungsnummer, Flugnummer, Datum, Routen)",
+        "Tickets und Boardingpässe (Dokumente, PDFs, Bilder)",
+        "Informationen zu Verspätung, Annullierung oder sonstiger Störung",
+        "Kommunikation mit dir (E-Mails, Nachrichten)",
+        "Technische Informationen (IP-Adresse, Gerät, Browser), soweit für Sicherheit und Betrieb erforderlich"
       ]
     },
-    "links": {
-      "title": "Want to learn more about the rules?",
-      "rights": {
-        "before": "On the page",
-        "link": "Your rights",
-        "after": "you’ll find a broader overview of EU261 and what applies to cancellations, overbooking and other situations."
-      },
-      "faq": {
-        "before": "You can also check our",
-        "link": "FAQ",
-        "after": "for short answers to common questions."
-      }
-    }
-  },
-  "footer": {
-    "lead": "Had a delayed flight? Check if you may be entitled to compensation — it only takes a minute.",
-    "cta": "Check my flight"
-  }
-},
-"login": {
-  "title": "Admin login",
-  "passwordLabel": "Password",
-  "passwordPlaceholder": "••••••••",
-  "submit": "Log in",
-  "loading": "Logging in…",
-  "errors": {
-    "invalidPassword": "Incorrect password",
-    "generic": "Could not log in"
-  }
-},
-"privacy": {
-    "meta": {
-  "title": "Privacy policy | FlightClaimly",
-  "description": "Learn how FlightClaimly processes personal data, what we collect, why we collect it, and your rights under GDPR."
-},
-  "badge": "Privacy",
-  "title": "Privacy policy for FlightClaimly",
-  "intro": "Your privacy is important to us. On this page we explain what data we collect, why we collect it, how it is used, and what rights you have.",
 
-  "controller": {
-    "title": "Data controller",
-    "body": "FlightClaimly (“we”, “us”) is the data controller responsible for the processing of personal data in connection with our flight compensation service."
-  },
-
-  "dataCollected": {
-    "title": "What data do we collect?",
-    "intro": "When you use our service, we may process the following categories of personal data:",
-    "items": [
-      "contact details (name, email address, phone number)",
-      "booking information (booking reference, flight number, dates, routes)",
-      "tickets and boarding passes (documents, PDFs, images)",
-      "information about delays, cancellations, or other disruptions",
-      "communication with you (emails, messages)",
-      "technical data (IP address, device, browser) where necessary for security and operation"
-    ]
-  },
-
-  "purpose": {
-    "title": "Why do we process your data?",
-    "intro": "We process your personal data in order to:",
-    "items": [
-      "assess whether you are entitled to compensation under EU261",
-      "create and manage your claim with the airline",
-      "communicate with you about the status of your case",
-      "handle payouts when compensation is granted",
-      "comply with legal obligations (e.g. accounting)",
-      "improve and secure our service"
-    ]
-  },
-
-  "legalBasis": {
-    "title": "Legal basis for processing",
-    "intro": "The processing of your personal data is primarily based on:",
-    "items": [
-      "<strong>Contract</strong> – when processing data to handle your claim against the airline",
-      "<strong>Legal obligation</strong> – when we are required to retain data under applicable law",
-      "<strong>Legitimate interest</strong> – limited technical data used to ensure security and operation"
-    ]
-  },
-
-  "retention": {
-    "title": "How long do we retain your data?",
-    "intro": "We retain your data for as long as necessary to:",
-    "items": [
-      "handle and conclude your claim",
-      "manage potential complaints or disputes related to the case",
-      "comply with legal obligations"
-    ],
-    "note": "When the data is no longer needed, it is securely deleted or anonymised."
-  },
-
-  "sharing": {
-    "title": "Who do we share your data with?",
-    "intro": "We only share your data with parties necessary to deliver the service, such as:",
-    "items": [
-      "airlines and their representatives",
-      "legal partners or representatives connected to your case",
-      "IT service providers (hosting, email) with appropriate agreements in place"
-    ],
-    "note": "We do not sell your personal data to third parties."
-  },
-
-  "rights": {
-    "title": "Your rights",
-    "intro": "As a data subject, you have the right to:",
-    "items": [
-      "request access to the personal data we process about you",
-      "request correction of inaccurate or incomplete data",
-      "request deletion of data when it is no longer necessary",
-      "object to or request restriction of certain processing",
-      "request data portability in certain cases"
-    ],
-    "contactBefore": "If you wish to exercise any of these rights, please contact us at"
-  },
-
-  "complaints": {
-    "title": "Complaints",
-    "body": "If you believe that we process your personal data in violation of applicable data protection laws, you have the right to lodge a complaint with the relevant supervisory authority."
-  },
-
-  "changes": {
-    "title": "Changes to this policy",
-    "body": "We may update this privacy policy from time to time. The latest version is always published on this page."
-  },
-
-  "footer": {
-    "before": "If you have questions about how we handle your personal data, please contact us at"
-  }
-},
-"rights": {
-  "meta": {
-    "title": "EU261 — your passenger rights | FlightClaimly",
-    "description": "Learn your rights under EU261/UK261 for delayed, cancelled, and overbooked flights. See when you may be entitled to €250–€600 and how FlightClaimly helps you get paid."
-  },
-  "badge": "Your rights",
-  "title": "Your passenger rights under EU261",
-  "intro": "EU Regulation 261/2004 (\"EU261\") gives you strong rights as an air passenger in case of delays, cancellations, or denied boarding. Here we explain the basics — and how FlightClaimly can help you get the compensation you’re entitled to.",
-
-  "whenApplies": {
-    "title": "When does EU261 apply?",
-    "intro": "EU261 applies in the following situations:",
-    "bullets": [
-      "the flight departs from a country in the EU/EEA or the United Kingdom",
-      "the flight arrives into the EU/EEA/UK with an EU-based airline",
-      "you have a confirmed booking and checked in on time"
-    ],
-    "note": "Some connecting flights and itineraries with stopovers may also be covered, depending on how your ticket is booked. We help you assess this."
-  },
-
-  "covered": {
-    "title": "Which situations are covered?",
-    "lead": "You may be entitled to compensation if:",
-    "bullets": [
-      "your flight is heavily delayed at arrival (often 3 hours or more)",
-      "your flight is cancelled on short notice",
-      "you are denied boarding due to overbooking"
-    ],
-    "after": "In addition to compensation, you may be entitled to meals, drinks, hotel accommodation, and rebooking depending on the length of the disruption and your journey."
-  },
-
-  "amounts": {
-    "title": "How much compensation can you receive?",
-    "intro": "Compensation mainly depends on flight distance and how much your journey was affected. Typical EU261 amounts are:",
-    "bullets": [
-      "up to €250 for short flights (approx. 0–1,500 km)",
-      "up to €400 for medium-haul flights within the EU or up to 3,500 km",
-      "up to €600 for long-haul international flights"
-    ],
-    "note": "The exact amount can vary depending on route, delay length, and any rebooking offered. FlightClaimly helps you calculate the correct level for your trip."
-  },
-
-  "exceptions": {
-    "title": "When are you not entitled to compensation?",
-    "intro": "The airline may avoid paying compensation if the delay or cancellation was caused by so-called \"extraordinary circumstances\", for example:",
-    "bullets": [
-      "severe weather or natural disasters",
-      "security risks or airspace closures",
-      "strikes outside the airline’s control (e.g. airport staff or air traffic control)"
-    ],
-    "afterBeforeStrong": "Technical issues or planning failures are often ",
-    "afterStrong": "not",
-    "afterTail": " considered extraordinary circumstances. Many airline rejections are incorrect — we can help you appeal."
-  },
-
-  "save": {
-    "title": "What should you keep?",
-    "intro": "To pursue a claim, it helps if you have:",
-    "bullets": [
-      "booking confirmation or ticket (preferably as PDF or image)",
-      "boarding pass if you managed to check in",
-      "receipts for meals, hotel, or transport",
-      "a short description of what happened (times, messages from the airline)"
-    ],
-    "note": "You can upload everything when you create a case with us — we’ll help you organise it."
-  },
-
-  "links": {
-    "title": "Want to learn more about specific situations?",
-    "lead": "Read more about:",
-    "delaysText": "Flight delays",
-    "delaysAfter": " — what applies to long delays.",
-    "cancellationsText": "Flight cancellations",
-    "cancellationsAfter": " — your rights when a flight is cancelled.",
-    "faqText": "Frequently asked questions",
-    "faqAfter": " — short answers to the most common questions."
-  },
-
-  "footer": {
-    "lead": "Think your flight is covered by EU261? Check now if you may be entitled to compensation — it only takes a minute.",
-    "cta": "Check if I’m entitled to compensation"
-  }
-},
-"terms": {
-    "meta": {
-  "title": "Terms of service | FlightClaimly",
-  "description": "Read FlightClaimly’s terms of service, including how the service works, fees, payouts, liability, and contact details."
-},
-  "badge": "Terms",
-  "title": "Terms of Use for FlightClaimly",
-  "intro": "These terms describe how FlightClaimly works and the rights and obligations that apply when you use our service to pursue flight compensation claims.",
-
-  "sections": {
-    "service": {
-      "title": "1. About the service",
-      "text": "FlightClaimly is a service that helps air passengers investigate and pursue compensation claims under EU261 and similar regulations. We act as your representative towards the airline.",
-      "note": "By submitting a case via our website, you accept these terms."
+    "purpose": {
+      "title": "Warum verarbeiten wir deine Daten?",
+      "intro": "Wir verarbeiten deine personenbezogenen Daten, um:",
+      "items": [
+        "zu prüfen, ob du Anspruch auf Entschädigung nach EU261 hast",
+        "deinen Vorgang gegenüber der Fluggesellschaft zu erstellen und zu bearbeiten",
+        "mit dir über den Status des Vorgangs zu kommunizieren",
+        "Auszahlungen zu veranlassen, wenn Entschädigung bewilligt wird",
+        "rechtliche Pflichten zu erfüllen (z. B. Buchhaltung)",
+        "unseren Service zu verbessern und abzusichern"
+      ]
     },
 
-    "usage": {
-      "title": "2. Your use of the service",
-      "intro": "You agree to:",
-      "bullets": [
-        "provide accurate and complete information about your flight",
-        "not submit claims you know to be incorrect or misleading",
-        "inform us if you have already hired another party for the same claim"
+    "legalBasis": {
+      "title": "Rechtsgrundlage der Verarbeitung",
+      "intro": "Die Verarbeitung deiner personenbezogenen Daten basiert hauptsächlich auf:",
+      "items": [
+        "<strong>Vertrag</strong> – um deinen Anspruch gegenüber der Fluggesellschaft durchsetzen zu können",
+        "<strong>Rechtlicher Verpflichtung</strong> – z. B. Buchhaltungsvorschriften",
+        "<strong>Berechtigtem Interesse</strong> – Sicherheit und Betrieb"
+      ]
+    },
+
+    "retention": {
+      "title": "Wie lange speichern wir deine Daten?",
+      "intro": "Wir speichern deine Daten so lange, wie es erforderlich ist, um:",
+      "items": [
+        "deinen Vorgang zu bearbeiten und abzuschließen",
+        "mögliche Beschwerden oder Streitigkeiten zu bearbeiten",
+        "rechtliche Pflichten zu erfüllen"
       ],
-      "note": "We reserve the right to discontinue handling a case if the information provided is incorrect or if the conditions for a valid claim are not met."
+      "note": "Wenn die Daten nicht mehr benötigt werden, löschen oder anonymisieren wir sie sicher."
     },
 
-    "power": {
-      "title": "3. Representation and power of attorney",
-      "text": "To pursue your claim, we may need to act as your representative towards the airline. By using the service, you authorise us to contact the airline on your behalf.",
-      "note": "In some cases, we may ask you to sign a separate power of attorney or mandate, for example if the case needs escalation."
-    },
-
-    "fees": {
-      "title": "4. Fees and compensation",
-      "lead": "FlightClaimly operates on a",
-      "highlight": "no win, no fee",
-      "bullets": [
-        "there is no cost to submit a claim",
-        "we only charge a fee if we successfully obtain compensation",
-        "our fee is a percentage of the compensation you receive"
+    "sharing": {
+      "title": "Mit wem teilen wir deine Daten?",
+      "intro": "Wir teilen deine Daten nur mit Parteien, die für die Bereitstellung des Services erforderlich sind:",
+      "items": [
+        "Fluggesellschaften und deren Vertreter",
+        "juristische Bevollmächtigte oder Kooperationspartner",
+        "IT-Dienstleister (Hosting, E-Mail)"
       ],
-      "note": "The applicable percentage and any additional conditions are clearly stated when you approve that we handle your claim."
+      "note": "Wir verkaufen deine personenbezogenen Daten nicht an Dritte."
     },
 
-    "payout": {
-      "title": "5. Payment to you",
-      "intro": "When compensation has been paid by the airline, payment may be made either:",
-      "bullets": [
-        "directly to FlightClaimly, after which your share is forwarded to you, or",
-        "directly to you, with our fee deducted according to a separate agreement"
+    "rights": {
+      "title": "Deine Rechte",
+      "intro": "Als betroffene Person hast du das Recht,",
+      "items": [
+        "Auskunft über die verarbeiteten Daten zu erhalten",
+        "Berichtigung unrichtiger Daten zu verlangen",
+        "Löschung zu verlangen, wenn Daten nicht mehr benötigt werden",
+        "der Verarbeitung zu widersprechen oder sie einzuschränken",
+        "in bestimmten Fällen Datenübertragbarkeit zu verlangen"
       ],
-      "note": "We aim to process payments as soon as possible after compensation has been received and identified."
+      "contactBefore": "Möchtest du eines dieser Rechte ausüben? Kontaktiere uns über"
     },
 
-    "liability": {
-      "title": "6. Liability and limitations",
-      "text1": "We cannot guarantee that a claim will result in compensation. Each case is assessed based on available information and applicable regulations.",
-      "text2": "FlightClaimly is not liable for indirect damages, such as loss of profit, and our liability is generally limited to the fee paid for the service."
-    },
-
-    "privacy": {
-      "title": "7. Personal data and privacy",
-      "text": "We process personal data in accordance with applicable data protection laws. More information is available in our",
-      "link": "privacy policy"
+    "complaints": {
+      "title": "Beschwerden",
+      "body": "Wenn du der Ansicht bist, dass wir deine Daten entgegen den geltenden Regeln verarbeiten, kannst du bei der zuständigen Datenschutzbehörde Beschwerde einreichen."
     },
 
     "changes": {
-      "title": "8. Changes to the terms",
-      "text": "We may update these terms when necessary. The latest version is always available on our website."
+      "title": "Änderungen dieser Erklärung",
+      "body": "Wir können diese Datenschutzerklärung bei Bedarf aktualisieren. Die neueste Version ist immer hier veröffentlicht."
     },
 
-    "contact": {
-      "title": "9. Contact",
-      "text": "If you have any questions about these terms, you are welcome to contact us at"
+    "footer": {
+      "before": "Hast du Fragen dazu, wie wir deine personenbezogenen Daten verarbeiten? Schreib uns an"
     }
   },
 
-  "footer": "By using FlightClaimly, you confirm that you have read and understood these terms."
-},
-"thanks": {
-  "brandTagline": "We handle the airline — you avoid the hassle.",
-  "backHome": "← Back to homepage",
-
-  "header": {
-    "badge": "FLIGHTCLAIMLY • YOUR CLAIM IS REGISTERED",
-    "title": "Thank you! We’ve received your claim.",
-    "claimId": "Claim ID",
-    "intro": "The next step is to confirm your authorization and upload supporting documents on this page. Once that’s done, we’ll start handling your case immediately and contact the airline on your behalf."
-  },
-
-  "precheck": {
-    "badge": "Preliminary assessment",
-    "eligibleTitle": "Good news — you appear to be eligible for compensation.",
-    "eligibleFallback": "Preliminary assessment: the flight may qualify for compensation under EU261.",
-    "eligibleNote": "This is not a guarantee, but a strong initial indication. Once you confirm authorization and upload documents, we’ll begin pursuing the claim with the airline.",
-    "unclearTitle": "Unclear — we’ll review this manually.",
-    "unclearFallback": "Please submit supporting documents and we’ll review your case manually.",
-    "amountPrefix": "Estimated amount:"
-  },
-
-  "upload": {
-    "title": "Upload documents",
-    "intro": "The authorization allows us to pursue the claim with the airline. Please also upload your boarding pass, booking confirmation, and receipts if you had additional expenses.",
-    "list": [
-      "Digital authorization (LoA) — required",
-      "Boarding pass or e-ticket",
-      "Booking confirmation",
-      "Receipts for additional expenses (if applicable)"
-    ]
-  },
-
-  "loa": {
-    "title": "Digital authorization (LoA)",
-    "description": "By entering your name and checking the box, you authorize FlightClaimly to represent you towards the airline in this case.",
-    "viewText": "View authorization text",
-    "nameLabel": "Full name (signature)",
-    "namePlaceholder": "Your full name",
-    "consent": "I authorize FlightClaimly (Letter of Authorization) to represent me towards the airline in this case.",
-    "error": "Please enter your name and check the box for the authorization to be valid."
-  },
-
-  "attachments": {
-    "title": "Additional documents (optional)",
-    "description": "You may upload boarding passes, booking confirmations, and receipts. Multiple files can be uploaded at once.",
-    "choose": "Choose files",
-    "types": "PDF, JPG, PNG, HEIC. A few files at a time."
-  },
-
-  "actions": {
-    "submit": "Confirm authorization and upload",
-    "submitting": "Processing…",
-    "later": "You can always add more documents later by contacting us if needed."
-  },
-
-  "success": {
-    "title": "Authorization confirmed!",
-    "text": "Thank you — we’ll start handling your claim immediately. You’ll receive emails when the status changes and can follow everything via your tracking link."
-  },
-
-  "errors": {
-    "missingId": "We couldn’t find your claim ID. Please return to the homepage and submit the form again.",
-    "generic": "❌ We couldn’t complete the step. Please try again."
-  },
-
-  "security": {
-    "badge": "Secure file transfer",
-    "text": "Your files are stored encrypted and used only to handle your claim. They are shared only with the airline and, if necessary, legal partners related to this specific case.",
-    "independentTitle": "Independent service",
-    "independentText": "FlightClaimly is an independent service and not affiliated with any airline. We always act on your behalf as a passenger."
-  },
-
-  "loaText": {
-    "title": "Authorization — FlightClaimly",
-    "intro": "I hereby authorize FlightClaimly to represent me in matters relating to flight compensation under EU Regulation 261/2004.",
-    "bullets": [
-      "Communicate with the airline on my behalf.",
-      "Submit claims and follow up the case.",
-      "Receive responses and decisions from the airline.",
-      "Cooperate with legal partners if required for this case."
-    ],
-    "note": "The authorization applies only to this specific case and can be revoked in writing at any time."
-  },
-
-  "loading": "Loading page…",
-  "home": "Back to homepage"
-},
-"about": {
+  "rights": {
     "meta": {
-  "title": "About FlightClaimly | Claim flight compensation without hassle",
-  "description": "Learn how FlightClaimly helps you pursue EU261 flight compensation from start to payout — fast, secure, and transparent."
-},
-  "badge": "About us",
-  "title": "We help you get compensation when your flight goes wrong",
-  "intro": "FlightClaimly is an EU-based service that makes it easy to claim compensation from airlines under EU261. The goal is simple: get you the money you’re entitled to — without hassle, stress, or legal friction.",
-
-  "why": {
-    "title": "Why FlightClaimly exists",
-    "p1": "Every year, large amounts of flight compensation never reach passengers. Many people don’t have the time, don’t know the rules, or get rejected the first time and give up.",
-    "p2": "FlightClaimly was built to make the process as simple as possible: you enter your flight details, upload your booking — we handle the rest and pursue the claim with the airline for you."
-  },
-
-  "how": {
-    "title": "How it works",
-    "steps": [
-      "You submit your flight details and what happened.",
-      "We assess your case under EU261 rules.",
-      "We pursue the claim with the airline on your behalf.",
-      "You only pay if you get paid."
-    ],
-    "note": "Everything is handled digitally — fast, secure, and transparent."
-  },
-
-  "model": {
-    "title": "Our model — simple and transparent",
-    "p1": "We believe in one simple principle:",
-    "p1Strong": "no win, no fee",
-    "p1b": " That means we only earn money when you do.",
-    "bullets": [
-      "creating a case is free",
-      "we only charge if you receive compensation",
-      "our fee is clear before you approve anything"
-    ],
-    "note": "No compensation from the airline = no cost to you."
-  },
-
-  "trust": {
-    "title": "Clarity and peace of mind",
-    "p1": "You should always know where your case stands. That’s why you can track the process and see:",
-    "bullets": [
-      "when we receive your case",
-      "when we review it",
-      "when it’s sent to the airline",
-      "when compensation is paid out"
-    ],
-    "p2": "You’ll also get status update emails — so you don’t have to chase support or log into unnecessary portals."
-  },
-
-  "independent": {
-    "title": "Independent and on your side",
-    "p1": "FlightClaimly works under EU passenger rights (EU261/2004) and is independent from airlines. Our only job is to represent you and ensure the rules are applied in practice — not just on paper.",
-    "p2": "We deal with airline bureaucracy so you can focus on your trip — not forms and fine print."
-  },
-
-  "footer": {
-    "cta": "Has your flight been disrupted? Check if you’re eligible — it only takes a minute.",
-    "primary": "Get compensation",
-    "secondary": "Contact & partnerships"
-  },
-  "email": {
-  "footer": {
-    "disclaimer": {
-      "title": "Confidentiality",
-      "p1": "This email and any attachments are intended only for the designated recipient. If you received this message by mistake, please reply to let us know and then delete it.",
-      "p2": "We process personal data to handle your case. Learn more in our Privacy Policy and Terms."
+      "title": "EU261 – deine Rechte als Fluggast | FlightClaimly",
+      "description": "Lerne deine Rechte nach EU261/UK261 bei Verspätungen, Annullierungen und Überbuchungen. Erfahre, wann du 250–600 € Entschädigung erhalten kannst und wie FlightClaimly dir hilft, das Geld zu bekommen."
     },
+    "badge": "Deine Rechte",
+    "title": "Deine Rechte als Fluggast nach EU261",
+    "intro": "Die EU-Verordnung 261/2004 („EU261“) gibt dir als Fluggast starke Rechte bei verspäteten, annullierten oder überbuchten Flügen. Hier erklären wir die Grundlagen – und wie FlightClaimly dir helfen kann, die Entschädigung zu erhalten, auf die du Anspruch hast.",
+
+    "whenApplies": {
+      "title": "Wann gilt EU261?",
+      "intro": "EU261 gilt in folgenden Situationen:",
+      "bullets": [
+        "der Flug startet in einem Land der EU/des EWR oder im Vereinigten Königreich",
+        "der Flug landet in der EU/im EWR/im Vereinigten Königreich mit einer in der EU ansässigen Fluggesellschaft",
+        "du hast eine bestätigte Buchung und bist rechtzeitig zum Check-in erschienen"
+      ],
+      "note": "Auch bestimmte Anschlussflüge und Reisen mit Zwischenstopps können erfasst sein – je nachdem, wie das Ticket gebucht wurde. Dabei helfen wir dir."
+    },
+
+    "covered": {
+      "title": "Welche Situationen sind erfasst?",
+      "lead": "Du kannst Anspruch auf Entschädigung haben, wenn:",
+      "bullets": [
+        "dein Flug bei Ankunft erheblich verspätet ist (oft 3 Stunden oder mehr)",
+        "dein Flug kurzfristig annulliert wird",
+        "dir wegen Überbuchung die Beförderung verweigert wird"
+      ],
+      "after": "Neben der finanziellen Entschädigung kannst du – je nach Dauer und Reiselänge – Anspruch auf Verpflegung, Hotel und Umbuchung haben."
+    },
+
+    "amounts": {
+      "title": "Wie viel kannst du erhalten?",
+      "intro": "Die Entschädigung hängt vor allem von der Flugstrecke ab und davon, wie stark deine Reise beeinträchtigt wurde. Übliche Pauschalbeträge nach EU261 sind:",
+      "bullets": [
+        "bis zu 250 € für kurze Flüge (ca. 0–1.500 km)",
+        "bis zu 400 € für mittlere Flüge innerhalb der EU oder bis 3.500 km",
+        "bis zu 600 € für längere internationale Flüge"
+      ],
+      "note": "Der genaue Betrag kann je nach Route, Länge der Verspätung und angebotener Umbuchung variieren. FlightClaimly hilft dir, die richtige Stufe für deine Reise zu ermitteln."
+    },
+
+    "exceptions": {
+      "title": "Wann hast du keinen Anspruch auf Entschädigung?",
+      "intro": "Die Fluggesellschaft kann von der Zahlung befreit sein, wenn die Verspätung oder Annullierung auf sogenannte „außergewöhnliche Umstände“ zurückzuführen ist, z. B.:",
+      "bullets": [
+        "schweres Unwetter oder Naturkatastrophen",
+        "Sicherheitsrisiken oder Luftraumsperrungen",
+        "Streiks außerhalb der Kontrolle der Airline (z. B. Flughafenpersonal oder Flugsicherung)"
+      ],
+      "afterBeforeStrong": "Technische Probleme oder Planungsmängel gelten dagegen oft ",
+      "afterStrong": "nicht",
+      "afterTail": " als außergewöhnliche Umstände. Viele Ablehnungen der Airlines sind falsch – dabei helfen wir dir, Widerspruch einzulegen."
+    },
+
+    "save": {
+      "title": "Was solltest du aufbewahren?",
+      "intro": "Um einen Vorgang zu bearbeiten, ist es gut, wenn du Folgendes hast:",
+      "bullets": [
+        "Buchungsbestätigung oder Ticket (gern als PDF oder Bild)",
+        "Boardingpass, falls du eingecheckt hast",
+        "Belege für Essen, Hotel oder Transport",
+        "kurze Beschreibung, was passiert ist (Zeiten, Informationen der Airline)"
+      ],
+      "note": "Du kannst alles direkt beim Erstellen eines Vorgangs bei uns hochladen – wir helfen dir beim Sortieren."
+    },
+
     "links": {
-      "privacy": "Privacy Policy",
-      "terms": "Terms"
+      "title": "Möchtest du mehr über bestimmte Situationen erfahren?",
+      "lead": "Lies mehr über:",
+      "delaysText": "Verspätete Flüge",
+      "delaysAfter": " – was bei langen Verspätungen gilt.",
+      "cancellationsText": "Annullierte Flüge",
+      "cancellationsAfter": " – deine Rechte bei Annullierungen.",
+      "faqText": "Häufige Fragen",
+      "faqAfter": " – kurze Antworten auf das, was die meisten wissen möchten."
     },
+
+    "footer": {
+      "lead": "Glaubst du, dass dein Flug unter EU261 fällt? Prüfe sofort, ob du Anspruch auf Entschädigung hast – das dauert nur eine Minute.",
+      "cta": "Prüfen, ob ich Anspruch habe"
+    }
+  },
+
+  "terms": {
+    "meta": {
+      "title": "Nutzungsbedingungen | FlightClaimly",
+      "description": "Lies die Nutzungsbedingungen von FlightClaimly, einschließlich Funktionsweise des Services, Gebühren, Auszahlungen, Haftung und Kontaktmöglichkeiten."
+    },
+    "badge": "Bedingungen",
+    "title": "Nutzungsbedingungen für FlightClaimly",
+    "intro": "Diese Bedingungen beschreiben, wie FlightClaimly funktioniert und welche Rechte und Pflichten gelten, wenn du unseren Service zur Durchsetzung von Flugentschädigungsansprüchen nutzt.",
+
+    "sections": {
+      "service": {
+        "title": "1. Über den Service",
+        "text": "FlightClaimly ist ein Service, der Fluggästen hilft, Ansprüche auf Entschädigung nach EU261 und ähnlichen Regelwerken zu prüfen und durchzusetzen. Wir handeln als Bevollmächtigter in deinem Namen gegenüber der Fluggesellschaft.",
+        "note": "Durch das Einreichen eines Vorgangs über unsere Website stimmst du diesen Bedingungen zu."
+      },
+
+      "usage": {
+        "title": "2. Deine Nutzung des Services",
+        "intro": "Du verpflichtest dich:",
+        "bullets": [
+          "korrekte und vollständige Angaben zu deinem Flug zu machen",
+          "keine Vorgänge einzureichen, von denen du weißt, dass sie falsch oder irreführend sind",
+          "uns zu informieren, wenn du bereits jemand anderen für denselben Anspruch beauftragt hast"
+        ],
+        "note": "Wir behalten uns das Recht vor, die Bearbeitung eines Vorgangs zu beenden, wenn wir die Angaben als falsch einschätzen oder die Voraussetzungen für einen Anspruch nicht vorliegen."
+      },
+
+      "power": {
+        "title": "3. Vertretung und Vollmacht",
+        "text": "Um deinen Anspruch durchzusetzen, müssen wir gelegentlich in deinem Namen gegenüber der Fluggesellschaft handeln. Durch die Nutzung des Services stimmst du zu, dass wir die Fluggesellschaft in deinem Namen kontaktieren und deine Interessen im Rahmen des Vorgangs vertreten.",
+        "note": "In bestimmten Fällen bitten wir dich, eine separate Vollmacht oder einen gesonderten Auftrag zu unterzeichnen – etwa, wenn der Vorgang eskaliert werden muss."
+      },
+
+      "fees": {
+        "title": "4. Gebühren und Vergütung",
+        "lead": "FlightClaimly arbeitet nach dem Prinzip",
+        "highlight": "no win, no fee",
+        "bullets": [
+          "das Einreichen eines Vorgangs ist kostenlos",
+          "wir berechnen nur dann eine Gebühr, wenn wir eine Entschädigung von der Fluggesellschaft erhalten",
+          "unsere Gebühr ist ein prozentualer Anteil der Entschädigung, die du erhältst"
+        ],
+        "note": "Der genaue Prozentsatz und etwaige weitere Bedingungen werden dir klar angezeigt, bevor du zustimmst, dass wir deinen Vorgang bearbeiten."
+      },
+
+      "payout": {
+        "title": "5. Auszahlung an dich",
+        "intro": "Wenn die Fluggesellschaft die Entschädigung gezahlt hat, kann die Auszahlung entweder erfolgen:",
+        "bullets": [
+          "direkt an FlightClaimly, woraufhin wir deinen Anteil an dich weiterleiten, oder",
+          "direkt an dich, nach Abzug unserer Gebühr gemäß separater Vereinbarung"
+        ],
+        "note": "Wir bemühen uns, Auszahlungen so schnell wie möglich vorzunehmen, nachdem die Entschädigung eingegangen und zugeordnet wurde."
+      },
+
+      "liability": {
+        "title": "6. Haftung und Beschränkungen",
+        "text1": "Wir können nicht garantieren, dass ein Anspruch zu einer Entschädigung führt. Die Bewertung erfolgt stets anhand der verfügbaren Informationen und des geltenden Regelwerks.",
+        "text2": "FlightClaimly haftet nicht für indirekte Schäden, wie entgangenen Gewinn oder Folgekosten. Unsere Haftung ist in der Regel auf die Gebühr beschränkt, die du für den Service bezahlt hast."
+      },
+
+      "privacy": {
+        "title": "7. Personenbezogene Daten und Datenschutz",
+        "text": "Wir verarbeiten personenbezogene Daten gemäß den geltenden Datenschutzgesetzen. Weitere Informationen findest du in unserer",
+        "link": "Datenschutzerklärung"
+      },
+
+      "changes": {
+        "title": "8. Änderungen der Bedingungen",
+        "text": "Wir können diese Bedingungen bei Bedarf aktualisieren. Die neueste Version ist immer auf unserer Website verfügbar."
+      },
+
+      "contact": {
+        "title": "9. Kontakt",
+        "text": "Wenn du Fragen zu diesen Bedingungen hast, kontaktiere uns unter"
+      }
+    },
+
+    "footer": "Durch die Nutzung von FlightClaimly bestätigst du, dass du diese Bedingungen gelesen und verstanden hast."
+  },
+
+  "thanks": {
+    "brandTagline": "Wir treiben deinen Anspruch gegen die Airline voran – du musst dich nicht ärgern.",
+    "backHome": "← Zur Startseite",
+
+    "header": {
+      "badge": "FLIGHTCLAIMLY • DEIN VORGANG IST REGISTRIERT",
+      "title": "Danke! Wir haben deinen Vorgang erhalten.",
+      "claimId": "Vorgangs-ID",
+      "intro": "Als nächstes bestätigst du die Vollmacht und lädst hier auf der Seite Unterlagen hoch. Sobald das erledigt ist, beginnen wir sofort mit der Bearbeitung und kontaktieren die Airline in deinem Namen."
+    },
+
+    "precheck": {
+      "badge": "Vorläufige Einschätzung",
+      "eligibleTitle": "Gute Nachrichten – es sieht so aus, als hättest du Anspruch auf Entschädigung.",
+      "eligibleFallback": "Vorläufige Einschätzung: Der Flug könnte gemäß EU261 entschädigungsberechtigt sein.",
+      "eligibleNote": "Das ist keine Garantie, aber ein starkes erstes Signal. Sobald du die Vollmacht bestätigt und Anhänge hochgeladen hast, beginnen wir, den Anspruch gegenüber der Airline durchzusetzen.",
+      "unclearTitle": "Unklar – wir prüfen manuell.",
+      "unclearFallback": "Bitte reiche Unterlagen ein, dann prüfen wir deinen Vorgang manuell.",
+      "amountPrefix": "Indikation:"
+    },
+
+    "upload": {
+      "title": "Unterlagen hochladen",
+      "intro": "Die Vollmacht gibt uns das Recht, den Vorgang gegenüber der Airline zu bearbeiten. Lade gern auch Boardingpass, Buchungsbestätigung und Belege hoch, falls dir Zusatzkosten entstanden sind.",
+      "list": [
+        "Digitale Vollmacht (LoA) – obligatorisch",
+        "Boardingpass oder E-Ticket",
+        "Buchungsbestätigung",
+        "Belege für Zusatzkosten (falls vorhanden)"
+      ]
+    },
+
+    "loa": {
+      "title": "Digitale Vollmacht (LoA)",
+      "description": "Indem du deinen Namen eingibst und das Kästchen ankreuzt, erteilst du FlightClaimly eine Vollmacht, dich gegenüber der Airline in diesem Vorgang zu vertreten.",
+      "viewText": "Vollmachtstext anzeigen",
+      "nameLabel": "Vollständiger Name (Unterschrift)",
+      "namePlaceholder": "Dein vollständiger Name",
+      "consent": "Ich erteile FlightClaimly eine Vollmacht (Letter of Authorization), mich gegenüber der Airline in diesem Vorgang zu vertreten.",
+      "error": "Bitte gib deinen Namen ein und setze das Häkchen, damit die Vollmacht gültig ist."
+    },
+
+    "attachments": {
+      "title": "Weitere Anhänge (optional)",
+      "description": "Lade gern Boardingpass, Buchungsbestätigung und Belege hoch. Du kannst mehrere Dateien gleichzeitig hochladen.",
+      "choose": "Dateien auswählen",
+      "types": "PDF, JPG, PNG, HEIC. Maximal einige Dateien pro Upload."
+    },
+
+    "actions": {
+      "submit": "Vollmacht bestätigen und hochladen",
+      "submitting": "Wird verarbeitet…",
+      "later": "Du kannst später jederzeit weitere Anhänge ergänzen, indem du uns kontaktierst, falls nötig."
+    },
+
+    "success": {
+      "title": "Vollmacht bestätigt!",
+      "text": "Danke – wir beginnen sofort mit der Bearbeitung deines Vorgangs. Du erhältst E-Mails bei Status-Updates und kannst alles über deinen Tracking-Link verfolgen."
+    },
+
     "errors": {
-  "required": "Please fill in all required fields.",
-  "invalidFlightNumber": "Please enter a valid flight number (e.g. SK123).",
-  "network": "Something went wrong. Please try again.",
-  "noResult": "We couldn’t verify this flight, but you can still submit your claim."
-}
+      "missingId": "Wir konnten deine Vorgangs-ID nicht finden. Geh zurück zur Startseite und sende das Formular erneut ab.",
+      "generic": "❌ Schritt konnte nicht abgeschlossen werden. Bitte versuche es erneut."
+    },
+
+    "security": {
+      "badge": "Sicherer Dateitransfer",
+      "text": "Deine Dateien werden verschlüsselt gespeichert und ausschließlich zur Bearbeitung deines Vorgangs verwendet. Wir geben sie an niemanden weiter, außer an die Airline und ggf. an einen juristischen Vertreter, der mit genau diesem Vorgang befasst ist.",
+      "independentTitle": "Unabhängiger Anbieter",
+      "independentText": "FlightClaimly ist ein unabhängiger Anbieter und nicht mit einer Fluggesellschaft verbunden. Wir handeln immer im Auftrag von dir als Reisendem."
+    },
+
+    "loaText": {
+      "title": "Vollmacht – FlightClaimly",
+      "intro": "Hiermit erteile ich FlightClaimly die Vollmacht, mich in einem Anspruch auf Flugentschädigung gemäß der EU-Verordnung 261/2004 zu vertreten.",
+      "bullets": [
+        "Mit der Fluggesellschaft in meinem Namen zu kommunizieren.",
+        "Ansprüche einzureichen und den Vorgang nachzuverfolgen.",
+        "Antworten und Entscheidungen der Fluggesellschaft entgegenzunehmen.",
+        "Bei Bedarf mit einem juristischen Vertreter zusammenzuarbeiten, soweit dies für diesen Vorgang erforderlich ist."
+      ],
+      "note": "Die Vollmacht gilt nur für diesen konkreten Vorgang und kann jederzeit schriftlich widerrufen werden."
+    },
+
+    "loading": "Seite wird geladen…",
+    "home": "Zur Startseite"
+  },
+
+  "about": {
+    "meta": {
+      "title": "Über FlightClaimly | Flugentschädigung ohne Stress",
+      "description": "Erfahre mehr über FlightClaimly und wie wir dir helfen, deinen EU261-Anspruch von der Einreichung bis zur Auszahlung durchzusetzen — schnell, sicher und transparent."
+    },
+    "badge": "Über uns",
+    "title": "Wir helfen dir, Entschädigung zu erhalten, wenn dein Flug Probleme macht",
+    "intro": "FlightClaimly ist ein EU-basierter Service, der es einfach macht, Entschädigung von Fluggesellschaften nach EU261 zu verlangen. Das Ziel: Du erhältst das Geld, auf das du Anspruch hast – ohne Stress, ohne Aufwand und ohne juristische Hürden.",
+
+    "why": {
+      "title": "Warum gibt es FlightClaimly?",
+      "p1": "Jedes Jahr gehen große Summen an Flugentschädigungen verloren, weil Passagiere nicht wissen, wie die Regeln funktionieren, aufgeben oder beim ersten „Nein“ aufhören.",
+      "p2": "FlightClaimly wurde geschaffen, um den Prozess so einfach wie möglich zu machen: Du gibst deinen Flug ein, lädst deine Buchung hoch – wir kümmern uns um den Rest und treiben den Anspruch gegenüber der Airline für dich voran."
+    },
+
+    "how": {
+      "title": "So funktioniert der Service",
+      "steps": [
+        "Du gibst deine Flugdaten ein und beschreibst, was passiert ist.",
+        "Wir analysieren den Vorgang anhand der EU261-Regeln.",
+        "Wir setzen den Anspruch gegenüber der Airline für dich durch.",
+        "Du zahlst erst, wenn du eine Entschädigung erhältst."
+      ],
+      "note": "Alles läuft digital – schnell, sicher und transparent."
+    },
+
+    "model": {
+      "title": "Unser Modell – einfach und transparent",
+      "p1": "Wir glauben an ein einfaches Prinzip:",
+      "p1Strong": "no win, no fee",
+      "p1b": " Das bedeutet: Wir verdienen nur, wenn du es tust.",
+      "bullets": [
+        "das Erstellen eines Vorgangs ist kostenlos",
+        "wir berechnen nur eine Gebühr, wenn du tatsächlich eine Entschädigung erhältst",
+        "unsere Gebühr ist klar und wird angezeigt, bevor du zustimmst"
+      ],
+      "note": "Keine Entschädigung von der Airline = keine Kosten für dich."
+    },
+
+    "trust": {
+      "title": "Fokus auf Klarheit und Sicherheit",
+      "p1": "Wir möchten, dass du jederzeit weißt, wo dein Vorgang steht. Deshalb kannst du den Prozess über unsere Tracking-Seite verfolgen, wo du siehst:",
+      "bullets": [
+        "wann wir deinen Vorgang erhalten haben",
+        "wann wir ihn prüfen",
+        "wann er an die Airline gesendet wurde",
+        "wann die Entschädigung ausgezahlt wurde"
+      ],
+      "p2": "Du erhältst außerdem eine E-Mail, wenn sich der Status ändert – so musst du nicht ständig nachfragen oder dich in unnötige Portale einloggen."
+    },
+
+    "independent": {
+      "title": "Unabhängig und auf deiner Seite",
+      "p1": "FlightClaimly arbeitet strikt nach den EU-Passagierrechten (EU261/2004) und ist unabhängig von Fluggesellschaften. Unser einziger Auftrag ist, dich als Passagier zu vertreten und dafür zu sorgen, dass die Regeln auch in der Praxis gelten – nicht nur auf dem Papier.",
+      "p2": "Wir übernehmen den Ärger mit Airlines und Bürokratie, damit du dich auf deine Reise konzentrieren kannst – nicht auf Paragraphen und Formulare."
+    },
+
+    "footer": {
+      "cta": "Hatte dein Flug Probleme? Prüfe, ob du Anspruch auf Entschädigung hast – das dauert nur eine Minute.",
+      "primary": "Entschädigung erhalten",
+      "secondary": "Kontakt & Kooperationen"
+    },
+
+    "email": {
+      "footer": {
+        "disclaimer": {
+          "title": "Vertraulichkeit",
+          "p1": "Diese E-Mail und eventuelle Anhänge sind ausschließlich für den angegebenen Empfänger bestimmt. Wenn du diese Nachricht irrtümlich erhalten hast, antworte bitte auf diese E-Mail und lösche sie anschließend.",
+          "p2": "Wir verarbeiten personenbezogene Daten im Zusammenhang mit der Bearbeitung deines Vorgangs. Mehr dazu findest du in unserer Datenschutzerklärung und in unseren Nutzungsbedingungen."
+        },
+        "links": {
+          "privacy": "Datenschutzerklärung",
+          "terms": "Nutzungsbedingungen"
+        },
+        "errors": {
+          "required": "Bitte fülle alle Pflichtfelder aus.",
+          "invalidFlightNumber": "Bitte gib eine gültige Flugnummer ein (z. B. SK123).",
+          "network": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+          "noResult": "Wir konnten den Flug nicht verifizieren, aber du kannst den Vorgang trotzdem einreichen."
+        }
+      }
+    }
   }
 }
-}
-}
-

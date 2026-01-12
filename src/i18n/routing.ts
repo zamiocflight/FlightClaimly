@@ -1,5 +1,5 @@
 // src/i18n/routing.ts
-export const locales = ['sv', 'en', 'da', 'de'] as const;
+export const locales = ['sv', 'en', 'da', 'de', 'pl', 'fi'] as const;
 export type Locale = (typeof locales)[number];
 
 export const defaultLocale: Locale = 'sv';

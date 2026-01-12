@@ -6,7 +6,6 @@ import { Link } from '../../i18n/navigation';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
 import { useTranslations } from 'next-intl';
 
-
 /* ---------- Form state ---------- */
 type FormState = {
   flightNumber: string;
@@ -246,9 +245,10 @@ export default function Home() {
             />
           </Link>
 
-          {/* Desktop: meny + språk + Följ ärende */}
-<div className="hidden md:flex items-center gap-6">
-  <nav className="flex items-center gap-8 text-[15px] font-semibold text-slate-900">
+{/* Desktop: meny + språk + Följ ärende */}
+<div className="hidden md:flex items-center gap-6 fc-desktop-navwrap">
+  {/* ✅ fc-desktop-nav = hook för DE-only CSS (påverkar inte andra språk) */}
+  <nav className="flex items-center gap-8 text-[15px] font-semibold text-slate-900 fc-desktop-nav">
     <a href="#how" className="hover:text-slate-700 transition-colors">
       {t('nav.compensation')}
     </a>
@@ -288,10 +288,11 @@ export default function Home() {
   </button>
 
   {/* Följ ärende */}
+  {/* ✅ fc-track-btn = hook för DE-only CSS för att minska knappen */}
   <button
     type="button"
     onClick={openTrackModal}
-    className="inline-flex items-center gap-2 rounded-md border border-slate-900/10 bg-slate-900 px-4 py-2 text-[14px] font-semibold text-white shadow-sm hover:bg-slate-800 hover:shadow-md transition"
+    className="inline-flex items-center gap-2 rounded-md border border-slate-900/10 bg-slate-900 px-4 py-2 text-[14px] font-semibold text-white shadow-sm hover:bg-slate-800 hover:shadow-md transition fc-track-btn"
   >
     <UserCircleIcon className="h-5 w-5" />
     {t('track.button')}

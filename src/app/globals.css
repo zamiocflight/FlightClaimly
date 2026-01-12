@@ -30,3 +30,54 @@ button,
 [data-clickable="true"] {
   cursor: pointer;
 }
+/* =========================================================
+   DE-only layout polish (påverkar bara /de eftersom html[lang="de"])
+   ========================================================= */
+
+html[lang="de"] .fc-desktop-navwrap {
+  /* ✅ låter nav + knappar ligga stabilt utan att trycka ut allt */
+  gap: 16px; /* motsvarar ungefär Tailwind gap-4 */
+}
+
+html[lang="de"] .fc-desktop-nav {
+  /* ✅ gör menyn mer kompakt för tyska (längre ord) */
+  gap: 26px; /* mindre än gap-8 */
+  font-size: 14px; /* lite mindre än 15px */
+  white-space: nowrap; /* undvik “ful” radbrytning i rubrikerna */
+}
+
+html[lang="de"] .fc-track-btn {
+  /* ✅ gör Track-knappen mindre i DE */
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+html[lang="de"] .fc-track-btn svg {
+  /* ✅ ikonen lite mindre så knappen ser tight ut */
+  width: 18px;
+  height: 18px;
+}
+/* =========================================================
+   FI-only header/nav polish (påverkar endast finska /fi)
+   Orsak: längre labels -> wrapping + ful spacing
+   ========================================================= */
+
+html[lang="fi"] .fc-desktop-navwrap {
+  gap: 14px; /* lite tajtare så allt får plats på en rad */
+}
+
+html[lang="fi"] .fc-desktop-nav {
+  gap: 18px;
+  font-size: 14px;
+  white-space: nowrap; /* stoppar radbrytning i top-nav */
+}
+
+html[lang="fi"] .fc-track-btn {
+  padding: 0.45rem 0.75rem;
+  font-size: 13px;
+}
+
+html[lang="fi"] .fc-track-btn svg {
+  width: 16px;
+  height: 16px;
+}

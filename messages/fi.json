@@ -1,0 +1,1082 @@
+{
+  "errors": {
+    "sendFailed": "Lähetys epäonnistui, yritä uudelleen.",
+    "noClaimId": "Vastauksessa ei ole tapaus-ID:tä.",
+    "network": "Verkkovirhe. Yritä uudelleen.",
+    "invalidFlightNumber": "Anna kelvollinen lentonumero (esim. SK123)."
+  },
+
+  "header": {
+    "language": {
+      "label": "FI ▾",
+      "aria": "Vaihda kieltä"
+    }
+  },
+
+  "mobileNav": {
+    "title": "Valikko",
+    "openAria": "Avaa valikko",
+    "openSr": "Avaa valikko",
+    "closeAria": "Sulje valikko"
+  },
+
+  "nav": {
+    "compensation": "Hae korvausta",
+    "delays": "Lentojen viivästykset",
+    "cancellations": "Lentojen peruutukset",
+    "rights": "Oikeutesi",
+    "faq": "UKK",
+    "about": "Tietoa meistä",
+    "contact": "Yhteystiedot",
+    "track": "Seuraa tapausta",
+    "langLabel": "Kieli"
+  },
+
+  "track": {
+    "button": "Seuraa tapausta",
+    "title": "Seuraa tapaustasi",
+    "description": "Syötä sähköpostiosoite, jota käytit lähettäessäsi tapauksen. Jos löydämme tapauksen, lähetämme sinulle suojatun linkin, jolla voit seurata tilaa.",
+    "closeAria": "Sulje",
+    "emailLabel": "Sähköpostiosoite",
+    "emailPlaceholder": "sinun@mail.fi",
+    "cancel": "Peruuta",
+    "resend": "Etkö löytänyt linkkiä? Lähetä uudelleen",
+    "send": "Lähetä linkki",
+    "sending": "Lähetetään linkkiä…",
+    "messages": {
+      "success": "Jos löydämme tähän sähköpostiin liittyvän tapauksen, lähetämme suojatun seurantasilinkin muutaman minuutin kuluessa.",
+      "errorGeneric": "Linkkiä ei voitu lähettää juuri nyt. Yritä hetken kuluttua uudelleen.",
+      "errorTechnical": "Tekninen virhe – yritä hetken kuluttua uudelleen."
+    }
+  },
+
+  "sections": {
+    "readMore": "Lue lisää"
+  },
+
+  "how": {
+    "badge": "Näin se toimii",
+    "title": "3 helppoa askelta korvaukseen",
+    "desc": {
+      "before": "Teemme prosessista mahdollisimman helpon: lähetät lentosi tiedot, me hoidamme asian lentoyhtiön kanssa ja saat korvauksen maksuun oikeuksiesi mukaisesti",
+      "link": "EU261-oikeutesi",
+      "after": "."
+    },
+    "stepLabel": "Vaihe {n}",
+    "steps": {
+      "1": {
+        "title": "Lähetä lentosi tiedot",
+        "body": "Täytä lentonumero, päivämäärä ja reitti. Teemme nopean ennakkotarkistuksen ja vahvistamme, voiko tapauksesi olla korvaukseen oikeuttava EU261:n mukaan."
+      },
+      "2": {
+        "title": "Hoidamme tapauksen",
+        "body": "Lisäät tietosi ja liitteet. Otamme yhteyttä lentoyhtiöön, hoidamme kaiken muodollisen ja pidämme sinut ajan tasalla matkan varrella."
+      },
+      "3": {
+        "title": "Saat korvauksesi",
+        "body": "Kun lentoyhtiö maksaa, maksamme korvauksen sinulle vähennettynä palkkiollamme. Ei tulosta – ei palkkiota."
+      }
+    }
+  },
+
+  "trustRow": {
+    "eu261": "EU261-oikeudet",
+    "lowFee": "No win, no fee – matala palkkio",
+    "gdpr": "GDPR-turvallinen käsittely"
+  },
+
+  "why": {
+    "title": "Miksi valita FlightClaimly?",
+    "cards": {
+      "peace": {
+        "badge": "Turvallisuus",
+        "title": "Me hoidamme asian – sinä voit rentoutua",
+        "body": "Hoidamme kaiken yhteydenpidon lentoyhtiöön puolestasi ja pidämme sinut ajan tasalla koko matkan."
+      },
+      "fee": {
+        "badge": "Alhaisin palkkio",
+        "title": "Enemmän rahaa sinulle",
+        "body": "Meillä on yksi Pohjoismaiden alhaisimmista palkkioista ja olemme täysin läpinäkyviä."
+      },
+      "smart": {
+        "badge": "Fiksu & reilu",
+        "title": "Teknologia + juristi tarvittaessa",
+        "body": "Automatisoimme sen minkä voimme, ja käytämme juridista apua kun tarvitaan – ilman riskiä sinulle."
+      }
+    }
+  },
+
+  "footer": {
+    "pitch": "Autamme matkustajia saamaan heille EU261:n mukaan kuuluvan korvauksen – ilman ennakkokuluja.",
+    "badges": {
+      "lowFee": "No win, no fee – matala palkkio",
+      "eu": "EU261 / UK261",
+      "gdpr": "GDPR-yhteensopiva käsittely"
+    },
+    "columns": {
+      "services": "Palvelut",
+      "company": "FlightClaimly"
+    },
+    "links": {
+      "rightsLabel": "Oikeutesi (EU261)",
+      "terms": "Ehdot",
+      "privacy": "Tietosuoja"
+    },
+    "bottom": {
+      "copyright": "© {year} FlightClaimly. Kaikki oikeudet pidätetään.",
+      "disclaimer": "FlightClaimly on itsenäinen toimija eikä ole sidoksissa lentoyhtiöihin."
+    }
+  },
+
+  "hero": {
+    "badges": {
+      "eu": "EU261 / UK261",
+      "fee": "MATALA PALKKIO",
+      "noWinNoFee": "NO WIN, NO FEE"
+    },
+    "title": "Saat jopa 600 € korvausta viivästyneistä tai peruutetuista lennoista – ilman vaivaa.",
+    "subtitle": {
+      "beforeDelayed": "Tarkista, oikeuttaako",
+      "delayedLink": "viivästynyt lentosi",
+      "between": "tai",
+      "cancelledLink": "peruutettu lentosi",
+      "afterCancelled": "korvaukseen",
+      "eu261Link": "EU261:n",
+      "afterEu261": "mukaan. Autamme sinua vaatimaan korvauksen lentoyhtiöltä – maksat vain, jos saat rahaa tilillesi."
+    },
+    "cta": "Tarkista lentoni nyt",
+    "trust": {
+      "beforeLink": "Kestää noin 2 minuuttia. Ei maksettavaa, jos et saa korvausta –",
+      "link": "lue lisää palkkiostamme.",
+      "afterLink": ""
+    }
+  },
+
+  "precheck": {
+    "steps": {
+      "step1": "Tarkista lentosi",
+      "step2": "Täytä tietosi"
+    },
+    "quick": {
+      "title": "Nopea ennakkotarkistus",
+      "descBeforeLink": "Syötä lentosi tiedot – teemme nopean arvion, voitko olla oikeutettu korvaukseen",
+      "eu261Link": "EU261:n",
+      "descAfterLink": "mukaan.",
+      "labels": {
+        "flightNumber": "Lentonumero",
+        "date": "Päivämäärä",
+        "from": "Mistä",
+        "to": "Minne",
+        "connectionTitle": "Välilasku",
+        "direct": "Suora lento",
+        "withConnection": "Välilaskulla"
+      },
+      "placeholders": {
+        "flightNumber": "esim. SK1420",
+        "from": "CPH",
+        "to": "ARN",
+        "connection": "esim. FRA, DOH tai Paris CDG"
+      },
+      "actions": {
+        "remove": "Poista",
+        "addAirport": "+ Lisää toinen lentoasema"
+      },
+      "submit": {
+        "default": "Tarkista lentoni",
+        "checking": "Tarkistetaan…"
+      }
+    },
+    "details": {
+      "goodNewsStrong": "Hyviä uutisia!",
+      "goodNewsText": "Paljon viittaa siihen, että lentosi voi olla korvaukseen oikeuttava EU261:n mukaan.",
+      "title": "Tietosi",
+      "labels": {
+        "fullName": "Koko nimi",
+        "email": "Sähköposti",
+        "phone": "Puhelinnumero",
+        "bookingNumber": "Varausnumero"
+      },
+      "placeholders": {
+        "fullName": "Nimesi",
+        "email": "sinun@mail.fi",
+        "phone": "+358 40 123 45 67",
+        "bookingNumber": "ABC123"
+      },
+      "submit": {
+        "default": "Lähetä tapaus",
+        "sending": "Lähetetään tapausta…"
+      },
+      "consent": {
+        "before": "Lähettämällä hyväksyt",
+        "terms": "Ehdot",
+        "and": "&",
+        "privacy": "Tietosuoja",
+        "after": "."
+      },
+      "trust": {
+        "gdpr": "GDPR-yhteensopiva",
+        "noWinNoFee": "No win, no fee",
+        "fastHandling": "Nopea käsittely"
+      }
+    }
+  },
+
+  "faq": {
+    "meta": {
+      "title": "Usein kysytyt kysymykset lentokorvauksista | FlightClaimly",
+      "description": "Vastauksia yleisimpiin kysymyksiin EU261:stä, lentojen viivästyksistä, peruutuksista, korvauksista ja siitä, miten FlightClaimly auttaa sinua saamaan oikean korvauksen."
+    },
+    "badge": "UKK",
+    "title": "Usein kysytyt kysymykset lentokorvauksista",
+    "intro": "Olemme koonneet vastaukset yleisimpiin kysymyksiin korvauksista viivästyneistä tai peruutetuista lennoista ja siitä, miten FlightClaimly toimii.",
+    "jsonld": {
+      "eligibilityAnswer": "Yleissääntönä voit olla oikeutettu korvaukseen, jos saavuit lopulliseen määränpäähäsi yli kolme tuntia myöhässä, lento peruutettiin lyhyellä varoitusajalla, sinulta evättiin pääsy koneeseen voimassa olevasta lipusta huolimatta, ja matka lähti EU:sta tai sitä operoi EU-lentoyhtiö.",
+      "securityAnswer": "Kyllä. Käytämme tietojasi vain tapausesi hoitamiseen ja lakisääteisten velvoitteiden täyttämiseen. Lisätietoja on tietosuojakäytännössämme."
+    },
+    "items": {
+      "eu261": {
+        "q": "Mitä on EU261:n mukainen lentokorvaus?",
+        "a": "EU261 on EU-asetus, joka antaa matkustajille oikeuden rahalliseen korvaukseen, kun lennot viivästyvät merkittävästi, peruutetaan tai kun pääsy koneeseen evätään tietyin edellytyksin. Korvauksen määrä riippuu muun muassa lentomatkan pituudesta."
+      },
+      "eligibility": {
+        "q": "Milloin olen oikeutettu korvaukseen?",
+        "lead": "Yleissääntönä voit olla oikeutettu korvaukseen, jos:",
+        "bullets": [
+          "saavuit lopulliseen määränpäähäsi yli 3 tuntia myöhässä",
+          "lento peruutettiin lyhyellä varoitusajalla",
+          "sinulta evättiin pääsy koneeseen voimassa olevasta lipusta huolimatta",
+          "matka lähti EU-maasta tai sitä operoi EU-lentoyhtiö"
+        ]
+      },
+      "amount": {
+        "q": "Kuinka paljon rahaa voin saada?",
+        "lead": "EU261:n mukainen korvaus on yleensä",
+        "highlight": "250 € – 600 € per henkilö",
+        "tail": ", riippuen lentomatkan pituudesta ja matkan tyypistä.",
+        "a": "EU261:n mukainen korvaus on yleensä 250 € – 600 € per henkilö, riippuen lentomatkan pituudesta ja matkan tyypistä."
+      },
+      "perPerson": {
+        "q": "Onko korvaus per henkilö vai per varaus?",
+        "a": "Korvaus koskee jokaista matkustajaa erikseen, ei varausta. Jos matkustatte useamman hengen seurueessa, kokonaissumma voi olla merkittävä."
+      },
+      "timeLimit": {
+        "q": "Kuinka pitkältä ajalta taaksepäin voin vaatia korvausta?",
+        "a": "Se riippuu sovellettavasta maasta, mutta monissa tapauksissa voit vaatia korvausta useita vuosia matkapäivän jälkeen."
+      },
+      "cause": {
+        "q": "Onko viivästyksen syyllä merkitystä?",
+        "a": "Kyllä. Lentoyhtiö voi välttyä maksamasta korvausta, jos kyse on niin sanotuista “poikkeuksellisista olosuhteista”."
+      },
+      "businessModel": {
+        "q": "Miten FlightClaimly ansaitsee rahaa?",
+        "lead": "Toimimme periaatteella",
+        "highlight": "no win, no fee",
+        "a": "FlightClaimly toimii periaatteella no win, no fee. Tapauksen lähettäminen ei maksa mitään, ja veloitamme vain prosenttiosuuden siitä korvauksesta, jonka saat maksettuna."
+      },
+      "process": {
+        "q": "Miten prosessi etenee käytännössä?",
+        "lead": "Lyhyesti:",
+        "steps": [
+          "täytät lentosi ja tietosi",
+          "teemme arvion ja otamme yhteyttä lentoyhtiöön",
+          "käsittelemme vastaukset, vastaväitteet ja täydennykset",
+          "voitolla saat korvauksen maksettuna"
+        ]
+      },
+      "timing": {
+        "q": "Kuinka kauan kestää, ennen kuin saan vastauksen?",
+        "a": "Osa tapauksista ratkeaa muutamassa viikossa, toiset voivat kestää pidempään."
+      },
+      "documents": {
+        "q": "Mitä asiakirjoja tarvitsen?",
+        "lead": "Tärkeimmät ovat:",
+        "list": [
+          "varausvahvistus",
+          "boarding pass",
+          "viestintä lentoyhtiöltä"
+        ]
+      },
+      "security": {
+        "q": "Ovatko tietoni turvassa?",
+        "lead": "Kyllä. Käytämme tietojasi vain tapausesi hoitamiseen. Lisätietoja on meidän",
+        "linkText": "tietosuojakäytännössämme"
+      },
+      "contact": {
+        "q": "En löydä vastausta – mitä teen?",
+        "lead": "Lähetä meille sähköpostia:"
+      }
+    },
+    "footer": {
+      "lead": "Valmiina tarkistamaan, voiko lentosi oikeuttaa korvaukseen?",
+      "cta": "Tarkista lentoni"
+    }
+  },
+
+  "cancellations": {
+    "meta": {
+      "title": "Peruutettu lento – korvaus EU261:n mukaan | FlightClaimly",
+      "description": "Peruutettu lento? Opi, milloin olet oikeutettu 250–600 € korvaukseen EU261:n mukaan, mitä eroa on uudelleenreitityksellä ja hyvityksellä sekä miten FlightClaimly hoitaa vaatimuksesi lentoyhtiötä vastaan."
+    },
+    "badge": "Peruutetut lennot",
+    "title": "Peruutettu lento – oikeutesi korvaukseen EU261:n mukaan",
+    "intro": "Kun lento peruutetaan, koko matka menee helposti uusiksi – joskus uudelleenreitityksen kautta, joskus loma tai tärkeät tapaamiset kärsivät. EU261 antaa vahvat oikeudet peruutetuissa lennoissa. Käymme läpi perusteet ja sen, miten FlightClaimly voi auttaa.",
+    "sections": {
+      "whenIsCancelled": {
+        "title": "Milloin lento katsotaan peruutetuksi?",
+        "p1": "Lento katsotaan peruutetuksi, kun alkuperäistä lentoa ei suoriteta ja matkustajat joko:",
+        "list": [
+          "uudelleenreititetään toiselle lennolle, tai",
+          "saavat lipun hinnan takaisin matkustamisen sijaan"
+        ],
+        "note": "Myös suuret aikataulumuutokset voivat käytännössä olla peruutus – autamme sinua arvioimaan tämän, kun lähetät tapauksen."
+      },
+      "whenMoney": {
+        "title": "Milloin voit saada rahallisen korvauksen?",
+        "p1": "Voit olla oikeutettu EU261-korvaukseen, jos:",
+        "list": [
+          "lento peruutetaan lyhyellä varoitusajalla (yleensä alle 14 päivää ennen lähtöä)",
+          "uudelleenreititys tarkoittaa, että saavut selvästi myöhemmin kuin suunniteltu",
+          "lentoyhtiö on vastuussa peruutuksen syystä"
+        ],
+        "note": "Tarkat säännöt riippuvat siitä, milloin sinulle ilmoitettiin peruutuksesta ja mitä vaihtoehtoista matkaa tarjottiin. FlightClaimly auttaa laskemaan, mitä tapauksessasi sovelletaan."
+      },
+      "amount": {
+        "title": "Kuinka paljon voit saada korvausta?",
+        "p1": "Korvauksen määrä riippuu lentomatkan pituudesta ja siitä, kuinka paljon matkaasi vaikutetaan. Tyypillisiä EU261:n mukaisia kiinteitä korvaussummia ovat:",
+        "list": [
+          "enintään 250 € lyhyillä lennoilla (noin 0–1 500 km)",
+          "enintään 400 € keskipitkillä lennoilla EU:n sisällä tai enintään 3 500 km",
+          "enintään 600 € pidemmillä kansainvälisillä lennoilla"
+        ],
+        "note": "Summia voidaan alentaa, jos lentoyhtiö tarjoaa uudelleenreitityksen, jolla pääset perille suhteellisen pienellä viiveellä. Analysoimme tämän puolestasi, kun lähetät tapauksen."
+      },
+      "rerouteOrRefund": {
+        "title": "Uudelleenreititys tai hyvitys – sinulla on oikeus valita",
+        "p1": "Kun lento peruutetaan, sinulla on yleensä oikeus valita:",
+        "list": [
+          "uudelleenreititys myöhemmälle lennolle mahdollisimman pian, tai",
+          "lipun hinnan palautus siltä osuudelta, jota et voinut matkustaa"
+        ],
+        "p2": "Joissakin tilanteissa sinulla voi myös olla oikeus korvaukseen lisäkuluista, kuten hotellista tai kuljetuksista, jos joudut jäämään pidemmäksi aikaa."
+      },
+      "extraordinary": {
+        "title": "Milloin lentoyhtiö voi evätä korvauksen?",
+        "p1": "Lentoyhtiö voi välttyä maksamasta korvausta, jos peruutus johtuu \"poikkeuksellisista olosuhteista\", kuten:",
+        "list": [
+          "vakava sää tai luonnonkatastrofit",
+          "turvallisuusuhat tai ilmatilan sulkemiset",
+          "lakot, joihin lentoyhtiö ei voi vaikuttaa"
+        ],
+        "p2": {
+          "before": "Tekniset viat, henkilöstöpula tai lentoyhtiön sisäiset ongelmat eivät sen sijaan usein",
+          "strong": "ole",
+          "after": "poikkeuksellisia olosuhteita. Monet hylkäykset ovat virheellisiä – siinä voimme auttaa sinua etenemään."
+        }
+      },
+      "examples": {
+        "title": "Esimerkkejä: milloin voit olla oikeutettu korvaukseen",
+        "list": [
+          "Saat ilmoituksen 3 päivää ennen lähtöä, että lentosi on peruutettu, ja sinulle tarjotaan uudelleenreititys, jolla saavut perille monta tuntia myöhemmin – korvaus voi tulla kyseeseen.",
+          "Lentoyhtiö peruuttaa iltalentosi teknisen vian vuoksi ja siirtää sinut seuraavalle päivälle – voit olla oikeutettu sekä korvaukseen että hotelliin.",
+          "Lento peruutetaan samana päivänä ilman selkeää selitystä ja joudut ostamaan uuden lipun toiselta yhtiöltä – tämäkin voi oikeuttaa korvaukseen."
+        ]
+      },
+      "links": {
+        "title": "Haluatko perehtyä sääntöihin tarkemmin?",
+        "p1": {
+          "before": "Sivulta",
+          "linkText": "Oikeutesi",
+          "after": "löydät laajemman katsauksen EU261:een ja siihen, mitä tilanteita se kattaa."
+        },
+        "p2": {
+          "before": "Voit myös lukea meidän",
+          "linkText": "UKK:n",
+          "after": "jossa on lyhyet vastaukset yleisiin kysymyksiin."
+        }
+      }
+    },
+    "footer": {
+      "lead": "Onko lentosi peruutettu? Tarkista, voitko saada jopa 6 000 kr korvausta – se vie vain hetken.",
+      "cta": "Tarkista lentoni"
+    }
+  },
+
+  "contact": {
+    "meta": {
+      "title": "Ota yhteyttä FlightClaimlyyn | Tuki ja kysymykset",
+      "description": "Ota yhteyttä FlightClaimlyyn, jos sinulla on kysyttävää tapauksestasi, EU261:stä tai prosessin kulusta. Vastaamme mahdollisimman nopeasti."
+    },
+    "badge": "Yhteystiedot",
+    "title": "Ota yhteyttä FlightClaimlyyn",
+    "intro": "Onko sinulla kysyttävää tapauksesta, EU261-säännöistä tai siitä, miten prosessi toimii? Olet aina tervetullut ottamaan yhteyttä. Vastaamme mahdollisimman nopeasti.",
+    "email": {
+      "title": "Sähköposti",
+      "lead": "Saat meidät parhaiten kiinni sähköpostilla:",
+      "note": "Palaamme asiaan mahdollisimman pian. Ruuhka-aikoina vastausaika voi olla hieman pidempi."
+    },
+    "faq": {
+      "title": "Usein kysytyt kysymykset",
+      "before": "Moniin kysymyksiin on jo vastattu meidän ",
+      "link": "UKK:ssa",
+      "after": ". Sieltä löydät lyhyet ja selkeät vastaukset korvauksista, prosessista ja eri tilanteista."
+    },
+    "rights": {
+      "title": "Oikeutesi",
+      "lead": "Haluatko lukea lisää siitä, mihin olet oikeutettu EU261:n mukaan? Katso:",
+      "link": "Oikeutesi"
+    },
+    "case": {
+      "title": "Onko sinulla käynnissä oleva tapaus?",
+      "p1": "Voit seurata tilaa milloin tahansa linkin kautta, jonka sait sähköpostissa, kun loit tapauksen.",
+      "before": "Kadotitko linkin? Ei hätää – kirjoita meille osoitteeseen",
+      "after": ", niin lähetämme sen uudelleen."
+    },
+    "footer": {
+      "lead": "Haluatko tarkistaa, oikeuttaako lentosi korvaukseen? Se vie vain hetken.",
+      "cta": "Tarkista lentoni"
+    }
+  },
+
+  "compensation": {
+    "meta": {
+      "title": "Korvaussummat EU261:n mukaan – 250, 400 ja 600 € | FlightClaimly",
+      "description": "Katso, mitä korvaussummia voit saada EU261/UK261:n mukaan – 250, 400 tai 600 € per henkilö lentomatkan pituuden ja viivästyksen mukaan."
+    },
+    "badge": "Korvaussummat",
+    "title": "Korvaussummat EU261:n mukaan – 250, 400 ja 600 €",
+    "intro": "EU-asetus 261/2004 (”EU261”) antaa oikeuden kiinteisiin korvaussummiin, kun lentosi viivästyy merkittävästi, peruutetaan tai sinulta evätään pääsy koneeseen.",
+    "sections": {
+      "overview": {
+        "title": "Nopea yleiskuva – kuinka paljon voit saada?",
+        "p1": {
+          "before": "EU261:n mukainen korvaus on yleensä ",
+          "highlight": "250 € – 600 € per henkilö",
+          "after": ". Summa riippuu pääasiassa:"
+        },
+        "list": [
+          "lentomatkan pituudesta",
+          "onko lento EU:n sisäinen vai kansainvälinen",
+          "kuinka paljon viivästystä tai haittaa koit"
+        ],
+        "note": "Lipun hinnalla on yleensä vähemmän merkitystä – kaksi matkustajaa samalla lennolla saa tyypillisesti saman korvaussumman."
+      },
+
+      "table": {
+        "title": "Korvaustasot EU261:n mukaan",
+        "intro": "Summat riippuvat pääasiassa lentomatkasta ja häiriötyypistä. Taulukko antaa yleiskuvan.",
+        "head": {
+          "distance": "Etäisyys",
+          "type": "Milloin sovelletaan",
+          "amount": "Korvaus"
+        },
+        "rows": [
+          {
+            "distance": "Enintään 1 500 km",
+            "type": "Viivästys ≥ 3 tuntia / peruutettu lento",
+            "amount": "250 €"
+          },
+          {
+            "distance": "1 500–3 500 km",
+            "type": "Viivästys ≥ 3 tuntia / peruutettu lento",
+            "amount": "400 €"
+          },
+          {
+            "distance": "Yli 3 500 km (EU:n sisällä)",
+            "type": "Viivästys ≥ 3 tuntia / peruutettu lento",
+            "amount": "400 €"
+          },
+          {
+            "distance": "Yli 3 500 km (EU:n ulkopuolelle)",
+            "type": "Viivästys ≥ 3 tuntia / peruutettu lento",
+            "amount": "600 €"
+          }
+        ],
+        "note": "Autamme sinua arvioimaan, onko tapauksesi korvaukseen oikeuttava."
+      },
+
+      "reduction": {
+        "title": "Milloin korvausta voidaan alentaa?",
+        "p1": "Uudelleenreitityksessä, joka vie sinut perille lähellä alkuperäistä saapumisaikaa, korvaus voidaan joissain tapauksissa puolittaa.",
+        "list": [
+          "Lyhyet matkat: pieni viive saapumisessa",
+          "Keskipitkät matkat: kohtalainen viive saapumisessa",
+          "Pitkät matkat: rajattu viive saapumisessa"
+        ],
+        "note": "Arviointi perustuu aina todelliseen saapumisaikaan ja lentoyhtiön toimiin."
+      },
+
+      "types": {
+        "title": "Mitä häiriöitä asetus kattaa?",
+        "p1": "EU261 voi antaa oikeuden korvaukseen esimerkiksi seuraavissa tilanteissa:",
+        "list": [
+          "Viivästykset (usein ≥ 3 tuntia saapuessa)",
+          "Peruutetut lennot",
+          "Koneeseen pääsyn epääminen (ylivaraus)"
+        ],
+        "note": {
+          "before": "Lue lisää oikeuksistasi sivulta ",
+          "link": "Oikeutesi"
+        }
+      },
+
+      "examples": {
+        "title": "Esimerkkejä",
+        "list": [
+          "Lento saapuu 3 h 20 min myöhässä → voi oikeuttaa korvaukseen.",
+          "Lento peruutetaan samana päivänä → voi oikeuttaa korvaukseen ja uudelleenreititykseen.",
+          "Sinulta evätään pääsy koneeseen ylivarauksen vuoksi → voi oikeuttaa korvaukseen."
+        ],
+        "note": "Oikeus korvaukseen riippuu häiriön syystä."
+      },
+
+      "myths": {
+        "title": "Yleisiä väärinkäsityksiä",
+        "list": [
+          "Se pätee vain, jos lippu ostettiin suoraan lentoyhtiöltä.",
+          "Valitus on tehtävä heti lentokentällä.",
+          "Kaikki viivästykset oikeuttavat korvaukseen."
+        ],
+        "note": "Autamme sinua arvioimaan, onko tapauksesi korvaukseen oikeuttava."
+      }
+    },
+    "footer": {
+      "lead": "Haluatko nähdä, mikä korvaussumma voi koskea juuri sinun matkaasi?",
+      "cta": "Tarkista lentoni"
+    }
+  },
+
+  "delays": {
+    "meta": {
+      "title": "Viivästynyt lento – korvaus EU261:n mukaan | FlightClaimly",
+      "description": "Viivästynyt lento? Katso, milloin olet oikeutettu 250–600 € korvaukseen EU261/UK261:n mukaan, mitä pidetään merkittävänä viivästyksenä ja miten FlightClaimly auttaa sinua vaatimuksen hoitamisessa."
+    },
+    "badge": "Lentojen viivästykset",
+    "title": "Viivästynyt lento – näin saat korvauksen EU261:n mukaan",
+    "intro": "Viivästynyt lento voi pilata suunnitelmat, jatkoyhteydet ja lomat. EU261 antaa matkustajille vahvat oikeudet – monissa tapauksissa olet oikeutettu korvaukseen, kun saavut perille myöhässä. Tässä selitämme perusteet.",
+    "sections": {
+      "when": {
+        "title": "Milloin lento katsotaan merkittävästi viivästyneeksi?",
+        "p1": {
+          "before": "EU261:ssa ratkaisevaa on ennen kaikkea",
+          "highlight": "saapumisaika",
+          "after": ". Voit olla oikeutettu korvaukseen, kun:"
+        },
+        "list": [
+          "saavut 3 tuntia tai enemmän myöhässä suunnitellusta ajasta",
+          "missaat jatkoyhteyksiä ja saavut lopulliseen määränpäähäsi selvästi myöhässä",
+          "joudut odottamaan pitkään ilman kohtuullista apua lentoyhtiöltä"
+        ],
+        "note": "Pienemmät viivästykset eivät yleensä oikeuta rahalliseen korvaukseen, mutta voivat silti oikeuttaa ruokaan, juomaan tai uudelleenreititykseen. Autamme arvioimaan, mitä juuri sinun tapauksessasi sovelletaan."
+      },
+      "amount": {
+        "title": "Kuinka paljon voit saada viivästyksestä?",
+        "p1": "Merkittävien viivästysten korvaustasot ovat samankaltaisia kuin peruutuksissa ja riippuvat lentomatkan pituudesta:",
+        "list": [
+          "enintään 250 € lyhyillä lennoilla (noin 0–1 500 km)",
+          "enintään 400 € keskipitkillä lennoilla EU:n sisällä tai enintään 3 500 km",
+          "enintään 600 € pidemmillä kansainvälisillä lennoilla"
+        ],
+        "note": "Joissakin tapauksissa summia voidaan alentaa, jos lentoyhtiö tarjoaa uudelleenreitityksen, jolla pääset perille suhteellisen pienellä viiveellä. Me laskemme tämän puolestasi."
+      },
+      "care": {
+        "title": "Oikeutesi odotusaikana",
+        "p1": "Rahallisen korvauksen lisäksi voit pidemmissä viivästyksissä olla oikeutettu:",
+        "list": [
+          "ruokaan ja juomaan kohtuullisessa määrin",
+          "kahteen maksuttomaan puheluun tai viestiin",
+          "hotelliyöpymiseen, jos joudut jäämään yöksi",
+          "kuljetukseen lentokentän ja hotellin välillä",
+          "uudelleenreititykseen myöhemmälle lennolle tai joissain tapauksissa hyvitykseen"
+        ],
+        "note": "Säästä aina kuitit – voit usein vaatia välttämättömät kulut takaisin jälkikäteen, jos lentoyhtiö ei auttanut paikan päällä."
+      },
+      "exceptions": {
+        "title": "Milloin lentoyhtiö voi välttyä maksamasta korvausta?",
+        "p1": "Joissakin tilanteissa lentoyhtiö voi vedota ”poikkeuksellisiin olosuhteisiin” ja evätä korvauksen, esimerkiksi:",
+        "list": [
+          "vakava sää tai luonnonkatastrofit",
+          "suljetut lentokentät tai ilmatilarajoitukset",
+          "turvallisuusuhat tai tapahtumat, jotka ovat lentoyhtiön vaikutusvallan ulkopuolella"
+        ],
+        "p2": {
+          "before": "Tekniset viat, henkilöstöpula tai suunnitteluvirheet eivät sen sijaan yleensä",
+          "highlight": "ole",
+          "after": "hyväksyttäviä perusteita korvauksen epäämiselle. Monet matkustajat saavat ensin kielteisen vastauksen – siinä voimme auttaa sinua etenemään."
+        }
+      },
+      "examples": {
+        "title": "Esimerkkejä: milloin voit olla oikeutettu korvaukseen",
+        "list": [
+          "Lentosi Tukholmasta Barcelonaan saapuu 3 tuntia ja 45 minuuttia myöhässä – voit olla oikeutettu korvaukseen.",
+          "Missaat kaukolentosi ensimmäisen osuuden viivästyksen vuoksi ja saavut lopulliseen määränpäähäsi yli 3 tuntia myöhässä – koko matka voi kuulua asetuksen piiriin.",
+          "Lento viivästyy 4 tuntia teknisen vian vuoksi – usein korvaukseen oikeuttavaa."
+        ]
+      },
+      "links": {
+        "title": "Haluatko lukea säännöistä lisää?",
+        "rights": {
+          "before": "Sivulta",
+          "link": "Oikeutesi",
+          "after": "löydät laajemman katsauksen EU261:een ja siihen, mitä peruutuksissa, ylivarauksissa ja muissa tilanteissa sovelletaan."
+        },
+        "faq": {
+          "before": "Voit myös vilkaista meidän",
+          "link": "UKK:ta",
+          "after": "jossa vastaamme lyhyesti yleisiin kysymyksiin."
+        }
+      }
+    },
+    "footer": {
+      "lead": "Onko lentosi viivästynyt? Tarkista, voitko saada jopa 6 000 kr korvausta – se vie vain hetken.",
+      "cta": "Tarkista lentoni"
+    }
+  },
+
+  "login": {
+    "title": "Admin-kirjautuminen",
+    "passwordLabel": "Salasana",
+    "passwordPlaceholder": "••••••••",
+    "submit": "Kirjaudu sisään",
+    "loading": "Kirjaudutaan…",
+    "errors": {
+      "invalidPassword": "Väärä salasana",
+      "generic": "Kirjautuminen epäonnistui"
+    }
+  },
+
+  "privacy": {
+    "meta": {
+      "title": "Tietosuojakäytäntö | FlightClaimly",
+      "description": "Lue, miten FlightClaimly käsittelee henkilötietoja, mitä tietoja keräämme, mihin tarkoituksiin ja mitkä ovat oikeutesi GDPR:n mukaan."
+    },
+    "badge": "Tietosuoja",
+    "title": "FlightClaimlyn tietosuojakäytäntö",
+    "intro": "Yksityisyytesi on meille tärkeä. Tällä sivulla kerromme, mitä tietoja keräämme, miksi keräämme niitä, miten käytämme niitä ja mitkä oikeudet sinulla on.",
+
+    "controller": {
+      "title": "Rekisterinpitäjä",
+      "body": "FlightClaimly (”me”, ”meitä”) on rekisterinpitäjä henkilötietojen käsittelyssä, joka liittyy lentokorvauspalveluumme."
+    },
+
+    "dataCollected": {
+      "title": "Mitä tietoja keräämme?",
+      "intro": "Kun käytät palveluamme, saatamme käsitellä seuraavanlaisia henkilötietoja:",
+      "items": [
+        "yhteystiedot (nimi, sähköposti, puhelinnumero)",
+        "varaustiedot (varausnumero, lentonumero, päivämäärät, reitit)",
+        "liput ja boarding passit (asiakirjat, PDF:t, kuvat)",
+        "tiedot viivästyksestä, peruutuksesta tai muusta häiriöstä",
+        "viestintä kanssasi (sähköpostit, viestit)",
+        "tekniset tiedot (IP-osoite, laite, selain) siltä osin kuin se on tarpeen turvallisuuden ja toiminnan varmistamiseksi"
+      ]
+    },
+
+    "purpose": {
+      "title": "Miksi käsittelemme tietojasi?",
+      "intro": "Käsittelemme henkilötietojasi voidaksemme:",
+      "items": [
+        "arvioida, oletko oikeutettu korvaukseen EU261:n mukaan",
+        "luoda ja hallinnoida tapaustasi lentoyhtiötä vastaan",
+        "viestiä kanssasi tapauksen tilasta",
+        "hoitaa maksut, kun korvaus hyväksytään",
+        "täyttää lakisääteiset velvoitteet (esim. kirjanpito)",
+        "parantaa ja suojata palveluamme"
+      ]
+    },
+
+    "legalBasis": {
+      "title": "Käsittelyn oikeusperuste",
+      "intro": "Henkilötietojesi käsittely perustuu pääasiassa:",
+      "items": [
+        "<strong>Sopimukseen</strong> – jotta voimme hoitaa vaatimustasi lentoyhtiötä vastaan",
+        "<strong>Lakisääteiseen velvoitteeseen</strong> – esim. kirjanpitosäännöt",
+        "<strong>Oikeutettuun etuun</strong> – turvallisuus ja toiminnan varmistaminen"
+      ]
+    },
+
+    "retention": {
+      "title": "Kuinka kauan säilytämme tietojasi?",
+      "intro": "Säilytämme tietojasi niin kauan kuin se on tarpeen, jotta voimme:",
+      "items": [
+        "hoitaa ja saattaa tapauksen päätökseen",
+        "käsitellä mahdolliset valitukset tai riidat",
+        "täyttää lakisääteiset velvoitteet"
+      ],
+      "note": "Kun tietoja ei enää tarvita, poistamme ne tai anonymisoimme ne turvallisesti."
+    },
+
+    "sharing": {
+      "title": "Kenelle jaamme tietojasi?",
+      "intro": "Jaamme tietojasi vain osapuolille, joita tarvitaan palvelun toimittamiseen:",
+      "items": [
+        "lentoyhtiöt ja niiden edustajat",
+        "juridiset asiamiehet tai yhteistyökumppanit",
+        "IT-toimittajat (hosting, sähköposti)"
+      ],
+      "note": "Emme myy henkilötietojasi kolmansille osapuolille."
+    },
+
+    "rights": {
+      "title": "Oikeutesi",
+      "intro": "Rekisteröitynä sinulla on oikeus:",
+      "items": [
+        "pyytää pääsyä tietoihin, joita käsittelemme",
+        "pyytää virheellisten tietojen oikaisua",
+        "pyytää tietojen poistamista, kun niitä ei enää tarvita",
+        "vastustaa käsittelyä tai pyytää sen rajoittamista",
+        "pyytää tietojen siirtoa tietyissä tapauksissa"
+      ],
+      "contactBefore": "Haluatko käyttää jotakin näistä oikeuksista? Ota yhteyttä osoitteeseen"
+    },
+
+    "complaints": {
+      "title": "Valitukset",
+      "body": "Jos katsot, että käsittelemme tietojasi vastoin sovellettavia sääntöjä, voit tehdä valituksen toimivaltaiselle tietosuojaviranomaiselle."
+    },
+
+    "changes": {
+      "title": "Muutokset tähän käytäntöön",
+      "body": "Saatamme päivittää tätä tietosuojakäytäntöä tarvittaessa. Uusin versio on aina saatavilla täällä."
+    },
+
+    "footer": {
+      "before": "Onko sinulla kysyttävää henkilötietojesi käsittelystä? Ota yhteyttä osoitteeseen"
+    }
+  },
+
+  "rights": {
+    "meta": {
+      "title": "EU261 – oikeutesi lentomatkustajana | FlightClaimly",
+      "description": "Opi oikeutesi EU261/UK261:n mukaan viivästyneillä, peruutetuilla ja ylivaratuilla lennoilla. Katso, milloin olet oikeutettu 250–600 € korvaukseen ja miten FlightClaimly auttaa sinua saamaan rahat."
+    },
+    "badge": "Oikeutesi",
+    "title": "Oikeutesi lentomatkustajana EU261:n mukaan",
+    "intro": "EU-asetus 261/2004 (\"EU261\") antaa lentomatkustajille vahvat oikeudet viivästyneissä, peruutetuissa tai ylivaratuissa lennoissa. Tässä selitämme perusteet – ja miten FlightClaimly voi auttaa sinua saamaan sinulle kuuluvan korvauksen.",
+
+    "whenApplies": {
+      "title": "Milloin EU261 soveltuu?",
+      "intro": "EU261 soveltuu seuraavissa tilanteissa:",
+      "bullets": [
+        "lento lähtee EU/ETA-alueen tai Yhdistyneen kuningaskunnan maasta",
+        "lento saapuu EU/ETA-alueelle tai Yhdistyneeseen kuningaskuntaan EU-pohjaisen lentoyhtiön operoimana",
+        "sinulla on vahvistettu varaus ja saavuit ajoissa lähtöselvitykseen"
+      ],
+      "note": "Myös tietyt jatkolennot ja välilaskulliset matkat voivat kuulua asetuksen piiriin riippuen siitä, miten lippu on varattu. Autamme sinua arvioimaan tämän."
+    },
+
+    "covered": {
+      "title": "Mitä tilanteita se kattaa?",
+      "lead": "Voit olla oikeutettu korvaukseen, jos:",
+      "bullets": [
+        "lentosi viivästyy merkittävästi saapuessa (usein 3 tuntia tai enemmän)",
+        "lentosi peruutetaan lyhyellä varoitusajalla",
+        "sinulta evätään pääsy koneeseen ylivarauksen vuoksi"
+      ],
+      "after": "Rahallisen korvauksen lisäksi sinulla voi olla oikeus ruokaan, juomaan, hotelliin ja uudelleenreititykseen riippuen siitä, kuinka kauan ja kuinka pitkällä matkalla olet."
+    },
+
+    "amounts": {
+      "title": "Kuinka paljon korvausta voit saada?",
+      "intro": "Korvaus riippuu pääasiassa lentomatkan pituudesta ja siitä, kuinka paljon matkaasi vaikutettiin. Tyypillisiä EU261:n mukaisia kiinteitä korvaussummia ovat:",
+      "bullets": [
+        "enintään 250 € lyhyillä lennoilla (noin 0–1 500 km)",
+        "enintään 400 € keskipitkillä lennoilla EU:n sisällä tai enintään 3 500 km",
+        "enintään 600 € pidemmillä kansainvälisillä lennoilla"
+      ],
+      "note": "Tarkka summa voi vaihdella reitin, viivästyksen pituuden ja tarjotun uudelleenreitityksen mukaan. FlightClaimly auttaa laskemaan oikean tason juuri sinun matkallesi."
+    },
+
+    "exceptions": {
+      "title": "Milloin et ole oikeutettu korvaukseen?",
+      "intro": "Lentoyhtiö voi välttyä maksamasta korvausta, jos viivästys tai peruutus johtuu niin sanotuista \"poikkeuksellisista olosuhteista\", kuten:",
+      "bullets": [
+        "vakava sää tai luonnonkatastrofit",
+        "turvallisuusriskit tai ilmatilan sulkemiset",
+        "lakot, jotka ovat lentoyhtiön vaikutusvallan ulkopuolella (esim. lentokenttähenkilöstö tai lennonjohto)"
+      ],
+      "afterBeforeStrong": "Tekniset ongelmat tai puutteet suunnittelussa eivät usein ",
+      "afterStrong": "ole",
+      "afterTail": "poikkeuksellisia olosuhteita. Monet lentoyhtiöiden hylkäykset ovat virheellisiä – siinä voimme auttaa sinua valittamaan päätöksestä."
+    },
+
+    "save": {
+      "title": "Mitä kannattaa säilyttää?",
+      "intro": "Tapauksen hoitamiseksi on hyvä, jos sinulla on:",
+      "bullets": [
+        "varausvahvistus tai lippu (mielellään PDF:nä tai kuvana)",
+        "boarding pass, jos ehdit tehdä lähtöselvityksen",
+        "mahdolliset kuitit ruoasta, hotellista tai kuljetuksista",
+        "lyhyt kuvaus siitä, mitä tapahtui (ajat, lentoyhtiön ilmoitukset)"
+      ],
+      "note": "Voit ladata kaiken suoraan meille, kun luot tapauksen – autamme sinua järjestämään aineiston."
+    },
+
+    "links": {
+      "title": "Haluatko tietää lisää tietyistä tilanteista?",
+      "lead": "Lue lisää:",
+      "delaysText": "Viivästyneet lennot",
+      "delaysAfter": " – mitä sovelletaan pitkiin viivästyksiin.",
+      "cancellationsText": "Peruutetut lennot",
+      "cancellationsAfter": " – oikeutesi, kun lento peruutetaan.",
+      "faqText": "Usein kysytyt kysymykset",
+      "faqAfter": " – lyhyet vastaukset yleisimpiin kysymyksiin."
+    },
+
+    "footer": {
+      "lead": "Uskotko, että lentosi kuuluu EU261:n piiriin? Tarkista heti, oletko oikeutettu korvaukseen – se vie vain hetken.",
+      "cta": "Tarkista, olenko oikeutettu korvaukseen"
+    }
+  },
+
+  "terms": {
+    "meta": {
+      "title": "Käyttöehdot | FlightClaimly",
+      "description": "Lue FlightClaimlyn käyttöehdot, mukaan lukien miten palvelu toimii, palkkiot, maksut, vastuut ja yhteydenottotavat."
+    },
+    "badge": "Ehdot",
+    "title": "FlightClaimlyn käyttöehdot",
+    "intro": "Nämä ehdot kuvaavat, miten FlightClaimly toimii sekä mitä oikeuksia ja velvollisuuksia sinulla on käyttäessäsi palveluamme lentokorvausvaatimusten hoitamiseen.",
+
+    "sections": {
+      "service": {
+        "title": "1. Palvelusta",
+        "text": "FlightClaimly on palvelu, joka auttaa lentomatkustajia selvittämään ja hoitamaan korvausvaatimuksia EU261:n ja vastaavien sääntöjen mukaan. Toimimme asiamiehenäsi lentoyhtiötä vastaan.",
+        "note": "Lähettämällä tapauksen verkkosivustollamme hyväksyt nämä ehdot."
+      },
+
+      "usage": {
+        "title": "2. Palvelun käyttösi",
+        "intro": "Sitoudut:",
+        "bullets": [
+          "antamaan oikeat ja täydelliset tiedot lennostasi",
+          "olemaan luomatta tapauksia, joiden tiedät olevan virheellisiä tai harhaanjohtavia",
+          "ilmoittamaan meille, jos olet jo palkannut jonkun muun hoitamaan samaa vaatimusta"
+        ],
+        "note": "Pidätämme oikeuden keskeyttää tapauksen käsittelyn, jos arvioimme tietojen olevan virheellisiä tai jos vaatimuksen edellytykset eivät täyty."
+      },
+
+      "power": {
+        "title": "3. Asiamies ja valtuutus",
+        "text": "Voidaksemme hoitaa vaatimuksesi meidän täytyy joskus toimia asiamiehenäsi lentoyhtiötä vastaan. Käyttämällä palvelua hyväksyt, että otamme yhteyttä lentoyhtiöön puolestasi ja edustamme etujasi tapauksen yhteydessä.",
+        "note": "Joissakin tapauksissa saatamme pyytää sinua allekirjoittamaan erillisen valtakirjan tai toimeksiantosopimuksen, esimerkiksi jos tapaus täytyy eskaloida."
+      },
+
+      "fees": {
+        "title": "4. Palkkiot ja korvaukset",
+        "lead": "FlightClaimly toimii periaatteella",
+        "highlight": "no win, no fee",
+        "bullets": [
+          "tapauksen lähettäminen ei maksa mitään",
+          "veloitamme vain, jos onnistumme saamaan korvauksen lentoyhtiöltä",
+          "palkkiomme on prosenttiosuus saamastasi korvauksesta"
+        ],
+        "note": "Ajantasainen prosenttiosuus ja mahdolliset muut ehdot kerrotaan selkeästi, kun hyväksyt, että hoidamme tapaustasi."
+      },
+
+      "payout": {
+        "title": "5. Maksu sinulle",
+        "intro": "Kun lentoyhtiö on maksanut korvauksen, maksu voi tapahtua joko:",
+        "bullets": [
+          "suoraan FlightClaimlylle, jonka jälkeen välitämme osuutesi sinulle, tai",
+          "suoraan sinulle, jolloin palkkiomme vähennetään erillisen sopimuksen mukaisesti"
+        ],
+        "note": "Pyrimme maksamaan mahdollisimman pian sen jälkeen, kun korvaus on vastaanotettu ja tunnistettu."
+      },
+
+      "liability": {
+        "title": "6. Vastuu ja rajoitukset",
+        "text1": "Emme voi taata, että vaatimus johtaa korvaukseen. Arviointi tehdään aina käytettävissä olevien tietojen ja sovellettavan sääntelyn perusteella.",
+        "text2": "FlightClaimly ei vastaa välillisistä vahingoista, kuten menetetystä voitosta tai seuraamuskustannuksista; vastuumme rajoittuu normaalisti maksamaasi palkkioon."
+      },
+
+      "privacy": {
+        "title": "7. Henkilötiedot ja tietosuoja",
+        "text": "Käsittelemme henkilötietoja sovellettavan tietosuojalainsäädännön mukaisesti. Lisätietoja löytyy meidän",
+        "link": "tietosuojakäytännöstämme"
+      },
+
+      "changes": {
+        "title": "8. Ehtojen muutokset",
+        "text": "Saatamme päivittää näitä ehtoja tarvittaessa. Uusin versio on aina saatavilla verkkosivustollamme."
+      },
+
+      "contact": {
+        "title": "9. Yhteystiedot",
+        "text": "Jos sinulla on kysyttävää näistä ehdoista, voit ottaa yhteyttä osoitteeseen"
+      }
+    },
+
+    "footer": "Käyttämällä FlightClaimlyä vahvistat, että olet lukenut ja ymmärtänyt nämä ehdot."
+  },
+
+  "thanks": {
+    "brandTagline": "Hoidamme vaatimuksesi lentoyhtiötä vastaan – sinä vältät vaivan.",
+    "backHome": "← Takaisin etusivulle",
+
+    "header": {
+      "badge": "FLIGHTCLAIMLY • TAPAUKSESI ON REKISTERÖITY",
+      "title": "Kiitos! Olemme vastaanottaneet tapauksen.",
+      "claimId": "Tapaus-ID",
+      "intro": "Seuraava vaihe on vahvistaa valtakirja ja ladata aineisto tälle sivulle. Kun se on tehty, aloitamme käsittelyn heti ja otamme yhteyttä lentoyhtiöön puolestasi."
+    },
+
+    "precheck": {
+      "badge": "Alustava arvio",
+      "eligibleTitle": "Hyviä uutisia – vaikutat olevan oikeutettu korvaukseen.",
+      "eligibleFallback": "Alustava arvio: lento voi olla korvaukseen oikeuttava EU261:n mukaan.",
+      "eligibleNote": "Tämä ei ole takuu, mutta vahva ensiarvio. Kun olet vahvistanut valtakirjan ja ladannut liitteet, alamme hoitaa vaatimusta lentoyhtiötä vastaan.",
+      "unclearTitle": "Epäselvää – tarkistamme manuaalisesti.",
+      "unclearFallback": "Lähetäthän aineiston, niin käymme tapauksen läpi manuaalisesti.",
+      "amountPrefix": "Arvio:"
+    },
+
+    "upload": {
+      "title": "Lataa liitteet",
+      "intro": "Valtakirja antaa meille oikeuden hoitaa tapausta lentoyhtiötä vastaan. Lisää mielellään myös boarding pass, varausvahvistus ja kuitit mahdollisista lisäkuluista.",
+      "list": [
+        "Digitaalinen valtakirja (LoA) – pakollinen",
+        "Boarding pass tai e-lippu",
+        "Varausvahvistus",
+        "Kuitit lisäkuluista (jos niitä on)"
+      ]
+    },
+
+    "loa": {
+      "title": "Digitaalinen valtakirja (LoA)",
+      "description": "Kirjoittamalla nimesi ja rastittamalla ruudun annat FlightClaimlylle oikeuden edustaa sinua lentoyhtiötä vastaan tässä tapauksessa.",
+      "viewText": "Näytä valtakirjateksti",
+      "nameLabel": "Koko nimi (allekirjoitus)",
+      "namePlaceholder": "Koko nimesi",
+      "consent": "Annan FlightClaimlylle valtakirjan (Letter of Authorization) edustaa minua lentoyhtiötä vastaan tässä tapauksessa.",
+      "error": "Täytä nimesi ja rastita ruutu, jotta valtakirja on voimassa."
+    },
+
+    "attachments": {
+      "title": "Muut liitteet (valinnainen)",
+      "description": "Lisää mielellään boarding pass, varausvahvistus ja kuitit. Voit ladata useita tiedostoja kerralla.",
+      "choose": "Valitse tiedostot",
+      "types": "PDF, JPG, PNG, HEIC. Enintään muutama tiedosto kerralla."
+    },
+
+    "actions": {
+      "submit": "Vahvista valtakirja ja lataa",
+      "submitting": "Käsitellään…",
+      "later": "Voit aina täydentää lisäliitteillä myöhemmin ottamalla meihin yhteyttä tarvittaessa."
+    },
+
+    "success": {
+      "title": "Valtakirja vahvistettu!",
+      "text": "Kiitos – aloitamme tapauksen käsittelyn heti. Saat sähköpostia, kun tila päivittyy, ja voit seurata kaikkea seurantasilinkin kautta."
+    },
+
+    "errors": {
+      "missingId": "Tapaus-ID:tä ei löytynyt. Palaa etusivulle ja lähetä lomake uudelleen.",
+      "generic": "❌ Vaihetta ei voitu suorittaa. Yritä uudelleen."
+    },
+
+    "security": {
+      "badge": "Turvallinen tiedostonsiirto",
+      "text": "Tiedostosi tallennetaan salattuina ja niitä käytetään vain tapauksen hoitamiseen. Emme jaa niitä muille kuin lentoyhtiölle ja mahdolliselle tähän tapaukseen liittyvälle juridiselle asiamiehelle.",
+      "independentTitle": "Itsenäinen toimija",
+      "independentText": "FlightClaimly on itsenäinen toimija eikä ole sidoksissa mihinkään lentoyhtiöön. Toimimme aina sinun, matkustajan, toimeksiannosta."
+    },
+
+    "loaText": {
+      "title": "Valtakirja – FlightClaimly",
+      "intro": "Annan täten FlightClaimlylle oikeuden edustaa minua lentokorvausasiassa EU-asetuksen 261/2004 mukaisesti.",
+      "bullets": [
+        "Viestittää lentoyhtiön kanssa nimissäni.",
+        "Lähettää vaatimuksen ja seurata tapausta.",
+        "Vastaanottaa lentoyhtiön vastaukset ja päätökset.",
+        "Tehdä yhteistyötä juridisen asiamiehen kanssa, jos se on tarpeen tässä tapauksessa."
+      ],
+      "note": "Valtakirja koskee vain tätä yksittäistä tapausta ja sen voi peruuttaa milloin tahansa kirjallisesti."
+    },
+
+    "loading": "Ladataan sivua…",
+    "home": "Etusivulle"
+  },
+
+  "about": {
+    "meta": {
+      "title": "Tietoa FlightClaimlystä | Lentokorvaus ilman vaivaa",
+      "description": "Lue FlightClaimlystä ja siitä, miten autamme sinua hoitamaan EU261-tapauksesi alusta maksuun — nopeasti, turvallisesti ja läpinäkyvästi."
+    },
+    "badge": "Tietoa meistä",
+    "title": "Autamme sinua saamaan korvauksen, kun lento on mennyt pieleen",
+    "intro": "FlightClaimly on EU-pohjainen palvelu, joka tekee lentoyhtiöltä vaadittavan EU261-korvauksen hakemisesta helppoa. Tavoitteena on, että saat sinulle kuuluvat rahat – ilman vaivaa, stressiä tai juridisia esteitä.",
+
+    "why": {
+      "title": "Miksi FlightClaimly on olemassa?",
+      "p1": "Joka vuosi suuret summat lentokorvauksia jäävät matkustajilta saamatta. Moni ei jaksa, ei tunne sääntöjä tai saa kielteisen vastauksen ensimmäisellä yrittämällä ja luovuttaa.",
+      "p2": "FlightClaimly luotiin tekemään prosessista mahdollisimman helppo: syötät lentosi tiedot ja lataat varauksesi – me hoidamme loput ja ajamme vaatimuksesi lentoyhtiötä vastaan."
+    },
+
+    "how": {
+      "title": "Näin palvelu toimii",
+      "steps": [
+        "Syötät lentotietosi ja mitä tapahtui.",
+        "Analysoimme tapauksen EU261-sääntöjen mukaan.",
+        "Ajamme vaatimuksesi lentoyhtiötä vastaan.",
+        "Maksat vasta, kun saat korvauksen."
+      ],
+      "note": "Kaikki hoituu digitaalisesti – nopeasti, turvallisesti ja läpinäkyvästi."
+    },
+
+    "model": {
+      "title": "Mallimme – yksinkertainen ja läpinäkyvä",
+      "p1": "Uskomme yhteen yksinkertaiseen periaatteeseen:",
+      "p1Strong": "no win, no fee",
+      "p1b": ". Se tarkoittaa, että ansaitsemme vain, kun sinä ansaitset.",
+      "bullets": [
+        "tapauksen luominen ei maksa mitään",
+        "veloitamme vain, jos saat korvauksen",
+        "palkkiomme on selkeä ja kerrotaan ennen kuin hyväksyt"
+      ],
+      "note": "Ei korvausta lentoyhtiöltä = ei kustannuksia FlightClaimlylle."
+    },
+
+    "trust": {
+      "title": "Selkeys ja turvallisuus etusijalla",
+      "p1": "Haluamme, että tiedät aina, missä vaiheessa tapauksesi on. Siksi voit seurata prosessia seurantasisivulla, jossa näet:",
+      "bullets": [
+        "milloin olemme vastaanottaneet tapauksen",
+        "milloin tarkistamme sen",
+        "milloin se on lähetetty lentoyhtiölle",
+        "milloin korvaus on maksettu"
+      ],
+      "p2": "Saat myös sähköpostia, kun tila päivittyy, jotta sinun ei tarvitse jahdata asiakaspalvelua tai kirjautua turhiin portaaleihin."
+    },
+
+    "independent": {
+      "title": "Itsenäinen ja sinun puolellasi",
+      "p1": "FlightClaimly toimii täysin EU:n matkustajaoikeuksien (EU261/2004) mukaisesti ja on riippumaton lentoyhtiöistä. Ainoa tehtävämme on edustaa sinua matkustajana ja varmistaa, että sääntöjä noudatetaan käytännössä – ei vain paperilla.",
+      "p2": "Me taistelemme lentoyhtiöitä ja byrokratiaa vastaan, jotta sinä voit keskittyä matkaasi, etkä pykäliin ja lomakkeisiin."
+    },
+
+    "footer": {
+      "cta": "Onko lentosi kärsinyt häiriöstä? Tarkista, oletko oikeutettu korvaukseen – se vie vain hetken.",
+      "primary": "Hae korvausta",
+      "secondary": "Yhteystiedot & yhteistyö"
+    },
+    "email": {
+      "footer": {
+        "disclaimer": {
+          "title": "Luottamuksellisuus",
+          "p1": "Tämä sähköpostiviesti ja mahdolliset liitteet on tarkoitettu vain nimetylle vastaanottajalle. Jos sait viestin vahingossa, pyydämme sinua vastaamaan sähköpostiin ja poistamaan sen sen jälkeen.",
+          "p2": "Käsittelemme henkilötietoja tapauksen käsittelyn yhteydessä. Lue lisää tietosuojakäytännöstämme ja ehdoistamme."
+        },
+        "links": {
+          "privacy": "Tietosuojakäytäntö",
+          "terms": "Ehdot"
+        },
+        "errors": {
+          "required": "Täytä kaikki pakolliset kentät.",
+          "invalidFlightNumber": "Anna kelvollinen lentonumero (esim. SK123).",
+          "network": "Jotain meni pieleen. Yritä uudelleen.",
+          "noResult": "Emme voineet vahvistaa lentoa, mutta voit silti lähettää tapauksen."
+        }
+      }
+    }
+  }
+}
