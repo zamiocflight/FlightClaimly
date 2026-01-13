@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "flag-icons/css/flag-icons.min.css";
+
 
 :root {
   --background: #ffffff;
@@ -80,4 +82,13 @@ html[lang="fi"] .fc-track-btn {
 html[lang="fi"] .fc-track-btn svg {
   width: 16px;
   height: 16px;
+}
+/* flag-icons fix (Tailwind-safe) */
+.fi {
+  display: inline-block;
+  width: 1.25em;
+  height: 0.875em;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
