@@ -11,23 +11,105 @@ const LOCALES = [
   { code: 'de', label: 'DE' },
   { code: 'pl', label: 'PL' },
   { code: 'fi', label: 'FI' },
-  // { code: 'nl', label: 'NL' }, // aktivera när nl är live
 ] as const;
 
 type LocaleCode = (typeof LOCALES)[number]['code'];
 
 /**
- * Map locale -> flag-icons country code (ISO 3166-1 alpha-2)
- * EN = GB (UK) enligt ditt beslut.
+ * We render flags as inline SVGs (no external CSS lib),
+ * so it works одинаково in dev + production.
  */
-const FLAG_BY_LOCALE: Record<LocaleCode, string> = {
-  sv: 'se',
-  en: 'gb',
-  da: 'dk',
-  de: 'de',
-  pl: 'pl',
-  fi: 'fi',
-};
+function Flag({ locale }: { locale: LocaleCode }) {
+  return (
+    <span
+      aria-hidden="true"
+      className="inline-block rounded-[2px] overflow-hidden"
+      style={{ width: 18, height: 12, lineHeight: 0 }}
+    >
+      {locale === 'sv' && <FlagSE />}
+      {locale === 'en' && <FlagGB />}
+      {locale === 'da' && <FlagDK />}
+      {locale === 'de' && <FlagDE />}
+      {locale === 'pl' && <FlagPL />}
+      {locale === 'fi' && <FlagFI />}
+    </span>
+  );
+}
+
+function FlagSE() {
+  // Sweden
+  return (
+    <svg viewBox="0 0 22 14" width="18" height="12" xmlns="http://www.w3.org/2000/svg">
+      <rect width="22" height="14" fill="#006AA7" />
+      <rect x="6" width="4" height="14" fill="#FECC00" />
+      <rect y="5" width="22" height="4" fill="#FECC00" />
+    </svg>
+  );
+}
+
+function FlagDK() {
+  // Denmark
+  return (
+    <svg viewBox="0 0 22 14" width="18" height="12" xmlns="http://www.w3.org/2000/svg">
+      <rect width="22" height="14" fill="#C60C30" />
+      <rect x="6" width="2.6" height="14" fill="#FFFFFF" />
+      <rect y="5.6" width="22" height="2.6" fill="#FFFFFF" />
+    </svg>
+  );
+}
+
+function FlagDE() {
+  // Germany
+  return (
+    <svg viewBox="0 0 22 14" width="18" height="12" xmlns="http://www.w3.org/2000/svg">
+      <rect width="22" height="14" fill="#000000" />
+      <rect y="4.6667" width="22" height="4.6667" fill="#DD0000" />
+      <rect y="9.3334" width="22" height="4.6666" fill="#FFCE00" />
+    </svg>
+  );
+}
+
+function FlagPL() {
+  // Poland
+  return (
+    <svg viewBox="0 0 22 14" width="18" height="12" xmlns="http://www.w3.org/2000/svg">
+      <rect width="22" height="7" fill="#FFFFFF" />
+      <rect y="7" width="22" height="7" fill="#DC143C" />
+    </svg>
+  );
+}
+
+function FlagFI() {
+  // Finland
+  return (
+    <svg viewBox="0 0 22 14" width="18" height="12" xmlns="http://www.w3.org/2000/svg">
+      <rect width="22" height="14" fill="#FFFFFF" />
+      <rect x="6" width="3.5" height="14" fill="#003580" />
+      <rect y="5.25" width="22" height="3.5" fill="#003580" />
+    </svg>
+  );
+}
+
+function FlagGB() {
+  // UK (simplified but clean)
+  return (
+    <svg viewBox="0 0 22 14" width="18" height="12" xmlns="http://www.w3.org/2000/svg">
+      <rect width="22" height="14" fill="#012169" />
+      {/* white diagonals */}
+      <path d="M0 0 L2.2 0 L22 12.6 L22 14 L19.8 14 L0 1.4 Z" fill="#FFFFFF" opacity="0.95" />
+      <path d="M22 0 L19.8 0 L0 12.6 L0 14 L2.2 14 L22 1.4 Z" fill="#FFFFFF" opacity="0.95" />
+      {/* red diagonals */}
+      <path d="M0 0 L1.4 0 L22 13.1 L22 14 L20.6 14 L0 0.9 Z" fill="#C8102E" />
+      <path d="M22 0 L20.6 0 L0 13.1 L0 14 L1.4 14 L22 0.9 Z" fill="#C8102E" />
+      {/* white cross */}
+      <rect x="8.4" width="5.2" height="14" fill="#FFFFFF" />
+      <rect y="4.4" width="22" height="5.2" fill="#FFFFFF" />
+      {/* red cross */}
+      <rect x="9.3" width="3.4" height="14" fill="#C8102E" />
+      <rect y="5.3" width="22" height="3.4" fill="#C8102E" />
+    </svg>
+  );
+}
 
 function stripLocale(pathname: string) {
   const m = pathname.match(/^\/([^/]+)(\/.*)?$/);
@@ -39,28 +121,7 @@ function stripLocale(pathname: string) {
   if (LOCALES.some((l) => l.code === maybeLocale)) {
     return rest || '/';
   }
-
   return pathname;
-}
-
-function Flag({ locale }: { locale: LocaleCode }) {
-  const cc = FLAG_BY_LOCALE[locale];
-
-  // flag-icons använder .fi + .fi-xx
-  return (
-    <span
-     className={`fi fi-${cc} rounded-[2px]`}
-
-      aria-hidden="true"
-      style={{
-        width: 18,
-        height: 12,
-        display: 'inline-block',
-        // gör att flaggan inte blir “kladdig” på retina
-        backgroundSize: 'cover',
-      }}
-    />
-  );
 }
 
 export default function LanguageSwitcher() {
@@ -75,7 +136,6 @@ export default function LanguageSwitcher() {
   const [open, setOpen] = React.useState(false);
   const ref = React.useRef<HTMLDivElement | null>(null);
 
-  // Close on outside click + ESC
   React.useEffect(() => {
     function onClick(e: MouseEvent) {
       if (!ref.current) return;
