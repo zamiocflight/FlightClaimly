@@ -81,3 +81,20 @@ html[lang="fi"] .fc-track-btn svg {
   width: 16px;
   height: 16px;
 }
+/* Self-hosted flags (production-safe) */
+.fc-flag {
+  width: 18px;
+  height: 12px;
+  display: inline-block;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 2px; /* mindre rundade hörn */
+}
+
+.fc-flag--se { background-image: url("/flags/se.svg"); }
+.fc-flag--gb { background-image: url("/flags/gb.svg"); }
+.fc-flag--dk { background-image: url("/flags/dk.svg"); }
+.fc-flag--de { background-image: url("/flags/de.svg"); }
+.fc-flag--pl { background-image: url("/flags/pl.svg"); }
+.fc-flag--fi { background-image: url("/flags/fi.svg"); }

@@ -252,7 +252,7 @@ export default function Home() {
 {/* Desktop: meny + språk + Följ ärende */}
 <div className="hidden md:flex items-center gap-6 fc-desktop-navwrap">
   {/* ✅ fc-desktop-nav = hook för DE-only CSS (påverkar inte andra språk) */}
-  <nav className="flex items-center gap-8 text-[15px] font-semibold text-slate-900 fc-desktop-nav">
+<nav className="flex items-center gap-8 text-[15px] font-semibold text-slate-900 fc-desktop-nav whitespace-nowrap">
     <a href="#how" className="hover:text-slate-700 transition-colors">
       {t('nav.compensation')}
     </a>
@@ -290,7 +290,7 @@ export default function Home() {
   <button
     type="button"
     onClick={openTrackModal}
-    className="inline-flex items-center gap-2 rounded-md border border-slate-900/10 bg-slate-900 px-4 py-2 text-[14px] font-semibold text-white shadow-sm hover:bg-slate-800 hover:shadow-md transition fc-track-btn"
+className="inline-flex items-center gap-2 rounded-md border border-slate-900/10 bg-slate-900 px-4 py-2 text-[14px] font-semibold text-white shadow-sm hover:bg-slate-800 hover:shadow-md transition fc-track-btn whitespace-nowrap"
   >
     <UserCircleIcon className="h-5 w-5" />
     {t('track.button')}

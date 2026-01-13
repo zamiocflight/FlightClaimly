@@ -11,6 +11,7 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@supabase/supabase-js": "^2.76.1",
+    "flag-icons": "^7.5.0",
     "next": "^15.5.7",
     "next-intl": "^4.6.0",
     "nodemailer": "^7.0.9",
