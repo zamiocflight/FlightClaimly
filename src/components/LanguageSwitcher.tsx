@@ -16,6 +16,19 @@ const LOCALES = [
 
 type LocaleCode = (typeof LOCALES)[number]['code'];
 
+/**
+ * Map locale -> flag-icons country code (ISO 3166-1 alpha-2)
+ * EN = GB (UK) enligt ditt beslut.
+ */
+const FLAG_BY_LOCALE: Record<LocaleCode, string> = {
+  sv: 'se',
+  en: 'gb',
+  da: 'dk',
+  de: 'de',
+  pl: 'pl',
+  fi: 'fi',
+};
+
 function stripLocale(pathname: string) {
   const m = pathname.match(/^\/([^/]+)(\/.*)?$/);
   if (!m) return pathname;
@@ -28,6 +41,26 @@ function stripLocale(pathname: string) {
   }
 
   return pathname;
+}
+
+function Flag({ locale }: { locale: LocaleCode }) {
+  const cc = FLAG_BY_LOCALE[locale];
+
+  // flag-icons använder .fi + .fi-xx
+  return (
+    <span
+     className={`fi fi-${cc} rounded-[2px]`}
+
+      aria-hidden="true"
+      style={{
+        width: 18,
+        height: 12,
+        display: 'inline-block',
+        // gör att flaggan inte blir “kladdig” på retina
+        backgroundSize: 'cover',
+      }}
+    />
+  );
 }
 
 export default function LanguageSwitcher() {
@@ -61,8 +94,7 @@ export default function LanguageSwitcher() {
   }, []);
 
   function go(next: LocaleCode) {
-    const nextPath =
-      `/${next}${rest === '/' ? '' : rest}` + (qs ? `?${qs}` : '');
+    const nextPath = `/${next}${rest === '/' ? '' : rest}` + (qs ? `?${qs}` : '');
     router.push(nextPath);
     setOpen(false);
   }
@@ -80,13 +112,14 @@ export default function LanguageSwitcher() {
         aria-expanded={open}
         aria-label="Change language"
       >
+        <Flag locale={locale} />
         <span>{activeLabel}</span>
         <span className="text-slate-400">▾</span>
       </button>
 
       {open && (
         <div
-          className="absolute right-0 mt-2 w-36 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg z-[70]"
+          className="absolute right-0 mt-2 w-40 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg z-[70]"
           role="menu"
         >
           {LOCALES.map((l) => (
@@ -95,13 +128,14 @@ export default function LanguageSwitcher() {
               type="button"
               onClick={() => go(l.code)}
               className={`w-full px-3 py-2 text-left text-sm hover:bg-slate-50 ${
-                l.code === locale
-                  ? 'font-semibold text-slate-900'
-                  : 'text-slate-700'
+                l.code === locale ? 'font-semibold text-slate-900' : 'text-slate-700'
               }`}
               role="menuitem"
             >
-              {l.label}
+              <span className="inline-flex items-center gap-2">
+                <Flag locale={l.code} />
+                <span>{l.label}</span>
+              </span>
             </button>
           ))}
         </div>
