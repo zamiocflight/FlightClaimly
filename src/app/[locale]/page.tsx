@@ -298,109 +298,92 @@ className="inline-flex items-center gap-2 rounded-md border border-slate-900/10 
 </div>
 
 
-          {/* Mobil: hamburger */}
-          <button
-            type="button"
-            className="md:hidden inline-flex items-center justify-center px-2.5 py-2 text-slate-900"
-            onClick={() => setIsMobileNavOpen(true)}
-            aria-label={t('mobileNav.openAria')}
-          >
-            <span className="sr-only">{t('mobileNav.openSr')}</span>
-            <span className="flex flex-col gap-1.5">
-              <span className="block h-[2px] w-5 rounded-full bg-slate-900" />
-              <span className="block h-[2px] w-5 rounded-full bg-slate-900" />
-              <span className="block h-[2px] w-5 rounded-full bg-slate-900" />
-            </span>
-          </button>
-        </header>
+{/* Mobil: header actions (språk + hamburger) */}
+<div className="md:hidden flex items-center gap-2">
+  <LanguageSwitcher compact />
 
-        {/* Mobil: slide-over-meny */}
-        {isMobileNavOpen && (
-          <div className="fixed inset-0 z-40 flex md:hidden">
-            <div
-              className="flex-1 bg-black/40"
-              onClick={() => setIsMobileNavOpen(false)}
-            />
-            <div className="w-72 max-w-full h-full bg-white shadow-2xl flex flex-col">
-              <div className="flex items-center justify-between px-4 py-4 border-b border-slate-200">
-                <span className="text-sm font-semibold text-slate-900">
-                  {t('mobileNav.title')}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setIsMobileNavOpen(false)}
-                  className="text-slate-400 hover:text-slate-700"
-                  aria-label={t('mobileNav.closeAria')}
-                >
-                  ✕
-                </button>
-              </div>
 
-              <nav className="flex-1 px-4 py-4 space-y-2 text-[15px] font-medium text-slate-900">
-                <a
-                  href="#how"
-                  className="block py-1.5"
-                  onClick={() => setIsMobileNavOpen(false)}
-                >
-                  {t('nav.compensation')}
-                </a>
-                <a
-                  href="/delays"
-                  className="block py-1.5"
-                  onClick={() => setIsMobileNavOpen(false)}
-                >
-                  {t('nav.delays')}
-                </a>
-                <a
-                  href="/cancellations"
-                  className="block py-1.5"
-                  onClick={() => setIsMobileNavOpen(false)}
-                >
-                  {t('nav.cancellations')}
-                </a>
-                <a
-                  href="/rights"
-                  className="block py-1.5"
-                  onClick={() => setIsMobileNavOpen(false)}
-                >
-                  {t('nav.rights')}
-                </a>
-                <a
-                  href="/faq"
-                  className="block py-1.5"
-                  onClick={() => setIsMobileNavOpen(false)}
-                >
-                  {t('nav.faq')}
-                </a>
-                <a
-                  href="/about"
-                  className="block py-1.5"
-                  onClick={() => setIsMobileNavOpen(false)}
-                >
-                  {t('nav.about')}
-                </a>
-                <a
-                  href="/contact"
-                  className="block py-1.5"
-                  onClick={() => setIsMobileNavOpen(false)}
-                >
-                  {t('nav.contact')}
-                </a>
-              </nav>
+  <button
+    type="button"
+    className="inline-flex items-center justify-center px-2.5 py-2 text-slate-900"
+    onClick={() => setIsMobileNavOpen(true)}
+    aria-label={t('mobileNav.openAria')}
+  >
+    <span className="sr-only">{t('mobileNav.openSr')}</span>
+    <span className="flex flex-col gap-1.5">
+      <span className="block h-[2px] w-5 rounded-full bg-slate-900" />
+      <span className="block h-[2px] w-5 rounded-full bg-slate-900" />
+      <span className="block h-[2px] w-5 rounded-full bg-slate-900" />
+    </span>
+  </button>
+</div>
+</header>
 
-              <div className="px-4 pb-6 pt-2 border-t border-slate-200">
-                <button
-                  type="button"
-                  onClick={openTrackModal}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
-                >
-                  <UserCircleIcon className="h-5 w-5" />
-                  {t('track.button')}
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+{/* Mobil: slide-over-meny */}
+{isMobileNavOpen && (
+  <div className="fixed inset-0 z-40 flex md:hidden">
+    <div
+      className="flex-1 bg-black/40"
+      onClick={() => setIsMobileNavOpen(false)}
+    />
+
+    <div className="w-72 max-w-full h-full bg-white shadow-2xl flex flex-col">
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-4 border-b border-slate-200">
+        <span className="text-sm font-semibold text-slate-900">
+          {t('mobileNav.title')}
+        </span>
+        <button
+          type="button"
+          onClick={() => setIsMobileNavOpen(false)}
+          className="text-slate-400 hover:text-slate-700"
+          aria-label={t('mobileNav.closeAria')}
+        >
+          ✕
+        </button>
+      </div>
+
+      {/* Navigation */}
+      <nav className="flex-1 px-4 py-4 space-y-2 text-[15px] font-medium text-slate-900">
+        <a href="#how" className="block py-1.5" onClick={() => setIsMobileNavOpen(false)}>
+          {t('nav.compensation')}
+        </a>
+        <a href="/delays" className="block py-1.5" onClick={() => setIsMobileNavOpen(false)}>
+          {t('nav.delays')}
+        </a>
+        <a href="/cancellations" className="block py-1.5" onClick={() => setIsMobileNavOpen(false)}>
+          {t('nav.cancellations')}
+        </a>
+        <a href="/rights" className="block py-1.5" onClick={() => setIsMobileNavOpen(false)}>
+          {t('nav.rights')}
+        </a>
+        <a href="/faq" className="block py-1.5" onClick={() => setIsMobileNavOpen(false)}>
+          {t('nav.faq')}
+        </a>
+        <a href="/about" className="block py-1.5" onClick={() => setIsMobileNavOpen(false)}>
+          {t('nav.about')}
+        </a>
+        <a href="/contact" className="block py-1.5" onClick={() => setIsMobileNavOpen(false)}>
+          {t('nav.contact')}
+        </a>
+      </nav>
+
+      {/* Track claim */}
+      <div className="px-4 pb-6 pt-2 border-t border-slate-200">
+        <button
+          type="button"
+          onClick={openTrackModal}
+          className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
+        >
+          <UserCircleIcon className="h-5 w-5" />
+          {t('track.button')}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
 
         {/* Följ ärende – modal */}
         {isTrackModalOpen && (

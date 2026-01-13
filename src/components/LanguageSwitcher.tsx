@@ -126,7 +126,11 @@ function stripLocale(pathname: string) {
 
 
 
-export default function LanguageSwitcher() {
+export default function LanguageSwitcher({
+  compact = false,
+}: {
+  compact?: boolean;
+}) {
   const locale = (useLocale() as LocaleCode) ?? 'sv';
   const pathname = usePathname() || '/';
   const searchParams = useSearchParams();
@@ -137,7 +141,6 @@ export default function LanguageSwitcher() {
 
   const [open, setOpen] = React.useState(false);
   const ref = React.useRef<HTMLDivElement | null>(null);
-
 
   React.useEffect(() => {
     function onClick(e: MouseEvent) {
@@ -157,7 +160,8 @@ export default function LanguageSwitcher() {
   }, []);
 
   function go(next: LocaleCode) {
-    const nextPath = `/${next}${rest === '/' ? '' : rest}` + (qs ? `?${qs}` : '');
+    const nextPath =
+      `/${next}${rest === '/' ? '' : rest}` + (qs ? `?${qs}` : '');
     router.push(nextPath);
     setOpen(false);
   }
@@ -176,7 +180,10 @@ export default function LanguageSwitcher() {
         aria-label="Change language"
       >
         <Flag locale={locale} />
-<span className="hidden md:inline">{activeLabel}</span>
+
+        {/* 🔹 Visa text ENDAST om inte compact */}
+        {!compact && <span>{activeLabel}</span>}
+
         <span className="text-slate-400">▾</span>
       </button>
 
@@ -191,7 +198,9 @@ export default function LanguageSwitcher() {
               type="button"
               onClick={() => go(l.code)}
               className={`w-full px-3 py-2 text-left text-sm hover:bg-slate-50 ${
-                l.code === locale ? 'font-semibold text-slate-900' : 'text-slate-700'
+                l.code === locale
+                  ? 'font-semibold text-slate-900'
+                  : 'text-slate-700'
               }`}
               role="menuitem"
             >
