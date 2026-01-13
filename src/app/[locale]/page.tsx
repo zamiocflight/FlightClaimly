@@ -6,6 +6,8 @@ import { Link } from '../../i18n/navigation';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
 import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+
 
 
 /* ---------- Form state ---------- */
@@ -1296,19 +1298,46 @@ function IconStep3(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-function LanguageSwitcher() {
+  function LanguageSwitcherInline() {
   const t = useTranslations();
   const [open, setOpen] = React.useState(false);
 
   const LOCALES = ['sv', 'en', 'da', 'de', 'pl', 'fi'] as const;
 
+  type LocaleCode = (typeof LOCALES)[number];
+
+  const FLAG_BY_LOCALE: Record<LocaleCode, string> = {
+    sv: 'se',
+    en: 'gb',
+    da: 'dk',
+    de: 'de',
+    pl: 'pl',
+    fi: 'fi',
+  };
+
+  function FlagInline({ loc }: { loc: LocaleCode }) {
+    const cc = FLAG_BY_LOCALE[loc];
+    return (
+      <span
+        className={`fi fi-${cc} rounded-[2px]`}
+        aria-hidden="true"
+        style={{
+          width: 18,
+          height: 12,
+          display: 'inline-block',
+          backgroundSize: 'cover',
+        }}
+      />
+    );
+  }
+
   function currentLocale() {
     if (typeof window === 'undefined') return 'sv';
     const seg = window.location.pathname.split('/')[1];
-    return LOCALES.includes(seg as any) ? seg : 'sv';
+    return LOCALES.includes(seg as any) ? (seg as LocaleCode) : 'sv';
   }
 
-  const active = useLocale();
+  const active = (useLocale() as LocaleCode) ?? currentLocale();
 
   function go(nextLocale: string) {
     if (typeof window === 'undefined') return;
@@ -1323,20 +1352,23 @@ function LanguageSwitcher() {
     window.location.href = `${nextPath}${search}${hash}`;
   }
 
- return (
-  <div className="relative z-[60]">
+  return (
+    <div className="relative z-[60]">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         className="inline-flex items-center gap-2 text-[14px] font-medium text-slate-500 hover:text-slate-900 transition-colors"
         aria-label={t('header.language.aria')}
       >
-        {active.toUpperCase()}
+        <span className="inline-flex items-center gap-2">
+          <FlagInline loc={active} />
+          <span>{active.toUpperCase()}</span>
+        </span>
         <span className="text-slate-400">▾</span>
       </button>
 
       {open && (
-<div className="absolute right-0 mt-2 w-36 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg z-[60]">
+        <div className="absolute right-0 mt-2 w-36 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg z-[60]">
           {LOCALES.map((loc) => (
             <button
               key={loc}
@@ -1350,7 +1382,10 @@ function LanguageSwitcher() {
               }`}
               role="menuitem"
             >
-              {loc.toUpperCase()}
+              <span className="inline-flex items-center gap-2">
+                <FlagInline loc={loc} />
+                <span>{loc.toUpperCase()}</span>
+              </span>
             </button>
           ))}
         </div>
