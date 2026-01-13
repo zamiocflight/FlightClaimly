@@ -124,6 +124,8 @@ function stripLocale(pathname: string) {
   return pathname;
 }
 
+
+
 export default function LanguageSwitcher() {
   const locale = (useLocale() as LocaleCode) ?? 'sv';
   const pathname = usePathname() || '/';
@@ -135,6 +137,7 @@ export default function LanguageSwitcher() {
 
   const [open, setOpen] = React.useState(false);
   const ref = React.useRef<HTMLDivElement | null>(null);
+
 
   React.useEffect(() => {
     function onClick(e: MouseEvent) {
@@ -173,7 +176,7 @@ export default function LanguageSwitcher() {
         aria-label="Change language"
       >
         <Flag locale={locale} />
-        <span>{activeLabel}</span>
+<span className="hidden md:inline">{activeLabel}</span>
         <span className="text-slate-400">▾</span>
       </button>
 
