@@ -5,28 +5,33 @@ import { NextResponse } from 'next/server';
 import { addClaim } from '@/lib/claims';
 import { sendStatusEmail } from '@/lib/statusEmail';
 
-type Lang = 'sv' | 'en';
+type Lang = 'sv' | 'en' | 'da' | 'de' | 'pl' | 'fi';
 
 function detectLocale(req: Request, bodyLocale?: unknown): Lang {
-  // 1) body.locale (bäst om ni skickar från UI)
-  if (
-    typeof bodyLocale === 'string' &&
-    (bodyLocale === 'sv' || bodyLocale === 'en')
-  ) {
-    return bodyLocale;
+  const allowed: Lang[] = ['sv', 'en', 'da', 'de', 'pl', 'fi'];
+
+  // 1) body.locale (högsta prio)
+  if (typeof bodyLocale === 'string' && allowed.includes(bodyLocale as Lang)) {
+    return bodyLocale as Lang;
   }
 
-  // 2) referer /sv/... eller /en/...
+  // 2) referer: /sv/... /da/... /de/...
   const referer = req.headers.get('referer') || '';
-  const m = referer.match(/\/(sv|en)(\/|$)/);
-  if (m?.[1] === 'sv' || m?.[1] === 'en') return m[1];
+  const m = referer.match(/\/(sv|en|da|de|pl|fi)(\/|$)/);
+  if (m?.[1] && allowed.includes(m[1] as Lang)) {
+    return m[1] as Lang;
+  }
 
-  // 3) accept-language (grov fallback)
+  // 3) accept-language
   const al = (req.headers.get('accept-language') || '').toLowerCase();
-  if (al.includes('sv')) return 'sv';
+  for (const l of allowed) {
+    if (al.includes(l)) return l;
+  }
 
+  // 4) fallback
   return 'en';
 }
+
 
 export async function POST(req: Request) {
   try {
