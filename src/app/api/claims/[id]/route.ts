@@ -91,7 +91,7 @@ export async function PATCH(
           to: updated.to,
           flightDate: updated.date ?? null,
           publicToken: updated.viewerToken ?? undefined,
-          lang: 'sv', // kan göras smartare senare (per kund)
+          lang: (updated as any).locale || 'en',
         });
       }
     } catch (e) {
