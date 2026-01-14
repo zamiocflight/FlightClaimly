@@ -52,21 +52,17 @@ if (matchDisabled) {
     return NextResponse.next();
   }
 
- // ✅ Skippa ALL tracking (med eller utan locale) från next-intl
-if (
-  pathname === "/track" ||
-  pathname.startsWith("/track/") ||
-  pathname.match(/^\/(sv|en|da|de|pl|fi)\/track(\/|$)/)
-) {
-  return NextResponse.next();
-}
+  // ✅ Skippa locale-routing för ALLA API-routes
+  if (pathname.startsWith("/api")) {
+    return NextResponse.next();
+  }
 
-  // ✅ Skippa ENDAST tracking UTAN locale ("/track/...")
-// Men låt "/{locale}/track/..." gå via next-intl så sidan får rätt språk.
-if (pathname.startsWith("/track")) {
-  return NextResponse.next();
-}
-
+  // ✅ Skippa locale-routing för tracking (utan intl)
+  // - "/track/..."
+  // - "/{locale}/track/..." (oavsett locale-sträng)
+  if (pathname.startsWith("/track") || pathname.match(/^\/[^/]+\/track(\/|$)/)) {
+    return NextResponse.next();
+  }
 
   // ✅ Skippa locale för vissa publika routes (admin-skydd körs längre ner)
   if (
