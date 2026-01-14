@@ -41,6 +41,8 @@ type TrackStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export default function Home() {
   const t = useTranslations();
+  const locale = useLocale();
+
 
   const [form, setForm] = useState<FormState>(INITIAL);
   const [loading, setLoading] = useState(false);
@@ -156,7 +158,11 @@ export default function Home() {
       const r = await fetch('/api/claims', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+  ...form,
+  locale,
+}),
+
       });
 
       // 🔍 Logga status + ev feltext

@@ -137,7 +137,7 @@ export default function TrackPage({
   // Läs ev. ?lang=en som initialt värde, men byt språk via state
   const initialLangParam = searchParams.get('lang');
   const [lang, setLang] = useState<Lang>(
-    initialLangParam === 'en' ? 'en' : 'sv',
+    initialLangParam === 'sv' ? 'sv' : 'en',
   );
   const t = texts[lang];
 
