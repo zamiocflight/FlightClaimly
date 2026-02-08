@@ -184,7 +184,11 @@
       "submit": {
         "default": "Meinen Flug prüfen",
         "checking": "Wird geprüft…"
-      }
+      },
+      "result": {
+  "eligible": "Basierend auf historischen Flugdaten scheint Ihr Flug um mehr als 3 Stunden verspätet gewesen zu sein. Möglicherweise haben Sie Anspruch auf Entschädigung.",
+  "notConfirmed": "Wir konnten anhand der verfügbaren Daten keine Verspätung von über 3 Stunden bestätigen. Sie können dennoch fortfahren — die Angaben der Fluggesellschaft können abweichen."
+}
     },
     "details": {
       "goodNewsStrong": "Gute Nachrichten!",

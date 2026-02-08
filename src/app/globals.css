@@ -98,3 +98,13 @@ html[lang="fi"] .fc-track-btn svg {
 .fc-flag--de { background-image: url("/flags/de.svg"); }
 .fc-flag--pl { background-image: url("/flags/pl.svg"); }
 .fc-flag--fi { background-image: url("/flags/fi.svg"); }
+
+@keyframes headerGlow {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.035);
+  }
+}

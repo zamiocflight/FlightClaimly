@@ -184,7 +184,11 @@
       "submit": {
         "default": "Check my flight",
         "checking": "Checking…"
-      }
+      },
+      "result": {
+  "eligible": "Based on historical flight data, your flight appears to have been delayed by more than 3 hours. You may be entitled to compensation.",
+  "notConfirmed": "We couldn’t confirm a delay of more than 3 hours using available data. You can still continue — airline records may differ."
+}
     },
     "details": {
       "goodNewsStrong": "Good news!",

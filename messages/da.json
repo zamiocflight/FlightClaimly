@@ -173,7 +173,11 @@
       "submit": {
         "default": "Tjek mit fly",
         "checking": "Tjekker…"
-      }
+      },
+      "result": {
+  "eligible": "Baseret på historiske flydata ser det ud til, at dit fly var forsinket med mere end 3 timer. Du kan have ret til kompensation.",
+  "notConfirmed": "Vi kunne ikke bekræfte en forsinkelse på over 3 timer ud fra de tilgængelige data. Du kan stadig fortsætte — flyselskabets oplysninger kan variere."
+}
     },
     "details": {
       "goodNewsStrong": "Gode nyheder!",

@@ -7,6 +7,8 @@ import { UserCircleIcon } from '@heroicons/react/24/outline';
 import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import AirportInput from '@/components/AirportInput';
+
 
 
 
@@ -106,40 +108,50 @@ export default function Home() {
   }
 
   // 🔹 Steg 1 – snabb koll (frontend-logik)
-  function handleQuickCheck(e: FormEvent) {
-    e.preventDefault();
-    setQuickMessage(null);
-    setQuickStatus('checking');
+async function handleQuickCheck(e: FormEvent) {
+  e.preventDefault();
+  setQuickMessage(null);
+  setQuickStatus('checking');
 
-    const { flightNumber, date, from, to } = form;
+  const { flightNumber, date, from, to } = form;
 
-    if (!flightNumber || !date || !from || !to) {
-      setQuickStatus('ineligible');
-      setQuickMessage(t('precheck.quick.frontend.missingFields'));
-      return;
-    }
+  if (!flightNumber || !date || !from || !to) {
+    setQuickStatus('ineligible');
+    setQuickMessage(t('precheck.quick.frontend.missingFields'));
+    return;
+  }
 
-    // ✅ NYTT: flight number format check (v1)
+  // ✅ Flight number format check (v1)
   if (!isValidFlightNumber(flightNumber)) {
-  setQuickStatus('ineligible');
-  setQuickMessage(t('errors.invalidFlightNumber'));
-  return;
-}
+    setQuickStatus('ineligible');
+    setQuickMessage(t('errors.invalidFlightNumber'));
+    return;
+  }
 
+  try {
+    const res = await fetch('/api/flight/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        flightNumber,
+        date,
+        from,
+        to,
+      }),
+    });
 
-    // Simulerad snabbkoll
-    setTimeout(() => {
+    const data = await res.json();
+
+    if (data?.matched && data.arrivalDelayMinutes >= 180) {
+      // ✅ Eligible → visa grön info + gå vidare till steg 2
       setQuickStatus('eligible');
-      // ❗Ingen positiv text i steg 1
-      setQuickMessage(null);
+      setQuickMessage(t('precheck.quick.result.eligible'));
 
-      // Gå till steg 2
       setStep('details');
 
-      // Mjuk scroll ner till steg 2 / "Dina uppgifter"
       if (detailsRef.current) {
         const rect = detailsRef.current.getBoundingClientRect();
-        const offset = 140; // justera vid behov
+        const offset = 140;
         const targetY = rect.top + window.scrollY - offset;
 
         window.scrollTo({
@@ -147,8 +159,17 @@ export default function Home() {
           behavior: 'smooth',
         });
       }
-    }, 400);
+    } else {
+      // ⚠️ Ej bekräftad 3h+ → neutral/ineligible copy
+      setQuickStatus('ineligible');
+      setQuickMessage(t('precheck.quick.result.notConfirmed'));
+    }
+  } catch (err) {
+    setQuickStatus('ineligible');
+    setQuickMessage(t('errors.generic'));
   }
+}
+
 
   // 🔹 Steg 2 – skicka in ärendet
   async function submit() {
@@ -226,6 +247,17 @@ export default function Home() {
   }
 
   return (
+    <>
+      <div
+    aria-hidden
+    className="
+      pointer-events-none
+      fixed inset-0
+      z-0
+      bg-[radial-gradient(1200px_600px_at_50%_-200px,rgba(255,245,230,0.35),transparent_60%)]
+    "
+  />
+
     <main className="relative min-h-screen text-slate-900">
       {/* Background sky + soft vignette */}
       <Image
@@ -242,7 +274,24 @@ export default function Home() {
       {/* Content */}
       <div className="relative z-10" id="top">
         {/* Header */}
-        <header className="w-full px-4 sm:px-6 pt-4 md:pt-5 flex items-center justify-between">
+<header
+  className="
+    relative overflow-hidden
+    w-full
+    px-4 sm:px-6
+    py-[6px] md:py-[10px]
+    flex items-center justify-between
+    bg-gradient-to-b
+    from-[#050B1A]
+    to-[#040813]
+    border-b border-white/5
+    animate-[headerGlow_14s_ease-in-out_infinite]
+  "
+>
+  {/* Night filter (milt) */}
+      <div className="pointer-events-none fixed inset-0 z-[1] bg-[#FFF6E8]/6" />
+
+
           {/* Logga */}
           <Link href="/" className="flex items-center gap-3">
             <Image
@@ -258,32 +307,32 @@ export default function Home() {
 {/* Desktop: meny + språk + Följ ärende */}
 <div className="hidden md:flex items-center gap-6 fc-desktop-navwrap">
   {/* ✅ fc-desktop-nav = hook för DE-only CSS (påverkar inte andra språk) */}
-<nav className="flex items-center gap-8 text-[15px] font-semibold text-slate-900 fc-desktop-nav whitespace-nowrap">
-    <a href="#how" className="hover:text-slate-700 transition-colors">
+<nav className="flex items-center gap-8 text-[14px] font-semibold text-white/75 fc-desktop-nav whitespace-nowrap">
+    <a href="#how" className="hover:text-white transition-colors">
       {t('nav.compensation')}
     </a>
 
-    <Link href="/delays" className="hover:text-slate-700 transition-colors">
+    <Link href="/delays" className="hover:text-white transition-colors">
       {t('nav.delays')}
     </Link>
 
-    <Link href="/cancellations" className="hover:text-slate-700 transition-colors">
+    <Link href="/cancellations" className="hover:text-white transition-colors">
       {t('nav.cancellations')}
     </Link>
 
-    <Link href="/rights" className="hover:text-slate-700 transition-colors">
+    <Link href="/rights" className="hover:text-white transition-colors">
       {t('nav.rights')}
     </Link>
 
-    <Link href="/faq" className="hover:text-slate-700 transition-colors">
+    <Link href="/faq" className="hover:text-white transition-colors">
       {t('nav.faq')}
     </Link>
 
-    <Link href="/about" className="hover:text-slate-700 transition-colors">
+    <Link href="/about" className="hover:text-white transition-colors">
       {t('nav.about')}
     </Link>
 
-    <Link href="/contact" className="hover:text-slate-700 transition-colors">
+    <Link href="/contact" className="hover:text-white transition-colors">
       {t('nav.contact')}
     </Link>
   </nav>
@@ -293,12 +342,26 @@ export default function Home() {
 
   {/* Följ ärende */}
   {/* ✅ fc-track-btn = hook för DE-only CSS för att minska knappen */}
-  <button
-    type="button"
-    onClick={openTrackModal}
-className="inline-flex items-center gap-2 rounded-md border border-slate-900/10 bg-slate-900 px-4 py-2 text-[14px] font-semibold text-white shadow-sm hover:bg-slate-800 hover:shadow-md transition fc-track-btn whitespace-nowrap"
-  >
-    <UserCircleIcon className="h-5 w-5" />
+<button
+  type="button"
+  onClick={openTrackModal}
+  className="
+  inline-flex items-center gap-2
+  rounded-lg
+  border border-white/90
+  bg-transparent
+  px-4 py-2
+  text-[14px] font-semibold
+  text-white
+  transition
+  hover:bg-white/10
+  fc-track-btn
+  whitespace-nowrap
+"
+
+>
+
+    <UserCircleIcon className="h-5 w-5 text-white" />
     {t('track.button')}
   </button>
 </div>
@@ -311,18 +374,20 @@ className="inline-flex items-center gap-2 rounded-md border border-slate-900/10 
 
   <button
     type="button"
-    className="inline-flex items-center justify-center px-2.5 py-2 text-slate-900"
+    className="inline-flex items-center justify-center px-2.5 py-2 text-white"
     onClick={() => setIsMobileNavOpen(true)}
     aria-label={t('mobileNav.openAria')}
   >
     <span className="sr-only">{t('mobileNav.openSr')}</span>
     <span className="flex flex-col gap-1.5">
-      <span className="block h-[2px] w-5 rounded-full bg-slate-900" />
-      <span className="block h-[2px] w-5 rounded-full bg-slate-900" />
-      <span className="block h-[2px] w-5 rounded-full bg-slate-900" />
+<span className="block h-[2px] w-5 rounded-full bg-white/90" />
+<span className="block h-[2px] w-5 rounded-full bg-white/90" />
+<span className="block h-[2px] w-5 rounded-full bg-white/90" />
     </span>
   </button>
 </div>
+{/* Subtil highlight under header */}
+<div className="pointer-events-none absolute left-0 right-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 </header>
 
 {/* Mobil: slide-over-meny */}
@@ -476,357 +541,154 @@ className="inline-flex items-center gap-2 rounded-md border border-slate-900/10 
         )}
 
         {/* Hero */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-10 sm:pt-12 md:pt-16 pb-20 md:pb-28 grid md:grid-cols-2 gap-10 lg:gap-14 items-start">
-          {/* Copy-sida */}
-          <div className="order-1 md:order-1">
-            {/* Badge – trygghet & erbjudande */}
-            <div className="inline-flex flex-wrap items-center gap-2 text-[11px] font-semibold tracking-[0.18em] text-emerald-900/90">
-              <span>{t('hero.badges.eu')}</span>
-              <span>•</span>
-              <span>{t('hero.badges.fee')}</span>
-              <span>•</span>
-              <span>{t('hero.badges.noWinNoFee')}</span>
-            </div>
+<section className="max-w-6xl mx-auto px-4 sm:px-6 pt-12 sm:pt-14 md:pt-18 pb-16 md:pb-24 space-y-10">
+{/* Hero Card – Step A */}
+<div className="relative">
+<div
+  className="
+    relative
+    mx-auto max-w-5xl
+    rounded-3xl
+    bg-gradient-to-br
+  bg-gradient-to-b
+from-[#0A1120]   /* matchar header */
+via-[#0C1830]
+to-[#061028]     /* djupare botten */
+    shadow-[0_30px_110px_rgba(15,60,120,0.28)]
+    px-6 py-16
+    sm:px-12 sm:py-24
+    overflow-hidden
+  "
+>
 
-            <h1 className="mt-3 max-w-3xl text-[26px] sm:text-[30px] md:text-[38px] font-black leading-snug md:leading-tight tracking-[-0.5px] text-slate-950 drop-shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
-              {t('hero.title')}
-            </h1>
+<div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(60%_40%_at_0%_0%,rgba(10,17,32,0.6)_0%,transparent_60%)]" />
+<div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-b from-white/2 via-transparent to-black/40" />
+<div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-white/10" />
+<div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(80%_60%_at_50%_30%,rgba(255,255,255,0.05)_0%,transparent_60%)]" />
 
-            <p className="mt-3 text-sm sm:text-base text-slate-700 max-w-xl">
-              {t('hero.subtitle.beforeDelayed')}{' '}
-              <a href="/delays" className="hover:text-slate-900 transition-colors">
-                {t('hero.subtitle.delayedLink')}
-              </a>{' '}
-              {t('hero.subtitle.between')}{' '}
-              <a href="/cancellations" className="hover:text-slate-900 transition-colors">
-                {t('hero.subtitle.cancelledLink')}
-              </a>{' '}
-              {t('hero.subtitle.afterCancelled')}{' '}
-              <a href="/rights" className="hover:text-slate-900 transition-colors">
-                {t('hero.subtitle.eu261Link')}
-              </a>
-              {t('hero.subtitle.afterEu261')}
-            </p>
 
-            <div className="mt-5 flex flex-col sm:flex-row sm:items-center gap-3">
-              <a
-                href="#precheck"
-                className="inline-flex w-full sm:w-auto items-center justify-center rounded-md border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-sm whitespace-nowrap transition-all duration-150 ease-out hover:bg-slate-800 hover:shadow-md hover:-translate-y-[1px] active:scale-[0.98]"
-              >
-                {t('hero.cta')}
-              </a>
 
-              {/* Liten trygghetsrad under knappen */}
-              <p className="mt-1 text-[11px] text-slate-700/80">
-                {t('hero.trust.beforeLink')}{' '}
-                <a href="/terms" className="underline">
-                  {t('hero.trust.link')}
-                </a>
-                {t('hero.trust.afterLink')}
-              </p>
-            </div>
-          </div>
+    {/* Trust badges */}
+<div className="mb-4 flex flex-wrap items-center gap-3 text-[11px] font-semibold tracking-[0.18em] text-[#2DFF9C]/90">
+      <span>EU261/UK261</span>
+      <span>•</span>
+      <span>NO WIN, NO FEE</span>
+      <span>•</span>
+      <span>1 MINUTE FREE CHECK</span>
+    </div>
 
-          {/* Form-kortet */}
-          <div
-            id="precheck"
-            className="order-2 md:order-2 mt-6 md:mt-0 w-full max-w-md md:max-w-none mx-auto
-           rounded-2xl border border-white/40 bg-white/85 bg-clip-padding
-           shadow-[0_28px_80px_rgba(15,23,42,0.35)] backdrop-blur-xl
-           p-5 sm:p-6 md:p-7"
-          >
-            {/* Steg-indikator */}
-            <div className="mb-3 flex items-center justify-between text-[11px] font-medium text-slate-600">
-              <div className="flex items-center gap-2">
-                <span
-                  className={
-                    step === 'quick'
-                      ? 'inline-flex h-5 w-5 items-center justify-center rounded-full text-white text-[11px] font-semibold shadow-[0_2px_4px_rgba(0,0,0,0.15)] bg-gradient-to-br from-emerald-500 to-emerald-600'
-                      : 'inline-flex h-5 w-5 items-center justify-center rounded-full text-emerald-700 text-[11px] font-semibold bg-emerald-100 shadow-inner'
-                  }
-                >
-                  1
-                </span>
+    {/* Headline */}
+<h1 className="max-w-4xl font-black tracking-tight text-white/85">
+      <span className="block text-[30px] sm:text-[36px] md:text-[44px] leading-tight">
+        Get up to €600 in compensation
+      </span>
+<span className="mt-1 block text-[28px] sm:text-[34px] md:text-[42px] leading-tight text-white/80">
+        for delayed or cancelled flights!
+      </span>
+    </h1>
+<p className="mt-2 max-w-3xl text-sm leading-relaxed text-white/70">
+  {t('hero.subtitle.beforeDelayed')}{' '}
+  <span className="font-medium">
+    {t('hero.subtitle.delayedLink')}
+  </span>{' '}
+  {t('hero.subtitle.between')}{' '}
+  <span className="font-medium">
+    {t('hero.subtitle.cancelledLink')}
+  </span>{' '}
+  {t('hero.subtitle.afterCancelled')}{' '}
+  <span className="font-medium">
+    {t('hero.subtitle.eu261Link')}
+  </span>
+  {t('hero.subtitle.afterEu261')}
+</p>
 
-                <span className={step === 'quick' ? 'text-slate-900' : 'text-slate-500'}>
-                  {t('precheck.steps.step1')}
-                </span>
-              </div>
+    {/* Unified Inputs + CTA (AirHelp-style) */}
+<form
+  onSubmit={(e) => {
+    e.preventDefault();
+    
+console.log("FROM:", form.from, "TO:", form.to);
 
-              <div className="flex items-center gap-2">
-                <span
-                  className={
-                    step === 'details'
-                      ? 'inline-flex h-5 w-5 items-center justify-center rounded-full text-white text-[11px] font-semibold shadow-[0_2px_4px_rgba(0,0,0,0.15)] bg-gradient-to-br from-emerald-500 to-emerald-600'
-                      : 'inline-flex h-5 w-5 items-center justify-center rounded-full text-emerald-700 text-[11px] font-semibold bg-emerald-100 shadow-inner'
-                  }
-                >
-                  2
-                </span>
+    if (!form.from || !form.to) {
+      return;
+    }
 
-                <span className={step === 'details' ? 'text-slate-900' : 'text-slate-500'}>
-                  {t('precheck.steps.step2')}
-                </span>
-              </div>
-            </div>
+    const params = new URLSearchParams({
+      from: form.from,
+      to: form.to,
+    });
 
-            {/* Steg 1 – snabb förhandskontroll */}
-            <div className="mb-5 space-y-3">
-              <h3 className="text-base md:text-lg font-semibold mb-1">
-                {t('precheck.quick.title')}
-              </h3>
+    window.location.href = `/${locale}/check?${params.toString()}`;
+  }}
+  className="mt-10"
+>
 
-              <p className="text-xs text-slate-600 mt-1">
-                {t('precheck.quick.descBeforeLink')}{' '}
-                <a href="/rights" className="font-semibold text-slate-900">
-                  {t('precheck.quick.eu261Link')}
-                </a>
-                {t('precheck.quick.descAfterLink')}
-              </p>
+  <div className="
+    flex items-stretch
+    rounded-2xl
+    bg-white/90 backdrop-blur-sm
+    shadow-[0_20px_60px_rgba(15,23,42,0.18)]
+    overflow-visable
+  ">
+    {/* FROM */}
+    <div className="flex-1 px-5 py-4">
+      <AirportInput
+        label="Departure airport"
+        placeholder="Departure airport"
+        value={form.from}
+        onSelect={(iata) => setForm({ ...form, from: iata })}
+        variant="unstyled"
+      />
+    </div>
 
-              <form onSubmit={handleQuickCheck} className="grid grid-cols-1 gap-3">
-                <Input
-                  label={t('precheck.quick.labels.flightNumber')}
-                  placeholder={t('precheck.quick.placeholders.flightNumber')}
-                  value={form.flightNumber}
-                  onChange={(v) => setForm({ ...form, flightNumber: v.toUpperCase() })}
-                />
-                <Input
-                  label={t('precheck.quick.labels.date')}
-                  type="date"
-                  value={form.date}
-                  onChange={(v) => setForm({ ...form, date: v })}
-                />
+   {/* Divider */}
+<div className="w-px bg-gradient-to-b from-white/90 via-white/60 to-white/90 my-3" />
 
-                <div className="grid grid-cols-2 gap-3">
-                  <Input
-                    label={t('precheck.quick.labels.from')}
-                    placeholder={t('precheck.quick.placeholders.from')}
-                    value={form.from}
-                    onChange={(v) => setForm({ ...form, from: v.toUpperCase() })}
-                  />
-                  <Input
-                    label={t('precheck.quick.labels.to')}
-                    placeholder={t('precheck.quick.placeholders.to')}
-                    value={form.to}
-                    onChange={(v) => setForm({ ...form, to: v.toUpperCase() })}
-                  />
-                </div>
+    {/* TO */}
+    <div className="flex-1 px-5 py-4">
+      <AirportInput
+        label="Final destination airport"
+        placeholder="Final destination airport"
+        value={form.to}
+        onSelect={(iata) => setForm({ ...form, to: iata })}
+        variant="unstyled"
+      />
+    </div>
 
-                <div>
-                  <span className="mb-1 block text-xs font-medium text-slate-800">
-                    {t('precheck.quick.labels.connectionTitle')}
-                  </span>
+    {/* CTA */}
+ <button
+  type="submit"
+  className="
+    m-2
+    px-8
+    rounded-xl
+    bg-[#22E3A5]
+    text-slate-900
+    text-base
+    font-semibold
+    shadow-[0_6px_18px_rgba(16,185,129,0.28)]
+    transition
+    hover:shadow-[0_0_0_6px_rgba(34,227,165,0.14)]
+    hover:bg-[#1FD39A]
+    active:scale-[0.98]
+    whitespace-nowrap
+  "
+>
+  Check compensation
+</button>
 
-                  <div className="flex flex-wrap gap-3 text-xs">
-                    <label className="inline-flex items-center gap-1">
-                      <input
-                        type="radio"
-                        name="connection"
-                        value="direct"
-                        checked={form.hasConnection === 'direct'}
-                        onChange={() =>
-                          setForm({
-                            ...form,
-                            hasConnection: 'direct',
-                            connections: [''],
-                          })
-                        }
-                      />
-                      <span>{t('precheck.quick.labels.direct')}</span>
-                    </label>
+  </div>
+</form>
 
-                    <label className="inline-flex items-center gap-1">
-                      <input
-                        type="radio"
-                        name="connection"
-                        value="connection"
-                        checked={form.hasConnection === 'connection'}
-                        onChange={() =>
-                          setForm({
-                            ...form,
-                            hasConnection: 'connection',
-                            connections: form.connections.length ? form.connections : [''],
-                          })
-                        }
-                      />
-                      <span>{t('precheck.quick.labels.withConnection')}</span>
-                    </label>
-                  </div>
 
-                  {form.hasConnection === 'connection' && (
-                    <div className="mt-2 space-y-2">
-                      {form.connections.map((value, index) => (
-                        <div key={index} className="flex items-center gap-2">
-                          <input
-                            type="text"
-                            value={value}
-                            onChange={(e) => {
-                              const next = [...form.connections];
-                              next[index] = e.target.value;
-                              setForm({ ...form, connections: next });
-                            }}
-                            placeholder={t('precheck.quick.placeholders.connection')}
-                            className="w-full rounded-lg border border-slate-300 bg-white/95 px-3 py-2 text-xs text-slate-900 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100"
-                          />
+  </div>
+</div>
 
-                          {index > 0 && (
-                            <button
-                              type="button"
-                              onClick={() => {
-                                const next = form.connections.filter((_, i) => i !== index);
-                                setForm({ ...form, connections: next.length ? next : [''] });
-                              }}
-                              className="text-[11px] text-slate-500 hover:text-red-600"
-                            >
-                              {t('precheck.quick.actions.remove')}
-                            </button>
-                          )}
-                        </div>
-                      ))}
 
-                      {form.connections.length < 5 && (
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setForm({ ...form, connections: [...form.connections, ''] })
-                          }
-                          className="text-[11px] font-medium text-emerald-700 hover:text-emerald-800"
-                        >
-                          {t('precheck.quick.actions.addAirport')}
-                        </button>
-                      )}
-                    </div>
-                  )}
-                </div>
-
-                {quickMessage && <p className="text-xs text-red-600">{quickMessage}</p>}
-
-                <button
-                  type="submit"
-                  className="
-          inline-flex items-center justify-center
-          w-full sm:w-auto
-          rounded-xl px-5 py-2.5
-          font-semibold text-sm
-          text-white
-          bg-emerald-600
-          shadow-[0_2px_4px_rgba(0,0,0,0.06)]
-          hover:bg-emerald-700 hover:shadow-[0_3px_6px_rgba(0,0,0,0.10)]
-          active:scale-[0.98]
-          transition-all duration-150
-          disabled:opacity-60 disabled:cursor-not-allowed
-        "
-                  disabled={quickStatus === 'checking'}
-                >
-                  {quickStatus === 'checking'
-                    ? t('precheck.quick.submit.checking')
-                    : t('precheck.quick.submit.default')}
-                </button>
-              </form>
-            </div>
-
-            {/* Steg 2 – detaljer */}
-            {step === 'details' && (
-              <div ref={detailsRef}>
-                <div className="h-px bg-slate-200 my-3" />
-
-                <form onSubmit={handleFullSubmit} className="grid grid-cols-1 gap-3">
-                  {/* Liten "Bra nyheter!"-rad */}
-                  <div className="flex items-start gap-2 mb-1">
-                    <div className="mt-[2px] text-emerald-600 text-base">✔️</div>
-                    <p className="text-xs md:text-sm text-emerald-700 leading-snug">
-                      <span className="font-semibold">
-                        {t('precheck.details.goodNewsStrong')}
-                      </span>{' '}
-                      {t('precheck.details.goodNewsText')}
-                    </p>
-                  </div>
-
-                  <h3 className="text-sm font-semibold text-slate-900">
-                    {t('precheck.details.title')}
-                  </h3>
-
-                  <Input
-                    label={t('precheck.details.labels.fullName')}
-                    placeholder={t('precheck.details.placeholders.fullName')}
-                    value={form.name}
-                    onChange={(v) => setForm({ ...form, name: v })}
-                  />
-                  <Input
-                    label={t('precheck.details.labels.email')}
-                    type="email"
-                    placeholder={t('precheck.details.placeholders.email')}
-                    value={form.email}
-                    onChange={(v) => setForm({ ...form, email: v })}
-                  />
-                  <Input
-                    label={t('precheck.details.labels.phone')}
-                    type="tel"
-                    placeholder={t('precheck.details.placeholders.phone')}
-                    value={form.phone}
-                    onChange={(v) => setForm({ ...form, phone: v })}
-                  />
-                  <Input
-                    label={t('precheck.details.labels.bookingNumber')}
-                    placeholder={t('precheck.details.placeholders.bookingNumber')}
-                    value={form.bookingNumber}
-                    onChange={(v) => setForm({ ...form, bookingNumber: v })}
-                  />
-
-                  {err && (
-                    <div className="rounded-lg border border-rose-200 bg-rose-50 p-3 text-sm text-rose-700">
-                      {err}
-                    </div>
-                  )}
-
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="
-            inline-flex items-center justify-center
-            w-full sm:w-auto
-            rounded-xl px-5 py-2.5
-            font-semibold text-sm
-            text-white
-            bg-emerald-600
-            shadow-[0_2px_4px_rgba(0,0,0,0.06)]
-            hover:bg-emerald-700 hover:shadow-[0_3px_6px_rgba(0,0,0,0.10)]
-            active:scale-[0.98]
-            transition-all duration-150
-            disabled:opacity-60 disabled:cursor-not-allowed
-          "
-                  >
-                    {loading
-                      ? t('precheck.details.submit.sending')
-                      : t('precheck.details.submit.default')}
-                  </button>
-
-                  <p className="mt-1 text-[11px] text-slate-600">
-                    {t('precheck.details.consent.before')}{' '}
-                    <a className="underline" href="/terms">
-                      {t('precheck.details.consent.terms')}
-                    </a>{' '}
-                    {t('precheck.details.consent.and')}{' '}
-                    <a className="underline" href="/privacy">
-                      {t('precheck.details.consent.privacy')}
-                    </a>
-                    {t('precheck.details.consent.after')}
-                  </p>
-
-                  <div className="mt-3 flex flex-wrap items-center gap-4 text-[11px] text-slate-500">
-                    <span>{t('precheck.details.trust.gdpr')}</span>
-                    <span>{t('precheck.details.trust.noWinNoFee')}</span>
-                    <span>{t('precheck.details.trust.fastHandling')}</span>
-                  </div>
-                </form>
-              </div>
-            )}
-          </div>
         </section>
 
         {/* Läs mer – precis vid kanten innan man scrollar till stegen */}
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-6 mb-4 flex justify-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-2 mb-4 flex justify-center">
           <a
             href="#how"
             className="inline-flex items-center gap-1 text-[15px] font-semibold text-slate-800 hover:text-slate-900 transition-colors"
@@ -1086,7 +948,8 @@ className="inline-flex items-center gap-2 rounded-md border border-slate-900/10 
         </footer>
       </div>
     </main>
-  );
+      </>
+);
 }
 
 /* ---------- Tiny UI bits ---------- */
@@ -1105,29 +968,29 @@ function Input({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-xs font-medium text-slate-800 tracking-tight">
+<span className="mb-1 block text-sm font-semibold tracking-tight text-slate-900">
         {label}
       </span>
       <input
-        type={type}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className="
-          w-full px-3.5 py-2.5
-          rounded-xl
-          border border-slate-300/80 
-          bg-white/90 backdrop-blur-sm
-          text-slate-900 text-sm
-          shadow-[0_1px_2px_rgba(0,0,0,0.03)]
-          transition-all duration-150
-          placeholder:text-slate-400
+  type={type}
+  value={value}
+  onChange={(e) => onChange(e.target.value)}
+  placeholder={placeholder}
+  className={`
+    w-full h-11
+    rounded-lg
+    border border-slate-300
+    bg-white
+    px-3
+    text-base
+    ${type === 'date' ? 'text-slate-400' : 'text-slate-900'}
+    placeholder:text-slate-400
+    focus:outline-none
+    focus:ring-0
+    focus:border-slate-900
+  `}
+/>
 
-          focus:border-emerald-500
-          focus:ring-2 focus:ring-emerald-500/20
-          focus:bg-white
-        "
-      />
     </label>
   );
 }

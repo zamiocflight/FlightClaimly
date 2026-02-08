@@ -184,7 +184,11 @@
       "submit": {
         "default": "Sprawdź mój lot",
         "checking": "Sprawdzanie…"
-      }
+      },
+      "result": {
+  "eligible": "Na podstawie historycznych danych lotniczych wygląda na to, że Twój lot był opóźniony o ponad 3 godziny. Możesz mieć prawo do odszkodowania.",
+  "notConfirmed": "Nie mogliśmy potwierdzić opóźnienia powyżej 3 godzin na podstawie dostępnych danych. Możesz jednak kontynuować — dane linii lotniczej mogą się różnić."
+}
     },
     "details": {
       "goodNewsStrong": "Dobre wieści!",

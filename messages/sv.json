@@ -184,7 +184,11 @@
       "submit": {
         "default": "Kolla mitt flyg",
         "checking": "Kontrollerar…"
-      }
+      },
+      "result": {
+  "eligible": "Baserat på historisk flygdata verkar ditt flyg ha varit försenat mer än 3 timmar. Du kan ha rätt till ersättning.",
+  "notConfirmed": "Vi kunde inte bekräfta en försening över 3 timmar med tillgänglig data. Du kan ändå gå vidare – flygbolagets uppgifter kan skilja sig."
+}
     },
     "details": {
       "goodNewsStrong": "Bra nyheter!",

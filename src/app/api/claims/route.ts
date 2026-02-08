@@ -37,27 +37,27 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    const {
-      flightNumber,
-      date,
-      from,
-      to,
-      name,
-      email,
-      bookingNumber,
-      phone,
-      locale: bodyLocale,
-    } = body ?? {};
+const {
+  flightNumber,
+  date,
+  from,
+  to,
+  name,
+  email,
+  bookingNumber,
+  bookingRef, // ✅ tillåt gamla namnet också
+  phone,
+  locale: bodyLocale,
+} = body ?? {};
 
-    if (!flightNumber || !date || !from || !to || !name || !email || !bookingNumber) {
-      return NextResponse.json(
-        {
-          error:
-            'Saknar nödvändig information. Fyll i flygnummer, datum, från, till, namn, e-post och bokningsnummer.',
-        },
-        { status: 400 }
-      );
-    }
+const booking = bookingNumber ?? bookingRef ?? null;
+
+if (!flightNumber || !date || !from || !to || !name || !email) {
+  return NextResponse.json(
+    { error: 'Saknar nödvändig information. Fyll i flygnummer, datum, från, till, namn och e-post.' },
+    { status: 400 }
+  );
+}
 
     const locale = detectLocale(req, bodyLocale);
 
@@ -66,16 +66,16 @@ export async function POST(req: Request) {
 
     // Spara claim
     const claim = await addClaim({
-      id,
-      flightNumber,
-      date,
-      from,
-      to,
-      name,
-      email,
-      bookingNumber,
-      phone: phone ?? null,
-    });
+  id,
+  flightNumber,
+  date,
+  from,
+  to,
+  name,
+  email,
+  bookingNumber: booking, // ✅ nu optional
+  phone: phone ?? null,
+});
 
     console.log('✅ /api/claims – NYTT ärende skapat i Supabase:', claim);
 

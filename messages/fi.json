@@ -184,7 +184,11 @@
       "submit": {
         "default": "Tarkista lentoni",
         "checking": "Tarkistetaan…"
-      }
+      },
+      "result": {
+  "eligible": "Historiallisten lentotietojen perusteella lentosi näyttää viivästyneen yli 3 tuntia. Saatat olla oikeutettu korvaukseen.",
+  "notConfirmed": "Emme pystyneet vahvistamaan yli 3 tunnin viivästystä saatavilla olevien tietojen perusteella. Voit silti jatkaa — lentoyhtiön tiedot voivat poiketa."
+}
     },
     "details": {
       "goodNewsStrong": "Hyviä uutisia!",
