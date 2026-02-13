@@ -3,6 +3,27 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
+function ensureLegsInQuery(sp: URLSearchParams): URLSearchParams {
+  const qs = new URLSearchParams(sp.toString());
+
+  if (!qs.get("legs")) {
+    const from = qs.get("from");
+    const fromCode = qs.get("fromCode");
+    const to = qs.get("to");
+    const toCode = qs.get("toCode");
+
+    if (from && fromCode && to && toCode) {
+      const legs = [
+        { id: "0", from, fromCode, to, toCode },
+      ];
+      qs.set("legs", JSON.stringify(legs));
+    }
+  }
+
+  return qs;
+}
+
+
 export default function MissedConnectionPage() {
   const router = useRouter();
   const sp = useSearchParams();
@@ -12,24 +33,44 @@ export default function MissedConnectionPage() {
     current === "yes" || current === "no" ? current : null
   );
 
-  useEffect(() => {
-    if (!value) return;
+ useEffect(() => {
+  const qs = new URLSearchParams(sp.toString());
 
-    const qs = new URLSearchParams(sp.toString());
+  // always ensure we're in itinerary flow
+  qs.set("choice", "itinerary");
+
+  if (value) {
     qs.set("missedConnection", value);
-
-    router.replace(`?${qs.toString()}`, { scroll: false });
-  }, [value, router, sp]);
-
-  function goNext() {
-    if (!value) return;
-
-    if (value === "yes") {
-      router.push(`./missed-connection-hours?${sp.toString()}`);
-    } else {
-      router.push(`./what-happened?${sp.toString()}`);
-    }
+  } else {
+    qs.delete("missedConnection");
   }
+
+  router.replace(`?${qs.toString()}`, { scroll: false });
+}, [value, router, sp]);
+
+
+  // Init state from querystring (on refresh / back)
+useEffect(() => {
+  const v = sp.get("missedConnection");
+  if (v === "yes" || v === "no") {
+    setValue(v);
+  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
+
+ function goNext() {
+  if (!value) return;
+
+  const qs = ensureLegsInQuery(new URLSearchParams(sp.toString()));
+
+  if (value === "yes") {
+    router.push(`./missed-connection-hours?${qs.toString()}`);
+  } else {
+    router.push(`./what-happened?${qs.toString()}`);
+  }
+}
+
 
 const cardBase =
   "w-full flex items-center gap-4 rounded-lg border px-5 py-4 text-left transition bg-white h-[56px]";

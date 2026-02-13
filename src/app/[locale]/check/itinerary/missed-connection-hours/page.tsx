@@ -29,6 +29,25 @@ const OPTIONS: { value: DelayValue; label: string }[] = [
   { value: "9+", label: "9+ hours" },
 ];
 
+function ensureLegsInQuery(sp: URLSearchParams): URLSearchParams {
+  const qs = new URLSearchParams(sp.toString());
+
+  if (!qs.get("legs")) {
+    const from = qs.get("from");
+    const fromCode = qs.get("fromCode");
+    const to = qs.get("to");
+    const toCode = qs.get("toCode");
+
+    if (from && fromCode && to && toCode) {
+      const legs = [{ id: "0", from, fromCode, to, toCode }];
+      qs.set("legs", JSON.stringify(legs));
+    }
+  }
+
+  return qs;
+}
+
+
 export default function MissedConnectionHoursPage() {
   const router = useRouter();
   const sp = useSearchParams();
@@ -40,19 +59,23 @@ export default function MissedConnectionHoursPage() {
 
   const wrapRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const qs = new URLSearchParams(sp.toString());
+useEffect(() => {
+  const qs = new URLSearchParams(sp.toString());
 
-    if (value) {
-      qs.set("missedConnectionDelay", value);
-      qs.set("missedConnectionDelayValid", "1");
-    } else {
-      qs.delete("missedConnectionDelay");
-      qs.delete("missedConnectionDelayValid");
-    }
+  // always ensure itinerary flow
+  qs.set("choice", "itinerary");
 
-    router.replace(`?${qs.toString()}`, { scroll: false });
-  }, [value, router, sp]);
+  if (value) {
+    qs.set("missedConnectionDelay", value);
+    qs.set("missedConnectionDelayValid", "1");
+  } else {
+    qs.delete("missedConnectionDelay");
+    qs.delete("missedConnectionDelayValid");
+  }
+
+  router.replace(`?${qs.toString()}`, { scroll: false });
+}, [value, router, sp]);
+
 
   useEffect(() => {
     function onClickOutside(e: MouseEvent) {
@@ -65,10 +88,23 @@ export default function MissedConnectionHoursPage() {
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, []);
 
-  function goNext() {
-    if (!value) return;
-    router.push(`../what-happened?${sp.toString()}`);
+// Init state from querystring (on refresh / back)
+useEffect(() => {
+  const v = sp.get("missedConnectionDelay") as DelayValue | null;
+  if (v) {
+    setValue(v);
+    setNeverArrived(v === "never");
   }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
+
+function goNext() {
+  if (!value) return;
+  const qs = ensureLegsInQuery(new URLSearchParams(sp.toString()));
+  router.push(`../what-happened?${qs.toString()}`);
+}
+
 
   const FIELD_WIDTH = "max-w-[50%] w-full";
   const FIELD_ROW =

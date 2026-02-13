@@ -66,22 +66,25 @@ export default function DirectOrLayoverUI() {
   }
 
   function goNext(next: Choice) {
-    if (!next) return;
+  if (!next) return;
 
-    const qs = new URLSearchParams(sp.toString());
-    if (from) qs.set("from", from);
-    if (to) qs.set("to", to);
+  const qs = new URLSearchParams(sp.toString());
+  if (from) qs.set("from", from);
+  if (to) qs.set("to", to);
 
-    if (next === "itinerary") {
-      qs.set("layoversValid", allLayoversFilled ? "1" : "0");
-      qs.set("layovers", JSON.stringify(layovers.filter(Boolean)));
-    } else {
-      qs.delete("layoversValid");
-      qs.delete("layovers");
-    }
-
-    router.push(`/check/${next}?${qs.toString()}`);
+  if (next === "itinerary") {
+    qs.set("choice", "itinerary");
+    qs.set("layoversValid", allLayoversFilled ? "1" : "0");
+    qs.set("layovers", JSON.stringify(layovers.filter(Boolean)));
+  } else {
+    qs.set("choice", "direct");   // 👈 LÄGG TILL DENNA RAD
+    qs.delete("layoversValid");
+    qs.delete("layovers");
   }
+
+  router.push(`/check/${next}?${qs.toString()}`);
+}
+
 
   const cardBase =
     "flex items-center gap-4 rounded-lg border px-5 py-4 text-left transition bg-white border-black/10 hover:border-sky-400 h-[56px]";

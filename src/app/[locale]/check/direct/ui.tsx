@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState, useRef } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import PlaneIcon from "@/components/PlaneIcon";
+
 
 type FlightItem = {
   id: string;
@@ -74,19 +76,12 @@ function formatAirport(label: string) {
   return `${city} (${code})`;
 }
 
-// Plane icon
-function PlaneIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-4 w-4 text-slate-400 rotate-90"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M21 16v-2l-8-5V3.5c0-.8-.7-1.5-1.5-1.5S10 2.7 10 3.5V9L2 14v2l8-1.5V20l-2 1.5V23l3.5-1 3.5 1v-1.5L13 20v-5.5L21 16z" />
-    </svg>
-  );
+function normalizeFlightNumber(raw: string) {
+  // "BA 812" -> "BA812"
+  return raw.replace(/\s+/g, "").trim();
 }
+
+
 
 // --- Airline Autocomplete ---
 function AirlineAutocomplete({
@@ -170,6 +165,15 @@ export default function DirectClient() {
   const flightsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+  const params = new URLSearchParams(sp.toString());
+  params.set("choice", "direct");
+
+  const qs = params.toString();
+  router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+}, [sp, pathname, router]);
+
+
+  useEffect(() => {
     if (!selectedAirline) return;
     flightsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [selectedAirline]);
@@ -183,22 +187,42 @@ export default function DirectClient() {
     { id: "5", depTime: "20:30", arrTime: "23:10", flightNumber: "BA 820" },
   ];
 
+  function getSelectedFlightNumber() {
+  if (!selectedFlightId) return "";
+  if (selectedFlightId === MANUAL_ID) return "MANUAL";
+  return mockFlights.find((f) => f.id === selectedFlightId)?.flightNumber || "";
+}
+
+
   // ✅ NY: beräkna om direct-sidan är “klar”
   const directValid = Boolean(date && selectedAirline && selectedFlightId);
 
-  // ✅ NY: synca directValid till querystring för layout.tsx
-  useEffect(() => {
-    const params = new URLSearchParams(sp.toString());
+useEffect(() => {
+  const qs = new URLSearchParams(sp.toString());
 
-    if (directValid) {
-      params.set("directValid", "1");
-    } else {
-      params.delete("directValid");
-    }
+  // Always ensure direct flow
+  qs.set("choice", "direct");
 
-    const qs = params.toString();
-    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-  }, [directValid, sp, pathname, router]);
+  // Persist direct selections so Verify + Layout can work
+  if (date) qs.set("date", date);
+  else qs.delete("date");
+
+  if (selectedAirline) qs.set("airline", selectedAirline);
+  else qs.delete("airline");
+
+  const flightNumber = getSelectedFlightNumber();
+  if (flightNumber) qs.set("flightNumber", flightNumber);
+  else qs.delete("flightNumber");
+
+  // Layout gate
+  const directValidNow = Boolean(date && selectedAirline && selectedFlightId);
+  if (directValidNow) qs.set("directValid", "1");
+  else qs.delete("directValid");
+
+  router.replace(`${pathname}?${qs.toString()}`, { scroll: false });
+}, [date, selectedAirline, selectedFlightId, sp, pathname, router]);
+
+
 
   return (
     <div className="space-y-10">

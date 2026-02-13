@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Plane } from "lucide-react";
+import PlaneIcon from "@/components/PlaneIcon";
+
 
 type Segment = {
   airline: string;
@@ -28,19 +30,7 @@ function formatAirport(label: string) {
   return `${city} (${code})`;
 }
 
-// Horizontal plane icon (points right, same color as text) — no external libs
-function PlaneIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-4 w-4 text-sky-400 rotate-90"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M21 16v-2l-8-5V3.5c0-.8-.7-1.5-1.5-1.5S10 2.7 10 3.5V9L2 14v2l8-1.5V20l-2 1.5V23l3.5-1 3.5 1v-1.5L13 20v-5.5L21 16z" />
-    </svg>
-  );
-}
+
 
 // --- Airline list (~40 major EU + intercontinental carriers) ---
 const AIRLINES = [
@@ -126,7 +116,7 @@ function AirlineAutocomplete({
       />
 
       {open && matches.length > 0 && (
-        <div className="absolute z-10 mt-1 w-full overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg">
+<div className="absolute z-10 mt-1 w-full overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg">
           {matches.map((a) => (
             <div
               key={a}
@@ -134,7 +124,7 @@ function AirlineAutocomplete({
                 onChange(a);
                 setOpen(false);
               }}
-              className="cursor-pointer px-4 py-2 text-sm text-slate-900 hover:bg-sky-50"
+              className="cursor-pointer px-4 py-2 text-sm text-slate-900 hover:bg-sky-50 whitespace-nowrap"
             >
               {a}
             </div>
@@ -218,6 +208,13 @@ export default function ItineraryClient() {
   }, [segments, segmentCount]);
 
   useEffect(() => {
+  const qs = new URLSearchParams(sp.toString());
+  qs.set("choice", "itinerary");
+  router.replace(`?${qs.toString()}`, { scroll: false });
+}, [sp, router]);
+
+
+  useEffect(() => {
     const qs = new URLSearchParams(sp.toString());
     qs.set("segmentsValid", allFilled ? "1" : "0");
     qs.set("segments", JSON.stringify(segments));
@@ -232,8 +229,8 @@ export default function ItineraryClient() {
     });
   }
 
-  const inputBase =
-    "w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-sky-300 hover:border-sky-300";
+const fieldRow =
+  "relative flex items-center h-[50px] rounded-lg border border-slate-300 bg-white px-4 focus-within:border-sky-300 hover:border-sky-300";
 
   return (
     <div className="mx-auto max-w-[640px]">
@@ -263,40 +260,59 @@ export default function ItineraryClient() {
                   <span>{formatAirport(toStop)}</span>
                 </div>
 
-                {/* Airline = 50% width */}
-                <div className="mt-2 max-w-[50%]">
-                  <div className="mb-2 text-sm font-semibold text-sky-900">
-                    Airline
-                  </div>
-                  <AirlineAutocomplete
-                    value={seg.airline}
-                    onChange={(v) => setSegment(i, { airline: v })}
-                    inputClassName={inputBase}
-                  />
-                </div>
+{/* Airline = 50% width */}
+<div className="mt-2 max-w-[50%]">
+  <div className="mb-2 text-sm font-semibold text-sky-900">Airline</div>
 
-                {/* Flight number (1/3) + Date (2/3) */}
-                <div className="mt-5 flex gap-4 max-w-[50%]">
-                  <div className="w-1/3">
-                    <div className="mb-2 text-sm font-semibold text-sky-900">
-                      Flight number
-                    </div>
+<div className={fieldRow}>
+  <div className="flex-1">
+    <AirlineAutocomplete
+      value={seg.airline}
+      onChange={(v) => setSegment(i, { airline: v })}
+      inputClassName="w-full h-full bg-transparent outline-none text-sm text-slate-900 placeholder:text-slate-400 pr-12"
+    />
+  </div>
 
-                    <div className="flex overflow-hidden rounded-lg border border-slate-300 bg-white focus-within:border-sky-300 hover:border-sky-300">
-                      <div className="flex w-1/2 items-center justify-center bg-slate-100 px-3 text-sm font-normal text-slate-500">
-                        {extractAirlineCode(seg.airline)}
-                      </div>
+  {seg.airline && (
+    <button
+      type="button"
+      aria-label="Clear airline"
+      onClick={() => setSegment(i, { airline: "" })}
+      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+    >
+      ✕
+    </button>
+  )}
+</div>
+</div>
 
-                      <input
-                        className="w-full px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
-                        value={seg.flightNumber}
-                        onChange={(e) =>
-                          setSegment(i, { flightNumber: e.target.value })
-                        }
-                        placeholder="1234"
-                      />
-                    </div>
-                  </div>
+
+
+
+{/* Flight number (1/3) + Date (2/3) */}
+<div className="mt-5 flex gap-4 max-w-[50%]">
+  <div className="w-1/3">
+    <div className="mb-2 text-sm font-semibold text-sky-900">
+      Flight number
+    </div>
+
+{/* Flight number wrapper — force same height as Date */}
+<div className="h-[50px] flex overflow-hidden rounded-lg border border-slate-300 bg-white focus-within:border-sky-300 hover:border-sky-300">
+  {/* Prefix – grey fills full height */}
+  <div className="h-full flex w-1/3 items-center justify-center bg-slate-100 px-3 text-sm font-normal text-slate-500">
+    {extractAirlineCode(seg.airline)}
+  </div>
+
+  {/* Input – white fills full height */}
+  <input
+    className="h-full w-2/3 bg-transparent px-4 text-sm text-slate-900 placeholder:text-slate-400 outline-none"
+    value={seg.flightNumber}
+    onChange={(e) => setSegment(i, { flightNumber: e.target.value })}
+    placeholder="1234"
+  />
+</div>
+
+  </div>
 
                   <div className="w-2/3">
                     <div className="mb-2 text-sm font-semibold text-sky-900">

@@ -10,7 +10,19 @@ type StepDef = {
 };
 
 const STEPS: StepDef[] = [
-  { id: 1, title: "Eligibility", paths: ["direct-or-layover", "direct", "itinerary", "verify"] },
+  {
+    id: 1,
+    title: "Eligibility",
+    paths: [
+      "direct-or-layover",
+      "direct",
+      "itinerary",
+      "missed-connection",
+      "missed-connection-hours",
+      "what-happened",
+      "verify",
+    ],
+  },
   { id: 2, title: "Passenger details", paths: ["claim"] },
   { id: 3, title: "Documents", paths: ["thanks"] },
   { id: 4, title: "Finish", paths: [] },
@@ -18,46 +30,221 @@ const STEPS: StepDef[] = [
 
 function getActiveStep(pathname: string): number {
   for (const step of STEPS) {
-    if (step.paths.some((p) => pathname.includes(p))) {
-      return step.id;
-    }
+    if (step.paths.some((p) => pathname.includes(p))) return step.id;
   }
   return 1;
 }
+
+function ensureLegsInQuery(sp: URLSearchParams): URLSearchParams {
+  const qs = new URLSearchParams(sp.toString());
+
+  if (!qs.get("legs")) {
+    const segmentsJson = qs.get("segments");
+    const layoversJson = qs.get("layovers");
+
+    if (segmentsJson) {
+      try {
+        const segments = JSON.parse(segmentsJson);
+        const layovers: string[] = layoversJson ? JSON.parse(layoversJson) : [];
+
+        const fromLabel = qs.get("from"); // "Copenhagen (CPH) — Copenhagen Kastrup Airport"
+        const toLabel = qs.get("to");     // "Warsaw (WAW) — Warsaw Chopin Airport"
+
+        const parseCityAndCode = (label: string | null) => {
+          if (!label) return { city: "Unknown", code: "UNK" };
+          const match = label.match(/^(.+?)\s*\((\w{3})\)/);
+          if (match) {
+            return { city: match[1].trim(), code: match[2].trim() };
+          }
+          return { city: label, code: "UNK" };
+        };
+
+        const fromParsed = parseCityAndCode(fromLabel);
+        const toParsed = parseCityAndCode(toLabel);
+
+        if (Array.isArray(segments) && segments.length > 0) {
+          const points: { city: string; code: string }[] = [];
+
+          // Start
+          points.push(fromParsed);
+
+          // Layovers
+          for (const stop of layovers) {
+            const p = parseCityAndCode(stop);
+            points.push(p);
+          }
+
+          // End
+          points.push(toParsed);
+
+          const legs = points.slice(0, -1).map((p, idx) => ({
+            id: String(idx),
+            from: p.city,
+            fromCode: p.code,
+            to: points[idx + 1].city,
+            toCode: points[idx + 1].code,
+          }));
+
+          qs.set("legs", JSON.stringify(legs));
+          return qs;
+        }
+      } catch {
+        // fallthrough
+      }
+    }
+
+    // Fallback för direct
+    const from = qs.get("from");
+    const fromCode = qs.get("fromCode");
+    const to = qs.get("to");
+    const toCode = qs.get("toCode");
+
+    if (from && fromCode && to && toCode) {
+      const legs = [{ id: "0", from, fromCode, to, toCode }];
+      qs.set("legs", JSON.stringify(legs));
+    }
+  }
+
+  return qs;
+}
+
+
+
 
 export default function CheckLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const sp = useSearchParams();
   const activeStep = getActiveStep(pathname);
-
   const router = useRouter();
 
   const choice = (sp.get("choice") || "direct") as "direct" | "itinerary";
 
   // base: /{locale}/check
-  const parts = pathname.split("/").filter(Boolean); // ["sv","check","direct-or-layover"]
+  const parts = pathname.split("/").filter(Boolean); // ["sv","check","direct-or-layover", ...]
   const base = parts.length >= 2 ? `/${parts[0]}/${parts[1]}` : "/check";
 
+  // --- page detection ---
   const isDirectOrLayover = pathname.endsWith("/direct-or-layover");
   const isDirect = pathname.endsWith("/direct");
-  const isItinerary = pathname.endsWith("/itinerary");
 
-  // validity flags from pages (set in querystring)
+  const isItinerary = pathname.endsWith("/itinerary");
+  const isMissedConnection = pathname.endsWith("/itinerary/missed-connection");
+  const isMissedConnectionHours = pathname.endsWith(
+    "/itinerary/missed-connection-hours"
+  );
+  const isWhatHappened = pathname.endsWith("/itinerary/what-happened");
+
+  const isVerify = pathname.endsWith("/verify");
+
+  // Verify flags (from VerifyClient)
+const verifyMatched = sp.get("verifyMatched") === "1";
+const verifyEligible = sp.get("verifyEligible") === "1";
+const verifyConfirm = sp.get("verifyConfirm"); // "yes" | null
+
+const verifyValid = verifyMatched && verifyEligible && verifyConfirm === "yes";
+
+
+  // --- validity flags from pages (querystring) ---
   const layoversValid = sp.get("layoversValid") === "1";
   const segmentsValid = sp.get("segmentsValid") === "1";
   const directValid = sp.get("directValid") === "1";
 
-  const canContinue =
-    (isDirectOrLayover &&
-      (choice === "direct" || (choice === "itinerary" && layoversValid))) ||
-    (isItinerary && layoversValid && segmentsValid) ||
-    (isDirect && directValid);
+  // Missed connection step (we treat presence of yes/no as valid)
+  const missedConnection = sp.get("missedConnection"); // "yes" | "no" | null
+  const missedConnectionValid = missedConnection === "yes" || missedConnection === "no";
 
-  const nextHref = isDirectOrLayover
-    ? `${base}/${choice}?${sp.toString()}`
-    : isDirect || isItinerary
-    ? `${base}/verify?${sp.toString()}`
-    : null;
+  // Missed connection hours
+  const missedConnectionDelayValid =
+    sp.get("missedConnectionDelayValid") === "1" ||
+    Boolean(sp.get("missedConnectionDelay"));
+
+  // What happened (minimal wiring via query params)
+  const disruptionType = sp.get("disruptionType"); // "delayed" | "cancelled" | "denied"
+  const affectedLegId = sp.get("affectedLegId");
+  const outcome = sp.get("outcome"); // "gte3" | "lt3" | "never"
+
+  // Extra follow-ups (optional – only required for certain disruptions)
+  const cancelNotice = sp.get("cancelNotice"); // "lt14" | "gte14"
+  const volunteer = sp.get("volunteer"); // "yes" | "no"
+
+  const baseWhatHappenedValid =
+    Boolean(disruptionType) && Boolean(affectedLegId) && Boolean(outcome);
+
+  const cancelledOk =
+    disruptionType !== "cancelled" || (cancelNotice === "lt14" || cancelNotice === "gte14");
+
+  const deniedOk =
+    disruptionType !== "denied" || (volunteer === "yes" || volunteer === "no");
+
+  const whatHappenedValid = baseWhatHappenedValid && cancelledOk && deniedOk;
+
+  // --- nextHref mapping ---
+  const nextHref = (() => {
+    // Step 0
+    if (isDirectOrLayover) {
+      return `${base}/${choice}?${sp.toString()}`;
+    }
+
+  // Direct path
+if (isDirect) {
+  const qs = ensureLegsInQuery(new URLSearchParams(sp.toString()));
+  return `${base}/verify?${qs.toString()}`;
+}
+
+
+    // Itinerary path
+    if (isItinerary) {
+      // after segments -> missed connection question
+      return `${base}/itinerary/missed-connection?${sp.toString()}`;
+    }
+
+if (isMissedConnection) {
+  if (missedConnection === "yes") {
+    return `${base}/itinerary/missed-connection-hours?${sp.toString()}`;
+  }
+  if (missedConnection === "no") {
+    const qs = ensureLegsInQuery(new URLSearchParams(sp.toString()));
+    return `${base}/itinerary/what-happened?${qs.toString()}`;
+  }
+  return null;
+}
+
+if (isMissedConnectionHours) {
+  const qs = ensureLegsInQuery(new URLSearchParams(sp.toString()));
+  return `${base}/itinerary/what-happened?${qs.toString()}`;
+}
+
+
+    if (isWhatHappened) {
+      return `${base}/verify?${sp.toString()}`;
+    }
+
+    // verify -> (kommer senare: claim)
+    if (isVerify) {
+  return `${base}/claim?${sp.toString()}`;
+}
+
+
+    return null;
+  })();
+
+  // --- canContinue mapping (requires nextHref) ---
+  const canContinue = Boolean(nextHref) && (() => {
+    if (isDirectOrLayover) {
+      return choice === "direct" || (choice === "itinerary" && layoversValid);
+    }
+    if (isItinerary) return layoversValid && segmentsValid;
+    if (isDirect) return directValid;
+
+    if (isMissedConnection) return missedConnectionValid;
+    if (isMissedConnectionHours) return missedConnectionDelayValid;
+    if (isWhatHappened) return whatHappenedValid;
+
+    if (isVerify) return verifyValid;
+
+
+    return false;
+  })();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F4F5F7] via-[#F1F3F6] to-[#ECEFF3]">
@@ -68,9 +255,7 @@ export default function CheckLayout({ children }: { children: ReactNode }) {
             <div className="text-white text-lg font-semibold tracking-wide">
               FLIGHT<span className="text-emerald-400">CLAIMLY</span>
             </div>
-            <div className="mt-2 text-xs text-white/60">
-              Your claim progress
-            </div>
+            <div className="mt-2 text-xs text-white/60">Your claim progress</div>
           </div>
 
           <div className="relative mt-20 pl-4">
@@ -121,7 +306,8 @@ export default function CheckLayout({ children }: { children: ReactNode }) {
                     !
                   </span>
                   <p className="text-sm leading-relaxed">
-                    Please provide details for your <strong>original flight</strong> itinerary (not a rebooked or replacement flight).
+                    Please provide details for your <strong>original flight</strong>{" "}
+                    itinerary (not a rebooked or replacement flight).
                   </p>
                 </div>
               </div>
@@ -135,10 +321,10 @@ export default function CheckLayout({ children }: { children: ReactNode }) {
                 className="
                   w-44 px-5 py-4
                   text-sm font-semibold
-                  text-slate-600
+                  text-sky-600
                   rounded-lg
-                  hover:bg-white/70
-                  hover:text-slate-900
+                  hover:bg-sky-50
+                  hover:text-sky-700
                   transition
                 "
               >
@@ -154,8 +340,8 @@ export default function CheckLayout({ children }: { children: ReactNode }) {
                 className={[
                   "w-44 rounded-lg px-5 py-4 text-sm font-semibold transition",
                   canContinue
-                    ? "bg-emerald-400 text-slate-950 hover:bg-emerald-500 cursor-pointer"
-                    : "bg-slate-200 text-slate-400 cursor-not-allowed",
+                    ? "bg-sky-500 text-white hover:bg-sky-600 cursor-pointer shadow-md shadow-sky-500/30 hover:shadow-lg hover:shadow-sky-500/40 transform hover:-translate-y-[1px] active:translate-y-0"
+                    : "bg-slate-300 text-sky-600 cursor-not-allowed opacity-60",
                 ].join(" ")}
               >
                 Continue
