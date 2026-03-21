@@ -60,10 +60,11 @@ export async function GET() {
           receivedAt: c.receivedAt ?? '',
           statusInternal: internal,
           statusLabel: statusLabelSv(internal),
-          connections: Array.isArray(c.connections) ? c.connections : [],
-          attachmentsCount: Array.isArray(c.attachments)
-            ? c.attachments.length
-            : 0,
+      connections: Array.isArray(c.connections) ? c.connections : [],
+      attachments: Array.isArray(c.attachments) ? c.attachments : [],
+      attachmentsCount: Array.isArray(c.attachments)
+      ? c.attachments.length
+      : 0,
         };
       });
 

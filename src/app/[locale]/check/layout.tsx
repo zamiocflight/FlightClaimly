@@ -108,9 +108,6 @@ function ensureLegsInQuery(sp: URLSearchParams): URLSearchParams {
   return qs;
 }
 
-
-
-
 export default function CheckLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const sp = useSearchParams();
@@ -118,6 +115,11 @@ export default function CheckLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
 
   const choice = (sp.get("choice") || "direct") as "direct" | "itinerary";
+
+  const passengerDetailsValid = sp.get("passengerDetailsValid") === "1";
+
+  // ✅ ADD: authorization valid flag
+  const authorizationValid = sp.get("authorizationValid") === "1";
 
   // base: /{locale}/check
   const parts = pathname.split("/").filter(Boolean); // ["sv","check","direct-or-layover", ...]
@@ -135,23 +137,45 @@ export default function CheckLayout({ children }: { children: ReactNode }) {
   const isWhatHappened = pathname.endsWith("/itinerary/what-happened");
 
   const isVerify = pathname.endsWith("/verify");
+  const isClaimOwner = pathname.endsWith("/claim-owner");
+  const isPassengers = pathname.endsWith("/passengers");
+  const isPassengerDetails = pathname.endsWith("/passenger-details");
+
+  const isBookingReference = pathname.endsWith("/booking-reference");
+
+  const isSignature = pathname.endsWith("/signature");
+  const signatureValid = sp.get("signatureValid") === "1";
+
+  const isUploads = pathname.endsWith("/uploads");
+
+  // ✅ ADD: authorization page detection
+  const isAuthorization = pathname.endsWith("/authorization");
+
+  const isUploadsId = pathname.endsWith("/uploads-id");
+  const isAdditional = pathname.endsWith("/additional");
+  const isFinish = pathname.endsWith("/finish");
+
+  const primaryCtaLabel = "Continue";
+  
 
   // Verify flags (from VerifyClient)
-const verifyMatched = sp.get("verifyMatched") === "1";
-const verifyEligible = sp.get("verifyEligible") === "1";
-const verifyConfirm = sp.get("verifyConfirm"); // "yes" | null
+  const verifyMatched = sp.get("verifyMatched") === "1";
+  const verifyEligible = sp.get("verifyEligible") === "1";
+  const verifyConfirm = sp.get("verifyConfirm"); // "yes" | null
 
-const verifyValid = verifyMatched && verifyEligible && verifyConfirm === "yes";
-
+  const verifyValid = verifyMatched && verifyEligible && verifyConfirm === "yes";
 
   // --- validity flags from pages (querystring) ---
   const layoversValid = sp.get("layoversValid") === "1";
   const segmentsValid = sp.get("segmentsValid") === "1";
   const directValid = sp.get("directValid") === "1";
 
+  const bookingRefValid = sp.get("bookingRefValid") === "1";
+
   // Missed connection step (we treat presence of yes/no as valid)
   const missedConnection = sp.get("missedConnection"); // "yes" | "no" | null
-  const missedConnectionValid = missedConnection === "yes" || missedConnection === "no";
+  const missedConnectionValid =
+    missedConnection === "yes" || missedConnection === "no";
 
   // Missed connection hours
   const missedConnectionDelayValid =
@@ -171,7 +195,8 @@ const verifyValid = verifyMatched && verifyEligible && verifyConfirm === "yes";
     Boolean(disruptionType) && Boolean(affectedLegId) && Boolean(outcome);
 
   const cancelledOk =
-    disruptionType !== "cancelled" || (cancelNotice === "lt14" || cancelNotice === "gte14");
+    disruptionType !== "cancelled" ||
+    (cancelNotice === "lt14" || cancelNotice === "gte14");
 
   const deniedOk =
     disruptionType !== "denied" || (volunteer === "yes" || volunteer === "no");
@@ -185,12 +210,11 @@ const verifyValid = verifyMatched && verifyEligible && verifyConfirm === "yes";
       return `${base}/${choice}?${sp.toString()}`;
     }
 
-  // Direct path
-if (isDirect) {
-  const qs = ensureLegsInQuery(new URLSearchParams(sp.toString()));
-  return `${base}/verify?${qs.toString()}`;
-}
-
+    // Direct path
+    if (isDirect) {
+      const qs = ensureLegsInQuery(new URLSearchParams(sp.toString()));
+      return `${base}/verify?${qs.toString()}`;
+    }
 
     // Itinerary path
     if (isItinerary) {
@@ -198,32 +222,71 @@ if (isDirect) {
       return `${base}/itinerary/missed-connection?${sp.toString()}`;
     }
 
-if (isMissedConnection) {
-  if (missedConnection === "yes") {
-    return `${base}/itinerary/missed-connection-hours?${sp.toString()}`;
-  }
-  if (missedConnection === "no") {
-    const qs = ensureLegsInQuery(new URLSearchParams(sp.toString()));
-    return `${base}/itinerary/what-happened?${qs.toString()}`;
-  }
-  return null;
-}
+    if (isMissedConnection) {
+      if (missedConnection === "yes") {
+        return `${base}/itinerary/missed-connection-hours?${sp.toString()}`;
+      }
+      if (missedConnection === "no") {
+        const qs = ensureLegsInQuery(new URLSearchParams(sp.toString()));
+        return `${base}/itinerary/what-happened?${qs.toString()}`;
+      }
+      return null;
+    }
 
-if (isMissedConnectionHours) {
-  const qs = ensureLegsInQuery(new URLSearchParams(sp.toString()));
-  return `${base}/itinerary/what-happened?${qs.toString()}`;
-}
-
+    if (isMissedConnectionHours) {
+      const qs = ensureLegsInQuery(new URLSearchParams(sp.toString()));
+      return `${base}/itinerary/what-happened?${qs.toString()}`;
+    }
 
     if (isWhatHappened) {
       return `${base}/verify?${sp.toString()}`;
     }
 
-    // verify -> (kommer senare: claim)
+    // verify -> claim owner
     if (isVerify) {
-  return `${base}/claim?${sp.toString()}`;
+      return `${base}/claim-owner?${sp.toString()}`;
+    }
+
+    // claim owner -> passengers
+    if (isClaimOwner) {
+      return `${base}/passengers?${sp.toString()}`;
+    }
+    if (isPassengers) {
+      return `${base}/passenger-details?${sp.toString()}`;
+    }
+
+    if (isPassengerDetails) {
+      return `${base}/booking-reference?${sp.toString()}`;
+    }
+
+    // ✅ CHANGE: booking-reference -> authorization (instead of uploads)
+    if (isBookingReference) {
+      return `${base}/authorization?${sp.toString()}`;
+    }
+
+
+ // authorization -> ticket uploads
+if (isAuthorization) {
+  return `${base}/uploads?${sp.toString()}`;
 }
 
+// ticket uploads -> ID uploads
+
+
+// ID uploads -> additional info
+if (isUploadsId) {
+  return `${base}/additional?${sp.toString()}`;
+}
+
+// additional -> finish (review)
+if (isAdditional) {
+  return `${base}/finish?${sp.toString()}`;
+}
+
+// finish -> thanks (confirmation)
+if (isFinish) {
+  return `${base}/thanks?${sp.toString()}`;
+}
 
     return null;
   })();
@@ -241,7 +304,48 @@ if (isMissedConnectionHours) {
     if (isWhatHappened) return whatHappenedValid;
 
     if (isVerify) return verifyValid;
+    if (isBookingReference) return bookingRefValid;
 
+    if (isUploads) return sp.get("uploadsValid") === "1";
+
+    // ✅ ADD: authorization validity
+    if (isAuthorization) return authorizationValid;
+
+    if (isPassengerDetails) return passengerDetailsValid;
+
+    if (isClaimOwner) {
+      const firstName = sp.get("firstName");
+      const lastName = sp.get("lastName");
+      return Boolean(
+        firstName && firstName.trim() && lastName && lastName.trim()
+      );
+    }
+    if (isPassengers) {
+      const solo = sp.get("solo") === "1";
+      if (solo) return true;
+
+      const paxJson = sp.get("pax");
+      if (!paxJson) return false;
+
+      try {
+        const pax = JSON.parse(paxJson) as Array<{
+          firstName: string;
+          lastName: string;
+          email?: string;
+          under18?: boolean;
+        }>;
+
+        if (!Array.isArray(pax) || pax.length === 0) return false;
+
+        return pax.every((p) => {
+          if (!p.firstName?.trim() || !p.lastName?.trim()) return false;
+          if (p.under18) return true; // email optional
+          return Boolean(p.email && p.email.trim());
+        });
+      } catch {
+        return false;
+      }
+    }
 
     return false;
   })();
@@ -250,8 +354,7 @@ if (isMissedConnectionHours) {
     <div className="min-h-screen bg-gradient-to-br from-[#F4F5F7] via-[#F1F3F6] to-[#ECEFF3]">
       <div className="relative flex min-h-screen">
         {/* LEFT PANEL */}
-        <aside className="hidden md:flex w-[380px] flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-sky-900 px-10 py-10">
-          <div>
+<aside className="hidden md:flex w-[380px] flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-sky-900 px-10 py-10 sticky top-0 h-screen">          <div>
             <div className="text-white text-lg font-semibold tracking-wide">
               FLIGHT<span className="text-emerald-400">CLAIMLY</span>
             </div>
@@ -291,7 +394,7 @@ if (isMissedConnectionHours) {
         </aside>
 
         {/* RIGHT CONTENT */}
-        <main className="flex-1 px-4 py-10 md:px-10">
+        <main className="flex-1 px-4 py-10 md:px-10 h-screen overflow-y-auto">
           <div className="mx-auto max-w-4xl">
             {/* WHITE CARD */}
             <div className="overflow-visible rounded-2xl bg-white/90 shadow-[0_25px_80px_-30px_rgba(0,0,0,0.18)] backdrop-blur-[2px]">
@@ -334,9 +437,14 @@ if (isMissedConnectionHours) {
               <button
                 type="button"
                 disabled={!canContinue}
-                onClick={() => {
-                  if (nextHref) router.push(nextHref);
-                }}
+onClick={() => {
+  if (isAuthorization) {
+    window.dispatchEvent(new Event("flightclaimly-submit-authorization"));
+    return;
+  }
+
+  if (nextHref) router.push(nextHref);
+}}
                 className={[
                   "w-44 rounded-lg px-5 py-4 text-sm font-semibold transition",
                   canContinue
@@ -344,9 +452,39 @@ if (isMissedConnectionHours) {
                     : "bg-slate-300 text-sky-600 cursor-not-allowed opacity-60",
                 ].join(" ")}
               >
-                Continue
+                {primaryCtaLabel}
               </button>
             </div>
+            <div className="mt-10 border-t border-slate-200 pt-6 flex items-center justify-between text-xs text-slate-500">
+  <div className="flex items-center gap-8">
+    <a
+      href={`/${parts[0]}/contact`}
+      className="hover:text-slate-700 transition"
+    >
+      Help
+    </a>
+    <a
+      href={`/${parts[0]}/terms`}
+      className="hover:text-slate-700 transition"
+      target="_blank"
+      rel="noreferrer"
+    >
+      Terms & Conditions
+    </a>
+    <a
+      href={`/${parts[0]}/privacy`}
+      className="hover:text-slate-700 transition"
+      target="_blank"
+      rel="noreferrer"
+    >
+      Privacy
+    </a>
+  </div>
+
+  <div className="text-slate-400">
+    © 2026 FLIGHTCLAIMLY
+  </div>
+</div>
           </div>
         </main>
       </div>

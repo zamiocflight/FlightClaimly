@@ -52,7 +52,7 @@ const {
 
 const booking = bookingNumber ?? bookingRef ?? null;
 
-if (!flightNumber || !date || !from || !to || !name || !email) {
+if (!flightNumber || !date || !from || !to || !name) {
   return NextResponse.json(
     { error: 'Saknar nödvändig information. Fyll i flygnummer, datum, från, till, namn och e-post.' },
     { status: 400 }

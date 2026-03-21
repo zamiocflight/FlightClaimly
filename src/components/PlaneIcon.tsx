@@ -5,10 +5,12 @@ type PlaneIconProps = {
 };
 
 export default function PlaneIcon({ className = "" }: PlaneIconProps) {
+  const colorClass = className ? className : "text-slate-400"; // default = grå
+
   return (
     <svg
       viewBox="0 0 24 24"
-      className={`h-4 w-4 text-slate-400 rotate-90 ${className}`}
+      className={`h-4 w-4 rotate-90 ${colorClass}`}
       fill="currentColor"
       aria-hidden="true"
     >

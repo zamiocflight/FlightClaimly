@@ -19,6 +19,7 @@ type ClaimAdmin = {
   statusLabel: string; // svensk label
   connections: string[]; // mellanlandningar
   attachmentsCount: number; // antal bilagor
+  attachments: any[];
   payoutDetailsSubmittedAt?: string | null;
   payoutIbanLast4?: string | null;
 };
@@ -433,6 +434,21 @@ async function markAsPaidOut(id: string) {
                             </span>
                           </span>
                         </span>
+                        {c.attachments && c.attachments.length > 0 && (
+  <div className="mt-1 flex flex-col gap-1">
+    {c.attachments.map((a: any, i: number) => (
+      <a
+        key={i}
+        href={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/attachments/${a.path}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-[11px] text-sky-400 hover:underline"
+      >
+        {a.type}
+      </a>
+    ))}
+  </div>
+)}
                       </div>
                     </Td>
 

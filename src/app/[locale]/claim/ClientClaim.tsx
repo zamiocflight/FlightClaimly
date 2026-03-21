@@ -65,7 +65,11 @@ export default function ClientClaim() {
 
       if (!id) throw new Error('No claim id returned');
 
-      window.location.href = `/thanks?id=${id}`;
+const params = new URLSearchParams(searchParams.toString());
+params.set("claimId", id);
+
+window.location.href = `/sv/check/authorization?${params.toString()}`;
+
     } catch (e: any) {
       setError(e.message || 'Something went wrong');
     } finally {

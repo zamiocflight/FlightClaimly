@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import PlaneIcon from "@/components/PlaneIcon";
+import { CalendarDays, Clock, Plane, Timer } from "lucide-react";
 
 type VerifyResult = {
   matched: boolean;
@@ -40,26 +41,35 @@ function parseLegsFromSearchParams(sp: URLSearchParams): Leg[] {
 }
 
 // --- helpers ---
-function formatDateTime(iso: string) {
-  if (!iso) return "—";
-  try {
-    const d = new Date(iso);
-    const date = d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' });
-    const time = d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
-    return `${date} ${time}`;
-  } catch {
-    return iso;
-  }
+function formatDateParts(iso: string) {
+  if (!iso) return { date: "—", time: "—" };
+
+  const d = new Date(iso);
+  const day = d.getDate();
+  const month = d.toLocaleString(undefined, { month: "short" }).replace(".", "");
+  const monthCap = month.charAt(0).toUpperCase() + month.slice(1);
+  const year = d.getFullYear();
+
+  const date = `${day} ${monthCap} ${year}`;
+  const time = d.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
+
+  return { date, time };
+}
+
+function isDelayedOver3h(scheduledIso: string, actualIso: string) {
+  if (!scheduledIso || !actualIso) return false;
+  const s = new Date(scheduledIso).getTime();
+  const a = new Date(actualIso).getTime();
+  const diffHours = (a - s) / (1000 * 60 * 60);
+  return diffHours >= 3;
 }
 
 function estimateCompensationEUR() {
   return 250; // v1 placeholder
 }
-
 function estimateDistanceKm() {
   return 357; // v1 placeholder
 }
-
 function estimateDelay() {
   return "3 hours 22 minutes"; // v1 placeholder
 }
@@ -67,18 +77,16 @@ function estimateDelay() {
 // 👉 Normaliserar "Copenhagen — Copenhagen Kastrup Airport" -> "Copenhagen (CPH)"
 function normalizeCityLabel(name: string, code: string) {
   if (!name) return "—";
-
   const clean = name.split("—")[0].split("-")[0].trim();
-
-  if (/\([A-Z]{3}\)/.test(clean)) {
-    return clean;
-  }
-
-  if (code) {
-    return `${clean} (${code})`;
-  }
-
+  if (/\([A-Z]{3}\)/.test(clean)) return clean;
+  if (code) return `${clean} (${code})`;
   return clean;
+}
+
+function extractAirlineCode(label: string) {
+  // "Iberia (IB)" -> "IB"
+  const m = label.match(/\(([A-Z0-9]{2,3})\)/i);
+  return m ? m[1].toUpperCase() : "";
 }
 
 export function VerifyClient() {
@@ -92,6 +100,14 @@ export function VerifyClient() {
   const to = searchParams.get("to") || "";
   const date = searchParams.get("date") || "";
   const flightNumber = searchParams.get("flightNumber") || "";
+
+  // Airline label can be stored as either "airline" or "airlineName" depending on your step
+  const airlineLabel =
+    searchParams.get("airline") ||
+    searchParams.get("airlineName") ||
+    "";
+
+  const airlineCode = searchParams.get("airlineCode") || "";
 
   // ----- Itinerary fields -----
   const legs = useMemo(
@@ -116,6 +132,18 @@ export function VerifyClient() {
       ? `direct|${from}|${to}|${date}|${flightNumber}`
       : `itinerary|${legsKey}|${disruptionType}|${affectedLegId}|${outcome}|${cancelNotice}|${volunteer}`;
 
+    useEffect(() => {
+    // Set airlineCode once (no loops)
+    if (airlineCode) return;
+
+    const code = extractAirlineCode(airlineLabel);
+    if (!code) return;
+
+    const qs = new URLSearchParams(searchParams.toString());
+    qs.set("airlineCode", code);
+    router.replace(`?${qs.toString()}`, { scroll: false });
+  }, [airlineCode, airlineLabel, router, searchParams]);
+
   const [loading, setLoading] = useState(true);
   const [result, setResult] = useState<VerifyResult | null>(null);
   const [confirm, setConfirm] = useState<'yes' | 'no' | null>(null);
@@ -123,18 +151,15 @@ export function VerifyClient() {
   useEffect(() => {
     async function run() {
       setLoading(true);
-
       const res = await fetch("/api/flight/verify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-
       const json = await res.json();
       setResult(json);
       setLoading(false);
     }
-
     run();
   }, [payloadKey]);
 
@@ -149,11 +174,8 @@ export function VerifyClient() {
       qs.delete("verifyEligible");
     }
 
-    if (confirm) {
-      qs.set("verifyConfirm", confirm);
-    } else {
-      qs.delete("verifyConfirm");
-    }
+    if (confirm) qs.set("verifyConfirm", confirm);
+    else qs.delete("verifyConfirm");
 
     router.replace(`?${qs.toString()}`, { scroll: false });
   }, [result, confirm, router, searchParams]);
@@ -184,14 +206,16 @@ export function VerifyClient() {
   const scheduledArrival = date ? `${date}T10:30:00` : "";
   const actualArrival = date ? `${date}T13:51:00` : "";
 
+  const scheduledParts = formatDateParts(scheduledArrival);
+  const actualParts = formatDateParts(actualArrival);
+  const delayedOver3h = isDelayedOver3h(scheduledArrival, actualArrival);
+
   if (loading) {
-    // ändrat: text-slate-700 -> text-sky-900
     return <div className="p-8 text-sky-900">Checking flight status…</div>;
   }
 
   if (!result || !result.matched) {
     return (
-      // ändrat: text-slate-700 -> text-sky-900
       <div className="p-8 text-sky-900">
         <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
           We couldn’t verify this flight. Please go back and check your details.
@@ -203,82 +227,128 @@ export function VerifyClient() {
   const eligible = result.eligible;
 
   return (
-    // ändrat: text-slate-800 -> text-sky-900
     <div className="mx-auto max-w-3xl p-2 md:p-6 text-sky-900">
-      {eligible && (
-        // ändrat: text-slate-900 -> text-sky-900
-        <h1 className="mb-6 text-2xl md:text-3xl font-semibold text-sky-900">
+      {eligible ? (
+        <h1 className="mb-6 text-2xl md:text-2xl font-semibold text-sky-900">
           Your flight appears eligible for compensation.
+        </h1>
+      ) : (
+        <h1 className="mb-6 text-2xl md:text-2xl font-semibold text-sky-900">
+          Not eligible for compensation under EU/UK 261.
         </h1>
       )}
 
       {/* FLIGHT CARD */}
       <div className="mb-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-        {/* ändrat: text-slate-500 -> text-sky-600 */}
         <div className="flex items-center justify-between text-sm text-slate-500">
-          <span>{flightNumber ? `Flight ${flightNumber}` : "Flight details"}</span>
-          <span className="rounded-full px-3 py-1 text-xs font-medium bg-emerald-100 text-emerald-700">
-            ELIGIBLE
+          <span>
+            {flightNumber
+              ? `${airlineLabel || "Airline"} · Flight ${flightNumber}`
+              : "Flight details"}
           </span>
+
+          {eligible ? (
+            <span className="rounded-full px-3 py-1 text-xs font-medium bg-emerald-100 text-emerald-700">
+              ELIGIBLE
+            </span>
+          ) : (
+            <span className="rounded-full px-3 py-1 text-xs font-medium bg-red-100 text-red-700">
+              NOT ELIGIBLE
+            </span>
+          )}
         </div>
 
         {/* ROUTE */}
         <div className="mt-4 flex items-center justify-between">
-          {/* ändrat: text-slate-900 -> text-sky-900 */}
           <div className="text-lg font-semibold text-sky-900 truncate">
             {fromLabel}
           </div>
 
           <div className="mx-4 flex shrink-0 items-center justify-center">
-            {/* ändrat: text-slate-400 -> text-sky-500 */}
             <PlaneIcon className="text-sky-500" />
           </div>
 
-          {/* ändrat: text-slate-900 -> text-sky-900 */}
           <div className="text-lg font-semibold text-sky-900 truncate text-right">
             {toLabel}
           </div>
         </div>
 
         {/* COMPENSATION BANNER */}
-        <div className="mt-4 rounded-lg bg-gradient-to-r from-white to-emerald-50 px-5 py-4">
-          {/* ändrat: text-slate-500 -> text-sky-600 */}
-          <div className="text-xs text-slate-500">Potential compensation</div>
-          <div className="text-2xl font-semibold text-emerald-600">
-            {/* ändrat: text-slate-600 -> text-sky-700 */}
-            €{compEUR} <span className="text-sm font-medium text-slate-600">per passenger</span>
+        <div
+          className={[
+            "mt-4 rounded-lg px-5 py-4 bg-gradient-to-r",
+            eligible ? "from-white to-emerald-50" : "from-white to-red-50",
+          ].join(" ")}
+        >
+          <div className="text-xs text-slate-500">
+            {eligible ? "Potential compensation" : "Compensation"}
+          </div>
+          <div
+            className={[
+              "text-2xl font-semibold",
+              eligible ? "text-emerald-600" : "text-red-600",
+            ].join(" ")}
+          >
+            €{eligible ? compEUR : 0}{" "}
+            <span className="text-sm font-medium text-slate-600">
+              per passenger
+            </span>
           </div>
         </div>
 
         {/* INFO GRID */}
         <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="rounded-lg bg-slate-50 p-4">
-            {/* ändrat: text-slate-500 -> text-sky-600 */}
             <div className="text-xs text-slate-500">Scheduled arrival time</div>
-            {/* ändrat: text-slate-900 -> text-sky-900 */}
-            <div className="mt-1 font-medium text-sky-900">
-              {formatDateTime(scheduledArrival)}
+            <div className="mt-2 flex items-center gap-6">
+              <div className="flex items-center gap-2 text-sky-900 font-medium">
+                <CalendarDays className="h-5 w-5 text-slate-400" />
+                <span>{scheduledParts.date}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sky-900 font-medium">
+                <Clock className="h-5 w-5 text-slate-400" />
+                <span>{scheduledParts.time}</span>
+              </div>
             </div>
           </div>
 
           <div className="rounded-lg bg-slate-50 p-4">
             <div className="text-xs text-slate-500">Actual arrival time</div>
-            <div className="mt-1 font-medium text-sky-900">
-              {formatDateTime(actualArrival)}
+            <div className="mt-2 flex items-center gap-6">
+              <div className="flex items-center gap-2 text-sky-900 font-medium">
+                <CalendarDays className="h-5 w-5 text-slate-400" />
+                <span>{actualParts.date}</span>
+              </div>
+              <div
+                className={[
+                  "flex items-center gap-2 font-medium",
+                  delayedOver3h ? "text-red-500" : "text-sky-900",
+                ].join(" ")}
+              >
+                <Clock
+                  className={[
+                    "h-5 w-5",
+                    delayedOver3h ? "text-red-500" : "text-slate-400",
+                  ].join(" ")}
+                />
+                <span>{actualParts.time}</span>
+              </div>
             </div>
           </div>
 
           <div className="rounded-lg bg-slate-50 p-4">
             <div className="text-xs text-slate-500">Flight distance</div>
-            <div className="mt-1 font-medium text-sky-900">
-              {distanceKm} km
+            <div className="mt-1 font-medium text-sky-900 flex items-center gap-2">
+              <Plane className="h-5 w-5 text-slate-400" />
+              <span>{distanceKm} km</span>
             </div>
           </div>
 
           <div className="rounded-lg bg-slate-50 p-4">
             <div className="text-xs text-slate-500">Total delay</div>
-            <div className="mt-1 font-medium text-sky-900">
-              {delayText}
+            <div className="mt-1 font-medium text-sky-900 flex items-center gap-2">
+              <Timer className="h-5 w-5 text-slate-400" />
+              <span>{delayText}</span>
             </div>
           </div>
         </div>
@@ -286,7 +356,6 @@ export function VerifyClient() {
 
       {/* CONFIRM */}
       <div className="mt-8">
-        {/* ändrat: text-slate-900 -> text-sky-900 */}
         <h2 className="mb-3 text-lg font-semibold text-sky-900">
           Are these details correct?
         </h2>
@@ -294,7 +363,10 @@ export function VerifyClient() {
         <div className="space-y-3">
           <button
             type="button"
-            onClick={() => setConfirm('yes')}
+            onClick={() => {
+              setConfirm('yes');
+              window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+            }}
             className={[
               "w-full rounded-lg border px-4 py-4 text-left transition",
               confirm === 'yes'
@@ -309,14 +381,16 @@ export function VerifyClient() {
               ].join(" ")}>
                 {confirm === 'yes' && <div className="h-2 w-2 rounded-full bg-sky-500" />}
               </div>
-              {/* ändrat: text-slate-800 -> text-sky-900 */}
               <span className="font-medium text-sky-900">Yes, this is my flight</span>
             </div>
           </button>
 
           <button
             type="button"
-            onClick={() => setConfirm('no')}
+            onClick={() => {
+              setConfirm('no');
+              window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+            }}
             className={[
               "w-full rounded-lg border px-4 py-4 text-left transition",
               confirm === 'no'
@@ -331,7 +405,6 @@ export function VerifyClient() {
               ].join(" ")}>
                 {confirm === 'no' && <div className="h-2 w-2 rounded-full bg-sky-500" />}
               </div>
-              {/* ändrat: text-slate-800 -> text-sky-900 */}
               <span className="font-medium text-sky-900">No, something is wrong</span>
             </div>
           </button>
