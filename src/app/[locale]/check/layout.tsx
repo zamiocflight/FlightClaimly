@@ -271,6 +271,9 @@ if (isAuthorization) {
 }
 
 // ticket uploads -> ID uploads
+if (isUploads) {
+  return `${base}/uploads-id?${sp.toString()}`;
+}
 
 
 // ID uploads -> additional info
@@ -307,6 +310,8 @@ if (isFinish) {
     if (isBookingReference) return bookingRefValid;
 
     if (isUploads) return sp.get("uploadsValid") === "1";
+
+    if (isUploadsId) return sp.get("uploadsIdValid") === "1";
 
     // ✅ ADD: authorization validity
     if (isAuthorization) return authorizationValid;
