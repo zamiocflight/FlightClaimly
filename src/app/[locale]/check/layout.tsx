@@ -313,6 +313,8 @@ if (isFinish) {
 
     if (isUploadsId) return sp.get("uploadsIdValid") === "1";
 
+    if (isAdditional) return true;
+
     // ✅ ADD: authorization validity
     if (isAuthorization) return authorizationValid;
 
@@ -442,11 +444,16 @@ if (isFinish) {
               <button
                 type="button"
                 disabled={!canContinue}
-onClick={() => {
+onClick={async () => {
   if (isAuthorization) {
     window.dispatchEvent(new Event("flightclaimly-submit-authorization"));
     return;
   }
+
+if ((window as any).fc_uploadAndContinue) {
+  await (window as any).fc_uploadAndContinue();
+  return;
+}
 
   if (nextHref) router.push(nextHref);
 }}

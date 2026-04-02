@@ -1,3 +1,5 @@
+import ClientAdditionalUploads from "./ClientAdditionalUploads";
+
 export default function Page() {
-  return <div>Placeholder</div>;
+  return <ClientAdditionalUploads />;
 }

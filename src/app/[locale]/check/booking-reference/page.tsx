@@ -55,7 +55,6 @@ export default function BookingReferencePage() {
         />
       </div>
 
-      {/* Helper accordion */}
       <details className="mt-6 w-2/3">
         <summary className="cursor-pointer select-none flex items-center gap-2 font-semibold text-sky-900 hover:text-sky-700 transition">
           <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-sky-500 text-sky-500 text-xs font-bold">

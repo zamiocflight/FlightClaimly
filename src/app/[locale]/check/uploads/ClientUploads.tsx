@@ -12,6 +12,7 @@ import {
   AlertTriangle,
 } from "lucide-react";
 
+
 const ACCEPTED_EXT = ["pdf", "jpg", "jpeg", "png"];
 const MAX_FILE_MB = 10; // per file
 const MAX_TOTAL_MB = 25; // total
@@ -44,7 +45,7 @@ export default function ClientUploads() {
   const router = useRouter();
   const sp = useSearchParams();
 
-  const claimId = sp.get("claimId");
+  const claimId = sp.get("claimId") || "";
 
     const airlineCode = sp.get("airlineCode") || "";
   const docTier = getDocTier(airlineCode);
@@ -72,6 +73,8 @@ export default function ClientUploads() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>("");
   const [authorityReady, setAuthorityReady] = useState(false);
+  const authorityRunningRef = useRef(false);
+  const ensureAuthorityRanRef = useRef(false);
 
   const totalBytes = useMemo(
     () => files.reduce((sum, f) => sum + f.size, 0),
@@ -80,24 +83,48 @@ export default function ClientUploads() {
 
   const hasFiles = files.length > 0;
 
-  useEffect(() => {
+ useEffect(() => {
   async function ensureAuthority() {
+  if (ensureAuthorityRanRef.current) return;
+  ensureAuthorityRanRef.current = true;
+
+    console.log("🧪 DEBUG SIGNATURE", {
+  claimId,
+  claimKey: `fc_signature_png_${claimId}`,
+  claimSig: sessionStorage.getItem(`fc_signature_png_${claimId}`),
+  globalSig: sessionStorage.getItem("fc_signature_png"),
+});
+
+    if (authorityRunningRef.current) return;
+    authorityRunningRef.current = true;
+console.log("🧪 ensureAuthority TRIGGER");
+    console.log("🚀 ensureAuthority RUN", claimId);
+
     if (!claimId) return;
 
-    // undvik att köra flera gånger
-    if (sessionStorage.getItem(`fc_authority_done_${claimId}`) === "1") {
-      setAuthorityReady(true);
-      return;
-    }
+  // undvik att köra flera gånger
+  if (sessionStorage.getItem(`fc_authority_done_${claimId}`) === "1") {
+    console.log("🚀 ensureAuthority RUN", claimId);
+    setAuthorityReady(true);
+    return;
+  }
 
-    const sig =
+
+  if (authorityReady) return;
+
+   let sig =
   sessionStorage.getItem(`fc_signature_png_${claimId}`) ||
   sessionStorage.getItem("fc_signature_png");
-    if (!sig) {
-      // vi fortsätter ändå; admin kan requesta signatur igen om det behövs
-      setAuthorityReady(true);
-      return;
-    }
+
+// 🔥 OM fallback användes → migrera till rätt key
+if (sig && !sessionStorage.getItem(`fc_signature_png_${claimId}`)) {
+  sessionStorage.setItem(`fc_signature_png_${claimId}`, sig);
+}
+
+if (!sig) {
+  setAuthorityReady(true);
+  return;
+}
 
     const fullName = `${sp.get("firstName") || ""} ${sp.get("lastName") || ""}`.trim();
     const bookingReference = sp.get("bookingRef") || sp.get("pnr") || sp.get("bookingReference") || "";
@@ -106,6 +133,8 @@ export default function ClientUploads() {
       setAuthorityReady(true);
       return;
     }
+
+   
 
     // 1) Generate PDF
     const pdfRes = await fetch("/api/authority/generate", {
@@ -124,16 +153,6 @@ export default function ClientUploads() {
       return;
     }
 
-    const pdfBlob = await pdfRes.blob();
-
-    // 2) Upload PDF as attachment (re-using your attachments endpoint)
-    const formData = new FormData();
-    formData.append("files", new File([pdfBlob], `authority-${claimId}.pdf`, { type: "application/pdf" }));
-
-    await fetch(`/api/claims/${claimId}/attachments`, {
-      method: "POST",
-      body: formData,
-    });
 
     sessionStorage.setItem(`fc_authority_done_${claimId}`, "1");
     setAuthorityReady(true);
@@ -233,8 +252,8 @@ export default function ClientUploads() {
     setDragActive(false);
   }
 
- function goNext() {
-  router.push(`/${locale}/check/thanks?id=${claimId}`);
+function goNext() {
+  router.push(`/${locale}/check/uploads-id?${sp.toString()}`);
 }
 
   async function uploadAndContinue() {
@@ -279,12 +298,20 @@ export default function ClientUploads() {
     }
   }
 
- function skipForNow() {
-  router.push(finishHref);
-}
+useEffect(() => {
+  (window as any).fc_uploadAndContinue = uploadAndContinue;
+
+  return () => {
+    delete (window as any).fc_uploadAndContinue;
+  };
+}, [uploadAndContinue]);
 
   // If user lands here without claimId, still render clean + helpful
   const claimMissing = !claimId;
+
+useEffect(() => {
+  (window as any).fc_uploadAndContinue = uploadAndContinue;
+}, [uploadAndContinue]);
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-2 text-sky-900">
@@ -395,25 +422,7 @@ export default function ClientUploads() {
           </div>
         )}
 
-   
 
-    
-
-        {/* Actions */}
-        <div className="mt-8 flex items-center justify-between">
-          <button
-            type="button"
-            onClick={skipForNow}
-            className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-800 transition"
-          >
-            <SkipForward className="h-4 w-4" />
-            Skip for now
-          </button>
-        </div>
-
-       <div className="mt-3 text-xs text-slate-400">
-  Tip: uploading now usually speeds things up. If you skip, we’ll request missing documents by email.
-</div>
       </div>
     </div>
   );

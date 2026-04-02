@@ -46,6 +46,8 @@ export default function AuthorizationPage() {
 
   const sigRef = useRef<SignatureCanvas | null>(null);
 
+  const continueRunningRef = useRef(false);
+
   const [hasSigned, setHasSigned] = useState(false);
   const [isDrawing, setIsDrawing] = useState(false);
 
@@ -96,21 +98,19 @@ function handleEnd() {
 
     const dataUrl = signatureCanvas.toDataURL("image/png");
 
-    try {
-      const claimId = searchParams.get("claimId");
+try {
+  // 🔥 alltid spara globalt först
+sessionStorage.setItem("fc_signature_png", dataUrl);
 
-      if (claimId) {
-        sessionStorage.setItem(
-          `fc_signature_png_${claimId}`,
-          dataUrl
-        );
-      } else {
-        sessionStorage.setItem(
-          "fc_signature_png",
-          dataUrl
-        );
-      }
-    } catch {}
+const claimId = searchParams.get("claimId");
+
+if (claimId) {
+  sessionStorage.setItem(
+    `fc_signature_png_${claimId}`,
+    dataUrl
+  );
+}
+} catch {}
   } else {
     setHasSigned(false);
 
@@ -129,8 +129,12 @@ function handleEnd() {
     });
   }
 
-  async function handleContinue() {
+async function handleContinue() {
   if (!isValid) return;
+
+  // 🔥 STOPPAR dubbelkörning
+  if (continueRunningRef.current) return;
+  continueRunningRef.current = true;
 
   try {
     const claimId = await createClaim(searchParams, locale);
@@ -142,6 +146,9 @@ function handleEnd() {
   } catch (err) {
     console.error("Claim creation failed:", err);
     alert("Something went wrong creating the claim.");
+
+    // 🔥 viktigt: reset om fail
+    continueRunningRef.current = false;
   }
 }
 

@@ -50,45 +50,7 @@ export default function Page() {
         if (!fullName || !bookingReference) {
           throw new Error("Missing passenger data");
         }
-
-        // 2️⃣ Generera PDF
-        const pdfRes = await fetch("/api/authority/generate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            fullName,
-            bookingReference,
-            claimId,
-            signatureDataUrl: sig,
-          }),
-        });
-
-        if (!pdfRes.ok) {
-          throw new Error("Failed to generate PDF");
-        }
-
-        const pdfBlob = await pdfRes.blob();
-
-        // 3️⃣ Ladda upp PDF som attachment
-        const formData = new FormData();
-        formData.append(
-          "files",
-          new File([pdfBlob], `authority-${claimId}.pdf`, {
-            type: "application/pdf",
-          })
-        );
-
-        await fetch(`/api/claims/${claimId}/attachments`, {
-          method: "POST",
-          body: formData,
-        });
-
-        // 🔒 Markera att Authority är genererad
-        sessionStorage.setItem(`fc_authority_done_${claimId}`, "1");
-
-        // 4️⃣ Rensa signatur ur sessionStorage
-        sessionStorage.removeItem(`fc_signature_png_${claimId}`);
-        sessionStorage.removeItem("fc_signature_png");
+        
 
         // 5️⃣ Redirect till thanks
         router.replace(`/${locale}/check/thanks?${sp.toString()}`);

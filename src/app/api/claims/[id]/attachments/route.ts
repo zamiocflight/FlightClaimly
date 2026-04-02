@@ -4,13 +4,6 @@ export const runtime = 'nodejs';
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-type IncomingFile = {
-  filename: string;
-  size: number;
-  path: string; // "<claimId>/<filename>"
-  contentType?: string;
-};
-
 function supabaseAdmin() {
   const url = process.env.SUPABASE_URL;
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE;
@@ -31,55 +24,127 @@ export async function POST(
   ctx: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await ctx.params;
-    if (!id) {
+    const params = await ctx.params;
+    const incomingId = Array.isArray((params as any).id) ? (params as any).id[0] : params.id;
+
+    if (!incomingId) {
       return NextResponse.json({ error: 'Missing claim id' }, { status: 400 });
     }
 
-    const body = await req.json().catch(() => null);
-    if (!body || !Array.isArray(body.files)) {
-      return NextResponse.json(
-        { error: 'Missing files array in body' },
-        { status: 400 }
-      );
-    }
+    console.log('UPLOAD CLAIM ID:', incomingId);
 
-    const files = body.files as IncomingFile[];
     const sb = supabaseAdmin();
 
-    // ✅ RÄTT: slå upp claim på id
-    const { data: row, error: readErr } = await sb
-      .from('claims')
-      .select('attachments')
-      .eq('id', id)
-      .single();
+    const formData = await req.formData();
+    const fileEntries = formData.getAll('files');
 
-    if (readErr || !row) {
-      return NextResponse.json(
-        { error: 'Claim not found for this id' },
-        { status: 404 }
-      );
+    if (!fileEntries || fileEntries.length === 0) {
+      return NextResponse.json({ error: 'No files uploaded' }, { status: 400 });
     }
+
+    // 🔥 Viktigt: hitta claim via id ELLER received_at
+let row: any = null;
+let readErr: any = null;
+
+// 1) Försök hitta på id först
+{
+  const res = await sb
+    .from('claims')
+    .select('received_at, attachments')
+    .eq('received_at', incomingId)
+    .maybeSingle();
+
+  row = res.data;
+  readErr = res.error;
+}
+
+// 2) Om inte hittad, försök på received_at
+if (!row) {
+  const res = await sb
+    .from('claims')
+    .select('id, received_at, attachments')
+    .eq('received_at', incomingId)
+    .maybeSingle();
+
+  row = res.data;
+  readErr = res.error;
+}
+
+if (readErr || !row) {
+  console.error('Claim lookup failed', { incomingId, readErr, row });
+  return NextResponse.json(
+    { error: 'Claim not found for this id' },
+    { status: 404 }
+  );
+}
 
     const existing = Array.isArray(row.attachments) ? row.attachments : [];
     const now = new Date().toISOString();
 
-    const next = existing.concat(
-      files.map((f) => ({
-        path: f.path,
-        filename: f.filename,
-        size: f.size,
-        contentType: f.contentType ?? null,
-        uploadedAt: now,
-      }))
-    );
+    const uploadedFiles: Array<{
+      path: string;
+      filename: string;
+      size: number;
+      contentType: string;
+    }> = [];
 
-    const { error: updErr } = await sb
-      .from('claims')
-      .update({ attachments: next, updated_at: now })
-      .eq('id', id);
+    for (const entry of fileEntries) {
+      if (!(entry instanceof File)) continue;
+
+      const originalName = entry.name || "file";
+
+// 🔥 SANITIZE filename (kritisk fix)
+const safeName = originalName
+  .normalize("NFKD")
+  .replace(/[^\w.\-]/g, "_"); // tar bort åäö, spaces, etc
+      const fileName = `${Date.now()}-${safeName}`;
+      const filePath = `claims/${incomingId}/${fileName}`;
+
+      const { error: uploadError } = await sb.storage
+        .from('attachments')
+        .upload(filePath, entry, {
+          contentType: entry.type || 'application/octet-stream',
+          upsert: false,
+        });
+
+      if (uploadError) {
+        console.error('Upload error:', uploadError);
+        return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
+      }
+
+      uploadedFiles.push({
+        path: filePath,
+        filename: safeName,
+        size: entry.size,
+        contentType: entry.type || 'application/octet-stream',
+      });
+    }
+
+   const newFiles = uploadedFiles.map((f) => ({
+  path: f.path,
+  filename: f.filename,
+  size: f.size,
+  contentType: f.contentType,
+  uploadedAt: now,
+}));
+
+// 🔥 merge + dedupe (fixar overwrite-buggen)
+const map = new Map();
+
+[...existing, ...newFiles].forEach((f) => {
+  map.set(f.path, f);
+});
+
+const next = Array.from(map.values());
+
+    // 🔥 Uppdatera samma rad med samma identifierare som faktiskt matchade
+  const { error: updErr } = await sb
+  .from('claims')
+  .update({ attachments: next, updated_at: now })
+  .eq('received_at', row.received_at);
 
     if (updErr) {
+      console.error('Update attachments failed:', updErr);
       return NextResponse.json(
         { error: 'Failed to update claim attachments' },
         { status: 500 }
@@ -87,7 +152,7 @@ export async function POST(
     }
 
     return NextResponse.json(
-      { ok: true, count: files.length },
+      { ok: true, count: uploadedFiles.length },
       { status: 200 }
     );
   } catch (e: any) {

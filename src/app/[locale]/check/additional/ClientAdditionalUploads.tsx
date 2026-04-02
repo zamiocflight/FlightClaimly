@@ -7,9 +7,12 @@ import {
   FileText,
   X,
   ArrowRight,
+  SkipForward,
   CheckCircle2,
   AlertTriangle,
 } from "lucide-react";
+
+
 
 const ACCEPTED_EXT = ["pdf", "jpg", "jpeg", "png"];
 const MAX_FILE_MB = 10; // per file
@@ -38,30 +41,31 @@ function getExt(name: string) {
   return parts.length > 1 ? parts[parts.length - 1].toLowerCase() : "";
 }
 
-export default function ClientUploadsId() {
+
+export default function ClientAdditionalUploads() {
   const router = useRouter();
   const sp = useSearchParams();
 
   const claimId = sp.get("claimId");
 
-  const airlineCode = sp.get("airlineCode") || "";
+    const airlineCode = sp.get("airlineCode") || "";
   const docTier = getDocTier(airlineCode);
 
-  // locale from /sv/check/uploads-id
+  // locale from /sv/check/uploads
   const pathnameLocale =
     typeof window !== "undefined" ? window.location.pathname.split("/")[1] : "sv";
   const locale = pathnameLocale || "sv";
 
-  const finishHref = `/${locale}/check/thanks?${sp.toString()}`;
+  const finishHref = `/${locale}/check/finish?${sp.toString()}`;
 
   function updateQuery(patch: Record<string, string>) {
-    const params = new URLSearchParams(sp.toString());
-    Object.entries(patch).forEach(([k, v]) => {
-      if (v) params.set(k, v);
-      else params.delete(k);
-    });
-    router.replace(`?${params.toString()}`, { scroll: false });
-  }
+  const params = new URLSearchParams(sp.toString());
+  Object.entries(patch).forEach(([k, v]) => {
+    if (v) params.set(k, v);
+    else params.delete(k);
+  });
+  router.replace(`?${params.toString()}`, { scroll: false });
+}
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -79,46 +83,41 @@ export default function ClientUploadsId() {
   const hasFiles = files.length > 0;
 
   useEffect(() => {
-    async function ensureAuthority() {
-      if (!claimId) return;
+  async function ensureAuthority() {
+    if (!claimId) return;
 
-      // undvik att köra flera gånger
-      if (sessionStorage.getItem(`fc_authority_done_${claimId}`) === "1") {
-        setAuthorityReady(true);
-        return;
-      }
-
-      const sig =
-        sessionStorage.getItem(`fc_signature_png_${claimId}`) ||
-        sessionStorage.getItem("fc_signature_png");
-      if (!sig) {
-        // vi fortsätter ändå; admin kan requesta signatur igen om det behövs
-        setAuthorityReady(true);
-        return;
-      }
-
-      const fullName = `${sp.get("firstName") || ""} ${sp.get("lastName") || ""}`.trim();
-      const bookingReference =
-        sp.get("bookingRef") || sp.get("pnr") || sp.get("bookingReference") || "";
-
-      if (!fullName || !bookingReference) {
-        setAuthorityReady(true);
-        return;
-      }
-
-      
-
-    
+    // undvik att köra flera gånger
+    if (sessionStorage.getItem(`fc_authority_done_${claimId}`) === "1") {
+      setAuthorityReady(true);
+      return;
     }
 
-    ensureAuthority();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [claimId]);
+    const sig =
+  sessionStorage.getItem(`fc_signature_png_${claimId}`) ||
+  sessionStorage.getItem("fc_signature_png");
+    if (!sig) {
+      // vi fortsätter ändå; admin kan requesta signatur igen om det behövs
+      setAuthorityReady(true);
+      return;
+    }
+
+    const fullName = `${sp.get("firstName") || ""} ${sp.get("lastName") || ""}`.trim();
+    const bookingReference = sp.get("bookingRef") || sp.get("pnr") || sp.get("bookingReference") || "";
+
+    if (!fullName || !bookingReference) {
+      setAuthorityReady(true);
+      return;
+    }
+  }
+
+  ensureAuthority();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [claimId]);
 
   useEffect(() => {
-    updateQuery({ uploadsIdValid: hasFiles ? "1" : "" });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hasFiles]);
+  updateQuery({ additionalValid: hasFiles ? "1" : "" });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [hasFiles]);
 
   const validation = useMemo(() => {
     if (files.length === 0) return { ok: true, msg: "" };
@@ -205,11 +204,8 @@ export default function ClientUploadsId() {
     setDragActive(false);
   }
 
-function goNext() {
-  const params = new URLSearchParams(sp.toString());
-  params.set("uploadsIdValid", "1");
-
-  router.push(`/${locale}/check/additional?${params.toString()}`);
+ function goNext() {
+  router.push(`/${locale}/check/finish?${sp.toString()}`);
 }
 
   async function uploadAndContinue() {
@@ -246,11 +242,25 @@ function goNext() {
 
       goNext();
     } catch {
-      setError("Upload failed. Please try again.");
+      setError(
+        "Upload failed. Please try again, or skip for now and we’ll request documents if needed."
+      );
     } finally {
       setLoading(false);
     }
   }
+
+  useEffect(() => {
+  (window as any).fc_uploadAndContinue = uploadAndContinue;
+
+  return () => {
+    delete (window as any).fc_uploadAndContinue;
+  };
+}, [uploadAndContinue]);
+
+ function skipForNow() {
+  router.push(finishHref);
+}
 
   // If user lands here without claimId, still render clean + helpful
   const claimMissing = !claimId;
@@ -258,17 +268,15 @@ function goNext() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-2 text-sky-900">
       <div className="max-w-2xl">
-        <h1 className="text-2xl font-semibold text-sky-900">
-          Now we need your ID or Passport. This is very important for your airline case.
-        </h1>
+        <h1 className="text-2xl font-semibold text-sky-900">Any additional expenses?</h1>
 
-        <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
-          Your document will only be used to process the claim and will be deleted
-          within 30 days after the claim is finalized.
-        </div>
+        <p className="mt-2 text-slate-700">
+          If your flight was delayed, you may be entitled to compensation for
+          meals, hotel, or transport.
+        </p>
 
-        <p className="mt-6 text-slate-700">
-          Please upload your <strong>ID or passport</strong>.
+        <p className="mt-2 text-slate-700">
+          Upload receipts to help us <strong>recover even more money</strong> for you.
         </p>
 
         {/* Drop zone */}
@@ -317,7 +325,6 @@ function goNext() {
             accept=".pdf,.jpg,.jpeg,.png"
             className="hidden"
             onChange={(e) => addFiles(e.target.files)}
-            capture="environment"
           />
         </div>
 
@@ -368,40 +375,25 @@ function goNext() {
           </div>
         )}
 
-        {docTier === "high" && (
-          <div className="mt-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
-            <div className="flex items-start gap-3">
-              <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
-              <div>
-                Some airlines often require identity verification before handling third-party claims.
-                Uploading your ID now reduces delays later.
-              </div>
-            </div>
-          </div>
-        )}
+   
 
-        {docTier === "medium" && (
-          <div className="mt-6 rounded-xl border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-900">
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
-              <div>
-                Providing ID now can help speed up processing if the airline requests verification.
-              </div>
-            </div>
-          </div>
-        )}
+    
 
-        {error && (
-          <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
-            {error}
-          </div>
-        )}
+        {/* Actions */}
+        <div className="mt-8 flex items-center justify-between">
+          <button
+            type="button"
+            onClick={skipForNow}
+            className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-800 transition"
+          >
+            <SkipForward className="h-4 w-4" />
+            Skip for now
+          </button>
+        </div>
 
-        {claimMissing && (
-          <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
-            Missing claim reference. Please go back and try again.
-          </div>
-        )}
+       <div className="mt-3 text-xs text-slate-400">
+  Tip: uploading receipts may increase your compensation.
+</div>
       </div>
     </div>
   );
