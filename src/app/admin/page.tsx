@@ -2,6 +2,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { useRouter } from "next/navigation";
 
 const ENABLE_QUICK_STATUS = false;
 
@@ -17,6 +18,7 @@ type ClaimAdmin = {
   receivedAt: string;
   statusInternal: string; // new | processing | sent_to_airline | approved | paid_out | rejected
   statusLabel: string; // svensk label
+  originalStatus?: string;
   connections: string[]; // mellanlandningar
   attachmentsCount: number; // antal bilagor
   attachments: any[];
@@ -42,6 +44,10 @@ export default function AdminPage() {
   const [search, setSearch] = useState('');
   const [showArchived, setShowArchived] = useState(false);
 
+  const [filter, setFilter] = useState<'all' | 'inbox' | 'active' | 'waiting_iban' | 'done'>('all');
+
+  const router = useRouter();
+
   useEffect(() => {
   const load = async () => {
     try {
@@ -60,6 +66,7 @@ export default function AdminPage() {
 const normalized: ClaimAdmin[] = data.map((c, i) => ({
   ...c,
   id: c.id ?? c.receivedAt ?? `row-${i}`,
+  originalStatus: c.statusInternal, // 👈 NY
 }));
 
 setClaims(normalized);
@@ -79,10 +86,13 @@ const handleDownloadCsv = () => {
 };
 
   const filteredClaims = useMemo(() => {
-    if (!search.trim()) return claims;
+  let result = claims;
+
+  // 🔍 SEARCH
+  if (search.trim()) {
     const q = search.trim().toLowerCase();
 
-    return claims.filter((c) => {
+    result = result.filter((c) => {
       const haystack = [
         c.name,
         c.email,
@@ -97,7 +107,27 @@ const handleDownloadCsv = () => {
 
       return haystack.includes(q);
     });
-  }, [claims, search]);
+  }
+
+  // 🔥 FILTER (PIPELINE)
+  if (filter === 'inbox') {
+    result = result.filter((c) => c.statusInternal === 'new');
+  }
+
+  if (filter === 'active') {
+    result = result.filter((c) =>
+      ['processing', 'sent_to_airline'].includes(c.statusInternal)
+    );
+  }
+
+  if (filter === 'done') {
+    result = result.filter((c) =>
+      ['paid_out', 'rejected'].includes(c.statusInternal)
+    );
+  }
+
+  return result;
+}, [claims, search, filter]);
 
   async function updateStatus(id: string, status: string) {
     try {
@@ -256,7 +286,7 @@ async function markAsPaidOut(id: string) {
     <main className="min-h-screen bg-slate-950 text-slate-50">
       {/* Topbar */}
       <div className="border-b border-slate-800 bg-slate-950/95 backdrop-blur">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
+        <div className="max-w-[1600px] mx-auto px-4 py-4 flex items-center justify-between gap-4">
           <div>
             <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-sky-400">
               FlightClaimly
@@ -276,7 +306,7 @@ async function markAsPaidOut(id: string) {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-6 space-y-4">
+      <div className="max-w-[1600px] mx-auto px-4 py-6 space-y-4">
         {/* Error-banner */}
         {error && (
           <div className="rounded-lg border border-rose-400/60 bg-rose-950/40 px-3 py-2 text-xs text-rose-100">
@@ -298,6 +328,28 @@ async function markAsPaidOut(id: string) {
               className="w-full rounded-md border border-slate-700 bg-slate-900/80 px-3 py-1.5 text-[13px] text-slate-50 placeholder:text-slate-500 outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500/60"
             />
           </div>
+
+          <div className="flex gap-2 flex-wrap mt-2">
+  {[
+    { key: 'all', label: 'Alla' },
+    { key: 'inbox', label: 'Inbox' },
+    { key: 'active', label: 'Aktiva' },
+    { key: 'waiting_iban', label: 'Väntar IBAN' },
+    { key: 'done', label: 'Klara' },
+  ].map((f) => (
+    <button
+      key={f.key}
+      onClick={() => setFilter(f.key as any)}
+      className={`px-3 py-1.5 rounded-full text-xs font-semibold border ${
+        filter === f.key
+          ? 'bg-sky-500 text-slate-950 border-sky-400'
+          : 'bg-slate-900 text-slate-300 border-slate-700 hover:bg-slate-800'
+      }`}
+    >
+      {f.label}
+    </button>
+  ))}
+</div>
 
           <button
             type="button"
@@ -334,7 +386,7 @@ async function markAsPaidOut(id: string) {
 
         {/* Tabell */}
         <div className="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-950/70 shadow-lg shadow-slate-950/60">
-          <table className="min-w-full text-xs">
+          <table className="min-w-full table-fixed text-xs">
             <thead className="bg-slate-900/90">
               <tr>
                 <Th>Skapad</Th>
@@ -342,7 +394,7 @@ async function markAsPaidOut(id: string) {
                 <Th>Kontakt</Th>
                 <Th>Flyg</Th>
                 <Th>Mellanlandningar</Th>
-                <Th>Bokning &amp; bilagor</Th>
+                <Th className="w-[220px]">Bokning & bilagor</Th>              
                 <Th>Status</Th>
                 <Th>Åtgärd</Th>
               </tr>
@@ -361,15 +413,16 @@ async function markAsPaidOut(id: string) {
                 const statusBadge = getStatusBadge(c.statusInternal);
 
                 return (
-                  <tr key={`${c.receivedAt}-${rowIdx}`}
-
-
-                    className={
-                      rowIdx % 2 === 0
-                        ? 'bg-slate-950/40 hover:bg-slate-900/60'
-                        : 'bg-slate-950/20 hover:bg-slate-900/60'
-                    }
-                  >
+             <tr
+  key={`${c.receivedAt}-${rowIdx}`}
+  onClick={() => router.push(`/admin/claims/${c.id}`)}
+  className={
+    (rowIdx % 2 === 0
+      ? 'bg-slate-950/40 hover:bg-slate-900/60'
+      : 'bg-slate-950/20 hover:bg-slate-900/60') +
+    ' cursor-pointer'
+  }
+>
                     <Td>
                       <div className="flex flex-col">
                         <span className="font-mono text-[11px] text-slate-200">
@@ -390,19 +443,21 @@ async function markAsPaidOut(id: string) {
                       </div>
                     </Td>
 
-                    <Td>
-                      <div className="flex flex-col gap-0.5">
-                        <span className="font-mono text-[11px] text-sky-300">
-                          {c.flightNumber}
-                        </span>
-                        <span className="text-slate-100">
-                          {c.from} → {c.to}
-                        </span>
-                        <span className="text-slate-500 text-[11px]">
-                          {c.date || '—'}
-                        </span>
-                      </div>
-                    </Td>
+                 <Td>
+  <div className="flex flex-col leading-tight">
+    <span className="text-slate-100 text-[11px]">
+      {formatAirport(c.from)} → {formatAirport(c.to)}
+    </span>
+
+    <span className="font-mono text-[10px] text-sky-300">
+      {c.flightNumber}
+    </span>
+
+    <span className="text-slate-500 text-[10px]">
+      {c.date || '—'}
+    </span>
+  </div>
+</Td>
 
                     <Td>
                       <span className="text-[11px] text-slate-100">
@@ -410,8 +465,8 @@ async function markAsPaidOut(id: string) {
                       </span>
                     </Td>
 
-                    <Td>
-                      <div className="flex flex-col gap-1">
+                    <Td className="max-w-[220px] truncate">
+  <div className="flex flex-col gap-1 overflow-hidden">
                         <span className="font-mono text-[11px] text-slate-100">
                           {c.bookingNumber}
                         </span>
@@ -459,7 +514,9 @@ async function markAsPaidOut(id: string) {
                       </div>
                     </Td>
 
-                    <Td>
+
+
+                    <Td className="w-[140px]">
                       <div className="flex flex-col gap-1">
                         {/* Status-badge */}
                         <span
@@ -475,23 +532,24 @@ async function markAsPaidOut(id: string) {
 )}
 
                         {/* Select för ändring */}
-                        <select
-                          className="mt-1 rounded-md border border-slate-700 bg-slate-950/60 px-2 py-1 text-[11px] text-slate-50 focus:border-sky-500 focus:ring-1 focus:ring-sky-500/60"
-                          value={c.statusInternal}
-                          onChange={(e) =>
-                            setClaims((prev) =>
-                              prev.map((x) =>
-                                x.id === c.id
-                                  ? {
-                                      ...x,
-                                      statusInternal: e.target.value,
-                                      statusLabel: statusLabelSv(e.target.value),
-                                    }
-                                  : x
-                              )
-                            )
-                          }
-                        >
+                <select
+  className="mt-1 rounded-md border border-slate-700 bg-slate-950/60 px-2 py-1 text-[11px] text-slate-50 focus:border-sky-500 focus:ring-1 focus:ring-sky-500/60"
+  value={c.statusInternal}
+  onClick={(e) => e.stopPropagation()}   // ✅ HÄR ÄR FIXEN
+  onChange={(e) =>
+    setClaims((prev) =>
+      prev.map((x) =>
+        x.id === c.id
+          ? {
+              ...x,
+              statusInternal: e.target.value,
+              statusLabel: statusLabelSv(e.target.value),
+            }
+          : x
+      )
+    )
+  }
+>
                           {STATUS_OPTIONS.map((opt) => (
                             <option key={opt.value} value={opt.value}>
                               {opt.label}
@@ -522,15 +580,23 @@ async function markAsPaidOut(id: string) {
                       </div>
                     </Td>
 
-                    <Td>
-                      <button
-                        type="button"
-                        onClick={() => updateStatus(c.id, c.statusInternal)}
-                        disabled={savingId === c.id}
-                        className="rounded-full bg-sky-500 px-3 py-1 text-[11px] font-semibold text-slate-950 shadow-sm hover:bg-sky-400 disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap"
-                      >
-                        {savingId === c.id ? 'Sparar…' : 'Spara & skicka mail'}
-                      </button>
+                    
+
+                    <Td className="w-[180px]">
+                   <button
+  type="button"
+  onClick={(e) => {
+    e.stopPropagation();
+    updateStatus(c.id, c.statusInternal);
+  }}
+  disabled={
+    savingId === c.id ||
+    c.statusInternal === c.originalStatus
+  }
+  className="rounded-full bg-sky-500 px-3 py-1 text-[11px] font-semibold text-slate-950 shadow-sm hover:bg-sky-400 disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap"
+>
+  {savingId === c.id ? 'Sparar…' : 'Spara & skicka mail'}
+</button>
                         {canResendPayoutLink(c) && (
   <button
     type="button"
@@ -603,9 +669,17 @@ async function markAsPaidOut(id: string) {
 
 /* ----- Små UI-komponenter ----- */
 
-function Th({ children }: { children: React.ReactNode }) {
+function Th({
+  children,
+  className = '',
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <th className="px-3 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+    <th
+      className={`px-3 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-slate-400 ${className}`}
+    >
       {children}
     </th>
   );
@@ -614,12 +688,17 @@ function Th({ children }: { children: React.ReactNode }) {
 function Td({
   children,
   colSpan,
+  className = '',
 }: {
   children: React.ReactNode;
   colSpan?: number;
+  className?: string;
 }) {
   return (
-    <td className="px-3 py-2 align-top text-[11px] text-slate-50" colSpan={colSpan}>
+    <td
+      className={`px-3 py-2 align-top text-[11px] text-slate-50 ${className}`}
+      colSpan={colSpan}
+    >
       {children}
     </td>
   );
@@ -661,6 +740,22 @@ function getStatusBadge(status: string): { className: string } {
     default:
       return { className: 'bg-slate-900/80 text-slate-100 border border-slate-600/80' };
   }
+}
+
+
+
+function formatAirport(value?: string) {
+  if (!value) return '—';
+
+  const match = value.match(/^(.+?)\s*\((\w{3})\)/);
+
+  if (match) {
+    const city = match[1].trim();
+    const code = match[2];
+    return `${city} (${code})`;
+  }
+
+  return value;
 }
 
 function canResendPayoutLink(c: ClaimAdmin) {

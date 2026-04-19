@@ -189,8 +189,7 @@ export default function LanguageSwitcher({
 
       {open && (
         <div
-          className="absolute right-0 mt-2 w-40 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg z-[70]"
-          role="menu"
+className="absolute right-0 mt-2 w-40 overflow-hidden rounded-xl border border-slate-200 bg-white/95 shadow-xl ring-1 ring-black/5 backdrop-blur-md z-[70]"          role="menu"
         >
           {LOCALES.map((l) => (
             <button

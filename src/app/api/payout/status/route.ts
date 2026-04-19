@@ -34,18 +34,21 @@ export async function GET(req: Request) {
 
   const submittedAt = (claim as any).payoutDetailsSubmittedAt ?? null;
 
-  return NextResponse.json(
-    {
-      ok: true,
-      hasSubmitted: Boolean(submittedAt),
-      payout: submittedAt
-        ? {
-            accountHolder: (claim as any).payoutAccountHolder ?? null,
-            ibanLast4: (claim as any).payoutIbanLast4 ?? null,
-            submittedAt,
-          }
-        : null,
-    },
-    { status: 200 }
-  );
+return NextResponse.json(
+  {
+    ok: true,
+    hasSubmitted: Boolean(submittedAt),
+    payout: submittedAt
+      ? {
+          accountHolder: (claim as any).payoutAccountHolder ?? null,
+          ibanLast4: (claim as any).payoutIbanLast4 ?? null,
+          submittedAt,
+        }
+      : null,
+
+    // 👇 LÄGG TILL EXAKT DENNA RAD
+    compensationAmount: (claim as any).compensationAmount ?? 400,
+  },
+  { status: 200 }
+);
 }

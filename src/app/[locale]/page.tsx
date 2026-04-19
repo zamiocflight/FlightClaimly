@@ -276,7 +276,7 @@ async function handleQuickCheck(e: FormEvent) {
         {/* Header */}
 <header
   className="
-    relative overflow-hidden
+    relative z-50 overflow-visible
     w-full
     px-4 sm:px-6
     py-[6px] md:py-[10px]
@@ -623,14 +623,44 @@ console.log("FROM:", form.from, "TO:", form.to);
   className="mt-10"
 >
 
-  <div className="
-    flex items-stretch
-    rounded-2xl
-    bg-white/90 backdrop-blur-sm
-    shadow-[0_20px_60px_rgba(15,23,42,0.18)]
-    overflow-visable
-  ">
-    {/* FROM */}
+ <div className="mt-10">
+
+  {/* Mobile */}
+  <div className="sm:hidden rounded-2xl bg-white/90 backdrop-blur-sm shadow-[0_20px_60px_rgba(15,23,42,0.18)] overflow-hidden">
+
+    <div className="px-4 py-3">
+      <AirportInput
+        label="Departure airport"
+        placeholder="Departure airport"
+        value={form.from}
+        onSelect={(iata) => setForm({ ...form, from: iata })}
+        variant="unstyled"
+      />
+    </div>
+
+    <div className="px-4 py-3">
+      <AirportInput
+        label="Final destination airport"
+        placeholder="Final destination airport"
+        value={form.to}
+        onSelect={(iata) => setForm({ ...form, to: iata })}
+        variant="unstyled"
+      />
+    </div>
+
+    <div className="p-2 pt-0">
+      <button
+        type="submit"
+        className="w-full px-6 py-3 rounded-xl bg-[#22E3A5] text-slate-900 text-base font-semibold shadow-[0_6px_18px_rgba(16,185,129,0.28)] transition active:scale-[0.98]"
+      >
+        Check compensation
+      </button>
+    </div>
+  </div>
+
+  {/* Desktop */}
+  <div className="hidden sm:flex items-stretch rounded-2xl bg-white/90 backdrop-blur-sm shadow-[0_20px_60px_rgba(15,23,42,0.18)] overflow-hidden">
+
     <div className="flex-1 px-5 py-4">
       <AirportInput
         label="Departure airport"
@@ -641,10 +671,8 @@ console.log("FROM:", form.from, "TO:", form.to);
       />
     </div>
 
-   {/* Divider */}
-<div className="w-px bg-gradient-to-b from-white/90 via-white/60 to-white/90 my-3" />
+    <div className="w-px bg-gradient-to-b from-white/90 via-white/60 to-white/90 my-3" />
 
-    {/* TO */}
     <div className="flex-1 px-5 py-4">
       <AirportInput
         label="Final destination airport"
@@ -655,29 +683,16 @@ console.log("FROM:", form.from, "TO:", form.to);
       />
     </div>
 
-    {/* CTA */}
- <button
-  type="submit"
-  className="
-    m-2
-    px-8
-    rounded-xl
-    bg-[#22E3A5]
-    text-slate-900
-    text-base
-    font-semibold
-    shadow-[0_6px_18px_rgba(16,185,129,0.28)]
-    transition
-    hover:shadow-[0_0_0_6px_rgba(34,227,165,0.14)]
-    hover:bg-[#1FD39A]
-    active:scale-[0.98]
-    whitespace-nowrap
-  "
->
-  Check compensation
-</button>
-
+    <button
+      type="submit"
+      className="m-2 px-8 rounded-xl bg-[#22E3A5] text-slate-900 text-base font-semibold shadow-[0_6px_18px_rgba(16,185,129,0.28)] transition hover:shadow-[0_0_0_6px_rgba(34,227,165,0.14)] hover:bg-[#1FD39A] active:scale-[0.98] whitespace-nowrap"
+    >
+      Check compensation
+    </button>
   </div>
+
+</div>
+
 </form>
 
 

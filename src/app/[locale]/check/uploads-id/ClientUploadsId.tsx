@@ -252,6 +252,14 @@ function goNext() {
     }
   }
 
+  useEffect(() => {
+  (window as any).fc_uploadAndContinue = uploadAndContinue;
+
+  return () => {
+    delete (window as any).fc_uploadAndContinue;
+  };
+}, [uploadAndContinue]);
+
   // If user lands here without claimId, still render clean + helpful
   const claimMissing = !claimId;
 

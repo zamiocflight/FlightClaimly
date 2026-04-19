@@ -42,7 +42,7 @@ export default function ClientClaim() {
       const res = await fetch('/api/claims', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+body: JSON.stringify({
   from,
   to,
   date,
@@ -51,7 +51,13 @@ export default function ClientClaim() {
   name,
   email,
   phone,
-  bookingNumber: bookingRef, // ✅ VIKTIGT: backend förväntar bookingNumber
+  bookingNumber: bookingRef,
+
+  // 🔥 LÄGG TILL DETTA:
+  address: searchParams.get("address") || "",
+  city: searchParams.get("city") || "",
+  postalCode: searchParams.get("postalCode") || "",
+  country: searchParams.get("country") || "",
 }),
       });
 

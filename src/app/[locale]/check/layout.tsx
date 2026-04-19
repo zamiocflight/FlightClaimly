@@ -320,13 +320,20 @@ if (isFinish) {
 
     if (isPassengerDetails) return passengerDetailsValid;
 
-    if (isClaimOwner) {
-      const firstName = sp.get("firstName");
-      const lastName = sp.get("lastName");
-      return Boolean(
-        firstName && firstName.trim() && lastName && lastName.trim()
-      );
-    }
+ if (isClaimOwner) {
+  const firstName = sp.get("firstName");
+  const lastName = sp.get("lastName");
+  const email = sp.get("email");
+
+  const isValidEmail =
+    email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  return Boolean(
+    firstName && firstName.trim() &&
+    lastName && lastName.trim() &&
+    isValidEmail
+  );
+}
     if (isPassengers) {
       const solo = sp.get("solo") === "1";
       if (solo) return true;

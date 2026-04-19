@@ -45,8 +45,13 @@ const {
   name,
   email,
   bookingNumber,
-  bookingRef, // ✅ tillåt gamla namnet också
+  bookingRef,
   phone,
+  address,
+  address2,
+  postalCode,
+  city,
+  country,
   locale: bodyLocale,
 } = body ?? {};
 
@@ -63,9 +68,15 @@ if (!flightNumber || !date || !from || !to || !name) {
 
     // tracking-id (uuid)
     const id = crypto.randomUUID();
-
+console.log("DEBUG BEFORE ADDCLAIM:", {
+  address,
+  city,
+  postalCode,
+  country,
+  phone,
+});
     // Spara claim
-    const claim = await addClaim({
+const claim = await addClaim({
   id,
   flightNumber,
   date,
@@ -73,8 +84,13 @@ if (!flightNumber || !date || !from || !to || !name) {
   to,
   name,
   email,
-  bookingNumber: booking, // ✅ nu optional
+  bookingNumber: booking,
   phone: phone ?? null,
+  address,
+  address2,
+  postalCode,
+  city,
+  country,
 });
 
     console.log('✅ /api/claims – NYTT ärende skapat i Supabase:', claim);

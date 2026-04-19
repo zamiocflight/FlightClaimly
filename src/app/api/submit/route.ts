@@ -13,6 +13,11 @@ const CreateSchema = z.object({
   from: z.string().min(2),
   to: z.string().min(2),
   name: z.string().min(2),
+  address: z.string().optional(),
+postalCode: z.string().optional(),
+city: z.string().optional(),
+country: z.string().optional(),
+phone: z.string().optional(),
   email: z.string().email(),
   bookingNumber: z.string().min(2),
   locale: z.string().optional(), // tas emot men skickas ej till addClaim
@@ -33,7 +38,14 @@ export async function POST(req: Request) {
     const locale = parsed.data.locale ?? 'en';
 
     // 🔹 Skapa claim (oförändrad addClaim-signatur)
-    const claim = await addClaim(parsed.data);
+    const claim = await addClaim({
+  ...parsed.data,
+  address: body.address,
+  postalCode: body.postalCode,
+  city: body.city,
+  country: body.country,
+  phone: body.phone,
+});
 
     // 🔹 Läs tracking-id säkert (utan TS-antaganden)
     const claimId = (claim as any).received_at;

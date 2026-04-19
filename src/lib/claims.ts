@@ -26,6 +26,11 @@ export type Claim = {
   name: string;
   email: string;
   phone?: string | null;                  // DB: phone
+  address?: string | null;
+  address2?: string | null;
+  postalCode?: string | null;
+  city?: string | null;
+  country?: string | null;
 
   // Bokning
   bookingNumber: string;                  // DB: booking_number
@@ -55,6 +60,11 @@ export type Claim = {
 
   // ✈️ NEW — När ärendet skickades till flygbolaget (för timeline steg 3)
   sentToAirlineAt?: string | null;        // DB: sent_to_airline_at (timestamptz)
+
+  // Visar ersättning + minus kompensationen.
+  compensationAmount?: number;
+  currency?: string;
+
 };
 
 // ---------- DB row shape ----------
@@ -65,6 +75,11 @@ type ClaimRow = {
   from_code: string;
   to_code: string;
   name: string;
+  address: string | null;
+  address2: string | null; // ✅ LÄGG TILL HÄR
+  postal_code: string | null;
+  city: string | null;
+  country: string | null;
   email: string;
   booking_number: string;
   status: string;
@@ -91,6 +106,9 @@ type ClaimRow = {
 
   phone: string | null;
   sent_to_airline_at: string | null;
+
+  compensation_amount: number | null;
+  currency: string | null;
 };
 
 // ---------- mappers ----------
@@ -103,6 +121,11 @@ function fromRow(r: ClaimRow): Claim {
     from: r.from_code,
     to: r.to_code,
     name: r.name,
+    address: r.address,
+    address2: r.address2,
+    postalCode: r.postal_code,
+    city: r.city,
+    country: r.country,
     email: r.email,
     bookingNumber: r.booking_number,
     status: r.status,
@@ -119,6 +142,8 @@ function fromRow(r: ClaimRow): Claim {
     payoutToken: r.payout_token,
 payoutTokenCreatedAt: r.payout_token_created_at,
 payoutTokenExpiresAt: r.payout_token_expires_at,
+compensationAmount: r.compensation_amount ?? undefined,
+currency: r.currency ?? 'EUR',
 
   
 
@@ -132,6 +157,11 @@ function toInsert(input: {
   from: string;
   to: string;
   name: string;
+  address?: string;
+  address2?: string; 
+  postalCode?: string;
+  city?: string;
+  country?: string;
   email: string;
   bookingNumber: string;
   status?: string;
@@ -141,6 +171,8 @@ function toInsert(input: {
 
   phone?: string | null;
   id?: string; // 👈 lägg till så vi kan använda det här också
+  compensationAmount?: number;
+currency?: string;
 }) {
   return {
     received_at: input.id ?? undefined, // 👈 låter addClaim sätta default senare
@@ -157,7 +189,14 @@ function toInsert(input: {
     viewer_token_created_at: input.viewerTokenCreatedAt ?? null,
 
     phone: input.phone ?? null,
-  };
+    address: input.address ?? null,
+    address2: input.address2 ?? null,
+    postal_code: input.postalCode ?? null,
+    city: input.city ?? null,
+    country: input.country ?? null,
+    compensation_amount: input.compensationAmount ?? 400,
+currency: input.currency ?? 'EUR',
+    };
 }
 
 
@@ -205,22 +244,31 @@ export async function addClaim(input: {
   from: string;
   to: string;
   name: string;
+  address?: string;
+  address2?: string;
+  postalCode?: string;
+  city?: string;
+  country?: string;
   email: string;
   bookingNumber: string;
   status?: string;
   viewerToken?: string;
   viewerTokenCreatedAt?: string;
   phone?: string | null;
+  compensationAmount?: number;
+currency?: string;
 }): Promise<Claim> {
   const sb = supabaseAdmin();
 
   const nowIso = new Date().toISOString();
   const baseStatus = input.status ?? 'new';
 
-  const row = toInsert({
-    ...input,
-    status: baseStatus,
-  }) as Partial<ClaimRow> & { received_at?: string; updated_at?: string };
+const row = toInsert({
+  ...input,
+  status: baseStatus,
+  compensationAmount: input.compensationAmount ?? 400,
+  currency: input.currency ?? 'EUR',
+}) as Partial<ClaimRow> & { received_at?: string; updated_at?: string };
 
   row.updated_at = row.updated_at ?? nowIso;
 

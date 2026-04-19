@@ -14,17 +14,25 @@ async function createClaim(searchParams: URLSearchParams, locale: string) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      flightNumber: searchParams.get("flightNumber"),
-      date: searchParams.get("date"),
-      from: searchParams.get("from"),
-      to: searchParams.get("to"),
-      name: `${searchParams.get("firstName") || ""} ${searchParams.get("lastName") || ""}`.trim(),
-      email: searchParams.get("email"),
-      bookingNumber: searchParams.get("bookingRef"),
-      phone: searchParams.get("phone"),
-      locale,
-    }),
+body: JSON.stringify({
+  flightNumber: searchParams.get("flightNumber"),
+  date: searchParams.get("date"),
+  from: searchParams.get("from"),
+  to: searchParams.get("to"),
+  name: `${searchParams.get("firstName") || ""} ${searchParams.get("lastName") || ""}`.trim(),
+  email: searchParams.get("email"),
+  bookingNumber: searchParams.get("bookingRef"),
+  phone: searchParams.get("phone"),
+
+  // 🔥 DETTA VAR HELA BUGGEN
+  address: searchParams.get("address"),
+  address2: searchParams.get("address2"),
+  city: searchParams.get("city"),
+  postalCode: searchParams.get("postalCode"),
+  country: searchParams.get("country"),
+
+  locale,
+}),
   });
 
   if (!res.ok) {

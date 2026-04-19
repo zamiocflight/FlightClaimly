@@ -6,6 +6,15 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 
+function formatIBAN(value: string) {
+  return value
+    .replace(/\s+/g, '')
+    .replace(/[^a-zA-Z0-9]/g, '')
+    .toUpperCase()
+    .match(/.{1,4}/g)
+    ?.join(' ') || '';
+}
+
 
 type PayoutStatusResponse = {
   ok: boolean;
@@ -40,6 +49,8 @@ const [submittedInfo, setSubmittedInfo] = useState<{
   submittedAt?: string | null;
 } | null>(null);
 
+const [compensation, setCompensation] = useState<number | null>(null);
+
 useEffect(() => {
   let alive = true;
 
@@ -73,12 +84,18 @@ useEffect(() => {
 
       if (!alive) return;
 
-      if (res.ok && data?.ok) {
-        setHasSubmitted(Boolean((data as any).hasSubmitted));
-        setSubmittedInfo(((data as any).payout ?? null) as any);
-      } else {
-        setError((data as any)?.error || 'Ogiltig länk. Be oss skicka en ny.');
-      }
+   if (res.ok && data?.ok) {
+  setHasSubmitted(Boolean((data as any).hasSubmitted));
+  setSubmittedInfo(((data as any).payout ?? null) as any);
+
+  // 👇 NY KOD – exakt här inne
+  if ((data as any)?.compensationAmount) {
+    setCompensation((data as any).compensationAmount);
+  }
+
+} else {
+  setError((data as any)?.error || 'Ogiltig länk. Be oss skicka en ny.');
+}
     } catch (e) {
       if (alive) setError('Ogiltig länk. Be oss skicka en ny.');
     } finally {
@@ -103,6 +120,12 @@ async function onSubmit(e: React.FormEvent) {
 
   if (!token) return setError('Ogiltig länk. Be oss skicka en ny.');
 
+  const cleanIban = iban.replace(/\s+/g, '').toUpperCase();
+
+if (cleanIban.length < 15) {
+  return setError('Ogiltigt IBAN.');
+}
+
   setLoading(true);
   try {
     const res = await fetch('/api/payout/submit', {
@@ -112,8 +135,7 @@ async function onSubmit(e: React.FormEvent) {
         id,
         token,
         accountHolder: accountHolder.trim(),
-        iban: iban.trim(),
-      }),
+        iban: cleanIban,      }),
     });
 
     const data = await res.json();
@@ -146,6 +168,7 @@ async function onSubmit(e: React.FormEvent) {
 
   // ✅ Om redan inskickat → visa tack-vy (låst)
   if (hasSubmitted) {
+    
     return (
       <main className="mx-auto max-w-xl px-4 py-12">
         <h1 className="text-2xl font-bold text-slate-900">Tack!</h1>
@@ -190,41 +213,95 @@ async function onSubmit(e: React.FormEvent) {
     );
   }
 
-  return (
-    <main className="mx-auto max-w-xl px-4 py-12">
-      <h1 className="text-2xl font-bold text-slate-900">Lämna kontouppgifter</h1>
-      <p className="mt-3 text-slate-700">
-        För att kunna betala ut ersättningen behöver vi dina kontouppgifter (IBAN).
-      </p>
+const gross = compensation ?? 400;
+const fee = Math.round(gross * 0.2);
+const net = gross - fee;
 
-      <form onSubmit={onSubmit} className="mt-8 space-y-4">
+ return (
+  <main className="mx-auto max-w-xl px-4 py-12">
+
+    {/* CARD */}
+    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+      {/* HEADER */}
+      <div className="mb-6">
+        <div className="text-xs font-semibold text-slate-500 tracking-wide">
+          🔒 Säker utbetalning
+        </div>
+
+        <h1 className="mt-2 text-2xl font-bold text-slate-900">
+          Lämna kontouppgifter
+        </h1>
+
+        <p className="mt-3 text-slate-600 text-sm leading-relaxed">
+          För att betala ut din ersättningen behöver vi dina kontouppgifter (IBAN).
+        </p>
+      </div>
+
+      <form onSubmit={onSubmit} className="space-y-5">
+
+       <div className="mb-6 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3">
+  <div className="text-xs font-medium text-emerald-700">
+    Din ersättning
+  </div>
+
+  <div className="mt-1 text-4xl font-bold text-emerald-900 tracking-tight">
+    €{gross}
+  </div>
+
+  <div className="mt-1 text-sm text-emerald-800">
+    Avgift (20%): <span className="font-semibold">-€{fee}</span>
+  </div>
+
+  <div className="mt-2 text-base font-semibold text-emerald-900">
+    Du får utbetalt: <span className="font-semibold">€{net}</span>
+  </div>
+
+  <div className="text-xs text-emerald-700 mt-1">
+    Utbetalas när ärendet är slutfört.
+  </div>
+</div>
+
+
+
+        {/* NAME */}
         <div>
           <label className="block text-sm font-medium text-slate-800">
             Kontoinnehavare
           </label>
+
           <input
             value={accountHolder}
             onChange={(e) => setAccountHolder(e.target.value)}
-            className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2"
+            className="mt-1 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm 
+            focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition"
             placeholder="För- och efternamn"
             autoComplete="name"
           />
         </div>
 
+        {/* IBAN */}
         <div>
-          <label className="block text-sm font-medium text-slate-800">IBAN</label>
+          <label className="block text-sm font-medium text-slate-800">
+            IBAN
+          </label>
+
           <input
             value={iban}
-            onChange={(e) => setIban(e.target.value)}
-            className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2"
+            onChange={(e) => setIban(formatIBAN(e.target.value))}
+            className="mt-1 w-full rounded-xl border border-slate-200 px-4 py-3 text-base font-mono tracking-wider focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition"
             placeholder="SE12 3456 7890 1234 5678 90"
             autoComplete="off"
+            inputMode="numeric"
+            maxLength={34}
           />
-          <p className="mt-1 text-xs text-slate-500">
+
+          <p className="mt-2 text-xs text-slate-500">
             Vi sparar dina uppgifter för att kunna genomföra utbetalningen.
           </p>
         </div>
 
+        {/* CHECKBOX */}
         <label className="flex items-start gap-2 text-sm text-slate-700">
           <input
             type="checkbox"
@@ -238,22 +315,28 @@ async function onSubmit(e: React.FormEvent) {
           </span>
         </label>
 
+        {/* ERROR */}
         {error && (
           <div className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">
             {error}
           </div>
         )}
 
+        {/* CTA */}
         <button
           type="submit"
           disabled={loading}
-          className="rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white disabled:opacity-60"
+          className="w-full rounded-full bg-slate-900 px-5 py-3.5 text-sm font-semibold text-white hover:bg-slate-800 active:scale-[0.99] transition"
         >
           {loading ? 'Sparar…' : 'Spara kontouppgifter'}
         </button>
 
-        <p className="text-xs text-slate-500">Ärende-ID: {id}</p>
+        {/* META */}
+        <div className="pt-2 text-xs text-slate-500">
+          Ärende-ID: {id}
+        </div>
       </form>
-    </main>
-  );
+    </div>
+  </main>
+);
 }
