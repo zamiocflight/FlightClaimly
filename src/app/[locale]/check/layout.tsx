@@ -408,11 +408,11 @@ if (isFinish) {
         </aside>
 
         {/* RIGHT CONTENT */}
-        <main className="flex-1 px-4 py-10 md:px-10 h-screen overflow-y-auto">
-          <div className="mx-auto max-w-4xl">
+            <main className="flex-1 px-4 py-10 md:px-10 pb-28">
+            <div className="mx-auto max-w-4xl">
             {/* WHITE CARD */}
             <div className="overflow-visible rounded-2xl bg-white/90 shadow-[0_25px_80px_-30px_rgba(0,0,0,0.18)] backdrop-blur-[2px]">
-              <div className="px-10 py-8">{children}</div>
+              <div className="px-4 py-6 md:px-10 md:py-8">{children}</div>
             </div>
 
             {/* OBS ROW – ONLY ON ITINERARY */}
@@ -431,7 +431,7 @@ if (isFinish) {
             )}
 
             {/* FOOTER – OWNED BY LAYOUT */}
-            <div className="mt-6 flex justify-end gap-3">
+            <div className="mt-6 hidden md:flex justify-end gap-3">
               <button
                 type="button"
                 onClick={() => window.history.back()}
@@ -474,6 +474,49 @@ if ((window as any).fc_uploadAndContinue) {
                 {primaryCtaLabel}
               </button>
             </div>
+
+<div className="md:hidden mt-2 sticky bottom-0 z-50 bg-white backdrop-blur-sm rounded-2xl p-4">
+      <div className="flex items-center gap-3">
+    <button
+      type="button"
+      onClick={() => window.history.back()}
+      className="
+        shrink-0 rounded-xl px-4 py-3
+        text-sm font-semibold text-sky-600
+        transition hover:bg-sky-50 hover:text-sky-700
+      "
+    >
+      Back
+    </button>
+
+    <button
+      type="button"
+      disabled={!canContinue}
+      onClick={async () => {
+        if (isAuthorization) {
+          window.dispatchEvent(new Event("flightclaimly-submit-authorization"));
+          return;
+        }
+
+        if ((window as any).fc_uploadAndContinue) {
+          await (window as any).fc_uploadAndContinue();
+          return;
+        }
+
+        if (nextHref) router.push(nextHref);
+      }}
+      className={[
+        "flex-1 rounded-xl px-6 py-3 text-base font-semibold transition-all duration-200",
+        canContinue
+  ? "bg-sky-600 text-white shadow-[0_10px_25px_rgba(2,132,199,0.35)] hover:scale-[1.01] active:scale-[0.98] active:bg-sky-700 animate-[pulse_0.6s_ease-in-out_1]"
+          : "bg-slate-200 text-slate-400 cursor-not-allowed",
+      ].join(" ")}
+    >
+      {primaryCtaLabel}
+    </button>
+  </div>
+</div>
+
             <div className="mt-10 border-t border-slate-200 pt-6 flex items-center justify-between text-xs text-slate-500">
   <div className="flex items-center gap-8">
     <a

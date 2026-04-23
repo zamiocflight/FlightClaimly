@@ -541,8 +541,7 @@ async function handleQuickCheck(e: FormEvent) {
         )}
 
         {/* Hero */}
-<section className="max-w-6xl mx-auto px-4 sm:px-6 pt-12 sm:pt-14 md:pt-18 pb-16 md:pb-24 space-y-10">
-{/* Hero Card – Step A */}
+<section className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-12 sm:pt-14 md:pt-18 pb-16 md:pb-24 space-y-10">{/* Hero Card – Step A */}
 <div className="relative">
 <div
   className="
@@ -557,7 +556,7 @@ to-[#061028]     /* djupare botten */
     shadow-[0_30px_110px_rgba(15,60,120,0.28)]
     px-6 py-16
     sm:px-12 sm:py-24
-    overflow-hidden
+    overflow-visible
   "
 >
 
@@ -626,7 +625,7 @@ console.log("FROM:", form.from, "TO:", form.to);
  <div className="mt-10">
 
   {/* Mobile */}
-  <div className="sm:hidden rounded-2xl bg-white/90 backdrop-blur-sm shadow-[0_20px_60px_rgba(15,23,42,0.18)] overflow-hidden">
+  <div className="sm:hidden rounded-2xl bg-white/90 backdrop-blur-sm shadow-[0_20px_60px_rgba(15,23,42,0.18)] overflow-visible">
 
     <div className="px-4 py-3">
       <AirportInput
@@ -649,17 +648,34 @@ console.log("FROM:", form.from, "TO:", form.to);
     </div>
 
     <div className="p-2 pt-0">
-      <button
-        type="submit"
-        className="w-full px-6 py-3 rounded-xl bg-[#22E3A5] text-slate-900 text-base font-semibold shadow-[0_6px_18px_rgba(16,185,129,0.28)] transition active:scale-[0.98]"
-      >
-        Check compensation
-      </button>
+<button
+  type="submit"
+  disabled={!form.from || !form.to}
+  className={`
+    w-full
+    px-6
+    py-3
+    rounded-xl
+    text-base
+    font-semibold
+    transition-all duration-150
+
+    ${form.from && form.to
+      ? "bg-[#22E3A5] text-slate-900 shadow-[0_6px_18px_rgba(16,185,129,0.28)]"
+      : "bg-[#22E3A5]/40 text-slate-500 shadow-none"
+    }
+
+    active:scale-[0.97]
+    active:bg-[#1FD39A]
+  `}
+>
+  Check compensation
+</button>
     </div>
   </div>
 
   {/* Desktop */}
-  <div className="hidden sm:flex items-stretch rounded-2xl bg-white/90 backdrop-blur-sm shadow-[0_20px_60px_rgba(15,23,42,0.18)] overflow-hidden">
+  <div className="hidden sm:flex items-stretch rounded-2xl bg-white/90 backdrop-blur-sm shadow-[0_20px_60px_rgba(15,23,42,0.18)] overflow-visible">
 
     <div className="flex-1 px-5 py-4">
       <AirportInput

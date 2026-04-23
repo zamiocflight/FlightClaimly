@@ -64,9 +64,9 @@ export default function AirportInput({
         const json = await res.json();
         setResults(json.results || []);
 
-        if (!hidePreview || hasUserTyped) {
-          setOpen(true);
-        }
+       if (hasUserTyped) {
+  setOpen(true);
+}
       } catch {
         /* ignore */
       }
@@ -81,7 +81,7 @@ export default function AirportInput({
         w-full h-12
         bg-transparent
         border-0
-        px-0 pr-8
+        px-0 pr-10
         text-base text-slate-900
         placeholder:text-slate-400
         focus:outline-none
@@ -99,6 +99,32 @@ export default function AirportInput({
         focus:ring-0
         focus:border-slate-900
       `;
+
+function highlight(text: string, query: string) {
+  if (!query) return text;
+
+  const regex = new RegExp(`(${query})`, "ig");
+  const parts = text.split(regex);
+
+  return parts.map((part, i) =>
+    part.toLowerCase() === query.toLowerCase() ? (
+      <span key={i} className="font-semibold text-slate-900">
+        {part}
+      </span>
+    ) : (
+      part
+    )
+  );
+}
+
+function getFlag(label: string) {
+  if (label.includes("Stockholm")) return "🇸🇪";
+  if (label.includes("Copenhagen")) return "🇩🇰";
+  if (label.includes("London")) return "🇬🇧";
+  if (label.includes("Oslo")) return "🇳🇴";
+  if (label.includes("Helsinki")) return "🇫🇮";
+  return "✈️";
+}
 
   return (
     <div className={attachDropdownToParent ? "w-full min-w-0" : "relative w-full min-w-0"}>
@@ -124,43 +150,53 @@ export default function AirportInput({
         />
 
         {/* Clear-X */}
-        {q && onClear && (
-          <button
-            type="button"
-            aria-label="Clear"
-            onMouseDown={(e) => {
-              e.preventDefault();
-              onClear();
-              setQ("");
-              setOpen(false);
-              setHasUserTyped(false);
+{q && (
+  <button
+    type="button"
+    aria-label="Clear"
+    onMouseDown={(e) => {
+      e.preventDefault();
+      onClear?.();
+      setQ("");
+      setOpen(false);
+      setHasUserTyped(false);
 
-              // ta bort layover från URL
-              const qs = new URLSearchParams(sp.toString());
-              qs.delete("layover");
-              router.replace(`?${qs.toString()}`, { scroll: false });
-            }}
-            className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
-          >
-            ✕
-          </button>
-        )}
+      const qs = new URLSearchParams(sp.toString());
+      qs.delete("layover");
+      router.replace(`?${qs.toString()}`, { scroll: false });
+    }}
+  className="
+  absolute right-[-6px] top-1/2 -translate-y-1/2
+  w-6 h-6 flex items-center justify-center
+  rounded-full bg-slate-200 text-slate-600 text-xs
+"
+  >
+    ×
+  </button>
+)}
       </div>
 
       {open && results.length > 0 && (
         <ul
           className={[
-            "z-20 mt-2 max-h-64 overflow-auto rounded-lg border border-slate-200 bg-white shadow-lg text-slate-900",
+            "z-20 mt-3 max-h-64 overflow-auto rounded-lg border border-slate-200 bg-white shadow-xl text-slate-900",
             attachDropdownToParent
               ? "absolute left-0 right-0"
               : "absolute w-full",
           ].join(" ")}
         >
           {results.map((r) => (
-            <li
-              key={r.iata}
-              className="cursor-pointer px-4 py-2.5 text-sm text-slate-900 hover:bg-slate-100"
-              onMouseDown={() => {
+<li
+  key={r.iata}
+  className="
+    cursor-pointer
+    px-4 py-3
+    text-sm text-slate-900
+    transition
+    hover:bg-slate-100
+    active:bg-slate-200
+  "              onMouseDown={(e) => {
+  e.preventDefault();
                 // 1) sätt värdet lokalt
                 onSelect(r.label);
                 setQ(r.label);
@@ -176,7 +212,12 @@ export default function AirportInput({
                 router.replace(`?${qs.toString()}`, { scroll: false });
               }}
             >
-              {r.label}
+              <div className="flex items-center gap-2">
+  <span className="text-base">{getFlag(r.label)}</span>
+  <span className="truncate">
+    {highlight(r.label, q)}
+  </span>
+</div>
             </li>
           ))}
         </ul>

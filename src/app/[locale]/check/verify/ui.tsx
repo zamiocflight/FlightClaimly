@@ -227,7 +227,7 @@ export function VerifyClient() {
   const eligible = result.eligible;
 
   return (
-    <div className="mx-auto max-w-3xl p-2 md:p-6 text-sky-900">
+    <div className="mx-auto max-w-3xl px-[16px] py-2 md:p-6 text-sky-900">
       {eligible ? (
         <h1 className="mb-6 text-2xl md:text-2xl font-semibold text-sky-900">
           Your flight appears eligible for compensation.
@@ -239,8 +239,7 @@ export function VerifyClient() {
       )}
 
       {/* FLIGHT CARD */}
-      <div className="mb-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-        <div className="flex items-center justify-between text-sm text-slate-500">
+<div className="mb-6 w-full max-w-[520px] mx-auto rounded-xl border border-slate-200/80 bg-white p-4 md:p-6 shadow-sm">  <div className="flex items-center justify-between text-sm text-slate-500">
           <span>
             {flightNumber
               ? `${airlineLabel || "Airline"} · Flight ${flightNumber}`
@@ -274,27 +273,34 @@ export function VerifyClient() {
         </div>
 
         {/* COMPENSATION BANNER */}
-        <div
-          className={[
-            "mt-4 rounded-lg px-5 py-4 bg-gradient-to-r",
-            eligible ? "from-white to-emerald-50" : "from-white to-red-50",
-          ].join(" ")}
-        >
-          <div className="text-xs text-slate-500">
-            {eligible ? "Potential compensation" : "Compensation"}
-          </div>
-          <div
-            className={[
-              "text-2xl font-semibold",
-              eligible ? "text-emerald-600" : "text-red-600",
-            ].join(" ")}
-          >
-            €{eligible ? compEUR : 0}{" "}
-            <span className="text-sm font-medium text-slate-600">
-              per passenger
-            </span>
-          </div>
-        </div>
+<div
+  className={[
+    "mt-5 md:mt-4 rounded-lg px-5 py-5 bg-gradient-to-r shadow-[0_10px_30px_rgba(16,185,129,0.15)]",
+    eligible ? "from-white to-emerald-50" : "from-white to-red-50",
+  ].join(" ")}
+>
+  <div className="text-xs text-slate-500 mb-1">
+    {eligible ? "Potential compensation" : "Compensation"}
+  </div>
+<div className="text-xs text-emerald-600 font-medium mb-1">
+  You're entitled to compensation under EU law
+</div>
+  <div className="flex items-end gap-1">
+    <span
+      className={[
+        "font-bold leading-none",
+        "text-3xl md:text-2xl", // 👈 MOBILE större än desktop
+        eligible ? "text-emerald-600" : "text-red-600",
+      ].join(" ")}
+    >
+      €{eligible ? compEUR : 0}
+    </span>
+
+    <span className="text-sm text-slate-600">
+      per passenger
+    </span>
+  </div>
+</div>
 
         {/* INFO GRID */}
         <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -357,7 +363,7 @@ export function VerifyClient() {
       {/* CONFIRM */}
       <div className="mt-8">
         <h2 className="mb-3 text-lg font-semibold text-sky-900">
-          Are these details correct?
+          Confirm your flight details
         </h2>
 
         <div className="space-y-3">
@@ -370,7 +376,7 @@ export function VerifyClient() {
             className={[
               "w-full rounded-lg border px-4 py-4 text-left transition",
               confirm === 'yes'
-                ? "border-sky-500"
+                ? "border-sky-500 bg-sky-50"
                 : "border-slate-300 hover:border-sky-400"
             ].join(" ")}
           >
@@ -394,7 +400,7 @@ export function VerifyClient() {
             className={[
               "w-full rounded-lg border px-4 py-4 text-left transition",
               confirm === 'no'
-                ? "border-sky-500"
+                ? "border-sky-500 bg-sky-50"
                 : "border-slate-300 hover:border-sky-400"
             ].join(" ")}
           >

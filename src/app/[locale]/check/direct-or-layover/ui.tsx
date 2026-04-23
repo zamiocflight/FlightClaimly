@@ -110,9 +110,9 @@ export default function DirectOrLayoverUI() {
               goNext("direct");
             }}
             className={[
-              "flex items-center gap-4 rounded-lg border px-5 py-4 text-left transition",
+  "flex items-center gap-4 rounded-lg border px-5 py-4 text-left transition active:scale-[0.98]",
               choice === "direct"
-                ? "border-sky-400 ring-2 ring-sky-200"
+  ? "border-sky-400 ring-2 ring-sky-200 bg-sky-50 shadow-sm"
                 : "border-black/10 bg-white hover:border-sky-400",
             ].join(" ")}
           >
@@ -137,9 +137,9 @@ export default function DirectOrLayoverUI() {
               setChoice("itinerary");
             }}
             className={[
-              "flex items-center gap-4 rounded-lg border px-5 py-4 text-left transition",
-              choice === "itinerary"
-                ? "border-sky-400 ring-2 ring-sky-200"
+  "flex items-center gap-4 rounded-lg border px-5 py-4 text-left transition active:scale-[0.98]",
+             choice === "itinerary"
+  ? "border-sky-400 ring-2 ring-sky-200 bg-sky-50 shadow-sm"
                 : "border-black/10 bg-white hover:border-sky-400",
             ].join(" ")}
           >
@@ -174,12 +174,9 @@ export default function DirectOrLayoverUI() {
                   {idx + 1}. City or airport name
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="relative w-full">
                   <div
-                    className={
-                      cardBase +
-                      " w-full relative md:max-w-[calc(50%-0.5rem)]"
-                    }
+                    className={cardBase + " w-full relative"}
                   >
                     <AirportInput
                       variant="unstyled"
@@ -194,14 +191,19 @@ export default function DirectOrLayoverUI() {
                     />
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => removeLayover(idx)}
-                    className="text-slate-500 hover:text-slate-900 text-xl leading-none px-2"
-                    aria-label="Remove layover"
-                  >
-                    ✕
-                  </button>
+             <button
+  type="button"
+  onClick={() => removeLayover(idx)}
+  className="
+    absolute right-2 top-1/2 -translate-y-1/2
+    w-5 h-5 flex items-center justify-center
+    rounded-full bg-slate-200 text-slate-600 text-[10px]
+    hover:bg-slate-300
+  "
+  aria-label="Remove layover"
+>
+  ✕
+</button>
                 </div>
               </div>
             ))}

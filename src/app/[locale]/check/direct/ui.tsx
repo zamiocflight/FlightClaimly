@@ -63,7 +63,7 @@ const AIRLINES = [
 ];
 
 // --- Shared layout constants (SINGLE SOURCE OF TRUTH) ---
-const FIELD_WIDTH = "max-w-[50%] w-full";
+const FIELD_WIDTH = "w-full md:max-w-[50%]";
 const FIELD_ROW =
   "flex items-center justify-between rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 focus-within:outline-none focus-within:border-sky-300";
 
@@ -362,8 +362,8 @@ className="
                   key={f.id}
                   type="button"
                   onClick={() => setSelectedFlightId(f.id)}
-                  className={`${FIELD_ROW} ${FIELD_WIDTH} transition hover:border-sky-300 ${
-                    selected ? "border-sky-400" : ""
+                  className={`${FIELD_ROW} ${FIELD_WIDTH} transition hover:border-sky-300 hover:bg-slate-50 ${
+                    selected ? "border-sky-400 bg-sky-50 shadow-sm" : ""
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -400,9 +400,9 @@ className="
                 <button
                   type="button"
                   onClick={() => setSelectedFlightId(MANUAL_ID)}
-                  className={`${FIELD_ROW} ${FIELD_WIDTH} transition hover:border-sky-300 ${
-                    selected ? "border-sky-400" : ""
-                  }`}
+                 className={`${FIELD_ROW} ${FIELD_WIDTH} transition hover:border-sky-300 hover:bg-slate-50 ${
+  selected ? "border-sky-400 bg-sky-50 shadow-sm" : ""
+}`}
                 >
                   <div className="flex items-center gap-3">
                     {/* Radio */}
