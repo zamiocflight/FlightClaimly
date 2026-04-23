@@ -239,7 +239,8 @@ export function VerifyClient() {
       )}
 
       {/* FLIGHT CARD */}
-<div className="mb-6 w-full max-w-[520px] mx-auto rounded-xl border border-slate-200/80 bg-white p-4 md:p-6 shadow-sm">  <div className="flex items-center justify-between text-sm text-slate-500">
+<div className="mb-6 w-full rounded-xl border border-slate-200/80 bg-white p-4 md:p-6 shadow-sm">
+<div className="flex items-center justify-between text-sm text-slate-500">
           <span>
             {flightNumber
               ? `${airlineLabel || "Airline"} · Flight ${flightNumber}`
