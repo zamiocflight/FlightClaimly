@@ -240,35 +240,35 @@ export function VerifyClient() {
 
       {/* FLIGHT CARD */}
 <div className="mb-6 w-full rounded-xl border border-slate-200/80 bg-white p-4 md:p-6 shadow-sm">
-<div className="flex items-center justify-between text-sm text-slate-500">
-          <span>
+<div className="flex min-w-0 items-center justify-between gap-3 text-sm text-slate-500">
+  <span className="min-w-0 truncate">
             {flightNumber
               ? `${airlineLabel || "Airline"} · Flight ${flightNumber}`
               : "Flight details"}
           </span>
 
           {eligible ? (
-            <span className="rounded-full px-3 py-1 text-xs font-medium bg-emerald-100 text-emerald-700">
+            <span className="shrink-0 rounded-full px-3 py-1 text-xs font-medium bg-emerald-100 text-emerald-700">
               ELIGIBLE
             </span>
           ) : (
-            <span className="rounded-full px-3 py-1 text-xs font-medium bg-red-100 text-red-700">
-              NOT ELIGIBLE
-            </span>
+        <span className="shrink-0 rounded-full px-3 py-1 text-xs font-medium bg-red-100 text-red-700">
+  NOT ELIGIBLE
+</span>
           )}
         </div>
 
         {/* ROUTE */}
-        <div className="mt-4 flex items-center justify-between">
-          <div className="text-lg font-semibold text-sky-900 truncate">
+        <div className="mt-4 flex min-w-0 items-center justify-between">
+          <div className="min-w-0 flex-1 truncate text-lg font-semibold text-sky-900">
             {fromLabel}
           </div>
 
-          <div className="mx-4 flex shrink-0 items-center justify-center">
+          <div className="mx-3 flex shrink-0 items-center justify-center">
             <PlaneIcon className="text-sky-500" />
           </div>
 
-          <div className="text-lg font-semibold text-sky-900 truncate text-right">
+          <div className="min-w-0 flex-1 truncate text-right text-lg font-semibold text-sky-900">
             {toLabel}
           </div>
         </div>
