@@ -409,7 +409,7 @@ if (isFinish) {
 
         {/* RIGHT CONTENT */}
             <main className="flex-1 px-4 py-10 md:px-10 pb-28">
-            <div className="mx-auto max-w-4xl">
+            <div className="mx-auto w-full max-w-[680px]">
             {/* WHITE CARD */}
             <div className="overflow-visible rounded-2xl bg-white/90 shadow-[0_25px_80px_-30px_rgba(0,0,0,0.18)] backdrop-blur-[2px]">
               <div className="px-4 py-6 md:px-10 md:py-8">{children}</div>
