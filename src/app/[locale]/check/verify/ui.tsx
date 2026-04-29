@@ -227,8 +227,8 @@ export function VerifyClient() {
   const eligible = result.eligible;
 
   return (
-    <div className="mx-auto max-w-3xl px-[16px] py-2 md:p-6 text-sky-900">
-      {eligible ? (
+<div className="mx-auto max-w-3xl px-[16px] py-2 md:p-6 text-sky-900 overflow-x-hidden">
+        {eligible ? (
         <h1 className="mb-6 text-2xl md:text-2xl font-semibold text-sky-900">
           Your flight appears eligible for compensation.
         </h1>
