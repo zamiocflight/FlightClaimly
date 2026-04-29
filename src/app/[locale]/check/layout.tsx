@@ -366,7 +366,7 @@ if (isFinish) {
 
   return (
   <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-[#F4F5F7] via-[#F1F3F6] to-[#ECEFF3]">
-      <div className="relative flex min-h-screen">
+      <div className="relative min-h-screen md:flex">
         {/* LEFT PANEL */}
 <aside className="hidden md:flex w-[380px] flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-sky-900 px-10 py-10 sticky top-0 h-screen">          <div>
             <div className="text-white text-lg font-semibold tracking-wide">
