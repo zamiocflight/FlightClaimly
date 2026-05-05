@@ -83,7 +83,7 @@ const phoneRef = useRef<HTMLInputElement>(null);
   city.trim().length > 0 &&
   postalCode.trim().length > 0 &&
   country !== null &&
-  phone.trim().length > 0;
+  phone.replace(/\D/g, "").length >= 8
 
 updateQuery({
   address,
