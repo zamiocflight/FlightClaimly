@@ -100,7 +100,7 @@ updateQuery({
   }, [address, address2, city, postalCode, state, country, phone]);
 
 const inputBase =
-  "mt-1 w-full md:w-2/3 h-[48px] rounded-md border border-slate-300 px-3 text-slate-900 placeholder:text-slate-500 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none";
+  "mt-1 w-full md:w-2/3 h-[56px] md:h-[52px] rounded-lg border border-black/10 bg-white px-5 md:px-4 text-slate-900 placeholder:text-slate-400 hover:border-sky-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none transition";  
   const filteredCountries =
     countryQuery.trim() === ""
       ? COUNTRIES
