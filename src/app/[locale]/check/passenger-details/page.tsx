@@ -1,10 +1,11 @@
 "use client";
 
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { Combobox } from "@headlessui/react";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
+
 
 
 type Country = {
@@ -42,6 +43,12 @@ export default function PassengerDetailsPage() {
   const [postalCode, setPostalCode] = useState(searchParams.get("postalCode") || "");
   const [state, setState] = useState(searchParams.get("state") || "");
 const [phone, setPhone] = useState<string>(searchParams.get("phone") || "");
+
+const addressRef = useRef<HTMLInputElement>(null);
+const cityRef = useRef<HTMLInputElement>(null);
+const postalRef = useRef<HTMLInputElement>(null);
+const countryRef = useRef<HTMLInputElement>(null);
+const phoneRef = useRef<HTMLInputElement>(null);
 
   // Country combobox
   const locale = pathname.split("/")[1]; // ex: "sv", "da"
@@ -125,12 +132,19 @@ updateQuery({
         {/* Address */}
         <div>
           <label className="block text-sm font-semibold text-sky-900">Address</label>
-          <input
-            className={inputBase}
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            placeholder="Street and number"
-          />
+        <input
+  ref={addressRef}
+  className={inputBase}
+  value={address}
+  onChange={(e) => setAddress(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      cityRef.current?.focus();
+    }
+  }}
+  placeholder="Street and number"
+/>
         </div>
 
         {/* Address line 2 */}
@@ -151,21 +165,35 @@ updateQuery({
           <div>
             <label className="block text-sm font-semibold text-sky-900">City</label>
             <input
-              className="mt-1 w-full h-[48px] rounded-md border border-slate-300 px-3 text-slate-900 placeholder:text-slate-500 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              placeholder="City"
-            />
+  ref={cityRef}
+  className="mt-1 w-full h-[48px] rounded-md border border-slate-300 px-3 ..."
+  value={city}
+  onChange={(e) => setCity(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      postalRef.current?.focus();
+    }
+  }}
+  placeholder="City"
+/>
           </div>
 
           <div>
             <label className="block text-sm font-semibold text-sky-900">Postal code</label>
-            <input
-              className="mt-1 w-full h-[48px] rounded-md border border-slate-300 px-3 text-slate-900 placeholder:text-slate-500 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
-              value={postalCode}
-              onChange={(e) => setPostalCode(e.target.value)}
-              placeholder="Postal code"
-            />
+          <input
+  ref={postalRef}
+  className="mt-1 w-full h-[48px] rounded-md border border-slate-300 px-3 ..."
+  value={postalCode}
+  onChange={(e) => setPostalCode(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      countryRef.current?.focus();
+    }
+  }}
+  placeholder="Postal code"
+/>
           </div>
         </div>
 
@@ -188,12 +216,19 @@ updateQuery({
           <div className="mt-1 w-2/3">
             <Combobox value={country} onChange={(c: Country | null) => c && setCountry(c)}>
               <div className="relative">
-                <Combobox.Input
-                  className="w-full h-[48px] rounded-md border border-slate-300 px-3 pr-10 text-slate-900 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
-                  displayValue={(c: Country | null) => (c ? c.nameEn : "")}
-                  onChange={(e) => setCountryQuery(e.target.value)}
-                  placeholder="Start typing country..."
-                />
+              <Combobox.Input
+  ref={countryRef}
+  className="w-full h-[48px] rounded-md border border-slate-300 px-3 pr-10 text-slate-900 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
+  displayValue={(c: Country | null) => (c ? c.nameEn : "")}
+  onChange={(e) => setCountryQuery(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      phoneRef.current?.focus();
+    }
+  }}
+  placeholder="Start typing country..."
+/>
 
                 {country && (
                   <button
@@ -236,6 +271,7 @@ updateQuery({
 
   <div className="mt-1 w-2/3">
     <PhoneInput
+      inputRef={phoneRef}
       defaultCountry={(country?.code || "SE").toLowerCase() as any}
       value={phone}
       onChange={(value) => setPhone(value)}

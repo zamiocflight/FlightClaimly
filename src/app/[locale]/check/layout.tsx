@@ -23,7 +23,11 @@ const STEPS: StepDef[] = [
       "verify",
     ],
   },
-  { id: 2, title: "Passenger details", paths: ["claim"] },
+ { 
+  id: 2, 
+  title: "Passenger details", 
+  paths: ["claim-owner", "passengers", "passenger-details"] 
+},
   { id: 3, title: "Documents", paths: ["thanks"] },
   { id: 4, title: "Finish", paths: [] },
 ];
@@ -366,9 +370,9 @@ if (isFinish) {
 
   return (
   <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-[#F4F5F7] via-[#F1F3F6] to-[#ECEFF3]">
-      <div className="relative min-h-screen md:flex">
+      <div className="relative h-screen md:flex">
         {/* LEFT PANEL */}
-<aside className="hidden md:flex w-[380px] flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-sky-900 px-10 py-10 sticky top-0 h-screen">          <div>
+<aside className="hidden md:flex w-[380px] flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-sky-900 px-10 py-10 sticky top-0 h-screen">      <div>
             <div className="text-white text-lg font-semibold tracking-wide">
               FLIGHT<span className="text-emerald-400">CLAIMLY</span>
             </div>

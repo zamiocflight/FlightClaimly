@@ -80,6 +80,10 @@ export default function PassengersPage() {
     ];
     setPassengers(next);
     updateQuery({ pax: next });
+setTimeout(() => {
+  const el = document.getElementById("continue-anchor");
+  el?.scrollIntoView({ behavior: "smooth", block: "end" });
+}, 100);
   }
 
   function removePassenger(idx: number) {
@@ -134,6 +138,27 @@ export default function PassengersPage() {
           <span className="font-medium">I was traveling alone</span>
         </label>
       </div>
+
+       {/* Compensation summary banner (Verify-style) */}
+          <div className="mt-6 rounded-xl bg-emerald-50 px-6 py-5 flex items-center justify-between">
+            <div>
+              <div className="text-sm text-slate-600">Potential compensation</div>
+              <div className="mt-1 text-3xl font-bold text-emerald-600">
+                €{totalCompensation}
+              </div>
+              <div className="text-slate-600 text-sm">
+                Total for {passengerCount} passenger
+                {passengerCount > 1 ? "s" : ""}
+              </div>
+            </div>
+
+            <div className="text-right">
+              <div className="text-sm text-slate-600">Per passenger</div>
+              <div className="text-xl font-semibold text-emerald-700">
+                €{PER_PASSENGER}
+              </div>
+            </div>
+          </div>
 
       {/* Passengers list */}
       {travelingWithOthers && (
@@ -226,28 +251,11 @@ export default function PassengersPage() {
             + Add passenger
           </button>
 
-          {/* Compensation summary banner (Verify-style) */}
-          <div className="mt-6 rounded-xl bg-emerald-50 px-6 py-5 flex items-center justify-between">
-            <div>
-              <div className="text-sm text-slate-600">Potential compensation</div>
-              <div className="mt-1 text-3xl font-bold text-emerald-600">
-                €{totalCompensation}
-              </div>
-              <div className="text-slate-600 text-sm">
-                Total for {passengerCount} passenger
-                {passengerCount > 1 ? "s" : ""}
-              </div>
-            </div>
-
-            <div className="text-right">
-              <div className="text-sm text-slate-600">Per passenger</div>
-              <div className="text-xl font-semibold text-emerald-700">
-                €{PER_PASSENGER}
-              </div>
-            </div>
-          </div>
-        </div>
+         
+           </div>
       )}
+
+      <div id="continue-anchor" />
     </div>
   );
 }
