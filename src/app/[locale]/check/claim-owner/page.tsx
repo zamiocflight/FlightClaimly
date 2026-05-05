@@ -15,6 +15,9 @@ export default function ClaimOwnerPage() {
   const [lastNameState, setLastNameState] = useState(lastName);
   const [emailState, setEmailState] = useState(email);
   const [emailValid, setEmailValid] = useState(false);
+
+  const firstNameRef = useRef<HTMLInputElement>(null);
+  const lastNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
 
   function updateParam(key: string, value: string) {
@@ -26,11 +29,12 @@ export default function ClaimOwnerPage() {
     }
     router.replace(`?${params.toString()}`, { scroll: false });
   }
+
 useEffect(() => {
   const el = emailRef.current;
   if (!el) return;
 
-  const observer = new MutationObserver(() => {
+  const handle = () => {
     const val = el.value;
 
     if (val && val !== emailState) {
@@ -40,41 +44,26 @@ useEffect(() => {
       const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
       setEmailValid(isValid);
     }
-  });
+  };
 
-  observer.observe(el, {
-    attributes: true,
-    attributeFilter: ["value"],
-  });
-
-  const interval = setInterval(() => {
-    const val = el.value;
-
-    if (val && val !== emailState) {
-      setEmailState(val);
-      updateParam("email", val);
-
-      const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
-      setEmailValid(isValid);
-    }
-  }, 300);
+  el.addEventListener("change", handle);
+  el.addEventListener("blur", handle);
 
   return () => {
-    observer.disconnect();
-    clearInterval(interval);
+    el.removeEventListener("change", handle);
+    el.removeEventListener("blur", handle);
   };
 }, [emailState]);
-
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
       <h1 className="text-2xl font-semibold text-sky-900">
-  Who should receive the compensation?
-</h1>
+        Who should receive the compensation?
+      </h1>
 
-<div className="text-sm text-emerald-600 font-medium mt-2">
-  You're just one step away from claiming your compensation
-</div>
+      <div className="text-sm text-emerald-600 font-medium mt-2">
+        You're just one step away from claiming your compensation
+      </div>
 
       <div className="mt-8 space-y-8">
         {/* First name */}
@@ -83,6 +72,7 @@ useEffect(() => {
             First name
           </label>
           <input
+            ref={firstNameRef}
             type="text"
             autoFocus
             value={firstNameState}
@@ -91,6 +81,13 @@ useEffect(() => {
               setFirstNameState(val);
               updateParam("firstName", val);
             }}
+            onKeyDown={(e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    lastNameRef.current?.focus();
+    lastNameRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}}
             className="
               mt-1 w-full md:w-2/3
               h-[48px]
@@ -117,6 +114,7 @@ useEffect(() => {
             Last name
           </label>
           <input
+            ref={lastNameRef}
             type="text"
             value={lastNameState}
             onChange={(e) => {
@@ -124,6 +122,13 @@ useEffect(() => {
               setLastNameState(val);
               updateParam("lastName", val);
             }}
+            onKeyDown={(e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    emailRef.current?.focus();
+    emailRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}}
             className="
               mt-1 w-full md:w-2/3
               h-[48px]
@@ -149,47 +154,49 @@ useEffect(() => {
           <label className="block text-sm font-medium text-sky-900">
             Email
           </label>
-<div className="text-xs text-emerald-600 font-medium mb-1">
-  We'll send your claim updates and payout here
-</div>
-<div className="relative w-full md:w-2/3">
-  <input
-  ref={emailRef}
-  type="email"
-    value={emailState}
-    onChange={(e) => {
-      const val = e.target.value;
-      setEmailState(val);
-      updateParam("email", val);
 
-      const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
-      setEmailValid(isValid);
-    }}
-    onBlur={() => {
-  const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailState);
-  setEmailValid(isValid);
-}}
-    className={`
-      mt-1 w-full
-      h-[48px]
-      rounded-md
-      border ${emailValid ? "border-emerald-400" : "border-slate-300"}
-      px-3 pr-10
-      text-slate-900
-      placeholder:text-slate-300
-      hover:border-sky-400
-      focus:border-sky-500 focus:ring-1 focus:ring-sky-200
-      outline-none
-    `}
-    placeholder="name@example.com"
-  />
+          <div className="text-xs text-emerald-600 font-medium mb-1">
+            We'll send your claim updates and payout here
+          </div>
 
-  {emailValid && (
-    <div className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500">
-      ✓
-    </div>
-  )}
-</div>
+          <div className="relative w-full md:w-2/3">
+            <input
+              ref={emailRef}
+              type="email"
+              value={emailState}
+              onChange={(e) => {
+                const val = e.target.value;
+                setEmailState(val);
+                updateParam("email", val);
+
+                const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+                setEmailValid(isValid);
+              }}
+              onBlur={() => {
+                const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailState);
+                setEmailValid(isValid);
+              }}
+              className={`
+                mt-1 w-full
+                h-[48px]
+                rounded-md
+                border ${emailValid ? "border-emerald-400" : "border-slate-300"}
+                px-3 pr-10
+                text-slate-900
+                placeholder:text-slate-300
+                hover:border-sky-400
+                focus:border-sky-500 focus:ring-1 focus:ring-sky-200
+                outline-none
+              `}
+              placeholder="name@example.com"
+            />
+
+            {emailValid && (
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500">
+                ✓
+              </div>
+            )}
+          </div>
 
           <p className="mt-2 text-xs text-slate-400">
             We’ll use your email to keep you updated about your claim.
