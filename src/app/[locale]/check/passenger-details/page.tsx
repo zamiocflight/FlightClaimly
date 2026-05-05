@@ -100,7 +100,7 @@ updateQuery({
   }, [address, address2, city, postalCode, state, country, phone]);
 
   const inputBase =
-    "mt-1 w-2/3 h-[48px] rounded-md border border-slate-300 px-3 text-slate-900 placeholder:text-slate-500 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none";
+    "mt-1 w=full md:w-2/3 h-[48px] rounded-md border border-slate-300 px-3 text-slate-900 placeholder:text-slate-500 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none";
 
   const filteredCountries =
     countryQuery.trim() === ""
@@ -161,7 +161,7 @@ updateQuery({
         </div>
 
         {/* City + Postal code */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 w-2/3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 w-full md:w-2/3">
           <div>
             <label className="block text-sm font-semibold text-sky-900">City</label>
             <input
@@ -213,7 +213,7 @@ updateQuery({
         {/* Country (Combobox) */}
         <div>
           <label className="block text-sm font-semibold text-sky-900">Country</label>
-          <div className="mt-1 w-2/3">
+          <div className="mt-1 w-full md:w-2/3">
             <Combobox value={country} onChange={(c: Country | null) => c && setCountry(c)}>
               <div className="relative">
               <Combobox.Input
@@ -269,7 +269,7 @@ updateQuery({
 <div>
   <label className="block text-sm font-semibold text-sky-900">Phone number</label>
 
-  <div className="mt-1 w-2/3">
+  <div className="mt-1 w-full md:w-2/3">
     <PhoneInput
       inputRef={phoneRef}
       defaultCountry={(country?.code || "SE").toLowerCase() as any}

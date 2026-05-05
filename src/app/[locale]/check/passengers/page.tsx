@@ -39,24 +39,37 @@ export default function PassengersPage() {
     }
   }, [searchParams]);
 
-  function updateQuery(next: { solo?: boolean; pax?: Pax[] }) {
-    const params = new URLSearchParams(searchParams.toString());
+function updateQuery(next: {
+  solo?: boolean;
+  pax?: Pax[];
+  passengerDetailsValid?: string;
+}) {
+  const params = new URLSearchParams(searchParams.toString());
 
-    if (typeof next.solo === "boolean") {
-      if (next.solo) {
-        params.set("solo", "1");
-        params.delete("pax");
-      } else {
-        params.delete("solo");
-      }
+  if (typeof next.solo === "boolean") {
+    if (next.solo) {
+      params.set("solo", "1");
+      params.delete("pax");
+    } else {
+      params.delete("solo");
     }
-
-    if (next.pax) {
-      params.set("pax", JSON.stringify(next.pax));
-    }
-
-    router.replace(`?${params.toString()}`, { scroll: false });
   }
+
+  if (next.pax) {
+    params.set("pax", JSON.stringify(next.pax));
+  }
+
+  // 🔥 NY DEL
+  if (typeof next.passengerDetailsValid === "string") {
+    if (next.passengerDetailsValid) {
+      params.set("passengerDetailsValid", "1");
+    } else {
+      params.delete("passengerDetailsValid");
+    }
+  }
+
+  router.replace(`?${params.toString()}`, { scroll: false });
+}
 
   function handleToggle(solo: boolean) {
     setTravelingWithOthers(!solo);
@@ -67,11 +80,26 @@ export default function PassengersPage() {
     }
   }
 
-  function updatePassenger(idx: number, patch: Partial<Pax>) {
-    const next = passengers.map((p, i) => (i === idx ? { ...p, ...patch } : p));
-    setPassengers(next);
-    updateQuery({ pax: next });
-  }
+function updatePassenger(idx: number, patch: Partial<Pax>) {
+  const next = passengers.map((p, i) => (i === idx ? { ...p, ...patch } : p));
+
+  setPassengers(next);
+
+  const isValid = next.every((p) => {
+    if (!p.firstName.trim() || !p.lastName.trim()) return false;
+
+    if (p.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.email)) {
+      return false;
+    }
+
+    return true;
+  });
+
+  updateQuery({
+    pax: next,
+    passengerDetailsValid: isValid ? "1" : "",
+  });
+}
 
   function addPassenger() {
     const next = [
