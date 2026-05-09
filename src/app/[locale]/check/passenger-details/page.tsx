@@ -165,7 +165,7 @@ const inputBase =
             <label className="block text-sm font-semibold text-sky-900">City</label>
             <input
   ref={cityRef}
-  className="mt-1 w-full h-[48px] rounded-md border border-slate-300 px-3 ..."
+  className={inputBase.replace("md:w-2/3", "w-full")}
   value={city}
   onChange={(e) => setCity(e.target.value)}
   onKeyDown={(e) => {
@@ -182,7 +182,7 @@ const inputBase =
             <label className="block text-sm font-semibold text-sky-900">Postal code</label>
           <input
   ref={postalRef}
-  className="mt-1 w-full h-[48px] rounded-md border border-slate-300 px-3 ..."
+  className={inputBase.replace("md:w-2/3", "w-full")}
   value={postalCode}
   onChange={(e) => setPostalCode(e.target.value)}
   onKeyDown={(e) => {
