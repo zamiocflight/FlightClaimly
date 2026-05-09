@@ -217,7 +217,7 @@ const inputBase =
               <div className="relative">
               <Combobox.Input
   ref={countryRef}
-  className="w-full h-[48px] rounded-md border border-slate-300 px-3 pr-10 text-slate-900 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
+  className="w-full h-[48px] rounded-lg border border-black/10 px-3 pr-10 text-slate-900 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
   displayValue={(c: Country | null) => (c ? c.nameEn : "")}
   onChange={(e) => setCountryQuery(e.target.value)}
   onKeyDown={(e) => {
@@ -285,22 +285,29 @@ const inputBase =
       </div>
 
 <style jsx global>{`
-  .react-international-phone-input-container,
-  .react-international-phone-country-selector-button,
+  .react-international-phone-input-container {
+    height: 48px !important;
+    width: 100% !important;
+    border-radius: 0.5rem !important;
+    border: 1px solid rgb(0 0 0 / 0.1) !important;
+    overflow: hidden !important;
+    background: white !important;
+  }
+
+  .react-international-phone-country-selector-button {
+    height: 48px !important;
+    border: none !important;
+    border-right: 1px solid rgb(0 0 0 / 0.08) !important;
+    background: transparent !important;
+    color: #94a3b8 !important;
+  }
+
   .react-international-phone-input {
     height: 48px !important;
     width: 100% !important;
-  }
-
-  /* Dov grå prefix (+46) */
-  .react-international-phone-country-selector-button {
-    border-right-width: 0 !important; /* ta bort separator helt */
-    color: #94a3b8 !important; /* slate-400 */
-  }
-
-  /* Själva siffrorna mörka */
-  .react-international-phone-input {
-    color: #0f172a !important; /* slate-900 */
+    border: none !important;
+    background: transparent !important;
+    color: #0f172a !important;
   }
 `}</style>
 

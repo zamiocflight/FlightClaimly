@@ -207,7 +207,81 @@ export default function CheckLayout({ children }: { children: ReactNode }) {
 
   const whatHappenedValid = baseWhatHappenedValid && cancelledOk && deniedOk;
 
+
+
   // --- nextHref mapping ---
+const backHref = (() => {
+  if (isDirect) {
+    return `${base}/direct-or-layover?${sp.toString()}`;
+  }
+
+  if (isItinerary) {
+    return `${base}/direct-or-layover?${sp.toString()}`;
+  }
+
+  if (isMissedConnection) {
+    return `${base}/itinerary?${sp.toString()}`;
+  }
+
+  if (isMissedConnectionHours) {
+    return `${base}/itinerary/missed-connection?${sp.toString()}`;
+  }
+
+  if (isWhatHappened) {
+    if (pathname.includes("/itinerary/")) {
+      return `${base}/itinerary/missed-connection-hours?${sp.toString()}`;
+    }
+
+    return `${base}/direct?${sp.toString()}`;
+  }
+
+  if (isVerify) {
+    if (pathname.includes("/itinerary/")) {
+      return `${base}/itinerary/what-happened?${sp.toString()}`;
+    }
+
+    return `${base}/direct?${sp.toString()}`;
+  }
+
+  if (isClaimOwner) {
+    return `${base}/verify?${sp.toString()}`;
+  }
+
+  if (isPassengers) {
+    return `${base}/claim-owner?${sp.toString()}`;
+  }
+
+  if (isPassengerDetails) {
+    return `${base}/passengers?${sp.toString()}`;
+  }
+
+  if (isBookingReference) {
+    return `${base}/passenger-details?${sp.toString()}`;
+  }
+
+  if (isAuthorization) {
+    return `${base}/booking-reference?${sp.toString()}`;
+  }
+
+  if (isUploads) {
+    return `${base}/authorization?${sp.toString()}`;
+  }
+
+  if (isUploadsId) {
+    return `${base}/uploads?${sp.toString()}`;
+  }
+
+  if (isAdditional) {
+    return `${base}/uploads-id?${sp.toString()}`;
+  }
+
+  if (isFinish) {
+    return `${base}/additional?${sp.toString()}`;
+  }
+
+  return null;
+})();
+
   const nextHref = (() => {
     // Step 0
     if (isDirectOrLayover) {
@@ -438,7 +512,9 @@ if (isFinish) {
             <div className="mt-6 hidden md:flex justify-end gap-3">
               <button
                 type="button"
-                onClick={() => window.history.back()}
+                onClick={() => {
+  if (backHref) router.push(backHref);
+}}
                 className="
                   w-44 px-5 py-4
                   text-sm font-semibold
@@ -483,7 +559,9 @@ if ((window as any).fc_uploadAndContinue) {
       <div className="flex items-center gap-3">
     <button
       type="button"
-      onClick={() => window.history.back()}
+      onClick={() => {
+  if (backHref) router.push(backHref);
+}}
       className="
         shrink-0 rounded-xl px-4 py-3
         text-sm font-semibold text-sky-600
