@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type StepDef = {
@@ -26,10 +26,31 @@ const STEPS: StepDef[] = [
  { 
   id: 2, 
   title: "Passenger details", 
-  paths: ["claim-owner", "passengers", "passenger-details"] 
+  paths: [
+    "claim-owner",
+    "passengers",
+    "passenger-details",
+    "booking-reference",
+    "authorization"
+  ] 
 },
-  { id: 3, title: "Documents", paths: ["thanks"] },
-  { id: 4, title: "Finish", paths: [] },
+  { 
+  id: 3, 
+  title: "Documents", 
+  paths: [
+    "uploads",
+    "uploads-id",
+    "additional"
+  ] 
+},
+  { 
+  id: 4, 
+  title: "Finish", 
+  paths: [
+    "finish",
+    "thanks"
+  ] 
+},
 ];
 
 function getActiveStep(pathname: string): number {
@@ -117,6 +138,23 @@ export default function CheckLayout({ children }: { children: ReactNode }) {
   const sp = useSearchParams();
   const activeStep = getActiveStep(pathname);
   const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+  const reset = () => setIsSubmitting(false);
+
+  window.addEventListener(
+    "flightclaimly-submit-failed",
+    reset
+  );
+
+  return () => {
+    window.removeEventListener(
+      "flightclaimly-submit-failed",
+      reset
+    );
+  };
+}, []);
 
   const choice = (sp.get("choice") || "direct") as "direct" | "itinerary";
 
@@ -530,8 +568,9 @@ if (isFinish) {
 
               <button
                 type="button"
-                disabled={!canContinue}
+                disabled={!canContinue || isSubmitting}
 onClick={async () => {
+  setIsSubmitting(true);
   if (isAuthorization) {
     window.dispatchEvent(new Event("flightclaimly-submit-authorization"));
     return;
@@ -573,8 +612,9 @@ if ((window as any).fc_uploadAndContinue) {
 
     <button
       type="button"
-      disabled={!canContinue}
+      disabled={!canContinue || isSubmitting}
       onClick={async () => {
+        setIsSubmitting(true);
         if (isAuthorization) {
           window.dispatchEvent(new Event("flightclaimly-submit-authorization"));
           return;

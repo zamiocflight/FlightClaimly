@@ -155,6 +155,8 @@ async function handleContinue() {
     console.error("Claim creation failed:", err);
     alert("Something went wrong creating the claim.");
 
+    window.dispatchEvent(new Event("flightclaimly-submit-failed"));
+    
     // 🔥 viktigt: reset om fail
     continueRunningRef.current = false;
   }

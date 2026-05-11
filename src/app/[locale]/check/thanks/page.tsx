@@ -2,13 +2,15 @@ import Link from "next/link";
 
 type Props = {
   searchParams: Promise<{
-    id?: string;
+    ClaimId?: string;
+    locale?: string;
   }>;
 };
 
 export default async function ThanksPage({ searchParams }: Props) {
   const sp = await searchParams;
-  const claimId = sp.id || "FC-XXXXXX";
+  const claimId = sp.ClaimId || "FC-XXXXXX";
+  const locale = sp.locale || "sv";
 
   return (
     <div className="min-h-screen bg-slate-100 flex items-center justify-center px-4">
@@ -47,7 +49,7 @@ export default async function ThanksPage({ searchParams }: Props) {
 
         {/* CTA */}
         <Link
-          href={`/track/${claimId}`}
+          href={`/${claimId ? locale : "sv"}/track/${claimId}`}
           className="inline-block w-full bg-blue-600 hover:bg-blue-700 transition text-white font-medium py-3 rounded-lg"
         >
           Track your claim

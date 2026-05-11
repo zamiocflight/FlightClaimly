@@ -22,38 +22,67 @@ export default function ClaimOwnerPage() {
 
   function updateParam(key: string, value: string) {
     const params = new URLSearchParams(searchParams.toString());
+
     if (value.trim()) {
       params.set(key, value);
     } else {
       params.delete(key);
     }
+
     router.replace(`?${params.toString()}`, { scroll: false });
   }
 
-useEffect(() => {
-  const el = emailRef.current;
-  if (!el) return;
+  function syncClaimOwnerFields() {
+    const first = firstNameRef.current?.value || "";
+    const last = lastNameRef.current?.value || "";
+    const mail = emailRef.current?.value || "";
 
-  const handle = () => {
-    const val = el.value;
+    setFirstNameState(first);
+    setLastNameState(last);
+    setEmailState(mail);
 
-    if (val && val !== emailState) {
-      setEmailState(val);
-      updateParam("email", val);
+    const params = new URLSearchParams(searchParams.toString());
 
-      const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
-      setEmailValid(isValid);
+    if (first.trim()) {
+      params.set("firstName", first);
+    } else {
+      params.delete("firstName");
     }
-  };
 
-  el.addEventListener("change", handle);
-  el.addEventListener("blur", handle);
+    if (last.trim()) {
+      params.set("lastName", last);
+    } else {
+      params.delete("lastName");
+    }
 
-  return () => {
-    el.removeEventListener("change", handle);
-    el.removeEventListener("blur", handle);
-  };
-}, [emailState]);
+    if (mail.trim()) {
+      params.set("email", mail);
+    } else {
+      params.delete("email");
+    }
+
+    router.replace(`?${params.toString()}`, { scroll: false });
+
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail);
+    setEmailValid(isValid);
+  }
+
+  useEffect(() => {
+    const el = emailRef.current;
+    if (!el) return;
+
+    const handle = () => {
+      syncClaimOwnerFields();
+    };
+
+    el.addEventListener("change", handle);
+    el.addEventListener("blur", handle);
+
+    return () => {
+      el.removeEventListener("change", handle);
+      el.removeEventListener("blur", handle);
+    };
+  }, []);
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
@@ -71,6 +100,7 @@ useEffect(() => {
           <label className="block text-sm font-medium text-sky-900">
             First name
           </label>
+
           <input
             ref={firstNameRef}
             type="text"
@@ -81,13 +111,17 @@ useEffect(() => {
               setFirstNameState(val);
               updateParam("firstName", val);
             }}
+            onBlur={syncClaimOwnerFields}
             onKeyDown={(e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    lastNameRef.current?.focus();
-    lastNameRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-  }
-}}
+              if (e.key === "Enter") {
+                e.preventDefault();
+                lastNameRef.current?.focus();
+                lastNameRef.current?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
+              }
+            }}
             className="
               mt-1 w-full md:w-2/3
               h-[48px]
@@ -103,6 +137,7 @@ useEffect(() => {
             "
             placeholder="First name"
           />
+
           <p className="mt-2 text-xs text-slate-400">
             Must match your ID
           </p>
@@ -113,6 +148,7 @@ useEffect(() => {
           <label className="block text-sm font-medium text-sky-900">
             Last name
           </label>
+
           <input
             ref={lastNameRef}
             type="text"
@@ -122,13 +158,17 @@ useEffect(() => {
               setLastNameState(val);
               updateParam("lastName", val);
             }}
+            onBlur={syncClaimOwnerFields}
             onKeyDown={(e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    emailRef.current?.focus();
-    emailRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-  }
-}}
+              if (e.key === "Enter") {
+                e.preventDefault();
+                emailRef.current?.focus();
+                emailRef.current?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
+              }
+            }}
             className="
               mt-1 w-full md:w-2/3
               h-[48px]
@@ -144,8 +184,10 @@ useEffect(() => {
             "
             placeholder="Last name"
           />
+
           <p className="mt-2 text-xs text-slate-400">
-            Please enter all your last name exactly as it appears on your ID or passport.
+            Please enter all your last name exactly as it appears on your ID or
+            passport.
           </p>
         </div>
 
@@ -166,16 +208,16 @@ useEffect(() => {
               value={emailState}
               onChange={(e) => {
                 const val = e.target.value;
+
                 setEmailState(val);
                 updateParam("email", val);
 
-                const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+                const isValid =
+                  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+
                 setEmailValid(isValid);
               }}
-              onBlur={() => {
-                const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailState);
-                setEmailValid(isValid);
-              }}
+              onBlur={syncClaimOwnerFields}
               className={`
                 mt-1 w-full
                 h-[48px]
