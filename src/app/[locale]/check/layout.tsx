@@ -581,7 +581,15 @@ if ((window as any).fc_uploadAndContinue) {
   return;
 }
 
-  if (nextHref) router.push(nextHref);
+ setTimeout(() => {
+  const latest = window.location.search;
+
+  if (nextHref) {
+    router.push(nextHref.split("?")[0] + latest);
+  } else {
+    setIsSubmitting(false);
+  }
+}, 50);
 }}
                 className={[
                   "w-44 rounded-lg px-5 py-4 text-sm font-semibold transition",
@@ -625,7 +633,15 @@ if ((window as any).fc_uploadAndContinue) {
           return;
         }
 
-        if (nextHref) router.push(nextHref);
+      setTimeout(() => {
+  const latest = window.location.search;
+
+  if (nextHref) {
+    router.push(nextHref.split("?")[0] + latest);
+  } else {
+    setIsSubmitting(false);
+  }
+}, 50);
       }}
       className={[
         "flex-1 rounded-xl px-6 py-3 text-base font-semibold transition-all duration-200",
