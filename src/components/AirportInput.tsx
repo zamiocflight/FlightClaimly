@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 type Result = {
   iata: string;
   label: string;
+  country?: string;
 };
 
 type Props = {
@@ -117,13 +118,16 @@ function highlight(text: string, query: string) {
   );
 }
 
-function getFlag(label: string) {
-  if (label.includes("Stockholm")) return "🇸🇪";
-  if (label.includes("Copenhagen")) return "🇩🇰";
-  if (label.includes("London")) return "🇬🇧";
-  if (label.includes("Oslo")) return "🇳🇴";
-  if (label.includes("Helsinki")) return "🇫🇮";
-  return "✈️";
+function getFlag(countryCode?: string) {
+  if (!countryCode || countryCode.length !== 2) {
+    return "✈️";
+  }
+
+  return countryCode
+    .toUpperCase()
+    .replace(/./g, (char) =>
+      String.fromCodePoint(127397 + char.charCodeAt(0))
+    );
 }
 
   return (
@@ -213,7 +217,7 @@ function getFlag(label: string) {
               }}
             >
               <div className="flex items-center gap-2">
-  <span className="text-base">{getFlag(r.label)}</span>
+  <span className="text-base">{getFlag(r.country)}</span>
   <span className="truncate">
     {highlight(r.label, q)}
   </span>

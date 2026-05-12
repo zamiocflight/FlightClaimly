@@ -2,14 +2,14 @@ import Link from "next/link";
 
 type Props = {
   searchParams: Promise<{
-    ClaimId?: string;
+    claimId?: string;
     locale?: string;
   }>;
 };
 
 export default async function ThanksPage({ searchParams }: Props) {
   const sp = await searchParams;
-  const claimId = sp.ClaimId || "FC-XXXXXX";
+  const claimId = sp.claimId || "FC-XXXXXX";
   const locale = sp.locale || "sv";
 
   return (
@@ -43,7 +43,7 @@ export default async function ThanksPage({ searchParams }: Props) {
         <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 mb-6">
           <p className="text-xs text-slate-500 mb-1">Claim ID</p>
           <p className="text-lg font-semibold text-slate-900">
-            FC-{claimId}
+            {claimId}
           </p>
         </div>
 

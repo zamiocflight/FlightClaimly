@@ -256,47 +256,55 @@ function goNext() {
   router.push(`/${locale}/check/uploads-id?${sp.toString()}`);
 }
 
-  async function uploadAndContinue() {
-    if (!claimId) {
-      setError("Missing claim reference. Please go back and try again.");
-      return;
-    }
+function stopLayoutProcessing() {
+  window.dispatchEvent(new Event("flightclaimly-submit-failed"));
+}
 
-    if (!hasFiles) {
-      goNext();
-      return;
-    }
-
-    if (!validation.ok) {
-      setError(validation.msg);
-      return;
-    }
-
-    try {
-      setLoading(true);
-      setError("");
-
-      const formData = new FormData();
-      files.forEach((f) => formData.append("files", f));
-
-      const res = await fetch(`/api/claims/${claimId}/attachments`, {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!res.ok) {
-        throw new Error("Upload failed");
-      }
-
-      goNext();
-    } catch {
-      setError(
-        "Upload failed. Please try again, or skip for now and we’ll request documents if needed."
-      );
-    } finally {
-      setLoading(false);
-    }
+async function uploadAndContinue() {
+  if (!claimId) {
+    setError("Missing claim reference. Please go back and try again.");
+    stopLayoutProcessing();
+    return;
   }
+
+  if (!hasFiles) {
+    goNext();
+    return;
+  }
+
+  if (!validation.ok) {
+    setError(validation.msg);
+    stopLayoutProcessing();
+    return;
+  }
+
+  try {
+    setLoading(true);
+    setError("");
+
+    const formData = new FormData();
+    files.forEach((f) => formData.append("files", f));
+
+    const res = await fetch(`/api/claims/${claimId}/attachments`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!res.ok) {
+      throw new Error("Upload failed");
+    }
+
+    goNext();
+  } catch {
+    setError(
+      "Upload failed. Please try again, or skip for now and we’ll request documents if needed."
+    );
+
+    stopLayoutProcessing();
+  } finally {
+    setLoading(false);
+  }
+}
 
 useEffect(() => {
   (window as any).fc_uploadAndContinue = uploadAndContinue;
@@ -374,6 +382,12 @@ useEffect(() => {
             onChange={(e) => addFiles(e.target.files)}
           />
         </div>
+
+        {error && (
+  <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+    {error}
+  </div>
+)}
 
         {/* Files list */}
         {files.length > 0 && (

@@ -164,13 +164,16 @@ export default function DirectClient() {
   // Scroll target for flight list
   const flightsRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+useEffect(() => {
+  if (sp.get("choice") === "direct") return;
+
   const params = new URLSearchParams(sp.toString());
   params.set("choice", "direct");
 
-  const qs = params.toString();
-  router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-}, [sp, pathname, router]);
+  router.replace(`${pathname}?${params.toString()}`, {
+    scroll: false,
+  });
+}, []);
 
 
   useEffect(() => {

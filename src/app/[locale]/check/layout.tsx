@@ -141,6 +141,10 @@ export default function CheckLayout({ children }: { children: ReactNode }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
+  setIsSubmitting(false);
+}, [pathname]);
+
+  useEffect(() => {
   const reset = () => setIsSubmitting(false);
 
   window.addEventListener(
@@ -570,26 +574,25 @@ if (isFinish) {
                 type="button"
                 disabled={!canContinue || isSubmitting}
 onClick={async () => {
+  if (!nextHref) return;
+
   setIsSubmitting(true);
+
   if (isAuthorization) {
     window.dispatchEvent(new Event("flightclaimly-submit-authorization"));
     return;
   }
 
-if ((window as any).fc_uploadAndContinue) {
-  await (window as any).fc_uploadAndContinue();
-  return;
-}
-
- setTimeout(() => {
-  const latest = window.location.search;
-
-  if (nextHref) {
-    router.push(nextHref.split("?")[0] + latest);
-  } else {
-    setIsSubmitting(false);
+  if ((window as any).fc_uploadAndContinue) {
+    try {
+      await (window as any).fc_uploadAndContinue();
+    } catch {
+      setIsSubmitting(false);
+    }
+    return;
   }
-}, 50);
+
+  router.push(nextHref);
 }}
                 className={[
                   "w-44 rounded-lg px-5 py-4 text-sm font-semibold transition",
@@ -598,7 +601,7 @@ if ((window as any).fc_uploadAndContinue) {
                     : "bg-slate-300 text-sky-600 cursor-not-allowed opacity-60",
                 ].join(" ")}
               >
-                {primaryCtaLabel}
+                {isSubmitting ? "Processing..." : primaryCtaLabel}
               </button>
             </div>
 
@@ -621,28 +624,27 @@ if ((window as any).fc_uploadAndContinue) {
     <button
       type="button"
       disabled={!canContinue || isSubmitting}
-      onClick={async () => {
-        setIsSubmitting(true);
-        if (isAuthorization) {
-          window.dispatchEvent(new Event("flightclaimly-submit-authorization"));
-          return;
-        }
+onClick={async () => {
+  if (!nextHref) return;
 
-        if ((window as any).fc_uploadAndContinue) {
-          await (window as any).fc_uploadAndContinue();
-          return;
-        }
+  setIsSubmitting(true);
 
-      setTimeout(() => {
-  const latest = window.location.search;
-
-  if (nextHref) {
-    router.push(nextHref.split("?")[0] + latest);
-  } else {
-    setIsSubmitting(false);
+  if (isAuthorization) {
+    window.dispatchEvent(new Event("flightclaimly-submit-authorization"));
+    return;
   }
-}, 50);
-      }}
+
+  if ((window as any).fc_uploadAndContinue) {
+    try {
+      await (window as any).fc_uploadAndContinue();
+    } catch {
+      setIsSubmitting(false);
+    }
+    return;
+  }
+
+  router.push(nextHref);
+}}
       className={[
         "flex-1 rounded-xl px-6 py-3 text-base font-semibold transition-all duration-200",
         canContinue
@@ -650,7 +652,7 @@ if ((window as any).fc_uploadAndContinue) {
           : "bg-slate-200 text-slate-400 cursor-not-allowed",
       ].join(" ")}
     >
-      {primaryCtaLabel}
+{isSubmitting ? "Processing..." : primaryCtaLabel}
     </button>
   </div>
 </div>
