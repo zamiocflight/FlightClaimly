@@ -67,7 +67,10 @@ export async function GET(
       date: (claim as any).date ?? null,
       bookingNumber: claim.bookingNumber || '',
       receivedAt: claim.receivedAt || '',
-      attachmentsSummary: (claim as any).attachmentsSummary ?? undefined,
+      attachmentsSummary: (claim.attachments ?? []).map((a) => ({
+  filename: a.filename,
+  uploadedAt: a.uploadedAt,
+})),
       sentToAirlineAt: (claim as any).sentToAirlineAt ?? null,
     };
 
