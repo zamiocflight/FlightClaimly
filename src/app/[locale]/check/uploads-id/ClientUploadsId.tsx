@@ -313,9 +313,9 @@ function goNext() {
 <div className="mt-1 text-sm text-slate-600">
   <span className="hidden sm:inline">or</span>
 
-  <span className="sm:hidden">
-    Use your phone camera to quickly upload your document
-  </span>
+<span className="sm:hidden">
+  Use your phone camera to quickly upload your passport or ID
+</span>
 </div>
 
 <button
@@ -331,7 +331,7 @@ function goNext() {
   "
 >
   <span className="hidden sm:inline">Browse files</span>
-  <span className="sm:hidden">Take photo</span>
+  <span className="sm:hidden">Upload or take photo</span>
 </button>
 
             <div className="mt-3 text-xs text-slate-300">
