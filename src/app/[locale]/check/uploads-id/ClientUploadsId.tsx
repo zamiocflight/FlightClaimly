@@ -300,18 +300,39 @@ function goNext() {
               <UploadCloud className="h-6 w-6 text-sky-700" />
             </div>
 
-            <div className="mt-4 text-base font-semibold text-sky-900">
-              Drag &amp; drop files here
-            </div>
-            <div className="mt-1 text-sm text-slate-600">or</div>
+           <div className="mt-4 text-base font-semibold text-sky-900">
+  <span className="hidden sm:inline">
+    Drag &amp; drop files here
+  </span>
 
-            <button
-              type="button"
-              onClick={onBrowseClick}
-              className="mt-3 inline-flex items-center justify-center rounded-lg border border-sky-500 px-4 py-2 text-sm font-semibold text-sky-700 hover:bg-sky-50 transition"
-            >
-              Browse files
-            </button>
+  <span className="sm:hidden">
+    Take a photo of your ID or passport
+  </span>
+</div>
+
+<div className="mt-1 text-sm text-slate-600">
+  <span className="hidden sm:inline">or</span>
+
+  <span className="sm:hidden">
+    Use your phone camera to quickly upload your document
+  </span>
+</div>
+
+<button
+  type="button"
+  onClick={onBrowseClick}
+  className="
+    mt-4 inline-flex items-center justify-center
+    rounded-xl border border-sky-500
+    px-5 py-3
+    text-sm font-semibold text-sky-700
+    hover:bg-sky-50 transition
+    sm:px-4 sm:py-2
+  "
+>
+  <span className="hidden sm:inline">Browse files</span>
+  <span className="sm:hidden">Take photo</span>
+</button>
 
             <div className="mt-3 text-xs text-slate-300">
               PDF, JPG, PNG • Max {MAX_FILE_MB} MB per file • Max {MAX_TOTAL_MB} MB total
