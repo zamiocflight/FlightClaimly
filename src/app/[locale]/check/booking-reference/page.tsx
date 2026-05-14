@@ -51,7 +51,7 @@ export default function BookingReferencePage() {
             updateParam(e.target.value);
           }}
           placeholder="e.g. DS27K3 or YLEHPW"
-          className="mt-1 w-full md:w-2/3 h-[56px] rounded-md border border-slate-300 px-3 text-slate-900 placeholder:text-slate-300 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
+          className="mt-1 w-full md:w-2/3 h-[56px] rounded-md border border-slate-300 px-3 text-[16px] text-slate-900 placeholder:text-slate-300 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
         />
       </div>
 
