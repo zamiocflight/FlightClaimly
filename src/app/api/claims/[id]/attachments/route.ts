@@ -88,7 +88,7 @@ if (readErr || !row) {
       contentType: string;
     }> = [];
 
-    for (const entry of fileEntries) {
+for (const [index, entry] of fileEntries.entries()) {
       if (!(entry instanceof File)) continue;
 
       const originalName = entry.name || "file";
@@ -97,7 +97,8 @@ if (readErr || !row) {
 const safeName = originalName
   .normalize("NFKD")
   .replace(/[^\w.\-]/g, "_"); // tar bort åäö, spaces, etc
-      const fileName = `${Date.now()}-${safeName}`;
+      const uniquePart = `${Date.now()}-${index}-${crypto.randomUUID()}`;
+const fileName = `${uniquePart}-${safeName}`;
       const filePath = `claims/${incomingId}/${fileName}`;
 
       const { error: uploadError } = await sb.storage
