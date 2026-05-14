@@ -142,13 +142,6 @@ export default function CheckLayout({ children }: { children: ReactNode }) {
 
 useEffect(() => {
   setIsSubmitting(false);
-
-  const active = document.activeElement as HTMLElement | null;
-  active?.blur?.();
-
-  requestAnimationFrame(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  });
 }, [pathname]);
 
   useEffect(() => {
