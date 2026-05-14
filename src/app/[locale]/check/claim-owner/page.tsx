@@ -104,7 +104,6 @@ export default function ClaimOwnerPage() {
           <input
             ref={firstNameRef}
             type="text"
-            autoFocus
             value={firstNameState}
             onChange={(e) => {
               const val = e.target.value;
@@ -128,6 +127,7 @@ export default function ClaimOwnerPage() {
               rounded-md
               border border-slate-300
               px-3
+              text-[16px]
               text-slate-900
               placeholder:text-slate-300
               hover:border-sky-400
@@ -175,6 +175,7 @@ export default function ClaimOwnerPage() {
               rounded-md
               border border-slate-300
               px-3
+              text-[16px]
               text-slate-900
               placeholder:text-slate-300
               hover:border-sky-400
@@ -224,6 +225,7 @@ export default function ClaimOwnerPage() {
                 rounded-md
                 border ${emailValid ? "border-emerald-400" : "border-slate-300"}
                 px-3 pr-10
+                text-[16px]
                 text-slate-900
                 placeholder:text-slate-300
                 hover:border-sky-400
