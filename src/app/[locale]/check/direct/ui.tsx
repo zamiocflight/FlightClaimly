@@ -63,10 +63,9 @@ const AIRLINES = [
 ];
 
 // --- Shared layout constants (SINGLE SOURCE OF TRUTH) ---
-const FIELD_WIDTH = "w-full md:max-w-[50%]";
+const FIELD_WIDTH = "w-full md:max-w-[560px]";
 const FIELD_ROW =
-  "flex items-center justify-between rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 focus-within:outline-none focus-within:border-sky-300";
-
+  "flex min-h-[64px] md:min-h-[56px] items-center justify-between rounded-2xl border border-slate-300 bg-white px-5 py-4 text-base text-slate-900 shadow-sm focus-within:outline-none focus-within:border-sky-300 focus-within:ring-2 focus-within:ring-sky-100 transition";
 // "Copenhagen (CPH) — ..." -> "Copenhagen (CPH)"
 function formatAirport(label: string) {
   const match = label.match(/^(.*?)\s*\((\w{3})\)/);
