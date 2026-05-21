@@ -377,7 +377,7 @@ export function VerifyClient() {
             className={[
               "w-full rounded-lg border px-4 py-4 text-left transition",
               confirm === 'yes'
-                ? "border-sky-500 bg-sky-50"
+                ? "border-sky-500 bg-sky-50 shadow-sm"
                 : "border-slate-300 hover:border-sky-400"
             ].join(" ")}
           >
@@ -388,7 +388,14 @@ export function VerifyClient() {
               ].join(" ")}>
                 {confirm === 'yes' && <div className="h-2 w-2 rounded-full bg-sky-500" />}
               </div>
-              <span className="font-medium text-sky-900">Yes, this is my flight</span>
+              <span
+  className={[
+    "font-semibold transition-colors",
+    confirm === "yes" ? "text-slate-900" : "text-sky-900",
+  ].join(" ")}
+>
+  Yes, this is my flight
+</span>
             </div>
           </button>
 
@@ -412,7 +419,14 @@ export function VerifyClient() {
               ].join(" ")}>
                 {confirm === 'no' && <div className="h-2 w-2 rounded-full bg-sky-500" />}
               </div>
-              <span className="font-medium text-sky-900">No, something is wrong</span>
+              <span
+  className={[
+    "font-semibold transition-colors",
+    confirm === "no" ? "text-slate-900" : "text-sky-900",
+  ].join(" ")}
+>
+  No, something is wrong
+</span>
             </div>
           </button>
         </div>
