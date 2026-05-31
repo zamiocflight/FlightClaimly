@@ -18,7 +18,7 @@ export async function POST(
 
     // Sanera filnamn — inga snedstreck eller konstiga tecken
     const clean = String(filename).replace(/[^A-Za-z0-9._-]/g, '_');
-    const path = `${id}/${Date.now()}-${clean}`;
+    const path = `claims/${id}/${Date.now()}-${crypto.randomUUID()}-${clean}`;
 
     const sb = supabaseAdmin();
     const { data, error } = await sb.storage

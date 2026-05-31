@@ -35,6 +35,60 @@ export async function POST(
 
     const sb = supabaseAdmin();
 
+    const contentType = req.headers.get("content-type") || "";
+
+if (contentType.includes("application/json")) {
+  const body = await req.json();
+  const incomingFiles = Array.isArray(body.files) ? body.files : [];
+
+  if (incomingFiles.length === 0) {
+    return NextResponse.json({ error: "No attachment metadata" }, { status: 400 });
+  }
+
+  const { data: row, error: readErr } = await sb
+    .from("claims")
+    .select("received_at, attachments")
+    .eq("received_at", incomingId)
+    .maybeSingle();
+
+  if (readErr || !row) {
+    return NextResponse.json({ error: "Claim not found for this id" }, { status: 404 });
+  }
+
+  const existing = Array.isArray(row.attachments) ? row.attachments : [];
+  const now = new Date().toISOString();
+
+  const newFiles = incomingFiles.map((f: any) => ({
+    path: f.path,
+    filename: f.filename,
+    size: f.size,
+    contentType: f.contentType || "application/octet-stream",
+    uploadedAt: now,
+  }));
+
+  const map = new Map();
+
+  [...existing, ...newFiles].forEach((f) => {
+    map.set(f.path, f);
+  });
+
+  const next = Array.from(map.values());
+
+  const { error: updErr } = await sb
+    .from("claims")
+    .update({ attachments: next, updated_at: now })
+    .eq("received_at", row.received_at);
+
+  if (updErr) {
+    return NextResponse.json(
+      { error: "Failed to update claim attachments" },
+      { status: 500 }
+    );
+  }
+
+  return NextResponse.json({ ok: true, count: newFiles.length }, { status: 200 });
+}
+
     const formData = await req.formData();
     const fileEntries = formData.getAll('files');
 

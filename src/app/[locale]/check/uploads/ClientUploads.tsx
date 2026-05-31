@@ -260,6 +260,42 @@ function stopLayoutProcessing() {
   window.dispatchEvent(new Event("flightclaimly-submit-failed"));
 }
 
+async function uploadFileDirect(file: File) {
+  const presignRes = await fetch(`/api/claims/${claimId}/attachments/presign`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      filename: file.name,
+      contentType: file.type || "application/octet-stream",
+    }),
+  });
+
+  if (!presignRes.ok) {
+    throw new Error("Presign failed");
+  }
+
+  const { url, path, contentType } = await presignRes.json();
+
+  const uploadRes = await fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": contentType || file.type || "application/octet-stream",
+    },
+    body: file,
+  });
+
+  if (!uploadRes.ok) {
+    throw new Error("Direct upload failed");
+  }
+
+  return {
+    path,
+    filename: file.name,
+    size: file.size,
+    contentType: file.type || "application/octet-stream",
+  };
+}
+
 async function uploadAndContinue() {
   if (!claimId) {
     setError("Missing claim reference. Please go back and try again.");
@@ -282,16 +318,21 @@ async function uploadAndContinue() {
     setLoading(true);
     setError("");
 
-    const formData = new FormData();
-    files.forEach((f) => formData.append("files", f));
+    const uploaded = [];
 
-    const res = await fetch(`/api/claims/${claimId}/attachments`, {
+    for (const file of files) {
+      const result = await uploadFileDirect(file);
+      uploaded.push(result);
+    }
+
+    const metadataRes = await fetch(`/api/claims/${claimId}/attachments`, {
       method: "POST",
-      body: formData,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ files: uploaded }),
     });
 
-    if (!res.ok) {
-      throw new Error("Upload failed");
+    if (!metadataRes.ok) {
+      throw new Error("Metadata save failed");
     }
 
     goNext();
