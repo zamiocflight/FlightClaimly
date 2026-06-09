@@ -216,8 +216,7 @@ const inputBase =
               <div className="relative">
               <Combobox.Input
   ref={countryRef}
-className="w-full h-[48px] rounded-lg border border-black/10 px-3 pr-10 text-[16px] text-slate-900 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"  displayValue={(c: Country | null) => (c ? c.nameEn : "")}
-  onChange={(e) => setCountryQuery(e.target.value)}
+className="w-full h-[56px] md:h-[52px] rounded-lg border border-black/10 bg-white px-5 pr-10 text-[16px] text-slate-900 placeholder:text-slate-400 hover:border-sky-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none transition"  onChange={(e) => setCountryQuery(e.target.value)}
   onKeyDown={(e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -275,7 +274,7 @@ className="w-full h-[48px] rounded-lg border border-black/10 px-3 pr-10 text-[16
       forceDialCode
       disableDialCodePrefill={false}
       className="!w-full"
-inputClassName="!w-full !h-[48px] !text-[16px] !text-slate-900"
+inputClassName="!w-full !h-[56px] md:!h-[52px] !text-[16px] !text-slate-900"
     />
   </div>
 </div>
@@ -284,7 +283,7 @@ inputClassName="!w-full !h-[48px] !text-[16px] !text-slate-900"
 
 <style jsx global>{`
   .react-international-phone-input-container {
-    height: 48px !important;
+    height: 56px !important;
     width: 100% !important;
     border-radius: 0.5rem !important;
     border: 1px solid rgb(0 0 0 / 0.1) !important;
@@ -293,7 +292,7 @@ inputClassName="!w-full !h-[48px] !text-[16px] !text-slate-900"
   }
 
   .react-international-phone-country-selector-button {
-    height: 48px !important;
+    height: 56px !important;
     border: none !important;
     border-right: 1px solid rgb(0 0 0 / 0.08) !important;
     background: transparent !important;
@@ -301,7 +300,7 @@ inputClassName="!w-full !h-[48px] !text-[16px] !text-slate-900"
   }
 
   .react-international-phone-input {
-    height: 48px !important;
+    height: 56px !important;
     width: 100% !important;
     border: none !important;
     background: transparent !important;
