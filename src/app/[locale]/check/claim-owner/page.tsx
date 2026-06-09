@@ -123,7 +123,7 @@ export default function ClaimOwnerPage() {
             }}
             className="
               mt-1 w-full md:w-2/3
-              h-[48px]
+              h-[56px]
               rounded-md
               border border-slate-300
               px-3
@@ -171,7 +171,7 @@ export default function ClaimOwnerPage() {
             }}
             className="
               mt-1 w-full md:w-2/3
-              h-[48px]
+              h-[56px]
               rounded-md
               border border-slate-300
               px-3
@@ -221,7 +221,7 @@ export default function ClaimOwnerPage() {
               onBlur={syncClaimOwnerFields}
               className={`
                 mt-1 w-full
-                h-[48px]
+                h-[56px]
                 rounded-md
                 border ${emailValid ? "border-emerald-400" : "border-slate-300"}
                 px-3 pr-10
