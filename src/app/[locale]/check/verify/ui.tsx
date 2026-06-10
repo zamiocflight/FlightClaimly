@@ -10,6 +10,15 @@ type VerifyResult = {
   eligible: boolean;
   reasonCode?: string;
   source: 'mock' | 'provider';
+
+  arrivalDelayMinutes?: number | null;
+  cancelled?: boolean | null;
+
+  scheduledDeparture?: string | null;
+  actualDeparture?: string | null;
+  scheduledArrival?: string | null;
+  actualArrival?: string | null;
+  distanceKm?: number | null;
 };
 
 type Leg = {
@@ -199,12 +208,36 @@ export function VerifyClient() {
         : "—"
       : normalizeCityLabel(to, "");
 
-  const compEUR = estimateCompensationEUR();
-  const distanceKm = estimateDistanceKm();
-  const delayText = estimateDelay();
+function formatDelay(minutes: number | null | undefined) {
+  if (typeof minutes !== "number") return "No significant delay detected";
 
-  const scheduledArrival = date ? `${date}T10:30:00` : "";
-  const actualArrival = date ? `${date}T13:51:00` : "";
+  if (minutes < 0) {
+    const early = Math.abs(minutes);
+    return early === 1 ? "Arrived 1 minute early" : `Arrived ${early} minutes early`;
+  }
+
+  if (minutes === 0) return "Arrived on time";
+
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+
+  if (h === 0) return `${m} minutes`;
+  if (m === 0) return `${h} ${h === 1 ? "hour" : "hours"}`;
+
+  return `${h} ${h === 1 ? "hour" : "hours"} ${m} minutes`;
+}
+
+const compEUR = estimateCompensationEUR();
+
+const distanceKm =
+  typeof result?.distanceKm === "number"
+    ? Math.round(result.distanceKm)
+    : estimateDistanceKm();
+
+const delayText = formatDelay(result?.arrivalDelayMinutes);
+
+const scheduledArrival = result?.scheduledArrival || "";
+const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
 
   const scheduledParts = formatDateParts(scheduledArrival);
   const actualParts = formatDateParts(actualArrival);

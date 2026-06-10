@@ -160,6 +160,10 @@ export default function DirectClient() {
   // Selected flight (radio)
   const [selectedFlightId, setSelectedFlightId] = useState<string | null>(null);
   const MANUAL_ID = "MANUAL";
+  const [flights, setFlights] = useState<FlightItem[]>([]);
+  const [flightsLoading, setFlightsLoading] = useState(false);
+  const [flightsError, setFlightsError] = useState("");
+  const [manualFlightNumber, setManualFlightNumber] = useState("");
 
   // Scroll target for flight list
   const flightsRef = useRef<HTMLDivElement>(null);
@@ -181,6 +185,58 @@ useEffect(() => {
     flightsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [selectedAirline]);
 
+useEffect(() => {
+  if (!date || !selectedAirline) {
+    setFlights([]);
+    setFlightsError("");
+    return;
+  }
+
+  let cancelled = false;
+
+  async function loadFlights() {
+    try {
+      setFlightsLoading(true);
+      setFlightsError("");
+      setFlights([]);
+      setSelectedFlightId(null);
+
+      const qs = new URLSearchParams({
+        from,
+        to,
+        date,
+        airline: selectedAirline,
+      });
+
+      const res = await fetch(`/api/flight/search?${qs.toString()}`);
+
+      if (!res.ok) {
+        throw new Error("Flight search failed");
+      }
+
+      const data = await res.json();
+
+      if (!cancelled) {
+        setFlights(Array.isArray(data.flights) ? data.flights : []);
+      }
+    } catch {
+      if (!cancelled) {
+        setFlightsError("We couldn't load flights. You can still continue manually.");
+      }
+    } finally {
+      if (!cancelled) {
+        setFlightsLoading(false);
+      }
+    }
+  }
+
+  loadFlights();
+
+  return () => {
+    cancelled = true;
+  };
+}, [from, to, date, selectedAirline]);
+
   // --- MOCK FLIGHTS ---
   const mockFlights: FlightItem[] = [
     { id: "1", depTime: "06:30", arrTime: "09:10", flightNumber: "BA 812" },
@@ -190,15 +246,20 @@ useEffect(() => {
     { id: "5", depTime: "20:30", arrTime: "23:10", flightNumber: "BA 820" },
   ];
 
-  function getSelectedFlightNumber() {
+function getSelectedFlightNumber() {
   if (!selectedFlightId) return "";
-  if (selectedFlightId === MANUAL_ID) return "MANUAL";
-  return mockFlights.find((f) => f.id === selectedFlightId)?.flightNumber || "";
+  if (selectedFlightId === MANUAL_ID) return normalizeFlightNumber(manualFlightNumber);
+  return flights.find((f) => f.id === selectedFlightId)?.flightNumber || "";
 }
 
 
   // ✅ NY: beräkna om direct-sidan är “klar”
-  const directValid = Boolean(date && selectedAirline && selectedFlightId);
+  const directValid = Boolean(
+  date &&
+    selectedAirline &&
+    selectedFlightId &&
+    (selectedFlightId !== MANUAL_ID || manualFlightNumber.trim())
+);
 
 useEffect(() => {
   const qs = new URLSearchParams(sp.toString());
@@ -218,12 +279,17 @@ useEffect(() => {
   else qs.delete("flightNumber");
 
   // Layout gate
-  const directValidNow = Boolean(date && selectedAirline && selectedFlightId);
+  const directValidNow = Boolean(
+  date &&
+    selectedAirline &&
+    selectedFlightId &&
+    (selectedFlightId !== MANUAL_ID || manualFlightNumber.trim())
+);
   if (directValidNow) qs.set("directValid", "1");
   else qs.delete("directValid");
 
   router.replace(`${pathname}?${qs.toString()}`, { scroll: false });
-}, [date, selectedAirline, selectedFlightId, sp, pathname, router]);
+}, [date, selectedAirline, selectedFlightId, manualFlightNumber, sp, pathname, router]);
 
 
 
@@ -357,7 +423,25 @@ className="
 
           {/* MOCK FLIGHTS */}
           <div className="space-y-2">
-            {mockFlights.map((f) => {
+            {flightsLoading && (
+  <div className={`${FIELD_WIDTH} rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-500`}>
+    Loading available flights…
+  </div>
+)}
+
+{flightsError && (
+  <div className={`${FIELD_WIDTH} rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800`}>
+    {flightsError}
+  </div>
+)}
+
+{!flightsLoading && !flightsError && flights.length === 0 && (
+  <div className={`${FIELD_WIDTH} rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-500`}>
+    No flights found for this route. You can still continue manually.
+  </div>
+)}
+
+{flights.map((f) => {
               const selected = selectedFlightId === f.id;
 
               return (
@@ -366,7 +450,7 @@ className="
                   type="button"
                   onClick={() => setSelectedFlightId(f.id)}
                   className={`${FIELD_ROW} ${FIELD_WIDTH} transition hover:border-sky-300 hover:bg-slate-50 ${
-                    selected ? "border-sky-400 bg-sky-50 shadow-sm" : ""
+                    selected ? "border-sky-400 ring-2 ring-sky-200 bg-sky-50 shadow-sm" : ""
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -404,7 +488,7 @@ className="
                   type="button"
                   onClick={() => setSelectedFlightId(MANUAL_ID)}
                  className={`${FIELD_ROW} ${FIELD_WIDTH} transition hover:border-sky-300 hover:bg-slate-50 ${
-  selected ? "border-sky-400 bg-sky-50 shadow-sm" : ""
+  selected ? "border-sky-400 ring-2 ring-sky-200 bg-sky-50 shadow-sm" : ""
 }`}
                 >
                   <div className="flex items-center gap-3">
@@ -426,6 +510,19 @@ className="
                 </button>
               );
             })()}
+            {selectedFlightId === MANUAL_ID && (
+  <div className={`${FIELD_WIDTH} mt-3`}>
+    <label className="mb-1 block text-sm font-semibold text-sky-900">
+      Enter your flight number
+    </label>
+    <input
+      value={manualFlightNumber}
+      onChange={(e) => setManualFlightNumber(e.target.value.toUpperCase())}
+      placeholder="e.g. SK2814"
+      className="w-full h-[56px] rounded-lg border border-black/10 bg-white px-5 text-base text-slate-900 placeholder:text-slate-400 hover:border-sky-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none transition"
+    />
+  </div>
+)}
           </div>
         </div>
       )}

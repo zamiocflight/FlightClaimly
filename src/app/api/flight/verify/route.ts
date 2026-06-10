@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { verifyFlightFlightAware } from "@/lib/flight/providers/flightaware";
 
 type Leg = {
   id: string;
@@ -44,14 +45,34 @@ export async function POST(req: Request) {
     input.date &&
     input.flightNumber;
 
-  if (hasDirect) {
-    // MOCK: vi “matchar” alltid om fields finns
-    return NextResponse.json({
-      matched: true,
-      eligible: true, // mock tills provider finns
-      source: "mock" as const,
-    });
-  }
+if (hasDirect) {
+  const result = await verifyFlightFlightAware({
+    from: input.from,
+    to: input.to,
+    date: input.date,
+    flightNumber: input.flightNumber,
+  });
+
+  const eligible =
+    result.cancelled === true ||
+    (typeof result.arrivalDelayMinutes === "number" &&
+      result.arrivalDelayMinutes >= 180);
+
+return NextResponse.json({
+  matched: result.matched,
+  eligible,
+  source: result.source,
+  arrivalDelayMinutes: result.arrivalDelayMinutes,
+  cancelled: result.cancelled,
+  confidence: result.confidence,
+
+  scheduledDeparture: result.scheduledDeparture ?? null,
+  actualDeparture: result.actualDeparture ?? null,
+  scheduledArrival: result.scheduledArrival ?? null,
+  actualArrival: result.actualArrival ?? null,
+  distanceKm: result.distanceKm ?? null,
+});
+}
 
   // 2) ITINERARY kontrakt
   const {

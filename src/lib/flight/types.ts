@@ -1,14 +1,20 @@
 export type FlightVerifyInput = {
-  flightNumber: string; // ex "SK123"
-  date: string;         // YYYY-MM-DD
-  from: string;         // IATA
-  to: string;           // IATA
+  flightNumber: string;
+  date: string;
+  from: string;
+  to: string;
 };
 
 export type FlightVerifyResult = {
   matched: boolean;
   arrivalDelayMinutes: number | null;
   cancelled: boolean | null;
-  confidence: 'high' | 'medium' | 'low';
-  source: 'mock' | 'provider';
+  confidence: "high" | "medium" | "low";
+  source: "mock" | "provider";
+
+  scheduledDeparture?: string | null;
+  actualDeparture?: string | null;
+  scheduledArrival?: string | null;
+  actualArrival?: string | null;
+  distanceKm?: number | null;
 };
