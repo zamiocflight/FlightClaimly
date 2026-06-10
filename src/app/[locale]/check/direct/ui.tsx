@@ -441,12 +441,12 @@ className="
   </div>
 )}
 
-{flights.map((f) => {
+{flights.map((f, index) => {
               const selected = selectedFlightId === f.id;
 
               return (
                 <button
-                  key={f.id}
+                  key={`${f.id}-${index}`}
                   type="button"
                   onClick={() => setSelectedFlightId(f.id)}
                   className={`${FIELD_ROW} ${FIELD_WIDTH} transition hover:border-sky-300 hover:bg-slate-50 ${

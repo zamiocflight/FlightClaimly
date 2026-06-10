@@ -57,7 +57,7 @@ export async function GET(req: Request) {
   const params = new URLSearchParams({
     origin: from,
     destination: to,
-    include_codeshares: "true",
+    include_codeshares: "false",
     include_regional: "true",
     max_pages: "1",
   });
