@@ -71,7 +71,7 @@ export async function GET(
   filename:
     a.filename?.trim() ||
     (a.path?.includes('authority')
-      ? 'Signed authority document'
+      ? 'Authority.pdf'
       : 'Uploaded document'),
   uploadedAt: a.uploadedAt,
 })),

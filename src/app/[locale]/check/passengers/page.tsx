@@ -136,10 +136,10 @@ setTimeout(() => {
       <div className="mt-6 space-y-3">
         <label
           className={[
-            "flex items-center gap-3 rounded-lg border px-4 py-3 cursor-pointer transition text-sky-900",
+            "flex items-center gap-3 rounded-lg border px-5 py-4 min-h-[56px] cursor-pointer transition text-sky-900",
             travelingWithOthers
-              ? "border-sky-400 bg-sky-50"
-              : "border-slate-300 hover:border-sky-300",
+  ? "border-sky-400 ring-2 ring-sky-200 bg-sky-50 shadow-sm"
+  : "border-slate-300 hover:border-sky-300"
           ].join(" ")}
         >
           <input
@@ -152,10 +152,10 @@ setTimeout(() => {
 
         <label
           className={[
-            "flex items-center gap-3 rounded-lg border px-4 py-3 cursor-pointer transition text-sky-900",
+            "flex items-center gap-3 rounded-lg border px-5 py-4 min-h-[56px] cursor-pointer transition text-sky-900",
             !travelingWithOthers
-              ? "border-sky-400 bg-sky-50"
-              : "border-slate-300 hover:border-sky-300",
+  ? "border-sky-400 ring-2 ring-sky-200 bg-sky-50 shadow-sm"
+  : "border-slate-300 hover:border-sky-300"
           ].join(" ")}
         >
           <input
@@ -229,7 +229,7 @@ setTimeout(() => {
                   First name
                 </label>
                 <input
-                  className="mt-1 w-full h-[48px] rounded-md border border-slate-300 px-3 text-slate-900 placeholder:text-slate-500 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
+                  className="mt-1 w-full h-[56px] rounded-lg border border-black/10 bg-white px-5 text-slate-900 placeholder:text-slate-500 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
                   value={p.firstName}
                   onChange={(e) =>
                     updatePassenger(idx, { firstName: e.target.value })
@@ -243,7 +243,7 @@ setTimeout(() => {
                   Last name
                 </label>
                 <input
-                  className="mt-1 w-full h-[48px] rounded-md border border-slate-300 px-3 text-slate-900 placeholder:text-slate-500 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
+                  className="mt-1 w-full h-[56px] rounded-lg border border-black/10 bg-white px-5 text-slate-900 placeholder:text-slate-500 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
                   value={p.lastName}
                   onChange={(e) =>
                     updatePassenger(idx, { lastName: e.target.value })
@@ -261,7 +261,7 @@ setTimeout(() => {
                 </label>
                 <input
                   type="email"
-                  className="mt-1 w-full h-[48px] rounded-md border border-slate-300 px-3 text-slate-900 placeholder:text-slate-500 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
+                  className="mt-1 w-full h-[56px] rounded-lg border border-black/10 bg-white px-5 text-slate-900 placeholder:text-slate-500 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
                   value={p.email}
                   onChange={(e) =>
                     updatePassenger(idx, { email: e.target.value })
