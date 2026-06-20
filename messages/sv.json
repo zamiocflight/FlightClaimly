@@ -6,6 +6,353 @@
       "invalidFlightNumber": "Ange ett giltigt flightnummer (t.ex. SK123)."
   },
 
+"check": {
+  "itinerary": {
+    "intro": "Okej, jag behöver bara några flyguppgifter för att kunna kontrollera om du har rätt till ersättning.",
+"airline": "Flygbolag",
+"airlinePlaceholder": "t.ex. British Airways",
+"clearAirline": "Rensa flygbolag",
+"flightNumber": "Flightnummer",
+"date": "Flygdatum",
+"continueHint": "Fyll i flygbolag, flightnummer och datum för varje delsträcka för att fortsätta.",
+  "missedConnection": {
+    "title": "Missade du ett anslutningsflyg?",
+    "yes": "Ja",
+    "no": "Nej"
+  }
+},
+"whatHappened": {
+  "title": "Vad hände?",
+  "disruption": {
+    "delayed": "Mitt flyg var försenat",
+    "cancelled": "Mitt flyg blev inställt",
+    "denied": "Jag nekades ombordstigning"
+  },
+  "whichFlight": {
+    "delayed": "Vilket flyg var försenat?",
+    "cancelled": "Vilket flyg blev inställt?",
+    "denied": "Vilket flyg nekades du ombordstigning på?"
+  },
+  "destinationFallback": "din slutdestination",
+  "arrivalQuestion": "Hur många timmar sent kom du fram till {destination}?",
+  "outcome": {
+    "gte3": "3 timmar eller mer",
+    "lt3": "Mindre än 3 timmar",
+    "never": "Kom aldrig fram"
+  },
+  "cancelNotice": {
+    "title": "Hur många dagar före avgång fick du information om ändringen?",
+    "lt14": "Mindre än 14 dagar",
+    "gte14": "14 dagar eller mer"
+  },
+  "volunteer": {
+    "title": "Gav du frivilligt upp din plats i utbyte mot andra förmåner från flygbolaget?",
+    "yes": "Ja",
+    "no": "Nej"
+  }
+},
+"missedConnectionHours": {
+  "title": "Hur lång blev förseningen vid din anslutning?",
+  "label": "Välj förseningens längd",
+  "placeholder": "Välj förseningens längd",
+  "neverArrived": "Jag kom aldrig fram",
+  "options": {
+    "0-1": "0–1 timmar",
+    "1-2": "1–2 timmar",
+    "2-3": "2–3 timmar",
+    "3-4": "3–4 timmar",
+    "4-5": "4–5 timmar",
+    "5-6": "5–6 timmar",
+    "6-7": "6–7 timmar",
+    "7-8": "7–8 timmar",
+    "8-9": "8–9 timmar",
+    "9plus": "9+ timmar"
+  }
+},
+  "itineraryNotice": {
+  "before": "Ange uppgifter för din",
+  "originalFlight": "ursprungliga flygresa",
+  "after": "inte en ombokad eller ersättande resa."
+},
+  "thanks": {
+  "title": "Ditt ärende har skickats in",
+  "description": "Din fullmakt har signerats och ditt ärende förbereds nu för att skickas till flygbolaget.",
+  "claimId": "Ärende-ID",
+  "track": "Följ ditt ärende",
+  "emailNotice": "Vi har även skickat spårningslänken till din e-postadress.",
+  "reassurance": "FlightClaimly granskar nu ditt ärende och skickar det vidare till flygbolaget. Du får en uppdatering så snart något händer."
+},
+  "finish": {
+  "finalizing": "Slutför ditt ärende…",
+  "errors": {
+    "missingClaimId": "Saknar ärende-ID.",
+    "finalizeFailed": "Något gick fel när ditt ärende skulle slutföras."
+  }
+},
+  "additional": {
+  "title": "Har du haft några extra kostnader?",
+  "intro1": "Om ditt flyg var försenat kan du ha rätt till ersättning för mat, hotell eller transport.",
+  "intro2": {
+    "before": "Ladda upp kvitton så kan vi hjälpa dig att ",
+    "highlight": "få tillbaka ännu mer pengar",
+    "after": "."
+  },
+  "attachedFiles": "Bifogade filer",
+  "totalSize": "{size} totalt",
+  "remove": "Ta bort",
+  "removeFile": "Ta bort fil",
+  "skip": "Hoppa över",
+  "tip": "Tips: uppladdade kvitton kan öka din ersättning.",
+  "dropzone": {
+    "dragDrop": "Dra och släpp filer här",
+    "or": "eller",
+    "browse": "Välj filer",
+    "fileLimits": "PDF, JPG, PNG • Max {perFile} MB per fil • Max {total} MB totalt"
+  },
+  "errors": {
+    "missingClaim": "Saknar ärendereferens. Gå tillbaka och försök igen.",
+    "uploadFailed": "Uppladdningen misslyckades. Försök igen eller hoppa över så begär vi dokument senare vid behov.",
+    "unsupportedFormat": "\"{file}\" är inte ett stödd filformat. Ladda upp PDF, JPG eller PNG.",
+    "fileTooLarge": "\"{file}\" är för stor. Max {max} MB per fil.",
+    "totalTooLarge": "Den totala uppladdningen är för stor. Max {max} MB totalt."
+  }
+},
+  "uploadsId": {
+  "title": "Nu behöver vi ditt ID eller pass. Detta är viktigt för ditt ärende hos flygbolaget.",
+  "privacyNotice": "Ditt dokument används endast för att behandla ärendet och raderas inom 30 dagar efter att ärendet är avslutat.",
+  "uploadPromptBefore": "Ladda upp ditt",
+  "idOrPassport": "ID eller pass",
+  "attachedFiles": "Bifogade filer",
+  "totalSize": "{size} totalt",
+  "remove": "Ta bort",
+  "removeFile": "Ta bort fil",
+  "highWarning": "Vissa flygbolag kräver ofta identitetsverifiering innan de hanterar tredjepartsärenden. Om du laddar upp ditt ID nu kan det minska förseningar senare.",
+  "mediumWarning": "Att ladda upp ID nu kan hjälpa till att snabba upp handläggningen om flygbolaget begär verifiering.",
+  "dropzone": {
+    "dragDrop": "Dra och släpp filer här",
+    "takePhoto": "Ta ett foto av ditt ID eller pass",
+    "or": "eller",
+    "camera": "Använd mobilkameran för att snabbt ladda upp ditt pass eller ID",
+    "browse": "Välj filer",
+    "uploadPhoto": "Ladda upp eller ta foto",
+    "fileLimits": "PDF, JPG, PNG • Max {perFile} MB per fil • Max {total} MB totalt"
+  },
+  "errors": {
+    "missingClaim": "Saknar ärendereferens. Gå tillbaka och försök igen.",
+    "uploadFailed": "Uppladdningen misslyckades. Försök igen.",
+    "unsupportedFormat": "\"{file}\" är inte ett stödd filformat. Ladda upp PDF, JPG eller PNG.",
+    "fileTooLarge": "\"{file}\" är för stor. Max {max} MB per fil.",
+    "totalTooLarge": "Den totala uppladdningen är för stor. Max {max} MB totalt."
+  }
+},
+  "uploads": {
+  "title": "Ladda upp dokument",
+  "attachedFiles": "Bifogade filer",
+  "totalSize": "{size} totalt",
+  "remove": "Ta bort",
+  "removeFile": "Ta bort fil",
+  "description": {
+    "before": "Att ladda upp ditt",
+    "boardingPass": "boardingkort",
+    "middle": ", bokningsbekräftelse eller kvitton kan hjälpa oss att ",
+    "faster": "behandla ditt ärende snabbare",
+    "expenses": "Om du haft extra kostnader (hotell, mat eller transport) kan kvitton hjälpa oss att ",
+    "moreMoney": "återkräva ännu mer pengar",
+    "after": " åt dig."
+  },
+  "dropzone": {
+    "dragDrop": "Dra och släpp filer här",
+    "takePhoto": "Ta ett foto av ditt boardingkort eller dina kvitton",
+    "or": "eller",
+    "camera": "Använd mobilkameran för att snabbt ladda upp dokument",
+    "browse": "Välj filer",
+    "uploadPhoto": "Ladda upp eller ta foto",
+    "fileLimits": "PDF, JPG, PNG • Max {perFile} MB per fil • Max {total} MB totalt"
+  },
+  "errors": {
+    "missingClaim": "Saknar ärendereferens. Gå tillbaka och försök igen.",
+    "uploadFailed": "Uppladdningen misslyckades. Försök igen eller hoppa över så begär vi dokument senare vid behov.",
+    "unsupportedFormat": "\"{file}\" är inte ett stödd filformat. Ladda upp PDF, JPG eller PNG.",
+    "fileTooLarge": "\"{file}\" är för stor. Max {max} MB per fil.",
+    "totalTooLarge": "Den totala uppladdningen är för stor. Max {max} MB totalt."
+  }
+},
+  "authorization": {
+  "claimCreationError": "Något gick fel när ärendet skulle skapas.",
+  "amountFallback": "upp till €600",
+  "titleBefore": "Goda nyheter! Det ser ut som att du har rätt till",
+  "titleAfterAmount": "per person enligt EU261.",
+  "titleSecondLine": "Signera nedan för att ta emot ersättningen du har rätt till.",
+  "signaturePlaceholder": "Klicka och signera här",
+  "clearSignature": "Rensa signatur",
+  "important": "Viktigt",
+  "signatureGuidance": "Din signatur ska likna signaturen på ditt ID.",
+  "feeTitle": "Ja – no win, no fee. Du betalar bara 20% inkl. moms om vi lyckas.",
+  "feeSubtitle": "Avgiften dras från din ersättning.",
+  "legal": {
+    "before": "Genom att signera godkänner du våra",
+    "terms": "villkor",
+    "and": "och",
+    "priceList": "prislista",
+    "middle": "och ger oss tillstånd att använda din signatur på",
+    "authorityDocument": "fullmakten"
+  }
+},
+  "bookingReference": {
+  "title": "Vad är din bokningsreferens?",
+  "placeholder": "t.ex. DS27K3 eller YLEHPW",
+  "helpTitle": "Hur hittar jag min bokningsreferens?",
+  "helpText1": "Din bokningsreferens (PNR) finns vanligtvis i bokningsbekräftelsen från flygbolaget eller resebyrån. Den är oftast 5–8 tecken lång och består av bokstäver och siffror.",
+  "helpText2": "Den kan också finnas på ditt boardingkort eller i flygbolagets app.",
+  "examples": "Exempel"
+},
+  "passengerDetails": {
+  "title": "Dina kontaktuppgifter",
+  "claimOwner": "Anspråksägare",
+  "address": "Adress",
+  "addressPlaceholder": "Gata och nummer",
+  "address2": "Adressrad 2",
+  "address2Placeholder": "Lägenhet, våning, etc.",
+  "city": "Stad",
+  "postalCode": "Postnummer",
+  "state": "Delstat/Län",
+  "statePlaceholder": "Delstat / Region",
+  "country": "Land",
+  "countryPlaceholder": "Börja skriva land...",
+  "clearCountry": "Rensa land",
+  "phone": "Telefonnummer",
+  "optional": "(valfritt)"
+},
+  "passengers": {
+  "title": "Andra passagerare",
+  "info": "Passagerare du reste med kan också ha rätt till ersättning.",
+  "travelingWithOthers": "Jag reste med andra",
+  "travelingAlone": "Jag reste ensam",
+  "potentialCompensation": "Möjlig ersättning",
+  "manualReview": "Manuell granskning",
+  "totalForOnePassenger": "Totalt för {count} passagerare",
+  "totalForPassengers": "Totalt för {count} passagerare",
+  "perPassenger": "Per passagerare",
+  "passengerNumber": "Passagerare {number}",
+  "remove": "Ta bort",
+  "under18": "Den här personen är under 18 år",
+  "firstName": "Förnamn",
+  "lastName": "Efternamn",
+  "email": "E-post",
+  "optional": "(valfritt)",
+  "addPassenger": "+ Lägg till passagerare"
+},
+  "claimOwner": {
+  "title": "Vem ska få ersättningen?",
+  "subtitle": "Du är bara ett steg från att skicka in ditt ersättningsärende",
+  "firstNameLabel": "Förnamn",
+  "firstNamePlaceholder": "Förnamn",
+  "firstNameHint": "Måste matcha ditt ID",
+  "lastNameLabel": "Efternamn",
+  "lastNamePlaceholder": "Efternamn",
+  "lastNameHint": "Ange hela ditt efternamn exakt som det står på ditt ID eller pass.",
+  "emailLabel": "E-post",
+  "emailSubtitle": "Vi skickar uppdateringar och utbetalningsinformation hit",
+  "emailHint": "Vi använder din e-post för att hålla dig uppdaterad om ditt ärende.",
+  "legal": {
+    "before": "Genom att fortsätta godkänner du våra",
+    "terms": "villkor",
+    "and": "och",
+    "privacy": "integritetspolicy"
+  }
+},
+  "verify": {
+  "loading": "Kontrollerar flygstatus…",
+  "verifyFailed": "Vi kunde inte verifiera flyget. Gå tillbaka och kontrollera dina uppgifter.",
+  "eligibleTitle": "Goda nyheter – ditt flyg kan ge rätt till ersättning.",
+  "notEligibleTitle": "Inte ersättningsberättigad enligt EU/UK 261.",
+  "notEligibleExplanation": "Ditt flyg verkar inte vara minst 3 timmar försenat vid ankomst. Därför kan vi inte gå vidare med ett ersättningsärende enligt EU/UK 261.",
+  "airlineFallback": "Flygbolag",
+  "flight": "Flyg",
+  "flightDetails": "Flyguppgifter",
+  "badgeEligible": "ERSÄTTNINGSBERÄTTIGAD",
+  "badgeNotEligible": "INTE ERSÄTTNINGSBERÄTTIGAD",
+  "potentialCompensation": "Möjlig ersättning",
+  "compensation": "Ersättning",
+  "entitled": "Du kan ha rätt till ersättning enligt EU-lagstiftning",
+  "manualReview": "Detta ärende kan behöva granskas manuellt",
+  "perPassenger": "per passagerare",
+  "scheduledArrivalTime": "Planerad ankomsttid",
+  "actualArrivalTime": "Faktisk ankomsttid",
+  "flightDistance": "Flygdistans",
+  "totalDelay": "Total försening",
+  "confirmTitle": "Bekräfta dina flyguppgifter",
+  "confirmYes": "Ja, detta är mitt flyg",
+  "confirmNo": "Nej, något är fel",
+  "correctDetails": "Gå tillbaka och korrigera dina flyguppgifter innan du fortsätter.",
+  "delay": {
+    "noSignificantDelay": "Ingen betydande försening upptäckt",
+    "arrivedOneMinuteEarly": "Ankom 1 minut tidigt",
+    "arrivedMinutesEarly": "Ankom {minutes} minuter tidigt",
+    "arrivedOnTime": "Ankom i tid",
+    "minutes": "{minutes} minuter",
+    "hours": "{hours} timmar",
+    "hoursMinutes": "{hours} timmar {minutes} minuter"
+  }
+},
+  "direct": {
+  "departureDateTitle": "Vilket datum skulle ditt flyg avgå?",
+  "dateLabel": "Datum",
+  "airlineTitle": "Vilket flygbolag flög du med?",
+  "airlineLabel": "Flygbolag",
+  "airlinePlaceholder": "t.ex. British Airways",
+  "clearAirline": "Rensa flygbolag",
+  "flightListTitle": "Välj ditt flyg från listan nedan:",
+  "scheduledTime": "Planerad tid",
+  "flightNumber": "Flightnummer",
+  "loadingFlights": "Laddar tillgängliga flyg…",
+  "noFlightsFound": "Inga flyg hittades för den här rutten. Du kan fortfarande fortsätta manuellt.",
+  "manualEnterDetails": "Ange flyguppgifter manuellt",
+  "manualCantFind": "Jag hittar inte mitt flyg",
+  "manualFlightNumberLabel": "Ange ditt flightnummer",
+  "manualFlightNumberPlaceholder": "t.ex. SK2814",
+  "errors": {
+    "searchFailed": "Flygsökningen misslyckades",
+    "loadFailed": "Vi kunde inte ladda flygen. Du kan fortfarande fortsätta manuellt."
+  }
+},
+  "directOrLayover": {
+    "title": "Var detta ett direktflyg?",
+    "routeTitle": "Vart flög du?",
+    "fromLabel": "Avreseflygplats",
+    "toLabel": "Slutdestination",
+    "airportOrCity": "Flygplats eller stad",
+    "direct": "Direktflyg",
+    "layovers": "Med mellanlandningar",
+    "connectionTitle": "Var hade du din anslutning?",
+    "cityOrAirport": "Stad eller flygplats",
+    "airportPlaceholder": "t.ex. London eller LHR",
+    "removeLayover": "Ta bort mellanlandning",
+    "addAirport": "+ Lägg till ytterligare en flygplats",
+    "connectionRequired": "Lägg till minst en anslutningsflygplats för att fortsätta."
+  },
+
+"layout": {
+  "progress": "Ditt ärendes status",
+  "back": "Tillbaka",
+  "continue": "Fortsätt",
+  "processing": "Behandlar...",
+
+  "steps": {
+    "eligibility": "Kontroll",
+    "passengerDetails": "Passageraruppgifter",
+    "documents": "Dokument",
+    "finish": "Slutför"
+  },
+
+  "footer": {
+    "help": "Hjälp",
+    "terms": "Villkor",
+    "privacy": "Integritetspolicy"
+  }
+}
+},
+
   "header": {
     "language": {
       "label": "SV ▾",
@@ -128,29 +475,36 @@
     }
   },
 
-  "hero": {
-    "badges": {
-      "eu": "EU261 / UK261",
-      "fee": "LÅG AVGIFT",
-      "noWinNoFee": "NO WIN, NO FEE"
-    },
-    "title": "Få upp till 600 € i ersättning för försenade eller inställda flyg – utan krångel.",
-    "subtitle": {
-      "beforeDelayed": "Kolla om ditt",
-      "delayedLink": "försenade flyg",
-      "between": "eller",
-      "cancelledLink": "inställda flyg",
-      "afterCancelled": "ger rätt till ersättning enligt",
-      "eu261Link": "EU261",
-      "afterEu261": ". Vi hjälper dig att kräva ersättning från flygbolaget – du betalar bara om du får pengar utbetalda."
-    },
-    "cta": "Kolla mitt flyg nu",
-    "trust": {
-      "beforeLink": "Tar ca 2 minuter. Inget att betala om du inte får ersättning –",
-      "link": "läs mer om vår avgift.",
-      "afterLink": ""
-    }
+"hero": {
+  "badges": {
+    "eu": "EU261 / UK261",
+    "fee": "LÅG AVGIFT",
+    "noWinNoFee": "INGEN ERSÄTTNING, INGEN AVGIFT"
   },
+  "title": "Få upp till €600 i ersättning för försenade eller inställda flyg – utan krångel.",
+  "titleLine1": "Få upp till €600 i ersättning",
+  "titleLine2": "för försenade eller inställda flyg!",
+  "fromLabel": "Avreseflygplats",
+  "fromPlaceholder": "Avreseflygplats",
+  "toLabel": "Slutdestination",
+  "toPlaceholder": "Slutdestination",
+  "subtitle": {
+    "beforeDelayed": "Kontrollera om ditt",
+    "delayedLink": "försenade flyg",
+    "between": "eller",
+    "cancelledLink": "inställda flyg",
+    "afterCancelled": "ger rätt till ersättning enligt",
+    "eu261Link": "EU261",
+    "afterEu261": ". Vi hanterar ditt ärende med flygbolaget – du betalar bara om du får ersättning."
+  },
+  "cta": "Kontrollera mitt flyg nu",
+  "searchCta": "Kontrollera ersättning",
+  "trust": {
+    "beforeLink": "Tar ungefär 2 minuter. Ingen betalning om du inte får ersättning –",
+    "link": "läs mer om vår avgift.",
+    "afterLink": ""
+  }
+},
 
     "precheck": {
     "steps": {

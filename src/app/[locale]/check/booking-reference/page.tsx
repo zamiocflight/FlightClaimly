@@ -1,9 +1,11 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 
 export default function BookingReferencePage() {
+  const t = useTranslations("check.bookingReference");
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -40,7 +42,7 @@ export default function BookingReferencePage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-2 text-sky-900">
       <h1 className="text-2xl font-semibold text-sky-900">
-        What is your booking reference?
+        {t("title")}
       </h1>
 
       <div className="mt-5">
@@ -50,7 +52,7 @@ export default function BookingReferencePage() {
             setBookingRef(e.target.value);
             updateParam(e.target.value);
           }}
-          placeholder="e.g. DS27K3 or YLEHPW"
+          placeholder={t("placeholder")}
           className="mt-1 w-full md:w-2/3 h-[56px] rounded-md border border-slate-300 px-3 text-[16px] text-slate-900 placeholder:text-slate-300 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
         />
       </div>
@@ -60,20 +62,18 @@ export default function BookingReferencePage() {
           <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-sky-500 text-sky-500 text-xs font-bold">
             ?
           </span>
-          <span>How do I find my booking reference?</span>
+          <span>{t("helpTitle")}</span>
         </summary>
 
         <div className="mt-3 space-y-2 text-sm text-slate-700">
           <p>
-            Your booking reference (PNR) is usually found in your booking
-            confirmation email from the airline or travel agency. It is typically
-            5–8 characters long (letters and numbers).
+            {t("helpText1")}
           </p>
           <p>
-            It can also be shown on your boarding pass or in your airline app.
+            {t("helpText2")}
           </p>
           <p className="text-slate-500">
-            Examples: <span className="font-medium">DS27K3</span>,{" "}
+           {t("examples")} <span className="font-medium">DS27K3</span>,{" "}
             <span className="font-medium">YLEHPW</span>
           </p>
         </div>

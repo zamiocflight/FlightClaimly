@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
 type DelayValue =
@@ -16,17 +17,17 @@ type DelayValue =
   | "9+"
   | "never";
 
-const OPTIONS: { value: DelayValue; label: string }[] = [
-  { value: "0-1", label: "0–1 hours" },
-  { value: "1-2", label: "1–2 hours" },
-  { value: "2-3", label: "2–3 hours" },
-  { value: "3-4", label: "3–4 hours" },
-  { value: "4-5", label: "4–5 hours" },
-  { value: "5-6", label: "5–6 hours" },
-  { value: "6-7", label: "6–7 hours" },
-  { value: "7-8", label: "7–8 hours" },
-  { value: "8-9", label: "8–9 hours" },
-  { value: "9+", label: "9+ hours" },
+const OPTIONS: { value: DelayValue; labelKey: string }[] = [
+  { value: "0-1", labelKey: "options.0-1" },
+  { value: "1-2", labelKey: "options.1-2" },
+  { value: "2-3", labelKey: "options.2-3" },
+  { value: "3-4", labelKey: "options.3-4" },
+  { value: "4-5", labelKey: "options.4-5" },
+  { value: "5-6", labelKey: "options.5-6" },
+  { value: "6-7", labelKey: "options.6-7" },
+  { value: "7-8", labelKey: "options.7-8" },
+  { value: "8-9", labelKey: "options.8-9" },
+  { value: "9+", labelKey: "options.9plus" },
 ];
 
 function ensureLegsInQuery(sp: URLSearchParams): URLSearchParams {
@@ -49,6 +50,7 @@ function ensureLegsInQuery(sp: URLSearchParams): URLSearchParams {
 
 
 export default function MissedConnectionHoursPage() {
+  const t = useTranslations("check.itinerary.missedConnectionHours");
   const router = useRouter();
   const sp = useSearchParams();
 
@@ -106,24 +108,23 @@ function goNext() {
 }
 
 
-  const FIELD_WIDTH = "max-w-[50%] w-full";
-  const FIELD_ROW =
-    "flex items-center justify-between rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm focus:outline-none";
-
-  const selectedLabel =
-    OPTIONS.find((o) => o.value === value)?.label || "";
+const FIELD_WIDTH = "w-full md:max-w-[50%]";
+const FIELD_ROW =
+  "flex h-[56px] items-center justify-between rounded-lg border border-slate-300 bg-white px-4 text-sm focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-200 hover:border-sky-300";
+  const selectedOption = OPTIONS.find((o) => o.value === value);
+const selectedLabel = selectedOption ? t(selectedOption.labelKey) : "";
 
   return (
     <div className="space-y-8">
       <div>
         <h2 className="text-lg font-semibold text-sky-900">
-          How long was the delay at your connection?
+          {t("title")}
         </h2>
       </div>
 
       <div className={`space-y-2 ${FIELD_WIDTH}`} ref={wrapRef}>
         <div className="text-sm font-semibold text-sky-900">
-          Select delay length
+          {t("label")}
         </div>
 
         {/* Trigger / Input */}
@@ -142,7 +143,7 @@ function goNext() {
           >
             {value && value !== "never"
               ? selectedLabel
-              : "Select delay length"}
+              : t("placeholder")}
           </span>
 
           {/* Chevron */}
@@ -179,7 +180,7 @@ function goNext() {
                         : "text-sky-900 hover:bg-sky-50"
                     }`}
                   >
-                    {opt.label}
+                    {t(opt.labelKey)}
                   </button>
                 );
               })}
@@ -220,7 +221,7 @@ className="
 
 
 />
-          <span>I never arrived</span>
+          <span>{t("neverArrived")}</span>
         </label>
       </div>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import PlaneIcon from "@/components/PlaneIcon";
 import { useMemo } from "react";
@@ -66,6 +67,7 @@ function parseLegsFromSearchParams(sp: ReturnType<typeof useSearchParams>): Leg[
 
 
 export default function WhatHappenedPage() {
+  const t = useTranslations("check.itinerary.whatHappened");
   const router = useRouter();
   const sp = useSearchParams();
 
@@ -162,8 +164,8 @@ useEffect(() => {
     // Kopplas senare i layout
   }
 
-  const cardBase =
-    "flex items-center gap-4 rounded-lg border px-5 py-4 text-left transition bg-white h-[56px] w-full";
+const cardBase =
+  "flex items-center gap-4 rounded-lg border px-5 py-4 text-left transition bg-white min-h-[56px] w-full";
 
   const optionClass = (active: boolean) =>
     [
@@ -174,20 +176,20 @@ useEffect(() => {
     ].join(" ");
 
   const whichFlightTitle =
-    disruption === "delayed"
-      ? "Which flight was delayed?"
-      : disruption === "cancelled"
-      ? "Which flight was cancelled?"
-      : "Which flight were you denied boarding on?";
+  disruption === "delayed"
+    ? t("whichFlight.delayed")
+    : disruption === "cancelled"
+    ? t("whichFlight.cancelled")
+    : t("whichFlight.denied");
 
   return (
     <div className="space-y-6">
       {/* STEP 1 */}
       <div>
-        <h2 className="text-lg font-semibold text-sky-900">What happened?</h2>
+        <h2 className="text-lg font-semibold text-sky-900">{t("title")}</h2>
       </div>
 
-      <div className="space-y-2 w-full max-w-[50%]">
+      <div className="space-y-2 w-full md:max-w-[560px]">
         {/* DELAYED */}
         <button
           type="button"
@@ -204,7 +206,7 @@ useEffect(() => {
             )}
           </div>
           <span className="font-normal text-slate-700">
-            My flight was delayed
+            {t("disruption.delayed")}
           </span>
         </button>
 
@@ -224,7 +226,7 @@ useEffect(() => {
             )}
           </div>
           <span className="font-normal text-slate-700">
-            My flight was cancelled
+            {t("disruption.cancelled")}
           </span>
         </button>
 
@@ -244,7 +246,7 @@ useEffect(() => {
             )}
           </div>
           <span className="font-normal text-slate-700">
-            I was denied boarding
+            {t("disruption.denied")}
           </span>
         </button>
       </div>
@@ -256,7 +258,7 @@ useEffect(() => {
             {whichFlightTitle}
           </h2>
 
-          <div className="space-y-2 w-full max-w-[50%]">
+          <div className="space-y-2 w-full md:max-w-[560px]">
             {legs.map((leg) => {
               const selected = affectedLegId === leg.id;
               return (
@@ -276,11 +278,14 @@ useEffect(() => {
                     )}
                   </div>
 
-                  <span className="font-normal text-slate-700 flex items-center gap-2">
-  <span>
- {leg.fromCode ? `${leg.from} (${leg.fromCode})` : leg.from}  </span>
+ <span className="min-w-0 flex flex-1 items-center gap-2 font-normal text-slate-700">
+  <span className="min-w-0 flex-1 truncate">
+    {leg.fromCode ? `${leg.from} (${leg.fromCode})` : leg.from}
+  </span>
+
   <PlaneIcon />
-  <span>
+
+  <span className="min-w-0 flex-1 truncate">
     {leg.toCode ? `${leg.to} (${leg.toCode})` : leg.to}
   </span>
 </span>
@@ -298,13 +303,13 @@ useEffect(() => {
          <h2 className="text-lg font-semibold text-sky-900">
   {(() => {
     const leg = legs.find((l) => l.id === affectedLegId);
-    const dest = leg ? `${leg.to} (${leg.toCode})` : "your destination";
-    return `How many hours late did you arrive at ${dest}?`;
+    const dest = leg ? `${leg.to} (${leg.toCode})` : t("destinationFallback");
+return t("arrivalQuestion", { destination: dest });
   })()}
 </h2>
 
 
-          <div className="space-y-2 w-full max-w-[50%]">
+          <div className="space-y-2 w-full md:max-w-[560px]">
             <button
               type="button"
               onClick={() => setOutcome("gte3")}
@@ -315,7 +320,7 @@ useEffect(() => {
               }`}>
                 {outcome === "gte3" && <div className="h-2 w-2 rounded-full bg-sky-500" />}
               </div>
-              <span className="font-normal text-slate-700">3 hours or more</span>
+              <span className="font-normal text-slate-700">{t("outcome.gte3")}</span>
             </button>
 
             <button
@@ -328,7 +333,7 @@ useEffect(() => {
               }`}>
                 {outcome === "lt3" && <div className="h-2 w-2 rounded-full bg-sky-500" />}
               </div>
-              <span className="font-normal text-slate-700">Less than 3 hours</span>
+              <span className="font-normal text-slate-700">{t("outcome.lt3")}</span>
             </button>
 
             <button
@@ -341,7 +346,7 @@ useEffect(() => {
               }`}>
                 {outcome === "never" && <div className="h-2 w-2 rounded-full bg-sky-500" />}
               </div>
-              <span className="font-normal text-slate-700">Never arrived</span>
+              <span className="font-normal text-slate-700">{t("outcome.never")}</span>
             </button>
           </div>
         </div>
@@ -351,10 +356,10 @@ useEffect(() => {
       {disruption === "cancelled" && affectedLegId && outcome && (
         <div className="space-y-3 pt-4">
           <h2 className="text-lg font-semibold text-sky-900">
-            How many days before the departure were you informed about the flight change?
+            {t("cancelNotice.title")}
           </h2>
 
-          <div className="space-y-2 w-full max-w-[50%]">
+          <div className="space-y-2 w-full md:max-w-[560px]">
  <button
   type="button"
   onClick={() => setCancelNotice("lt14")}
@@ -370,7 +375,7 @@ useEffect(() => {
     )}
   </div>
 
-  <span className="font-normal text-slate-700">Less than 14 days</span>
+  <span className="font-normal text-slate-700">{t("cancelNotice.lt14")}</span>
 </button>
 
 
@@ -390,7 +395,7 @@ useEffect(() => {
     )}
   </div>
 
-  <span className="font-normal text-slate-700">14 days or more</span>
+  <span className="font-normal text-slate-700">{t("cancelNotice.gte14")}</span>
 </button>
 
 
@@ -402,10 +407,10 @@ useEffect(() => {
       {disruption === "denied" && affectedLegId && outcome && (
         <div className="space-y-3 pt-4">
           <h2 className="text-lg font-semibold text-sky-900">
-            Did you volunteer to give up your seat in exchange for other benefits from the airline?
+            {t("volunteer.title")}
           </h2>
 
-          <div className="space-y-2 w-full max-w-[50%]">
+          <div className="space-y-2 w-full md:max-w-[560px]">
 <button
   type="button"
   onClick={() => setVolunteer("yes")}
@@ -421,7 +426,7 @@ className={optionClass(volunteer === "yes")}
     )}
   </div>
 
-  <span className="font-normal text-slate-700">Yes</span>
+  <span className="font-normal text-slate-700">{t("volunteer.yes")}</span>
 </button>
 
 
@@ -442,7 +447,7 @@ className={optionClass(volunteer === "no")}
     )}
   </div>
 
-  <span className="font-normal text-slate-700">No</span>
+  <span className="font-normal text-slate-700">{t("volunteer.no")}</span>
 </button>
 
 

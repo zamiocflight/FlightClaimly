@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 function ensureLegsInQuery(sp: URLSearchParams): URLSearchParams {
@@ -25,6 +26,7 @@ function ensureLegsInQuery(sp: URLSearchParams): URLSearchParams {
 
 
 export default function MissedConnectionPage() {
+  const t = useTranslations("check.itinerary.missedConnection");
   const router = useRouter();
   const sp = useSearchParams();
 
@@ -76,24 +78,24 @@ const cardBase =
   "w-full flex items-center gap-4 rounded-lg border px-5 py-4 text-left transition bg-white h-[56px]";
 
 
-  const optionClass = (active: boolean) =>
-    [
-      cardBase,
-      active
-        ? "border-sky-400"
-        : "border-slate-300 hover:border-sky-300",
-    ].join(" ");
+ const optionClass = (active: boolean) =>
+  [
+    cardBase,
+    active
+      ? "border-sky-400 ring-2 ring-sky-200 bg-sky-50 shadow-sm"
+      : "border-slate-300 bg-white hover:border-sky-300",
+  ].join(" ");
 
   return (
     <div className="space-y-8">
       <div>
         <h2 className="text-lg font-semibold text-sky-900">
-          Did you miss a connecting flight?
+          {t("title")}
         </h2>
       </div>
 
-<div className="space-y-4 w-full md:max-w-[50%]">
-        {/* NO */}
+<div className="space-y-2 w-full md:max-w-[560px]">
+          {/* NO */}
         <button
           type="button"
           onClick={() => setValue("no")}
@@ -109,7 +111,9 @@ const cardBase =
             )}
           </div>
 
-          <span className="font-normal text-slate-900">No</span>
+          <span className="font-normal text-slate-900">
+  {t("no")}
+</span>
         </button>
 
         {/* YES */}
@@ -128,7 +132,9 @@ const cardBase =
             )}
           </div>
 
-          <span className="font-normal text-slate-900">Yes</span>
+          <span className="font-normal text-slate-900">
+  {t("yes")}
+</span>
         </button>
       </div>
 

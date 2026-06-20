@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   UploadCloud,
@@ -39,6 +40,7 @@ function getExt(name: string) {
 }
 
 export default function ClientUploadsId() {
+  const t = useTranslations("check.uploadsId");
   const router = useRouter();
   const sp = useSearchParams();
 
@@ -129,7 +131,7 @@ export default function ClientUploadsId() {
       if (!ACCEPTED_EXT.includes(ext)) {
         return {
           ok: false,
-          msg: `“${f.name}” is not a supported format. Please upload PDF, JPG, or PNG.`,
+          msg: t("errors.unsupportedFormat", { file: f.name }),
         };
       }
     }
@@ -140,7 +142,7 @@ export default function ClientUploadsId() {
       if (f.size > maxFileBytes) {
         return {
           ok: false,
-          msg: `“${f.name}” is too large. Max ${MAX_FILE_MB} MB per file.`,
+          msg: t("errors.fileTooLarge", { file: f.name, max: MAX_FILE_MB }),
         };
       }
     }
@@ -150,7 +152,7 @@ export default function ClientUploadsId() {
     if (totalBytes > maxTotalBytes) {
       return {
         ok: false,
-        msg: `Total upload is too large. Max ${MAX_TOTAL_MB} MB in total.`,
+        msg: t("errors.totalTooLarge", { max: MAX_TOTAL_MB }),
       };
     }
 
@@ -218,7 +220,7 @@ function stopLayoutProcessing() {
 
 async function uploadAndContinue() {
   if (!claimId) {
-    setError("Missing claim reference. Please go back and try again.");
+    setError(t("errors.missingClaim"));
     stopLayoutProcessing();
     return;
   }
@@ -252,7 +254,7 @@ async function uploadAndContinue() {
 
     goNext();
   } catch {
-    setError("Upload failed. Please try again.");
+    setError(t("errors.uploadFailed"));
     stopLayoutProcessing();
   } finally {
     setLoading(false);
@@ -274,16 +276,15 @@ async function uploadAndContinue() {
     <div className="mx-auto max-w-3xl px-4 py-2 text-sky-900">
       <div className="max-w-2xl">
         <h1 className="text-2xl font-semibold text-sky-900">
-          Now we need your ID or Passport. This is very important for your airline case.
+          {t("title")}
         </h1>
 
         <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
-          Your document will only be used to process the claim and will be deleted
-          within 30 days after the claim is finalized.
+          {t("privacyNotice")}
         </div>
 
         <p className="mt-6 text-slate-700">
-          Please upload your <strong>ID or passport</strong>.
+          {t("uploadPromptBefore")} <strong>{t("idOrPassport")}</strong>.
         </p>
 
         {/* Drop zone */}
@@ -309,19 +310,19 @@ async function uploadAndContinue() {
 
            <div className="mt-4 text-base font-semibold text-sky-900">
   <span className="hidden sm:inline">
-    Drag &amp; drop files here
+    {t("dropzone.dragDrop")}
   </span>
 
   <span className="sm:hidden">
-    Take a photo of your ID or passport
+    {t("dropzone.takePhoto")}
   </span>
 </div>
 
 <div className="mt-1 text-sm text-slate-600">
-  <span className="hidden sm:inline">or</span>
+  <span className="hidden sm:inline">{t("dropzone.or")}</span>
 
 <span className="sm:hidden">
-  Use your phone camera to quickly upload your passport or ID
+  {t("dropzone.camera")}
 </span>
 </div>
 
@@ -337,12 +338,15 @@ async function uploadAndContinue() {
     sm:px-4 sm:py-2
   "
 >
-  <span className="hidden sm:inline">Browse files</span>
-  <span className="sm:hidden">Upload or take photo</span>
+  <span className="hidden sm:inline">{t("dropzone.browse")}</span>
+  <span className="sm:hidden">{t("dropzone.uploadPhoto")}</span>
 </button>
 
             <div className="mt-3 text-xs text-slate-300">
-              PDF, JPG, PNG • Max {MAX_FILE_MB} MB per file • Max {MAX_TOTAL_MB} MB total
+              {t("dropzone.fileLimits", {
+  perFile: MAX_FILE_MB,
+  total: MAX_TOTAL_MB,
+})}
             </div>
           </div>
 
@@ -362,10 +366,10 @@ async function uploadAndContinue() {
           <div className="mt-6">
             <div className="flex items-center justify-between">
               <div className="text-sm font-semibold text-slate-900">
-                Attached files
+                {t("attachedFiles")}
               </div>
               <div className="text-xs text-slate-500">
-                {formatBytes(totalBytes)} total
+                {t("totalSize", { size: formatBytes(totalBytes) })}
               </div>
             </div>
 
@@ -393,8 +397,8 @@ async function uploadAndContinue() {
                     type="button"
                     onClick={() => removeFile(idx)}
                     className="ml-3 inline-flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-50 hover:text-slate-700 transition"
-                    aria-label="Remove file"
-                    title="Remove"
+                    aria-label={t("removeFile")}
+                    title={t("remove")}
                   >
                     <X className="h-5 w-5" />
                   </button>
@@ -409,8 +413,7 @@ async function uploadAndContinue() {
             <div className="flex items-start gap-3">
               <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
               <div>
-                Some airlines often require identity verification before handling third-party claims.
-                Uploading your ID now reduces delays later.
+                {t("highWarning")}
               </div>
             </div>
           </div>
@@ -421,7 +424,7 @@ async function uploadAndContinue() {
             <div className="flex items-start gap-3">
               <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
               <div>
-                Providing ID now can help speed up processing if the airline requests verification.
+                {t("mediumWarning")}
               </div>
             </div>
           </div>
@@ -435,7 +438,7 @@ async function uploadAndContinue() {
 
         {claimMissing && (
           <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
-            Missing claim reference. Please go back and try again.
+            {t("errors.missingClaim")}
           </div>
         )}
       </div>

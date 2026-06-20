@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   UploadCloud,
@@ -42,6 +43,7 @@ function getExt(name: string) {
 
 
 export default function ClientUploads() {
+  const t = useTranslations("check.uploads");
   const router = useRouter();
   const sp = useSearchParams();
 
@@ -176,7 +178,7 @@ if (!sig) {
       if (!ACCEPTED_EXT.includes(ext)) {
         return {
           ok: false,
-          msg: `“${f.name}” is not a supported format. Please upload PDF, JPG, or PNG.`,
+          msg: t("errors.unsupportedFormat", { file: f.name })
         };
       }
     }
@@ -187,7 +189,10 @@ if (!sig) {
       if (f.size > maxFileBytes) {
         return {
           ok: false,
-          msg: `“${f.name}” is too large. Max ${MAX_FILE_MB} MB per file.`,
+          msg: t("errors.fileTooLarge", {
+  file: f.name,
+  max: MAX_FILE_MB
+})
         };
       }
     }
@@ -197,7 +202,9 @@ if (!sig) {
     if (totalBytes > maxTotalBytes) {
       return {
         ok: false,
-        msg: `Total upload is too large. Max ${MAX_TOTAL_MB} MB in total.`,
+        msg: t("errors.totalTooLarge", {
+  max: MAX_TOTAL_MB
+})
       };
     }
 
@@ -298,7 +305,7 @@ async function uploadFileDirect(file: File) {
 
 async function uploadAndContinue() {
   if (!claimId) {
-    setError("Missing claim reference. Please go back and try again.");
+    setError(t("errors.missingClaim"));
     stopLayoutProcessing();
     return;
   }
@@ -337,9 +344,7 @@ async function uploadAndContinue() {
 
     goNext();
   } catch {
-    setError(
-      "Upload failed. Please try again, or skip for now and we’ll request documents if needed."
-    );
+    setError(t("errors.uploadFailed"));
 
     stopLayoutProcessing();
   } finally {
@@ -365,14 +370,18 @@ useEffect(() => {
   return (
     <div className="mx-auto max-w-3xl px-4 py-2 text-sky-900">
       <div className="max-w-2xl">
-        <h1 className="text-2xl font-semibold text-sky-900">Upload documents</h1>
+        <h1 className="text-2xl font-semibold text-sky-900">{t("title")}</h1>
 
         <p className="mt-2 text-slate-700">
-          Uploading your <strong>boarding pass</strong>, booking confirmation, or receipts can help
-          us <strong>process your claim faster</strong>.
-          {" "}
-          If you had extra expenses (hotel, meals, transport), receipts may
-          help us <strong>recover even more money</strong> for you.
+          {t("description.before")}{" "}
+<strong>{t("description.boardingPass")}</strong>,
+{" "}
+{t("description.middle")}
+<strong>{t("description.faster")}</strong>.
+{" "}
+{t("description.expenses")}
+<strong>{t("description.moreMoney")}</strong>
+{t("description.after")}
         </p>
 
         {/* Drop zone */}
@@ -398,19 +407,19 @@ useEffect(() => {
 
             <div className="mt-4 text-base font-semibold text-sky-900">
   <span className="hidden sm:inline">
-    Drag &amp; drop files here
+    {t("dropzone.dragDrop")}
   </span>
 
  <span className="sm:hidden">
-  Take a photo of your boarding pass or receipts
+  {t("dropzone.takePhoto")}
 </span>
 </div>
 
 <div className="mt-1 text-sm text-slate-600">
-  <span className="hidden sm:inline">or</span>
+  <span className="hidden sm:inline">{t("dropzone.or")}</span>
 
 <span className="sm:hidden">
-  Use your phone camera to quickly upload your document
+  {t("dropzone.camera")}
 </span>
 </div>
 
@@ -426,12 +435,15 @@ useEffect(() => {
     sm:px-4 sm:py-2
   "
 >
-  <span className="hidden sm:inline">Browse files</span>
-  <span className="sm:hidden">Upload or take photo</span>
+  <span className="hidden sm:inline">{t("dropzone.browse")}</span>
+  <span className="sm:hidden">{t("dropzone.uploadPhoto")}</span>
 </button>
 
             <div className="mt-3 text-xs text-slate-300">
-              PDF, JPG, PNG • Max {MAX_FILE_MB} MB per file • Max {MAX_TOTAL_MB} MB total
+              {t("dropzone.fileLimits", {
+  perFile: MAX_FILE_MB,
+  total: MAX_TOTAL_MB
+})}
             </div>
           </div>
 
@@ -456,10 +468,10 @@ useEffect(() => {
           <div className="mt-6">
             <div className="flex items-center justify-between">
               <div className="text-sm font-semibold text-slate-900">
-                Attached files
+                {t("attachedFiles")}
               </div>
               <div className="text-xs text-slate-500">
-                {formatBytes(totalBytes)} total
+                {t("totalSize", { size: formatBytes(totalBytes) })}
               </div>
             </div>
 
@@ -487,8 +499,8 @@ useEffect(() => {
                     type="button"
                     onClick={() => removeFile(idx)}
                     className="ml-3 inline-flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-50 hover:text-slate-700 transition"
-                    aria-label="Remove file"
-                    title="Remove"
+                    aria-label={t("removeFile")}
+                    title={t("remove")}
                   >
                     <X className="h-5 w-5" />
                   </button>

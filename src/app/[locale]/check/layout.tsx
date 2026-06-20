@@ -2,17 +2,18 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 type StepDef = {
   id: number;
-  title: string;
+  titleKey: "eligibility" | "passengerDetails" | "documents" | "finish";
   paths: string[];
 };
 
 const STEPS: StepDef[] = [
   {
     id: 1,
-    title: "Eligibility",
+    titleKey: "eligibility",
     paths: [
       "direct-or-layover",
       "direct",
@@ -23,34 +24,27 @@ const STEPS: StepDef[] = [
       "verify",
     ],
   },
- { 
-  id: 2, 
-  title: "Passenger details", 
-  paths: [
-    "claim-owner",
-    "passengers",
-    "passenger-details",
-    "booking-reference",
-    "authorization"
-  ] 
-},
-  { 
-  id: 3, 
-  title: "Documents", 
-  paths: [
-    "uploads",
-    "uploads-id",
-    "additional"
-  ] 
-},
-  { 
-  id: 4, 
-  title: "Finish", 
-  paths: [
-    "finish",
-    "thanks"
-  ] 
-},
+  {
+    id: 2,
+    titleKey: "passengerDetails",
+    paths: [
+      "claim-owner",
+      "passengers",
+      "passenger-details",
+      "booking-reference",
+      "authorization",
+    ],
+  },
+  {
+    id: 3,
+    titleKey: "documents",
+    paths: ["uploads", "uploads-id", "additional"],
+  },
+  {
+    id: 4,
+    titleKey: "finish",
+    paths: ["finish", "thanks"],
+  },
 ];
 
 function getActiveStep(pathname: string): number {
@@ -138,6 +132,7 @@ export default function CheckLayout({ children }: { children: ReactNode }) {
   const sp = useSearchParams();
   const activeStep = getActiveStep(pathname);
   const router = useRouter();
+  const t = useTranslations("check.layout");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
 useEffect(() => {
@@ -201,15 +196,17 @@ useEffect(() => {
   const isAdditional = pathname.endsWith("/additional");
   const isFinish = pathname.endsWith("/finish");
 
-  const primaryCtaLabel = "Continue";
-  
+const primaryCtaLabel = t("continue");  
 
   // Verify flags (from VerifyClient)
   const verifyMatched = sp.get("verifyMatched") === "1";
   const verifyEligible = sp.get("verifyEligible") === "1";
   const verifyConfirm = sp.get("verifyConfirm"); // "yes" | null
 
-  const verifyValid = verifyMatched && verifyEligible && verifyConfirm === "yes";
+const verifyValid =
+  verifyMatched &&
+  verifyEligible &&
+  verifyConfirm === "yes";
 
   // --- validity flags from pages (querystring) ---
   const layoversValid = sp.get("layoversValid") === "1";
@@ -492,7 +489,7 @@ if (isFinish) {
             <div className="text-white text-lg font-semibold tracking-wide">
               FLIGHT<span className="text-emerald-400">CLAIMLY</span>
             </div>
-            <div className="mt-2 text-xs text-white/60">Your claim progress</div>
+            <div className="mt-2 text-xs text-white/60">{t("progress")}</div>
           </div>
 
           <div className="relative mt-20 pl-4">
@@ -516,7 +513,7 @@ if (isFinish) {
                         active || done ? "text-white" : "text-white/50",
                       ].join(" ")}
                     >
-                      {step.title}
+                      {t(`steps.${step.titleKey}`)}
                     </div>
                   </div>
                 );
@@ -543,9 +540,10 @@ if (isFinish) {
                     !
                   </span>
                   <p className="text-sm leading-relaxed">
-                    Please provide details for your <strong>original flight</strong>{" "}
-                    itinerary (not a rebooked or replacement flight).
-                  </p>
+  {t("itineraryNotice.before")}{" "}
+  <strong>{t("itineraryNotice.originalFlight")}</strong>{" "}
+  {t("itineraryNotice.after")}
+</p>
                 </div>
               </div>
             )}
@@ -567,7 +565,7 @@ if (isFinish) {
                   transition
                 "
               >
-                Back
+                {t("back")}
               </button>
 
               <button
@@ -601,7 +599,7 @@ onClick={async () => {
                     : "bg-slate-300 text-sky-600 cursor-not-allowed opacity-60",
                 ].join(" ")}
               >
-                {isSubmitting ? "Processing..." : primaryCtaLabel}
+                {isSubmitting ? t("processing") : primaryCtaLabel}
               </button>
             </div>
 
@@ -618,7 +616,7 @@ onClick={async () => {
         transition hover:bg-sky-50 hover:text-sky-700
       "
     >
-      Back
+      {t("back")}
     </button>
 
     <button
@@ -652,7 +650,7 @@ onClick={async () => {
           : "bg-slate-200 text-slate-400 cursor-not-allowed",
       ].join(" ")}
     >
-{isSubmitting ? "Processing..." : primaryCtaLabel}
+{isSubmitting ? t("processing") : primaryCtaLabel}
     </button>
   </div>
 </div>
@@ -663,7 +661,7 @@ onClick={async () => {
       href={`/${parts[0]}/contact`}
       className="hover:text-slate-700 transition"
     >
-      Help
+      {t("footer.help")}
     </a>
     <a
       href={`/${parts[0]}/terms`}
@@ -671,7 +669,7 @@ onClick={async () => {
       target="_blank"
       rel="noreferrer"
     >
-      Terms & Conditions
+      {t("footer.terms")}
     </a>
     <a
       href={`/${parts[0]}/privacy`}
@@ -679,7 +677,7 @@ onClick={async () => {
       target="_blank"
       rel="noreferrer"
     >
-      Privacy
+      {t("footer.privacy")}
     </a>
   </div>
 

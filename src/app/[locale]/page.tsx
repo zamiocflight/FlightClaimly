@@ -579,10 +579,10 @@ to-[#061028]     /* djupare botten */
     {/* Headline */}
 <h1 className="max-w-4xl font-black tracking-tight text-white/85">
       <span className="block text-[30px] sm:text-[36px] md:text-[44px] leading-tight">
-        Get up to €600 in compensation
+        {t("hero.titleLine1")}
       </span>
 <span className="mt-1 block text-[28px] sm:text-[34px] md:text-[42px] leading-tight text-white/80">
-        for delayed or cancelled flights!
+        {t("hero.titleLine2")}
       </span>
     </h1>
 <p className="mt-2 max-w-3xl text-sm leading-relaxed text-white/70">
@@ -629,8 +629,8 @@ console.log("FROM:", form.from, "TO:", form.to);
 
     <div className="px-4 py-3">
       <AirportInput
-        label="Departure airport"
-        placeholder="Departure airport"
+        label={t("hero.fromLabel")}
+placeholder={t("hero.fromPlaceholder")}
         value={form.from}
         onSelect={(iata) => setForm({ ...form, from: iata })}
         variant="unstyled"
@@ -639,8 +639,8 @@ console.log("FROM:", form.from, "TO:", form.to);
 
     <div className="px-4 py-3">
       <AirportInput
-        label="Final destination airport"
-        placeholder="Final destination airport"
+        label={t("hero.toLabel")}
+placeholder={t("hero.toPlaceholder")}
         value={form.to}
         onSelect={(iata) => setForm({ ...form, to: iata })}
         variant="unstyled"
@@ -669,7 +669,7 @@ console.log("FROM:", form.from, "TO:", form.to);
     active:bg-[#1FD39A]
   `}
 >
-  Check compensation
+  {t("hero.cta")}
 </button>
     </div>
   </div>
@@ -679,8 +679,8 @@ console.log("FROM:", form.from, "TO:", form.to);
 
     <div className="flex-1 px-5 py-4">
       <AirportInput
-        label="Departure airport"
-        placeholder="Departure airport"
+        label={t("hero.fromLabel")}
+placeholder={t("hero.fromPlaceholder")}
         value={form.from}
         onSelect={(iata) => setForm({ ...form, from: iata })}
         variant="unstyled"
@@ -691,8 +691,8 @@ console.log("FROM:", form.from, "TO:", form.to);
 
     <div className="flex-1 px-5 py-4">
       <AirportInput
-        label="Final destination airport"
-        placeholder="Final destination airport"
+        label={t("hero.toLabel")}
+placeholder={t("hero.toPlaceholder")}
         value={form.to}
         onSelect={(iata) => setForm({ ...form, to: iata })}
         variant="unstyled"
@@ -703,7 +703,7 @@ console.log("FROM:", form.from, "TO:", form.to);
       type="submit"
       className="m-2 px-8 rounded-xl bg-[#22E3A5] text-slate-900 text-base font-semibold shadow-[0_6px_18px_rgba(16,185,129,0.28)] transition hover:shadow-[0_0_0_6px_rgba(34,227,165,0.14)] hover:bg-[#1FD39A] active:scale-[0.98] whitespace-nowrap"
     >
-      Check compensation
+      {t("hero.cta")}
     </button>
   </div>
 

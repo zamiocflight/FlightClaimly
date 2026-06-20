@@ -2,6 +2,7 @@
 
 import { useMemo, useRef, useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import SignatureCanvas from "react-signature-canvas";
 import { BadgeCheck, Eraser, PenLine } from "lucide-react";
 
@@ -9,14 +10,35 @@ async function createClaim(searchParams: URLSearchParams, locale: string) {
   const existingId = searchParams.get("claimId");
   if (existingId) return existingId;
 
+ const choice = searchParams.get("choice") || "direct";
+
+const segmentsRaw = searchParams.get("segments");
+let firstSegment: any = null;
+
+try {
+  firstSegment = segmentsRaw ? JSON.parse(segmentsRaw)?.[0] : null;
+} catch {}
+
+const fallbackFlightNumber =
+  searchParams.get("flightNumber") ||
+  firstSegment?.flightNumber ||
+  "ITINERARY";
+
+const fallbackDate =
+  searchParams.get("date") ||
+  firstSegment?.date ||
+  "";
+
   const res = await fetch("/api/claims", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
 body: JSON.stringify({
-  flightNumber: searchParams.get("flightNumber"),
-  date: searchParams.get("date"),
+  flightNumber: fallbackFlightNumber,
+date: fallbackDate,
+choice,
+segments: segmentsRaw,
   from: searchParams.get("from"),
   to: searchParams.get("to"),
   name: `${searchParams.get("firstName") || ""} ${searchParams.get("lastName") || ""}`.trim(),
@@ -44,6 +66,7 @@ body: JSON.stringify({
 }
 
 export default function AuthorizationPage() {
+  const t = useTranslations("check.authorization");
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -77,7 +100,7 @@ export default function AuthorizationPage() {
 
   // Optional: show amount if already present in query
   const amountParam = searchParams.get("amount") || searchParams.get("compensation") || "";
-  const amountLabel = amountParam ? `€${amountParam}` : "up to €600";
+  const amountLabel = amountParam ? `€${amountParam}` : t("amountFallback");
 
   function updateQuery(patch: Record<string, string>) {
     const params = new URLSearchParams(searchParams.toString());
@@ -153,7 +176,7 @@ async function handleContinue() {
     router.push(`/${locale}/check/uploads?${params.toString()}`);
   } catch (err) {
     console.error("Claim creation failed:", err);
-    alert("Something went wrong creating the claim.");
+    alert(t("claimCreationError"));
 
     window.dispatchEvent(new Event("flightclaimly-submit-failed"));
     
@@ -177,10 +200,11 @@ useEffect(() => {
      {/* Headline + value */}
 <div className="max-w-2xl">
 <h1 className="text-1xl font-semibold tracking-tight text-sky-900">
-  Good news! It looks like you’re entitled to{" "}
-  <span className="text-emerald-700">{amountLabel}</span> per person under EU261.
-  <br />
-  Sign below and receive the money you are entitled to.
+  {t("titleBefore")}{" "}
+<span className="text-emerald-700">{amountLabel}</span>{" "}
+{t("titleAfterAmount")}
+<br />
+{t("titleSecondLine")}
 </h1>
 </div>
 
@@ -198,7 +222,7 @@ useEffect(() => {
                     <PenLine className="h-5 w-5 text-slate-400" />
                   </div>
                   <div className="text-4xl font-light italic tracking-tight text-slate-500">
-                    Click & sign here
+                    {t("signaturePlaceholder")}
                   </div>
                 </div>
               </div>
@@ -235,7 +259,7 @@ useEffect(() => {
                 ].join(" ")}
               >
                 <Eraser className="h-4 w-4" />
-                Clear signature
+                {t("clearSignature")}
               </button>
             </div>
           </div>
@@ -245,37 +269,38 @@ useEffect(() => {
 
 {/* Legal / links */}
 <div className="mt-4 max-w-2xl text-xs text-slate-700">
-  By signing, you agree to our{" "}
-  <a
-    className="font-normal text-sky-700 hover:underline"
-    href={`/${locale}/terms`}
-    target="_blank"
-    rel="noreferrer"
-  >
-    Terms &amp; Conditions
-  </a>{" "}
-  and{" "}
-  <a
-    className="font-normal text-sky-700 hover:underline"
-    href={`/${locale}/price-list`}
-    target="_blank"
-    rel="noreferrer"
-  >
-    Price List
-  </a>
-  , and you authorize us to use your signature on the{" "}
-  <a
-    className="font-normal text-sky-700 hover:underline"
-href={`/${locale}/power-of-attorney?fullName=${encodeURIComponent(
-  `${searchParams.get("firstName") || ""} ${searchParams.get("lastName") || ""}`
-)}&bookingReference=${encodeURIComponent(
-  searchParams.get("bookingRef") || ""
-)}&claimId=${encodeURIComponent(
-  searchParams.get("claimId") || ""
-)}`}    target="_blank"
-    rel="noreferrer"
-  >
-    Authority Document
+  {t("legal.before")}{" "}
+<a
+  className="font-normal text-sky-700 hover:underline"
+  href={`/${locale}/terms`}
+  target="_blank"
+  rel="noreferrer"
+>
+  {t("legal.terms")}
+</a>{" "}
+{t("legal.and")}{" "}
+<a
+  className="font-normal text-sky-700 hover:underline"
+  href={`/${locale}/price-list`}
+  target="_blank"
+  rel="noreferrer"
+>
+  {t("legal.priceList")}
+</a>
+{t("legal.middle")}{" "}
+<a
+  className="font-normal text-sky-700 hover:underline"
+  href={`/${locale}/power-of-attorney?fullName=${encodeURIComponent(
+    `${searchParams.get("firstName") || ""} ${searchParams.get("lastName") || ""}`
+  )}&bookingReference=${encodeURIComponent(
+    searchParams.get("bookingRef") || ""
+  )}&claimId=${encodeURIComponent(
+    searchParams.get("claimId") || ""
+  )}`}
+  target="_blank"
+  rel="noreferrer"
+>
+  {t("legal.authorityDocument")}
   </a>
   .
 </div>
@@ -285,21 +310,21 @@ href={`/${locale}/power-of-attorney?fullName=${encodeURIComponent(
 <span
   aria-hidden
   className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-sky-600 text-white text-xs font-semibold"
-  title="Important"
+  title={t("important")}
 >
   !
 </span>
   <span>
-    Your signature should closely resemble the signature on your ID.
+    {t("signatureGuidance")}
   </span>
 </div>
 
 <div className="mt-8 text-center">
   <div className="text-sm font-semibold text-emerald-700">
-    Yes — no win, no fee. You only pay 20% incl. VAT if we succeed.
+    {t("feeTitle")}
   </div>
   <div className="mt-1 text-xs text-slate-500">
-    The fee is deducted from your compensation.
+    {t("feeSubtitle")}
   </div>
 </div>
 

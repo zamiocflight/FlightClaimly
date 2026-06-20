@@ -1,9 +1,11 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useState, useRef, useEffect } from "react";
 
 export default function ClaimOwnerPage() {
+  const t = useTranslations("check.claimOwner");
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -87,18 +89,18 @@ export default function ClaimOwnerPage() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
       <h1 className="text-2xl font-semibold text-sky-900">
-        Who should receive the compensation?
+        {t("title")}
       </h1>
 
       <div className="text-sm text-emerald-600 font-medium mt-2">
-        You're just one step away from claiming your compensation
+        {t("subtitle")}
       </div>
 
       <div className="mt-8 space-y-8">
         {/* First name */}
         <div>
           <label className="block text-sm font-medium text-sky-900">
-            First name
+            {t("firstNameLabel")}
           </label>
 
           <input
@@ -135,18 +137,18 @@ export default function ClaimOwnerPage() {
               outline-none
               leading-[38px]
             "
-            placeholder="First name"
+            placeholder={t("firstNamePlaceholder")}
           />
 
           <p className="mt-2 text-xs text-slate-400">
-            Must match your ID
+            {t("firstNameHint")}
           </p>
         </div>
 
         {/* Last name */}
         <div>
           <label className="block text-sm font-medium text-sky-900">
-            Last name
+            {t("lastNameLabel")}
           </label>
 
           <input
@@ -183,23 +185,22 @@ export default function ClaimOwnerPage() {
               outline-none
               leading-[38px]
             "
-            placeholder="Last name"
+            placeholder={t("lastNamePlaceholder")}
           />
 
           <p className="mt-2 text-xs text-slate-400">
-            Please enter all your last name exactly as it appears on your ID or
-            passport.
+            {t("lastNameHint")}
           </p>
         </div>
 
         {/* Email */}
         <div>
           <label className="block text-sm font-medium text-sky-900">
-            Email
+            {t("emailLabel")}
           </label>
 
           <div className="text-xs text-emerald-600 font-medium mb-1">
-            We'll send your claim updates and payout here
+            {t("emailSubtitle")}
           </div>
 
           <div className="relative w-full md:w-2/3">
@@ -243,17 +244,17 @@ export default function ClaimOwnerPage() {
           </div>
 
           <p className="mt-2 text-xs text-slate-400">
-            We’ll use your email to keep you updated about your claim.
+            {t("emailHint")}
           </p>
 
           <p className="mt-1 text-xs text-slate-400">
-            By continuing, you agree to our{" "}
+            {t("legal.before")}{" "}
             <a href="/terms" className="text-sky-600 hover:underline">
-              Terms & Conditions
+              {t("legal.terms")}
             </a>{" "}
-            and{" "}
+            {t("legal.and")}{" "}
             <a href="/privacy" className="text-sky-600 hover:underline">
-              Privacy Policy
+              {t("legal.privacy")}
             </a>.
           </p>
         </div>

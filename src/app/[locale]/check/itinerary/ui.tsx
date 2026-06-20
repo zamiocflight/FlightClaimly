@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Plane } from "lucide-react";
 import PlaneIcon from "@/components/PlaneIcon";
 
@@ -78,10 +79,12 @@ function AirlineAutocomplete({
   value,
   onChange,
   inputClassName,
+  placeholder,
 }: {
   value: string;
   onChange: (v: string) => void;
   inputClassName: string;
+  placeholder: string;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -112,7 +115,7 @@ function AirlineAutocomplete({
         onBlur={() => {
           setTimeout(() => setOpen(false), 120);
         }}
-        placeholder="e.g. British Airways"
+        placeholder={placeholder}
       />
 
       {open && matches.length > 0 && (
@@ -147,6 +150,7 @@ function extractAirlineCode(label: string) {
 }
 
 export default function ItineraryClient() {
+  const t = useTranslations("check.itinerary");
   const router = useRouter();
   const sp = useSearchParams();
 
@@ -230,15 +234,15 @@ export default function ItineraryClient() {
   }
 
 const fieldRow =
-  "relative flex items-center h-[50px] rounded-lg border border-slate-300 bg-white px-4 focus-within:border-sky-300 hover:border-sky-300";
+  "relative flex items-center h-[56px] rounded-lg border border-slate-300 bg-white px-4 focus-within:border-sky-300 hover:border-sky-300";
 
   return (
-    <div className="mx-auto max-w-[640px]">
-      <div className="-ml-18 space-y-8">
+    <div className="mx-auto w-full max-w-[640px]">
+  <div className="space-y-8">
         {/* Header */}
         <div>
           <h1 className="text-lg font-semibold tracking-tight text-sky-900">
-            OK, I’ll just need a few flight details so I can check your eligibility.
+            {t("intro")}
           </h1>
         </div>
 
@@ -261,8 +265,8 @@ const fieldRow =
                 </div>
 
 {/* Airline = 50% width */}
-<div className="mt-2 max-w-[50%]">
-  <div className="mb-2 text-sm font-semibold text-sky-900">Airline</div>
+<div className="mt-2 w-full">
+    <div className="mb-2 text-sm font-semibold text-sky-900">{t("airline")}</div>
 
 <div className={fieldRow}>
   <div className="flex-1">
@@ -270,13 +274,14 @@ const fieldRow =
       value={seg.airline}
       onChange={(v) => setSegment(i, { airline: v })}
       inputClassName="w-full h-full bg-transparent outline-none text-sm text-slate-900 placeholder:text-slate-400 pr-12"
+      placeholder={t("airlinePlaceholder")}
     />
   </div>
 
   {seg.airline && (
     <button
       type="button"
-      aria-label="Clear airline"
+      aria-label={t("clearAirline")}
       onClick={() => setSegment(i, { airline: "" })}
       className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
     >
@@ -290,14 +295,14 @@ const fieldRow =
 
 
 {/* Flight number (1/3) + Date (2/3) */}
-<div className="mt-5 flex gap-4 max-w-[50%]">
-  <div className="w-1/3">
-    <div className="mb-2 text-sm font-semibold text-sky-900">
-      Flight number
+<div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
+<div className="md:col-span-1">
+      <div className="mb-2 text-sm font-semibold text-sky-900">
+      {t("flightNumber")}
     </div>
 
 {/* Flight number wrapper — force same height as Date */}
-<div className="h-[50px] flex overflow-hidden rounded-lg border border-slate-300 bg-white focus-within:border-sky-300 hover:border-sky-300">
+<div className="h-[56px] flex overflow-hidden rounded-lg border border-slate-300 bg-white focus-within:border-sky-300 hover:border-sky-300">
   {/* Prefix – grey fills full height */}
   <div className="h-full flex w-1/3 items-center justify-center bg-slate-100 px-3 text-sm font-normal text-slate-500">
     {extractAirlineCode(seg.airline)}
@@ -314,15 +319,15 @@ const fieldRow =
 
   </div>
 
-                  <div className="w-2/3">
-                    <div className="mb-2 text-sm font-semibold text-sky-900">
-                      Date
+<div className="md:col-span-2">
+                      <div className="mb-2 text-sm font-semibold text-sky-900">
+                      {t("date")}
                     </div>
 
                     {/* CLICKABLE ROW WITH LEFT ICON */}
                     <div
                       onClick={() => dateRef.current?.showPicker()}
-                      className="flex items-center gap-3 rounded-lg border border-slate-300 bg-white px-4 py-3 focus-within:border-sky-300 hover:border-sky-300 cursor-pointer"
+                      className="flex items-center gap-3 rounded-lg border border-slate-300 bg-white h-[56px] px-4 focus-within:border-sky-300 hover:border-sky-300 cursor-pointer"
                     >
                       {/* Calendar icon */}
                       <svg
@@ -359,7 +364,7 @@ const fieldRow =
 
         {!allFilled && (
           <div className="text-sm text-slate-500">
-            Fill in airline, flight number and date for every segment to continue.
+            {t("continueHint")}
           </div>
         )}
       </div>

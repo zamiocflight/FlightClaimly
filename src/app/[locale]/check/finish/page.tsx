@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function Page() {
+  const t = useTranslations("check.finish");
   const router = useRouter();
   const sp = useSearchParams();
 
@@ -18,7 +20,7 @@ export default function Page() {
   useEffect(() => {
     async function finalizeClaim() {
       if (!claimId) {
-        setError("Missing claim ID.");
+        setError(t("errors.missingClaimId"));
         return;
       }
 
@@ -55,7 +57,7 @@ export default function Page() {
         // 5️⃣ Redirect till thanks
         router.replace(`/${locale}/check/thanks?${sp.toString()}`);
       } catch (e) {
-        setError("Something went wrong while finalizing your claim.");
+        setError(t("errors.finalizeFailed"));
       }
     }
 
@@ -69,7 +71,7 @@ export default function Page() {
           {error}
         </div>
       ) : (
-        <div>Finalizing your claim…</div>
+        <div>{t("finalizing")}</div>
       )}
     </div>
   );

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState, useRef } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import PlaneIcon from "@/components/PlaneIcon";
+import { useTranslations } from "next-intl";
 
 
 type FlightItem = {
@@ -88,10 +89,12 @@ function AirlineAutocomplete({
   value,
   onChange,
   onSelect,
+  placeholder,
 }: {
   value: string;
   onChange: (v: string) => void;
   onSelect: (v: string) => void;
+  placeholder: string;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -120,7 +123,7 @@ function AirlineAutocomplete({
         onBlur={() => {
           setTimeout(() => setOpen(false), 120);
         }}
-        placeholder="e.g. British Airways"
+        placeholder={placeholder}
       />
 
       {open && matches.length > 0 && (
@@ -145,6 +148,7 @@ function AirlineAutocomplete({
 }
 
 export default function DirectClient() {
+  const t = useTranslations("check.direct");
   const router = useRouter();
   const sp = useSearchParams();
   const pathname = usePathname(); // ✅ NY
@@ -211,7 +215,7 @@ useEffect(() => {
       const res = await fetch(`/api/flight/search?${qs.toString()}`);
 
       if (!res.ok) {
-        throw new Error("Flight search failed");
+        throw new Error(t("errors.searchFailed"));
       }
 
       const data = await res.json();
@@ -221,7 +225,7 @@ useEffect(() => {
       }
     } catch {
       if (!cancelled) {
-        setFlightsError("We couldn't load flights. You can still continue manually.");
+        setFlightsError(t("errors.loadFailed"));
       }
     } finally {
       if (!cancelled) {
@@ -305,11 +309,11 @@ useEffect(() => {
       {/* DATE */}
       <div className="space-y-6">
         <h2 className="text-lg font-semibold text-sky-900">
-          What was your scheduled departure date?
+          {t("departureDateTitle")}
         </h2>
 
         <div className={`space-y-1 ${FIELD_WIDTH}`}>
-          <div className="text-sm font-semibold text-sky-900">Date</div>
+          <div className="text-sm font-semibold text-sky-900">{t("dateLabel")}</div>
 
           <div
             onClick={() => dateRef.current?.showPicker()}
@@ -351,28 +355,29 @@ useEffect(() => {
       {date && (
         <div className="space-y-6">
           <h2 className="text-lg font-semibold text-sky-900">
-            Which airline did you fly with?
+            {t("airlineTitle")}
           </h2>
 
           <div className={`space-y-1 ${FIELD_WIDTH}`}>
-            <div className="text-sm font-semibold text-sky-900">Airline</div>
+            <div className="text-sm font-semibold text-sky-900">{t("airlineLabel")}</div>
 
             <div className={`${FIELD_ROW} relative hover:border-sky-300`}>
-  <AirlineAutocomplete
-    value={airlineInput}
-    onChange={(v) => {
-      setAirlineInput(v);
-      setSelectedAirline("");
-    }}
-    onSelect={(v) => {
-      setSelectedAirline(v);
-    }}
-  />
+<AirlineAutocomplete
+  value={airlineInput}
+  onChange={(v) => {
+    setAirlineInput(v);
+    setSelectedAirline("");
+  }}
+  onSelect={(v) => {
+    setSelectedAirline(v);
+  }}
+  placeholder={t("airlinePlaceholder")}
+/>
 
   {(airlineInput.trim().length > 0 || selectedAirline.trim().length > 0) && (
     <button
       type="button"
-      aria-label="Clear airline"
+      aria-label={t("clearAirline")}
       onClick={() => {
         setAirlineInput("");
         setSelectedAirline("");
@@ -410,22 +415,22 @@ className="
       {date && selectedAirline && (
         <div ref={flightsRef} className="space-y-6">
           <h2 className="text-lg font-semibold text-sky-900">
-            Next up, please select your flight from the list below:
+            {t("flightListTitle")}
           </h2>
 
           {/* HEADER ROW */}
           <div
             className={`${FIELD_WIDTH} flex justify-between text-sm text-slate-400 px-1 mb-1`}
           >
-            <span>Scheduled time</span>
-            <span>Flight number</span>
+            <span>{t("scheduledTime")}</span>
+            <span>{t("flightNumber")}</span>
           </div>
 
           {/* MOCK FLIGHTS */}
           <div className="space-y-2">
             {flightsLoading && (
   <div className={`${FIELD_WIDTH} rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-500`}>
-    Loading available flights…
+    {t("loadingFlights")}
   </div>
 )}
 
@@ -437,7 +442,7 @@ className="
 
 {!flightsLoading && !flightsError && flights.length === 0 && (
   <div className={`${FIELD_WIDTH} rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-500`}>
-    No flights found for this route. You can still continue manually.
+    {t("noFlightsFound")}
   </div>
 )}
 
@@ -483,6 +488,9 @@ className="
             {/* I CAN'T FIND MY FLIGHT */}
             {(() => {
               const selected = selectedFlightId === MANUAL_ID;
+const manualLabel = flightsError
+  ? t("manualEnterDetails")
+  : t("manualCantFind");
               return (
                 <button
                   type="button"
@@ -503,9 +511,9 @@ className="
                       )}
                     </div>
 
-                    <span className="font-normal text-slate-900">
-                      I can’t find my flight
-                    </span>
+                   <span className="font-normal text-slate-900">
+  {manualLabel}
+</span>
                   </div>
                 </button>
               );
@@ -513,12 +521,12 @@ className="
             {selectedFlightId === MANUAL_ID && (
   <div className={`${FIELD_WIDTH} mt-3`}>
     <label className="mb-1 block text-sm font-semibold text-sky-900">
-      Enter your flight number
+      {t("manualFlightNumberLabel")}
     </label>
     <input
       value={manualFlightNumber}
       onChange={(e) => setManualFlightNumber(e.target.value.toUpperCase())}
-      placeholder="e.g. SK2814"
+      placeholder={t("manualFlightNumberPlaceholder")}
       className="w-full h-[56px] rounded-lg border border-black/10 bg-white px-5 text-base text-slate-900 placeholder:text-slate-400 hover:border-sky-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none transition"
     />
   </div>

@@ -2,12 +2,15 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
+
 import FromToInline from "@/components/FromToInline";
 import AirportInput from "@/components/AirportInput";
 
 type Choice = "direct" | "itinerary" | null;
 
 export default function DirectOrLayoverUI() {
+  const t = useTranslations("check.directOrLayover");
   const router = useRouter();
   const sp = useSearchParams();
 
@@ -99,7 +102,7 @@ export default function DirectOrLayoverUI() {
 
       <div className="space-y-4">
         <h2 className="text-lg font-semibold text-sky-900">
-          Was this a direct flight?
+          {t("title")}
         </h2>
 
         <div className="grid gap-4 md:grid-cols-2">
@@ -128,7 +131,7 @@ export default function DirectOrLayoverUI() {
                 <div className="h-2 w-2 rounded-full bg-sky-500" />
               )}
             </div>
-            <div className="font-semibold text-slate-950">Direct flight</div>
+            <div className="font-semibold text-slate-950">{t("direct")}</div>
           </button>
 
           <button
@@ -155,7 +158,7 @@ export default function DirectOrLayoverUI() {
                 <div className="h-2 w-2 rounded-full bg-sky-500" />
               )}
             </div>
-            <div className="font-semibold text-slate-950">With layovers</div>
+            <div className="font-semibold text-slate-950">{t("layovers")}</div>
           </button>
         </div>
 
@@ -164,14 +167,14 @@ export default function DirectOrLayoverUI() {
           <div className="mt-6 grid gap-4 md:grid-cols-1">
             <div>
               <h3 className="text-lg font-semibold text-sky-900">
-                Where did you have a connection?
+                {t("connectionTitle")}
               </h3>
             </div>
 
             {layovers.map((value, idx) => (
               <div key={idx}>
                 <div className="mb-1 text-sm font-semibold text-sky-900">
-                  {idx + 1}. City or airport name
+                  {idx + 1}. {t("cityOrAirport")}
                 </div>
 
                 <div className="relative w-full">
@@ -181,7 +184,7 @@ export default function DirectOrLayoverUI() {
                     <AirportInput
                       variant="unstyled"
                       value={value}
-                      placeholder="e.g. London or LHR"
+                      placeholder={t("airportPlaceholder")}
                       hidePreview={false}
                       attachDropdownToParent={true}
                       onSelect={(fullLabel) => {
@@ -200,7 +203,7 @@ export default function DirectOrLayoverUI() {
     rounded-full bg-slate-200 text-slate-600 text-[10px]
     hover:bg-slate-300
   "
-  aria-label="Remove layover"
+  aria-label={t("removeLayover")}
 >
   ✕
 </button>
@@ -214,12 +217,12 @@ export default function DirectOrLayoverUI() {
                 onClick={addLayover}
                 className="text-emerald-600 font-semibold hover:underline"
               >
-                + Add another airport
+                {t("addAirport")}
               </button>
 
               {!allLayoversFilled && (
                 <div className="mt-2 text-sm text-slate-500">
-                  Add at least one connection airport to continue.
+                  {t("connectionRequired")}
                 </div>
               )}
             </div>

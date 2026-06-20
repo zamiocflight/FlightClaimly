@@ -2,8 +2,10 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+import { useTranslations } from "next-intl";
 import PlaneIcon from "@/components/PlaneIcon";
 import { CalendarDays, Clock, Plane, Timer } from "lucide-react";
+
 
 type VerifyResult = {
   matched: boolean;
@@ -73,8 +75,12 @@ function isDelayedOver3h(scheduledIso: string, actualIso: string) {
   return diffHours >= 3;
 }
 
-function estimateCompensationEUR() {
-  return 250; // v1 placeholder
+function calculateCompensationEUR(distanceKm: number | null | undefined) {
+  if (typeof distanceKm !== "number") return 250;
+
+  if (distanceKm <= 1500) return 250;
+  if (distanceKm <= 3500) return 400;
+  return 600;
 }
 function estimateDistanceKm() {
   return 357; // v1 placeholder
@@ -99,6 +105,7 @@ function extractAirlineCode(label: string) {
 }
 
 export function VerifyClient() {
+  const t = useTranslations("check.verify");
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -209,30 +216,33 @@ export function VerifyClient() {
       : normalizeCityLabel(to, "");
 
 function formatDelay(minutes: number | null | undefined) {
-  if (typeof minutes !== "number") return "No significant delay detected";
+  if (typeof minutes !== "number") return t("delay.noSignificantDelay");
 
   if (minutes < 0) {
     const early = Math.abs(minutes);
-    return early === 1 ? "Arrived 1 minute early" : `Arrived ${early} minutes early`;
+    return early === 1
+      ? t("delay.arrivedOneMinuteEarly")
+      : t("delay.arrivedMinutesEarly", { minutes: early });
   }
 
-  if (minutes === 0) return "Arrived on time";
+  if (minutes === 0) return t("delay.arrivedOnTime");
 
   const h = Math.floor(minutes / 60);
   const m = minutes % 60;
 
-  if (h === 0) return `${m} minutes`;
-  if (m === 0) return `${h} ${h === 1 ? "hour" : "hours"}`;
+  if (h === 0) return t("delay.minutes", { minutes: m });
+  if (m === 0) return t("delay.hours", { hours: h });
 
-  return `${h} ${h === 1 ? "hour" : "hours"} ${m} minutes`;
+  return t("delay.hoursMinutes", { hours: h, minutes: m });
 }
 
-const compEUR = estimateCompensationEUR();
 
 const distanceKm =
   typeof result?.distanceKm === "number"
     ? Math.round(result.distanceKm)
     : estimateDistanceKm();
+
+    const compEUR = calculateCompensationEUR(distanceKm);
 
 const delayText = formatDelay(result?.arrivalDelayMinutes);
 
@@ -244,14 +254,14 @@ const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
   const delayedOver3h = isDelayedOver3h(scheduledArrival, actualArrival);
 
   if (loading) {
-    return <div className="p-8 text-sky-900">Checking flight status…</div>;
+    return <div className="p-8 text-sky-900">{t("loading")}</div>;
   }
 
   if (!result || !result.matched) {
     return (
       <div className="p-8 text-sky-900">
         <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
-          We couldn’t verify this flight. Please go back and check your details.
+          {t("verifyFailed")}
         </div>
       </div>
     );
@@ -263,11 +273,11 @@ const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
 <div className="mx-auto max-w-3xl px-[16px] py-2 md:p-6 text-sky-900 overflow-x-hidden">
         {eligible ? (
         <h1 className="mb-6 text-2xl md:text-2xl font-semibold text-sky-900">
-          Good news — your flight is eligible for compensation.
+          {t("eligibleTitle")}
         </h1>
       ) : (
         <h1 className="mb-6 text-2xl md:text-2xl font-semibold text-sky-900">
-          Not eligible for compensation under EU/UK 261.
+          {t("notEligibleTitle")}
         </h1>
       )}
 
@@ -276,17 +286,17 @@ const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
 <div className="flex min-w-0 items-center justify-between gap-3 text-sm text-slate-500">
   <span className="min-w-0 truncate">
             {flightNumber
-              ? `${airlineLabel || "Airline"} · Flight ${flightNumber}`
-              : "Flight details"}
+              ? `${airlineLabel || t("airlineFallback")} · ${t("flight")} ${flightNumber}`
+              : t("flightDetails")}
           </span>
 
           {eligible ? (
             <span className="shrink-0 rounded-full px-3 py-1 text-xs font-medium bg-emerald-100 text-emerald-700">
-              ELIGIBLE
+              {t("badgeEligible")}
             </span>
           ) : (
         <span className="shrink-0 rounded-full px-3 py-1 text-xs font-medium bg-red-100 text-red-700">
-  NOT ELIGIBLE
+  {t("badgeNotEligible")}
 </span>
           )}
         </div>
@@ -314,10 +324,17 @@ const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
   ].join(" ")}
 >
   <div className="text-xs text-slate-500 mb-1">
-    {eligible ? "Potential compensation" : "Compensation"}
+    {eligible ? t("potentialCompensation") : t("compensation")}
   </div>
-<div className="text-xs text-emerald-600 font-medium mb-1">
-  You're entitled to compensation under EU law
+<div
+  className={[
+    "text-xs font-medium mb-1",
+    eligible ? "text-emerald-600" : "text-slate-500",
+  ].join(" ")}
+>
+  {eligible
+    ? t("entitled")
+: t("manualReview")}
 </div>
   <div className="flex items-end gap-1">
     <span
@@ -331,7 +348,7 @@ const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
     </span>
 
     <span className="text-sm text-slate-600">
-      per passenger
+      {t("perPassenger")}
     </span>
   </div>
 </div>
@@ -339,7 +356,7 @@ const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
         {/* INFO GRID */}
         <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="rounded-lg bg-slate-50 p-4">
-            <div className="text-xs text-slate-500">Scheduled arrival time</div>
+            <div className="text-xs text-slate-500">{t("scheduledArrivalTime")}</div>
             <div className="mt-2 flex items-center gap-6">
               <div className="flex items-center gap-2 text-sky-900 font-medium">
                 <CalendarDays className="h-5 w-5 text-slate-400" />
@@ -353,7 +370,7 @@ const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
           </div>
 
           <div className="rounded-lg bg-slate-50 p-4">
-            <div className="text-xs text-slate-500">Actual arrival time</div>
+            <div className="text-xs text-slate-500">{t("actualArrivalTime")}</div>
             <div className="mt-2 flex items-center gap-6">
               <div className="flex items-center gap-2 text-sky-900 font-medium">
                 <CalendarDays className="h-5 w-5 text-slate-400" />
@@ -377,7 +394,7 @@ const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
           </div>
 
           <div className="rounded-lg bg-slate-50 p-4">
-            <div className="text-xs text-slate-500">Flight distance</div>
+            <div className="text-xs text-slate-500">{t("flightDistance")}</div>
             <div className="mt-1 font-medium text-sky-900 flex items-center gap-2">
               <Plane className="h-5 w-5 text-slate-400" />
               <span>{distanceKm} km</span>
@@ -385,7 +402,7 @@ const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
           </div>
 
           <div className="rounded-lg bg-slate-50 p-4">
-            <div className="text-xs text-slate-500">Total delay</div>
+            <div className="text-xs text-slate-500">{t("totalDelay")}</div>
             <div className="mt-1 font-medium text-sky-900 flex items-center gap-2">
               <Timer className="h-5 w-5 text-slate-400" />
               <span>{delayText}</span>
@@ -397,7 +414,7 @@ const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
       {/* CONFIRM */}
       <div className="mt-8">
         <h2 className="mb-3 text-lg font-semibold text-sky-900">
-          Confirm your flight details
+          {t("confirmTitle")}
         </h2>
 
         <div className="space-y-3">
@@ -427,7 +444,7 @@ const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
     confirm === "yes" ? "text-slate-900" : "text-sky-900",
   ].join(" ")}
 >
-  Yes, this is my flight
+  {t("confirmYes")}
 </span>
             </div>
           </button>
@@ -458,10 +475,20 @@ const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
     confirm === "no" ? "text-slate-900" : "text-sky-900",
   ].join(" ")}
 >
-  No, something is wrong
+  {t("confirmNo")}
 </span>
             </div>
           </button>
+          {confirm === "no" && (
+  <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+    {t("correctDetails")}
+  </div>
+)}
+{!eligible && (
+  <div className="mt-4 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+    {t("notEligibleExplanation")}
+  </div>
+)}
         </div>
       </div>
     </div>

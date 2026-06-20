@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   UploadCloud,
@@ -43,6 +44,7 @@ function getExt(name: string) {
 
 
 export default function ClientAdditionalUploads() {
+  const t = useTranslations("check.additional");
   const router = useRouter();
   const sp = useSearchParams();
 
@@ -128,7 +130,7 @@ export default function ClientAdditionalUploads() {
       if (!ACCEPTED_EXT.includes(ext)) {
         return {
           ok: false,
-          msg: `“${f.name}” is not a supported format. Please upload PDF, JPG, or PNG.`,
+          msg: t("errors.unsupportedFormat", { file: f.name }),
         };
       }
     }
@@ -139,7 +141,10 @@ export default function ClientAdditionalUploads() {
       if (f.size > maxFileBytes) {
         return {
           ok: false,
-          msg: `“${f.name}” is too large. Max ${MAX_FILE_MB} MB per file.`,
+          msg: t("errors.fileTooLarge", {
+  file: f.name,
+  max: MAX_FILE_MB,
+}),
         };
       }
     }
@@ -149,7 +154,9 @@ export default function ClientAdditionalUploads() {
     if (totalBytes > maxTotalBytes) {
       return {
         ok: false,
-        msg: `Total upload is too large. Max ${MAX_TOTAL_MB} MB in total.`,
+        msg: t("errors.totalTooLarge", {
+  max: MAX_TOTAL_MB,
+}),
       };
     }
 
@@ -210,7 +217,7 @@ export default function ClientAdditionalUploads() {
 
   async function uploadAndContinue() {
     if (!claimId) {
-      setError("Missing claim reference. Please go back and try again.");
+      setError(t("errors.missingClaim"));
       return;
     }
 
@@ -242,9 +249,7 @@ export default function ClientAdditionalUploads() {
 
       goNext();
     } catch {
-      setError(
-        "Upload failed. Please try again, or skip for now and we’ll request documents if needed."
-      );
+      setError(t("errors.uploadFailed"));
     } finally {
       setLoading(false);
     }
@@ -268,15 +273,16 @@ export default function ClientAdditionalUploads() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-2 text-sky-900">
       <div className="max-w-2xl">
-        <h1 className="text-2xl font-semibold text-sky-900">Any additional expenses?</h1>
+        <h1 className="text-2xl font-semibold text-sky-900">{t("title")}</h1>
 
         <p className="mt-2 text-slate-700">
-          If your flight was delayed, you may be entitled to compensation for
-          meals, hotel, or transport.
+          {t("intro1")}
         </p>
 
         <p className="mt-2 text-slate-700">
-          Upload receipts to help us <strong>recover even more money</strong> for you.
+          {t("intro2.before")}{" "}
+<strong>{t("intro2.highlight")}</strong>
+{t("intro2.after")}
         </p>
 
         {/* Drop zone */}
@@ -301,20 +307,23 @@ export default function ClientAdditionalUploads() {
             </div>
 
             <div className="mt-4 text-base font-semibold text-sky-900">
-              Drag &amp; drop files here
+              {t("dropzone.dragDrop")}
             </div>
-            <div className="mt-1 text-sm text-slate-600">or</div>
+            <div className="mt-1 text-sm text-slate-600">{t("dropzone.or")}</div>
 
             <button
               type="button"
               onClick={onBrowseClick}
               className="mt-3 inline-flex items-center justify-center rounded-lg border border-sky-500 px-4 py-2 text-sm font-semibold text-sky-700 hover:bg-sky-50 transition"
             >
-              Browse files
+              {t("dropzone.browse")}
             </button>
 
             <div className="mt-3 text-xs text-slate-300">
-              PDF, JPG, PNG • Max {MAX_FILE_MB} MB per file • Max {MAX_TOTAL_MB} MB total
+              {t("dropzone.fileLimits", {
+  perFile: MAX_FILE_MB,
+  total: MAX_TOTAL_MB,
+})}
             </div>
           </div>
 
@@ -333,10 +342,12 @@ export default function ClientAdditionalUploads() {
           <div className="mt-6">
             <div className="flex items-center justify-between">
               <div className="text-sm font-semibold text-slate-900">
-                Attached files
+                {t("attachedFiles")}
               </div>
               <div className="text-xs text-slate-500">
-                {formatBytes(totalBytes)} total
+                {t("totalSize", {
+  size: formatBytes(totalBytes),
+})}
               </div>
             </div>
 
@@ -364,8 +375,8 @@ export default function ClientAdditionalUploads() {
                     type="button"
                     onClick={() => removeFile(idx)}
                     className="ml-3 inline-flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-50 hover:text-slate-700 transition"
-                    aria-label="Remove file"
-                    title="Remove"
+                    aria-label={t("removeFile")}
+                    title={t("remove")}
                   >
                     <X className="h-5 w-5" />
                   </button>
@@ -387,12 +398,12 @@ export default function ClientAdditionalUploads() {
             className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-800 transition"
           >
             <SkipForward className="h-4 w-4" />
-            Skip for now
+            {t("skip")}
           </button>
         </div>
 
        <div className="mt-3 text-xs text-slate-400">
-  Tip: uploading receipts may increase your compensation.
+  {t("tip")}
 </div>
       </div>
     </div>

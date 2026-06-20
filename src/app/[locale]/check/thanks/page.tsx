@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 type Props = {
   searchParams: Promise<{
@@ -11,6 +12,7 @@ export default async function ThanksPage({ searchParams }: Props) {
   const sp = await searchParams;
   const claimId = sp.claimId || "FC-XXXXXX";
   const locale = sp.locale || "sv";
+  const t = await getTranslations({ locale, namespace: "check.thanks" });
 
   return (
     <div className="min-h-screen bg-slate-100 flex items-center justify-center px-4">
@@ -31,17 +33,17 @@ export default async function ThanksPage({ searchParams }: Props) {
 
         {/* Title */}
         <h1 className="text-2xl font-semibold text-slate-900 mb-3">
-          Your claim has been submitted
+          {t("title")}
         </h1>
 
         {/* Description */}
         <p className="text-slate-600 mb-6">
-          Your authority document has been successfully signed and your claim is now being prepared for submission to the airline.
+          {t("description")}
         </p>
 
         {/* Claim ID */}
         <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 mb-6">
-          <p className="text-xs text-slate-500 mb-1">Claim ID</p>
+          <p className="text-xs text-slate-500 mb-1">{t("claimId")}</p>
           <p className="text-lg font-semibold text-slate-900">
             {claimId}
           </p>
@@ -52,18 +54,17 @@ export default async function ThanksPage({ searchParams }: Props) {
           href={`/${claimId ? locale : "sv"}/track/${claimId}`}
           className="inline-block w-full bg-blue-600 hover:bg-blue-700 transition text-white font-medium py-3 rounded-lg"
         >
-          Track your claim
+          {t("track")}
         </Link>
 
         {/* Secondary text */}
         <p className="text-xs text-slate-500 mt-5">
-          We have also sent the tracking link to your email address.
+          {t("emailNotice")}
         </p>
 
         {/* Bottom reassurance */}
         <div className="mt-6 pt-4 border-t border-slate-200 text-xs text-slate-500">
-          FlightClaimly will now review your case and submit it to the airline.
-          You will be notified as soon as there are any updates.
+          {t("reassurance")}
         </div>
 
       </div>

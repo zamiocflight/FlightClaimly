@@ -32,6 +32,33 @@ function minutesBetween(a?: string | null, b?: string | null) {
   return Math.round((end - start) / 60000);
 }
 
+function toFlightAwareIdent(flightNumber: string) {
+  const cleaned = flightNumber.replace(/\s+/g, "").toUpperCase();
+
+  const iataToIcao: Record<string, string> = {
+    SK: "SAS",
+    BA: "BAW",
+    LH: "DLH",
+    KL: "KLM",
+    AF: "AFR",
+    IB: "IBE",
+    LO: "LOT",
+    AY: "FIN",
+    FR: "RYR",
+    W6: "WZZ",
+    U2: "EZY",
+    DY: "NOZ",
+    D8: "NSZ",
+    TK: "THY",
+  };
+
+  const match = cleaned.match(/^([A-Z0-9]{2})(\d+)$/);
+  if (!match) return cleaned;
+
+  const [, prefix, number] = match;
+  return `${iataToIcao[prefix] || prefix}${number}`;
+}
+
 export async function verifyFlightFlightAware(
   input: FlightVerifyInput
 ): Promise<FlightVerifyResult> {
@@ -47,7 +74,9 @@ export async function verifyFlightFlightAware(
     };
   }
 
-  const ident = input.flightNumber.replace(/\s+/g, "").toUpperCase();
+  const xApiKey = apiKey;
+
+  const ident = toFlightAwareIdent(input.flightNumber);
   const from = normalizeAirport(input.from);
   const to = normalizeAirport(input.to);
 
@@ -57,20 +86,37 @@ const params = new URLSearchParams({
   max_pages: "1",
 });
 
-  const url = `https://aeroapi.flightaware.com/aeroapi/flights/${encodeURIComponent(
-    ident
-  )}?${params.toString()}`;
+async function fetchFlights(useHistory: boolean) {
+  const p = new URLSearchParams(params);
 
-  const res = await fetch(url, {
+  if (useHistory) {
+    p.set("ident_type", "designator");
+  }
+
+  const endpoint = useHistory
+    ? `/history/flights/${encodeURIComponent(ident)}`
+    : `/flights/${encodeURIComponent(ident)}`;
+
+  const url = `https://aeroapi.flightaware.com/aeroapi${endpoint}?${p.toString()}`;
+
+  return fetch(url, {
     headers: {
-      "x-apikey": apiKey,
+      "x-apikey": xApiKey,
       Accept: "application/json",
     },
     cache: "no-store",
   });
+}
+
+let res = await fetchFlights(false);
+
+if (!res.ok) {
+  console.error("FlightAware live error", res.status, await res.text());
+  res = await fetchFlights(true);
+}
 
   if (!res.ok) {
-    console.error("FlightAware error", res.status, await res.text());
+    console.error("FlightAware history error", res.status, await res.text());
     return {
       matched: false,
       arrivalDelayMinutes: null,

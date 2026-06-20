@@ -1,0 +1,1626 @@
+src/app/[locale]/check/direct/page.tsx:import DirectClient from "./ui";
+src/app/[locale]/check/direct/ui.tsx:"use client";
+src/app/[locale]/check/direct/ui.tsx:import { useEffect, useMemo, useState, useRef } from "react";
+src/app/[locale]/check/direct/ui.tsx:import { useRouter, useSearchParams, usePathname } from "next/navigation";
+src/app/[locale]/check/direct/ui.tsx:import PlaneIcon from "@/components/PlaneIcon";
+src/app/[locale]/check/direct/ui.tsx:import { useTranslations } from "next-intl";
+src/app/[locale]/check/direct/ui.tsx:  "Scandinavian Airlines (SAS)",
+src/app/[locale]/check/direct/ui.tsx:  "Lufthansa (LH)",
+src/app/[locale]/check/direct/ui.tsx:  "Swiss International Air Lines (LX)",
+src/app/[locale]/check/direct/ui.tsx:  "Austrian Airlines (OS)",
+src/app/[locale]/check/direct/ui.tsx:  "British Airways (BA)",
+src/app/[locale]/check/direct/ui.tsx:  "Brussels Airlines (SN)",
+src/app/[locale]/check/direct/ui.tsx:  "Air France (AF)",
+src/app/[locale]/check/direct/ui.tsx:  "KLM (KL)",
+src/app/[locale]/check/direct/ui.tsx:  "Iberia (IB)",
+src/app/[locale]/check/direct/ui.tsx:  "TAP Air Portugal (TP)",
+src/app/[locale]/check/direct/ui.tsx:  "Finnair (AY)",
+src/app/[locale]/check/direct/ui.tsx:  "LOT Polish Airlines (LO)",
+src/app/[locale]/check/direct/ui.tsx:  "ITA Airways (AZ)",
+src/app/[locale]/check/direct/ui.tsx:  "Vueling (VY)",
+src/app/[locale]/check/direct/ui.tsx:  "easyJet (U2)",
+src/app/[locale]/check/direct/ui.tsx:  "Ryanair (FR)",
+src/app/[locale]/check/direct/ui.tsx:  "Wizz Air (W6)",
+src/app/[locale]/check/direct/ui.tsx:  "Turkish Airlines (TK)",
+src/app/[locale]/check/direct/ui.tsx:  "Aegean Airlines (A3)",
+src/app/[locale]/check/direct/ui.tsx:  "Air Europa (UX)",
+src/app/[locale]/check/direct/ui.tsx:  "Delta Air Lines (DL)",
+src/app/[locale]/check/direct/ui.tsx:  "American Airlines (AA)",
+src/app/[locale]/check/direct/ui.tsx:  "United Airlines (UA)",
+src/app/[locale]/check/direct/ui.tsx:  "Air Canada (AC)",
+src/app/[locale]/check/direct/ui.tsx:  "Emirates (EK)",
+src/app/[locale]/check/direct/ui.tsx:  "Qatar Airways (QR)",
+src/app/[locale]/check/direct/ui.tsx:  "Etihad Airways (EY)",
+src/app/[locale]/check/direct/ui.tsx:  "Singapore Airlines (SQ)",
+src/app/[locale]/check/direct/ui.tsx:  "Thai Airways (TG)",
+src/app/[locale]/check/direct/ui.tsx:  "ANA All Nippon Airways (NH)",
+src/app/[locale]/check/direct/ui.tsx:  "Japan Airlines (JL)",
+src/app/[locale]/check/direct/ui.tsx:  "Cathay Pacific (CX)",
+src/app/[locale]/check/direct/ui.tsx:  "Korean Air (KE)",
+src/app/[locale]/check/direct/ui.tsx:  "EVA Air (BR)",
+src/app/[locale]/check/direct/ui.tsx:  "China Airlines (CI)",
+src/app/[locale]/check/direct/ui.tsx:  "Hainan Airlines (HU)",
+src/app/[locale]/check/direct/ui.tsx:  "Icelandair (FI)",
+src/app/[locale]/check/direct/ui.tsx:  "Aer Lingus (EI)",
+src/app/[locale]/check/direct/ui.tsx:  "Virgin Atlantic (VS)",
+src/app/[locale]/check/direct/ui.tsx:  "Jet2.com (LS)",
+src/app/[locale]/check/direct/ui.tsx:  "Norwegian Air Shuttle (DY)",
+src/app/[locale]/check/direct/ui.tsx:  "Eurowings (EW)",
+src/app/[locale]/check/direct/ui.tsx:  "Transavia (HV)",
+src/app/[locale]/check/direct/ui.tsx:  "airBaltic (BT)",
+src/app/[locale]/check/direct/ui.tsx:  "Iberia Express (I2)",
+src/app/[locale]/check/direct/ui.tsx:const FIELD_WIDTH = "w-full md:max-w-[560px]";
+src/app/[locale]/check/direct/ui.tsx:  "flex min-h-[64px] md:min-h-[56px] items-center justify-between rounded-xl border border-black/10 bg-white px-5 py-4 text-base text-slate-900 focus-within:outline-none focus-within:border-sky-400 focus-within:ring-1 focus-within:ring-sky-100 transition";
+src/app/[locale]/check/direct/ui.tsx:// "Copenhagen (CPH) — ..." -> "Copenhagen (CPH)"
+src/app/[locale]/check/direct/ui.tsx:  // "BA 812" -> "BA812"
+src/app/[locale]/check/direct/ui.tsx:    <div className="relative w-full z-50">
+src/app/[locale]/check/direct/ui.tsx:        className="w-full bg-transparent outline-none text-slate-900 placeholder:text-slate-400 pr-10"
+src/app/[locale]/check/direct/ui.tsx:        <div className="absolute z-50 mt-1 w-full overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg">
+src/app/[locale]/check/direct/ui.tsx:              className="cursor-pointer px-4 py-2 text-sm text-slate-900 hover:bg-sky-50"
+src/app/[locale]/check/direct/ui.tsx:  const t = useTranslations("check.direct");
+src/app/[locale]/check/direct/ui.tsx:  const from = sp.get("from") || "";
+src/app/[locale]/check/direct/ui.tsx:  const to = sp.get("to") || "";
+src/app/[locale]/check/direct/ui.tsx:  const MANUAL_ID = "MANUAL";
+src/app/[locale]/check/direct/ui.tsx:  if (sp.get("choice") === "direct") return;
+src/app/[locale]/check/direct/ui.tsx:  params.set("choice", "direct");
+src/app/[locale]/check/direct/ui.tsx:    flightsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+src/app/[locale]/check/direct/ui.tsx:        throw new Error(t("errors.searchFailed"));
+src/app/[locale]/check/direct/ui.tsx:        setFlightsError(t("errors.loadFailed"));
+src/app/[locale]/check/direct/ui.tsx:    { id: "1", depTime: "06:30", arrTime: "09:10", flightNumber: "BA 812" },
+src/app/[locale]/check/direct/ui.tsx:    { id: "2", depTime: "10:15", arrTime: "12:55", flightNumber: "BA 814" },
+src/app/[locale]/check/direct/ui.tsx:    { id: "3", depTime: "13:40", arrTime: "16:20", flightNumber: "BA 816" },
+src/app/[locale]/check/direct/ui.tsx:    { id: "4", depTime: "17:05", arrTime: "19:45", flightNumber: "BA 818" },
+src/app/[locale]/check/direct/ui.tsx:    { id: "5", depTime: "20:30", arrTime: "23:10", flightNumber: "BA 820" },
+src/app/[locale]/check/direct/ui.tsx:  qs.set("choice", "direct");
+src/app/[locale]/check/direct/ui.tsx:  if (date) qs.set("date", date);
+src/app/[locale]/check/direct/ui.tsx:  else qs.delete("date");
+src/app/[locale]/check/direct/ui.tsx:  if (selectedAirline) qs.set("airline", selectedAirline);
+src/app/[locale]/check/direct/ui.tsx:  else qs.delete("airline");
+src/app/[locale]/check/direct/ui.tsx:  if (flightNumber) qs.set("flightNumber", flightNumber);
+src/app/[locale]/check/direct/ui.tsx:  else qs.delete("flightNumber");
+src/app/[locale]/check/direct/ui.tsx:  if (directValidNow) qs.set("directValid", "1");
+src/app/[locale]/check/direct/ui.tsx:  else qs.delete("directValid");
+src/app/[locale]/check/direct/ui.tsx:    <div className="space-y-10">
+src/app/[locale]/check/direct/ui.tsx:      <div className="flex flex-wrap items-center gap-2 text-sm font-normal text-sky-900">
+src/app/[locale]/check/direct/ui.tsx:      <div className="space-y-6">
+src/app/[locale]/check/direct/ui.tsx:        <h2 className="text-lg font-semibold text-sky-900">
+src/app/[locale]/check/direct/ui.tsx:          {t("departureDateTitle")}
+src/app/[locale]/check/direct/ui.tsx:          <div className="text-sm font-semibold text-sky-900">{t("dateLabel")}</div>
+src/app/[locale]/check/direct/ui.tsx:              className="h-5 w-5 text-slate-500"
+src/app/[locale]/check/direct/ui.tsx:              fill="currentColor"
+src/app/[locale]/check/direct/ui.tsx:              aria-hidden="true"
+src/app/[locale]/check/direct/ui.tsx:              <path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1Zm12 8H5v9h14v-9ZM6 8h12V6H6v2Z" />
+src/app/[locale]/check/direct/ui.tsx:              type="date"
+src/app/[locale]/check/direct/ui.tsx:      {date && <div className="h-px w-full bg-slate-200" />}
+src/app/[locale]/check/direct/ui.tsx:        <div className="space-y-6">
+src/app/[locale]/check/direct/ui.tsx:          <h2 className="text-lg font-semibold text-sky-900">
+src/app/[locale]/check/direct/ui.tsx:            {t("airlineTitle")}
+src/app/[locale]/check/direct/ui.tsx:            <div className="text-sm font-semibold text-sky-900">{t("airlineLabel")}</div>
+src/app/[locale]/check/direct/ui.tsx:  placeholder={t("airlinePlaceholder")}
+src/app/[locale]/check/direct/ui.tsx:      type="button"
+src/app/[locale]/check/direct/ui.tsx:      aria-label={t("clearAirline")}
+src/app/[locale]/check/direct/ui.tsx:        className="h-5 w-5"
+src/app/[locale]/check/direct/ui.tsx:        fill="currentColor"
+src/app/[locale]/check/direct/ui.tsx:        aria-hidden="true"
+src/app/[locale]/check/direct/ui.tsx:        <path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 1 0 5.7 7.11L10.59 12l-4.9 4.89a1 1 0 1 0 1.41 1.42L12 13.41l4.89 4.9a1 1 0 0 0 1.42-1.41L13.41 12l4.9-4.89a1 1 0 0 0-.01-1.4Z" />
+src/app/[locale]/check/direct/ui.tsx:      {date && selectedAirline && <div className="h-px w-full bg-slate-200" />}
+src/app/[locale]/check/direct/ui.tsx:        <div ref={flightsRef} className="space-y-6">
+src/app/[locale]/check/direct/ui.tsx:          <h2 className="text-lg font-semibold text-sky-900">
+src/app/[locale]/check/direct/ui.tsx:            {t("flightListTitle")}
+src/app/[locale]/check/direct/ui.tsx:            <span>{t("scheduledTime")}</span>
+src/app/[locale]/check/direct/ui.tsx:            <span>{t("flightNumber")}</span>
+src/app/[locale]/check/direct/ui.tsx:          <div className="space-y-2">
+src/app/[locale]/check/direct/ui.tsx:    {t("loadingFlights")}
+src/app/[locale]/check/direct/ui.tsx:    {t("noFlightsFound")}
+src/app/[locale]/check/direct/ui.tsx:                  type="button"
+src/app/[locale]/check/direct/ui.tsx:                    selected ? "border-sky-400 ring-2 ring-sky-200 bg-sky-50 shadow-sm" : ""
+src/app/[locale]/check/direct/ui.tsx:                  <div className="flex items-center gap-3">
+src/app/[locale]/check/direct/ui.tsx:                        selected ? "border-sky-500" : "border-slate-300"
+src/app/[locale]/check/direct/ui.tsx:                        <div className="h-2 w-2 rounded-full bg-sky-500" />
+src/app/[locale]/check/direct/ui.tsx:                    <span className="text-slate-700 flex items-center gap-2">
+src/app/[locale]/check/direct/ui.tsx:                  <span className="font-semibold text-slate-900">
+src/app/[locale]/check/direct/ui.tsx:  ? t("manualEnterDetails")
+src/app/[locale]/check/direct/ui.tsx:  : t("manualCantFind");
+src/app/[locale]/check/direct/ui.tsx:                  type="button"
+src/app/[locale]/check/direct/ui.tsx:  selected ? "border-sky-400 ring-2 ring-sky-200 bg-sky-50 shadow-sm" : ""
+src/app/[locale]/check/direct/ui.tsx:                  <div className="flex items-center gap-3">
+src/app/[locale]/check/direct/ui.tsx:                        selected ? "border-sky-500" : "border-slate-300"
+src/app/[locale]/check/direct/ui.tsx:                        <div className="h-2 w-2 rounded-full bg-sky-500" />
+src/app/[locale]/check/direct/ui.tsx:                   <span className="font-normal text-slate-900">
+src/app/[locale]/check/direct/ui.tsx:    <label className="mb-1 block text-sm font-semibold text-sky-900">
+src/app/[locale]/check/direct/ui.tsx:      {t("manualFlightNumberLabel")}
+src/app/[locale]/check/direct/ui.tsx:      placeholder={t("manualFlightNumberPlaceholder")}
+src/app/[locale]/check/direct/ui.tsx:      className="w-full h-[56px] rounded-lg border border-black/10 bg-white px-5 text-base text-slate-900 placeholder:text-slate-400 hover:border-sky-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none transition"
+src/app/[locale]/check/verify/page.tsx:import { VerifyClient } from "./ui";
+src/app/[locale]/check/verify/ui.tsx:import { useTranslations } from "next-intl";
+src/app/[locale]/check/verify/ui.tsx:import PlaneIcon from "@/components/PlaneIcon";
+src/app/[locale]/check/verify/ui.tsx:import { CalendarDays, Clock, Plane, Timer } from "lucide-react";
+src/app/[locale]/check/verify/ui.tsx:  const legsJson = sp.get("legs");
+src/app/[locale]/check/verify/ui.tsx:          typeof l.id === "string" &&
+src/app/[locale]/check/verify/ui.tsx:          typeof l.from === "string" &&
+src/app/[locale]/check/verify/ui.tsx:          typeof l.fromCode === "string" &&
+src/app/[locale]/check/verify/ui.tsx:          typeof l.to === "string" &&
+src/app/[locale]/check/verify/ui.tsx:          typeof l.toCode === "string"
+src/app/[locale]/check/verify/ui.tsx:  if (!iso) return { date: "—", time: "—" };
+src/app/[locale]/check/verify/ui.tsx:  const month = d.toLocaleString(undefined, { month: "short" }).replace(".", "");
+src/app/[locale]/check/verify/ui.tsx:  const time = d.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
+src/app/[locale]/check/verify/ui.tsx:  if (typeof distanceKm !== "number") return 250;
+src/app/[locale]/check/verify/ui.tsx:  return "3 hours 22 minutes"; // v1 placeholder
+src/app/[locale]/check/verify/ui.tsx:// 👉 Normaliserar "Copenhagen — Copenhagen Kastrup Airport" -> "Copenhagen (CPH)"
+src/app/[locale]/check/verify/ui.tsx:  const clean = name.split("—")[0].split("-")[0].trim();
+src/app/[locale]/check/verify/ui.tsx:  // "Iberia (IB)" -> "IB"
+src/app/[locale]/check/verify/ui.tsx:  const t = useTranslations("check.verify");
+src/app/[locale]/check/verify/ui.tsx:  const choice = (searchParams.get("choice") || "direct") as "direct" | "itinerary";
+src/app/[locale]/check/verify/ui.tsx:  const from = searchParams.get("from") || "";
+src/app/[locale]/check/verify/ui.tsx:  const to = searchParams.get("to") || "";
+src/app/[locale]/check/verify/ui.tsx:  const date = searchParams.get("date") || "";
+src/app/[locale]/check/verify/ui.tsx:  const flightNumber = searchParams.get("flightNumber") || "";
+src/app/[locale]/check/verify/ui.tsx:  // Airline label can be stored as either "airline" or "airlineName" depending on your step
+src/app/[locale]/check/verify/ui.tsx:    searchParams.get("airline") ||
+src/app/[locale]/check/verify/ui.tsx:    searchParams.get("airlineName") ||
+src/app/[locale]/check/verify/ui.tsx:  const airlineCode = searchParams.get("airlineCode") || "";
+src/app/[locale]/check/verify/ui.tsx:  const legsKey = searchParams.get("legs") || "";
+src/app/[locale]/check/verify/ui.tsx:  const disruptionType = searchParams.get("disruptionType");
+src/app/[locale]/check/verify/ui.tsx:  const affectedLegId = searchParams.get("affectedLegId");
+src/app/[locale]/check/verify/ui.tsx:  const outcome = searchParams.get("outcome");
+src/app/[locale]/check/verify/ui.tsx:  const cancelNotice = searchParams.get("cancelNotice");
+src/app/[locale]/check/verify/ui.tsx:  const volunteer = searchParams.get("volunteer");
+src/app/[locale]/check/verify/ui.tsx:    choice === "direct"
+src/app/[locale]/check/verify/ui.tsx:    choice === "direct"
+src/app/[locale]/check/verify/ui.tsx:    qs.set("airlineCode", code);
+src/app/[locale]/check/verify/ui.tsx:      const res = await fetch("/api/flight/verify", {
+src/app/[locale]/check/verify/ui.tsx:        method: "POST",
+src/app/[locale]/check/verify/ui.tsx:        headers: { "Content-Type": "application/json" },
+src/app/[locale]/check/verify/ui.tsx:      qs.set("verifyMatched", result.matched ? "1" : "0");
+src/app/[locale]/check/verify/ui.tsx:      qs.set("verifyEligible", result.eligible ? "1" : "0");
+src/app/[locale]/check/verify/ui.tsx:      qs.delete("verifyMatched");
+src/app/[locale]/check/verify/ui.tsx:      qs.delete("verifyEligible");
+src/app/[locale]/check/verify/ui.tsx:    if (confirm) qs.set("verifyConfirm", confirm);
+src/app/[locale]/check/verify/ui.tsx:    else qs.delete("verifyConfirm");
+src/app/[locale]/check/verify/ui.tsx:    choice === "itinerary"
+src/app/[locale]/check/verify/ui.tsx:    choice === "itinerary"
+src/app/[locale]/check/verify/ui.tsx:    choice === "itinerary"
+src/app/[locale]/check/verify/ui.tsx:  if (typeof minutes !== "number") return t("delay.noSignificantDelay");
+src/app/[locale]/check/verify/ui.tsx:      ? t("delay.arrivedOneMinuteEarly")
+src/app/[locale]/check/verify/ui.tsx:      : t("delay.arrivedMinutesEarly", { minutes: early });
+src/app/[locale]/check/verify/ui.tsx:  if (minutes === 0) return t("delay.arrivedOnTime");
+src/app/[locale]/check/verify/ui.tsx:  if (h === 0) return t("delay.minutes", { minutes: m });
+src/app/[locale]/check/verify/ui.tsx:  if (m === 0) return t("delay.hours", { hours: h });
+src/app/[locale]/check/verify/ui.tsx:  return t("delay.hoursMinutes", { hours: h, minutes: m });
+src/app/[locale]/check/verify/ui.tsx:  typeof result?.distanceKm === "number"
+src/app/[locale]/check/verify/ui.tsx:    return <div className="p-8 text-sky-900">{t("loading")}</div>;
+src/app/[locale]/check/verify/ui.tsx:      <div className="p-8 text-sky-900">
+src/app/[locale]/check/verify/ui.tsx:        <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
+src/app/[locale]/check/verify/ui.tsx:          {t("verifyFailed")}
+src/app/[locale]/check/verify/ui.tsx:<div className="mx-auto max-w-3xl px-[16px] py-2 md:p-6 text-sky-900 overflow-x-hidden">
+src/app/[locale]/check/verify/ui.tsx:        <h1 className="mb-6 text-2xl md:text-2xl font-semibold text-sky-900">
+src/app/[locale]/check/verify/ui.tsx:          {t("eligibleTitle")}
+src/app/[locale]/check/verify/ui.tsx:        <h1 className="mb-6 text-2xl md:text-2xl font-semibold text-sky-900">
+src/app/[locale]/check/verify/ui.tsx:          {t("notEligibleTitle")}
+src/app/[locale]/check/verify/ui.tsx:<div className="mb-6 w-full rounded-xl border border-slate-200/80 bg-white p-4 md:p-6 shadow-sm">
+src/app/[locale]/check/verify/ui.tsx:<div className="flex min-w-0 items-center justify-between gap-3 text-sm text-slate-500">
+src/app/[locale]/check/verify/ui.tsx:  <span className="min-w-0 truncate">
+src/app/[locale]/check/verify/ui.tsx:              ? `${airlineLabel || t("airlineFallback")} · ${t("flight")} ${flightNumber}`
+src/app/[locale]/check/verify/ui.tsx:              : t("flightDetails")}
+src/app/[locale]/check/verify/ui.tsx:            <span className="shrink-0 rounded-full px-3 py-1 text-xs font-medium bg-emerald-100 text-emerald-700">
+src/app/[locale]/check/verify/ui.tsx:              {t("badgeEligible")}
+src/app/[locale]/check/verify/ui.tsx:        <span className="shrink-0 rounded-full px-3 py-1 text-xs font-medium bg-red-100 text-red-700">
+src/app/[locale]/check/verify/ui.tsx:  {t("badgeNotEligible")}
+src/app/[locale]/check/verify/ui.tsx:        <div className="mt-4 flex min-w-0 items-center justify-between">
+src/app/[locale]/check/verify/ui.tsx:          <div className="min-w-0 flex-1 truncate text-lg font-semibold text-sky-900">
+src/app/[locale]/check/verify/ui.tsx:          <div className="mx-3 flex shrink-0 items-center justify-center">
+src/app/[locale]/check/verify/ui.tsx:            <PlaneIcon className="text-sky-500" />
+src/app/[locale]/check/verify/ui.tsx:          <div className="min-w-0 flex-1 truncate text-right text-lg font-semibold text-sky-900">
+src/app/[locale]/check/verify/ui.tsx:    "mt-5 md:mt-4 rounded-lg px-5 py-5 bg-gradient-to-r shadow-[0_10px_30px_rgba(16,185,129,0.15)]",
+src/app/[locale]/check/verify/ui.tsx:    eligible ? "from-white to-emerald-50" : "from-white to-red-50",
+src/app/[locale]/check/verify/ui.tsx:  <div className="text-xs text-slate-500 mb-1">
+src/app/[locale]/check/verify/ui.tsx:    {eligible ? t("potentialCompensation") : t("compensation")}
+src/app/[locale]/check/verify/ui.tsx:    "text-xs font-medium mb-1",
+src/app/[locale]/check/verify/ui.tsx:    eligible ? "text-emerald-600" : "text-slate-500",
+src/app/[locale]/check/verify/ui.tsx:    ? t("entitled")
+src/app/[locale]/check/verify/ui.tsx:: t("manualReview")}
+src/app/[locale]/check/verify/ui.tsx:  <div className="flex items-end gap-1">
+src/app/[locale]/check/verify/ui.tsx:        "font-bold leading-none",
+src/app/[locale]/check/verify/ui.tsx:        "text-3xl md:text-2xl", // 👈 MOBILE större än desktop
+src/app/[locale]/check/verify/ui.tsx:        eligible ? "text-emerald-600" : "text-red-600",
+src/app/[locale]/check/verify/ui.tsx:    <span className="text-sm text-slate-600">
+src/app/[locale]/check/verify/ui.tsx:      {t("perPassenger")}
+src/app/[locale]/check/verify/ui.tsx:        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+src/app/[locale]/check/verify/ui.tsx:          <div className="rounded-lg bg-slate-50 p-4">
+src/app/[locale]/check/verify/ui.tsx:            <div className="text-xs text-slate-500">{t("scheduledArrivalTime")}</div>
+src/app/[locale]/check/verify/ui.tsx:            <div className="mt-2 flex items-center gap-6">
+src/app/[locale]/check/verify/ui.tsx:              <div className="flex items-center gap-2 text-sky-900 font-medium">
+src/app/[locale]/check/verify/ui.tsx:                <CalendarDays className="h-5 w-5 text-slate-400" />
+src/app/[locale]/check/verify/ui.tsx:              <div className="flex items-center gap-2 text-sky-900 font-medium">
+src/app/[locale]/check/verify/ui.tsx:                <Clock className="h-5 w-5 text-slate-400" />
+src/app/[locale]/check/verify/ui.tsx:          <div className="rounded-lg bg-slate-50 p-4">
+src/app/[locale]/check/verify/ui.tsx:            <div className="text-xs text-slate-500">{t("actualArrivalTime")}</div>
+src/app/[locale]/check/verify/ui.tsx:            <div className="mt-2 flex items-center gap-6">
+src/app/[locale]/check/verify/ui.tsx:              <div className="flex items-center gap-2 text-sky-900 font-medium">
+src/app/[locale]/check/verify/ui.tsx:                <CalendarDays className="h-5 w-5 text-slate-400" />
+src/app/[locale]/check/verify/ui.tsx:                  "flex items-center gap-2 font-medium",
+src/app/[locale]/check/verify/ui.tsx:                  delayedOver3h ? "text-red-500" : "text-sky-900",
+src/app/[locale]/check/verify/ui.tsx:                    "h-5 w-5",
+src/app/[locale]/check/verify/ui.tsx:                    delayedOver3h ? "text-red-500" : "text-slate-400",
+src/app/[locale]/check/verify/ui.tsx:          <div className="rounded-lg bg-slate-50 p-4">
+src/app/[locale]/check/verify/ui.tsx:            <div className="text-xs text-slate-500">{t("flightDistance")}</div>
+src/app/[locale]/check/verify/ui.tsx:            <div className="mt-1 font-medium text-sky-900 flex items-center gap-2">
+src/app/[locale]/check/verify/ui.tsx:              <Plane className="h-5 w-5 text-slate-400" />
+src/app/[locale]/check/verify/ui.tsx:          <div className="rounded-lg bg-slate-50 p-4">
+src/app/[locale]/check/verify/ui.tsx:            <div className="text-xs text-slate-500">{t("totalDelay")}</div>
+src/app/[locale]/check/verify/ui.tsx:            <div className="mt-1 font-medium text-sky-900 flex items-center gap-2">
+src/app/[locale]/check/verify/ui.tsx:              <Timer className="h-5 w-5 text-slate-400" />
+src/app/[locale]/check/verify/ui.tsx:      <div className="mt-8">
+src/app/[locale]/check/verify/ui.tsx:        <h2 className="mb-3 text-lg font-semibold text-sky-900">
+src/app/[locale]/check/verify/ui.tsx:          {t("confirmTitle")}
+src/app/[locale]/check/verify/ui.tsx:        <div className="space-y-3">
+src/app/[locale]/check/verify/ui.tsx:            type="button"
+src/app/[locale]/check/verify/ui.tsx:              window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+src/app/[locale]/check/verify/ui.tsx:              "w-full rounded-lg border px-4 py-4 text-left transition",
+src/app/[locale]/check/verify/ui.tsx:                ? "border-sky-500 bg-sky-50 shadow-sm"
+src/app/[locale]/check/verify/ui.tsx:                : "border-slate-300 hover:border-sky-400"
+src/app/[locale]/check/verify/ui.tsx:            <div className="flex items-center gap-3">
+src/app/[locale]/check/verify/ui.tsx:                "h-4 w-4 rounded-full border flex items-center justify-center",
+src/app/[locale]/check/verify/ui.tsx:                confirm === 'yes' ? "border-sky-500" : "border-slate-300"
+src/app/[locale]/check/verify/ui.tsx:                {confirm === 'yes' && <div className="h-2 w-2 rounded-full bg-sky-500" />}
+src/app/[locale]/check/verify/ui.tsx:    "font-semibold transition-colors",
+src/app/[locale]/check/verify/ui.tsx:    confirm === "yes" ? "text-slate-900" : "text-sky-900",
+src/app/[locale]/check/verify/ui.tsx:  {t("confirmYes")}
+src/app/[locale]/check/verify/ui.tsx:            type="button"
+src/app/[locale]/check/verify/ui.tsx:              window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+src/app/[locale]/check/verify/ui.tsx:              "w-full rounded-lg border px-4 py-4 text-left transition",
+src/app/[locale]/check/verify/ui.tsx:                ? "border-sky-500 bg-sky-50"
+src/app/[locale]/check/verify/ui.tsx:                : "border-slate-300 hover:border-sky-400"
+src/app/[locale]/check/verify/ui.tsx:            <div className="flex items-center gap-3">
+src/app/[locale]/check/verify/ui.tsx:                "h-4 w-4 rounded-full border flex items-center justify-center",
+src/app/[locale]/check/verify/ui.tsx:                confirm === 'no' ? "border-sky-500" : "border-slate-300"
+src/app/[locale]/check/verify/ui.tsx:                {confirm === 'no' && <div className="h-2 w-2 rounded-full bg-sky-500" />}
+src/app/[locale]/check/verify/ui.tsx:    "font-semibold transition-colors",
+src/app/[locale]/check/verify/ui.tsx:    confirm === "no" ? "text-slate-900" : "text-sky-900",
+src/app/[locale]/check/verify/ui.tsx:  {t("confirmNo")}
+src/app/[locale]/check/verify/ui.tsx:          {confirm === "no" && (
+src/app/[locale]/check/verify/ui.tsx:  <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+src/app/[locale]/check/verify/ui.tsx:    {t("correctDetails")}
+src/app/[locale]/check/verify/ui.tsx:  <div className="mt-4 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+src/app/[locale]/check/verify/ui.tsx:    {t("notEligibleExplanation")}
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:"use client";
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:import { useRouter, useSearchParams } from "next/navigation";
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:import { useTranslations } from "next-intl";
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:import { useEffect, useMemo, useRef, useState } from "react";
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:} from "lucide-react";
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:const ACCEPTED_EXT = ["pdf", "jpg", "jpeg", "png"];
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:const HIGH_DOC_AIRLINES = ["FR", "W6"]; // Ryanair, Wizz (v1)
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:const MEDIUM_DOC_AIRLINES = ["LH", "LX", "OS", "SN", "U2"]; // Lufthansa group + easyJet (v1)
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:  if (HIGH_DOC_AIRLINES.includes(c)) return "high" as const;
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:  if (MEDIUM_DOC_AIRLINES.includes(c)) return "medium" as const;
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:  return "low" as const;
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:  const t = useTranslations("check.uploadsId");
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:  const claimId = sp.get("claimId");
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:  const airlineCode = sp.get("airlineCode") || "";
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:    typeof window !== "undefined" ? window.location.pathname.split("/")[1] : "sv";
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:  const locale = pathnameLocale || "sv";
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:        sessionStorage.getItem("fc_signature_png");
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:      const fullName = `${sp.get("firstName") || ""} ${sp.get("lastName") || ""}`.trim();
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:        sp.get("bookingRef") || sp.get("pnr") || sp.get("bookingReference") || "";
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:          msg: t("errors.unsupportedFormat", { file: f.name }),
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:          msg: t("errors.fileTooLarge", { file: f.name, max: MAX_FILE_MB }),
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:        msg: t("errors.totalTooLarge", { max: MAX_TOTAL_MB }),
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:  params.set("uploadsIdValid", "1");
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:  window.dispatchEvent(new Event("flightclaimly-submit-failed"));
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:    setError(t("errors.missingClaim"));
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:    files.forEach((f) => formData.append("files", f));
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:      method: "POST",
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:      throw new Error("Upload failed");
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:    setError(t("errors.uploadFailed"));
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:    <div className="mx-auto max-w-3xl px-4 py-2 text-sky-900">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:      <div className="max-w-2xl">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:        <h1 className="text-2xl font-semibold text-sky-900">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:          {t("title")}
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:        <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:          {t("privacyNotice")}
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:        <p className="mt-6 text-slate-700">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:          {t("uploadPromptBefore")} <strong>{t("idOrPassport")}</strong>.
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:            "mt-6 rounded-2xl border-2 border-dashed p-6 md:p-8 transition",
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:            "bg-white shadow-sm",
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:            dragActive ? "border-sky-400 ring-2 ring-sky-100" : "border-slate-200",
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:          <div className="flex flex-col items-center text-center">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                "flex h-12 w-12 items-center justify-center rounded-2xl transition",
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                dragActive ? "bg-sky-50" : "bg-slate-50",
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:              <UploadCloud className="h-6 w-6 text-sky-700" />
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:           <div className="mt-4 text-base font-semibold text-sky-900">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:  <span className="hidden sm:inline">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:    {t("dropzone.dragDrop")}
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:  <span className="sm:hidden">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:    {t("dropzone.takePhoto")}
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:<div className="mt-1 text-sm text-slate-600">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:  <span className="hidden sm:inline">{t("dropzone.or")}</span>
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:<span className="sm:hidden">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:  {t("dropzone.camera")}
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:  type="button"
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:  <span className="hidden sm:inline">{t("dropzone.browse")}</span>
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:  <span className="sm:hidden">{t("dropzone.uploadPhoto")}</span>
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:            <div className="mt-3 text-xs text-slate-300">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:              {t("dropzone.fileLimits", {
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:            type="file"
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:            accept=".pdf,.jpg,.jpeg,.png"
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:            className="hidden"
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:            capture="environment"
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:          <div className="mt-6">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:            <div className="flex items-center justify-between">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:              <div className="text-sm font-semibold text-slate-900">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                {t("attachedFiles")}
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:              <div className="text-xs text-slate-500">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                {t("totalSize", { size: formatBytes(totalBytes) })}
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:            <ul className="mt-3 space-y-2">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                  className="flex items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-3"
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                  <div className="flex min-w-0 items-center gap-3">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-50">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                      <FileText className="h-5 w-5 text-slate-600" />
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                    <div className="min-w-0">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                      <div className="truncate text-sm font-semibold text-slate-900">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                      <div className="text-xs text-slate-500">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                    type="button"
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                    className="ml-3 inline-flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-50 hover:text-slate-700 transition"
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                    aria-label={t("removeFile")}
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                    title={t("remove")}
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                    <X className="h-5 w-5" />
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:        {docTier === "high" && (
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:          <div className="mt-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:            <div className="flex items-start gap-3">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:              <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                {t("highWarning")}
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:        {docTier === "medium" && (
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:          <div className="mt-6 rounded-xl border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-900">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:            <div className="flex items-start gap-3">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:                {t("mediumWarning")}
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:          <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:          <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+src/app/[locale]/check/uploads-id/ClientUploadsId.tsx:            {t("errors.missingClaim")}
+src/app/[locale]/check/uploads-id/page.tsx:import ClientUploadsId from "./ClientUploadsId";
+src/app/[locale]/check/direct-or-layover/page.tsx:import DirectOrLayoverClient from "./ui";
+src/app/[locale]/check/direct-or-layover/ui.tsx:"use client";
+src/app/[locale]/check/direct-or-layover/ui.tsx:import { useRouter, useSearchParams } from "next/navigation";
+src/app/[locale]/check/direct-or-layover/ui.tsx:import { useEffect, useMemo, useState } from "react";
+src/app/[locale]/check/direct-or-layover/ui.tsx:import { useTranslations } from "next-intl";
+src/app/[locale]/check/direct-or-layover/ui.tsx:import FromToInline from "@/components/FromToInline";
+src/app/[locale]/check/direct-or-layover/ui.tsx:import AirportInput from "@/components/AirportInput";
+src/app/[locale]/check/direct-or-layover/ui.tsx:type Choice = "direct" | "itinerary" | null;
+src/app/[locale]/check/direct-or-layover/ui.tsx:  const t = useTranslations("check.directOrLayover");
+src/app/[locale]/check/direct-or-layover/ui.tsx:  const from = sp.get("from") || "";
+src/app/[locale]/check/direct-or-layover/ui.tsx:  const to = sp.get("to") || "";
+src/app/[locale]/check/direct-or-layover/ui.tsx:  const [choice, setChoice] = useState<Choice>("direct");
+src/app/[locale]/check/direct-or-layover/ui.tsx:    if (choice !== "itinerary") return true;
+src/app/[locale]/check/direct-or-layover/ui.tsx:    if (choice !== "itinerary") return;
+src/app/[locale]/check/direct-or-layover/ui.tsx:    qs.set("choice", "itinerary");
+src/app/[locale]/check/direct-or-layover/ui.tsx:    qs.set("layoversValid", hasAtLeastOne ? "1" : "0");
+src/app/[locale]/check/direct-or-layover/ui.tsx:    qs.set("layovers", JSON.stringify(layovers.filter(Boolean)));
+src/app/[locale]/check/direct-or-layover/ui.tsx:  if (from) qs.set("from", from);
+src/app/[locale]/check/direct-or-layover/ui.tsx:  if (to) qs.set("to", to);
+src/app/[locale]/check/direct-or-layover/ui.tsx:  if (next === "itinerary") {
+src/app/[locale]/check/direct-or-layover/ui.tsx:    qs.set("choice", "itinerary");
+src/app/[locale]/check/direct-or-layover/ui.tsx:    qs.set("layoversValid", allLayoversFilled ? "1" : "0");
+src/app/[locale]/check/direct-or-layover/ui.tsx:    qs.set("layovers", JSON.stringify(layovers.filter(Boolean)));
+src/app/[locale]/check/direct-or-layover/ui.tsx:    qs.set("choice", "direct");   // 👈 LÄGG TILL DENNA RAD
+src/app/[locale]/check/direct-or-layover/ui.tsx:    qs.delete("layoversValid");
+src/app/[locale]/check/direct-or-layover/ui.tsx:    qs.delete("layovers");
+src/app/[locale]/check/direct-or-layover/ui.tsx:    "flex items-center gap-4 rounded-lg border px-5 py-4 text-left transition bg-white border-black/10 hover:border-sky-400 h-[56px]";
+src/app/[locale]/check/direct-or-layover/ui.tsx:    <div className="space-y-8">
+src/app/[locale]/check/direct-or-layover/ui.tsx:      <div className="h-px w-full bg-gradient-to-r from-transparent via-black/10 to-transparent" />
+src/app/[locale]/check/direct-or-layover/ui.tsx:      <div className="space-y-4">
+src/app/[locale]/check/direct-or-layover/ui.tsx:        <h2 className="text-lg font-semibold text-sky-900">
+src/app/[locale]/check/direct-or-layover/ui.tsx:          {t("title")}
+src/app/[locale]/check/direct-or-layover/ui.tsx:        <div className="grid gap-4 md:grid-cols-2">
+src/app/[locale]/check/direct-or-layover/ui.tsx:            type="button"
+src/app/[locale]/check/direct-or-layover/ui.tsx:              setChoice("direct");
+src/app/[locale]/check/direct-or-layover/ui.tsx:              goNext("direct");
+src/app/[locale]/check/direct-or-layover/ui.tsx:  "flex items-center gap-4 rounded-lg border px-5 py-4 text-left transition active:scale-[0.98]",
+src/app/[locale]/check/direct-or-layover/ui.tsx:              choice === "direct"
+src/app/[locale]/check/direct-or-layover/ui.tsx:  ? "border-sky-400 ring-2 ring-sky-200 bg-sky-50 shadow-sm"
+src/app/[locale]/check/direct-or-layover/ui.tsx:                : "border-black/10 bg-white hover:border-sky-400",
+src/app/[locale]/check/direct-or-layover/ui.tsx:                "flex h-4 w-4 items-center justify-center rounded-full border",
+src/app/[locale]/check/direct-or-layover/ui.tsx:                choice === "direct"
+src/app/[locale]/check/direct-or-layover/ui.tsx:                  ? "border-sky-500"
+src/app/[locale]/check/direct-or-layover/ui.tsx:                  : "border-black/30",
+src/app/[locale]/check/direct-or-layover/ui.tsx:              {choice === "direct" && (
+src/app/[locale]/check/direct-or-layover/ui.tsx:                <div className="h-2 w-2 rounded-full bg-sky-500" />
+src/app/[locale]/check/direct-or-layover/ui.tsx:            <div className="font-semibold text-slate-950">{t("direct")}</div>
+src/app/[locale]/check/direct-or-layover/ui.tsx:            type="button"
+src/app/[locale]/check/direct-or-layover/ui.tsx:              setChoice("itinerary");
+src/app/[locale]/check/direct-or-layover/ui.tsx:  "flex items-center gap-4 rounded-lg border px-5 py-4 text-left transition active:scale-[0.98]",
+src/app/[locale]/check/direct-or-layover/ui.tsx:             choice === "itinerary"
+src/app/[locale]/check/direct-or-layover/ui.tsx:  ? "border-sky-400 ring-2 ring-sky-200 bg-sky-50 shadow-sm"
+src/app/[locale]/check/direct-or-layover/ui.tsx:                : "border-black/10 bg-white hover:border-sky-400",
+src/app/[locale]/check/direct-or-layover/ui.tsx:                "flex h-4 w-4 items-center justify-center rounded-full border",
+src/app/[locale]/check/direct-or-layover/ui.tsx:                choice === "itinerary"
+src/app/[locale]/check/direct-or-layover/ui.tsx:                  ? "border-sky-500"
+src/app/[locale]/check/direct-or-layover/ui.tsx:                  : "border-black/30",
+src/app/[locale]/check/direct-or-layover/ui.tsx:              {choice === "itinerary" && (
+src/app/[locale]/check/direct-or-layover/ui.tsx:                <div className="h-2 w-2 rounded-full bg-sky-500" />
+src/app/[locale]/check/direct-or-layover/ui.tsx:            <div className="font-semibold text-slate-950">{t("layovers")}</div>
+src/app/[locale]/check/direct-or-layover/ui.tsx:        {choice === "itinerary" && (
+src/app/[locale]/check/direct-or-layover/ui.tsx:          <div className="mt-6 grid gap-4 md:grid-cols-1">
+src/app/[locale]/check/direct-or-layover/ui.tsx:              <h3 className="text-lg font-semibold text-sky-900">
+src/app/[locale]/check/direct-or-layover/ui.tsx:                {t("connectionTitle")}
+src/app/[locale]/check/direct-or-layover/ui.tsx:                <div className="mb-1 text-sm font-semibold text-sky-900">
+src/app/[locale]/check/direct-or-layover/ui.tsx:                  {idx + 1}. {t("cityOrAirport")}
+src/app/[locale]/check/direct-or-layover/ui.tsx:                <div className="relative w-full">
+src/app/[locale]/check/direct-or-layover/ui.tsx:                    className={cardBase + " w-full relative"}
+src/app/[locale]/check/direct-or-layover/ui.tsx:                      variant="unstyled"
+src/app/[locale]/check/direct-or-layover/ui.tsx:                      placeholder={t("airportPlaceholder")}
+src/app/[locale]/check/direct-or-layover/ui.tsx:  type="button"
+src/app/[locale]/check/direct-or-layover/ui.tsx:  aria-label={t("removeLayover")}
+src/app/[locale]/check/direct-or-layover/ui.tsx:                type="button"
+src/app/[locale]/check/direct-or-layover/ui.tsx:                className="text-emerald-600 font-semibold hover:underline"
+src/app/[locale]/check/direct-or-layover/ui.tsx:                {t("addAirport")}
+src/app/[locale]/check/direct-or-layover/ui.tsx:                <div className="mt-2 text-sm text-slate-500">
+src/app/[locale]/check/direct-or-layover/ui.tsx:                  {t("connectionRequired")}
+src/app/[locale]/check/booking-reference/page.tsx:"use client";
+src/app/[locale]/check/booking-reference/page.tsx:import { useRouter, useSearchParams } from "next/navigation";
+src/app/[locale]/check/booking-reference/page.tsx:import { useTranslations } from "next-intl";
+src/app/[locale]/check/booking-reference/page.tsx:import { useMemo, useState } from "react";
+src/app/[locale]/check/booking-reference/page.tsx:  const t = useTranslations("check.bookingReference");
+src/app/[locale]/check/booking-reference/page.tsx:  const initial = searchParams.get("bookingRef") || "";
+src/app/[locale]/check/booking-reference/page.tsx:      params.set("bookingRef", clean);
+src/app/[locale]/check/booking-reference/page.tsx:      params.delete("bookingRef");
+src/app/[locale]/check/booking-reference/page.tsx:      params.set("bookingRefValid", "1");
+src/app/[locale]/check/booking-reference/page.tsx:      params.delete("bookingRefValid");
+src/app/[locale]/check/booking-reference/page.tsx:    <div className="mx-auto max-w-3xl px-4 py-2 text-sky-900">
+src/app/[locale]/check/booking-reference/page.tsx:      <h1 className="text-2xl font-semibold text-sky-900">
+src/app/[locale]/check/booking-reference/page.tsx:        {t("title")}
+src/app/[locale]/check/booking-reference/page.tsx:      <div className="mt-5">
+src/app/[locale]/check/booking-reference/page.tsx:          placeholder={t("placeholder")}
+src/app/[locale]/check/booking-reference/page.tsx:          className="mt-1 w-full md:w-2/3 h-[56px] rounded-md border border-slate-300 px-3 text-[16px] text-slate-900 placeholder:text-slate-300 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
+src/app/[locale]/check/booking-reference/page.tsx:      <details className="mt-4 w-full md:w-2/3">
+src/app/[locale]/check/booking-reference/page.tsx:        <summary className="cursor-pointer select-none flex items-center gap-2 font-semibold text-sky-900 hover:text-sky-700 transition">
+src/app/[locale]/check/booking-reference/page.tsx:          <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-sky-500 text-sky-500 text-xs font-bold">
+src/app/[locale]/check/booking-reference/page.tsx:          <span>{t("helpTitle")}</span>
+src/app/[locale]/check/booking-reference/page.tsx:        <div className="mt-3 space-y-2 text-sm text-slate-700">
+src/app/[locale]/check/booking-reference/page.tsx:            {t("helpText1")}
+src/app/[locale]/check/booking-reference/page.tsx:            {t("helpText2")}
+src/app/[locale]/check/booking-reference/page.tsx:          <p className="text-slate-500">
+src/app/[locale]/check/booking-reference/page.tsx:           {t("examples")} <span className="font-medium">DS27K3</span>,{" "}
+src/app/[locale]/check/booking-reference/page.tsx:            <span className="font-medium">YLEHPW</span>
+src/app/[locale]/check/uploads/ClientUploads.tsx:"use client";
+src/app/[locale]/check/uploads/ClientUploads.tsx:import { useRouter, useSearchParams } from "next/navigation";
+src/app/[locale]/check/uploads/ClientUploads.tsx:import { useTranslations } from "next-intl";
+src/app/[locale]/check/uploads/ClientUploads.tsx:import { useEffect, useMemo, useRef, useState } from "react";
+src/app/[locale]/check/uploads/ClientUploads.tsx:} from "lucide-react";
+src/app/[locale]/check/uploads/ClientUploads.tsx:const ACCEPTED_EXT = ["pdf", "jpg", "jpeg", "png"];
+src/app/[locale]/check/uploads/ClientUploads.tsx:const HIGH_DOC_AIRLINES = ["FR", "W6"]; // Ryanair, Wizz (v1)
+src/app/[locale]/check/uploads/ClientUploads.tsx:const MEDIUM_DOC_AIRLINES = ["LH", "LX", "OS", "SN", "U2"]; // Lufthansa group + easyJet (v1)
+src/app/[locale]/check/uploads/ClientUploads.tsx:  if (HIGH_DOC_AIRLINES.includes(c)) return "high" as const;
+src/app/[locale]/check/uploads/ClientUploads.tsx:  if (MEDIUM_DOC_AIRLINES.includes(c)) return "medium" as const;
+src/app/[locale]/check/uploads/ClientUploads.tsx:  return "low" as const;
+src/app/[locale]/check/uploads/ClientUploads.tsx:  const t = useTranslations("check.uploads");
+src/app/[locale]/check/uploads/ClientUploads.tsx:  const claimId = sp.get("claimId") || "";
+src/app/[locale]/check/uploads/ClientUploads.tsx:    const airlineCode = sp.get("airlineCode") || "";
+src/app/[locale]/check/uploads/ClientUploads.tsx:    typeof window !== "undefined" ? window.location.pathname.split("/")[1] : "sv";
+src/app/[locale]/check/uploads/ClientUploads.tsx:  const locale = pathnameLocale || "sv";
+src/app/[locale]/check/uploads/ClientUploads.tsx:    console.log("🧪 DEBUG SIGNATURE", {
+src/app/[locale]/check/uploads/ClientUploads.tsx:  globalSig: sessionStorage.getItem("fc_signature_png"),
+src/app/[locale]/check/uploads/ClientUploads.tsx:console.log("🧪 ensureAuthority TRIGGER");
+src/app/[locale]/check/uploads/ClientUploads.tsx:    console.log("🚀 ensureAuthority RUN", claimId);
+src/app/[locale]/check/uploads/ClientUploads.tsx:    console.log("🚀 ensureAuthority RUN", claimId);
+src/app/[locale]/check/uploads/ClientUploads.tsx:  sessionStorage.getItem("fc_signature_png");
+src/app/[locale]/check/uploads/ClientUploads.tsx:    const fullName = `${sp.get("firstName") || ""} ${sp.get("lastName") || ""}`.trim();
+src/app/[locale]/check/uploads/ClientUploads.tsx:    const bookingReference = sp.get("bookingRef") || sp.get("pnr") || sp.get("bookingReference") || "";
+src/app/[locale]/check/uploads/ClientUploads.tsx:    const pdfRes = await fetch("/api/authority/generate", {
+src/app/[locale]/check/uploads/ClientUploads.tsx:      method: "POST",
+src/app/[locale]/check/uploads/ClientUploads.tsx:      headers: { "Content-Type": "application/json" },
+src/app/[locale]/check/uploads/ClientUploads.tsx:          msg: t("errors.unsupportedFormat", { file: f.name })
+src/app/[locale]/check/uploads/ClientUploads.tsx:          msg: t("errors.fileTooLarge", {
+src/app/[locale]/check/uploads/ClientUploads.tsx:        msg: t("errors.totalTooLarge", {
+src/app/[locale]/check/uploads/ClientUploads.tsx:  window.dispatchEvent(new Event("flightclaimly-submit-failed"));
+src/app/[locale]/check/uploads/ClientUploads.tsx:    method: "POST",
+src/app/[locale]/check/uploads/ClientUploads.tsx:    headers: { "Content-Type": "application/json" },
+src/app/[locale]/check/uploads/ClientUploads.tsx:      contentType: file.type || "application/octet-stream",
+src/app/[locale]/check/uploads/ClientUploads.tsx:    throw new Error("Presign failed");
+src/app/[locale]/check/uploads/ClientUploads.tsx:    method: "PUT",
+src/app/[locale]/check/uploads/ClientUploads.tsx:      "Content-Type": contentType || file.type || "application/octet-stream",
+src/app/[locale]/check/uploads/ClientUploads.tsx:    throw new Error("Direct upload failed");
+src/app/[locale]/check/uploads/ClientUploads.tsx:    contentType: file.type || "application/octet-stream",
+src/app/[locale]/check/uploads/ClientUploads.tsx:    setError(t("errors.missingClaim"));
+src/app/[locale]/check/uploads/ClientUploads.tsx:      method: "POST",
+src/app/[locale]/check/uploads/ClientUploads.tsx:      headers: { "Content-Type": "application/json" },
+src/app/[locale]/check/uploads/ClientUploads.tsx:      throw new Error("Metadata save failed");
+src/app/[locale]/check/uploads/ClientUploads.tsx:    setError(t("errors.uploadFailed"));
+src/app/[locale]/check/uploads/ClientUploads.tsx:    <div className="mx-auto max-w-3xl px-4 py-2 text-sky-900">
+src/app/[locale]/check/uploads/ClientUploads.tsx:      <div className="max-w-2xl">
+src/app/[locale]/check/uploads/ClientUploads.tsx:        <h1 className="text-2xl font-semibold text-sky-900">{t("title")}</h1>
+src/app/[locale]/check/uploads/ClientUploads.tsx:        <p className="mt-2 text-slate-700">
+src/app/[locale]/check/uploads/ClientUploads.tsx:          {t("description.before")}{" "}
+src/app/[locale]/check/uploads/ClientUploads.tsx:<strong>{t("description.boardingPass")}</strong>,
+src/app/[locale]/check/uploads/ClientUploads.tsx:{t("description.middle")}
+src/app/[locale]/check/uploads/ClientUploads.tsx:<strong>{t("description.faster")}</strong>.
+src/app/[locale]/check/uploads/ClientUploads.tsx:{t("description.expenses")}
+src/app/[locale]/check/uploads/ClientUploads.tsx:<strong>{t("description.moreMoney")}</strong>
+src/app/[locale]/check/uploads/ClientUploads.tsx:{t("description.after")}
+src/app/[locale]/check/uploads/ClientUploads.tsx:            "mt-6 rounded-2xl border-2 border-dashed p-6 md:p-8 transition",
+src/app/[locale]/check/uploads/ClientUploads.tsx:            "bg-white shadow-sm",
+src/app/[locale]/check/uploads/ClientUploads.tsx:            dragActive ? "border-sky-400 ring-2 ring-sky-100" : "border-slate-200",
+src/app/[locale]/check/uploads/ClientUploads.tsx:          <div className="flex flex-col items-center text-center">
+src/app/[locale]/check/uploads/ClientUploads.tsx:                "flex h-12 w-12 items-center justify-center rounded-2xl transition",
+src/app/[locale]/check/uploads/ClientUploads.tsx:                dragActive ? "bg-sky-50" : "bg-slate-50",
+src/app/[locale]/check/uploads/ClientUploads.tsx:              <UploadCloud className="h-6 w-6 text-sky-700" />
+src/app/[locale]/check/uploads/ClientUploads.tsx:            <div className="mt-4 text-base font-semibold text-sky-900">
+src/app/[locale]/check/uploads/ClientUploads.tsx:  <span className="hidden sm:inline">
+src/app/[locale]/check/uploads/ClientUploads.tsx:    {t("dropzone.dragDrop")}
+src/app/[locale]/check/uploads/ClientUploads.tsx: <span className="sm:hidden">
+src/app/[locale]/check/uploads/ClientUploads.tsx:  {t("dropzone.takePhoto")}
+src/app/[locale]/check/uploads/ClientUploads.tsx:<div className="mt-1 text-sm text-slate-600">
+src/app/[locale]/check/uploads/ClientUploads.tsx:  <span className="hidden sm:inline">{t("dropzone.or")}</span>
+src/app/[locale]/check/uploads/ClientUploads.tsx:<span className="sm:hidden">
+src/app/[locale]/check/uploads/ClientUploads.tsx:  {t("dropzone.camera")}
+src/app/[locale]/check/uploads/ClientUploads.tsx:  type="button"
+src/app/[locale]/check/uploads/ClientUploads.tsx:  <span className="hidden sm:inline">{t("dropzone.browse")}</span>
+src/app/[locale]/check/uploads/ClientUploads.tsx:  <span className="sm:hidden">{t("dropzone.uploadPhoto")}</span>
+src/app/[locale]/check/uploads/ClientUploads.tsx:            <div className="mt-3 text-xs text-slate-300">
+src/app/[locale]/check/uploads/ClientUploads.tsx:              {t("dropzone.fileLimits", {
+src/app/[locale]/check/uploads/ClientUploads.tsx:            type="file"
+src/app/[locale]/check/uploads/ClientUploads.tsx:            accept=".pdf,.jpg,.jpeg,.png"
+src/app/[locale]/check/uploads/ClientUploads.tsx:            className="hidden"
+src/app/[locale]/check/uploads/ClientUploads.tsx:  <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+src/app/[locale]/check/uploads/ClientUploads.tsx:          <div className="mt-6">
+src/app/[locale]/check/uploads/ClientUploads.tsx:            <div className="flex items-center justify-between">
+src/app/[locale]/check/uploads/ClientUploads.tsx:              <div className="text-sm font-semibold text-slate-900">
+src/app/[locale]/check/uploads/ClientUploads.tsx:                {t("attachedFiles")}
+src/app/[locale]/check/uploads/ClientUploads.tsx:              <div className="text-xs text-slate-500">
+src/app/[locale]/check/uploads/ClientUploads.tsx:                {t("totalSize", { size: formatBytes(totalBytes) })}
+src/app/[locale]/check/uploads/ClientUploads.tsx:            <ul className="mt-3 space-y-2">
+src/app/[locale]/check/uploads/ClientUploads.tsx:                  className="flex items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-3"
+src/app/[locale]/check/uploads/ClientUploads.tsx:                  <div className="flex min-w-0 items-center gap-3">
+src/app/[locale]/check/uploads/ClientUploads.tsx:                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-50">
+src/app/[locale]/check/uploads/ClientUploads.tsx:                      <FileText className="h-5 w-5 text-slate-600" />
+src/app/[locale]/check/uploads/ClientUploads.tsx:                    <div className="min-w-0">
+src/app/[locale]/check/uploads/ClientUploads.tsx:                      <div className="truncate text-sm font-semibold text-slate-900">
+src/app/[locale]/check/uploads/ClientUploads.tsx:                      <div className="text-xs text-slate-500">
+src/app/[locale]/check/uploads/ClientUploads.tsx:                    type="button"
+src/app/[locale]/check/uploads/ClientUploads.tsx:                    className="ml-3 inline-flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-50 hover:text-slate-700 transition"
+src/app/[locale]/check/uploads/ClientUploads.tsx:                    aria-label={t("removeFile")}
+src/app/[locale]/check/uploads/ClientUploads.tsx:                    title={t("remove")}
+src/app/[locale]/check/uploads/ClientUploads.tsx:                    <X className="h-5 w-5" />
+src/app/[locale]/check/uploads/page.tsx:import ClientUploads from "./ClientUploads";
+src/app/[locale]/check/passengers/page.tsx:"use client";
+src/app/[locale]/check/passengers/page.tsx:import { useRouter, useSearchParams } from "next/navigation";
+src/app/[locale]/check/passengers/page.tsx:import { useTranslations } from "next-intl";
+src/app/[locale]/check/passengers/page.tsx:import { useEffect, useState } from "react";
+src/app/[locale]/check/passengers/page.tsx:  const t = useTranslations("check.passengers");
+src/app/[locale]/check/passengers/page.tsx:    { firstName: "", lastName: "", email: "", under18: false },
+src/app/[locale]/check/passengers/page.tsx:    const solo = searchParams.get("solo") === "1";
+src/app/[locale]/check/passengers/page.tsx:    const paxJson = searchParams.get("pax");
+src/app/[locale]/check/passengers/page.tsx:  if (typeof next.solo === "boolean") {
+src/app/[locale]/check/passengers/page.tsx:      params.set("solo", "1");
+src/app/[locale]/check/passengers/page.tsx:      params.delete("pax");
+src/app/[locale]/check/passengers/page.tsx:      params.delete("solo");
+src/app/[locale]/check/passengers/page.tsx:    params.set("pax", JSON.stringify(next.pax));
+src/app/[locale]/check/passengers/page.tsx:  if (typeof next.passengerDetailsValid === "string") {
+src/app/[locale]/check/passengers/page.tsx:      params.set("passengerDetailsValid", "1");
+src/app/[locale]/check/passengers/page.tsx:      params.delete("passengerDetailsValid");
+src/app/[locale]/check/passengers/page.tsx:      { firstName: "", lastName: "", email: "", under18: false },
+src/app/[locale]/check/passengers/page.tsx:  const el = document.getElementById("continue-anchor");
+src/app/[locale]/check/passengers/page.tsx:  el?.scrollIntoView({ behavior: "smooth", block: "end" });
+src/app/[locale]/check/passengers/page.tsx:  const verifyEligible = searchParams.get("verifyEligible") === "1";
+src/app/[locale]/check/passengers/page.tsx:    <div className="mx-auto max-w-3xl px-4 py-2 text-sky-900">
+src/app/[locale]/check/passengers/page.tsx:      <h1 className="text-2xl font-semibold text-sky-900">{t("title")}</h1>
+src/app/[locale]/check/passengers/page.tsx:      <div className="mt-4 rounded-lg bg-emerald-50 border border-emerald-200 px-4 py-3 text-emerald-900">
+src/app/[locale]/check/passengers/page.tsx:        {t("info")}
+src/app/[locale]/check/passengers/page.tsx:      <div className="mt-6 space-y-3">
+src/app/[locale]/check/passengers/page.tsx:            "flex items-center gap-3 rounded-lg border px-5 py-4 min-h-[56px] cursor-pointer transition text-sky-900",
+src/app/[locale]/check/passengers/page.tsx:  ? "border-sky-400 ring-2 ring-sky-200 bg-sky-50 shadow-sm"
+src/app/[locale]/check/passengers/page.tsx:  : "border-slate-300 hover:border-sky-300"
+src/app/[locale]/check/passengers/page.tsx:            type="radio"
+src/app/[locale]/check/passengers/page.tsx:          <span className="font-medium">{t("travelingWithOthers")}</span>
+src/app/[locale]/check/passengers/page.tsx:            "flex items-center gap-3 rounded-lg border px-5 py-4 min-h-[56px] cursor-pointer transition text-sky-900",
+src/app/[locale]/check/passengers/page.tsx:  ? "border-sky-400 ring-2 ring-sky-200 bg-sky-50 shadow-sm"
+src/app/[locale]/check/passengers/page.tsx:  : "border-slate-300 hover:border-sky-300"
+src/app/[locale]/check/passengers/page.tsx:            type="radio"
+src/app/[locale]/check/passengers/page.tsx:          <span className="font-medium">{t("travelingAlone")}</span>
+src/app/[locale]/check/passengers/page.tsx:          <div className="mt-6 rounded-xl bg-emerald-50 px-6 py-5 flex items-center justify-between">
+src/app/[locale]/check/passengers/page.tsx:              <div className="text-sm text-slate-600">{verifyEligible ? t("potentialCompensation") : t("manualReview")}</div>
+src/app/[locale]/check/passengers/page.tsx:              <div className="mt-1 text-3xl font-bold text-emerald-600">
+src/app/[locale]/check/passengers/page.tsx:              <div className="text-slate-600 text-sm">
+src/app/[locale]/check/passengers/page.tsx:  ? t("totalForOnePassenger", { count: passengerCount })
+src/app/[locale]/check/passengers/page.tsx:  : t("totalForPassengers", { count: passengerCount })}
+src/app/[locale]/check/passengers/page.tsx:            <div className="text-right">
+src/app/[locale]/check/passengers/page.tsx:              <div className="text-sm text-slate-600">{t("perPassenger")}</div>
+src/app/[locale]/check/passengers/page.tsx:              <div className="text-xl font-semibold text-emerald-700">
+src/app/[locale]/check/passengers/page.tsx:        <div className="mt-8 space-y-6">
+src/app/[locale]/check/passengers/page.tsx:            <div key={idx} className="rounded-lg border border-slate-200 p-4">
+src/app/[locale]/check/passengers/page.tsx:              <div className="mb-3 flex items-center justify-between">
+src/app/[locale]/check/passengers/page.tsx:                <div className="font-semibold text-sky-900">
+src/app/[locale]/check/passengers/page.tsx:                  {t("passengerNumber", { number: idx + 2 })}
+src/app/[locale]/check/passengers/page.tsx:                    type="button"
+src/app/[locale]/check/passengers/page.tsx:                    className="text-sm font-semibold text-sky-600 hover:text-sky-700 hover:bg-sky-50 rounded-md px-2 py-1 transition"
+src/app/[locale]/check/passengers/page.tsx:                    {t("remove")}
+src/app/[locale]/check/passengers/page.tsx:              <div className="mb-4">
+src/app/[locale]/check/passengers/page.tsx:                <label className="flex items-center gap-2 text-sm text-sky-900">
+src/app/[locale]/check/passengers/page.tsx:                    type="checkbox"
+src/app/[locale]/check/passengers/page.tsx:                  {t("under18")}
+src/app/[locale]/check/passengers/page.tsx:              <div className="mb-4">
+src/app/[locale]/check/passengers/page.tsx:                <label className="block text-sm font-semibold text-sky-900">
+src/app/[locale]/check/passengers/page.tsx:                  {t("firstName")}
+src/app/[locale]/check/passengers/page.tsx:                  className="mt-1 w-full h-[56px] rounded-lg border border-black/10 bg-white px-5 text-slate-900 placeholder:text-slate-500 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
+src/app/[locale]/check/passengers/page.tsx:              <div className="mb-4">
+src/app/[locale]/check/passengers/page.tsx:                <label className="block text-sm font-semibold text-sky-900">
+src/app/[locale]/check/passengers/page.tsx:                  {t("lastName")}
+src/app/[locale]/check/passengers/page.tsx:                  className="mt-1 w-full h-[56px] rounded-lg border border-black/10 bg-white px-5 text-slate-900 placeholder:text-slate-500 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
+src/app/[locale]/check/passengers/page.tsx:                <label className="block text-sm font-semibold text-sky-900">
+src/app/[locale]/check/passengers/page.tsx:                  {t("email")}{" "}
+src/app/[locale]/check/passengers/page.tsx:  <span className="text-xs text-slate-500">{t("optional")}</span>
+src/app/[locale]/check/passengers/page.tsx:                  type="email"
+src/app/[locale]/check/passengers/page.tsx:                  className="mt-1 w-full h-[56px] rounded-lg border border-black/10 bg-white px-5 text-slate-900 placeholder:text-slate-500 hover:border-sky-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-200 outline-none"
+src/app/[locale]/check/passengers/page.tsx:            type="button"
+src/app/[locale]/check/passengers/page.tsx:            className="rounded-md border border-sky-500 px-4 py-2 text-sm font-semibold text-sky-700 transition hover:bg-slate-100 hover:border-sky-600 hover:text-sky-800"
+src/app/[locale]/check/passengers/page.tsx:            {t("addPassenger")}
+src/app/[locale]/check/passengers/page.tsx:      <div id="continue-anchor" />
+src/app/[locale]/check/claim-owner/page.tsx:"use client";
+src/app/[locale]/check/claim-owner/page.tsx:import { useRouter, useSearchParams } from "next/navigation";
+src/app/[locale]/check/claim-owner/page.tsx:import { useTranslations } from "next-intl";
+src/app/[locale]/check/claim-owner/page.tsx:import { useState, useRef, useEffect } from "react";
+src/app/[locale]/check/claim-owner/page.tsx:  const t = useTranslations("check.claimOwner");
+src/app/[locale]/check/claim-owner/page.tsx:  const firstName = searchParams.get("firstName") || "";
+src/app/[locale]/check/claim-owner/page.tsx:  const lastName = searchParams.get("lastName") || "";
+src/app/[locale]/check/claim-owner/page.tsx:  const email = searchParams.get("email") || "";
+src/app/[locale]/check/claim-owner/page.tsx:      params.set("firstName", first);
+src/app/[locale]/check/claim-owner/page.tsx:      params.delete("firstName");
+src/app/[locale]/check/claim-owner/page.tsx:      params.set("lastName", last);
+src/app/[locale]/check/claim-owner/page.tsx:      params.delete("lastName");
+src/app/[locale]/check/claim-owner/page.tsx:      params.set("email", mail);
+src/app/[locale]/check/claim-owner/page.tsx:      params.delete("email");
+src/app/[locale]/check/claim-owner/page.tsx:    el.addEventListener("change", handle);
+src/app/[locale]/check/claim-owner/page.tsx:    el.addEventListener("blur", handle);
+src/app/[locale]/check/claim-owner/page.tsx:      el.removeEventListener("change", handle);
+src/app/[locale]/check/claim-owner/page.tsx:      el.removeEventListener("blur", handle);
+src/app/[locale]/check/claim-owner/page.tsx:    <div className="mx-auto max-w-2xl px-4 py-8">
+src/app/[locale]/check/claim-owner/page.tsx:      <h1 className="text-2xl font-semibold text-sky-900">
+src/app/[locale]/check/claim-owner/page.tsx:        {t("title")}
+src/app/[locale]/check/claim-owner/page.tsx:      <div className="text-sm text-emerald-600 font-medium mt-2">
+src/app/[locale]/check/claim-owner/page.tsx:        {t("subtitle")}
+src/app/[locale]/check/claim-owner/page.tsx:      <div className="mt-8 space-y-8">
+src/app/[locale]/check/claim-owner/page.tsx:          <label className="block text-sm font-medium text-sky-900">
+src/app/[locale]/check/claim-owner/page.tsx:            {t("firstNameLabel")}
+src/app/[locale]/check/claim-owner/page.tsx:            type="text"
+src/app/[locale]/check/claim-owner/page.tsx:              updateParam("firstName", val);
+src/app/[locale]/check/claim-owner/page.tsx:              if (e.key === "Enter") {
+src/app/[locale]/check/claim-owner/page.tsx:                  behavior: "smooth",
+src/app/[locale]/check/claim-owner/page.tsx:                  block: "center",
+src/app/[locale]/check/claim-owner/page.tsx:            placeholder={t("firstNamePlaceholder")}
+src/app/[locale]/check/claim-owner/page.tsx:          <p className="mt-2 text-xs text-slate-400">
+src/app/[locale]/check/claim-owner/page.tsx:            {t("firstNameHint")}
+src/app/[locale]/check/claim-owner/page.tsx:          <label className="block text-sm font-medium text-sky-900">
+src/app/[locale]/check/claim-owner/page.tsx:            {t("lastNameLabel")}
+src/app/[locale]/check/claim-owner/page.tsx:            type="text"
+src/app/[locale]/check/claim-owner/page.tsx:              updateParam("lastName", val);
+src/app/[locale]/check/claim-owner/page.tsx:              if (e.key === "Enter") {
+src/app/[locale]/check/claim-owner/page.tsx:                  behavior: "smooth",
+src/app/[locale]/check/claim-owner/page.tsx:                  block: "center",
+src/app/[locale]/check/claim-owner/page.tsx:            placeholder={t("lastNamePlaceholder")}
+src/app/[locale]/check/claim-owner/page.tsx:          <p className="mt-2 text-xs text-slate-400">
+src/app/[locale]/check/claim-owner/page.tsx:            {t("lastNameHint")}
+src/app/[locale]/check/claim-owner/page.tsx:          <label className="block text-sm font-medium text-sky-900">
+src/app/[locale]/check/claim-owner/page.tsx:            {t("emailLabel")}
+src/app/[locale]/check/claim-owner/page.tsx:          <div className="text-xs text-emerald-600 font-medium mb-1">
+src/app/[locale]/check/claim-owner/page.tsx:            {t("emailSubtitle")}
+src/app/[locale]/check/claim-owner/page.tsx:          <div className="relative w-full md:w-2/3">
+src/app/[locale]/check/claim-owner/page.tsx:              type="email"
+src/app/[locale]/check/claim-owner/page.tsx:                updateParam("email", val);
+src/app/[locale]/check/claim-owner/page.tsx:                border ${emailValid ? "border-emerald-400" : "border-slate-300"}
+src/app/[locale]/check/claim-owner/page.tsx:              placeholder="name@example.com"
+src/app/[locale]/check/claim-owner/page.tsx:              <div className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500">
+src/app/[locale]/check/claim-owner/page.tsx:          <p className="mt-2 text-xs text-slate-400">
+src/app/[locale]/check/claim-owner/page.tsx:            {t("emailHint")}
+src/app/[locale]/check/claim-owner/page.tsx:          <p className="mt-1 text-xs text-slate-400">
+src/app/[locale]/check/claim-owner/page.tsx:            {t("legal.before")}{" "}
+src/app/[locale]/check/claim-owner/page.tsx:            <a href="/terms" className="text-sky-600 hover:underline">
+src/app/[locale]/check/claim-owner/page.tsx:              {t("legal.terms")}
+src/app/[locale]/check/claim-owner/page.tsx:            {t("legal.and")}{" "}
+src/app/[locale]/check/claim-owner/page.tsx:            <a href="/privacy" className="text-sky-600 hover:underline">
+src/app/[locale]/check/claim-owner/page.tsx:              {t("legal.privacy")}
+src/app/[locale]/check/finish/page.tsx:"use client";
+src/app/[locale]/check/finish/page.tsx:import { useEffect, useState } from "react";
+src/app/[locale]/check/finish/page.tsx:import { useSearchParams, useRouter } from "next/navigation";
+src/app/[locale]/check/finish/page.tsx:import { useTranslations } from "next-intl";
+src/app/[locale]/check/finish/page.tsx:  const t = useTranslations("check.finish");
+src/app/[locale]/check/finish/page.tsx:  const claimId = sp.get("claimId");
+src/app/[locale]/check/finish/page.tsx:    typeof window !== "undefined"
+src/app/[locale]/check/finish/page.tsx:      : "sv";
+src/app/[locale]/check/finish/page.tsx:        setError(t("errors.missingClaimId"));
+src/app/[locale]/check/finish/page.tsx:          sessionStorage.getItem("fc_signature_png");
+src/app/[locale]/check/finish/page.tsx:          throw new Error("Missing signature");
+src/app/[locale]/check/finish/page.tsx:          `${sp.get("firstName") || ""} ${sp.get("lastName") || ""}`.trim();
+src/app/[locale]/check/finish/page.tsx:          sp.get("bookingRef") ||
+src/app/[locale]/check/finish/page.tsx:          sp.get("pnr") ||
+src/app/[locale]/check/finish/page.tsx:          sp.get("bookingReference") ||
+src/app/[locale]/check/finish/page.tsx:          throw new Error("Missing passenger data");
+src/app/[locale]/check/finish/page.tsx:        setError(t("errors.finalizeFailed"));
+src/app/[locale]/check/finish/page.tsx:    <div className="p-8 text-sky-900">
+src/app/[locale]/check/finish/page.tsx:        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
+src/app/[locale]/check/finish/page.tsx:        <div>{t("finalizing")}</div>
+src/app/[locale]/check/layout.tsx:"use client";
+src/app/[locale]/check/layout.tsx:import { useEffect, useState, type ReactNode } from "react";
+src/app/[locale]/check/layout.tsx:import { usePathname, useRouter, useSearchParams } from "next/navigation";
+src/app/[locale]/check/layout.tsx:import { useTranslations } from "next-intl";
+src/app/[locale]/check/layout.tsx:  titleKey: "eligibility" | "passengerDetails" | "documents" | "finish";
+src/app/[locale]/check/layout.tsx:    titleKey: "eligibility",
+src/app/[locale]/check/layout.tsx:      "direct-or-layover",
+src/app/[locale]/check/layout.tsx:      "direct",
+src/app/[locale]/check/layout.tsx:      "itinerary",
+src/app/[locale]/check/layout.tsx:      "missed-connection",
+src/app/[locale]/check/layout.tsx:      "missed-connection-hours",
+src/app/[locale]/check/layout.tsx:      "what-happened",
+src/app/[locale]/check/layout.tsx:      "verify",
+src/app/[locale]/check/layout.tsx:    titleKey: "passengerDetails",
+src/app/[locale]/check/layout.tsx:      "claim-owner",
+src/app/[locale]/check/layout.tsx:      "passengers",
+src/app/[locale]/check/layout.tsx:      "passenger-details",
+src/app/[locale]/check/layout.tsx:      "booking-reference",
+src/app/[locale]/check/layout.tsx:      "authorization",
+src/app/[locale]/check/layout.tsx:    titleKey: "documents",
+src/app/[locale]/check/layout.tsx:    paths: ["uploads", "uploads-id", "additional"],
+src/app/[locale]/check/layout.tsx:    titleKey: "finish",
+src/app/[locale]/check/layout.tsx:    paths: ["finish", "thanks"],
+src/app/[locale]/check/layout.tsx:  if (!qs.get("legs")) {
+src/app/[locale]/check/layout.tsx:    const segmentsJson = qs.get("segments");
+src/app/[locale]/check/layout.tsx:    const layoversJson = qs.get("layovers");
+src/app/[locale]/check/layout.tsx:        const fromLabel = qs.get("from"); // "Copenhagen (CPH) — Copenhagen Kastrup Airport"
+src/app/[locale]/check/layout.tsx:        const toLabel = qs.get("to");     // "Warsaw (WAW) — Warsaw Chopin Airport"
+src/app/[locale]/check/layout.tsx:          if (!label) return { city: "Unknown", code: "UNK" };
+src/app/[locale]/check/layout.tsx:          return { city: label, code: "UNK" };
+src/app/[locale]/check/layout.tsx:          qs.set("legs", JSON.stringify(legs));
+src/app/[locale]/check/layout.tsx:    const from = qs.get("from");
+src/app/[locale]/check/layout.tsx:    const fromCode = qs.get("fromCode");
+src/app/[locale]/check/layout.tsx:    const to = qs.get("to");
+src/app/[locale]/check/layout.tsx:    const toCode = qs.get("toCode");
+src/app/[locale]/check/layout.tsx:      qs.set("legs", JSON.stringify(legs));
+src/app/[locale]/check/layout.tsx:  const t = useTranslations("check.layout");
+src/app/[locale]/check/layout.tsx:    "flightclaimly-submit-failed",
+src/app/[locale]/check/layout.tsx:      "flightclaimly-submit-failed",
+src/app/[locale]/check/layout.tsx:  const choice = (sp.get("choice") || "direct") as "direct" | "itinerary";
+src/app/[locale]/check/layout.tsx:  const passengerDetailsValid = sp.get("passengerDetailsValid") === "1";
+src/app/[locale]/check/layout.tsx:  const authorizationValid = sp.get("authorizationValid") === "1";
+src/app/[locale]/check/layout.tsx:  const parts = pathname.split("/").filter(Boolean); // ["sv","check","direct-or-layover", ...]
+src/app/[locale]/check/layout.tsx:  const base = parts.length >= 2 ? `/${parts[0]}/${parts[1]}` : "/check";
+src/app/[locale]/check/layout.tsx:  const isDirectOrLayover = pathname.endsWith("/direct-or-layover");
+src/app/[locale]/check/layout.tsx:  const isDirect = pathname.endsWith("/direct");
+src/app/[locale]/check/layout.tsx:  const isItinerary = pathname.endsWith("/itinerary");
+src/app/[locale]/check/layout.tsx:  const isMissedConnection = pathname.endsWith("/itinerary/missed-connection");
+src/app/[locale]/check/layout.tsx:    "/itinerary/missed-connection-hours"
+src/app/[locale]/check/layout.tsx:  const isWhatHappened = pathname.endsWith("/itinerary/what-happened");
+src/app/[locale]/check/layout.tsx:  const isVerify = pathname.endsWith("/verify");
+src/app/[locale]/check/layout.tsx:  const isClaimOwner = pathname.endsWith("/claim-owner");
+src/app/[locale]/check/layout.tsx:  const isPassengers = pathname.endsWith("/passengers");
+src/app/[locale]/check/layout.tsx:  const isPassengerDetails = pathname.endsWith("/passenger-details");
+src/app/[locale]/check/layout.tsx:  const isBookingReference = pathname.endsWith("/booking-reference");
+src/app/[locale]/check/layout.tsx:  const isSignature = pathname.endsWith("/signature");
+src/app/[locale]/check/layout.tsx:  const signatureValid = sp.get("signatureValid") === "1";
+src/app/[locale]/check/layout.tsx:  const isUploads = pathname.endsWith("/uploads");
+src/app/[locale]/check/layout.tsx:  const isAuthorization = pathname.endsWith("/authorization");
+src/app/[locale]/check/layout.tsx:  const isUploadsId = pathname.endsWith("/uploads-id");
+src/app/[locale]/check/layout.tsx:  const isAdditional = pathname.endsWith("/additional");
+src/app/[locale]/check/layout.tsx:  const isFinish = pathname.endsWith("/finish");
+src/app/[locale]/check/layout.tsx:const primaryCtaLabel = t("continue");  
+src/app/[locale]/check/layout.tsx:  const verifyMatched = sp.get("verifyMatched") === "1";
+src/app/[locale]/check/layout.tsx:  const verifyEligible = sp.get("verifyEligible") === "1";
+src/app/[locale]/check/layout.tsx:  const verifyConfirm = sp.get("verifyConfirm"); // "yes" | null
+src/app/[locale]/check/layout.tsx:  verifyConfirm === "yes";
+src/app/[locale]/check/layout.tsx:  const layoversValid = sp.get("layoversValid") === "1";
+src/app/[locale]/check/layout.tsx:  const segmentsValid = sp.get("segmentsValid") === "1";
+src/app/[locale]/check/layout.tsx:  const directValid = sp.get("directValid") === "1";
+src/app/[locale]/check/layout.tsx:  const bookingRefValid = sp.get("bookingRefValid") === "1";
+src/app/[locale]/check/layout.tsx:  const missedConnection = sp.get("missedConnection"); // "yes" | "no" | null
+src/app/[locale]/check/layout.tsx:    missedConnection === "yes" || missedConnection === "no";
+src/app/[locale]/check/layout.tsx:    sp.get("missedConnectionDelayValid") === "1" ||
+src/app/[locale]/check/layout.tsx:    Boolean(sp.get("missedConnectionDelay"));
+src/app/[locale]/check/layout.tsx:  const disruptionType = sp.get("disruptionType"); // "delayed" | "cancelled" | "denied"
+src/app/[locale]/check/layout.tsx:  const affectedLegId = sp.get("affectedLegId");
+src/app/[locale]/check/layout.tsx:  const outcome = sp.get("outcome"); // "gte3" | "lt3" | "never"
+src/app/[locale]/check/layout.tsx:  const cancelNotice = sp.get("cancelNotice"); // "lt14" | "gte14"
+src/app/[locale]/check/layout.tsx:  const volunteer = sp.get("volunteer"); // "yes" | "no"
+src/app/[locale]/check/layout.tsx:    disruptionType !== "cancelled" ||
+src/app/[locale]/check/layout.tsx:    (cancelNotice === "lt14" || cancelNotice === "gte14");
+src/app/[locale]/check/layout.tsx:    disruptionType !== "denied" || (volunteer === "yes" || volunteer === "no");
+src/app/[locale]/check/layout.tsx:    if (pathname.includes("/itinerary/")) {
+src/app/[locale]/check/layout.tsx:    if (pathname.includes("/itinerary/")) {
+src/app/[locale]/check/layout.tsx:      if (missedConnection === "yes") {
+src/app/[locale]/check/layout.tsx:      if (missedConnection === "no") {
+src/app/[locale]/check/layout.tsx:      return choice === "direct" || (choice === "itinerary" && layoversValid);
+src/app/[locale]/check/layout.tsx:    if (isUploads) return sp.get("uploadsValid") === "1";
+src/app/[locale]/check/layout.tsx:    if (isUploadsId) return sp.get("uploadsIdValid") === "1";
+src/app/[locale]/check/layout.tsx:  const firstName = sp.get("firstName");
+src/app/[locale]/check/layout.tsx:  const lastName = sp.get("lastName");
+src/app/[locale]/check/layout.tsx:  const email = sp.get("email");
+src/app/[locale]/check/layout.tsx:      const solo = sp.get("solo") === "1";
+src/app/[locale]/check/layout.tsx:      const paxJson = sp.get("pax");
+src/app/[locale]/check/layout.tsx:  <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-[#F4F5F7] via-[#F1F3F6] to-[#ECEFF3]">
+src/app/[locale]/check/layout.tsx:      <div className="relative h-screen md:flex">
+src/app/[locale]/check/layout.tsx:<aside className="hidden md:flex w-[380px] flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-sky-900 px-10 py-10 sticky top-0 h-screen">      <div>
+src/app/[locale]/check/layout.tsx:            <div className="text-white text-lg font-semibold tracking-wide">
+src/app/[locale]/check/layout.tsx:              FLIGHT<span className="text-emerald-400">CLAIMLY</span>
+src/app/[locale]/check/layout.tsx:            <div className="mt-2 text-xs text-white/60">{t("progress")}</div>
+src/app/[locale]/check/layout.tsx:          <div className="relative mt-20 pl-4">
+src/app/[locale]/check/layout.tsx:            <div className="absolute left-[6px] top-1 bottom-1 w-px bg-white/15" />
+src/app/[locale]/check/layout.tsx:            <div className="space-y-8">
+src/app/[locale]/check/layout.tsx:                  <div key={step.id} className="relative flex items-center gap-4">
+src/app/[locale]/check/layout.tsx:                        "relative z-10 h-3 w-3 rounded-full transition",
+src/app/[locale]/check/layout.tsx:                        active || done ? "bg-emerald-400" : "bg-white/30",
+src/app/[locale]/check/layout.tsx:                        "text-sm font-medium transition",
+src/app/[locale]/check/layout.tsx:                        active || done ? "text-white" : "text-white/50",
+src/app/[locale]/check/layout.tsx:          <div className="mt-auto pt-16 text-xs text-white/40" />
+src/app/[locale]/check/layout.tsx:            <main className="flex-1 px-[14px] py-10 md:px-10 pb-28 overflow-x-hidden">
+src/app/[locale]/check/layout.tsx:            <div className="mx-auto w-full max-w-[680px]">
+src/app/[locale]/check/layout.tsx:            <div className="overflow-visible rounded-2xl bg-white/90 shadow-[0_25px_80px_-30px_rgba(0,0,0,0.18)] backdrop-blur-[2px]">
+src/app/[locale]/check/layout.tsx:              <div className="px-4 py-6 md:px-10 md:py-8">{children}</div>
+src/app/[locale]/check/layout.tsx:              <div className="mx-auto mt-6 w-full max-w-4xl px-2">
+src/app/[locale]/check/layout.tsx:                <div className="flex items-start gap-3 rounded-lg bg-emerald-50 px-4 py-3 text-slate-700">
+src/app/[locale]/check/layout.tsx:                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-sm font-bold text-white">
+src/app/[locale]/check/layout.tsx:                  <p className="text-sm leading-relaxed">
+src/app/[locale]/check/layout.tsx:  {t("itineraryNotice.before")}{" "}
+src/app/[locale]/check/layout.tsx:  <strong>{t("itineraryNotice.originalFlight")}</strong>{" "}
+src/app/[locale]/check/layout.tsx:  {t("itineraryNotice.after")}
+src/app/[locale]/check/layout.tsx:            <div className="mt-6 hidden md:flex justify-end gap-3">
+src/app/[locale]/check/layout.tsx:                type="button"
+src/app/[locale]/check/layout.tsx:                {t("back")}
+src/app/[locale]/check/layout.tsx:                type="button"
+src/app/[locale]/check/layout.tsx:    window.dispatchEvent(new Event("flightclaimly-submit-authorization"));
+src/app/[locale]/check/layout.tsx:                  "w-44 rounded-lg px-5 py-4 text-sm font-semibold transition",
+src/app/[locale]/check/layout.tsx:                    ? "bg-sky-500 text-white hover:bg-sky-600 cursor-pointer shadow-md shadow-sky-500/30 hover:shadow-lg hover:shadow-sky-500/40 transform hover:-translate-y-[1px] active:translate-y-0"
+src/app/[locale]/check/layout.tsx:                    : "bg-slate-300 text-sky-600 cursor-not-allowed opacity-60",
+src/app/[locale]/check/layout.tsx:                {isSubmitting ? t("processing") : primaryCtaLabel}
+src/app/[locale]/check/layout.tsx:<div className="md:hidden mt-2 sticky bottom-0 z-50 bg-white backdrop-blur-sm rounded-2xl p-4">
+src/app/[locale]/check/layout.tsx:      <div className="flex items-center gap-3">
+src/app/[locale]/check/layout.tsx:      type="button"
+src/app/[locale]/check/layout.tsx:      {t("back")}
+src/app/[locale]/check/layout.tsx:      type="button"
+src/app/[locale]/check/layout.tsx:    window.dispatchEvent(new Event("flightclaimly-submit-authorization"));
+src/app/[locale]/check/layout.tsx:        "flex-1 rounded-xl px-6 py-3 text-base font-semibold transition-all duration-200",
+src/app/[locale]/check/layout.tsx:  ? "bg-sky-600 text-white shadow-[0_10px_25px_rgba(2,132,199,0.35)] hover:scale-[1.01] active:scale-[0.98] active:bg-sky-700 animate-[pulse_0.6s_ease-in-out_1]"
+src/app/[locale]/check/layout.tsx:          : "bg-slate-200 text-slate-400 cursor-not-allowed",
+src/app/[locale]/check/layout.tsx:{isSubmitting ? t("processing") : primaryCtaLabel}
+src/app/[locale]/check/layout.tsx:            <div className="mt-10 border-t border-slate-200 pt-6 flex items-center justify-between text-xs text-slate-500">
+src/app/[locale]/check/layout.tsx:  <div className="flex items-center gap-8">
+src/app/[locale]/check/layout.tsx:      className="hover:text-slate-700 transition"
+src/app/[locale]/check/layout.tsx:      {t("footer.help")}
+src/app/[locale]/check/layout.tsx:      className="hover:text-slate-700 transition"
+src/app/[locale]/check/layout.tsx:      target="_blank"
+src/app/[locale]/check/layout.tsx:      rel="noreferrer"
+src/app/[locale]/check/layout.tsx:      {t("footer.terms")}
+src/app/[locale]/check/layout.tsx:      className="hover:text-slate-700 transition"
+src/app/[locale]/check/layout.tsx:      target="_blank"
+src/app/[locale]/check/layout.tsx:      rel="noreferrer"
+src/app/[locale]/check/layout.tsx:      {t("footer.privacy")}
+src/app/[locale]/check/layout.tsx:  <div className="text-slate-400">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:"use client";
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:import { useRouter, useSearchParams } from "next/navigation";
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:import { useTranslations } from "next-intl";
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:import { useEffect, useMemo, useRef, useState } from "react";
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:} from "lucide-react";
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:const ACCEPTED_EXT = ["pdf", "jpg", "jpeg", "png"];
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:const HIGH_DOC_AIRLINES = ["FR", "W6"]; // Ryanair, Wizz (v1)
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:const MEDIUM_DOC_AIRLINES = ["LH", "LX", "OS", "SN", "U2"]; // Lufthansa group + easyJet (v1)
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:  if (HIGH_DOC_AIRLINES.includes(c)) return "high" as const;
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:  if (MEDIUM_DOC_AIRLINES.includes(c)) return "medium" as const;
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:  return "low" as const;
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:  const t = useTranslations("check.additional");
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:  const claimId = sp.get("claimId");
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:    const airlineCode = sp.get("airlineCode") || "";
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:    typeof window !== "undefined" ? window.location.pathname.split("/")[1] : "sv";
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:  const locale = pathnameLocale || "sv";
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:  sessionStorage.getItem("fc_signature_png");
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:    const fullName = `${sp.get("firstName") || ""} ${sp.get("lastName") || ""}`.trim();
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:    const bookingReference = sp.get("bookingRef") || sp.get("pnr") || sp.get("bookingReference") || "";
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:          msg: t("errors.unsupportedFormat", { file: f.name }),
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:          msg: t("errors.fileTooLarge", {
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:        msg: t("errors.totalTooLarge", {
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:      setError(t("errors.missingClaim"));
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:      files.forEach((f) => formData.append("files", f));
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:        method: "POST",
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:        throw new Error("Upload failed");
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:      setError(t("errors.uploadFailed"));
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:    <div className="mx-auto max-w-3xl px-4 py-2 text-sky-900">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:      <div className="max-w-2xl">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:        <h1 className="text-2xl font-semibold text-sky-900">{t("title")}</h1>
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:        <p className="mt-2 text-slate-700">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:          {t("intro1")}
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:        <p className="mt-2 text-slate-700">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:          {t("intro2.before")}{" "}
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:<strong>{t("intro2.highlight")}</strong>
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:{t("intro2.after")}
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:            "mt-6 rounded-2xl border-2 border-dashed p-6 md:p-8 transition",
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:            "bg-white shadow-sm",
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:            dragActive ? "border-sky-400 ring-2 ring-sky-100" : "border-slate-200",
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:          <div className="flex flex-col items-center text-center">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:                "flex h-12 w-12 items-center justify-center rounded-2xl transition",
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:                dragActive ? "bg-sky-50" : "bg-slate-50",
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:              <UploadCloud className="h-6 w-6 text-sky-700" />
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:            <div className="mt-4 text-base font-semibold text-sky-900">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:              {t("dropzone.dragDrop")}
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:            <div className="mt-1 text-sm text-slate-600">{t("dropzone.or")}</div>
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:              type="button"
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:              className="mt-3 inline-flex items-center justify-center rounded-lg border border-sky-500 px-4 py-2 text-sm font-semibold text-sky-700 hover:bg-sky-50 transition"
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:              {t("dropzone.browse")}
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:            <div className="mt-3 text-xs text-slate-300">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:              {t("dropzone.fileLimits", {
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:            type="file"
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:            accept=".pdf,.jpg,.jpeg,.png"
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:            className="hidden"
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:          <div className="mt-6">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:            <div className="flex items-center justify-between">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:              <div className="text-sm font-semibold text-slate-900">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:                {t("attachedFiles")}
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:              <div className="text-xs text-slate-500">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:                {t("totalSize", {
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:            <ul className="mt-3 space-y-2">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:                  className="flex items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-3"
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:                  <div className="flex min-w-0 items-center gap-3">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-50">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:                      <FileText className="h-5 w-5 text-slate-600" />
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:                    <div className="min-w-0">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:                      <div className="truncate text-sm font-semibold text-slate-900">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:                      <div className="text-xs text-slate-500">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:                    type="button"
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:                    className="ml-3 inline-flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-50 hover:text-slate-700 transition"
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:                    aria-label={t("removeFile")}
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:                    title={t("remove")}
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:                    <X className="h-5 w-5" />
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:        <div className="mt-8 flex items-center justify-between">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:            type="button"
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:            className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-800 transition"
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:            <SkipForward className="h-4 w-4" />
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:            {t("skip")}
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:       <div className="mt-3 text-xs text-slate-400">
+src/app/[locale]/check/additional/ClientAdditionalUploads.tsx:  {t("tip")}
+src/app/[locale]/check/additional/page.tsx:import ClientAdditionalUploads from "./ClientAdditionalUploads";
+src/app/[locale]/check/thanks/page.tsx:import Link from "next/link";
+src/app/[locale]/check/thanks/page.tsx:import { getTranslations } from "next-intl/server";
+src/app/[locale]/check/thanks/page.tsx:  const claimId = sp.claimId || "FC-XXXXXX";
+src/app/[locale]/check/thanks/page.tsx:  const locale = sp.locale || "sv";
+src/app/[locale]/check/thanks/page.tsx:  const t = await getTranslations({ locale, namespace: "check.thanks" });
+src/app/[locale]/check/thanks/page.tsx:    <div className="min-h-screen bg-slate-100 flex items-center justify-center px-4">
+src/app/[locale]/check/thanks/page.tsx:      <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 text-center">
+src/app/[locale]/check/thanks/page.tsx:        <div className="mx-auto mb-6 flex items-center justify-center w-14 h-14 rounded-full bg-green-100">
+src/app/[locale]/check/thanks/page.tsx:            className="w-7 h-7 text-green-600"
+src/app/[locale]/check/thanks/page.tsx:            fill="none"
+src/app/[locale]/check/thanks/page.tsx:            stroke="currentColor"
+src/app/[locale]/check/thanks/page.tsx:            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+src/app/[locale]/check/thanks/page.tsx:        <h1 className="text-2xl font-semibold text-slate-900 mb-3">
+src/app/[locale]/check/thanks/page.tsx:          {t("title")}
+src/app/[locale]/check/thanks/page.tsx:        <p className="text-slate-600 mb-6">
+src/app/[locale]/check/thanks/page.tsx:          {t("description")}
+src/app/[locale]/check/thanks/page.tsx:        <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 mb-6">
+src/app/[locale]/check/thanks/page.tsx:          <p className="text-xs text-slate-500 mb-1">{t("claimId")}</p>
+src/app/[locale]/check/thanks/page.tsx:          <p className="text-lg font-semibold text-slate-900">
+src/app/[locale]/check/thanks/page.tsx:          href={`/${claimId ? locale : "sv"}/track/${claimId}`}
+src/app/[locale]/check/thanks/page.tsx:          className="inline-block w-full bg-blue-600 hover:bg-blue-700 transition text-white font-medium py-3 rounded-lg"
+src/app/[locale]/check/thanks/page.tsx:          {t("track")}
+src/app/[locale]/check/thanks/page.tsx:        <p className="text-xs text-slate-500 mt-5">
+src/app/[locale]/check/thanks/page.tsx:          {t("emailNotice")}
+src/app/[locale]/check/thanks/page.tsx:        <div className="mt-6 pt-4 border-t border-slate-200 text-xs text-slate-500">
+src/app/[locale]/check/thanks/page.tsx:          {t("reassurance")}
+src/app/[locale]/check/ClientCheck.tsx:  // pathname like "/sv/check" or "/en/check?..." (query not included)
+src/app/[locale]/check/ClientCheck.tsx:    <main className="min-h-screen bg-slate-950 text-white">
+src/app/[locale]/check/ClientCheck.tsx:      <div className="mx-auto max-w-6xl px-4 py-8">
+src/app/[locale]/check/ClientCheck.tsx:        <div className="grid gap-6 md:grid-cols-[280px_minmax(0,1fr)]">
+src/app/[locale]/check/ClientCheck.tsx:          <aside className="rounded-2xl border border-white/10 bg-white/5 p-5">
+src/app/[locale]/check/ClientCheck.tsx:            <div className="mb-5">
+src/app/[locale]/check/ClientCheck.tsx:              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-emerald-300">
+src/app/[locale]/check/ClientCheck.tsx:              <h2 className="mt-1 text-lg font-semibold">Eligibility check</h2>
+src/app/[locale]/check/ClientCheck.tsx:                <p className="mt-2 text-sm text-white/70">
+src/app/[locale]/check/ClientCheck.tsx:                <div className="mt-3 rounded-lg border border-amber-400/30 bg-amber-400/10 px-3 py-2 text-xs text-amber-200">
+src/app/[locale]/check/ClientCheck.tsx:                  Checking your <span className="font-semibold">original flight</span> (replacement safety-check).
+src/app/[locale]/check/ClientCheck.tsx:            <ol className="space-y-3 text-sm">
+src/app/[locale]/check/ClientCheck.tsx:              <li className="flex items-center gap-3">
+src/app/[locale]/check/ClientCheck.tsx:                <span className="h-7 w-7 rounded-full bg-emerald-400 text-slate-950 grid place-items-center font-bold">
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="font-semibold">Eligibility check</div>
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="text-xs text-white/60">Active</div>
+src/app/[locale]/check/ClientCheck.tsx:              <li className="flex items-center gap-3 opacity-50">
+src/app/[locale]/check/ClientCheck.tsx:                <span className="h-7 w-7 rounded-full border border-white/25 grid place-items-center font-bold">
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="font-semibold">Additional information</div>
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="text-xs text-white/60">Locked (Phase 3)</div>
+src/app/[locale]/check/ClientCheck.tsx:              <li className="flex items-center gap-3 opacity-50">
+src/app/[locale]/check/ClientCheck.tsx:                <span className="h-7 w-7 rounded-full border border-white/25 grid place-items-center font-bold">
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="font-semibold">Documents</div>
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="text-xs text-white/60">Locked</div>
+src/app/[locale]/check/ClientCheck.tsx:              <li className="flex items-center gap-3 opacity-50">
+src/app/[locale]/check/ClientCheck.tsx:                <span className="h-7 w-7 rounded-full border border-white/25 grid place-items-center font-bold">
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="font-semibold">Finish</div>
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="text-xs text-white/60">Locked</div>
+src/app/[locale]/check/ClientCheck.tsx:            <div className="mt-6 pt-6 border-t border-white/10">
+src/app/[locale]/check/ClientCheck.tsx:                className="w-full rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold hover:bg-white/10"
+src/app/[locale]/check/ClientCheck.tsx:          <section className="rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6">
+src/app/[locale]/check/ClientCheck.tsx:            <h1 className="text-2xl font-bold tracking-tight">Let’s verify your flight</h1>
+src/app/[locale]/check/ClientCheck.tsx:            <p className="mt-2 text-sm text-white/70">
+src/app/[locale]/check/ClientCheck.tsx:            <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-4">
+src/app/[locale]/check/ClientCheck.tsx:              <h2 className="text-base font-semibold">Was it a direct flight?</h2>
+src/app/[locale]/check/ClientCheck.tsx:              <p className="mt-1 text-sm text-white/60">
+src/app/[locale]/check/ClientCheck.tsx:              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="font-semibold">Yes, direct</div>
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="text-xs text-white/60">No layovers</div>
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="font-semibold">No, with layovers</div>
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="text-xs text-white/60">At least 1 connection</div>
+src/app/[locale]/check/ClientCheck.tsx:              <div className="mt-5 rounded-2xl border border-white/10 bg-black/20 p-4">
+src/app/[locale]/check/ClientCheck.tsx:                <h2 className="text-base font-semibold">
+src/app/[locale]/check/ClientCheck.tsx:                <p className="mt-1 text-sm text-white/60">Use the date on your ticket.</p>
+src/app/[locale]/check/ClientCheck.tsx:                <div className="mt-4">
+src/app/[locale]/check/ClientCheck.tsx:                    type="date"
+src/app/[locale]/check/ClientCheck.tsx:                    className="w-full rounded-xl border border-white/20 bg-black px-3 py-2 text-sm"
+src/app/[locale]/check/ClientCheck.tsx:              <div className="mt-5 rounded-2xl border border-white/10 bg-black/20 p-4">
+src/app/[locale]/check/ClientCheck.tsx:                <h2 className="text-base font-semibold">Which airline did you fly with?</h2>
+src/app/[locale]/check/ClientCheck.tsx:                <p className="mt-1 text-sm text-white/60">Start typing to search.</p>
+src/app/[locale]/check/ClientCheck.tsx:                <div className="mt-4">
+src/app/[locale]/check/ClientCheck.tsx:                    placeholder="e.g. Air France (AF)"
+src/app/[locale]/check/ClientCheck.tsx:                    className="w-full rounded-xl border border-white/20 bg-black px-3 py-2 text-sm"
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="mt-3 rounded-xl border border-white/10 bg-slate-950/60 overflow-hidden">
+src/app/[locale]/check/ClientCheck.tsx:                        className="w-full px-3 py-2 text-left text-sm hover:bg-white/5"
+src/app/[locale]/check/ClientCheck.tsx:                        <span className="font-semibold">{a.airlineName}</span>{' '}
+src/app/[locale]/check/ClientCheck.tsx:                        <span className="text-white/60">({a.airlineCode})</span>
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs">
+src/app/[locale]/check/ClientCheck.tsx:                    ✅ Selected: <span className="font-semibold">{airlineName}</span> ({airlineCode})
+src/app/[locale]/check/ClientCheck.tsx:              <div className="mt-5 rounded-2xl border border-white/10 bg-black/20 p-4">
+src/app/[locale]/check/ClientCheck.tsx:                <h2 className="text-base font-semibold">Select your flight</h2>
+src/app/[locale]/check/ClientCheck.tsx:                <p className="mt-1 text-sm text-white/60">
+src/app/[locale]/check/ClientCheck.tsx:                  {from} → {to} on <span className="font-semibold">{date}</span>
+src/app/[locale]/check/ClientCheck.tsx:                <div className="mt-4 space-y-2">
+src/app/[locale]/check/ClientCheck.tsx:                      <div className="flex items-center justify-between">
+src/app/[locale]/check/ClientCheck.tsx:                        <div className="font-semibold">{f.flightNumber}</div>
+src/app/[locale]/check/ClientCheck.tsx:                        <div className="text-xs text-white/60">
+src/app/[locale]/check/ClientCheck.tsx:                      <div className="mt-1 text-xs text-white/60">{f.airlineName}</div>
+src/app/[locale]/check/ClientCheck.tsx:                    <div className="font-semibold">I can’t find my flight</div>
+src/app/[locale]/check/ClientCheck.tsx:                    <div className="text-xs text-white/60">Enter flight number manually</div>
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-4">
+src/app/[locale]/check/ClientCheck.tsx:                    <label className="block text-sm font-semibold">Flight number</label>
+src/app/[locale]/check/ClientCheck.tsx:                      className="mt-2 w-full rounded-xl border border-white/20 bg-black px-3 py-2 text-sm"
+src/app/[locale]/check/ClientCheck.tsx:                      placeholder="e.g. AF23"
+src/app/[locale]/check/ClientCheck.tsx:                    <label className="mt-4 block text-sm font-semibold">
+src/app/[locale]/check/ClientCheck.tsx:                      className="mt-2 w-full rounded-xl border border-white/20 bg-black px-3 py-2 text-sm"
+src/app/[locale]/check/ClientCheck.tsx:                      placeholder="e.g. ZY4KQ1"
+src/app/[locale]/check/ClientCheck.tsx:              <div className="mt-5 rounded-2xl border border-white/10 bg-black/20 p-4">
+src/app/[locale]/check/ClientCheck.tsx:                <div className="flex items-start justify-between gap-3">
+src/app/[locale]/check/ClientCheck.tsx:                    <h2 className="text-base font-semibold">Detected disruption</h2>
+src/app/[locale]/check/ClientCheck.tsx:                    <p className="mt-1 text-sm text-white/60">
+src/app/[locale]/check/ClientCheck.tsx:                    className="rounded-lg bg-emerald-500 px-3 py-2 text-sm font-semibold text-black disabled:opacity-40"
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="mt-3 rounded-lg border border-red-400/30 bg-red-400/10 px-3 py-2 text-sm text-red-200">
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-4">
+src/app/[locale]/check/ClientCheck.tsx:                    <div className="flex flex-wrap items-center gap-2">
+src/app/[locale]/check/ClientCheck.tsx:                      <span className="rounded-full border border-white/15 bg-black/30 px-3 py-1 text-xs">
+src/app/[locale]/check/ClientCheck.tsx:                        Flight: <span className="font-semibold">{confirmedFlightNumber}</span>
+src/app/[locale]/check/ClientCheck.tsx:                      <span className="rounded-full border border-white/15 bg-black/30 px-3 py-1 text-xs">
+src/app/[locale]/check/ClientCheck.tsx:                        Route: <span className="font-semibold">{from} → {to}</span>
+src/app/[locale]/check/ClientCheck.tsx:                      <span className="rounded-full border border-white/15 bg-black/30 px-3 py-1 text-xs">
+src/app/[locale]/check/ClientCheck.tsx:                        Confidence: <span className="font-semibold">{verifyResult.confidence}</span>
+src/app/[locale]/check/ClientCheck.tsx:                        <span className="rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1 text-xs text-amber-200">
+src/app/[locale]/check/ClientCheck.tsx:                        <span className="rounded-full border border-sky-400/30 bg-sky-400/10 px-3 py-1 text-xs text-sky-200">
+src/app/[locale]/check/ClientCheck.tsx:                          Delay: <span className="font-semibold">{formatDelay(verifyResult.arrivalDelayMinutes)}</span>
+src/app/[locale]/check/ClientCheck.tsx:                    <div className="mt-3 text-sm text-white/70">
+src/app/[locale]/check/ClientCheck.tsx:                      Source: <span className="font-semibold">{verifyResult.source}</span>
+src/app/[locale]/check/ClientCheck.tsx:                        <span className="ml-2 text-emerald-300">✓ matched</span>
+src/app/[locale]/check/ClientCheck.tsx:                        <span className="ml-2 text-amber-300">⚠ not fully matched</span>
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-4 text-sm text-white/70">
+src/app/[locale]/check/ClientCheck.tsx:              <div className="mt-5 rounded-2xl border border-white/10 bg-black/20 p-4">
+src/app/[locale]/check/ClientCheck.tsx:                <h2 className="text-base font-semibold">Are these details correct?</h2>
+src/app/[locale]/check/ClientCheck.tsx:                <div className="mt-4 space-y-2">
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-4 text-sm text-white/70">
+src/app/[locale]/check/ClientCheck.tsx:              <div className="mt-5 rounded-2xl border border-white/10 bg-black/20 p-4">
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="rounded-xl border border-emerald-400/25 bg-emerald-400/10 p-4">
+src/app/[locale]/check/ClientCheck.tsx:                    <div className="text-lg font-semibold text-emerald-200">✅ Looks eligible</div>
+src/app/[locale]/check/ClientCheck.tsx:                    <p className="mt-2 text-sm text-emerald-100/80">{verdictReason}</p>
+src/app/[locale]/check/ClientCheck.tsx:                    <div className="mt-4 flex flex-col sm:flex-row gap-3">
+src/app/[locale]/check/ClientCheck.tsx:                        className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-black"
+src/app/[locale]/check/ClientCheck.tsx:                        className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold hover:bg-white/10"
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="rounded-xl border border-amber-400/25 bg-amber-400/10 p-4">
+src/app/[locale]/check/ClientCheck.tsx:                    <div className="text-lg font-semibold text-amber-200">⚠ We’re not fully sure yet</div>
+src/app/[locale]/check/ClientCheck.tsx:                    <p className="mt-2 text-sm text-amber-100/80">{verdictReason}</p>
+src/app/[locale]/check/ClientCheck.tsx:                    <div className="mt-4 flex flex-col sm:flex-row gap-3">
+src/app/[locale]/check/ClientCheck.tsx:                        className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-black"
+src/app/[locale]/check/ClientCheck.tsx:                        className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold hover:bg-white/10"
+src/app/[locale]/check/ClientCheck.tsx:                  <div className="rounded-xl border border-red-400/25 bg-red-400/10 p-4">
+src/app/[locale]/check/ClientCheck.tsx:                    <div className="text-lg font-semibold text-red-200">
+src/app/[locale]/check/ClientCheck.tsx:                    <p className="mt-2 text-sm text-red-100/80">
+src/app/[locale]/check/ClientCheck.tsx:                    <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-4">
+src/app/[locale]/check/ClientCheck.tsx:                      <div className="text-sm font-semibold">Was this a replacement flight?</div>
+src/app/[locale]/check/ClientCheck.tsx:                      <p className="mt-1 text-sm text-white/70">
+src/app/[locale]/check/ClientCheck.tsx:                        If your airline rebooked you due to a disruption, you might be eligible for compensation for your <span className="font-semibold">original flight</span> instead.
+src/app/[locale]/check/ClientCheck.tsx:                      <div className="mt-3 flex flex-col sm:flex-row gap-3">
+src/app/[locale]/check/ClientCheck.tsx:                          className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-black"
+src/app/[locale]/check/ClientCheck.tsx:                          className="rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold hover:bg-white/10"
+src/app/[locale]/check/ClientCheck.tsx:                        className="mt-3 text-xs text-white/60 underline underline-offset-2"
+src/app/[locale]/check/ClientCheck.tsx:                        <div className="mt-3 rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-xs text-white/70">
+src/app/[locale]/check/authorization/page.tsx:"use client";
+src/app/[locale]/check/authorization/page.tsx:import { useMemo, useRef, useState, useEffect } from "react";
+src/app/[locale]/check/authorization/page.tsx:import { useRouter, useSearchParams } from "next/navigation";
+src/app/[locale]/check/authorization/page.tsx:import { useTranslations } from "next-intl";
+src/app/[locale]/check/authorization/page.tsx:import SignatureCanvas from "react-signature-canvas";
+src/app/[locale]/check/authorization/page.tsx:import { BadgeCheck, Eraser, PenLine } from "lucide-react";
+src/app/[locale]/check/authorization/page.tsx:  const existingId = searchParams.get("claimId");
+src/app/[locale]/check/authorization/page.tsx: const choice = searchParams.get("choice") || "direct";
+src/app/[locale]/check/authorization/page.tsx:const segmentsRaw = searchParams.get("segments");
+src/app/[locale]/check/authorization/page.tsx:  searchParams.get("flightNumber") ||
+src/app/[locale]/check/authorization/page.tsx:  "ITINERARY";
+src/app/[locale]/check/authorization/page.tsx:  searchParams.get("date") ||
+src/app/[locale]/check/authorization/page.tsx:  const res = await fetch("/api/claims", {
+src/app/[locale]/check/authorization/page.tsx:    method: "POST",
+src/app/[locale]/check/authorization/page.tsx:      "Content-Type": "application/json",
+src/app/[locale]/check/authorization/page.tsx:  from: searchParams.get("from"),
+src/app/[locale]/check/authorization/page.tsx:  to: searchParams.get("to"),
+src/app/[locale]/check/authorization/page.tsx:  name: `${searchParams.get("firstName") || ""} ${searchParams.get("lastName") || ""}`.trim(),
+src/app/[locale]/check/authorization/page.tsx:  email: searchParams.get("email"),
+src/app/[locale]/check/authorization/page.tsx:  bookingNumber: searchParams.get("bookingRef"),
+src/app/[locale]/check/authorization/page.tsx:  phone: searchParams.get("phone"),
+src/app/[locale]/check/authorization/page.tsx:  address: searchParams.get("address"),
+src/app/[locale]/check/authorization/page.tsx:  address2: searchParams.get("address2"),
+src/app/[locale]/check/authorization/page.tsx:  city: searchParams.get("city"),
+src/app/[locale]/check/authorization/page.tsx:  postalCode: searchParams.get("postalCode"),
+src/app/[locale]/check/authorization/page.tsx:  country: searchParams.get("country"),
+src/app/[locale]/check/authorization/page.tsx:    throw new Error("Failed to create claim");
+src/app/[locale]/check/authorization/page.tsx:  const t = useTranslations("check.authorization");
+src/app/[locale]/check/authorization/page.tsx:    typeof window !== "undefined" ? window.location.pathname.split("/")[1] : "sv";
+src/app/[locale]/check/authorization/page.tsx:  const locale = pathnameLocale || "sv";
+src/app/[locale]/check/authorization/page.tsx:  window.addEventListener("flightclaimly-submit-authorization", handler);
+src/app/[locale]/check/authorization/page.tsx:    window.removeEventListener("flightclaimly-submit-authorization", handler);
+src/app/[locale]/check/authorization/page.tsx:  const amountParam = searchParams.get("amount") || searchParams.get("compensation") || "";
+src/app/[locale]/check/authorization/page.tsx:  const amountLabel = amountParam ? `€${amountParam}` : t("amountFallback");
+src/app/[locale]/check/authorization/page.tsx:    const dataUrl = signatureCanvas.toDataURL("image/png");
+src/app/[locale]/check/authorization/page.tsx:sessionStorage.setItem("fc_signature_png", dataUrl);
+src/app/[locale]/check/authorization/page.tsx:const claimId = searchParams.get("claimId");
+src/app/[locale]/check/authorization/page.tsx:    params.set("claimId", claimId);
+src/app/[locale]/check/authorization/page.tsx:    console.error("Claim creation failed:", err);
+src/app/[locale]/check/authorization/page.tsx:    alert(t("claimCreationError"));
+src/app/[locale]/check/authorization/page.tsx:    window.dispatchEvent(new Event("flightclaimly-submit-failed"));
+src/app/[locale]/check/authorization/page.tsx:    <div className="mx-auto max-w-3xl px-4 py-2 text-sky-900">
+src/app/[locale]/check/authorization/page.tsx:<div className="max-w-2xl">
+src/app/[locale]/check/authorization/page.tsx:<h1 className="text-1xl font-semibold tracking-tight text-sky-900">
+src/app/[locale]/check/authorization/page.tsx:  {t("titleBefore")}{" "}
+src/app/[locale]/check/authorization/page.tsx:<span className="text-emerald-700">{amountLabel}</span>{" "}
+src/app/[locale]/check/authorization/page.tsx:{t("titleAfterAmount")}
+src/app/[locale]/check/authorization/page.tsx:{t("titleSecondLine")}
+src/app/[locale]/check/authorization/page.tsx:      <div className="mt-6 max-w-2xl">
+src/app/[locale]/check/authorization/page.tsx:        <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+src/app/[locale]/check/authorization/page.tsx:          <div className="relative m-4 rounded-xl border-2 border-dashed border-slate-200 bg-slate-50/30">
+src/app/[locale]/check/authorization/page.tsx:              <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+src/app/[locale]/check/authorization/page.tsx:                <div className="flex flex-col items-center gap-3">
+src/app/[locale]/check/authorization/page.tsx:                  <div className="h-12 w-12 rounded-full bg-slate-100 flex items-center justify-center">
+src/app/[locale]/check/authorization/page.tsx:                    <PenLine className="h-5 w-5 text-slate-400" />
+src/app/[locale]/check/authorization/page.tsx:                  <div className="text-4xl font-light italic tracking-tight text-slate-500">
+src/app/[locale]/check/authorization/page.tsx:                    {t("signaturePlaceholder")}
+src/app/[locale]/check/authorization/page.tsx:              penColor="#0f172a"
+src/app/[locale]/check/authorization/page.tsx:                className: "w-full h-[240px] touch-none",
+src/app/[locale]/check/authorization/page.tsx:<div className="pointer-events-none absolute bottom-6 left-8 right-8">
+src/app/[locale]/check/authorization/page.tsx:  <div className="h-px bg-slate-200" />
+src/app/[locale]/check/authorization/page.tsx:  <div className="mt-2 h-4" /> {/* Spacer to keep line position */}
+src/app/[locale]/check/authorization/page.tsx:            <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center">
+src/app/[locale]/check/authorization/page.tsx:                type="button"
+src/app/[locale]/check/authorization/page.tsx:                  "inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition",
+src/app/[locale]/check/authorization/page.tsx:                    ? "text-sky-700 hover:bg-sky-50"
+src/app/[locale]/check/authorization/page.tsx:                    : "text-slate-300 cursor-not-allowed",
+src/app/[locale]/check/authorization/page.tsx:                <Eraser className="h-4 w-4" />
+src/app/[locale]/check/authorization/page.tsx:                {t("clearSignature")}
+src/app/[locale]/check/authorization/page.tsx:<div className="mt-4 max-w-2xl text-xs text-slate-700">
+src/app/[locale]/check/authorization/page.tsx:  {t("legal.before")}{" "}
+src/app/[locale]/check/authorization/page.tsx:  className="font-normal text-sky-700 hover:underline"
+src/app/[locale]/check/authorization/page.tsx:  target="_blank"
+src/app/[locale]/check/authorization/page.tsx:  rel="noreferrer"
+src/app/[locale]/check/authorization/page.tsx:  {t("legal.terms")}
+src/app/[locale]/check/authorization/page.tsx:{t("legal.and")}{" "}
+src/app/[locale]/check/authorization/page.tsx:  className="font-normal text-sky-700 hover:underline"
+src/app/[locale]/check/authorization/page.tsx:  target="_blank"
+src/app/[locale]/check/authorization/page.tsx:  rel="noreferrer"
+src/app/[locale]/check/authorization/page.tsx:  {t("legal.priceList")}
+src/app/[locale]/check/authorization/page.tsx:{t("legal.middle")}{" "}
+src/app/[locale]/check/authorization/page.tsx:  className="font-normal text-sky-700 hover:underline"
+src/app/[locale]/check/authorization/page.tsx:    `${searchParams.get("firstName") || ""} ${searchParams.get("lastName") || ""}`
+src/app/[locale]/check/authorization/page.tsx:    searchParams.get("bookingRef") || ""
+src/app/[locale]/check/authorization/page.tsx:    searchParams.get("claimId") || ""
+src/app/[locale]/check/authorization/page.tsx:  target="_blank"
+src/app/[locale]/check/authorization/page.tsx:  rel="noreferrer"
+src/app/[locale]/check/authorization/page.tsx:  {t("legal.authorityDocument")}
+src/app/[locale]/check/authorization/page.tsx:<div className="mt-8 max-w-2xl rounded-md border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 flex items-start gap-3">
+src/app/[locale]/check/authorization/page.tsx:  className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-sky-600 text-white text-xs font-semibold"
+src/app/[locale]/check/authorization/page.tsx:  title={t("important")}
+src/app/[locale]/check/authorization/page.tsx:    {t("signatureGuidance")}
+src/app/[locale]/check/authorization/page.tsx:<div className="mt-8 text-center">
+src/app/[locale]/check/authorization/page.tsx:  <div className="text-sm font-semibold text-emerald-700">
+src/app/[locale]/check/authorization/page.tsx:    {t("feeTitle")}
+src/app/[locale]/check/authorization/page.tsx:  <div className="mt-1 text-xs text-slate-500">
+src/app/[locale]/check/authorization/page.tsx:    {t("feeSubtitle")}
+src/app/[locale]/check/authorization/page.tsx:      <div className="mt-6 text-xs text-slate-400">{isValid ? "" : ""}</div>
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:"use client";
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:import { useRouter, useSearchParams } from "next/navigation";
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:import { useEffect, useState } from "react";
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:  if (!qs.get("legs")) {
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:    const from = qs.get("from");
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:    const fromCode = qs.get("fromCode");
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:    const to = qs.get("to");
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:    const toCode = qs.get("toCode");
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:      qs.set("legs", JSON.stringify(legs));
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:  const current = sp.get("missedConnection"); // "yes" | "no" | null
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:  const [value, setValue] = useState<"yes" | "no" | null>(
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:    current === "yes" || current === "no" ? current : null
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:  qs.set("choice", "itinerary");
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:    qs.set("missedConnection", value);
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:    qs.delete("missedConnection");
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:  const v = sp.get("missedConnection");
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:  if (v === "yes" || v === "no") {
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:  if (value === "yes") {
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:  "w-full flex items-center gap-4 rounded-lg border px-5 py-4 text-left transition bg-white h-[56px]";
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:      ? "border-sky-400 ring-2 ring-sky-200 bg-sky-50 shadow-sm"
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:      : "border-slate-300 bg-white hover:border-sky-300",
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:    <div className="space-y-8">
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:        <h2 className="text-lg font-semibold text-sky-900">
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:<div className="space-y-2 w-full md:max-w-[560px]">
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:          type="button"
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:          onClick={() => setValue("no")}
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:          className={optionClass(value === "no")}
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:              value === "no" ? "border-sky-500" : "border-slate-300"
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:            {value === "no" && (
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:              <div className="h-2 w-2 rounded-full bg-sky-500" />
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:          <span className="font-normal text-slate-900">No</span>
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:          type="button"
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:          onClick={() => setValue("yes")}
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:          className={optionClass(value === "yes")}
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:              value === "yes" ? "border-sky-500" : "border-slate-300"
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:            {value === "yes" && (
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:              <div className="h-2 w-2 rounded-full bg-sky-500" />
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:          <span className="font-normal text-slate-900">Yes</span>
+src/app/[locale]/check/itinerary/missed-connection/page.tsx:      <div className="hidden">
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:"use client";
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:import { useRouter, useSearchParams } from "next/navigation";
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:import { useEffect, useRef, useState } from "react";
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  | "never";
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  { value: "0-1", label: "0–1 hours" },
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  { value: "1-2", label: "1–2 hours" },
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  { value: "2-3", label: "2–3 hours" },
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  { value: "3-4", label: "3–4 hours" },
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  { value: "4-5", label: "4–5 hours" },
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  { value: "5-6", label: "5–6 hours" },
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  { value: "6-7", label: "6–7 hours" },
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  { value: "7-8", label: "7–8 hours" },
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  { value: "8-9", label: "8–9 hours" },
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  { value: "9+", label: "9+ hours" },
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  if (!qs.get("legs")) {
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:    const from = qs.get("from");
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:    const fromCode = qs.get("fromCode");
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:    const to = qs.get("to");
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:    const toCode = qs.get("toCode");
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:      qs.set("legs", JSON.stringify(legs));
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  const current = sp.get("missedConnectionDelay") as DelayValue | null;
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  const [neverArrived, setNeverArrived] = useState(current === "never");
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  qs.set("choice", "itinerary");
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:    qs.set("missedConnectionDelay", value);
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:    qs.set("missedConnectionDelayValid", "1");
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:    qs.delete("missedConnectionDelay");
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:    qs.delete("missedConnectionDelayValid");
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:    document.addEventListener("mousedown", onClickOutside);
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:    return () => document.removeEventListener("mousedown", onClickOutside);
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  const v = sp.get("missedConnectionDelay") as DelayValue | null;
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:    setNeverArrived(v === "never");
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:const FIELD_WIDTH = "w-full md:max-w-[50%]";
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  "flex h-[56px] items-center justify-between rounded-lg border border-slate-300 bg-white px-4 text-sm focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-200 hover:border-sky-300";
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:    <div className="space-y-8">
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:        <h2 className="text-lg font-semibold text-sky-900">
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:        <div className="text-sm font-semibold text-sky-900">
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:          type="button"
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:            neverArrived ? "opacity-50 cursor-not-allowed" : ""
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:              value && value !== "never" ? "text-sky-900" : "text-sky-900"
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:            {value && value !== "never"
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:              : "Select delay length"}
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:              open ? "rotate-180" : ""
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:            fill="currentColor"
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:            aria-hidden="true"
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:            <path d="M7.41 8.58a1 1 0 0 1 1.42 0L12 11.76l3.17-3.18a1 1 0 1 1 1.42 1.42l-3.88 3.88a1 1 0 0 1-1.42 0L7.41 10a1 1 0 0 1 0-1.42Z" />
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:          <div className="relative">
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:            <div className="absolute z-50 mt-2 w-full overflow-y-auto max-h-56 rounded-lg border border-slate-200 bg-white shadow-lg scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent">
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:                    type="button"
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:                        ? "bg-sky-50 text-sky-900 font-semibold"
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:                        : "text-sky-900 hover:bg-sky-50"
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:        <label className="flex items-center gap-2 pt-2 text-sm text-sky-900 cursor-pointer">
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  type="checkbox"
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:  checked={value === "never"}
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:    setValue(e.target.checked ? "never" : null);
+src/app/[locale]/check/itinerary/missed-connection-hours/page.tsx:      <div className="hidden">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:"use client";
+src/app/[locale]/check/itinerary/what-happened/page.tsx:import { useRouter, useSearchParams } from "next/navigation";
+src/app/[locale]/check/itinerary/what-happened/page.tsx:import { useEffect, useState } from "react";
+src/app/[locale]/check/itinerary/what-happened/page.tsx:import PlaneIcon from "@/components/PlaneIcon";
+src/app/[locale]/check/itinerary/what-happened/page.tsx:import { useMemo } from "react";
+src/app/[locale]/check/itinerary/what-happened/page.tsx:type Disruption = "delayed" | "cancelled" | "denied" | null;
+src/app/[locale]/check/itinerary/what-happened/page.tsx:type Outcome = "gte3" | "lt3" | "never" | null;
+src/app/[locale]/check/itinerary/what-happened/page.tsx:type CancelNotice = "lt14" | "gte14" | null;
+src/app/[locale]/check/itinerary/what-happened/page.tsx:type Volunteer = "yes" | "no" | null;
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  const legsJson = sp.get("legs");
+src/app/[locale]/check/itinerary/what-happened/page.tsx:            typeof l.id === "string" &&
+src/app/[locale]/check/itinerary/what-happened/page.tsx:            typeof l.from === "string" &&
+src/app/[locale]/check/itinerary/what-happened/page.tsx:            typeof l.fromCode === "string" &&
+src/app/[locale]/check/itinerary/what-happened/page.tsx:            typeof l.to === "string" &&
+src/app/[locale]/check/itinerary/what-happened/page.tsx:            typeof l.toCode === "string"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  const from = sp.get("from");
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  const fromCode = sp.get("fromCode");
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  const to = sp.get("to");
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  const toCode = sp.get("toCode");
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  const current = sp.get("disruptionType");
+src/app/[locale]/check/itinerary/what-happened/page.tsx:    current === "delayed" || current === "cancelled" || current === "denied"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  qs.set("choice", "itinerary");
+src/app/[locale]/check/itinerary/what-happened/page.tsx:    qs.set("disruptionType", disruption);
+src/app/[locale]/check/itinerary/what-happened/page.tsx:    qs.delete("disruptionType");
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  const d = sp.get("disruptionType") as Disruption | null;
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  const leg = sp.get("affectedLegId");
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  const o = sp.get("outcome") as Outcome | null;
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  const cn = sp.get("cancelNotice") as CancelNotice | null;
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  const v = sp.get("volunteer") as Volunteer | null;
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  if (d === "delayed" || d === "cancelled" || d === "denied") setDisruption(d);
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  if (affectedLegId) qs.set("affectedLegId", affectedLegId);
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  else qs.delete("affectedLegId");
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  if (outcome) qs.set("outcome", outcome);
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  else qs.delete("outcome");
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  if (cancelNotice) qs.set("cancelNotice", cancelNotice);
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  else qs.delete("cancelNotice");
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  if (volunteer) qs.set("volunteer", volunteer);
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  else qs.delete("volunteer");
+src/app/[locale]/check/itinerary/what-happened/page.tsx:    if (disruption === "cancelled" && !cancelNotice) return;
+src/app/[locale]/check/itinerary/what-happened/page.tsx:    if (disruption === "denied" && !volunteer) return;
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  "flex items-center gap-4 rounded-lg border px-5 py-4 text-left transition bg-white min-h-[56px] w-full";
+src/app/[locale]/check/itinerary/what-happened/page.tsx:        ? "border-sky-400"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:        : "border-slate-300 hover:border-sky-300",
+src/app/[locale]/check/itinerary/what-happened/page.tsx:    disruption === "delayed"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:      ? "Which flight was delayed?"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:      : disruption === "cancelled"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:      ? "Which flight was cancelled?"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:      : "Which flight were you denied boarding on?";
+src/app/[locale]/check/itinerary/what-happened/page.tsx:    <div className="space-y-6">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:        <h2 className="text-lg font-semibold text-sky-900">What happened?</h2>
+src/app/[locale]/check/itinerary/what-happened/page.tsx:      <div className="space-y-2 w-full md:max-w-[560px]">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          type="button"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          onClick={() => setDisruption("delayed")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          className={optionClass(disruption === "delayed")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              disruption === "delayed" ? "border-sky-500" : "border-slate-300"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:            {disruption === "delayed" && (
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              <div className="h-2 w-2 rounded-full bg-sky-500" />
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          <span className="font-normal text-slate-700">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          type="button"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          onClick={() => setDisruption("cancelled")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          className={optionClass(disruption === "cancelled")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              disruption === "cancelled" ? "border-sky-500" : "border-slate-300"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:            {disruption === "cancelled" && (
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              <div className="h-2 w-2 rounded-full bg-sky-500" />
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          <span className="font-normal text-slate-700">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          type="button"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          onClick={() => setDisruption("denied")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          className={optionClass(disruption === "denied")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              disruption === "denied" ? "border-sky-500" : "border-slate-300"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:            {disruption === "denied" && (
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              <div className="h-2 w-2 rounded-full bg-sky-500" />
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          <span className="font-normal text-slate-700">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:        <div className="space-y-3 pt-4">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          <h2 className="text-lg font-semibold text-sky-900">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          <div className="space-y-2 w-full md:max-w-[560px]">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:                  type="button"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:                      selected ? "border-sky-500" : "border-slate-300"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:                      <div className="h-2 w-2 rounded-full bg-sky-500" />
+src/app/[locale]/check/itinerary/what-happened/page.tsx: <span className="min-w-0 flex flex-1 items-center gap-2 font-normal text-slate-700">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  <span className="min-w-0 flex-1 truncate">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  <span className="min-w-0 flex-1 truncate">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:        <div className="space-y-3 pt-4">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:         <h2 className="text-lg font-semibold text-sky-900">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:    const dest = leg ? `${leg.to} (${leg.toCode})` : "your destination";
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          <div className="space-y-2 w-full md:max-w-[560px]">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              type="button"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              onClick={() => setOutcome("gte3")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              className={optionClass(outcome === "gte3")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:                outcome === "gte3" ? "border-sky-500" : "border-slate-300"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:                {outcome === "gte3" && <div className="h-2 w-2 rounded-full bg-sky-500" />}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              <span className="font-normal text-slate-700">3 hours or more</span>
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              type="button"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              onClick={() => setOutcome("lt3")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              className={optionClass(outcome === "lt3")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:                outcome === "lt3" ? "border-sky-500" : "border-slate-300"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:                {outcome === "lt3" && <div className="h-2 w-2 rounded-full bg-sky-500" />}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              <span className="font-normal text-slate-700">Less than 3 hours</span>
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              type="button"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              onClick={() => setOutcome("never")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              className={optionClass(outcome === "never")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:                outcome === "never" ? "border-sky-500" : "border-slate-300"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:                {outcome === "never" && <div className="h-2 w-2 rounded-full bg-sky-500" />}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:              <span className="font-normal text-slate-700">Never arrived</span>
+src/app/[locale]/check/itinerary/what-happened/page.tsx:      {disruption === "cancelled" && affectedLegId && outcome && (
+src/app/[locale]/check/itinerary/what-happened/page.tsx:        <div className="space-y-3 pt-4">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          <h2 className="text-lg font-semibold text-sky-900">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          <div className="space-y-2 w-full md:max-w-[560px]">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  type="button"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  onClick={() => setCancelNotice("lt14")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  className={optionClass(cancelNotice === "lt14")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:      cancelNotice === "lt14" ? "border-sky-500" : "border-slate-300"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:    {cancelNotice === "lt14" && (
+src/app/[locale]/check/itinerary/what-happened/page.tsx:      <div className="h-2 w-2 rounded-full bg-sky-500" />
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  <span className="font-normal text-slate-700">Less than 14 days</span>
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  type="button"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  onClick={() => setCancelNotice("gte14")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  className={optionClass(cancelNotice === "gte14")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:      cancelNotice === "gte14" ? "border-sky-500" : "border-slate-300"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:    {cancelNotice === "gte14" && (
+src/app/[locale]/check/itinerary/what-happened/page.tsx:      <div className="h-2 w-2 rounded-full bg-sky-500" />
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  <span className="font-normal text-slate-700">14 days or more</span>
+src/app/[locale]/check/itinerary/what-happened/page.tsx:      {disruption === "denied" && affectedLegId && outcome && (
+src/app/[locale]/check/itinerary/what-happened/page.tsx:        <div className="space-y-3 pt-4">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          <h2 className="text-lg font-semibold text-sky-900">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:          <div className="space-y-2 w-full md:max-w-[560px]">
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  type="button"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  onClick={() => setVolunteer("yes")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:className={optionClass(volunteer === "yes")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:      volunteer === "yes" ? "border-sky-500" : "border-slate-300"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:    {volunteer === "yes" && (
+src/app/[locale]/check/itinerary/what-happened/page.tsx:      <div className="h-2 w-2 rounded-full bg-sky-500" />
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  <span className="font-normal text-slate-700">Yes</span>
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  type="button"
+src/app/[locale]/check/itinerary/what-happened/page.tsx: onClick={() => setVolunteer("no")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:className={optionClass(volunteer === "no")}
+src/app/[locale]/check/itinerary/what-happened/page.tsx:      volunteer === "no" ? "border-sky-500" : "border-slate-300"
+src/app/[locale]/check/itinerary/what-happened/page.tsx:    {volunteer === "no" && (
+src/app/[locale]/check/itinerary/what-happened/page.tsx:      <div className="h-2 w-2 rounded-full bg-sky-500" />
+src/app/[locale]/check/itinerary/what-happened/page.tsx:  <span className="font-normal text-slate-700">No</span>
+src/app/[locale]/check/itinerary/what-happened/page.tsx:      <div className="hidden">
+src/app/[locale]/check/itinerary/page.tsx:export { default } from "./ui";
+src/app/[locale]/check/itinerary/ui.tsx:"use client";
+src/app/[locale]/check/itinerary/ui.tsx:import { useEffect, useMemo, useState, useRef } from "react";
+src/app/[locale]/check/itinerary/ui.tsx:import { useRouter, useSearchParams } from "next/navigation";
+src/app/[locale]/check/itinerary/ui.tsx:import { Plane } from "lucide-react";
+src/app/[locale]/check/itinerary/ui.tsx:import PlaneIcon from "@/components/PlaneIcon";
+src/app/[locale]/check/itinerary/ui.tsx:// "Copenhagen (CPH) — Copenhagen Kastrup Airport" -> "Copenhagen (CPH)"
+src/app/[locale]/check/itinerary/ui.tsx:  "Scandinavian Airlines (SAS)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Lufthansa (LH)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Swiss International Air Lines (LX)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Austrian Airlines (OS)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Brussels Airlines (SN)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Air France (AF)",
+src/app/[locale]/check/itinerary/ui.tsx:  "KLM (KL)",
+src/app/[locale]/check/itinerary/ui.tsx:  "British Airways (BA)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Iberia (IB)",
+src/app/[locale]/check/itinerary/ui.tsx:  "TAP Air Portugal (TP)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Finnair (AY)",
+src/app/[locale]/check/itinerary/ui.tsx:  "LOT Polish Airlines (LO)",
+src/app/[locale]/check/itinerary/ui.tsx:  "ITA Airways (AZ)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Vueling (VY)",
+src/app/[locale]/check/itinerary/ui.tsx:  "easyJet (U2)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Ryanair (FR)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Wizz Air (W6)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Turkish Airlines (TK)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Aegean Airlines (A3)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Air Europa (UX)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Delta Air Lines (DL)",
+src/app/[locale]/check/itinerary/ui.tsx:  "American Airlines (AA)",
+src/app/[locale]/check/itinerary/ui.tsx:  "United Airlines (UA)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Air Canada (AC)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Emirates (EK)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Qatar Airways (QR)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Etihad Airways (EY)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Singapore Airlines (SQ)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Thai Airways (TG)",
+src/app/[locale]/check/itinerary/ui.tsx:  "ANA All Nippon Airways (NH)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Japan Airlines (JL)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Cathay Pacific (CX)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Korean Air (KE)",
+src/app/[locale]/check/itinerary/ui.tsx:  "EVA Air (BR)",
+src/app/[locale]/check/itinerary/ui.tsx:  "China Airlines (CI)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Hainan Airlines (HU)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Icelandair (FI)",
+src/app/[locale]/check/itinerary/ui.tsx:  "Aer Lingus (EI)",
+src/app/[locale]/check/itinerary/ui.tsx:    <div className="relative">
+src/app/[locale]/check/itinerary/ui.tsx:        placeholder="e.g. British Airways"
+src/app/[locale]/check/itinerary/ui.tsx:<div className="absolute z-10 mt-1 w-full overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg">
+src/app/[locale]/check/itinerary/ui.tsx:              className="cursor-pointer px-4 py-2 text-sm text-slate-900 hover:bg-sky-50 whitespace-nowrap"
+src/app/[locale]/check/itinerary/ui.tsx:  const from = sp.get("from") || "";
+src/app/[locale]/check/itinerary/ui.tsx:  const to = sp.get("to") || "";
+src/app/[locale]/check/itinerary/ui.tsx:    const parsed = safeParseJSON<string[]>(sp.get("layovers"));
+src/app/[locale]/check/itinerary/ui.tsx:    const parsed = safeParseJSON<Segment[]>(sp.get("segments"));
+src/app/[locale]/check/itinerary/ui.tsx:  qs.set("choice", "itinerary");
+src/app/[locale]/check/itinerary/ui.tsx:    qs.set("segmentsValid", allFilled ? "1" : "0");
+src/app/[locale]/check/itinerary/ui.tsx:    qs.set("segments", JSON.stringify(segments));
+src/app/[locale]/check/itinerary/ui.tsx:  "relative flex items-center h-[56px] rounded-lg border border-slate-300 bg-white px-4 focus-within:border-sky-300 hover:border-sky-300";
+src/app/[locale]/check/itinerary/ui.tsx:    <div className="mx-auto w-full max-w-[640px]">
+src/app/[locale]/check/itinerary/ui.tsx:  <div className="space-y-8">
+src/app/[locale]/check/itinerary/ui.tsx:          <h1 className="text-lg font-semibold tracking-tight text-sky-900">
+src/app/[locale]/check/itinerary/ui.tsx:        <div className="space-y-10">
+src/app/[locale]/check/itinerary/ui.tsx:            const seg = segments[i] || { airline: "", flightNumber: "", date: "" };
+src/app/[locale]/check/itinerary/ui.tsx:                <div className="mb-4 flex flex-wrap items-center gap-2 text-sm font-normal text-sky-900">
+src/app/[locale]/check/itinerary/ui.tsx:<div className="mt-2 w-full">
+src/app/[locale]/check/itinerary/ui.tsx:    <div className="mb-2 text-sm font-semibold text-sky-900">Airline</div>
+src/app/[locale]/check/itinerary/ui.tsx:  <div className="flex-1">
+src/app/[locale]/check/itinerary/ui.tsx:      inputClassName="w-full h-full bg-transparent outline-none text-sm text-slate-900 placeholder:text-slate-400 pr-12"
+src/app/[locale]/check/itinerary/ui.tsx:      type="button"
+src/app/[locale]/check/itinerary/ui.tsx:      aria-label="Clear airline"
+src/app/[locale]/check/itinerary/ui.tsx:      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+src/app/[locale]/check/itinerary/ui.tsx:<div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
+src/app/[locale]/check/itinerary/ui.tsx:<div className="md:col-span-1">
+src/app/[locale]/check/itinerary/ui.tsx:      <div className="mb-2 text-sm font-semibold text-sky-900">
+src/app/[locale]/check/itinerary/ui.tsx:<div className="h-[56px] flex overflow-hidden rounded-lg border border-slate-300 bg-white focus-within:border-sky-300 hover:border-sky-300">
+src/app/[locale]/check/itinerary/ui.tsx:  <div className="h-full flex w-1/3 items-center justify-center bg-slate-100 px-3 text-sm font-normal text-slate-500">
+src/app/[locale]/check/itinerary/ui.tsx:    className="h-full w-2/3 bg-transparent px-4 text-sm text-slate-900 placeholder:text-slate-400 outline-none"
+src/app/[locale]/check/itinerary/ui.tsx:<div className="md:col-span-2">
+src/app/[locale]/check/itinerary/ui.tsx:                      <div className="mb-2 text-sm font-semibold text-sky-900">
+src/app/[locale]/check/itinerary/ui.tsx:                      className="flex items-center gap-3 rounded-lg border border-slate-300 bg-white h-[56px] px-4 focus-within:border-sky-300 hover:border-sky-300 cursor-pointer"
+src/app/[locale]/check/itinerary/ui.tsx:                        className="h-5 w-5 text-slate-500"
+src/app/[locale]/check/itinerary/ui.tsx:                        fill="currentColor"
+src/app/[locale]/check/itinerary/ui.tsx:                        aria-hidden="true"
+src/app/[locale]/check/itinerary/ui.tsx:                        <path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1Zm12 8H5v9h14v-9ZM6 8h12V6H6v2Z" />
+src/app/[locale]/check/itinerary/ui.tsx:                        type="date"
+src/app/[locale]/check/itinerary/ui.tsx:                  <div className="mt-8 h-px w-full bg-slate-200" />
+src/app/[locale]/check/itinerary/ui.tsx:          <div className="text-sm text-slate-500">
+src/app/[locale]/check/page.tsx:import { redirect } from "next/navigation";
+src/app/[locale]/check/page.tsx:  const from = typeof sp.from === "string" ? sp.from : "";
+src/app/[locale]/check/page.tsx:  const to = typeof sp.to === "string" ? sp.to : "";
+src/app/[locale]/check/page.tsx:  if (from) qs.set("from", from);
+src/app/[locale]/check/page.tsx:  if (to) qs.set("to", to);
+src/app/[locale]/check/passenger-details/page.tsx:"use client";
+src/app/[locale]/check/passenger-details/page.tsx:import { useRouter, useSearchParams, usePathname } from "next/navigation";
+src/app/[locale]/check/passenger-details/page.tsx:import { useEffect, useMemo, useState, useRef } from "react";
+src/app/[locale]/check/passenger-details/page.tsx:import { useTranslations } from "next-intl";
+src/app/[locale]/check/passenger-details/page.tsx:import { Combobox } from "@headlessui/react";
+src/app/[locale]/check/passenger-details/page.tsx:import { PhoneInput } from "react-international-phone";
+src/app/[locale]/check/passenger-details/page.tsx:import "react-international-phone/style.css";
+src/app/[locale]/check/passenger-details/page.tsx:  { code: "SE", nameEn: "Sweden", nameLocal: "Sverige" },
+src/app/[locale]/check/passenger-details/page.tsx:  { code: "DK", nameEn: "Denmark", nameLocal: "Danmark" },
+src/app/[locale]/check/passenger-details/page.tsx:  { code: "NO", nameEn: "Norway", nameLocal: "Norge" },
+src/app/[locale]/check/passenger-details/page.tsx:  { code: "FI", nameEn: "Finland", nameLocal: "Suomi" },
+src/app/[locale]/check/passenger-details/page.tsx:  { code: "DE", nameEn: "Germany", nameLocal: "Deutschland" },
+src/app/[locale]/check/passenger-details/page.tsx:  { code: "FR", nameEn: "France", nameLocal: "France" },
+src/app/[locale]/check/passenger-details/page.tsx:  { code: "ES", nameEn: "Spain", nameLocal: "España" },
+src/app/[locale]/check/passenger-details/page.tsx:  { code: "IT", nameEn: "Italy", nameLocal: "Italia" },
+src/app/[locale]/check/passenger-details/page.tsx:  { code: "NL", nameEn: "Netherlands", nameLocal: "Nederland" },
+src/app/[locale]/check/passenger-details/page.tsx:  { code: "GB", nameEn: "United Kingdom", nameLocal: "United Kingdom" },
+src/app/[locale]/check/passenger-details/page.tsx:  const t = useTranslations("check.passengerDetails");
+src/app/[locale]/check/passenger-details/page.tsx:  const firstName = searchParams.get("firstName") || "";
+src/app/[locale]/check/passenger-details/page.tsx:  const lastName = searchParams.get("lastName") || "";
+src/app/[locale]/check/passenger-details/page.tsx:  const [address, setAddress] = useState(searchParams.get("address") || "");
+src/app/[locale]/check/passenger-details/page.tsx:  const [address2, setAddress2] = useState(searchParams.get("address2") || "");
+src/app/[locale]/check/passenger-details/page.tsx:  const [city, setCity] = useState(searchParams.get("city") || "");
+src/app/[locale]/check/passenger-details/page.tsx:  const [postalCode, setPostalCode] = useState(searchParams.get("postalCode") || "");
+src/app/[locale]/check/passenger-details/page.tsx:  const [state, setState] = useState(searchParams.get("state") || "");
+src/app/[locale]/check/passenger-details/page.tsx:const [phone, setPhone] = useState<string>(searchParams.get("phone") || "");
+src/app/[locale]/check/passenger-details/page.tsx:  const locale = pathname.split("/")[1]; // ex: "sv", "da"
+src/app/[locale]/check/passenger-details/page.tsx:    if (locale === "sv") return COUNTRIES.find((c) => c.code === "SE")!;
+src/app/[locale]/check/passenger-details/page.tsx:    if (locale === "da") return COUNTRIES.find((c) => c.code === "DK")!;
+src/app/[locale]/check/passenger-details/page.tsx:    if (locale === "no") return COUNTRIES.find((c) => c.code === "NO")!;
+src/app/[locale]/check/passenger-details/page.tsx:    if (locale === "fi") return COUNTRIES.find((c) => c.code === "FI")!;
+src/app/[locale]/check/passenger-details/page.tsx:    return COUNTRIES.find((c) => c.code === "SE")!;
+src/app/[locale]/check/passenger-details/page.tsx:  "mt-1 w-full md:w-2/3 h-[56px] md:h-[52px] rounded-lg border border-black/10 bg-white px-5 md:px-4 text-[16px] text-slate-900 placeholder:text-slate-400 hover:border-sky-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none transition";  const filteredCountries =
+src/app/[locale]/check/passenger-details/page.tsx:    <div className="mx-auto max-w-3xl px-4 py-2 text-sky-900">
+src/app/[locale]/check/passenger-details/page.tsx:      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+src/app/[locale]/check/passenger-details/page.tsx:        <h1 className="text-2xl font-semibold text-sky-900">{t("title")}</h1>
+src/app/[locale]/check/passenger-details/page.tsx:        <div className="flex items-baseline gap-2">
+src/app/[locale]/check/passenger-details/page.tsx:          <span className="font-semibold text-sky-900">{t("claimOwner")}</span>
+src/app/[locale]/check/passenger-details/page.tsx:          <span className="text-slate-900">
+src/app/[locale]/check/passenger-details/page.tsx:      <div className="mt-5 space-y-4">
+src/app/[locale]/check/passenger-details/page.tsx:          <label className="block text-sm font-semibold text-sky-900">{t("address")}</label>
+src/app/[locale]/check/passenger-details/page.tsx:    if (e.key === "Enter") {
+src/app/[locale]/check/passenger-details/page.tsx:  placeholder={t("addressPlaceholder")}
+src/app/[locale]/check/passenger-details/page.tsx:          <label className="block text-sm font-semibold text-sky-900">
+src/app/[locale]/check/passenger-details/page.tsx:            {t("address2")} <span className="text-xs text-slate-500">{t("optional")}</span>
+src/app/[locale]/check/passenger-details/page.tsx:            placeholder={t("address2Placeholder")}
+src/app/[locale]/check/passenger-details/page.tsx:        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 w-full md:w-2/3">
+src/app/[locale]/check/passenger-details/page.tsx:            <label className="block text-sm font-semibold text-sky-900">{t("city")}</label>
+src/app/[locale]/check/passenger-details/page.tsx:  className={inputBase.replace("md:w-2/3", "w-full")}
+src/app/[locale]/check/passenger-details/page.tsx:    if (e.key === "Enter") {
+src/app/[locale]/check/passenger-details/page.tsx:  placeholder={t("city")}
+src/app/[locale]/check/passenger-details/page.tsx:            <label className="block text-sm font-semibold text-sky-900">{t("postalCode")}</label>
+src/app/[locale]/check/passenger-details/page.tsx:  className={inputBase.replace("md:w-2/3", "w-full")}
+src/app/[locale]/check/passenger-details/page.tsx:    if (e.key === "Enter") {
+src/app/[locale]/check/passenger-details/page.tsx:  placeholder={t("postalCode")}
+src/app/[locale]/check/passenger-details/page.tsx:          <label className="block text-sm font-semibold text-sky-900">
+src/app/[locale]/check/passenger-details/page.tsx:            {t("state")} <span className="text-xs text-slate-500">{t("optional")}</span>
+src/app/[locale]/check/passenger-details/page.tsx:            placeholder={t("statePlaceholder")}
+src/app/[locale]/check/passenger-details/page.tsx:          <label className="block text-sm font-semibold text-sky-900">{t("country")}</label>
+src/app/[locale]/check/passenger-details/page.tsx:          <div className="mt-1 w-full md:w-2/3">
+src/app/[locale]/check/passenger-details/page.tsx:              <div className="relative">
+src/app/[locale]/check/passenger-details/page.tsx:className="w-full h-[56px] md:h-[52px] rounded-lg border border-black/10 bg-white px-5 pr-10 text-[16px] text-slate-900 placeholder:text-slate-400 hover:border-sky-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none transition"  onChange={(e) => setCountryQuery(e.target.value)}
+src/app/[locale]/check/passenger-details/page.tsx:    if (e.key === "Enter") {
+src/app/[locale]/check/passenger-details/page.tsx:  placeholder={t("countryPlaceholder")}
+src/app/[locale]/check/passenger-details/page.tsx:                    type="button"
+src/app/[locale]/check/passenger-details/page.tsx:                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+src/app/[locale]/check/passenger-details/page.tsx:                    aria-label={t("clearCountry")}
+src/app/[locale]/check/passenger-details/page.tsx:                <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md border border-slate-200 bg-white py-1 text-sm shadow-lg">
+src/app/[locale]/check/passenger-details/page.tsx:                          active ? "bg-sky-50 text-sky-900" : "text-slate-900"
+src/app/[locale]/check/passenger-details/page.tsx:                      <span className="font-medium">{c.nameEn}</span>
+src/app/[locale]/check/passenger-details/page.tsx:                      <span className="ml-2 text-slate-500">({c.nameLocal})</span>
+src/app/[locale]/check/passenger-details/page.tsx:  <label className="block text-sm font-semibold text-sky-900">{t("phone")}</label>
+src/app/[locale]/check/passenger-details/page.tsx:  <div className="mt-1 w-full md:w-2/3">
+src/app/[locale]/check/passenger-details/page.tsx:      defaultCountry={(country?.code || "SE").toLowerCase() as any}
+src/app/[locale]/check/passenger-details/page.tsx:      className="!w-full"
+src/app/[locale]/check/passenger-details/page.tsx:inputClassName="!w-full !h-[56px] md:!h-[52px] !text-[16px] !text-slate-900"

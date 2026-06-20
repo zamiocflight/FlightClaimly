@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useEffect, useMemo, useState, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { Combobox } from "@headlessui/react";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
@@ -29,6 +30,7 @@ const COUNTRIES: Country[] = [
 ];
 
 export default function PassengerDetailsPage() {
+  const t = useTranslations("check.passengerDetails");
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -115,11 +117,11 @@ const inputBase =
     <div className="mx-auto max-w-3xl px-4 py-2 text-sky-900">
       {/* Header row */}
       <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-        <h1 className="text-2xl font-semibold text-sky-900">Your contact details</h1>
+        <h1 className="text-2xl font-semibold text-sky-900">{t("title")}</h1>
 
         {/* Claim owner inline */}
         <div className="flex items-baseline gap-2">
-          <span className="font-semibold text-sky-900">Claim owner</span>
+          <span className="font-semibold text-sky-900">{t("claimOwner")}</span>
           <span className="text-slate-900">
             {firstName} {lastName}
           </span>
@@ -129,7 +131,7 @@ const inputBase =
       <div className="mt-5 space-y-4">
         {/* Address */}
         <div>
-          <label className="block text-sm font-semibold text-sky-900">Address</label>
+          <label className="block text-sm font-semibold text-sky-900">{t("address")}</label>
         <input
   ref={addressRef}
   className={inputBase}
@@ -141,27 +143,27 @@ const inputBase =
       cityRef.current?.focus();
     }
   }}
-  placeholder="Street and number"
+  placeholder={t("addressPlaceholder")}
 />
         </div>
 
         {/* Address line 2 */}
         <div>
           <label className="block text-sm font-semibold text-sky-900">
-            Address line 2 <span className="text-xs text-slate-500">(optional)</span>
+            {t("address2")} <span className="text-xs text-slate-500">{t("optional")}</span>
           </label>
           <input
             className={inputBase}
             value={address2}
             onChange={(e) => setAddress2(e.target.value)}
-            placeholder="Apartment, suite, etc."
+            placeholder={t("address2Placeholder")}
           />
         </div>
 
         {/* City + Postal code */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 w-full md:w-2/3">
           <div>
-            <label className="block text-sm font-semibold text-sky-900">City</label>
+            <label className="block text-sm font-semibold text-sky-900">{t("city")}</label>
             <input
   ref={cityRef}
   className={inputBase.replace("md:w-2/3", "w-full")}
@@ -173,12 +175,12 @@ const inputBase =
       postalRef.current?.focus();
     }
   }}
-  placeholder="City"
+  placeholder={t("city")}
 />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-sky-900">Postal code</label>
+            <label className="block text-sm font-semibold text-sky-900">{t("postalCode")}</label>
           <input
   ref={postalRef}
   className={inputBase.replace("md:w-2/3", "w-full")}
@@ -190,7 +192,7 @@ const inputBase =
       countryRef.current?.focus();
     }
   }}
-  placeholder="Postal code"
+  placeholder={t("postalCode")}
 />
           </div>
         </div>
@@ -198,24 +200,31 @@ const inputBase =
         {/* State */}
         <div>
           <label className="block text-sm font-semibold text-sky-900">
-            State <span className="text-xs text-slate-500">(optional)</span>
+            {t("state")} <span className="text-xs text-slate-500">{t("optional")}</span>
           </label>
           <input
             className={inputBase}
             value={state}
             onChange={(e) => setState(e.target.value)}
-            placeholder="State / Region"
+            placeholder={t("statePlaceholder")}
           />
         </div>
 
         {/* Country (Combobox) */}
         <div>
-          <label className="block text-sm font-semibold text-sky-900">Country</label>
+          <label className="block text-sm font-semibold text-sky-900">{t("country")}</label>
           <div className="mt-1 w-full md:w-2/3">
-            <Combobox value={country} onChange={(c: Country | null) => c && setCountry(c)}>
+            <Combobox
+  value={country}
+  onChange={(c: Country | null) => {
+    setCountry(c);
+    setCountryQuery(c?.nameEn || "");
+  }}
+>
               <div className="relative">
               <Combobox.Input
   ref={countryRef}
+  displayValue={(c: Country | null) => c?.nameEn || ""}
 className="w-full h-[56px] md:h-[52px] rounded-lg border border-black/10 bg-white px-5 pr-10 text-[16px] text-slate-900 placeholder:text-slate-400 hover:border-sky-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none transition"  onChange={(e) => setCountryQuery(e.target.value)}
   onKeyDown={(e) => {
     if (e.key === "Enter") {
@@ -223,7 +232,7 @@ className="w-full h-[56px] md:h-[52px] rounded-lg border border-black/10 bg-whit
       phoneRef.current?.focus();
     }
   }}
-  placeholder="Start typing country..."
+  placeholder={t("countryPlaceholder")}
 />
 
                 {country && (
@@ -234,7 +243,7 @@ className="w-full h-[56px] md:h-[52px] rounded-lg border border-black/10 bg-whit
                       setCountryQuery("");
                     }}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                    aria-label="Clear country"
+                    aria-label={t("clearCountry")}
                   >
                     ×
                   </button>
@@ -263,7 +272,7 @@ className="w-full h-[56px] md:h-[52px] rounded-lg border border-black/10 bg-whit
 
 {/* Phone */}
 <div>
-  <label className="block text-sm font-semibold text-sky-900">Phone number</label>
+  <label className="block text-sm font-semibold text-sky-900">{t("phone")}</label>
 
   <div className="mt-1 w-full md:w-2/3">
     <PhoneInput
