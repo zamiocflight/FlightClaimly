@@ -82,11 +82,8 @@ function calculateCompensationEUR(distanceKm: number | null | undefined) {
   if (distanceKm <= 3500) return 400;
   return 600;
 }
-function estimateDistanceKm() {
-  return 357; // v1 placeholder
-}
-function estimateDelay() {
-  return "3 hours 22 minutes"; // v1 placeholder
+function estimateDistanceKm(): number | null {
+  return null;
 }
 
 // 👉 Normaliserar "Copenhagen — Copenhagen Kastrup Airport" -> "Copenhagen (CPH)"
@@ -397,7 +394,7 @@ const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
             <div className="text-xs text-slate-500">{t("flightDistance")}</div>
             <div className="mt-1 font-medium text-sky-900 flex items-center gap-2">
               <Plane className="h-5 w-5 text-slate-400" />
-              <span>{distanceKm} km</span>
+              <span>{distanceKm !== null ? `${distanceKm} km` : "—"}</span>
             </div>
           </div>
 
