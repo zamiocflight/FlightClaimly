@@ -7,68 +7,68 @@
   },
 
 "check": {
-  "itinerary": {
+    "itinerary": {
     "intro": "Okej, jag behöver bara några flyguppgifter för att kunna kontrollera om du har rätt till ersättning.",
-"airline": "Flygbolag",
-"airlinePlaceholder": "t.ex. British Airways",
-"clearAirline": "Rensa flygbolag",
-"flightNumber": "Flightnummer",
-"date": "Flygdatum",
-"continueHint": "Fyll i flygbolag, flightnummer och datum för varje delsträcka för att fortsätta.",
-  "missedConnection": {
-    "title": "Missade du ett anslutningsflyg?",
-    "yes": "Ja",
-    "no": "Nej"
-  }
-},
-"whatHappened": {
-  "title": "Vad hände?",
-  "disruption": {
-    "delayed": "Mitt flyg var försenat",
-    "cancelled": "Mitt flyg blev inställt",
-    "denied": "Jag nekades ombordstigning"
+    "airline": "Flygbolag",
+    "airlinePlaceholder": "t.ex. British Airways",
+    "clearAirline": "Rensa flygbolag",
+    "flightNumber": "Flightnummer",
+    "date": "Flygdatum",
+    "continueHint": "Fyll i flygbolag, flightnummer och datum för varje delsträcka för att fortsätta.",
+    "missedConnection": {
+      "title": "Missade du ett anslutningsflyg?",
+      "yes": "Ja",
+      "no": "Nej"
+    },
+    "whatHappened": {
+      "title": "Vad hände?",
+      "disruption": {
+        "delayed": "Mitt flyg var försenat",
+        "cancelled": "Mitt flyg blev inställt",
+        "denied": "Jag nekades ombordstigning"
+      },
+      "whichFlight": {
+        "delayed": "Vilket flyg var försenat?",
+        "cancelled": "Vilket flyg blev inställt?",
+        "denied": "Vilket flyg nekades du ombordstigning på?"
+      },
+      "destinationFallback": "din slutdestination",
+      "arrivalQuestion": "Hur många timmar sent kom du fram till {destination}?",
+      "outcome": {
+        "gte3": "3 timmar eller mer",
+        "lt3": "Mindre än 3 timmar",
+        "never": "Kom aldrig fram"
+      },
+      "cancelNotice": {
+        "title": "Hur många dagar före avgång fick du information om ändringen?",
+        "lt14": "Mindre än 14 dagar",
+        "gte14": "14 dagar eller mer"
+      },
+      "volunteer": {
+        "title": "Gav du frivilligt upp din plats i utbyte mot andra förmåner från flygbolaget?",
+        "yes": "Ja",
+        "no": "Nej"
+      }
+    },
+    "missedConnectionHours": {
+      "title": "Hur lång blev förseningen vid din anslutning?",
+      "label": "Välj förseningens längd",
+      "placeholder": "Välj förseningens längd",
+      "neverArrived": "Jag kom aldrig fram",
+      "options": {
+        "0-1": "0–1 timmar",
+        "1-2": "1–2 timmar",
+        "2-3": "2–3 timmar",
+        "3-4": "3–4 timmar",
+        "4-5": "4–5 timmar",
+        "5-6": "5–6 timmar",
+        "6-7": "6–7 timmar",
+        "7-8": "7–8 timmar",
+        "8-9": "8–9 timmar",
+        "9plus": "9+ timmar"
+      }
+    }
   },
-  "whichFlight": {
-    "delayed": "Vilket flyg var försenat?",
-    "cancelled": "Vilket flyg blev inställt?",
-    "denied": "Vilket flyg nekades du ombordstigning på?"
-  },
-  "destinationFallback": "din slutdestination",
-  "arrivalQuestion": "Hur många timmar sent kom du fram till {destination}?",
-  "outcome": {
-    "gte3": "3 timmar eller mer",
-    "lt3": "Mindre än 3 timmar",
-    "never": "Kom aldrig fram"
-  },
-  "cancelNotice": {
-    "title": "Hur många dagar före avgång fick du information om ändringen?",
-    "lt14": "Mindre än 14 dagar",
-    "gte14": "14 dagar eller mer"
-  },
-  "volunteer": {
-    "title": "Gav du frivilligt upp din plats i utbyte mot andra förmåner från flygbolaget?",
-    "yes": "Ja",
-    "no": "Nej"
-  }
-},
-"missedConnectionHours": {
-  "title": "Hur lång blev förseningen vid din anslutning?",
-  "label": "Välj förseningens längd",
-  "placeholder": "Välj förseningens längd",
-  "neverArrived": "Jag kom aldrig fram",
-  "options": {
-    "0-1": "0–1 timmar",
-    "1-2": "1–2 timmar",
-    "2-3": "2–3 timmar",
-    "3-4": "3–4 timmar",
-    "4-5": "4–5 timmar",
-    "5-6": "5–6 timmar",
-    "6-7": "6–7 timmar",
-    "7-8": "7–8 timmar",
-    "8-9": "8–9 timmar",
-    "9plus": "9+ timmar"
-  }
-},
   "itineraryNotice": {
   "before": "Ange uppgifter för din",
   "originalFlight": "ursprungliga flygresa",

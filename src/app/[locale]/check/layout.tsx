@@ -134,6 +134,7 @@ export default function CheckLayout({ children }: { children: ReactNode }) {
   const activeStep = getActiveStep(pathname);
   const router = useRouter();
   const t = useTranslations("check.layout");
+  const checkT = useTranslations("check");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
 useEffect(() => {
@@ -549,10 +550,10 @@ if (isFinish) {
                   <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-sm font-bold text-white">
                     !
                   </span>
-                  <p className="text-sm leading-relaxed">
-  {t("itineraryNotice.before")}{" "}
-  <strong>{t("itineraryNotice.originalFlight")}</strong>{" "}
-  {t("itineraryNotice.after")}
+                 <p className="text-sm leading-relaxed">
+  {checkT("itineraryNotice.before")}{" "}
+  <strong>{checkT("itineraryNotice.originalFlight")}</strong>{" "}
+  {checkT("itineraryNotice.after")}
 </p>
                 </div>
               </div>
