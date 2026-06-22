@@ -13,12 +13,32 @@ export default function FromToInline() {
   const to = sp.get("to") || "";
 
   function update(param: "from" | "to", value: string) {
-    const qs = new URLSearchParams(sp.toString());
-    if (value) qs.set(param, value);
-    else qs.delete(param);
+  const currentChoice = sp.get("choice") || "direct";
 
-    router.replace(`?${qs.toString()}`, { scroll: false });
+  const qs = new URLSearchParams(sp.toString());
+
+  if (value) qs.set(param, value);
+  else qs.delete(param);
+
+  qs.set("choice", currentChoice);
+
+  // Route changed, so old downstream validation should not survive
+  qs.delete("directValid");
+  qs.delete("verifyMatched");
+  qs.delete("verifyEligible");
+  qs.delete("verifyConfirm");
+  qs.delete("legs");
+
+  // Only clear itinerary-specific data if user is currently direct
+  if (currentChoice === "direct") {
+    qs.delete("layoversValid");
+    qs.delete("layovers");
+    qs.delete("segments");
+    qs.delete("segmentsValid");
   }
+
+  router.replace(`?${qs.toString()}`, { scroll: false });
+}
 
   const cardBase =
     "relative flex items-center gap-4 rounded-lg border px-5 py-4 text-left transition bg-white border-black/10 hover:border-black/20 h-[56px]";

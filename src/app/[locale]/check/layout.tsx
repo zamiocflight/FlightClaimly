@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
@@ -163,8 +164,9 @@ useEffect(() => {
   const authorizationValid = sp.get("authorizationValid") === "1";
 
   // base: /{locale}/check
-  const parts = pathname.split("/").filter(Boolean); // ["sv","check","direct-or-layover", ...]
-  const base = parts.length >= 2 ? `/${parts[0]}/${parts[1]}` : "/check";
+const parts = pathname.split("/").filter(Boolean); // ["sv","check","direct-or-layover", ...]
+const locale = parts[0] || "en";
+const base = parts.length >= 2 ? `/${parts[0]}/${parts[1]}` : "/check";
 
   // --- page detection ---
   const isDirectOrLayover = pathname.endsWith("/direct-or-layover");
@@ -250,6 +252,10 @@ const verifyValid =
 
   // --- nextHref mapping ---
 const backHref = (() => {
+  if (isDirectOrLayover) {
+    return `/${locale}`;
+  }
+
   if (isDirect) {
     return `${base}/direct-or-layover?${sp.toString()}`;
   }
@@ -481,14 +487,18 @@ if (isFinish) {
     return false;
   })();
 
+  
   return (
   <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-[#F4F5F7] via-[#F1F3F6] to-[#ECEFF3]">
       <div className="relative h-screen md:flex">
         {/* LEFT PANEL */}
 <aside className="hidden md:flex w-[380px] flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-sky-900 px-10 py-10 sticky top-0 h-screen">      <div>
-            <div className="text-white text-lg font-semibold tracking-wide">
-              FLIGHT<span className="text-emerald-400">CLAIMLY</span>
-            </div>
+            <Link
+  href={`/${locale}`}
+  className="block text-white text-lg font-semibold tracking-wide hover:opacity-90 transition"
+>
+  FLIGHT<span className="text-emerald-400">CLAIMLY</span>
+</Link>
             <div className="mt-2 text-xs text-white/60">{t("progress")}</div>
           </div>
 

@@ -68,24 +68,24 @@ export default function DirectOrLayoverUI() {
     });
   }
 
-  function goNext(next: Choice) {
+function updateChoice(next: Choice) {
   if (!next) return;
 
   const qs = new URLSearchParams(sp.toString());
-  if (from) qs.set("from", from);
-  if (to) qs.set("to", to);
 
   if (next === "itinerary") {
     qs.set("choice", "itinerary");
     qs.set("layoversValid", allLayoversFilled ? "1" : "0");
     qs.set("layovers", JSON.stringify(layovers.filter(Boolean)));
   } else {
-    qs.set("choice", "direct");   // 👈 LÄGG TILL DENNA RAD
+    qs.set("choice", "direct");
     qs.delete("layoversValid");
     qs.delete("layovers");
+    qs.delete("segments");
+    qs.delete("segmentsValid");
   }
 
-  router.push(`/check/${next}?${qs.toString()}`);
+  router.replace(`?${qs.toString()}`, { scroll: false });
 }
 
 
@@ -109,9 +109,9 @@ export default function DirectOrLayoverUI() {
           <button
             type="button"
             onClick={() => {
-              setChoice("direct");
-              goNext("direct");
-            }}
+  setChoice("direct");
+  updateChoice("direct");
+}}
             className={[
   "flex items-center gap-4 rounded-lg border px-5 py-4 text-left transition active:scale-[0.98]",
               choice === "direct"
@@ -137,8 +137,9 @@ export default function DirectOrLayoverUI() {
           <button
             type="button"
             onClick={() => {
-              setChoice("itinerary");
-            }}
+  setChoice("itinerary");
+  updateChoice("itinerary");
+}}
             className={[
   "flex items-center gap-4 rounded-lg border px-5 py-4 text-left transition active:scale-[0.98]",
              choice === "itinerary"

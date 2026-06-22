@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+
 
 type Result = {
   iata: string;
@@ -30,8 +30,7 @@ export default function AirportInput({
   hidePreview = false,
   attachDropdownToParent = false,
 }: Props) {
-  const router = useRouter();
-  const sp = useSearchParams();
+
 
   const [q, setQ] = useState(value);
   const [results, setResults] = useState<Result[]>([]);
@@ -164,11 +163,8 @@ function getFlag(countryCode?: string) {
       setQ("");
       setOpen(false);
       setHasUserTyped(false);
-
-      const qs = new URLSearchParams(sp.toString());
-      qs.delete("layover");
-      router.replace(`?${qs.toString()}`, { scroll: false });
     }}
+
   className="
   absolute right-[-6px] top-1/2 -translate-y-1/2
   w-6 h-6 flex items-center justify-center
@@ -199,22 +195,13 @@ function getFlag(countryCode?: string) {
     transition
     hover:bg-slate-100
     active:bg-slate-200
-  "              onMouseDown={(e) => {
+  "           onMouseDown={(e) => {
   e.preventDefault();
-                // 1) sätt värdet lokalt
-                onSelect(r.label);
-                setQ(r.label);
-                setOpen(false);
-                setHasUserTyped(false);
-
-                // 2) skriv till URL -> layouten ser layover -> Continue blir grön
-                const qs = new URLSearchParams(sp.toString());
-                qs.set("choice", "itinerary");
-                qs.delete("layover");
-                qs.append("layover", r.label);
-
-                router.replace(`?${qs.toString()}`, { scroll: false });
-              }}
+  onSelect(r.label);
+  setQ(r.label);
+  setOpen(false);
+  setHasUserTyped(false);
+}}
             >
               <div className="flex items-center gap-2">
   <span className="text-base">{getFlag(r.country)}</span>
