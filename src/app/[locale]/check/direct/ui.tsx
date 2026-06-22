@@ -55,7 +55,7 @@ const AIRLINES = [
   "Aer Lingus (EI)",
   "Virgin Atlantic (VS)",
   "Jet2.com (LS)",
-  "Norwegian Air Shuttle (DY)",
+  "Norwegian (DY/D8)",
   "Eurowings (EW)",
   "Transavia (HV)",
   "airBaltic (BT)",
