@@ -13,6 +13,17 @@ async function createClaim(searchParams: URLSearchParams, locale: string) {
  const choice = searchParams.get("choice") || "direct";
 
 const segmentsRaw = searchParams.get("segments");
+const paxRaw = searchParams.get("pax");
+const layoversRaw = searchParams.get("layovers");
+
+let passengerCount = 1;
+
+try {
+  const pax = paxRaw ? JSON.parse(paxRaw) : [];
+  if (Array.isArray(pax)) {
+    passengerCount = 1 + pax.length;
+  }
+} catch {}
 let firstSegment: any = null;
 
 try {
@@ -39,6 +50,9 @@ body: JSON.stringify({
 date: fallbackDate,
 choice,
 segments: segmentsRaw,
+pax: paxRaw,
+passengerCount,
+layovers: layoversRaw,
   from: searchParams.get("from"),
   to: searchParams.get("to"),
   name: `${searchParams.get("firstName") || ""} ${searchParams.get("lastName") || ""}`.trim(),

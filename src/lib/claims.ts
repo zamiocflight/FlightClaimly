@@ -65,6 +65,12 @@ export type Claim = {
   compensationAmount?: number;
   currency?: string;
 
+  choice?: string | null;
+  segments?: any;
+  pax?: any;
+  passengerCount?: number | null;
+  layovers?: any;
+
 };
 
 // ---------- DB row shape ----------
@@ -109,6 +115,11 @@ type ClaimRow = {
 
   compensation_amount: number | null;
   currency: string | null;
+  choice: string | null;
+  segments: any | null;
+  pax: any | null;
+  passenger_count: number | null;
+  layovers: any | null;
 };
 
 // ---------- mappers ----------
@@ -144,6 +155,11 @@ payoutTokenCreatedAt: r.payout_token_created_at,
 payoutTokenExpiresAt: r.payout_token_expires_at,
 compensationAmount: r.compensation_amount ?? undefined,
 currency: r.currency ?? 'EUR',
+choice: r.choice,
+segments: r.segments,
+pax: r.pax,
+passengerCount: r.passenger_count,
+layovers: r.layovers,
 
   
 
@@ -173,6 +189,13 @@ function toInsert(input: {
   id?: string; // 👈 lägg till så vi kan använda det här också
   compensationAmount?: number;
 currency?: string;
+
+choice?: string | null;
+segments?: any;
+pax?: any;
+passengerCount?: number | null;
+layovers?: any;
+
 }) {
   return {
     received_at: input.id ?? undefined, // 👈 låter addClaim sätta default senare
@@ -196,6 +219,11 @@ currency?: string;
     country: input.country ?? null,
     compensation_amount: input.compensationAmount ?? 400,
 currency: input.currency ?? 'EUR',
+choice: input.choice ?? null,
+segments: input.segments ?? null,
+pax: input.pax ?? null,
+passenger_count: input.passengerCount ?? 1,
+layovers: input.layovers ?? null,
     };
 }
 
@@ -257,6 +285,11 @@ export async function addClaim(input: {
   phone?: string | null;
   compensationAmount?: number;
 currency?: string;
+choice?: string | null;
+segments?: string | null;
+pax?: string | null;
+passengerCount?: number | null;
+layovers?: string | null;
 }): Promise<Claim> {
   const sb = supabaseAdmin();
 

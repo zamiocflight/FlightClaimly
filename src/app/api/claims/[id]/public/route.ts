@@ -11,8 +11,13 @@ type PublicClaim = {
   date: string | null;
   bookingNumber: string;
   receivedAt: string;
+  name?: string;
+  choice?: string | null;
+  segments?: any;
+  pax?: any;
+  passengerCount?: number | null;
   attachmentsSummary?: { filename: string; uploadedAt: string }[];
-  sentToAirlineAt?: string | null; // 👈 NYTT FÄLT UT TILL FRONTEND
+  sentToAirlineAt?: string | null;
 };
 
 export async function GET(
@@ -67,6 +72,11 @@ export async function GET(
       date: (claim as any).date ?? null,
       bookingNumber: claim.bookingNumber || '',
       receivedAt: claim.receivedAt || '',
+      name: claim.name || '',
+choice: (claim as any).choice ?? null,
+segments: (claim as any).segments ?? null,
+pax: (claim as any).pax ?? null,
+passengerCount: (claim as any).passengerCount ?? 1,
       attachmentsSummary: (claim.attachments ?? []).map((a: any) => ({
   filename:
     a.filename?.trim() ||

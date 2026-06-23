@@ -88,7 +88,6 @@ export default function ClientUploads() {
  useEffect(() => {
   async function ensureAuthority() {
   if (ensureAuthorityRanRef.current) return;
-  ensureAuthorityRanRef.current = true;
 
     console.log("🧪 DEBUG SIGNATURE", {
   claimId,
@@ -103,6 +102,8 @@ console.log("🧪 ensureAuthority TRIGGER");
     console.log("🚀 ensureAuthority RUN", claimId);
 
     if (!claimId) return;
+
+    ensureAuthorityRanRef.current = true;
 
   // undvik att köra flera gånger
   if (sessionStorage.getItem(`fc_authority_done_${claimId}`) === "1") {

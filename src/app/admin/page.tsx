@@ -20,6 +20,8 @@ type ClaimAdmin = {
   statusLabel: string; // svensk label
   originalStatus?: string;
   connections: string[]; // mellanlandningar
+  segments?: any;
+  layovers?: any;
   attachmentsCount: number; // antal bilagor
   attachments: any[];
   payoutDetailsSubmittedAt?: string | null;
@@ -405,10 +407,27 @@ async function markAsPaidOut(id: string) {
                 const isSaving = savingId === c.id;
                 const showEmailInfo = emailInfoId === c.id;
 
-                const connectionsText =
-                  c.connections && c.connections.length > 0
-                    ? c.connections.filter((x) => x?.trim()).join(', ')
-                    : '—';
+                const layovers = (() => {
+  if (Array.isArray(c.layovers)) return c.layovers;
+
+  if (typeof c.layovers === 'string') {
+    try {
+      const parsed = JSON.parse(c.layovers);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+
+  return [];
+})();
+
+const connectionsText =
+  layovers.length > 0
+    ? layovers.join(', ')
+    : c.connections && c.connections.length > 0
+    ? c.connections.filter((x) => x?.trim()).join(', ')
+    : '—';
 
                 const statusBadge = getStatusBadge(c.statusInternal);
 

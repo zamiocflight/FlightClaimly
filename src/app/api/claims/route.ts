@@ -52,6 +52,11 @@ const {
   postalCode,
   city,
   country,
+  choice,
+  segments,
+  pax,
+  passengerCount,
+  layovers,
   locale: bodyLocale,
 } = body ?? {};
 
@@ -91,6 +96,11 @@ const claim = await addClaim({
   postalCode,
   city,
   country,
+  choice,
+  segments,
+  pax,
+  passengerCount,
+  layovers,
 });
 
     console.log('✅ /api/claims – NYTT ärende skapat i Supabase:', claim);

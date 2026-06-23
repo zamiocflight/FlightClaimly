@@ -14,7 +14,9 @@ type ClaimRaw = {
   bookingNumber: string;
   status?: string;
   connections?: string[];
-  attachments?: { filename: string }[];
+  segments?: any;
+layovers?: any;
+attachments?: { filename: string }[];
 };
 
 type ClaimAdmin = {
@@ -30,7 +32,9 @@ type ClaimAdmin = {
   statusInternal: string; // new | processing | sent_to_airline | paid_out | rejected
   statusLabel: string;    // svensk label
   connections: string[];
-  attachmentsCount: number;
+segments?: any;
+layovers?: any;
+attachmentsCount: number;
 };
 
 export async function GET() {
@@ -60,8 +64,26 @@ export async function GET() {
           receivedAt: c.receivedAt ?? '',
           statusInternal: internal,
           statusLabel: statusLabelSv(internal),
-      connections: Array.isArray(c.connections) ? c.connections : [],
-      attachments: Array.isArray(c.attachments) ? c.attachments : [],
+      connections: (() => {
+  try {
+    const segments =
+      typeof c.segments === "string"
+        ? JSON.parse(c.segments)
+        : c.segments;
+
+    if (!Array.isArray(segments)) return [];
+
+    return segments
+      .slice(0, -1) // sista segmentet är destinationen
+      .map((s: any) => s?.from || s?.airport || s?.city || "")
+      .filter(Boolean);
+  } catch {
+    return [];
+  }
+})(),
+segments: c.segments ?? null,
+layovers: c.layovers ?? null,
+attachments: Array.isArray(c.attachments) ? c.attachments : [],
       attachmentsCount: Array.isArray(c.attachments)
       ? c.attachments.length
       : 0,
