@@ -302,10 +302,14 @@ const cardBase =
         <div className="space-y-3 pt-4">
          <h2 className="text-lg font-semibold text-sky-900">
   {(() => {
-    const leg = legs.find((l) => l.id === affectedLegId);
-    const dest = leg ? `${leg.to} (${leg.toCode})` : t("destinationFallback");
-return t("arrivalQuestion", { destination: dest });
-  })()}
+  const finalLeg = legs[legs.length - 1];
+
+  const dest = finalLeg
+    ? `${finalLeg.to} (${finalLeg.toCode})`
+    : t("destinationFallback");
+
+  return t("arrivalQuestion", { destination: dest });
+})()}
 </h2>
 
 
