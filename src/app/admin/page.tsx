@@ -22,6 +22,7 @@ type ClaimAdmin = {
   connections: string[]; // mellanlandningar
   segments?: any;
   layovers?: any;
+  passengerCount?: number;
   attachmentsCount: number; // antal bilagor
   attachments: any[];
   payoutDetailsSubmittedAt?: string | null;
@@ -450,11 +451,20 @@ const connectionsText =
                       </div>
                     </Td>
 
-                    <Td>
-                      <div className="flex flex-col">
-                        <span className="font-medium text-slate-50">{c.name}</span>
-                      </div>
-                    </Td>
+                   <Td>
+  <div className="flex flex-col">
+    <span className="font-medium text-slate-50">
+      {c.name}
+    </span>
+
+    {(c.passengerCount ?? 1) > 1 && (
+      <span className="text-[11px] text-slate-400">
+        +{(c.passengerCount ?? 1) - 1} passenger
+        {(c.passengerCount ?? 1) > 2 ? "s" : ""}
+      </span>
+    )}
+  </div>
+</Td>
 
                     <Td>
                       <div className="flex flex-col">

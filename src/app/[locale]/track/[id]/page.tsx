@@ -19,6 +19,7 @@ type PublicClaim = {
   name?: string;
 choice?: string | null;
 segments?: any;
+layovers?: any;
 pax?: any;
 passengerCount?: number | null;
 };
@@ -234,6 +235,21 @@ export default function TrackPage({
   const steps = getTimelineSteps(lang, t);
   const isRejected = normalizedStatus === 'rejected';
 
+const layovers = (() => {
+  if (Array.isArray(claim.layovers)) return claim.layovers;
+
+  if (typeof claim.layovers === "string") {
+    try {
+      const parsed = JSON.parse(claim.layovers);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+
+  return [];
+})();
+
   const attachmentsCount = claim.attachmentsSummary?.length ?? 0;
   const passengers = (() => {
   if (Array.isArray(claim.pax)) return claim.pax;
@@ -381,149 +397,150 @@ const itinerarySegments = Array.isArray(claim.segments)
 
           {/* Card body */}
           <div className="px-6 py-6 md:px-8 md:py-7 space-y-6">
-            {/* Flight + documents */}
-            <section className="grid gap-5 md:grid-cols-2">
-              {/* Flight details */}
-              <div>
-                <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">
-                  {t.flightDetails}
-                </h3>
-                <div className="rounded-2xl border border-slate-100 bg-slate-50/60 px-4 py-3 text-xs space-y-1.5">
-                  <p>
-                    <span className="font-medium">{t.flightLabel}:</span>{' '}
-                    <span className="font-mono">{claim.flightNumber}</span>
-                  </p>
-                  <p>
-                    <span className="font-medium">{t.routeLabel}:</span>{' '}
-                    <span>
-                      {claim.from} → {claim.to}
-                    </span>
-                  </p>
-                  <p>
-                    <span className="font-medium">{t.dateLabel}:</span>{' '}
-                    <span>{claim.date || '-'}</span>
-                  </p>
-                  <p>
-                    <span className="font-medium">{t.bookingLabel}:</span>{' '}
-                    <span className="font-mono">
-                      {claim.bookingNumber || '—'}
-                    </span>
-                  </p>
-                </div>
-              </div>
-
-            {/* Passengers */}
-<div>
-  <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">
-    {t.passengersTitle}
-  </h3>
-
-  <div className="rounded-2xl border border-slate-100 bg-slate-50/60 px-4 py-3 text-xs space-y-2">
-    <p>
-      <span className="font-medium">{t.claimOwnerLabel}:</span>{' '}
-      <span>{claim.name || '—'}</span>
-    </p>
-
-    <p>
-      <span className="font-medium">{t.passengerCountLabel}:</span>{' '}
-      <span>{claim.passengerCount ?? 1}</span>
-    </p>
-
-    {passengers.length > 0 && (
-      <div>
-        <p className="font-medium">{t.additionalPassengersLabel}:</p>
-        <ul className="mt-1 list-disc pl-4 text-[11px] text-slate-600 space-y-0.5">
-          {passengers.map((p: any, idx: number) => (
-            <li key={idx}>
-              {[p.firstName, p.lastName].filter(Boolean).join(' ') || '—'}
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
+           {/* Flight + passengers */}
+<section className="grid gap-5 md:grid-cols-2">
+  {/* Flight details */}
+  <div>
+    <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">
+      {t.flightDetails}
+    </h3>
+    <div className="rounded-2xl border border-slate-100 bg-slate-50/60 px-4 py-3 text-xs space-y-1.5">
+      <p>
+        <span className="font-medium">{t.flightLabel}:</span>{' '}
+        <span className="font-mono">{claim.flightNumber}</span>
+      </p>
+      <p>
+        <span className="font-medium">{t.routeLabel}:</span>{' '}
+        <span>
+          {[claim.from, ...layovers, claim.to].filter(Boolean).join(' → ')}
+        </span>
+      </p>
+      <p>
+        <span className="font-medium">{t.dateLabel}:</span>{' '}
+        <span>{claim.date || '-'}</span>
+      </p>
+      <p>
+        <span className="font-medium">{t.bookingLabel}:</span>{' '}
+        <span className="font-mono">{claim.bookingNumber || '—'}</span>
+      </p>
+    </div>
   </div>
-</div>
-            </section>
 
-{/* Documents */}
-<section>
-  <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">
-    {t.docsTitle}
-  </h3>
+  {/* Passengers */}
+  <div>
+    <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">
+      {t.passengersTitle}
+    </h3>
 
-  <div className="rounded-2xl border border-slate-100 bg-slate-50/60 px-4 py-3 text-xs space-y-1.5">
-    {attachmentsCount > 0 ? (
-      <>
-        <p>
-          {t.docsReceivedPrefix}{' '}
-          <span className="font-semibold">
-            {attachmentsCount} {docsLabelPlural}
-          </span>
-          .
-        </p>
+    <div className="min-h-[140px] rounded-2xl border border-slate-100 bg-slate-50/60 px-4 py-3 text-xs space-y-2">
+      <p>
+        <span className="font-medium">{t.claimOwnerLabel}:</span>{' '}
+        <span>{claim.name || '—'}</span>
+      </p>
 
-        <ul className="list-disc pl-4 text-[11px] text-slate-600 space-y-0.5">
-          {claim.attachmentsSummary!.map((a, idx) => (
-            <li key={`${a.filename}-${idx}`}>{a.filename}</li>
-          ))}
-        </ul>
+      <p>
+        <span className="font-medium">{t.passengerCountLabel}:</span>{' '}
+        <span>{claim.passengerCount ?? 1}</span>
+      </p>
 
-        <p className="mt-1 text-[10px] text-slate-400">
-          {t.docsSecurityNote}
-        </p>
-      </>
-    ) : (
-      <p className="text-slate-600">{t.docsNone}</p>
-    )}
+      {passengers.length > 0 && (
+        <div>
+          <p className="font-medium">{t.additionalPassengersLabel}:</p>
+          <ul className="mt-1 list-disc pl-4 text-[11px] text-slate-600 space-y-0.5">
+            {passengers.map((p: any, idx: number) => (
+              <li key={idx}>
+                {[p.firstName, p.lastName].filter(Boolean).join(' ') || '—'}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
   </div>
 </section>
 
-            {/* Timeline */}
-            <section>
-              <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">
-                {t.timeline}
-              </h3>
-              <ol className="relative border-l border-slate-200 pl-4 text-xs text-slate-700 space-y-4">
-                {steps.map((step, index) => {
-                  const state = indexState(index, currentStepIndex);
+{/* Timeline + documents */}
+<section className="grid gap-5 md:grid-cols-2">
+  {/* Timeline */}
+  <div>
+    <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">
+      {t.timeline}
+    </h3>
+    <ol className="relative border-l border-slate-200 pl-4 text-xs text-slate-700 space-y-4">
+      {steps.map((step, index) => {
+        const state = indexState(index, currentStepIndex);
 
-                  const circleClass =
-                    state === 'done'
-                      ? 'bg-emerald-500 border-emerald-500'
-                      : state === 'current'
-                      ? 'bg-sky-500 border-sky-500 ring-2 ring-sky-200'
-                      : 'bg-slate-300 border-slate-300';
+        const circleClass =
+          state === 'done'
+            ? 'bg-emerald-500 border-emerald-500'
+            : state === 'current'
+            ? 'bg-sky-500 border-sky-500 ring-2 ring-sky-200'
+            : 'bg-slate-300 border-slate-300';
 
-                  const titleClass =
-                    state === 'future'
-                      ? 'font-medium text-slate-500'
-                      : 'font-semibold text-slate-900';
+        const titleClass =
+          state === 'future'
+            ? 'font-medium text-slate-500'
+            : 'font-semibold text-slate-900';
 
-                  const textClass =
-                    state === 'future'
-                      ? 'text-slate-400'
-                      : 'text-slate-600';
+        const textClass =
+          state === 'future'
+            ? 'text-slate-400'
+            : 'text-slate-600';
 
-                  return (
-                    <li key={step.key} className="relative pl-2">
-                      <div
-                        className={`absolute -left-[9px] top-1.5 h-3 w-3 rounded-full border-2 ${circleClass}`}
-                      />
-                      <p className={titleClass}>{step.title}</p>
-                      <p className={textClass}>{step.text}</p>
+        return (
+          <li key={step.key} className="relative pl-2">
+            <div
+              className={`absolute -left-[9px] top-1.5 h-3 w-3 rounded-full border-2 ${circleClass}`}
+            />
+            <p className={titleClass}>{step.title}</p>
+            <p className={textClass}>{step.text}</p>
 
-                      {step.key === 'sent_to_airline' &&
-                        sentToAirlineDate && (
-                          <p className="mt-0.5 text-[10px] text-slate-400">
-                            {lang === 'sv'
-                              ? `Skickat: ${sentToAirlineDate}`
-                              : `Sent: ${sentToAirlineDate}`}
-                          </p>
-                        )}
-                    </li>
-                  );
-                })}
-              </ol>
+            {step.key === 'sent_to_airline' && sentToAirlineDate && (
+              <p className="mt-0.5 text-[10px] text-slate-400">
+                {lang === 'sv'
+                  ? `Skickat: ${sentToAirlineDate}`
+                  : `Sent: ${sentToAirlineDate}`}
+              </p>
+            )}
+          </li>
+        );
+      })}
+    </ol>
+  </div>
+
+  {/* Documents */}
+  <div>
+    <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">
+      {t.docsTitle}
+    </h3>
+
+    <div className="min-h-[140px] rounded-2xl border border-slate-100 bg-slate-50/60 px-4 py-3 text-xs space-y-1.5">
+      {attachmentsCount > 0 ? (
+        <>
+          <p>
+            {t.docsReceivedPrefix}{' '}
+            <span className="font-semibold">
+              {attachmentsCount} {docsLabelPlural}
+            </span>
+            .
+          </p>
+
+          <ul className="list-disc pl-4 text-[11px] text-slate-600 space-y-0.5">
+            {claim.attachmentsSummary!.map((a, idx) => (
+              <li key={`${a.filename}-${idx}`}>{a.filename}</li>
+            ))}
+          </ul>
+
+          <p className="mt-1 text-[10px] text-slate-400">
+            {t.docsSecurityNote}
+          </p>
+        </>
+      ) : (
+        <p className="text-slate-600">{t.docsNone}</p>
+      )}
+    </div>
+  </div>
+
             </section>
 
             {/* Footer */}

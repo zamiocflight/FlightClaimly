@@ -16,6 +16,7 @@ type PublicClaim = {
   segments?: any;
   pax?: any;
   passengerCount?: number | null;
+  layovers?: any;
   attachmentsSummary?: { filename: string; uploadedAt: string }[];
   sentToAirlineAt?: string | null;
 };
@@ -75,6 +76,7 @@ export async function GET(
       name: claim.name || '',
 choice: (claim as any).choice ?? null,
 segments: (claim as any).segments ?? null,
+layovers: (claim as any).layovers ?? null,
 pax: (claim as any).pax ?? null,
 passengerCount: (claim as any).passengerCount ?? 1,
       attachmentsSummary: (claim.attachments ?? []).map((a: any) => ({

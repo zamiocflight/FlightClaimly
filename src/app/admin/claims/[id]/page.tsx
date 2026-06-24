@@ -18,6 +18,36 @@ export default async function ClaimDetailPage({
     return <div className="p-6">Claim not found</div>;
   }
 
+  const pax = (() => {
+  if (Array.isArray(claim.pax)) return claim.pax;
+
+  if (typeof claim.pax === "string") {
+    try {
+      const parsed = JSON.parse(claim.pax);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+
+  return [];
+})();
+
+const layovers = (() => {
+  if (Array.isArray(claim.layovers)) return claim.layovers;
+
+  if (typeof claim.layovers === "string") {
+    try {
+      const parsed = JSON.parse(claim.layovers);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+
+  return [];
+})();
+
   return (
     <div className="mx-auto max-w-3xl px-6 py-8 space-y-8">
       <h1 className="text-2xl font-semibold">Claim details</h1>
@@ -29,6 +59,30 @@ export default async function ClaimDetailPage({
         <p><strong>Email:</strong> {claim.email}</p>
         <p><strong>Phone:</strong> {claim.phone || "—"}</p>
       </div>
+
+      {/* Passengers */}
+<div>
+  <h2 className="font-semibold text-lg mb-2">Passengers</h2>
+  <p><strong>Claim owner:</strong> {claim.name}</p>
+  <p><strong>Passenger count:</strong> {claim.passengerCount ?? 1}</p>
+
+  {pax.length > 0 ? (
+    <div className="mt-2">
+      <p><strong>Additional passengers:</strong></p>
+      <ul className="list-disc pl-6">
+        {pax.map((p: any, i: number) => (
+          <li key={i}>
+            {[p.firstName, p.lastName].filter(Boolean).join(" ") || "—"}
+            {p.email ? ` — ${p.email}` : ""}
+            {p.under18 ? " — under 18" : ""}
+          </li>
+        ))}
+      </ul>
+    </div>
+  ) : (
+    <p><strong>Additional passengers:</strong> —</p>
+  )}
+</div>
 
       {/* Address ✅ NY */}
       <div>
@@ -43,7 +97,10 @@ export default async function ClaimDetailPage({
       <div>
         <h2 className="font-semibold text-lg mb-2">Flight</h2>
         <p><strong>Flight:</strong> {claim.flightNumber}</p>
-        <p><strong>Route:</strong> {claim.from} → {claim.to}</p>
+        <p>
+  <strong>Route:</strong>{" "}
+  {[claim.from, ...layovers, claim.to].filter(Boolean).join(" → ")}
+</p>
         <p><strong>Date:</strong> {claim.date || "—"}</p>
       </div>
 

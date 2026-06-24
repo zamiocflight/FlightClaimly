@@ -16,6 +16,7 @@ type ClaimRaw = {
   connections?: string[];
   segments?: any;
 layovers?: any;
+passengerCount?: number | null;
 attachments?: { filename: string }[];
 };
 
@@ -34,6 +35,7 @@ type ClaimAdmin = {
   connections: string[];
 segments?: any;
 layovers?: any;
+passengerCount?: number | null;
 attachmentsCount: number;
 };
 
@@ -59,6 +61,7 @@ export async function GET() {
           from: c.from,
           to: c.to,
           name: c.name,
+          passengerCount: c.passengerCount ?? 1,
           email: c.email,
           bookingNumber: c.bookingNumber,
           receivedAt: c.receivedAt ?? '',
