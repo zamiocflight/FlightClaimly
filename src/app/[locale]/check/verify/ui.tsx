@@ -180,9 +180,32 @@ export function VerifyClient() {
     const qs = new URLSearchParams(searchParams.toString());
 
     if (result) {
-      qs.set("verifyMatched", result.matched ? "1" : "0");
-      qs.set("verifyEligible", result.eligible ? "1" : "0");
+  qs.set("verifyMatched", result.matched ? "1" : "0");
+  qs.set("verifyEligible", result.eligible ? "1" : "0");
+
+  if (choice === "direct" && result.eligible) {
+    const roundedDistance =
+      typeof result.distanceKm === "number"
+        ? Math.round(result.distanceKm)
+        : null;
+
+    const amount =
+      roundedDistance === null
+        ? 250
+        : calculateCompensationEUR(roundedDistance);
+
+    qs.set("amount", String(amount));
+
+    if (roundedDistance !== null) {
+      qs.set("distanceKm", String(roundedDistance));
     } else {
+      qs.delete("distanceKm");
+    }
+  } else {
+    qs.delete("amount");
+    qs.delete("distanceKm");
+  }
+} else {
       qs.delete("verifyMatched");
       qs.delete("verifyEligible");
     }

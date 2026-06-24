@@ -57,6 +57,7 @@ const {
   pax,
   passengerCount,
   layovers,
+  compensationAmount,
   locale: bodyLocale,
 } = body ?? {};
 
@@ -101,6 +102,7 @@ const claim = await addClaim({
   pax,
   passengerCount,
   layovers,
+  compensationAmount,
 });
 
     console.log('✅ /api/claims – NYTT ärende skapat i Supabase:', claim);

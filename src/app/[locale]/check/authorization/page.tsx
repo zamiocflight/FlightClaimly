@@ -59,6 +59,9 @@ layovers: layoversRaw,
   email: searchParams.get("email"),
   bookingNumber: searchParams.get("bookingRef"),
   phone: searchParams.get("phone"),
+  compensationAmount: searchParams.get("amount")
+  ? Number(searchParams.get("amount"))
+  : undefined,
 
   // 🔥 DETTA VAR HELA BUGGEN
   address: searchParams.get("address"),
