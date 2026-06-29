@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import { NextResponse } from "next/server";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import crypto from "crypto";
