@@ -217,9 +217,10 @@ const inputBase =
             <Combobox
   value={country}
   onChange={(c: Country | null) => {
-    setCountry(c);
-    setCountryQuery(c?.nameEn || "");
-  }}
+  setCountry(c);
+  setCountryQuery(c?.nameEn || "");
+  setPhone("");
+}}
 >
               <div className="relative">
               <Combobox.Input
@@ -276,6 +277,7 @@ className="w-full h-[56px] md:h-[52px] rounded-lg border border-black/10 bg-whit
 
   <div className="mt-1 w-full md:w-2/3">
     <PhoneInput
+  key={country?.code || "SE"}
       inputRef={phoneRef}
       defaultCountry={(country?.code || "SE").toLowerCase() as any}
       value={phone}
@@ -296,7 +298,7 @@ inputClassName="!w-full !h-[56px] md:!h-[52px] !text-[16px] !text-slate-900"
     width: 100% !important;
     border-radius: 0.5rem !important;
     border: 1px solid rgb(0 0 0 / 0.1) !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     background: white !important;
   }
 
@@ -315,6 +317,11 @@ inputClassName="!w-full !h-[56px] md:!h-[52px] !text-[16px] !text-slate-900"
     background: transparent !important;
     color: #0f172a !important;
   }
+    .react-international-phone-country-selector-dropdown {
+  z-index: 9999 !important;
+  max-height: 260px !important;
+  overflow-y: auto !important;
+}
 `}</style>
 
 
