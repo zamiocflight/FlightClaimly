@@ -9,6 +9,7 @@ const nextConfig = {
   experimental: {
     serverActions: {},
   },
+  serverExternalPackages: ["@sparticuz/chromium"],
 };
 
 // Koppla next-intl till src/i18n/request.ts (viktigt!)
