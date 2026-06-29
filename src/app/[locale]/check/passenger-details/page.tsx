@@ -240,9 +240,10 @@ className="w-full h-[56px] md:h-[52px] rounded-lg border border-black/10 bg-whit
                   <button
                     type="button"
                     onClick={() => {
-                      setCountry(null);
-                      setCountryQuery("");
-                    }}
+  setCountry(null);
+  setCountryQuery("");
+  setPhone("");
+}}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
                     aria-label={t("clearCountry")}
                   >
@@ -275,7 +276,7 @@ className="w-full h-[56px] md:h-[52px] rounded-lg border border-black/10 bg-whit
 <div>
   <label className="block text-sm font-semibold text-sky-900">{t("phone")}</label>
 
-  <div className="mt-1 w-full md:w-2/3">
+  <div className="relative z-[60] mt-1 w-full md:w-2/3">
     <PhoneInput
   key={country?.code || "SE"}
       inputRef={phoneRef}
