@@ -1,10 +1,358 @@
 {
   "errors": {
-    "sendFailed": "Kunne ikke sende, prøv igen.",
-    "noClaimId": "Intet sags-ID i svaret.",
-    "network": "Netværksfejl. Prøv igen.",
-    "invalidFlightNumber": "Indtast et gyldigt flynummer (f.eks. SK123)."
+    "sendFailed": "Kunne ikke indsende lige nu — prøv venligst igen.",
+    "noClaimId": "Intet sags-ID blev returneret fra serveren.",
+    "network": "Netværksfejl. Prøv venligst igen.",
+    "invalidFlightNumber": "Indtast venligst et gyldigt flynummer (f.eks. SK123)."
   },
+
+  "check": {
+    "itinerary": {
+      "intro": "OK, jeg skal blot bruge nogle få flyoplysninger for at kunne kontrollere, om du er berettiget til kompensation.",
+      "airline": "Flyselskab",
+      "airlinePlaceholder": "f.eks. British Airways",
+      "clearAirline": "Ryd flyselskab",
+      "flightNumber": "Flynummer",
+      "date": "Flydato",
+      "continueHint": "Udfyld flyselskab, flynummer og dato for hver flystrækning for at fortsætte.",
+      "missedConnection": {
+        "title": "Missede du en tilslutningsflyvning?",
+        "yes": "Ja",
+        "no": "Nej"
+      },
+      "whatHappened": {
+        "title": "Hvad skete der?",
+        "disruption": {
+          "delayed": "Mit fly var forsinket",
+          "cancelled": "Mit fly blev aflyst",
+          "denied": "Jeg blev nægtet boarding"
+        },
+        "whichFlight": {
+          "delayed": "Hvilket fly var forsinket?",
+          "cancelled": "Hvilket fly blev aflyst?",
+          "denied": "Hvilket fly blev du nægtet boarding på?"
+        },
+        "destinationFallback": "din destination",
+        "arrivalQuestion": "Hvor mange timer forsinket ankom du til {destination}?",
+        "outcome": {
+          "gte3": "3 timer eller mere",
+          "lt3": "Mindre end 3 timer",
+          "never": "Ankom aldrig"
+        },
+        "cancelNotice": {
+          "title": "Hvor mange dage før afgang blev du informeret om flyændringen?",
+          "lt14": "Mindre end 14 dage",
+          "gte14": "14 dage eller mere"
+        },
+        "volunteer": {
+          "title": "Frivilligt opgav du din plads i bytte for andre fordele fra flyselskabet?",
+          "yes": "Ja",
+          "no": "Nej"
+  }
+  },
+"missedConnectionHours": {
+    "title": "Hvor lang var forsinkelsen ved din forbindelse?",
+    "label": "Vælg forsinkelsens længde",
+    "placeholder": "Vælg forsinkelsens længde",
+    "neverArrived": "Jeg ankom aldrig",
+    "options": {
+      "0-1": "0–1 timer",
+      "1-2": "1–2 timer",
+      "2-3": "2–3 timer",
+      "3-4": "3–4 timer",
+      "4-5": "4–5 timer",
+      "5-6": "5–6 timer",
+      "6-7": "6–7 timer",
+      "7-8": "7–8 timer",
+      "8-9": "8–9 timer",
+      "9plus": "9+ timer"
+    }
+  }
+},
+  "itineraryNotice": {
+  "before": "Angiv venligst oplysninger for din",
+  "originalFlight": "oprindelige flyrejse",
+  "after": "rejseplan (ikke en ombooket eller erstatningsflyvning)."
+},
+  "thanks": {
+  "title": "Dit krav er blevet indsendt",
+  "description": "Dit fuldmagtsdokument er blevet underskrevet, og dit krav bliver nu gjort klar til indsendelse til flyselskabet.",
+  "claimId": "Sags-ID",
+  "track": "Følg dit krav",
+  "emailNotice": "Vi har også sendt sporingslinket til din e-mailadresse.",
+  "reassurance": "FlightClaimly vil nu gennemgå din sag og indsende den til flyselskabet. Du får besked, så snart der er opdateringer."
+},
+  "finish": {
+  "finalizing": "Færdiggør dit krav…",
+  "errors": {
+    "missingClaimId": "Manglende sags-ID.",
+    "finalizeFailed": "Der opstod en fejl under færdiggørelsen af dit krav."
+  }
+},
+  "additional": {
+  "title": "Har du yderligere udgifter?",
+  "intro1": "Hvis dit fly blev forsinket, kan du være berettiget til kompensation for mad, hotel eller transport.",
+  "intro2": {
+    "before": "Upload kvitteringer for at hjælpe os med at ",
+    "highlight": "inddrive endnu flere penge",
+    "after": " til dig."
+  },
+  "attachedFiles": "Vedhæftede filer",
+  "totalSize": "{size} i alt",
+  "remove": "Fjern",
+  "removeFile": "Fjern fil",
+  "skip": "Spring over for nu",
+  "tip": "Tip: Upload af kvitteringer kan øge din kompensation.",
+  "dropzone": {
+    "dragDrop": "Træk og slip filer her",
+    "or": "eller",
+    "browse": "Gennemse filer",
+    "fileLimits": "PDF, JPG, PNG • Maks {perFile} MB pr. fil • Maks {total} MB i alt"
+  },
+  "errors": {
+    "missingClaim": "Mangler sagsreference. Gå tilbage og prøv igen.",
+    "uploadFailed": "Upload mislykkedes. Prøv igen, eller spring over for nu, så beder vi om dokumenterne senere, hvis det er nødvendigt.",
+    "unsupportedFormat": "\"{file}\" er ikke et understøttet format. Upload venligst PDF, JPG eller PNG.",
+    "fileTooLarge": "\"{file}\" er for stor. Maks {max} MB pr. fil.",
+    "totalTooLarge": "Den samlede upload er for stor. Maks {max} MB i alt."
+  }
+},
+"uploadsId": {
+  "title": "Nu har vi brug for dit ID eller pas. Dette er meget vigtigt for din sag hos flyselskabet.",
+  "privacyNotice": "Dit dokument vil kun blive brugt til at behandle kravet og vil blive slettet inden for 30 dage efter, at sagen er afsluttet.",
+  "uploadPromptBefore": "Upload venligst dit",
+  "idOrPassport": "ID eller pas",
+  "attachedFiles": "Vedhæftede filer",
+  "totalSize": "{size} i alt",
+  "remove": "Fjern",
+  "removeFile": "Fjern fil",
+  "highWarning": "Nogle flyselskaber kræver ofte identitetsbekræftelse, før de behandler tredjepartskrav. Upload af dit ID nu reducerer forsinkelser senere.",
+  "mediumWarning": "At indsende ID nu kan hjælpe med at fremskynde behandlingen, hvis flyselskabet anmoder om verifikation.",
+  "dropzone": {
+    "dragDrop": "Træk og slip filer her",
+    "takePhoto": "Tag et billede af dit ID eller pas",
+    "or": "eller",
+    "camera": "Brug telefonens kamera til hurtigt at uploade dit pas eller ID",
+    "browse": "Gennemse filer",
+    "uploadPhoto": "Upload eller tag billede",
+    "fileLimits": "PDF, JPG, PNG • Maks {perFile} MB pr. fil • Maks {total} MB i alt"
+  },
+  "errors": {
+    "missingClaim": "Mangler sagsreference. Gå tilbage og prøv igen.",
+    "uploadFailed": "Upload mislykkedes. Prøv igen.",
+    "unsupportedFormat": "\"{file}\" er ikke et understøttet format. Upload venligst PDF, JPG eller PNG.",
+    "fileTooLarge": "\"{file}\" er for stor. Maks {max} MB pr. fil.",
+    "totalTooLarge": "Den samlede upload er for stor. Maks {max} MB i alt."
+  }
+},
+  "uploads": {
+  "title": "Upload dokumenter",
+  "attachedFiles": "Vedhæftede filer",
+  "totalSize": "{size} i alt",
+  "remove": "Fjern",
+  "removeFile": "Fjern fil",
+  "description": {
+    "before": "Upload af dit",
+    "boardingPass": "boardingkort",
+    "middle": ", bookingbekræftelse eller kvitteringer kan hjælpe os med at ",
+    "faster": "behandle dit krav hurtigere",
+    "expenses": "Hvis du havde ekstra udgifter (hotel, måltider, transport), kan kvitteringer hjælpe os med at ",
+    "moreMoney": "inddrive endnu flere penge",
+    "after": " til dig."
+  },
+  "dropzone": {
+    "dragDrop": "Træk og slip filer her",
+    "takePhoto": "Tag et billede af dit boardingkort eller dine kvitteringer",
+    "or": "eller",
+    "camera": "Brug telefonens kamera til hurtigt at uploade dit dokument",
+    "browse": "Gennemse filer",
+    "uploadPhoto": "Upload eller tag billede",
+    "fileLimits": "PDF, JPG, PNG • Maks {perFile} MB pr. fil • Maks {total} MB i alt"
+  },
+  "errors": {
+    "missingClaim": "Mangler sagsreference. Gå tilbage og prøv igen.",
+    "uploadFailed": "Upload mislykkedes. Prøv igen, eller spring over for nu, så beder vi om dokumenterne senere, hvis det er nødvendigt.",
+    "unsupportedFormat": "\"{file}\" er ikke et understøttet format. Upload venligst PDF, JPG eller PNG.",
+    "fileTooLarge": "\"{file}\" er for stor. Maks {max} MB pr. fil.",
+    "totalTooLarge": "Den samlede upload er for stor. Maks {max} MB i alt."
+  }
+},
+  "authorization": {
+  "claimCreationError": "Der opstod en fejl under oprettelsen af kravet.",
+  "amountFallback": "op til €600",
+  "titleBefore": "Gode nyheder! Det ser ud til, at du er berettiget til",
+  "titleAfterAmount": "pr. person i henhold til EU261.",
+  "titleSecondLine": "Underskriv nedenfor og modtag de penge, du har ret til.",
+  "signaturePlaceholder": "Klik og underskriv her",
+  "clearSignature": "Ryd underskrift",
+  "important": "Vigtigt",
+  "signatureGuidance": "Din underskrift bør så vidt muligt ligne underskriften på dit ID.",
+  "feeTitle": "Ja — no win, no fee. Du betaler kun 20 % inkl. moms, hvis vi lykkes.",
+  "feeSubtitle": "Gebyret fratrækkes din kompensation.",
+  "legal": {
+    "before": "Ved at underskrive accepterer du vores",
+    "terms": "Vilkår og betingelser",
+    "and": "og",
+    "priceList": "Prisliste",
+    "middle": ", og du giver os tilladelse til at bruge din underskrift på",
+    "authorityDocument": "Fuldmagtsdokumentet"
+  }
+},
+"bookingReference": {
+  "title": "Hvad er din bookingreference?",
+  "placeholder": "f.eks. DS27K3 eller YLEHPW",
+  "helpTitle": "Hvordan finder jeg min bookingreference?",
+  "helpText1": "Din bookingreference (PNR) findes normalt i din bookingbekræftelse fra flyselskabet eller rejsebureauet. Den er typisk 5–8 tegn lang (bogstaver og tal).",
+  "helpText2": "Den kan også stå på dit boardingkort eller i flyselskabets app.",
+  "examples": "Eksempler"
+},
+  "passengerDetails": {
+  "title": "Dine kontaktoplysninger",
+  "claimOwner": "Kravindehaver",
+  "address": "Adresse",
+  "addressPlaceholder": "Vejnavn og nummer",
+  "address2": "Adresselinje 2",
+  "address2Placeholder": "Lejlighed, etage osv.",
+  "city": "By",
+  "postalCode": "Postnummer",
+  "state": "Region",
+  "statePlaceholder": "Region / Område",
+  "country": "Land",
+  "countryPlaceholder": "Begynd at skrive land...",
+  "clearCountry": "Ryd land",
+  "phone": "Telefonnummer",
+  "optional": "(valgfrit)"
+},
+  "passengers": {
+  "title": "Andre passagerer",
+  "info": "Passagerer, du rejste sammen med, kan også være berettiget til kompensation.",
+  "travelingWithOthers": "Jeg rejste sammen med andre",
+  "travelingAlone": "Jeg rejste alene",
+  "potentialCompensation": "Potentiel kompensation",
+  "manualReview": "Manuel gennemgang",
+  "totalForOnePassenger": "I alt for {count} passager",
+  "totalForPassengers": "I alt for {count} passagerer",
+  "perPassenger": "Pr. passager",
+  "passengerNumber": "Passager {number}",
+  "remove": "Fjern",
+  "under18": "Denne person er under 18 år",
+  "firstName": "Fornavn",
+  "lastName": "Efternavn",
+  "email": "E-mail",
+  "optional": "(valgfrit)",
+  "addPassenger": "+ Tilføj passager"
+},
+  "claimOwner": {
+  "title": "Hvem skal modtage kompensationen?",
+  "subtitle": "Du er kun ét skridt fra at gøre krav på din kompensation",
+  "firstNameLabel": "Fornavn",
+  "firstNamePlaceholder": "Fornavn",
+  "firstNameHint": "Skal stemme overens med dit ID",
+  "lastNameLabel": "Efternavn",
+  "lastNamePlaceholder": "Efternavn",
+  "lastNameHint": "Indtast hele dit efternavn præcis som det står på dit ID eller pas.",
+  "emailLabel": "E-mail",
+  "emailSubtitle": "Vi sender opdateringer om dit krav og din udbetaling hertil",
+  "emailHint": "Vi bruger din e-mail til at holde dig opdateret om dit krav.",
+  "legal": {
+    "before": "Ved at fortsætte accepterer du vores",
+    "terms": "Vilkår og betingelser",
+    "and": "og",
+    "privacy": "Privatlivspolitik"
+  }
+},
+  "verify": {
+  "loading": "Kontrollerer flystatus…",
+  "verifyFailed": "Vi kunne ikke verificere dette fly. Gå tilbage og kontroller dine oplysninger.",
+  "eligibleTitle": "Gode nyheder — dit fly er berettiget til kompensation.",
+  "notEligibleTitle": "Ikke berettiget til kompensation i henhold til EU/UK 261.",
+  "notEligibleExplanation": "Dit fly ser ikke ud til at være forsinket med mindst 3 timer ved ankomst. Derfor kan vi ikke fortsætte med et kompensationskrav under EU/UK 261.",
+  "airlineFallback": "Flyselskab",
+  "flight": "Fly",
+  "flightDetails": "Flyoplysninger",
+  "badgeEligible": "BERETTIGET",
+  "badgeNotEligible": "IKKE BERETTIGET",
+  "potentialCompensation": "Potentiel kompensation",
+  "compensation": "Kompensation",
+  "entitled": "Du er berettiget til kompensation i henhold til EU-lovgivningen",
+  "manualReview": "Denne sag kan kræve manuel gennemgang",
+  "perPassenger": "pr. passager",
+  "scheduledArrivalTime": "Planlagt ankomsttid",
+  "actualArrivalTime": "Faktisk ankomsttid",
+  "flightDistance": "Flydistance",
+  "totalDelay": "Samlet forsinkelse",
+  "confirmTitle": "Bekræft dine flyoplysninger",
+  "confirmYes": "Ja, dette er mit fly",
+  "confirmNo": "Nej, noget er forkert",
+  "correctDetails": "Gå tilbage og ret dine flyoplysninger, før du fortsætter.",
+  "delay": {
+    "noSignificantDelay": "Ingen væsentlig forsinkelse registreret",
+    "arrivedOneMinuteEarly": "Ankom 1 minut før tid",
+    "arrivedMinutesEarly": "Ankom {minutes} minutter før tid",
+    "arrivedOnTime": "Ankom til tiden",
+    "minutes": "{minutes} minutter",
+    "hours": "{hours} timer",
+    "hoursMinutes": "{hours} timer {minutes} minutter"
+  }
+},
+"direct": {
+  "departureDateTitle": "Hvad var din planlagte afrejsedato?",
+  "dateLabel": "Dato",
+  "airlineTitle": "Hvilket flyselskab fløj du med?",
+  "airlineLabel": "Flyselskab",
+  "airlinePlaceholder": "f.eks. British Airways",
+  "clearAirline": "Ryd flyselskab",
+  "flightListTitle": "Vælg nu dit fly fra listen nedenfor:",
+  "scheduledTime": "Planlagt tidspunkt",
+  "flightNumber": "Flynummer",
+  "loadingFlights": "Indlæser tilgængelige fly…",
+  "noFlightsFound": "Ingen fly fundet på denne rute. Du kan stadig fortsætte manuelt.",
+  "manualEnterDetails": "Indtast flyoplysninger manuelt",
+  "manualCantFind": "Jeg kan ikke finde mit fly",
+  "manualFlightNumberLabel": "Indtast dit flynummer",
+  "manualFlightNumberPlaceholder": "f.eks. SK2814",
+  "errors": {
+    "searchFailed": "Flysøgning mislykkedes",
+    "loadFailed": "Vi kunne ikke indlæse fly. Du kan stadig fortsætte manuelt."
+  }
+},
+  "directOrLayover": {
+    "title": "Var dette en direkte flyvning?",
+    "routeTitle": "Hvor fløj du fra og til?",
+    "fromLabel": "Afrejselufthavn",
+    "toLabel": "Endelig destination",
+    "airportOrCity": "Lufthavn eller by",
+    "direct": "Direkte flyvning",
+    "layovers": "Med mellemlandinger",
+    "connectionTitle": "Hvor havde du en mellemlanding?",
+    "cityOrAirport": "By eller lufthavnsnavn",
+    "airportPlaceholder": "f.eks. London eller LHR",
+    "removeLayover": "Fjern mellemlanding",
+    "addAirport": "+ Tilføj endnu en lufthavn",
+    "connectionRequired": "Tilføj mindst én mellemlandingslufthavn for at fortsætte."
+  },
+
+  "layout": {
+  "progress": "Din sags fremdrift",
+  "back": "Tilbage",
+  "continue": "Fortsæt",
+  "processing": "Behandler...",
+
+  "steps": {
+    "eligibility": "Berettigelse",
+    "passengerDetails": "Passageroplysninger",
+    "documents": "Dokumenter",
+    "finish": "Afslut"
+  },
+
+  "footer": {
+    "help": "Hjælp",
+    "terms": "Vilkår og betingelser",
+    "privacy": "Privatliv"
+  }
+}
+},
+
   "header": {
     "language": {
       "label": "DA ▾",
@@ -123,24 +471,31 @@
       "eu": "EU261 / UK261",
       "fee": "LAVT GEBYR",
       "noWinNoFee": "NO WIN, NO FEE"
-    },
-    "title": "Få op til 600 € i kompensation for forsinkede eller aflyste fly – uden besvær.",
-    "subtitle": {
-      "beforeDelayed": "Tjek om dit",
-      "delayedLink": "forsinkede fly",
-      "between": "eller",
-      "cancelledLink": "aflyste fly",
-      "afterCancelled": "giver ret til kompensation efter",
-      "eu261Link": "EU261",
-      "afterEu261": ". Vi hjælper dig med at kræve kompensation fra flyselskabet – du betaler kun, hvis du får penge udbetalt."
-    },
-    "cta": "Tjek mit fly nu",
-    "trust": {
-      "beforeLink": "Tager ca. 2 minutter. Intet at betale, hvis du ikke får kompensation –",
-      "link": "læs mere om vores gebyr.",
-      "afterLink": ""
-    }
+      },
+   "title": "Få op til €600 i kompensation for forsinkede eller aflyste flyrejser — uden besvær.",
+  "titleLine1": "Få op til €600 i kompensation",
+  "titleLine2": "for forsinkede eller aflyste flyrejser!",
+  "fromLabel": "Afrejselufthavn",
+  "fromPlaceholder": "Afrejselufthavn",
+  "toLabel": "Endelig destinationslufthavn",
+  "toPlaceholder": "Endelig destinationslufthavn",
+  "subtitle": {
+    "beforeDelayed": "Tjek om dit",
+    "delayedLink": "forsinkede fly",
+    "between": "eller",
+    "cancelledLink": "aflyste fly",
+    "afterCancelled": "er berettiget til kompensation i henhold til",
+    "eu261Link": "EU261",
+    "afterEu261": ". Vi håndterer dit krav over for flyselskabet — du betaler kun, hvis du får udbetalt kompensation."
   },
+  "cta": "Tjek mit fly nu",
+  "searchCta": "Tjek kompensation",
+  "trust": {
+    "beforeLink": "Det tager cirka 2 minutter. Ingen betaling medmindre du modtager kompensation —",
+    "link": "læs mere om vores gebyr.",
+    "afterLink": ""
+  }
+},
   "precheck": {
     "steps": {
       "step1": "Tjek dit fly",
