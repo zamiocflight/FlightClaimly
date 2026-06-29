@@ -211,7 +211,7 @@ const inputBase =
         </div>
 
         {/* Country (Combobox) */}
-        <div>
+        <div className="relative z-[100]">
           <label className="block text-sm font-semibold text-sky-900">{t("country")}</label>
           <div className="mt-1 w-full md:w-2/3">
             <Combobox
@@ -273,7 +273,7 @@ className="w-full h-[56px] md:h-[52px] rounded-lg border border-black/10 bg-whit
         </div>
 
 {/* Phone */}
-<div>
+<div className="relative z-30">
   <label className="block text-sm font-semibold text-sky-900">{t("phone")}</label>
 
   <div className="relative z-[60] mt-1 w-full md:w-2/3">
@@ -318,7 +318,7 @@ inputClassName="!w-full !h-[56px] md:!h-[52px] !text-[16px] !text-slate-900"
     background: transparent !important;
     color: #0f172a !important;
   }
-    .react-international-phone-country-selector-dropdown {
+ .react-international-phone-country-selector-dropdown {
   z-index: 9999 !important;
   max-height: 260px !important;
   overflow-y: auto !important;

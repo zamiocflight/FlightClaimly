@@ -560,7 +560,13 @@ if (isFinish) {
             )}
 
             {/* FOOTER – OWNED BY LAYOUT */}
-            <div className="mt-6 hidden md:flex justify-end gap-3">
+            <div
+  className={
+    isPassengerDetails
+      ? "mt-6 flex justify-end gap-3"
+      : "mt-6 hidden md:flex justify-end gap-3"
+  }
+>
               <button
                 type="button"
                 onClick={() => {
@@ -607,14 +613,20 @@ onClick={async () => {
                   "w-44 rounded-lg px-5 py-4 text-sm font-semibold transition",
                   canContinue
                     ? "bg-sky-500 text-white hover:bg-sky-600 cursor-pointer shadow-md shadow-sky-500/30 hover:shadow-lg hover:shadow-sky-500/40 transform hover:-translate-y-[1px] active:translate-y-0"
-                    : "bg-slate-300 text-sky-600 cursor-not-allowed opacity-60",
+                    : "bg-slate-300 text-sky-600 cursor-not-allowed",
                 ].join(" ")}
               >
                 {isSubmitting ? t("processing") : primaryCtaLabel}
               </button>
             </div>
 
-<div className="md:hidden mt-2 sticky bottom-0 z-50 bg-white backdrop-blur-sm rounded-2xl p-4">
+<div
+  className={
+    isPassengerDetails
+      ? "hidden"
+      : "md:hidden mt-2 sticky bottom-0 z-50 bg-white backdrop-blur-sm rounded-2xl p-4"
+  }
+>
       <div className="flex items-center gap-3">
     <button
       type="button"
