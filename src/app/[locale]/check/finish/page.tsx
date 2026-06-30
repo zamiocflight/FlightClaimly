@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
@@ -9,60 +9,53 @@ export default function Page() {
   const router = useRouter();
   const sp = useSearchParams();
 
-  const claimId = sp.get("claimId");
-  const locale =
-    typeof window !== "undefined"
-      ? window.location.pathname.split("/")[1]
-      : "sv";
-
+  const hasRunRef = useRef(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
     async function finalizeClaim() {
+      if (hasRunRef.current) return;
+      hasRunRef.current = true;
+
+      const claimId = sp.get("claimId");
+
+      const locale =
+        typeof window !== "undefined"
+          ? window.location.pathname.split("/")[1]
+          : "sv";
+
       if (!claimId) {
         setError(t("errors.missingClaimId"));
         return;
       }
 
-      // 🔒 Skydd mot dubbelgenerering
-      if (sessionStorage.getItem(`fc_authority_done_${claimId}`) === "1") {
-        router.replace(`/${locale}/check/thanks?${sp.toString()}`);
-        return;
-      }
-
       try {
-        // 1️⃣ Hämta signatur
-        const sig =
-          sessionStorage.getItem(`fc_signature_png_${claimId}`) ||
-          sessionStorage.getItem("fc_signature_png");
+        if (sessionStorage.getItem(`fc_finish_email_sent_${claimId}`) !== "1") {
+          const res = await fetch(`/api/claims/${claimId}/finish`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ locale }),
+          });
 
-        if (!sig) {
-          throw new Error("Missing signature");
+          if (!res.ok) {
+            throw new Error("Finish email failed");
+          }
+
+          sessionStorage.setItem(`fc_finish_email_sent_${claimId}`, "1");
         }
 
-        const fullName =
-          `${sp.get("firstName") || ""} ${sp.get("lastName") || ""}`.trim();
-
-        const bookingReference =
-          sp.get("bookingRef") ||
-          sp.get("pnr") ||
-          sp.get("bookingReference") ||
-          "";
-
-        if (!fullName || !bookingReference) {
-          throw new Error("Missing passenger data");
-        }
-        
-
-        // 5️⃣ Redirect till thanks
         router.replace(`/${locale}/check/thanks?${sp.toString()}`);
       } catch (e) {
+        console.error("Finish failed:", e);
         setError(t("errors.finalizeFailed"));
+        hasRunRef.current = false;
       }
     }
 
     finalizeClaim();
-  }, [claimId, router, sp, locale]);
+  }, [router, sp, t]);
 
   return (
     <div className="p-8 text-sky-900">

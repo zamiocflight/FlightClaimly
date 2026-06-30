@@ -3,7 +3,6 @@ export const runtime = 'nodejs';
 
 import { NextResponse } from 'next/server';
 import { addClaim } from '@/lib/claims';
-import { sendStatusEmail } from '@/lib/statusEmail';
 
 type Lang = 'sv' | 'en' | 'da' | 'de' | 'pl' | 'fi';
 
@@ -114,26 +113,7 @@ const claim = await addClaim({
       'http://localhost:3000';
     const trackingUrl = `${String(base).replace(/\/$/, '')}/${locale}/track/${claim.id}`;
 
-    // ✅ Skicka bekräftelsemail med SAMMA snygga template (non-blocking)
- try {
-  if (email) {
-    const ok = await sendStatusEmail({
-      id: claim.id,
-      email: String(email).toLowerCase(),
-      name,
-      status: 'new',
-      flightNumber,
-      from,
-      to,
-      flightDate: date,
-      lang: locale,
-    });
 
-    console.log('✅ Onboarding-mail skickat:', { ok, to: email, trackingUrl });
-  }
-} catch (mailErr) {
-  console.error('❌ Kunde inte skicka onboarding-mail (claim sparad ändå):', mailErr);
-}
 
     // Dummy-precheck (som innan)
     const precheck = {

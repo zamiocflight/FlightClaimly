@@ -60,6 +60,7 @@ export type Claim = {
 
   // ✈️ NEW — När ärendet skickades till flygbolaget (för timeline steg 3)
   sentToAirlineAt?: string | null;        // DB: sent_to_airline_at (timestamptz)
+  finishEmailSentAt?: string | null;
 
   // Visar ersättning + minus kompensationen.
   compensationAmount?: number;
@@ -112,6 +113,7 @@ type ClaimRow = {
 
   phone: string | null;
   sent_to_airline_at: string | null;
+  finish_email_sent_at: string | null;
 
   compensation_amount: number | null;
   currency: string | null;
@@ -146,6 +148,7 @@ function fromRow(r: ClaimRow): Claim {
     viewerTokenCreatedAt: r.viewer_token_created_at,
     phone: r.phone,
     sentToAirlineAt: r.sent_to_airline_at,
+    finishEmailSentAt: r.finish_email_sent_at,
     payoutAccountHolder: r.payout_account_holder,
     payoutIban: r.payout_iban,
     payoutIbanLast4: r.payout_iban_last4,
@@ -461,4 +464,20 @@ export async function appendAttachment(
 
   if (error) throw error;
   return fromRow(data);
+}
+export async function markFinishEmailSent(id: string): Promise<void> {
+  const sb = supabaseAdmin();
+
+  const nowIso = new Date().toISOString();
+
+  const { error } = await sb
+    .from("claims")
+    .update({
+      finish_email_sent_at: nowIso,
+      updated_at: nowIso,
+    })
+    .eq("received_at", id)
+    .is("finish_email_sent_at", null);
+
+  if (error) throw error;
 }

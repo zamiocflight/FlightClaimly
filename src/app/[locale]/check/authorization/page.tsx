@@ -82,6 +82,52 @@ layovers: layoversRaw,
   return data.id;
 }
 
+async function generateAuthorityAfterClaim(
+  claimId: string,
+  searchParams: URLSearchParams
+) {
+  const sig =
+    sessionStorage.getItem(`fc_signature_png_${claimId}`) ||
+    sessionStorage.getItem("fc_signature_png");
+
+  if (!sig) {
+    throw new Error("Missing signature");
+  }
+
+  const fullName = `${searchParams.get("firstName") || ""} ${
+    searchParams.get("lastName") || ""
+  }`.trim();
+
+  const bookingReference =
+    searchParams.get("bookingRef") ||
+    searchParams.get("pnr") ||
+    searchParams.get("bookingReference") ||
+    "";
+
+  if (!fullName || !bookingReference) {
+    throw new Error("Missing authority data");
+  }
+
+  const res = await fetch("/api/authority/generate", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      claimId,
+      fullName,
+      bookingReference,
+      signatureDataUrl: sig,
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to generate authority");
+  }
+
+  sessionStorage.setItem(`fc_authority_done_${claimId}`, "1");
+}
+
 export default function AuthorizationPage() {
   const t = useTranslations("check.authorization");
   const router = useRouter();
@@ -180,24 +226,24 @@ if (claimId) {
 async function handleContinue() {
   if (!isValid) return;
 
-  // 🔥 STOPPAR dubbelkörning
   if (continueRunningRef.current) return;
   continueRunningRef.current = true;
 
   try {
     const claimId = await createClaim(searchParams, locale);
 
+    await generateAuthorityAfterClaim(claimId, searchParams);
+
     const params = new URLSearchParams(searchParams.toString());
     params.set("claimId", claimId);
 
     router.push(`/${locale}/check/uploads?${params.toString()}`);
   } catch (err) {
-    console.error("Claim creation failed:", err);
+    console.error("Claim creation / authority generation failed:", err);
     alert(t("claimCreationError"));
 
     window.dispatchEvent(new Event("flightclaimly-submit-failed"));
-    
-    // 🔥 viktigt: reset om fail
+
     continueRunningRef.current = false;
   }
 }
