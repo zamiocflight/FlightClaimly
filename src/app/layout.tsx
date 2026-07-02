@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import "./globals.css";
 import 'flag-icons/css/flag-icons.min.css';
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import MetaPixel from "@/components/analytics/MetaPixel";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -92,6 +93,8 @@ export default async function RootLayout({
   </Script>
 
   {children}
+
+  <MetaPixel />
 
         <footer className="border-t mt-10">
           <div className="max-w-7xl mx-auto px-6 py-6 text-sm text-gray-600 flex flex-wrap items-center gap-4">
