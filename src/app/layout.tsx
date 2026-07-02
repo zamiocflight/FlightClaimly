@@ -4,6 +4,7 @@ import Script from "next/script";
 import { headers } from "next/headers";
 import "./globals.css";
 import 'flag-icons/css/flag-icons.min.css';
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -66,28 +67,31 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased text-gray-900 bg-white`}
-      >
-        {/* Schema.org Organization */}
-        <Script
-          id="org-jsonld"
-          type="application/ld+json"
-          strategy="afterInteractive"
-        >
-          {JSON.stringify(orgJsonLd)}
-        </Script>
+<body
+  className={`${geistSans.variable} ${geistMono.variable} antialiased text-gray-900 bg-white`}
+>
+  {/* Google Analytics */}
+  <GoogleAnalytics />
 
-        {/* Schema.org WebSite */}
-        <Script
-          id="website-jsonld"
-          type="application/ld+json"
-          strategy="afterInteractive"
-        >
-          {JSON.stringify(websiteJsonLd)}
-        </Script>
+  {/* Schema.org Organization */}
+  <Script
+    id="org-jsonld"
+    type="application/ld+json"
+    strategy="afterInteractive"
+  >
+    {JSON.stringify(orgJsonLd)}
+  </Script>
 
-        {children}
+  {/* Schema.org WebSite */}
+  <Script
+    id="website-jsonld"
+    type="application/ld+json"
+    strategy="afterInteractive"
+  >
+    {JSON.stringify(websiteJsonLd)}
+  </Script>
+
+  {children}
 
         <footer className="border-t mt-10">
           <div className="max-w-7xl mx-auto px-6 py-6 text-sm text-gray-600 flex flex-wrap items-center gap-4">
