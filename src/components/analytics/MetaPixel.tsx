@@ -4,12 +4,26 @@ import Script from "next/script";
 
 const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
+declare global {
+  interface Window {
+    fbq?: any;
+    _fbq?: any;
+  }
+}
+
 export default function MetaPixel() {
   if (!PIXEL_ID) return null;
 
+  function initPixel() {
+    if (!window.fbq) return;
+
+    window.fbq("init", PIXEL_ID);
+    window.fbq("track", "PageView");
+  }
+
   return (
     <>
-      <Script id="meta-pixel-base" strategy="afterInteractive">
+      <Script id="meta-pixel-stub" strategy="afterInteractive">
         {`
           !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -19,21 +33,16 @@ export default function MetaPixel() {
           n.loaded=!0;
           n.version='2.0';
           n.queue=[];
-          t=b.createElement(e);
-          t.async=!0;
-          t.src=v;
-          s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s);
-          }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+          }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
         `}
       </Script>
 
-      <Script id="meta-pixel-init" strategy="afterInteractive">
-        {`
-          fbq('init', '${PIXEL_ID}');
-          fbq('track', 'PageView');
-        `}
-      </Script>
+      <Script
+        id="meta-pixel-script"
+        src="https://connect.facebook.net/en_US/fbevents.js"
+        strategy="afterInteractive"
+        onLoad={initPixel}
+      />
 
       <noscript>
         <img
