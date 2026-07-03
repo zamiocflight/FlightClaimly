@@ -14,6 +14,7 @@ import CompensationRules from "@/components/seo/CompensationRules";
 import CompensationAmounts from "@/components/seo/CompensationAmounts";
 import Statistics from "@/components/seo/Statistics";
 import Timeline from "@/components/seo/Timeline";
+import { buildAirlineMetadata } from "@/lib/seo/metadata";
 
 type PageProps = {
   params: Promise<{
@@ -32,25 +33,12 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const airline = getAirlineBySlug(slug);
 
   if (!airline) return {};
 
-  return {
-  title: `${airline.name} flight compensation | FlightClaimly`,
-  description: airline.description,
-  alternates: {
-    canonical: `https://www.flightclaimly.com/en/airlines/${airline.slug}`,
-  },
-  openGraph: {
-    title: `${airline.name} flight compensation | FlightClaimly`,
-    description: airline.description,
-    url: `https://www.flightclaimly.com/en/airlines/${airline.slug}`,
-    siteName: "FlightClaimly",
-    type: "article",
-  },
-};
+  return buildAirlineMetadata(airline, locale);
 }
 
 export default async function AirlinePage({ params }: PageProps) {
