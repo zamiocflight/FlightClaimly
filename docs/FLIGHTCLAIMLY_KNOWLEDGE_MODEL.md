@@ -152,3 +152,56 @@ Current files:
 This is SEO Engine v0.1.
 
 The next step is to evolve this into Knowledge Engine v0.2.
+# FlightClaimly Knowledge Model
+
+## Core Architecture
+
+Knowledge
+    ↓
+Knowledge Blocks
+    ↓
+Templates
+    ↓
+Pages
+    ↓
+SEO
+    ↓
+Growth
+
+---
+
+## Current Knowledge Blocks
+
+✅ Hero
+
+✅ Overview
+
+✅ Quick Facts
+
+✅ Claim Process
+
+✅ Common Issues
+
+✅ FAQ
+
+✅ FAQ Schema
+
+✅ Breadcrumb Schema
+
+✅ Related Airlines
+
+⬜ Passenger Rights
+
+⬜ Compensation Rules
+
+⬜ Timeline
+
+⬜ Statistics
+
+⬜ Legal References
+
+⬜ Airports
+
+⬜ Routes
+
+⬜ Countries

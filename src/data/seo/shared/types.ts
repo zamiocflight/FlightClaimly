@@ -13,6 +13,23 @@ export type CountryRef = {
   name: string;
 };
 
+export type CompensationAmount = {
+  label: string;
+  distance: string;
+  amount: string;
+};
+
+export type Statistic = {
+  label: string;
+  value: string;
+  description: string;
+};
+
+export type TimelineStep = {
+  title: string;
+  description: string;
+};
+
 export type Airline = {
   slug: string;
   name: string;
@@ -35,6 +52,19 @@ export type Airline = {
   title: string;
   description: string;
   intro: string;
+  overview: string;
+  passengerRights: string;
+
+  compensationIntro: string;
+  compensationAmounts: CompensationAmount[];
+
+  compensationRules: string;
+
+  statisticsIntro: string;
+  statistics: Statistic[];
+
+  timelineIntro: string;
+  timeline: TimelineStep[];
 
   claimProcess: string[];
   commonIssues: string[];

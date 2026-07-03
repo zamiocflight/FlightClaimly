@@ -8,6 +8,12 @@ import QuickFacts from "@/components/seo/QuickFacts";
 import FAQSchema from "@/components/seo/FAQSchema";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import RelatedAirlines from "@/components/seo/RelatedAirlines";
+import Overview from "@/components/seo/Overview";
+import PassengerRights from "@/components/seo/PassengerRights";
+import CompensationRules from "@/components/seo/CompensationRules";
+import CompensationAmounts from "@/components/seo/CompensationAmounts";
+import Statistics from "@/components/seo/Statistics";
+import Timeline from "@/components/seo/Timeline";
 
 type PageProps = {
   params: Promise<{
@@ -105,6 +111,63 @@ export default async function AirlinePage({ params }: PageProps) {
           ? [{ label: "Alliance", value: airline.alliance }]
           : []),
       ]}
+    />
+  </div>
+</section>
+
+<section className="px-6 py-12">
+  <div className="mx-auto max-w-5xl">
+    <Overview
+      title={`About ${airline.name}`}
+      body={airline.overview}
+    />
+  </div>
+</section>
+
+<section className="px-6 py-12">
+  <div className="mx-auto max-w-5xl">
+    <CompensationAmounts
+      title="How much compensation can you receive?"
+      intro={airline.compensationIntro}
+      amounts={airline.compensationAmounts}
+    />
+  </div>
+</section>
+
+<section className="px-6 py-12">
+  <div className="mx-auto max-w-5xl">
+    <PassengerRights
+      title="Passenger rights under EU261"
+      body={airline.passengerRights}
+    />
+  </div>
+</section>
+
+<section className="px-6 py-12">
+  <div className="mx-auto max-w-5xl">
+    <CompensationRules
+      title="When are you entitled to compensation?"
+      body={airline.compensationRules}
+    />
+  </div>
+</section>
+
+<section className="px-6 py-12">
+  <div className="mx-auto max-w-5xl">
+    <Statistics
+      title={`${airline.name} compensation statistics`}
+      intro={airline.statisticsIntro}
+      statistics={airline.statistics}
+    />
+  </div>
+</section>
+
+<section className="px-6 py-12">
+  <div className="mx-auto max-w-5xl">
+    <Timeline
+      title="What happens after you submit your claim?"
+      intro={airline.timelineIntro}
+      steps={airline.timeline}
     />
   </div>
 </section>
