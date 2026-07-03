@@ -4,6 +4,10 @@ import Hero from "@/components/seo/Hero";
 import ClaimProcess from "@/components/seo/ClaimProcess";
 import CommonIssues from "@/components/seo/CommonIssues";
 import FAQ from "@/components/seo/FAQ";
+import QuickFacts from "@/components/seo/QuickFacts";
+import FAQSchema from "@/components/seo/FAQSchema";
+import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import RelatedAirlines from "@/components/seo/RelatedAirlines";
 
 type PageProps = {
   params: Promise<{
@@ -28,9 +32,19 @@ export async function generateMetadata({ params }: PageProps) {
   if (!airline) return {};
 
   return {
+  title: `${airline.name} flight compensation | FlightClaimly`,
+  description: airline.description,
+  alternates: {
+    canonical: `https://www.flightclaimly.com/en/airlines/${airline.slug}`,
+  },
+  openGraph: {
     title: `${airline.name} flight compensation | FlightClaimly`,
     description: airline.description,
-  };
+    url: `https://www.flightclaimly.com/en/airlines/${airline.slug}`,
+    siteName: "FlightClaimly",
+    type: "article",
+  },
+};
 }
 
 export default async function AirlinePage({ params }: PageProps) {
@@ -44,6 +58,56 @@ export default async function AirlinePage({ params }: PageProps) {
   return (
     <main className="min-h-screen bg-slate-50">
       <Hero airline={airline} checkUrl={checkUrl} />
+      <FAQSchema items={airline.faq} />
+
+      <BreadcrumbSchema
+  items={[
+    {
+      name: "Home",
+      url: `https://www.flightclaimly.com/${locale}`,
+    },
+    {
+      name: "Airlines",
+      url: `https://www.flightclaimly.com/${locale}/airlines`,
+    },
+    {
+      name: airline.name,
+      url: `https://www.flightclaimly.com/${locale}/airlines/${airline.slug}`,
+    },
+  ]}
+/>
+      
+
+      <section className="px-6 pt-12">
+  <div className="mx-auto max-w-5xl">
+    <QuickFacts
+      facts={[
+        { label: "Airline", value: airline.name },
+        { label: "IATA code", value: airline.iata },
+        ...(airline.icao ? [{ label: "ICAO code", value: airline.icao }] : []),
+        { label: "Country", value: airline.country },
+        ...(airline.headquarters
+          ? [{ label: "Headquarters", value: airline.headquarters }]
+          : []),
+        ...(airline.founded
+          ? [{ label: "Founded", value: airline.founded }]
+          : []),
+        ...(airline.mainHub
+          ? [{ label: "Main hub", value: airline.mainHub }]
+          : []),
+        ...(airline.fleetSize
+          ? [{ label: "Fleet size", value: airline.fleetSize }]
+          : []),
+        ...(airline.destinations
+          ? [{ label: "Destinations", value: airline.destinations }]
+          : []),
+        ...(airline.alliance
+          ? [{ label: "Alliance", value: airline.alliance }]
+          : []),
+      ]}
+    />
+  </div>
+</section>
 
       <section className="px-6 py-16">
         <div className="mx-auto grid max-w-5xl gap-10 md:grid-cols-2">
@@ -61,6 +125,15 @@ export default async function AirlinePage({ params }: PageProps) {
           <FAQ items={airline.faq} />
         </div>
       </section>
+      <section className="px-6 pb-20">
+  <div className="mx-auto max-w-5xl">
+    <RelatedAirlines
+      currentSlug={airline.slug}
+      airlines={airlines}
+      locale={locale}
+    />
+  </div>
+</section>
     </main>
   );
 }

@@ -1,36 +1,45 @@
 import { standardClaimProcess } from "./shared/claimProcess";
 import { standardCommonIssues } from "./shared/commonIssues";
-import { standardFAQ, type FAQ } from "./shared/faq";
+import { standardFAQ } from "./shared/faq";
+import type { Airline } from "./shared/types";
 
-export type Airline = {
-  slug: string;
-  name: string;
-  iata: string;
-  country: string;
-  title: string;
-  description: string;
-  intro: string;
-  claimProcess: string[];
-  commonIssues: string[];
-  faq: FAQ[];
-};
+export type { Airline } from "./shared/types";
 
 export const airlines: Airline[] = [
-  {
-    slug: "norwegian",
-    name: "Norwegian",
-    iata: "DY",
-    country: "Norway",
-    title: "Norwegian flight compensation",
-    description:
-      "Find out if you can claim compensation for a delayed or cancelled Norwegian flight under EU261.",
-    intro:
-      "If your Norwegian flight was delayed, cancelled, or caused you to miss a connection, you may be entitled to compensation under EU261. FlightClaimly helps you check your case and handle the claim process.",
+  
+{
+  slug: "norwegian",
+  name: "Norwegian",
+  iata: "DY",
+  icao: "NOZ",
 
-    claimProcess: standardClaimProcess,
-    commonIssues: standardCommonIssues,
-    faq: standardFAQ,
-  },
+  country: "Norway",
+
+  headquarters: "Fornebu, Norway",
+  founded: 1993,
+  parentCompany: "Norwegian Air Shuttle ASA",
+
+  mainHub: "Oslo Airport (OSL)",
+  hubs: [
+    "Oslo Airport (OSL)",
+    "Bergen Airport (BGO)",
+    "Trondheim Airport (TRD)",
+  ],
+
+  fleetSize: 89,
+  destinations: 120,
+  alliance: null,
+
+  title: "Norwegian flight compensation",
+  description:
+    "Find out if you can claim compensation for a delayed or cancelled Norwegian flight under EU261.",
+  intro:
+    "If your Norwegian flight was delayed, cancelled, or caused you to miss a connection, you may be entitled to compensation under EU261. FlightClaimly helps you check your case and handle the claim process.",
+
+  claimProcess: standardClaimProcess,
+  commonIssues: standardCommonIssues,
+  faq: standardFAQ,
+},
     {
     slug: "sas",
     name: "SAS",
