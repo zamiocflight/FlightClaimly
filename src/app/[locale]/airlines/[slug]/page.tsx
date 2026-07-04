@@ -15,6 +15,8 @@ import CompensationAmounts from "@/components/seo/CompensationAmounts";
 import Statistics from "@/components/seo/Statistics";
 import Timeline from "@/components/seo/Timeline";
 import { buildAirlineMetadata } from "@/lib/seo/metadata";
+import RelatedKnowledge from "@/components/seo/RelatedKnowledge";
+import { getRelatedKnowledge } from "@/lib/seo/relationships";
 
 type PageProps = {
   params: Promise<{
@@ -48,6 +50,12 @@ export default async function AirlinePage({ params }: PageProps) {
   if (!airline) notFound();
 
   const checkUrl = `/${locale}/check/direct-or-layover`;
+
+  const relatedKnowledge = getRelatedKnowledge(
+  airline.slug,
+  locale,
+  ["airport", "law", "article"]
+);
 
   return (
     <main className="min-h-screen bg-slate-50">
@@ -176,6 +184,16 @@ export default async function AirlinePage({ params }: PageProps) {
           <FAQ items={airline.faq} />
         </div>
       </section>
+
+<section className="px-6 py-12">
+  <div className="mx-auto max-w-5xl">
+    <RelatedKnowledge
+      title="Related guides and destinations"
+      items={relatedKnowledge}
+    />
+  </div>
+</section>
+
       <section className="px-6 pb-20">
   <div className="mx-auto max-w-5xl">
     <RelatedAirlines
