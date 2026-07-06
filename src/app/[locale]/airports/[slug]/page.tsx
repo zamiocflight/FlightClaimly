@@ -5,7 +5,7 @@ import FAQSchema from "@/components/seo/FAQSchema";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 
 import { airports, getAirportBySlug } from "@/data/seo/airports";
-import { buildAirlineMetadata } from "@/lib/seo/metadata";
+import { buildMetadata } from "@/lib/seo/metadata";
 
 type PageProps = {
   params: Promise<{
@@ -25,18 +25,16 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps) {
   const { locale, slug } = await params;
+
   const airport = getAirportBySlug(slug);
 
   if (!airport) return {};
 
-  return buildAirlineMetadata(
-    {
-      slug: airport.slug,
-      name: airport.name,
-      description: airport.description,
-    } as any,
-    locale
-  );
+  return buildMetadata({
+    entity: airport,
+    locale,
+    pathPrefix: "airports",
+  });
 }
 
 export default async function AirportPage({ params }: PageProps) {

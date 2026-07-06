@@ -1,24 +1,38 @@
 import type { Metadata } from "next";
-import type { Airline } from "@/data/seo/airlines";
 
 const SITE_URL = "https://www.flightclaimly.com";
 
-export function buildAirlineMetadata(
-  airline: Airline,
-  locale: string
-): Metadata {
-  const url = `${SITE_URL}/${locale}/airlines/${airline.slug}`;
-  const title = `${airline.name} flight compensation | FlightClaimly`;
+type MetadataEntity = {
+  slug: string;
+  name: string;
+  description: string;
+};
+
+type BuildMetadataInput = {
+  entity: MetadataEntity;
+  locale: string;
+  pathPrefix: string;
+  titleSuffix?: string;
+};
+
+export function buildMetadata({
+  entity,
+  locale,
+  pathPrefix,
+  titleSuffix = "flight compensation",
+}: BuildMetadataInput): Metadata {
+  const url = `${SITE_URL}/${locale}/${pathPrefix}/${entity.slug}`;
+  const title = `${entity.name} ${titleSuffix} | FlightClaimly`;
 
   return {
     title,
-    description: airline.description,
+    description: entity.description,
     alternates: {
       canonical: url,
     },
     openGraph: {
       title,
-      description: airline.description,
+      description: entity.description,
       url,
       siteName: "FlightClaimly",
       type: "article",

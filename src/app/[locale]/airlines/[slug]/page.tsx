@@ -7,7 +7,7 @@ import RelatedKnowledge from "@/components/seo/RelatedKnowledge";
 import RelatedAirlines from "@/components/seo/RelatedAirlines";
 
 import { getAirlineBySlug, airlines } from "@/data/seo/airlines";
-import { buildAirlineMetadata } from "@/lib/seo/metadata";
+import { buildMetadata } from "@/lib/seo/metadata";
 import { getRelatedKnowledge } from "@/lib/seo/relationships";
 
 type PageProps = {
@@ -28,11 +28,16 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps) {
   const { locale, slug } = await params;
+
   const airline = getAirlineBySlug(slug);
 
   if (!airline) return {};
 
-  return buildAirlineMetadata(airline, locale);
+  return buildMetadata({
+    entity: airline,
+    locale,
+    pathPrefix: "airlines",
+  });
 }
 
 export default async function AirlinePage({ params }: PageProps) {
