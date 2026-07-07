@@ -78,6 +78,7 @@ export default async function AirlinePage({ params }: PageProps) {
       <KnowledgePageTemplate
         entity={airline}
         checkUrl={checkUrl}
+        locale={locale}
         facts={[
           { label: "Airline", value: airline.name },
           { label: "IATA code", value: airline.iata },

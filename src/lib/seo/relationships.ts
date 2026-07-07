@@ -1,5 +1,5 @@
-import { airlines } from "@/data/seo/airlines";
-import { airports } from "@/data/entities/airports";
+import { getEntity } from "@/lib/entities";
+import { getEntityHref } from "@/data/entities/registry";
 import {
   relationships,
   type Relationship,
@@ -23,40 +23,6 @@ const typeLabels: Record<RelationshipType, string> = {
   article: "Guide",
 };
 
-const routePrefixes: Record<RelationshipType, string> = {
-  airline: "airlines",
-  airport: "airports",
-  country: "countries",
-  route: "routes",
-  alliance: "alliances",
-  hub: "airports",
-  law: "laws",
-  article: "guides",
-};
-
-function humanizeSlug(slug: string) {
-  return slug
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
-
-function resolveLabel(relationship: Relationship) {
-  if (relationship.type === "airline") {
-    const airline = airlines.find((item) => item.slug === relationship.slug);
-    return airline?.name ?? humanizeSlug(relationship.slug);
-  }
-
-  if (relationship.type === "airport") {
-  const airport = airports.find(
-    (item) => item.slug === relationship.slug
-  );
-
-  return airport?.name ?? humanizeSlug(relationship.slug);
-}
-
-return humanizeSlug(relationship.slug);
-}
 
 export function getRelationships(slug: string) {
   return relationships.find((entity) => entity.slug === slug);
@@ -85,9 +51,16 @@ export function getRelatedKnowledge(
     .filter((relationship) =>
       allowedTypes ? allowedTypes.includes(relationship.type) : true
     )
-    .map((relationship) => ({
-      label: resolveLabel(relationship),
-      href: `/${locale}/${routePrefixes[relationship.type]}/${relationship.slug}`,
-      type: typeLabels[relationship.type],
-    }));
+    .map((relationship) => {
+      const relatedEntity = getEntity(relationship.slug);
+
+      if (!relatedEntity) return null;
+
+      return {
+        label: relatedEntity.name,
+        href: getEntityHref(relationship.slug, locale),
+        type: typeLabels[relationship.type],
+      };
+    })
+    .filter((item): item is RelatedKnowledgeItem => item !== null);
 }

@@ -9,6 +9,7 @@ import Timeline from "@/components/seo/Timeline";
 import ClaimProcess from "@/components/seo/ClaimProcess";
 import CommonIssues from "@/components/seo/CommonIssues";
 import FAQ from "@/components/seo/FAQ";
+import MajorAirlines from "@/components/seo/MajorAirlines";
 
 type Fact = {
   label: string;
@@ -19,12 +20,14 @@ type KnowledgePageTemplateProps = {
   entity: any;
   checkUrl: string;
   facts: Fact[];
+  locale: string;
 };
 
 export default function KnowledgePageTemplate({
   entity,
   checkUrl,
   facts,
+  locale,
 }: KnowledgePageTemplateProps) {
   return (
     <>
@@ -35,6 +38,14 @@ export default function KnowledgePageTemplate({
           <QuickFacts facts={facts} />
         </div>
       </section>
+
+      {entity.mainAirlines?.length > 0 && (
+  <MajorAirlines
+    title={`Major airlines at ${entity.name}`}
+    airlineSlugs={entity.mainAirlines}
+    locale={locale}
+  />
+)}
 
       <section className="px-6 py-12">
         <div className="mx-auto max-w-5xl">

@@ -42,4 +42,15 @@ export const relationships: EntityRelationships[] = [
     { type: "article", slug: "cancelled-flight-compensation" },
   ],
 },
+{
+  slug: "copenhagen-airport",
+  relationships: [
+    { type: "country", slug: "denmark" },
+    { type: "airline", slug: "sas" },
+    { type: "airline", slug: "norwegian" },
+    { type: "law", slug: "eu261" },
+    { type: "article", slug: "flight-delay-compensation" },
+    { type: "article", slug: "cancelled-flight-compensation" },
+  ],
+},
 ];

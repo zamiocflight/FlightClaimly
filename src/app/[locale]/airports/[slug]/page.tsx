@@ -6,6 +6,8 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 
 import { airports, getAirportBySlug } from "@/data/seo/airports";
 import { buildMetadata } from "@/lib/seo/metadata";
+import RelatedKnowledge from "@/components/seo/RelatedKnowledge";
+import { getRelatedKnowledge } from "@/lib/seo/relationships";
 
 type PageProps = {
   params: Promise<{
@@ -45,6 +47,12 @@ export default async function AirportPage({ params }: PageProps) {
 
   const checkUrl = `/${locale}/check/direct-or-layover`;
 
+  const relatedKnowledge = getRelatedKnowledge(
+  airport.slug,
+  locale,
+  ["airline", "law", "article"]
+);
+
   return (
     <main className="min-h-screen bg-slate-50">
       <FAQSchema items={airport.faq} />
@@ -66,6 +74,7 @@ export default async function AirportPage({ params }: PageProps) {
       <KnowledgePageTemplate
         entity={airport}
         checkUrl={checkUrl}
+        locale={locale}
         facts={[
           { label: "Airport", value: airport.name },
           { label: "IATA code", value: airport.iata },
@@ -73,6 +82,14 @@ export default async function AirportPage({ params }: PageProps) {
           { label: "Country", value: airport.country },
         ]}
       />
+      <section className="px-6 py-12">
+  <div className="mx-auto max-w-5xl">
+    <RelatedKnowledge
+      title="Related airlines and guides"
+      items={relatedKnowledge}
+    />
+  </div>
+</section>
     </main>
   );
 }
