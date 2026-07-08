@@ -205,3 +205,244 @@ Growth
 ⬜ Routes
 
 ⬜ Countries
+
+# FlightClaimly Knowledge Model
+
+Last Updated: 2026-07-08
+
+---
+
+# Purpose
+
+The FlightClaimly Knowledge Model defines how all SEO engines share and reuse structured data.
+
+Instead of every page owning its own information, all content is generated from reusable knowledge objects.
+
+This keeps the platform scalable, consistent and easy to maintain.
+
+---
+
+# Core Knowledge Objects
+
+The platform is built around reusable entities.
+
+## Airline
+
+Contains:
+
+- Airline metadata
+- IATA
+- ICAO
+- Country
+- Hub airports
+- Fleet information
+- Passenger rights
+- EU261 applicability
+- Compensation information
+- SEO content
+
+Current status:
+
+✅ Complete
+
+---
+
+## Airport
+
+Contains:
+
+- Airport metadata
+- IATA
+- ICAO
+- City
+- Country
+- Coordinates
+- Airlines
+- Routes
+
+Status:
+
+Foundation completed.
+
+---
+
+## Route
+
+Represents:
+
+Airport → Airport
+
+Example:
+
+Copenhagen → Stockholm
+
+Contains:
+
+- Origin airport
+- Destination airport
+- Cities
+- Countries
+- Airlines operating the route
+- Distance category
+- Compensation band
+- SEO content
+
+Status:
+
+Next engine.
+
+---
+
+## Country
+
+Contains:
+
+- Country information
+- Airports
+- Airlines
+- Routes
+- Passenger rights
+
+Used for:
+
+Country landing pages.
+
+---
+
+## Flight Number
+
+Represents:
+
+One scheduled flight.
+
+Examples:
+
+- SK1427
+- BA811
+- LH803
+
+Contains:
+
+- Airline
+- Route
+- Airport relationship
+- Passenger rights
+- Compensation guidance
+
+---
+
+## Delay Reason
+
+Represents:
+
+Specific disruption causes.
+
+Examples:
+
+- Weather
+- Technical problems
+- Crew shortages
+- Air traffic control
+- Missed connections
+- Strikes
+
+---
+
+# Relationships
+
+Airline
+
+↓
+
+Airport
+
+↓
+
+Route
+
+↓
+
+Flight Number
+
+Every object connects back to the others.
+
+Examples:
+
+Airline
+
+↔ Airport
+
+Airport
+
+↔ Route
+
+Route
+
+↔ Flight Number
+
+Country
+
+↔ Airport
+
+Country
+
+↔ Airline
+
+Delay Reason
+
+↔ Route
+
+Flight Number
+
+↔ Airline
+
+---
+
+# Reuse Principle
+
+Knowledge should never be duplicated.
+
+Every object should be referenced whenever possible.
+
+Example:
+
+Airline overview
+
+↓
+
+Used by:
+
+- Airline pages
+- Route pages
+- Airport pages
+- Flight number pages
+
+Updating one object automatically improves every page using that data.
+
+---
+
+# Knowledge Graph
+
+The long-term objective is to create a complete aviation knowledge graph focused on EU261.
+
+Each new engine strengthens all previous engines.
+
+This produces:
+
+- Better internal linking
+- Better crawlability
+- Better topical authority
+- Higher indexing rate
+- Increased organic traffic
+
+---
+
+# Development Philosophy
+
+Every new feature should either:
+
+- Introduce a reusable knowledge object, or
+
+- Improve an existing knowledge object.
+
+Avoid one-off content whenever reusable structured knowledge can be created instead.

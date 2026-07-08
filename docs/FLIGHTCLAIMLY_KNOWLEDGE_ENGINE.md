@@ -155,3 +155,221 @@ Never duplicate data.
 Never duplicate relationships.
 
 Everything references a single source.
+
+# FlightClaimly Knowledge Engine
+
+Last Updated: 2026-07-08
+
+---
+
+# Purpose
+
+The FlightClaimly Knowledge Engine is the foundation of the platform's organic SEO strategy.
+
+Instead of relying on a small number of landing pages, FlightClaimly builds reusable knowledge engines capable of generating thousands of highly relevant pages targeting specific passenger searches.
+
+Every engine is designed to be reusable and interconnected.
+
+---
+
+# Completed Engines
+
+## Airline Engine
+
+Status:
+
+✅ COMPLETE
+
+The Airline Engine contains approximately 100+ airlines covering nearly the entire EU261 market.
+
+Coverage includes:
+
+- European network airlines
+- European low-cost airlines
+- Charter airlines
+- Regional airlines
+- UK airlines
+- Swiss airlines
+- ECAA airlines
+- Major international airlines
+
+Each airline contains:
+
+- Core airline metadata
+- SEO title
+- Meta description
+- Overview
+- Passenger rights
+- EU261 applicability
+- Compensation explanation
+- Statistics
+- Timeline
+- FAQ
+- Standard claim process
+- Common passenger issues
+
+The Airline Engine now acts as the primary airline data source across the platform.
+
+---
+
+# Upcoming Engines
+
+## Route Engine
+
+Status:
+
+🚧 Next Sprint
+
+Purpose:
+
+Generate dedicated landing pages for individual flight routes.
+
+Examples:
+
+- Copenhagen → Stockholm
+- London → Barcelona
+- Paris → New York
+- Frankfurt → Malaga
+
+Each route page will include:
+
+- Route overview
+- Passenger rights
+- Compensation amounts
+- Airlines operating the route
+- Related airports
+- Related countries
+- Internal linking
+- Claim CTA
+
+The Route Engine is expected to become the single largest organic traffic generator.
+
+---
+
+## Airline × Airport Engine
+
+Purpose:
+
+Create pages such as:
+
+- SAS at Copenhagen Airport
+- Ryanair at Malaga Airport
+- Lufthansa at Frankfurt Airport
+
+---
+
+## Airline × Country Engine
+
+Purpose:
+
+Create pages such as:
+
+- Ryanair in Spain
+- Turkish Airlines in Germany
+- Air France in Italy
+
+---
+
+## Airport Engine
+
+Status:
+
+Foundation completed.
+
+Will continue expanding as Route Engine grows.
+
+---
+
+## Airport × Airport Engine
+
+Purpose:
+
+Expand route relationships between airports and strengthen internal linking.
+
+---
+
+## Delay Reason Engine
+
+Examples:
+
+- Technical problems
+- Weather delays
+- Crew shortages
+- Air traffic control
+- Missed connections
+- Denied boarding
+
+---
+
+## Flight Number Engine
+
+Examples:
+
+- SK1427
+- BA811
+- LH803
+
+Each page explains passenger rights for specific flight numbers.
+
+---
+
+## Live Content Engine
+
+Purpose:
+
+Support real-time SEO.
+
+Includes:
+
+- Flight disruption news
+- Airport disruptions
+- Airline incidents
+- Social media content
+- Seasonal travel updates
+
+---
+
+# Internal Linking Strategy
+
+Every engine should strengthen the others.
+
+Example:
+
+Airline
+↔ Airport
+
+Airport
+↔ Route
+
+Route
+↔ Airline
+
+Country
+↔ Airport
+
+Airport
+↔ Delay Guide
+
+Flight Number
+↔ Airline
+
+This creates a scalable knowledge graph where every new page increases the value of existing pages.
+
+---
+
+# Development Strategy
+
+Each engine is completed before starting the next.
+
+Priority order:
+
+1. Airline Engine ✅
+2. Route Engine
+3. Airline × Airport
+4. Airline × Country
+5. Airport × Airport
+6. Delay Reason Engine
+7. Flight Number Engine
+8. Live Content Engine
+
+This approach ensures every completed engine becomes a reusable building block for future SEO expansion.

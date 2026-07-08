@@ -537,3 +537,247 @@ Not hours.
 The generator creates the page.
 
 Developers only provide structured data.
+
+# Architecture
+
+Last Updated: 2026-07-08
+
+---
+
+# Overview
+
+FlightClaimly is built as a modular platform where every major feature is implemented as an independent engine.
+
+Each engine is responsible for one knowledge domain while exposing reusable data to the rest of the platform.
+
+The objective is to avoid duplicated logic and make every future SEO expansion significantly faster.
+
+---
+
+# Current Architecture
+
+Presentation Layer
+
+↓
+
+SEO Engines
+
+↓
+
+Shared Knowledge Objects
+
+↓
+
+Reusable Components
+
+↓
+
+Claim Platform
+
+---
+
+# Current Engines
+
+## Route Engine
+
+Status:
+
+✅ Foundation completed
+
+Responsibilities:
+
+- Route generation
+- Route knowledge objects
+- Airport relationships
+- Airline relationships
+- Internal linking
+- Route SEO
+- Route metadata
+- Route knowledge library
+
+The Route Engine consumes Airport and Airline knowledge rather than duplicating information.
+
+## Airline Engine
+
+Status:
+
+✅ Complete
+
+Location:
+
+src/data/seo/airlines.ts
+
+Responsibilities:
+
+- Airline metadata
+- Passenger rights
+- Compensation information
+- SEO content
+- Timeline
+- Statistics
+- FAQ
+- Standard reusable sections
+
+This engine acts as the primary airline knowledge source.
+
+---
+
+## Airport Engine
+
+Status:
+
+Foundation complete
+
+Responsibilities:
+
+- Airport metadata
+- Airport pages
+- Airline relationships
+- Route relationships
+
+---
+
+## Country Engine
+
+Status:
+
+Operational
+
+Responsibilities:
+
+- Country metadata
+- Country landing pages
+- Airline relationships
+- Airport relationships
+
+---
+
+## Route Engine
+
+Status:
+
+Next Sprint
+
+Responsibilities:
+
+- Airport → Airport relationships
+- City → City relationships
+- Compensation by route
+- Airline availability
+- Internal linking
+
+The Route Engine will consume data from both the Airline Engine and Airport Engine rather than duplicating information.
+
+---
+
+# Shared Components
+
+Reusable components include:
+
+- Hero
+- Compensation Cards
+- Timeline
+- Statistics
+- FAQ
+- Claim Process
+- Common Issues
+- CTA sections
+
+Every SEO page should be assembled from reusable components wherever possible.
+
+---
+
+# Data Flow
+
+Country
+
+↓
+
+Airport
+
+↓
+
+Route
+
+↓
+
+Airline
+
+↓
+
+Claim Flow
+
+Relationships exist in both directions whenever practical.
+
+---
+
+# Internal Linking
+
+Every engine strengthens every other engine.
+
+Examples:
+
+Airline
+
+↔ Airport
+
+Airport
+
+↔ Route
+
+Route
+
+↔ Country
+
+Country
+
+↔ Airline
+
+Flight Number
+
+↔ Route
+
+Delay Guide
+
+↔ Airline
+
+The objective is to continuously increase topical authority through dense internal linking.
+
+---
+
+# Scalability Principles
+
+Every new engine should:
+
+- Reuse existing knowledge.
+- Avoid duplicated content.
+- Generate structured pages.
+- Strengthen internal linking.
+- Be maintainable through centralized data.
+
+---
+
+# Development Rules
+
+The project follows these principles:
+
+- Build reusable systems instead of isolated pages.
+- Complete one engine before starting another.
+- Keep business logic centralized.
+- Prefer configuration over hardcoding.
+- Keep templates generic.
+- Make every engine reusable by future engines.
+
+---
+
+# Current Milestone
+
+Completed:
+
+✅ Airline Engine
+
+Next:
+
+🚧 Route Engine Foundation
+
+The Airline Engine now serves as the base layer for all upcoming SEO engines.

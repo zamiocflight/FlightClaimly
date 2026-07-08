@@ -16,8 +16,46 @@ type Fact = {
   value: string | number;
 };
 
+type KnowledgeEntity = {
+  name: string;
+  intro: string;
+  overview: string;
+  passengerRights: string;
+
+  compensationIntro: string;
+  compensationAmounts: {
+    label: string;
+    distance: string;
+    amount: string;
+  }[];
+
+  compensationRules: string;
+
+  statisticsIntro: string;
+  statistics: {
+    label: string;
+    value: string;
+    description: string;
+  }[];
+
+  timelineIntro: string;
+  timeline: {
+    title: string;
+    description: string;
+  }[];
+
+  claimProcess: string[];
+  commonIssues: string[];
+  faq: {
+    question: string;
+    answer: string;
+  }[];
+
+  mainAirlines?: string[];
+};
+
 type KnowledgePageTemplateProps = {
-  entity: any;
+  entity: KnowledgeEntity;
   checkUrl: string;
   facts: Fact[];
   locale: string;
@@ -31,7 +69,7 @@ export default function KnowledgePageTemplate({
 }: KnowledgePageTemplateProps) {
   return (
     <>
-      <Hero airline={entity} checkUrl={checkUrl} />
+      <Hero entity={entity} checkUrl={checkUrl} />
 
       <section className="px-6 pt-12">
         <div className="mx-auto max-w-5xl">
@@ -39,13 +77,13 @@ export default function KnowledgePageTemplate({
         </div>
       </section>
 
-      {entity.mainAirlines?.length > 0 && (
-  <MajorAirlines
-    title={`Major airlines at ${entity.name}`}
-    airlineSlugs={entity.mainAirlines}
-    locale={locale}
-  />
-)}
+      {entity.mainAirlines && entity.mainAirlines.length > 0 && (
+        <MajorAirlines
+          title={`Major airlines for ${entity.name}`}
+          airlineSlugs={entity.mainAirlines}
+          locale={locale}
+        />
+      )}
 
       <section className="px-6 py-12">
         <div className="mx-auto max-w-5xl">
@@ -104,10 +142,7 @@ export default function KnowledgePageTemplate({
       <section className="px-6 py-16">
         <div className="mx-auto grid max-w-5xl gap-10 md:grid-cols-2">
           <ClaimProcess steps={entity.claimProcess} />
-          <CommonIssues
-            airlineName={entity.name}
-            issues={entity.commonIssues}
-          />
+          <CommonIssues airlineName={entity.name} issues={entity.commonIssues} />
         </div>
       </section>
 
