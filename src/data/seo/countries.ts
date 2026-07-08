@@ -142,6 +142,126 @@ const countrySeeds: CountrySeed[] = [
     descriptionText:
       "Finland connects Europe and Asia through Helsinki Airport and a strong international route network.",
   },
+  {
+  slug: "germany",
+  name: "Germany",
+  descriptionText:
+    "Germany is one of Europe's largest aviation markets, with major airports such as Frankfurt, Munich, Berlin and Düsseldorf serving millions of passengers every year.",
+},
+{
+  slug: "netherlands",
+  name: "Netherlands",
+  descriptionText:
+    "The Netherlands is a major European aviation hub, with Amsterdam Schiphol Airport connecting passengers across Europe and the rest of the world.",
+},
+{
+  slug: "france",
+  name: "France",
+  descriptionText:
+    "France has one of Europe's busiest aviation networks, with major airports in Paris, Nice, Lyon and Marseille.",
+},
+{
+  slug: "spain",
+  name: "Spain",
+  descriptionText:
+    "Spain is one of Europe's largest travel markets, with major airports in Madrid, Barcelona, Malaga, Alicante, Palma and Valencia.",
+},
+{
+  slug: "italy",
+  name: "Italy",
+  descriptionText:
+    "Italy has a large and diverse aviation network, with major airports in Rome, Milan, Venice, Naples, Bologna and Sicily.",
+},
+{
+  slug: "united-kingdom",
+  name: "United Kingdom",
+  descriptionText:
+    "The United Kingdom has one of Europe's busiest aviation markets, with major airports in London, Manchester, Birmingham, Edinburgh and Glasgow.",
+},
+{
+  slug: "ireland",
+  name: "Ireland",
+  descriptionText:
+    "Ireland has an important aviation network, with Dublin Airport serving as the country's largest international gateway.",
+},
+{
+  slug: "portugal",
+  name: "Portugal",
+  descriptionText:
+    "Portugal connects millions of passengers through Lisbon, Porto and Faro, serving both business and leisure travel across Europe.",
+},
+{
+  slug: "poland",
+  name: "Poland",
+  descriptionText:
+    "Poland has a growing aviation market, with Warsaw Chopin Airport and Kraków Airport among its most important international gateways.",
+},
+{
+  slug: "austria",
+  name: "Austria",
+  descriptionText:
+    "Austria's aviation network is centred around Vienna Airport, with connections across Europe and beyond.",
+},
+{
+  slug: "switzerland",
+  name: "Switzerland",
+  descriptionText:
+    "Switzerland is home to major airports in Zurich, Geneva and Basel, serving both European and long-haul passengers.",
+},
+{
+  slug: "belgium",
+  name: "Belgium",
+  descriptionText:
+    "Belgium's aviation market is centred around Brussels Airport, with strong connections across Europe.",
+},
+{
+  slug: "greece",
+  name: "Greece",
+  descriptionText:
+    "Greece has a large seasonal and international aviation network, with major airports in Athens, Thessaloniki and many island destinations.",
+},
+{
+  slug: "cyprus",
+  name: "Cyprus",
+  descriptionText:
+    "Cyprus is served by major airports in Larnaca and Paphos, connecting passengers to destinations across Europe and the Mediterranean.",
+},
+{
+  slug: "croatia",
+  name: "Croatia",
+  descriptionText:
+    "Croatia has an important seasonal aviation market, with airports in Zagreb, Split and Dubrovnik serving millions of travellers.",
+},
+{
+  slug: "czech-republic",
+  name: "Czech Republic",
+  descriptionText:
+    "The Czech Republic's aviation market is centred around Prague Airport, one of Central Europe's major international airports.",
+},
+{
+  slug: "hungary",
+  name: "Hungary",
+  descriptionText:
+    "Hungary's international air traffic is mainly served by Budapest Ferenc Liszt Airport, a key hub in Central Europe.",
+},
+{
+  slug: "romania",
+  name: "Romania",
+  descriptionText:
+    "Romania has a growing aviation network, with Bucharest Airport serving as the country's largest international airport.",
+},
+{
+  slug: "bulgaria",
+  name: "Bulgaria",
+  descriptionText:
+    "Bulgaria is served by major airports including Sofia Airport and seasonal coastal airports used by leisure travellers.",
+},
+{
+  slug: "serbia",
+  name: "Serbia",
+  descriptionText:
+    "Serbia's aviation network is centred around Belgrade Nikola Tesla Airport, the country's main international gateway.",
+},
 ];
 export const countries = countrySeeds.map(createCountry);
 
