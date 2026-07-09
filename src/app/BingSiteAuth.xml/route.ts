@@ -1,0 +1,17 @@
+import { NextResponse } from "next/server";
+
+export const runtime = "nodejs";
+
+export function GET() {
+  const xml = `<?xml version="1.0"?>
+<users>
+  <user>A614633DE2DAF102D4A03D2BB6C08E30</user>
+</users>`;
+
+  return new NextResponse(xml, {
+    status: 200,
+    headers: {
+      "Content-Type": "application/xml",
+    },
+  });
+}
