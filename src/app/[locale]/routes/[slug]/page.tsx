@@ -5,7 +5,9 @@ import RelatedRoutes from "@/components/seo/RelatedRoutes";
 import RelatedAirports from "@/components/seo/RelatedAirports";
 import RelatedAirlines from "@/components/seo/RelatedAirlines";
 import { getRelatedRoutes } from "@/lib/knowledge/routes";
-import { getRouteMetadata } from "@/lib/seo/routes";
+import { getRouteBreadcrumbs, getRouteMetadata } from "@/lib/seo/routes";
+import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import FAQSchema from "@/components/seo/FAQSchema";
 
 type Props = {
   params: Promise<{
@@ -21,7 +23,7 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
 
   const route = getRouteBySlug(slug);
 
@@ -29,7 +31,7 @@ export async function generateMetadata({ params }: Props) {
     return {};
   }
 
-  return getRouteMetadata(route);
+  return getRouteMetadata(route, locale);
 }
 
 export default async function RoutePage({ params }: Props) {
@@ -62,8 +64,16 @@ export default async function RoutePage({ params }: Props) {
 
  const relatedRoutes = getRelatedRoutes(route);
 
+ const breadcrumbItems = getRouteBreadcrumbs(route, locale).map((item) => ({
+  name: item.label,
+  url: item.href,
+}));
+
 return (
   <>
+    <BreadcrumbSchema items={breadcrumbItems} />
+    <FAQSchema items={route.faq} />
+
     <KnowledgePageTemplate
       entity={route}
       checkUrl={`/${locale}/check`}

@@ -2,14 +2,33 @@ import type { Metadata } from "next";
 import type { MetadataRoute } from "next";
 import type { FlightRoute } from "@/data/seo/routes";
 
-export function getRouteMetadata(route: FlightRoute): Metadata {
+export function getRouteMetadata(
+  route: FlightRoute,
+  locale = "en",
+  siteUrl =
+    process.env.NEXT_PUBLIC_APP_URL ||
+    process.env.APP_URL ||
+    "https://www.flightclaimly.com"
+): Metadata {
+  const canonical = getRouteCanonical(
+    route,
+    locale,
+    siteUrl.replace(/\/+$/, "")
+  );
+
   return {
     title: route.title,
     description: route.description,
 
+    alternates: {
+      canonical,
+    },
+
     openGraph: {
       title: route.title,
       description: route.description,
+      url: canonical,
+      siteName: "FlightClaimly",
       type: "article",
     },
 
