@@ -7,11 +7,13 @@ export default function robots(): MetadataRoute.Robots {
     "https://www.flightclaimly.com";
 
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-      disallow: ["/admin", "/api"],
-    },
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/admin", "/api"],
+      },
+    ],
     sitemap: `${siteUrl.replace(/\/+$/, "")}/sitemap.xml`,
   };
 }
