@@ -9,6 +9,19 @@ type BreadcrumbSchemaProps = {
   items: BreadcrumbItem[];
 };
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_APP_URL ||
+  process.env.APP_URL ||
+  "https://www.flightclaimly.com";
+
+function toAbsoluteUrl(url: string) {
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    return url;
+  }
+
+  return `${SITE_URL.replace(/\/+$/, "")}/${url.replace(/^\/+/, "")}`;
+}
+
 export default function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
   if (!items.length) return null;
 
@@ -19,7 +32,7 @@ export default function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: item.url,
+      item: toAbsoluteUrl(item.url),
     })),
   };
 
