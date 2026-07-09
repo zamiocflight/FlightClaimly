@@ -232,14 +232,17 @@ async function handleContinue() {
   try {
     const claimId = await createClaim(searchParams, locale);
 
-    await generateAuthorityAfterClaim(claimId, searchParams);
-
     const params = new URLSearchParams(searchParams.toString());
     params.set("claimId", claimId);
 
+    // Do not block the user while the authority PDF is generated.
+    generateAuthorityAfterClaim(claimId, searchParams).catch((err) => {
+      console.error("Background authority generation failed:", err);
+    });
+
     router.push(`/${locale}/check/uploads?${params.toString()}`);
   } catch (err) {
-    console.error("Claim creation / authority generation failed:", err);
+    console.error("Claim creation failed:", err);
     alert(t("claimCreationError"));
 
     window.dispatchEvent(new Event("flightclaimly-submit-failed"));
