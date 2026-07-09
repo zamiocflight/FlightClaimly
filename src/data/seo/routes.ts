@@ -11,10 +11,9 @@ import type {
 import { getAirportByIata } from "@/lib/knowledge/airports";
 import { getAirlinesBySlugs } from "@/lib/knowledge/airlines";
 
-export type RouteGroupSeed = {
+export type RouteSeed = {
   origin: string;
-  destinations: string[];
-  airlines?: string[];
+  destination: string;
 };
 
 export type FlightRoute = {
@@ -92,8 +91,8 @@ const standardStatistics: Statistic[] = [
   },
   {
     label: "Coverage",
-    value: "EU261",
-    description: "Applies on eligible European flights.",
+    value: "EU261 / UK261",
+    description: "Applies on eligible European and UK flights.",
   },
 ];
 
@@ -120,50 +119,96 @@ const standardTimeline: TimelineStep[] = [
   },
 ];
 
-const routeGroupSeeds: RouteGroupSeed[] = [
-  {
-    origin: "CPH",
-    destinations: ["ARN", "OSL"],
-    airlines: ["sas", "norwegian"],
-  },
-  {
-    origin: "ARN",
-    destinations: ["CPH", "OSL"],
-    airlines: ["sas", "norwegian"],
-  },
-  {
-    origin: "OSL",
-    destinations: ["CPH", "ARN"],
-    airlines: ["sas", "norwegian"],
-  },
+const coreAirportNetwork = [
+  "CPH",
+  "ARN",
+  "OSL",
+  "HEL",
+  "FRA",
+  "MUC",
+  "AMS",
+  "CDG",
+  "LHR",
+  "LGW",
+  "STN",
+  "MAN",
+  "BCN",
+  "MAD",
+  "AGP",
+  "ALC",
+  "PMI",
+  "FCO",
+  "MXP",
+  "VIE",
+  "ZRH",
+  "BRU",
+  "LIS",
+  "OPO",
+  "WAW",
+  "DUB",
+  "EDI",
+  "NCE",
+  "MRS",
+  "LYS",
+  "HAM",
+  "DUS",
+  "BER",
+  "GVA",
+  "PRG",
+  "BUD",
+  "ATH",
+  "RIX",
+  "LCA",
+  "MLA",
 ];
 
-function createSlug(originCity: string, destinationCity: string) {
-  return `${originCity.toLowerCase().replaceAll(" ", "-")}-to-${destinationCity
-    .toLowerCase()
-    .replaceAll(" ", "-")}`;
+function createRouteSeedsFromNetwork(iatas: string[]): RouteSeed[] {
+  return iatas.flatMap((origin) =>
+    iatas
+      .filter((destination) => destination !== origin)
+      .map((destination) => ({
+        origin,
+        destination,
+      }))
+  );
 }
 
-function createRoute(
-  originIata: string,
-  destinationIata: string,
-  airlineSlugs?: string[]
-): FlightRoute {
-  const origin = getAirportByIata(originIata);
-  const destination = getAirportByIata(destinationIata);
+function createRouteSlug(originSlug: string, destinationSlug: string) {
+  return `${originSlug}-to-${destinationSlug}`;
+}
+
+function getRouteAirlines(originAirlines?: string[], destinationAirlines?: string[]) {
+  const origin = originAirlines ?? [];
+  const destination = destinationAirlines ?? [];
+
+  const shared = origin.filter((airline) => destination.includes(airline));
+
+  const fallback = [...origin, ...destination];
+
+  const unique = Array.from(new Set(shared.length > 0 ? shared : fallback));
+
+  return getAirlinesBySlugs(unique).slice(0, 6);
+}
+
+function createRoute(seed: RouteSeed): FlightRoute {
+  const origin = getAirportByIata(seed.origin);
+  const destination = getAirportByIata(seed.destination);
 
   if (!origin) {
-    throw new Error(`Route origin airport not found: ${originIata}`);
+    throw new Error(`Route origin airport not found: ${seed.origin}`);
   }
 
   if (!destination) {
-    throw new Error(`Route destination airport not found: ${destinationIata}`);
+    throw new Error(`Route destination airport not found: ${seed.destination}`);
   }
 
-  const routeAirlines = airlineSlugs ? getAirlinesBySlugs(airlineSlugs) : [];
+  const routeAirlines = getRouteAirlines(
+    origin.mainAirlines,
+    destination.mainAirlines
+  );
 
   const routeName = `${origin.city} to ${destination.city}`;
-  const slug = createSlug(origin.city, destination.city);
+  const slug = createRouteSlug(origin.slug, destination.slug);
 
   return {
     slug,
@@ -189,24 +234,24 @@ function createRoute(
 
     title: `${routeName} flight compensation`,
 
-    description: `Find out if you can claim compensation for a delayed or cancelled flight from ${origin.city} to ${destination.city} under EU261.`,
+    description: `Find out if you can claim compensation for a delayed or cancelled flight from ${origin.city} to ${destination.city} under EU261 or UK261.`,
 
-    intro: `If your flight from ${origin.city} to ${destination.city} was delayed, cancelled or caused you to miss a connection, you may be entitled to compensation under EU261. FlightClaimly helps you check your case and handle the claim process.`,
+    intro: `If your flight from ${origin.city} to ${destination.city} was delayed, cancelled or caused you to miss a connection, you may be entitled to compensation. FlightClaimly helps you check your case and handle the claim process.`,
 
-    overview: `Flights from ${origin.city} to ${destination.city} connect ${origin.country} with ${destination.country}. Depending on the airline, route and reason for the disruption, passengers may be protected by EU261 when flights are delayed, cancelled or disrupted.`,
+    overview: `Flights from ${origin.city} to ${destination.city} connect ${origin.name} in ${origin.country} with ${destination.name} in ${destination.country}. Depending on the airline, route, delay length and reason for the disruption, passengers may be protected by EU261 or UK261 when flights are delayed, cancelled or disrupted.`,
 
-    passengerRights: `Under EU261, passengers flying from ${origin.name} to ${destination.name} may have the right to compensation when the flight arrives at least three hours late, is cancelled at short notice, or causes a missed connection, as long as the disruption was within the airline's control.`,
+    passengerRights: `Passengers flying from ${origin.name} to ${destination.name} may have the right to compensation when the flight arrives at least three hours late, is cancelled at short notice, or causes a missed connection, as long as the disruption was within the airline's control.`,
 
     compensationIntro:
-      "The amount of compensation under EU261 depends on the flight distance and the length of the delay at arrival. Eligible passengers may receive between €250 and €600.",
+      "The amount of compensation depends on the flight distance and the length of the delay at arrival. Eligible passengers may receive between €250 and €600.",
 
     compensationAmounts: standardCompensationAmounts,
 
     compensationRules:
-      "To qualify for compensation, the flight disruption must normally be within the airline's control. Delays caused by technical issues, operational problems or crew shortages may qualify, while extraordinary circumstances such as severe weather or airport restrictions may not.",
+      "To qualify for compensation, the flight disruption must normally be within the airline's control. Delays caused by technical issues, operational problems or crew shortages may qualify, while extraordinary circumstances such as severe weather, airport restrictions or air traffic control decisions may not.",
 
     statisticsIntro:
-      "The statistics below provide an overview of passenger compensation under EU261 and help explain when compensation may apply.",
+      "The statistics below provide an overview of passenger compensation rules and help explain when compensation may apply.",
 
     statistics: standardStatistics,
 
@@ -221,13 +266,9 @@ function createRoute(
   };
 }
 
-function createRoutes(seed: RouteGroupSeed): FlightRoute[] {
-  return seed.destinations.map((destination) =>
-    createRoute(seed.origin, destination, seed.airlines)
-  );
-}
+const routeSeeds = createRouteSeedsFromNetwork(coreAirportNetwork);
 
-export const routes: FlightRoute[] = routeGroupSeeds.flatMap(createRoutes);
+export const routes: FlightRoute[] = routeSeeds.map(createRoute);
 
 export function getRouteBySlug(slug: string) {
   return routes.find((route) => route.slug === slug);

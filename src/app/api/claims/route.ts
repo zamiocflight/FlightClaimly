@@ -3,6 +3,7 @@ export const runtime = 'nodejs';
 
 import { NextResponse } from 'next/server';
 import { addClaim } from '@/lib/claims';
+import { sendClaimNotificationEmail } from "@/lib/claimNotificationEmail";
 
 type Lang = 'sv' | 'en' | 'da' | 'de' | 'pl' | 'fi';
 
@@ -113,7 +114,11 @@ const claim = await addClaim({
       'http://localhost:3000';
     const trackingUrl = `${String(base).replace(/\/$/, '')}/${locale}/track/${claim.id}`;
 
-
+await sendClaimNotificationEmail({
+  claim,
+  locale,
+  trackingUrl,
+});
 
     // Dummy-precheck (som innan)
     const precheck = {

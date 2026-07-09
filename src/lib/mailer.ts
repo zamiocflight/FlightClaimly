@@ -4,8 +4,12 @@ import { Resend } from 'resend';
 
 type MailOpts = { to: string; subject: string; text: string };
 
-const FROM = process.env.MAIL_FROM || process.env.FROM_EMAIL || 'FlightClaimly <no-reply@example.com>';
-
+const FROM =
+  process.env.MAIL_FROM ||
+  process.env.FROM_EMAIL ||
+  process.env.FLIGHTCLAIMLY_FROM_EMAIL ||
+  'FlightClaimly <support@flightclaimly.com>';
+  
 // ---- Provider 1: Resend ----
 const RESEND_KEY = process.env.RESEND_API_KEY;
 const resend = RESEND_KEY ? new Resend(RESEND_KEY) : null;

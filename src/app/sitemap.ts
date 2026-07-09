@@ -1,6 +1,8 @@
-// src/app/sitemap.ts 
+// src/app/sitemap.ts
 import { MetadataRoute } from "next";
 import { locales } from "@/i18n/routing";
+import { routes as flightRoutes } from "@/data/seo/routes";
+import { getRouteSitemapEntry } from "@/lib/seo/routes";
 
 function getSiteUrl() {
   const raw =
@@ -8,20 +10,19 @@ function getSiteUrl() {
     process.env.APP_URL ||
     "http://localhost:3000";
 
-  // normalize: remove trailing slash
   return raw.replace(/\/+$/, "");
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = getSiteUrl();
 
-  // OBS: alla routes här är "under [locale]" och ska INTE innehålla locale
-  const routes: Array<{
-    path: string; // "" => home
+  const staticRoutes: Array<{
+    path: string;
     changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
     priority: number;
   }> = [
     { path: "", changeFrequency: "daily", priority: 1.0 },
+    { path: "routes", changeFrequency: "weekly", priority: 0.9 },
     { path: "delays", changeFrequency: "weekly", priority: 0.9 },
     { path: "cancellations", changeFrequency: "weekly", priority: 0.9 },
     { path: "rights", changeFrequency: "weekly", priority: 0.9 },
@@ -30,26 +31,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "contact", changeFrequency: "monthly", priority: 0.6 },
     { path: "privacy", changeFrequency: "yearly", priority: 0.3 },
     { path: "terms", changeFrequency: "yearly", priority: 0.3 },
-
-    // compensation/conpensation lägger vi in när du bekräftat exakt path
   ];
 
   const now = new Date();
 
-  return locales.flatMap((locale) =>
-    routes.map((r) => {
+  const staticEntries = locales.flatMap((locale) =>
+    staticRoutes.map((route) => {
       const url =
-        r.path === ""
+        route.path === ""
           ? `${siteUrl}/${locale}`
-          : `${siteUrl}/${locale}/${r.path}`;
+          : `${siteUrl}/${locale}/${route.path}`;
 
       return {
         url,
         lastModified: now,
-        changeFrequency: r.changeFrequency,
-        priority: r.priority,
+        changeFrequency: route.changeFrequency,
+        priority: route.priority,
       };
     })
   );
-}
 
+  const routeEntries = locales.flatMap((locale) =>
+    flightRoutes.map((route) => getRouteSitemapEntry(route, locale, siteUrl))
+  );
+
+  return [...staticEntries, ...routeEntries];
+}
