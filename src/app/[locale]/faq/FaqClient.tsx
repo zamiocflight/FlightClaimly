@@ -7,13 +7,10 @@ import { useTranslations } from "next-intl";
 export default function FaqClient() {
   const t = useTranslations("faq");
 
-
-
   return (
     <>
       {/* FAQ Structured Data */}
     
-
       {/* Actual FAQ Content */}
       <main className="min-h-screen bg-white">
         <div className="max-w-3xl mx-auto px-6 py-12 text-slate-900">
