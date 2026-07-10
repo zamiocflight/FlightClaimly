@@ -1,66 +1,18 @@
-// src/app/[locale]/faq/page.tsx
+// src/app/[locale]/faq/FaqClient.tsx
 "use client";
 
 import { Link } from "@/i18n/navigation";
-import Script from "next/script";
 import { useTranslations } from "next-intl";
 
-export default function FaqPage() {
+export default function FaqClient() {
   const t = useTranslations("faq");
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: t("items.eu261.q"),
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: t("items.eu261.a"),
-        },
-      },
-      {
-        "@type": "Question",
-        name: t("items.eligibility.q"),
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: t("jsonld.eligibilityAnswer"),
-        },
-      },
-      {
-        "@type": "Question",
-        name: t("items.amount.q"),
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: t("items.amount.a"),
-        },
-      },
-      {
-        "@type": "Question",
-        name: t("items.businessModel.q"),
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: t("items.businessModel.a"),
-        },
-      },
-      {
-        "@type": "Question",
-        name: t("items.security.q"),
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: t("jsonld.securityAnswer"),
-        },
-      },
-    ],
-  };
+
 
   return (
     <>
       {/* FAQ Structured Data */}
-      <Script id="faq-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(faqJsonLd)}
-      </Script>
+    
 
       {/* Actual FAQ Content */}
       <main className="min-h-screen bg-white">
