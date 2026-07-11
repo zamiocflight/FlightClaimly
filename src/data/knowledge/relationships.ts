@@ -24,7 +24,19 @@ export type EntityRelationships = {
 };
 
 function getCountrySlug(countryName: string) {
-  return countries.find((country) => country.name === countryName)?.slug;
+  return countries.find(
+    (country) => country.name.toLowerCase() === countryName.toLowerCase()
+  )?.slug;
+}
+
+function getAirlineCountrySlugs(airline: (typeof airlines)[number]) {
+  if (airline.countrySlugs?.length) {
+    return airline.countrySlugs;
+  }
+
+  const countrySlug = getCountrySlug(airline.country);
+
+  return countrySlug ? [countrySlug] : [];
 }
 
 function removeDuplicateRelationships(
@@ -35,18 +47,50 @@ function removeDuplicateRelationships(
   return relationships.filter((relationship) => {
     const key = `${relationship.type}:${relationship.slug}`;
 
-    if (seen.has(key)) {
-      return false;
-    }
+    if (seen.has(key)) return false;
 
     seen.add(key);
     return true;
   });
 }
 
+const routesByAirportSlug = new Map<string, typeof routes>();
+const routesByAirlineSlug = new Map<string, typeof routes>();
+const routesByCountrySlug = new Map<string, typeof routes>();
+
+for (const route of routes) {
+  for (const airportSlug of [
+    route.origin.slug,
+    route.destination.slug,
+  ]) {
+    const airportRoutes = routesByAirportSlug.get(airportSlug) ?? [];
+    airportRoutes.push(route);
+    routesByAirportSlug.set(airportSlug, airportRoutes);
+  }
+
+  for (const airline of route.airlines) {
+    const airlineRoutes = routesByAirlineSlug.get(airline.slug) ?? [];
+    airlineRoutes.push(route);
+    routesByAirlineSlug.set(airline.slug, airlineRoutes);
+  }
+
+  const countrySlugs = [
+    getCountrySlug(route.origin.country),
+    getCountrySlug(route.destination.country),
+  ].filter((slug): slug is string => Boolean(slug));
+
+  for (const countrySlug of new Set(countrySlugs)) {
+    const countryRoutes = routesByCountrySlug.get(countrySlug) ?? [];
+    countryRoutes.push(route);
+    routesByCountrySlug.set(countrySlug, countryRoutes);
+  }
+}
+
 const routeRelationships: EntityRelationships[] = routes.map((route) => {
   const originCountrySlug = getCountrySlug(route.origin.country);
-  const destinationCountrySlug = getCountrySlug(route.destination.country);
+  const destinationCountrySlug = getCountrySlug(
+    route.destination.country
+  );
 
   return {
     slug: route.slug,
@@ -86,117 +130,107 @@ const routeRelationships: EntityRelationships[] = routes.map((route) => {
   };
 });
 
-const airportRelationships: EntityRelationships[] = airports.map((airport) => {
-  const countrySlug = getCountrySlug(airport.country);
+const airportRelationships: EntityRelationships[] = airports.map(
+  (airport) => {
+    const countrySlug = getCountrySlug(airport.country);
+    const airportRoutes =
+      routesByAirportSlug.get(airport.slug) ?? [];
 
-  const airportRoutes = routes.filter(
-    (route) =>
-      route.origin.slug === airport.slug ||
-      route.destination.slug === airport.slug
-  );
+    return {
+      slug: airport.slug,
+      relationships: removeDuplicateRelationships([
+        ...(countrySlug
+          ? [
+              {
+                type: "country" as const,
+                slug: countrySlug,
+              },
+            ]
+          : []),
 
-  return {
-    slug: airport.slug,
-    relationships: removeDuplicateRelationships([
-      ...(countrySlug
-        ? [
-            {
-              type: "country" as const,
-              slug: countrySlug,
-            },
-          ]
-        : []),
+        ...(airport.mainAirlines ?? []).map((airlineSlug) => ({
+          type: "airline" as const,
+          slug: airlineSlug,
+        })),
 
-      ...(airport.mainAirlines ?? []).map((airlineSlug) => ({
-        type: "airline" as const,
-        slug: airlineSlug,
-      })),
+        ...airportRoutes.map((route) => ({
+          type: "route" as const,
+          slug: route.slug,
+        })),
+      ]),
+    };
+  }
+);
 
-      ...airportRoutes.map((route) => ({
-        type: "route" as const,
-        slug: route.slug,
-      })),
-    ]),
-  };
-});
+const airlineRelationships: EntityRelationships[] = airlines.map(
+  (airline) => {
+    const countrySlugs = getAirlineCountrySlugs(airline);
+    const airlineRoutes =
+      routesByAirlineSlug.get(airline.slug) ?? [];
 
-const airlineRelationships: EntityRelationships[] = airlines.map((airline) => {
-  const countrySlugs =
-  airline.countrySlugs ??
-  [getCountrySlug(airline.country)].filter(
-    (slug): slug is string => Boolean(slug)
-  );
+    return {
+      slug: airline.slug,
+      relationships: removeDuplicateRelationships([
+        ...countrySlugs.map((countrySlug) => ({
+          type: "country" as const,
+          slug: countrySlug,
+        })),
 
-  const airlineRoutes = routes.filter((route) =>
-    route.airlines.some(
-      (routeAirline) => routeAirline.slug === airline.slug
-    )
-  );
+        ...airlineRoutes.flatMap((route) => [
+          {
+            type: "airport" as const,
+            slug: route.origin.slug,
+          },
+          {
+            type: "airport" as const,
+            slug: route.destination.slug,
+          },
+        ]),
 
-  const airlineAirportRelationships = airlineRoutes.flatMap((route) => [
-    {
-      type: "airport" as const,
-      slug: route.origin.slug,
-    },
-    {
-      type: "airport" as const,
-      slug: route.destination.slug,
-    },
-  ]);
+        ...airlineRoutes.map((route) => ({
+          type: "route" as const,
+          slug: route.slug,
+        })),
+      ]),
+    };
+  }
+);
 
-  return {
-    slug: airline.slug,
-    relationships: removeDuplicateRelationships([
-      ...countrySlugs.map((countrySlug) => ({
-  type: "country" as const,
-  slug: countrySlug,
-})),
+const countryRelationships: EntityRelationships[] = countries.map(
+  (country) => {
+    const countryAirports = airports.filter(
+      (airport) =>
+        airport.country.toLowerCase() === country.name.toLowerCase()
+    );
 
-      ...airlineAirportRelationships,
+    const countryAirlines = airlines.filter((airline) =>
+      getAirlineCountrySlugs(airline).includes(country.slug)
+    );
 
-      ...airlineRoutes.map((route) => ({
-        type: "route" as const,
-        slug: route.slug,
-      })),
-    ]),
-  };
-});
+    const countryRoutes =
+      routesByCountrySlug.get(country.slug) ?? [];
 
-const countryRelationships: EntityRelationships[] = countries.map((country) => {
-  const countryAirports = airports.filter(
-    (airport) => airport.country === country.name
-  );
+    return {
+      slug: country.slug,
+      relationships: removeDuplicateRelationships([
+        ...countryAirports.map((airport) => ({
+          type: "airport" as const,
+          slug: airport.slug,
+        })),
 
-  const countryAirlines = airlines.filter(
-    (airline) => airline.country === country.name
-  );
+        ...countryAirlines.map((airline) => ({
+          type: "airline" as const,
+          slug: airline.slug,
+        })),
 
-  const countryRoutes = routes.filter(
-    (route) =>
-      route.origin.country === country.name ||
-      route.destination.country === country.name
-  );
-
-  return {
-    slug: country.slug,
-    relationships: removeDuplicateRelationships([
-      ...countryAirports.map((airport) => ({
-        type: "airport" as const,
-        slug: airport.slug,
-      })),
-
-      ...countryAirlines.map((airline) => ({
-        type: "airline" as const,
-        slug: airline.slug,
-      })),
-
-      ...countryRoutes.map((route) => ({
-        type: "route" as const,
-        slug: route.slug,
-      })),
-    ]),
-  };
-});
+        ...countryRoutes.map((route) => ({
+          type: "route" as const,
+          slug: route.slug,
+        })),
+      ]),
+    };
+  }
+);
 
 export const relationships: EntityRelationships[] = [
   ...routeRelationships,
