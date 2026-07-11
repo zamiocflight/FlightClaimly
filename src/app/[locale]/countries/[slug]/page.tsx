@@ -7,6 +7,9 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import { countries, getCountryBySlug } from "@/data/seo/countries";
 import { buildMetadata } from "@/lib/seo/metadata";
 
+import InternalLinks from "@/components/seo/InternalLinks";
+import { getInternalLinkSections } from "@/lib/seo/internalLinks";
+
 type PageProps = {
   params: Promise<{
     locale: string;
@@ -44,6 +47,12 @@ export default async function CountryPage({ params }: PageProps) {
 
   const checkUrl = `/${locale}/check/direct-or-layover`;
 
+  const internalLinkSections = getInternalLinkSections(
+  "country",
+  country.slug,
+  locale
+);
+
   return (
     <main className="min-h-screen bg-slate-50">
       <FAQSchema items={country.faq} />
@@ -72,6 +81,7 @@ export default async function CountryPage({ params }: PageProps) {
           { label: "Maximum compensation", value: "€600" },
         ]}
       />
+      <InternalLinks sections={internalLinkSections} />
     </main>
   );
 }

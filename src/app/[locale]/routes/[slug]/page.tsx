@@ -2,8 +2,8 @@ import { notFound } from "next/navigation";
 import { getRouteBySlug, routes, } from "@/data/seo/routes";
 import KnowledgePageTemplate from "@/components/seo/KnowledgePageTemplate";
 import RelatedRoutes from "@/components/seo/RelatedRoutes";
-import RelatedAirports from "@/components/seo/RelatedAirports";
-import RelatedAirlines from "@/components/seo/RelatedAirlines";
+import InternalLinks from "@/components/seo/InternalLinks";
+import { getInternalLinkSections } from "@/lib/seo/internalLinks";
 import { getRelatedRoutes } from "@/lib/knowledge/routes";
 import { getRouteBreadcrumbs, getRouteMetadata } from "@/lib/seo/routes";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
@@ -64,6 +64,12 @@ export default async function RoutePage({ params }: Props) {
 
  const relatedRoutes = getRelatedRoutes(route);
 
+ const internalLinkSections = getInternalLinkSections(
+  "route",
+  route.slug,
+  locale
+);
+
  const breadcrumbItems = getRouteBreadcrumbs(route, locale).map((item) => ({
   name: item.label,
   url: item.href,
@@ -81,21 +87,7 @@ return (
       locale={locale}
     />
 
-<RelatedAirports
-  title="Airports on this route"
-  airports={[route.origin, route.destination]}
-  locale={locale}
-/>
-
-<section className="px-6 py-16">
-  <div className="mx-auto max-w-5xl">
-    <RelatedAirlines
-      currentSlug=""
-      airlines={route.airlines}
-      locale={locale}
-    />
-  </div>
-</section>
+<InternalLinks sections={internalLinkSections} />
 
     <RelatedRoutes
       title={`More routes from ${route.origin.city}`}

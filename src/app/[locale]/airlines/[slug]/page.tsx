@@ -3,12 +3,12 @@ import { notFound } from "next/navigation";
 import KnowledgePageTemplate from "@/components/seo/KnowledgePageTemplate";
 import FAQSchema from "@/components/seo/FAQSchema";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
-import RelatedKnowledge from "@/components/seo/RelatedKnowledge";
-import RelatedAirlines from "@/components/seo/RelatedAirlines";
+import InternalLinks from "@/components/seo/InternalLinks";
+import { getInternalLinkSections } from "@/lib/seo/internalLinks";
 
 import { getAirlineBySlug, airlines } from "@/data/seo/airlines";
 import { buildMetadata } from "@/lib/seo/metadata";
-import { getRelatedKnowledge } from "@/lib/seo/relationships";
+
 
 type PageProps = {
   params: Promise<{
@@ -48,11 +48,11 @@ export default async function AirlinePage({ params }: PageProps) {
 
   const checkUrl = `/${locale}/check/direct-or-layover`;
 
-  const relatedKnowledge = getRelatedKnowledge(airline.slug, locale, [
-    "airport",
-    "law",
-    "article",
-  ]);
+const internalLinkSections = getInternalLinkSections(
+  "airline",
+  airline.slug,
+  locale
+);
 
   return (
     <main className="min-h-screen bg-slate-50">
@@ -106,25 +106,8 @@ export default async function AirlinePage({ params }: PageProps) {
             : []),
         ]}
       />
+<InternalLinks sections={internalLinkSections} />
 
-      <section className="px-6 py-12">
-        <div className="mx-auto max-w-5xl">
-          <RelatedKnowledge
-            title="Related guides and destinations"
-            items={relatedKnowledge}
-          />
-        </div>
-      </section>
-
-      <section className="px-6 pb-20">
-        <div className="mx-auto max-w-5xl">
-          <RelatedAirlines
-            currentSlug={airline.slug}
-            airlines={airlines}
-            locale={locale}
-          />
-        </div>
-      </section>
     </main>
   );
 }

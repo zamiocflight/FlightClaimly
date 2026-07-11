@@ -1,6 +1,7 @@
 import { airlines } from "@/data/seo/airlines";
 import { airports } from "@/data/seo/airports";
 import { countries } from "@/data/seo/countries";
+import { routes } from "@/data/seo/routes";
 
 export type EntityType =
   | "airline"
@@ -31,12 +32,20 @@ export const registry: RegistryEntity[] = [
     name: airport.name,
     hrefBase: "airports",
   })),
+
   ...countries.map((country) => ({
-  type: "country" as const,
-  slug: country.slug,
-  name: country.name,
-  hrefBase: "countries",
-})),
+    type: "country" as const,
+    slug: country.slug,
+    name: country.name,
+    hrefBase: "countries",
+  })),
+
+  ...routes.map((route) => ({
+    type: "route" as const,
+    slug: route.slug,
+    name: route.name,
+    hrefBase: "routes",
+  })),
 ];
 
 export function getEntity(slug: string) {
@@ -46,10 +55,8 @@ export function getEntity(slug: string) {
 export function getEntitiesByType(type: EntityType) {
   return registry.filter((entity) => entity.type === type);
 }
-export function getEntityHref(
-  slug: string,
-  locale: string
-) {
+
+export function getEntityHref(slug: string, locale: string) {
   const entity = getEntity(slug);
 
   if (!entity) return "#";

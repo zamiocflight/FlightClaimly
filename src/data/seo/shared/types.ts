@@ -37,6 +37,7 @@ export type Airline = {
   icao?: string;
 
   country: string;
+  countrySlugs?: string[];
 
   headquarters?: string;
   founded?: number;

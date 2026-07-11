@@ -6,8 +6,8 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 
 import { airports, getAirportBySlug } from "@/data/seo/airports";
 import { buildMetadata } from "@/lib/seo/metadata";
-import RelatedKnowledge from "@/components/seo/RelatedKnowledge";
-import { getRelatedKnowledge } from "@/lib/seo/relationships";
+import InternalLinks from "@/components/seo/InternalLinks";
+import { getInternalLinkSections } from "@/lib/seo/internalLinks";
 
 type PageProps = {
   params: Promise<{
@@ -47,10 +47,10 @@ export default async function AirportPage({ params }: PageProps) {
 
   const checkUrl = `/${locale}/check/direct-or-layover`;
 
-  const relatedKnowledge = getRelatedKnowledge(
+const internalLinkSections = getInternalLinkSections(
+  "airport",
   airport.slug,
-  locale,
-  ["airline", "law", "article"]
+  locale
 );
 
   return (
@@ -82,14 +82,7 @@ export default async function AirportPage({ params }: PageProps) {
           { label: "Country", value: airport.country },
         ]}
       />
-      <section className="px-6 py-12">
-  <div className="mx-auto max-w-5xl">
-    <RelatedKnowledge
-      title="Related airlines and guides"
-      items={relatedKnowledge}
-    />
-  </div>
-</section>
+<InternalLinks sections={internalLinkSections} />
     </main>
   );
 }

@@ -109,12 +109,16 @@ claimProcess: standardClaimProcess,
   commonIssues: standardCommonIssues,
   faq: standardFAQ,
 },
-    {
-    slug: "sas",
-    name: "SAS",
-    iata: "SK",
-    country: "Denmark, Norway and Sweden",
-    title: "SAS flight compensation",
+{
+  slug: "sas",
+  name: "SAS",
+  iata: "SK",
+
+  country: "Denmark, Norway and Sweden",
+  countrySlugs: ["denmark", "norway", "sweden"],
+
+  title: "SAS flight compensation",
+
     description:
       "Find out if you can claim compensation for a delayed or cancelled SAS flight under EU261.",
     intro:
