@@ -1,11 +1,14 @@
 import { getEntity } from "@/lib/entities";
 import { getEntityHref } from "@/data/entities/registry";
+import { getRouteRelevanceScore } from "@/lib/knowledge/routes";
+import { getRouteBySlug } from "@/data/seo/routes";
 import {
   relationships,
   type RelationshipType,
 } from "@/data/knowledge/relationships";
 
 export type RelatedKnowledgeItem = {
+  slug: string;
   label: string;
   href: string;
   type: string;
@@ -93,6 +96,7 @@ export function getRelatedKnowledge(
       if (href === "#") return null;
 
       return {
+        slug: relationship.slug,
         label: relatedEntity.name,
         href,
         type: typeLabels[relationship.type],
@@ -110,6 +114,21 @@ export function getRelatedKnowledge(
       if (priorityDifference !== 0) {
         return priorityDifference;
       }
+
+    if (a.entityType === "route" && b.entityType === "route") {
+  const routeA = getRouteBySlug(a.slug);
+  const routeB = getRouteBySlug(b.slug);
+
+  if (routeA && routeB) {
+    const routeScoreDifference =
+      getRouteRelevanceScore(routeB) -
+      getRouteRelevanceScore(routeA);
+
+    if (routeScoreDifference !== 0) {
+      return routeScoreDifference;
+    }
+  }
+}
 
       return a.label.localeCompare(b.label);
     })
