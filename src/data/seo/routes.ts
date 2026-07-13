@@ -1,6 +1,6 @@
 import { standardClaimProcess } from "./shared/claimProcess";
 import { standardCommonIssues } from "./shared/commonIssues";
-import { standardFAQ } from "./shared/faq";
+
 import type {
   CompensationAmount,
   FAQ,
@@ -118,6 +118,36 @@ const standardTimeline: TimelineStep[] = [
       "If the claim is successful, FlightClaimly helps complete the payout process.",
   },
 ];
+
+function createRouteFAQ(
+  origin: FlightRoute["origin"],
+  destination: FlightRoute["destination"]
+): FAQ[] {
+  const routeLabel = `${origin.city} to ${destination.city}`;
+
+  return [
+    {
+      question: `Can I claim compensation for a delayed flight from ${origin.city} to ${destination.city}?`,
+      answer: `You may be entitled to compensation if your flight from ${origin.name} to ${destination.name} arrived at least three hours late and the disruption was within the airline's control. Eligibility depends on the operating airline, the reason for the delay and whether EU261 or UK261 applies.`,
+    },
+    {
+      question: `How much compensation can I receive for the ${routeLabel} route?`,
+      answer: `Eligible passengers may receive between €250 and €600. The final amount depends primarily on the flight distance, the arrival delay and the rules that apply to the journey.`,
+    },
+    {
+      question: `Does EU261 apply to flights from ${origin.country} to ${destination.country}?`,
+      answer: `EU261 may apply depending on where the flight departed, where it arrived and which airline operated the flight. FlightClaimly checks the route and operating airline when assessing your case.`,
+    },
+    {
+      question: `Can I claim if my ${routeLabel} flight was cancelled?`,
+      answer: `You may have a claim if the airline cancelled the flight at short notice and the cancellation was not caused by extraordinary circumstances. The alternative transport and notice provided by the airline can also affect eligibility.`,
+    },
+    {
+      question: `What documents do I need for a ${routeLabel} compensation claim?`,
+      answer: `You should normally keep your booking confirmation, flight details, passenger information and any messages received from the airline about the disruption. Additional documents may be requested while the claim is reviewed.`,
+    },
+  ];
+}
 
 const coreAirportNetwork = [
   "CPH",
@@ -262,7 +292,22 @@ function createRoute(seed: RouteSeed): FlightRoute {
 
     claimProcess: standardClaimProcess,
     commonIssues: standardCommonIssues,
-    faq: standardFAQ,
+    faq: createRouteFAQ(
+  {
+    slug: origin.slug,
+    name: origin.name,
+    iata: origin.iata,
+    city: origin.city,
+    country: origin.country,
+  },
+  {
+    slug: destination.slug,
+    name: destination.name,
+    iata: destination.iata,
+    city: destination.city,
+    country: destination.country,
+  }
+),
   };
 }
 
