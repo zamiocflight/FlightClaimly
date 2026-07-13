@@ -5,13 +5,13 @@ import {
 
 export const relationshipWeights: Record<RelationshipType, number> = {
   airport: 100,
+  airline: 98,
   route: 95,
-  airline: 90,
-  country: 70,
-  hub: 60,
-  alliance: 55,
-  law: 40,
-  article: 20,
+  country: 75,
+  hub: 65,
+  alliance: 60,
+  law: 45,
+  article: 30,
 };
 
 export type EntityScoreBonuses = {
@@ -49,6 +49,12 @@ const traitWeights: Record<keyof EntityTraits, number> = {
 };
 
 export function getRelationshipWeight(type: RelationshipType): number {
+  return relationshipWeights[type] ?? 0;
+}
+
+export function getBaseEntityScore(
+  type: RelationshipType
+): number {
   return relationshipWeights[type] ?? 0;
 }
 
