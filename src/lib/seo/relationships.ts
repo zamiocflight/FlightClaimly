@@ -2,6 +2,8 @@ import { getEntity } from "@/lib/entities";
 import { getEntityHref } from "@/data/entities/registry";
 import { getRouteRelevanceScore } from "@/lib/knowledge/routes";
 import { getRouteBySlug } from "@/data/seo/routes";
+import { getAirlineBySlug } from "@/data/seo/airlines";
+import { deriveAirlineTraits } from "@/lib/knowledge/derivedTraits";
 import {
   relationships,
   type RelationshipType,
@@ -9,6 +11,7 @@ import {
 import {
   getContextualBonuses,
   getEntityScore,
+  getTraitScore,
 } from "@/lib/knowledge/relevance";
 
 export type RelatedKnowledgeItem = {
@@ -104,6 +107,15 @@ const contextualBonuses = getContextualBonuses(
   relationship.slug
 );
 
+const airline =
+  relationship.type === "airline"
+    ? getAirlineBySlug(relationship.slug)
+    : undefined;
+
+const traitBonus = airline
+  ? getTraitScore(deriveAirlineTraits(airline))
+  : 0;
+
       return {
         slug: relationship.slug,
         label: relatedEntity.name,
@@ -112,7 +124,7 @@ const contextualBonuses = getContextualBonuses(
         entityType: relationship.type,
 score: getEntityScore(
   relationship.type,
-  relevanceBonus,
+  relevanceBonus + traitBonus,
   contextualBonuses
 ),
       };
