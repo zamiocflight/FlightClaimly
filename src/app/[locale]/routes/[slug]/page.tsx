@@ -9,6 +9,10 @@ import { getRouteBreadcrumbs, getRouteMetadata } from "@/lib/seo/routes";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import FAQSchema from "@/components/seo/FAQSchema";
 
+export const dynamic = "force-static";
+export const dynamicParams = false;
+export const revalidate = false;
+
 type Props = {
   params: Promise<{
     locale: string;

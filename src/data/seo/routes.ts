@@ -96,6 +96,31 @@ const standardStatistics: Statistic[] = [
   },
 ];
 
+function createRouteStatistics(
+  origin: FlightRoute["origin"],
+  destination: FlightRoute["destination"]
+): Statistic[] {
+  return [
+    {
+      label: "Route",
+      value: `${origin.iata} → ${destination.iata}`,
+      description: `${origin.name} to ${destination.name}.`,
+    },
+    {
+      label: "Maximum compensation",
+      value: "€600",
+      description:
+        "Per passenger when the route and disruption qualify under EU261 or UK261.",
+    },
+    {
+      label: "Delay threshold",
+      value: "3h+",
+      description:
+        "Compensation normally requires an arrival delay of at least three hours.",
+    },
+  ];
+}
+
 const standardTimeline: TimelineStep[] = [
   {
     title: "Submit your claim",
@@ -283,7 +308,22 @@ function createRoute(seed: RouteSeed): FlightRoute {
     statisticsIntro:
       "The statistics below provide an overview of passenger compensation rules and help explain when compensation may apply.",
 
-    statistics: standardStatistics,
+    statistics: createRouteStatistics(
+  {
+    slug: origin.slug,
+    name: origin.name,
+    iata: origin.iata,
+    city: origin.city,
+    country: origin.country,
+  },
+  {
+    slug: destination.slug,
+    name: destination.name,
+    iata: destination.iata,
+    city: destination.city,
+    country: destination.country,
+  }
+),
 
     timelineIntro:
       "After you submit your claim, FlightClaimly reviews your information, prepares the claim and follows up with the airline throughout the process.",

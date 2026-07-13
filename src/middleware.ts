@@ -8,7 +8,14 @@ const intlMiddleware = createMiddleware({
   localePrefix: "always",
 });
 
-
+const SUPPORTED_LOCALES = new Set([
+  "sv",
+  "en",
+  "da",
+  "de",
+  "pl",
+  "fi",
+]);
 
 const PROTECTED_PREFIXES = ["/admin"];
 const PUBLIC_ROUTES_WITHOUT_LOCALE = [
@@ -46,6 +53,11 @@ if (matchDisabled) {
   }
 }
 
+const firstPathSegment = pathname.split("/")[1];
+
+if (SUPPORTED_LOCALES.has(firstPathSegment)) {
+  return NextResponse.next();
+}
 
   // ✅ Tillåt admin-auth API
   if (pathname === "/api/admin/login" || pathname === "/api/admin/logout") {
