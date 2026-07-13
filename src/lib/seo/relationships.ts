@@ -6,6 +6,7 @@ import {
   relationships,
   type RelationshipType,
 } from "@/data/knowledge/relationships";
+import { getRelationshipWeight } from "@/lib/knowledge/relevance";
 
 export type RelatedKnowledgeItem = {
   slug: string;
@@ -31,16 +32,6 @@ const typeLabels: Record<RelationshipType, string> = {
   article: "Guide",
 };
 
-const typePriority: Record<RelationshipType, number> = {
-  airport: 1,
-  airline: 2,
-  country: 3,
-  route: 4,
-  law: 5,
-  article: 6,
-  alliance: 7,
-  hub: 8,
-};
 
 export function getRelationships(slug: string) {
   return relationships.find((entity) => entity.slug === slug);
@@ -108,12 +99,13 @@ export function getRelatedKnowledge(
         item !== null
     )
     .sort((a, b) => {
-      const priorityDifference =
-        typePriority[a.entityType] - typePriority[b.entityType];
+   const weightDifference =
+  getRelationshipWeight(b.entityType) -
+  getRelationshipWeight(a.entityType);
 
-      if (priorityDifference !== 0) {
-        return priorityDifference;
-      }
+if (weightDifference !== 0) {
+  return weightDifference;
+}
 
     if (a.entityType === "route" && b.entityType === "route") {
   const routeA = getRouteBySlug(a.slug);
