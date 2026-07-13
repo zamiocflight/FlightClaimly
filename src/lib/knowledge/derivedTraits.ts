@@ -1,5 +1,6 @@
 import type { Airline } from "@/data/seo/shared/types";
 import type { EntityTraits } from "@/lib/knowledge/relevance";
+import type { Airport } from "@/data/seo/airports";
 
 export function deriveAirlineTraits(
   airline: Airline
@@ -17,5 +18,16 @@ export function deriveAirlineTraits(
   return {
     ...derivedTraits,
     ...airline.traits,
+  };
+}
+export function deriveAirportTraits(
+  airport: Airport
+): EntityTraits {
+  const airlineCount = airport.mainAirlines?.length ?? 0;
+
+  return {
+    hub: airlineCount >= 5,
+    popular: airlineCount >= 8,
+    international: airlineCount > 0,
   };
 }
