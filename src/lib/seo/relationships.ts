@@ -4,10 +4,13 @@ import { getRouteRelevanceScore } from "@/lib/knowledge/routes";
 import { getRouteBySlug } from "@/data/seo/routes";
 import { getAirlineBySlug } from "@/data/seo/airlines";
 import { getAirportBySlug } from "@/data/seo/airports";
+import { getCountryBySlug } from "@/data/seo/countries";
 import {
   deriveAirlineTraits,
   deriveAirportTraits,
-} from "@/lib/knowledge/derivedTraits";import {
+  deriveCountryTraits,
+} from "@/lib/knowledge/derivedTraits";
+import {
   relationships,
   type RelationshipType,
 } from "@/data/knowledge/relationships";
@@ -128,6 +131,15 @@ const airportTraitBonus = airport
   ? getTraitScore(deriveAirportTraits(airport))
   : 0;
 
+  const country =
+  relationship.type === "country"
+    ? getCountryBySlug(relationship.slug)
+    : undefined;
+
+const countryTraitBonus = country
+  ? getTraitScore(deriveCountryTraits(country))
+  : 0;
+
       return {
         slug: relationship.slug,
         label: relatedEntity.name,
@@ -137,7 +149,10 @@ const airportTraitBonus = airport
 
 score: getEntityScore(
   relationship.type,
-  relevanceBonus + traitBonus + airportTraitBonus,
+  relevanceBonus +
+    traitBonus +
+    airportTraitBonus +
+    countryTraitBonus,
   contextualBonuses
 ),
 
