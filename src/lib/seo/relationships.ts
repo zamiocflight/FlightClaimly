@@ -68,6 +68,24 @@ function sharesRelationshipType(
   );
 }
 
+function getContextualBonuses(
+  sourceSlug: string,
+  targetSlug: string
+) {
+  return {
+    sameCountry: sharesRelationshipType(
+      sourceSlug,
+      targetSlug,
+      "country"
+    ),
+    sameAirline: sharesRelationshipType(
+      sourceSlug,
+      targetSlug,
+      "airline"
+    ),
+  };
+}
+
 export function getRelatedKnowledge(
   slug: string,
   locale: string,
@@ -112,10 +130,9 @@ export function getRelatedKnowledge(
 const relevanceBonus =
   route ? getRouteRelevanceScore(route) : 0;
 
-  const sameCountry = sharesRelationshipType(
+const contextualBonuses = getContextualBonuses(
   slug,
-  relationship.slug,
-  "country"
+  relationship.slug
 );
 
       return {
@@ -127,9 +144,7 @@ const relevanceBonus =
 score: getEntityScore(
   relationship.type,
   relevanceBonus,
-  {
-    sameCountry,
-  }
+  contextualBonuses
 ),
       };
     })
