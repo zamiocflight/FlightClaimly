@@ -51,6 +51,23 @@ export function getRelationshipsByType(
   );
 }
 
+function sharesRelationshipType(
+  sourceSlug: string,
+  targetSlug: string,
+  type: RelationshipType
+): boolean {
+  const sourceRelationships = getRelationshipsByType(sourceSlug, type);
+  const targetRelationships = getRelationshipsByType(targetSlug, type);
+
+  const targetSlugs = new Set(
+    targetRelationships.map((relationship) => relationship.slug)
+  );
+
+  return sourceRelationships.some((relationship) =>
+    targetSlugs.has(relationship.slug)
+  );
+}
+
 export function getRelatedKnowledge(
   slug: string,
   locale: string,
@@ -95,15 +112,24 @@ export function getRelatedKnowledge(
 const relevanceBonus =
   route ? getRouteRelevanceScore(route) : 0;
 
+  const sameCountry = sharesRelationshipType(
+  slug,
+  relationship.slug,
+  "country"
+);
+
       return {
         slug: relationship.slug,
         label: relatedEntity.name,
         href,
         type: typeLabels[relationship.type],
         entityType: relationship.type,
-        score: getEntityScore(
+score: getEntityScore(
   relationship.type,
-  relevanceBonus
+  relevanceBonus,
+  {
+    sameCountry,
+  }
 ),
       };
     })
