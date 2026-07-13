@@ -83,6 +83,11 @@ function getContextualBonuses(
       targetSlug,
       "airline"
     ),
+    sameAirport: sharesRelationshipType(
+      sourceSlug,
+      targetSlug,
+      "airport"
+    ),
   };
 }
 
