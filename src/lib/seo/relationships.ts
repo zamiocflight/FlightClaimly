@@ -6,7 +6,7 @@ import {
   relationships,
   type RelationshipType,
 } from "@/data/knowledge/relationships";
-import { getRelationshipWeight } from "@/lib/knowledge/relevance";
+import { getEntityScore } from "@/lib/knowledge/relevance";
 
 export type RelatedKnowledgeItem = {
   slug: string;
@@ -14,6 +14,7 @@ export type RelatedKnowledgeItem = {
   href: string;
   type: string;
   entityType: RelationshipType;
+  score: number;
 };
 
 type GetRelatedKnowledgeOptions = {
@@ -86,43 +87,38 @@ export function getRelatedKnowledge(
 
       if (href === "#") return null;
 
+      const route =
+  relationship.type === "route"
+    ? getRouteBySlug(relationship.slug)
+    : undefined;
+
+const relevanceBonus =
+  route ? getRouteRelevanceScore(route) : 0;
+
       return {
         slug: relationship.slug,
         label: relatedEntity.name,
         href,
         type: typeLabels[relationship.type],
         entityType: relationship.type,
+        score: getEntityScore(
+  relationship.type,
+  relevanceBonus
+),
       };
     })
     .filter(
       (item): item is RelatedKnowledgeItem =>
         item !== null
     )
-    .sort((a, b) => {
-   const weightDifference =
-  getRelationshipWeight(b.entityType) -
-  getRelationshipWeight(a.entityType);
+ .sort((a, b) => {
+  const scoreDifference = b.score - a.score;
 
-if (weightDifference !== 0) {
-  return weightDifference;
-}
-
-    if (a.entityType === "route" && b.entityType === "route") {
-  const routeA = getRouteBySlug(a.slug);
-  const routeB = getRouteBySlug(b.slug);
-
-  if (routeA && routeB) {
-    const routeScoreDifference =
-      getRouteRelevanceScore(routeB) -
-      getRouteRelevanceScore(routeA);
-
-    if (routeScoreDifference !== 0) {
-      return routeScoreDifference;
-    }
+  if (scoreDifference !== 0) {
+    return scoreDifference;
   }
-}
 
-      return a.label.localeCompare(b.label);
-    })
+  return a.label.localeCompare(b.label);
+})
     .slice(0, options.limit);
 }
