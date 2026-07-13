@@ -14,3 +14,9 @@ export const relationshipWeights: Record<RelationshipType, number> = {
 export function getRelationshipWeight(type: RelationshipType): number {
   return relationshipWeights[type] ?? 0;
 }
+export function getEntityScore(
+  type: RelationshipType,
+  score = 0
+): number {
+  return getRelationshipWeight(type) + score;
+}
