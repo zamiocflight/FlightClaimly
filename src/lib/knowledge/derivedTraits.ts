@@ -1,6 +1,7 @@
 import type { Airline } from "@/data/seo/shared/types";
 import type { EntityTraits } from "@/lib/knowledge/relevance";
 import type { Airport } from "@/data/seo/airports";
+import type { Country } from "@/data/seo/countries";
 
 export function deriveAirlineTraits(
   airline: Airline
@@ -29,5 +30,12 @@ export function deriveAirportTraits(
     hub: airlineCount >= 5,
     popular: airlineCount >= 8,
     international: airlineCount > 0,
+  };
+}
+export function deriveCountryTraits(
+  country: Country
+): EntityTraits {
+  return {
+    popular: true,
   };
 }
