@@ -1,4 +1,7 @@
-import type { RelationshipType } from "@/data/knowledge/relationships";
+import {
+  relationships,
+  type RelationshipType,
+} from "@/data/knowledge/relationships";
 
 export const relationshipWeights: Record<RelationshipType, number> = {
   airport: 100,
@@ -53,4 +56,52 @@ export function getEntityScore(
     relevanceBonus +
     contextualBonus
   );
+}
+function getRelationshipSlugs(
+  entitySlug: string,
+  type: RelationshipType
+): Set<string> {
+  const entity = relationships.find(
+    (item) => item.slug === entitySlug
+  );
+
+  return new Set(
+    entity?.relationships
+      .filter((relationship) => relationship.type === type)
+      .map((relationship) => relationship.slug) ?? []
+  );
+}
+
+function sharesRelationshipType(
+  sourceSlug: string,
+  targetSlug: string,
+  type: RelationshipType
+): boolean {
+  const sourceSlugs = getRelationshipSlugs(sourceSlug, type);
+  const targetSlugs = getRelationshipSlugs(targetSlug, type);
+
+  return [...sourceSlugs].some((slug) => targetSlugs.has(slug));
+}
+
+export function getContextualBonuses(
+  sourceSlug: string,
+  targetSlug: string
+): EntityScoreBonuses {
+  return {
+    sameCountry: sharesRelationshipType(
+      sourceSlug,
+      targetSlug,
+      "country"
+    ),
+    sameAirline: sharesRelationshipType(
+      sourceSlug,
+      targetSlug,
+      "airline"
+    ),
+    sameAirport: sharesRelationshipType(
+      sourceSlug,
+      targetSlug,
+      "airport"
+    ),
+  };
 }

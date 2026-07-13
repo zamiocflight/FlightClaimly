@@ -6,7 +6,10 @@ import {
   relationships,
   type RelationshipType,
 } from "@/data/knowledge/relationships";
-import { getEntityScore } from "@/lib/knowledge/relevance";
+import {
+  getContextualBonuses,
+  getEntityScore,
+} from "@/lib/knowledge/relevance";
 
 export type RelatedKnowledgeItem = {
   slug: string;
@@ -51,45 +54,6 @@ export function getRelationshipsByType(
   );
 }
 
-function sharesRelationshipType(
-  sourceSlug: string,
-  targetSlug: string,
-  type: RelationshipType
-): boolean {
-  const sourceRelationships = getRelationshipsByType(sourceSlug, type);
-  const targetRelationships = getRelationshipsByType(targetSlug, type);
-
-  const targetSlugs = new Set(
-    targetRelationships.map((relationship) => relationship.slug)
-  );
-
-  return sourceRelationships.some((relationship) =>
-    targetSlugs.has(relationship.slug)
-  );
-}
-
-function getContextualBonuses(
-  sourceSlug: string,
-  targetSlug: string
-) {
-  return {
-    sameCountry: sharesRelationshipType(
-      sourceSlug,
-      targetSlug,
-      "country"
-    ),
-    sameAirline: sharesRelationshipType(
-      sourceSlug,
-      targetSlug,
-      "airline"
-    ),
-    sameAirport: sharesRelationshipType(
-      sourceSlug,
-      targetSlug,
-      "airport"
-    ),
-  };
-}
 
 export function getRelatedKnowledge(
   slug: string,
