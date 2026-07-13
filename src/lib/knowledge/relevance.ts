@@ -22,12 +22,30 @@ export type EntityScoreBonuses = {
   popular?: boolean;
 };
 
+export type EntityTraits = {
+  hub?: boolean;
+  popular?: boolean;
+  capital?: boolean;
+  international?: boolean;
+  domestic?: boolean;
+  flagCarrier?: boolean;
+};
+
 const bonusWeights: Record<keyof EntityScoreBonuses, number> = {
   sameAirport: 40,
   sameAirline: 30,
   sameCountry: 20,
   hub: 20,
   popular: 15,
+};
+
+const traitWeights: Record<keyof EntityTraits, number> = {
+  hub: 20,
+  popular: 15,
+  capital: 10,
+  international: 10,
+  domestic: 5,
+  flagCarrier: 20,
 };
 
 export function getRelationshipWeight(type: RelationshipType): number {
@@ -104,4 +122,19 @@ export function getContextualBonuses(
       "airport"
     ),
   };
+}
+export function getTraitScore(
+  traits: EntityTraits = {}
+): number {
+  return Object.entries(traits).reduce(
+    (total, [key, enabled]) => {
+      if (!enabled) return total;
+
+      return (
+        total +
+        traitWeights[key as keyof EntityTraits]
+      );
+    },
+    0
+  );
 }
