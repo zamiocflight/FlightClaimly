@@ -52,12 +52,6 @@ export function getRelationshipWeight(type: RelationshipType): number {
   return relationshipWeights[type] ?? 0;
 }
 
-export function getBaseEntityScore(
-  type: RelationshipType
-): number {
-  return relationshipWeights[type] ?? 0;
-}
-
 export function getEntityScore(
   type: RelationshipType,
   relevanceBonus = 0,

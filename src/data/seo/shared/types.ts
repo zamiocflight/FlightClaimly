@@ -50,6 +50,12 @@ export type Airline = {
   destinations?: number;
   alliance?: string | null;
 
+  traits?: {
+  hub?: boolean;
+  popular?: boolean;
+  flagCarrier?: boolean;
+};
+
   title: string;
   description: string;
   intro: string;
