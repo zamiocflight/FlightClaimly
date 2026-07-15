@@ -5,21 +5,18 @@
     "network": "Verkkovirhe. Yritä uudelleen.",
     "invalidFlightNumber": "Anna kelvollinen lentonumero (esim. SK123)."
   },
-
   "header": {
     "language": {
       "label": "FI ▾",
       "aria": "Vaihda kieltä"
     }
   },
-
   "mobileNav": {
     "title": "Valikko",
     "openAria": "Avaa valikko",
     "openSr": "Avaa valikko",
     "closeAria": "Sulje valikko"
   },
-
   "nav": {
     "compensation": "Hae korvausta",
     "delays": "Lentojen viivästykset",
@@ -31,7 +28,6 @@
     "track": "Seuraa tapausta",
     "langLabel": "Kieli"
   },
-
   "track": {
     "button": "Seuraa tapausta",
     "title": "Seuraa tapaustasi",
@@ -49,11 +45,9 @@
       "errorTechnical": "Tekninen virhe – yritä hetken kuluttua uudelleen."
     }
   },
-
   "sections": {
     "readMore": "Lue lisää"
   },
-
   "how": {
     "badge": "Näin se toimii",
     "title": "3 helppoa askelta korvaukseen",
@@ -78,13 +72,11 @@
       }
     }
   },
-
   "trustRow": {
     "eu261": "EU261-oikeudet",
     "lowFee": "No win, no fee – matala palkkio",
     "gdpr": "GDPR-turvallinen käsittely"
   },
-
   "why": {
     "title": "Miksi valita FlightClaimly?",
     "cards": {
@@ -105,7 +97,6 @@
       }
     }
   },
-
   "footer": {
     "pitch": "Autamme matkustajia saamaan heille EU261:n mukaan kuuluvan korvauksen – ilman ennakkokuluja.",
     "badges": {
@@ -127,7 +118,6 @@
       "disclaimer": "FlightClaimly on itsenäinen toimija eikä ole sidoksissa lentoyhtiöihin."
     }
   },
-
   "hero": {
     "badges": {
       "eu": "EU261 / UK261",
@@ -149,9 +139,15 @@
       "beforeLink": "Kestää noin 2 minuuttia. Ei maksettavaa, jos et saa korvausta –",
       "link": "lue lisää palkkiostamme.",
       "afterLink": ""
-    }
+    },
+    "titleLine1": "Get up to €600 in compensation",
+    "titleLine2": "for delayed or cancelled flights!",
+    "fromLabel": "Departure airport",
+    "fromPlaceholder": "Departure airport",
+    "toLabel": "Final destination airport",
+    "toPlaceholder": "Final destination airport",
+    "searchCta": "Check compensation"
   },
-
   "precheck": {
     "steps": {
       "step1": "Tarkista lentosi",
@@ -186,9 +182,9 @@
         "checking": "Tarkistetaan…"
       },
       "result": {
-  "eligible": "Historiallisten lentotietojen perusteella lentosi näyttää viivästyneen yli 3 tuntia. Saatat olla oikeutettu korvaukseen.",
-  "notConfirmed": "Emme pystyneet vahvistamaan yli 3 tunnin viivästystä saatavilla olevien tietojen perusteella. Voit silti jatkaa — lentoyhtiön tiedot voivat poiketa."
-}
+        "eligible": "Historiallisten lentotietojen perusteella lentosi näyttää viivästyneen yli 3 tuntia. Saatat olla oikeutettu korvaukseen.",
+        "notConfirmed": "Emme pystyneet vahvistamaan yli 3 tunnin viivästystä saatavilla olevien tietojen perusteella. Voit silti jatkaa — lentoyhtiön tiedot voivat poiketa."
+      }
     },
     "details": {
       "goodNewsStrong": "Hyviä uutisia!",
@@ -224,7 +220,6 @@
       }
     }
   },
-
   "faq": {
     "meta": {
       "title": "Usein kysytyt kysymykset lentokorvauksista | FlightClaimly",
@@ -315,7 +310,6 @@
       "cta": "Tarkista lentoni"
     }
   },
-
   "cancellations": {
     "meta": {
       "title": "Peruutettu lento – korvaus EU261:n mukaan | FlightClaimly",
@@ -404,7 +398,6 @@
       "cta": "Tarkista lentoni"
     }
   },
-
   "contact": {
     "meta": {
       "title": "Ota yhteyttä FlightClaimlyyn | Tuki ja kysymykset",
@@ -440,7 +433,6 @@
       "cta": "Tarkista lentoni"
     }
   },
-
   "compensation": {
     "meta": {
       "title": "Korvaussummat EU261:n mukaan – 250, 400 ja 600 € | FlightClaimly",
@@ -464,7 +456,6 @@
         ],
         "note": "Lipun hinnalla on yleensä vähemmän merkitystä – kaksi matkustajaa samalla lennolla saa tyypillisesti saman korvaussumman."
       },
-
       "table": {
         "title": "Korvaustasot EU261:n mukaan",
         "intro": "Summat riippuvat pääasiassa lentomatkasta ja häiriötyypistä. Taulukko antaa yleiskuvan.",
@@ -497,7 +488,6 @@
         ],
         "note": "Autamme sinua arvioimaan, onko tapauksesi korvaukseen oikeuttava."
       },
-
       "reduction": {
         "title": "Milloin korvausta voidaan alentaa?",
         "p1": "Uudelleenreitityksessä, joka vie sinut perille lähellä alkuperäistä saapumisaikaa, korvaus voidaan joissain tapauksissa puolittaa.",
@@ -508,7 +498,6 @@
         ],
         "note": "Arviointi perustuu aina todelliseen saapumisaikaan ja lentoyhtiön toimiin."
       },
-
       "types": {
         "title": "Mitä häiriöitä asetus kattaa?",
         "p1": "EU261 voi antaa oikeuden korvaukseen esimerkiksi seuraavissa tilanteissa:",
@@ -522,7 +511,6 @@
           "link": "Oikeutesi"
         }
       },
-
       "examples": {
         "title": "Esimerkkejä",
         "list": [
@@ -532,7 +520,6 @@
         ],
         "note": "Oikeus korvaukseen riippuu häiriön syystä."
       },
-
       "myths": {
         "title": "Yleisiä väärinkäsityksiä",
         "list": [
@@ -548,7 +535,6 @@
       "cta": "Tarkista lentoni"
     }
   },
-
   "delays": {
     "meta": {
       "title": "Viivästynyt lento – korvaus EU261:n mukaan | FlightClaimly",
@@ -635,7 +621,6 @@
       "cta": "Tarkista lentoni"
     }
   },
-
   "login": {
     "title": "Admin-kirjautuminen",
     "passwordLabel": "Salasana",
@@ -647,7 +632,6 @@
       "generic": "Kirjautuminen epäonnistui"
     }
   },
-
   "privacy": {
     "meta": {
       "title": "Tietosuojakäytäntö | FlightClaimly",
@@ -656,12 +640,10 @@
     "badge": "Tietosuoja",
     "title": "FlightClaimlyn tietosuojakäytäntö",
     "intro": "Yksityisyytesi on meille tärkeä. Tällä sivulla kerromme, mitä tietoja keräämme, miksi keräämme niitä, miten käytämme niitä ja mitkä oikeudet sinulla on.",
-
     "controller": {
       "title": "Rekisterinpitäjä",
       "body": "FlightClaimly (”me”, ”meitä”) on rekisterinpitäjä henkilötietojen käsittelyssä, joka liittyy lentokorvauspalveluumme."
     },
-
     "dataCollected": {
       "title": "Mitä tietoja keräämme?",
       "intro": "Kun käytät palveluamme, saatamme käsitellä seuraavanlaisia henkilötietoja:",
@@ -674,7 +656,6 @@
         "tekniset tiedot (IP-osoite, laite, selain) siltä osin kuin se on tarpeen turvallisuuden ja toiminnan varmistamiseksi"
       ]
     },
-
     "purpose": {
       "title": "Miksi käsittelemme tietojasi?",
       "intro": "Käsittelemme henkilötietojasi voidaksemme:",
@@ -687,7 +668,6 @@
         "parantaa ja suojata palveluamme"
       ]
     },
-
     "legalBasis": {
       "title": "Käsittelyn oikeusperuste",
       "intro": "Henkilötietojesi käsittely perustuu pääasiassa:",
@@ -697,7 +677,6 @@
         "<strong>Oikeutettuun etuun</strong> – turvallisuus ja toiminnan varmistaminen"
       ]
     },
-
     "retention": {
       "title": "Kuinka kauan säilytämme tietojasi?",
       "intro": "Säilytämme tietojasi niin kauan kuin se on tarpeen, jotta voimme:",
@@ -708,7 +687,6 @@
       ],
       "note": "Kun tietoja ei enää tarvita, poistamme ne tai anonymisoimme ne turvallisesti."
     },
-
     "sharing": {
       "title": "Kenelle jaamme tietojasi?",
       "intro": "Jaamme tietojasi vain osapuolille, joita tarvitaan palvelun toimittamiseen:",
@@ -719,7 +697,6 @@
       ],
       "note": "Emme myy henkilötietojasi kolmansille osapuolille."
     },
-
     "rights": {
       "title": "Oikeutesi",
       "intro": "Rekisteröitynä sinulla on oikeus:",
@@ -732,22 +709,18 @@
       ],
       "contactBefore": "Haluatko käyttää jotakin näistä oikeuksista? Ota yhteyttä osoitteeseen"
     },
-
     "complaints": {
       "title": "Valitukset",
       "body": "Jos katsot, että käsittelemme tietojasi vastoin sovellettavia sääntöjä, voit tehdä valituksen toimivaltaiselle tietosuojaviranomaiselle."
     },
-
     "changes": {
       "title": "Muutokset tähän käytäntöön",
       "body": "Saatamme päivittää tätä tietosuojakäytäntöä tarvittaessa. Uusin versio on aina saatavilla täällä."
     },
-
     "footer": {
       "before": "Onko sinulla kysyttävää henkilötietojesi käsittelystä? Ota yhteyttä osoitteeseen"
     }
   },
-
   "rights": {
     "meta": {
       "title": "EU261 – oikeutesi lentomatkustajana | FlightClaimly",
@@ -756,7 +729,6 @@
     "badge": "Oikeutesi",
     "title": "Oikeutesi lentomatkustajana EU261:n mukaan",
     "intro": "EU-asetus 261/2004 (\"EU261\") antaa lentomatkustajille vahvat oikeudet viivästyneissä, peruutetuissa tai ylivaratuissa lennoissa. Tässä selitämme perusteet – ja miten FlightClaimly voi auttaa sinua saamaan sinulle kuuluvan korvauksen.",
-
     "whenApplies": {
       "title": "Milloin EU261 soveltuu?",
       "intro": "EU261 soveltuu seuraavissa tilanteissa:",
@@ -767,7 +739,6 @@
       ],
       "note": "Myös tietyt jatkolennot ja välilaskulliset matkat voivat kuulua asetuksen piiriin riippuen siitä, miten lippu on varattu. Autamme sinua arvioimaan tämän."
     },
-
     "covered": {
       "title": "Mitä tilanteita se kattaa?",
       "lead": "Voit olla oikeutettu korvaukseen, jos:",
@@ -778,7 +749,6 @@
       ],
       "after": "Rahallisen korvauksen lisäksi sinulla voi olla oikeus ruokaan, juomaan, hotelliin ja uudelleenreititykseen riippuen siitä, kuinka kauan ja kuinka pitkällä matkalla olet."
     },
-
     "amounts": {
       "title": "Kuinka paljon korvausta voit saada?",
       "intro": "Korvaus riippuu pääasiassa lentomatkan pituudesta ja siitä, kuinka paljon matkaasi vaikutettiin. Tyypillisiä EU261:n mukaisia kiinteitä korvaussummia ovat:",
@@ -789,7 +759,6 @@
       ],
       "note": "Tarkka summa voi vaihdella reitin, viivästyksen pituuden ja tarjotun uudelleenreitityksen mukaan. FlightClaimly auttaa laskemaan oikean tason juuri sinun matkallesi."
     },
-
     "exceptions": {
       "title": "Milloin et ole oikeutettu korvaukseen?",
       "intro": "Lentoyhtiö voi välttyä maksamasta korvausta, jos viivästys tai peruutus johtuu niin sanotuista \"poikkeuksellisista olosuhteista\", kuten:",
@@ -802,7 +771,6 @@
       "afterStrong": "ole",
       "afterTail": "poikkeuksellisia olosuhteita. Monet lentoyhtiöiden hylkäykset ovat virheellisiä – siinä voimme auttaa sinua valittamaan päätöksestä."
     },
-
     "save": {
       "title": "Mitä kannattaa säilyttää?",
       "intro": "Tapauksen hoitamiseksi on hyvä, jos sinulla on:",
@@ -814,7 +782,6 @@
       ],
       "note": "Voit ladata kaiken suoraan meille, kun luot tapauksen – autamme sinua järjestämään aineiston."
     },
-
     "links": {
       "title": "Haluatko tietää lisää tietyistä tilanteista?",
       "lead": "Lue lisää:",
@@ -825,13 +792,11 @@
       "faqText": "Usein kysytyt kysymykset",
       "faqAfter": " – lyhyet vastaukset yleisimpiin kysymyksiin."
     },
-
     "footer": {
       "lead": "Uskotko, että lentosi kuuluu EU261:n piiriin? Tarkista heti, oletko oikeutettu korvaukseen – se vie vain hetken.",
       "cta": "Tarkista, olenko oikeutettu korvaukseen"
     }
   },
-
   "terms": {
     "meta": {
       "title": "Käyttöehdot | FlightClaimly",
@@ -840,14 +805,12 @@
     "badge": "Ehdot",
     "title": "FlightClaimlyn käyttöehdot",
     "intro": "Nämä ehdot kuvaavat, miten FlightClaimly toimii sekä mitä oikeuksia ja velvollisuuksia sinulla on käyttäessäsi palveluamme lentokorvausvaatimusten hoitamiseen.",
-
     "sections": {
       "service": {
         "title": "1. Palvelusta",
         "text": "FlightClaimly on palvelu, joka auttaa lentomatkustajia selvittämään ja hoitamaan korvausvaatimuksia EU261:n ja vastaavien sääntöjen mukaan. Toimimme asiamiehenäsi lentoyhtiötä vastaan.",
         "note": "Lähettämällä tapauksen verkkosivustollamme hyväksyt nämä ehdot."
       },
-
       "usage": {
         "title": "2. Palvelun käyttösi",
         "intro": "Sitoudut:",
@@ -858,13 +821,11 @@
         ],
         "note": "Pidätämme oikeuden keskeyttää tapauksen käsittelyn, jos arvioimme tietojen olevan virheellisiä tai jos vaatimuksen edellytykset eivät täyty."
       },
-
       "power": {
         "title": "3. Asiamies ja valtuutus",
         "text": "Voidaksemme hoitaa vaatimuksesi meidän täytyy joskus toimia asiamiehenäsi lentoyhtiötä vastaan. Käyttämällä palvelua hyväksyt, että otamme yhteyttä lentoyhtiöön puolestasi ja edustamme etujasi tapauksen yhteydessä.",
         "note": "Joissakin tapauksissa saatamme pyytää sinua allekirjoittamaan erillisen valtakirjan tai toimeksiantosopimuksen, esimerkiksi jos tapaus täytyy eskaloida."
       },
-
       "fees": {
         "title": "4. Palkkiot ja korvaukset",
         "lead": "FlightClaimly toimii periaatteella",
@@ -876,7 +837,6 @@
         ],
         "note": "Ajantasainen prosenttiosuus ja mahdolliset muut ehdot kerrotaan selkeästi, kun hyväksyt, että hoidamme tapaustasi."
       },
-
       "payout": {
         "title": "5. Maksu sinulle",
         "intro": "Kun lentoyhtiö on maksanut korvauksen, maksu voi tapahtua joko:",
@@ -886,44 +846,36 @@
         ],
         "note": "Pyrimme maksamaan mahdollisimman pian sen jälkeen, kun korvaus on vastaanotettu ja tunnistettu."
       },
-
       "liability": {
         "title": "6. Vastuu ja rajoitukset",
         "text1": "Emme voi taata, että vaatimus johtaa korvaukseen. Arviointi tehdään aina käytettävissä olevien tietojen ja sovellettavan sääntelyn perusteella.",
         "text2": "FlightClaimly ei vastaa välillisistä vahingoista, kuten menetetystä voitosta tai seuraamuskustannuksista; vastuumme rajoittuu normaalisti maksamaasi palkkioon."
       },
-
       "privacy": {
         "title": "7. Henkilötiedot ja tietosuoja",
         "text": "Käsittelemme henkilötietoja sovellettavan tietosuojalainsäädännön mukaisesti. Lisätietoja löytyy meidän",
         "link": "tietosuojakäytännöstämme"
       },
-
       "changes": {
         "title": "8. Ehtojen muutokset",
         "text": "Saatamme päivittää näitä ehtoja tarvittaessa. Uusin versio on aina saatavilla verkkosivustollamme."
       },
-
       "contact": {
         "title": "9. Yhteystiedot",
         "text": "Jos sinulla on kysyttävää näistä ehdoista, voit ottaa yhteyttä osoitteeseen"
       }
     },
-
     "footer": "Käyttämällä FlightClaimlyä vahvistat, että olet lukenut ja ymmärtänyt nämä ehdot."
   },
-
   "thanks": {
     "brandTagline": "Hoidamme vaatimuksesi lentoyhtiötä vastaan – sinä vältät vaivan.",
     "backHome": "← Takaisin etusivulle",
-
     "header": {
       "badge": "FLIGHTCLAIMLY • TAPAUKSESI ON REKISTERÖITY",
       "title": "Kiitos! Olemme vastaanottaneet tapauksen.",
       "claimId": "Tapaus-ID",
       "intro": "Seuraava vaihe on vahvistaa valtakirja ja ladata aineisto tälle sivulle. Kun se on tehty, aloitamme käsittelyn heti ja otamme yhteyttä lentoyhtiöön puolestasi."
     },
-
     "precheck": {
       "badge": "Alustava arvio",
       "eligibleTitle": "Hyviä uutisia – vaikutat olevan oikeutettu korvaukseen.",
@@ -933,7 +885,6 @@
       "unclearFallback": "Lähetäthän aineiston, niin käymme tapauksen läpi manuaalisesti.",
       "amountPrefix": "Arvio:"
     },
-
     "upload": {
       "title": "Lataa liitteet",
       "intro": "Valtakirja antaa meille oikeuden hoitaa tapausta lentoyhtiötä vastaan. Lisää mielellään myös boarding pass, varausvahvistus ja kuitit mahdollisista lisäkuluista.",
@@ -944,7 +895,6 @@
         "Kuitit lisäkuluista (jos niitä on)"
       ]
     },
-
     "loa": {
       "title": "Digitaalinen valtakirja (LoA)",
       "description": "Kirjoittamalla nimesi ja rastittamalla ruudun annat FlightClaimlylle oikeuden edustaa sinua lentoyhtiötä vastaan tässä tapauksessa.",
@@ -954,37 +904,31 @@
       "consent": "Annan FlightClaimlylle valtakirjan (Letter of Authorization) edustaa minua lentoyhtiötä vastaan tässä tapauksessa.",
       "error": "Täytä nimesi ja rastita ruutu, jotta valtakirja on voimassa."
     },
-
     "attachments": {
       "title": "Muut liitteet (valinnainen)",
       "description": "Lisää mielellään boarding pass, varausvahvistus ja kuitit. Voit ladata useita tiedostoja kerralla.",
       "choose": "Valitse tiedostot",
       "types": "PDF, JPG, PNG, HEIC. Enintään muutama tiedosto kerralla."
     },
-
     "actions": {
       "submit": "Vahvista valtakirja ja lataa",
       "submitting": "Käsitellään…",
       "later": "Voit aina täydentää lisäliitteillä myöhemmin ottamalla meihin yhteyttä tarvittaessa."
     },
-
     "success": {
       "title": "Valtakirja vahvistettu!",
       "text": "Kiitos – aloitamme tapauksen käsittelyn heti. Saat sähköpostia, kun tila päivittyy, ja voit seurata kaikkea seurantasilinkin kautta."
     },
-
     "errors": {
       "missingId": "Tapaus-ID:tä ei löytynyt. Palaa etusivulle ja lähetä lomake uudelleen.",
       "generic": "❌ Vaihetta ei voitu suorittaa. Yritä uudelleen."
     },
-
     "security": {
       "badge": "Turvallinen tiedostonsiirto",
       "text": "Tiedostosi tallennetaan salattuina ja niitä käytetään vain tapauksen hoitamiseen. Emme jaa niitä muille kuin lentoyhtiölle ja mahdolliselle tähän tapaukseen liittyvälle juridiselle asiamiehelle.",
       "independentTitle": "Itsenäinen toimija",
       "independentText": "FlightClaimly on itsenäinen toimija eikä ole sidoksissa mihinkään lentoyhtiöön. Toimimme aina sinun, matkustajan, toimeksiannosta."
     },
-
     "loaText": {
       "title": "Valtakirja – FlightClaimly",
       "intro": "Annan täten FlightClaimlylle oikeuden edustaa minua lentokorvausasiassa EU-asetuksen 261/2004 mukaisesti.",
@@ -996,11 +940,9 @@
       ],
       "note": "Valtakirja koskee vain tätä yksittäistä tapausta ja sen voi peruuttaa milloin tahansa kirjallisesti."
     },
-
     "loading": "Ladataan sivua…",
     "home": "Etusivulle"
   },
-
   "about": {
     "meta": {
       "title": "Tietoa FlightClaimlystä | Lentokorvaus ilman vaivaa",
@@ -1009,13 +951,11 @@
     "badge": "Tietoa meistä",
     "title": "Autamme sinua saamaan korvauksen, kun lento on mennyt pieleen",
     "intro": "FlightClaimly on EU-pohjainen palvelu, joka tekee lentoyhtiöltä vaadittavan EU261-korvauksen hakemisesta helppoa. Tavoitteena on, että saat sinulle kuuluvat rahat – ilman vaivaa, stressiä tai juridisia esteitä.",
-
     "why": {
       "title": "Miksi FlightClaimly on olemassa?",
       "p1": "Joka vuosi suuret summat lentokorvauksia jäävät matkustajilta saamatta. Moni ei jaksa, ei tunne sääntöjä tai saa kielteisen vastauksen ensimmäisellä yrittämällä ja luovuttaa.",
       "p2": "FlightClaimly luotiin tekemään prosessista mahdollisimman helppo: syötät lentosi tiedot ja lataat varauksesi – me hoidamme loput ja ajamme vaatimuksesi lentoyhtiötä vastaan."
     },
-
     "how": {
       "title": "Näin palvelu toimii",
       "steps": [
@@ -1026,7 +966,6 @@
       ],
       "note": "Kaikki hoituu digitaalisesti – nopeasti, turvallisesti ja läpinäkyvästi."
     },
-
     "model": {
       "title": "Mallimme – yksinkertainen ja läpinäkyvä",
       "p1": "Uskomme yhteen yksinkertaiseen periaatteeseen:",
@@ -1039,7 +978,6 @@
       ],
       "note": "Ei korvausta lentoyhtiöltä = ei kustannuksia FlightClaimlylle."
     },
-
     "trust": {
       "title": "Selkeys ja turvallisuus etusijalla",
       "p1": "Haluamme, että tiedät aina, missä vaiheessa tapauksesi on. Siksi voit seurata prosessia seurantasisivulla, jossa näet:",
@@ -1051,13 +989,11 @@
       ],
       "p2": "Saat myös sähköpostia, kun tila päivittyy, jotta sinun ei tarvitse jahdata asiakaspalvelua tai kirjautua turhiin portaaleihin."
     },
-
     "independent": {
       "title": "Itsenäinen ja sinun puolellasi",
       "p1": "FlightClaimly toimii täysin EU:n matkustajaoikeuksien (EU261/2004) mukaisesti ja on riippumaton lentoyhtiöistä. Ainoa tehtävämme on edustaa sinua matkustajana ja varmistaa, että sääntöjä noudatetaan käytännössä – ei vain paperilla.",
       "p2": "Me taistelemme lentoyhtiöitä ja byrokratiaa vastaan, jotta sinä voit keskittyä matkaasi, etkä pykäliin ja lomakkeisiin."
     },
-
     "footer": {
       "cta": "Onko lentosi kärsinyt häiriöstä? Tarkista, oletko oikeutettu korvaukseen – se vie vain hetken.",
       "primary": "Hae korvausta",
@@ -1080,6 +1016,349 @@
           "network": "Jotain meni pieleen. Yritä uudelleen.",
           "noResult": "Emme voineet vahvistaa lentoa, mutta voit silti lähettää tapauksen."
         }
+      }
+    }
+  },
+  "check": {
+    "itinerary": {
+      "intro": "OK, I'll just need a few flight details so I can check your eligibility.",
+      "airline": "Airline",
+      "airlinePlaceholder": "e.g. British Airways",
+      "clearAirline": "Clear airline",
+      "flightNumber": "Flight number",
+      "date": "Date of flight",
+      "continueHint": "Fill in airline, flight number and date for every segment to continue.",
+      "missedConnection": {
+        "title": "Did you miss a connecting flight?",
+        "yes": "Yes",
+        "no": "No"
+      },
+      "whatHappened": {
+        "title": "What happened?",
+        "disruption": {
+          "delayed": "My flight was delayed",
+          "cancelled": "My flight was cancelled",
+          "denied": "I was denied boarding"
+        },
+        "whichFlight": {
+          "delayed": "Which flight was delayed?",
+          "cancelled": "Which flight was cancelled?",
+          "denied": "Which flight were you denied boarding on?"
+        },
+        "destinationFallback": "your destination",
+        "arrivalQuestion": "How many hours late did you arrive at {destination}?",
+        "outcome": {
+          "gte3": "3 hours or more",
+          "lt3": "Less than 3 hours",
+          "never": "Never arrived"
+        },
+        "cancelNotice": {
+          "title": "How many days before the departure were you informed about the flight change?",
+          "lt14": "Less than 14 days",
+          "gte14": "14 days or more"
+        },
+        "volunteer": {
+          "title": "Did you volunteer to give up your seat in exchange for other benefits from the airline?",
+          "yes": "Yes",
+          "no": "No"
+        }
+      },
+      "missedConnectionHours": {
+        "title": "How long was the delay at your connection?",
+        "label": "Select delay length",
+        "placeholder": "Select delay length",
+        "neverArrived": "I never arrived",
+        "options": {
+          "0-1": "0–1 hours",
+          "1-2": "1–2 hours",
+          "2-3": "2–3 hours",
+          "3-4": "3–4 hours",
+          "4-5": "4–5 hours",
+          "5-6": "5–6 hours",
+          "6-7": "6–7 hours",
+          "7-8": "7–8 hours",
+          "8-9": "8–9 hours",
+          "9plus": "9+ hours"
+        }
+      }
+    },
+    "itineraryNotice": {
+      "before": "Please provide details for your",
+      "originalFlight": "original flight",
+      "after": "itinerary (not a rebooked or replacement flight)."
+    },
+    "thanks": {
+      "title": "Your claim has been submitted",
+      "description": "Your authority document has been successfully signed and your claim is now being prepared for submission to the airline.",
+      "claimId": "Claim ID",
+      "track": "Track your claim",
+      "emailNotice": "We have also sent the tracking link to your email address.",
+      "reassurance": "FlightClaimly will now review your case and submit it to the airline. You will be notified as soon as there are any updates."
+    },
+    "finish": {
+      "finalizing": "Finalizing your claim…",
+      "errors": {
+        "missingClaimId": "Missing claim ID.",
+        "finalizeFailed": "Something went wrong while finalizing your claim."
+      }
+    },
+    "additional": {
+      "title": "Any additional expenses?",
+      "intro1": "If your flight was delayed, you may be entitled to compensation for meals, hotel, or transport.",
+      "intro2": {
+        "before": "Upload receipts to help us ",
+        "highlight": "recover even more money",
+        "after": " for you."
+      },
+      "attachedFiles": "Attached files",
+      "totalSize": "{size} total",
+      "remove": "Remove",
+      "removeFile": "Remove file",
+      "skip": "Skip for now",
+      "tip": "Tip: uploading receipts may increase your compensation.",
+      "dropzone": {
+        "dragDrop": "Drag & drop files here",
+        "or": "or",
+        "browse": "Browse files",
+        "fileLimits": "PDF, JPG, PNG • Max {perFile} MB per file • Max {total} MB total"
+      },
+      "errors": {
+        "missingClaim": "Missing claim reference. Please go back and try again.",
+        "uploadFailed": "Upload failed. Please try again, or skip for now and we'll request documents if needed.",
+        "unsupportedFormat": "\"{file}\" is not a supported format. Please upload PDF, JPG, or PNG.",
+        "fileTooLarge": "\"{file}\" is too large. Max {max} MB per file.",
+        "totalTooLarge": "Total upload is too large. Max {max} MB in total."
+      }
+    },
+    "uploadsId": {
+      "title": "Now we need your ID or Passport. This is very important for your airline case.",
+      "privacyNotice": "Your document will only be used to process the claim and will be deleted within 30 days after the claim is finalized.",
+      "uploadPromptBefore": "Please upload your",
+      "idOrPassport": "ID or passport",
+      "attachedFiles": "Attached files",
+      "totalSize": "{size} total",
+      "remove": "Remove",
+      "removeFile": "Remove file",
+      "highWarning": "Some airlines often require identity verification before handling third-party claims. Uploading your ID now reduces delays later.",
+      "mediumWarning": "Providing ID now can help speed up processing if the airline requests verification.",
+      "dropzone": {
+        "dragDrop": "Drag & drop files here",
+        "takePhoto": "Take a photo of your ID or passport",
+        "or": "or",
+        "camera": "Use your phone camera to quickly upload your passport or ID",
+        "browse": "Browse files",
+        "uploadPhoto": "Upload or take photo",
+        "fileLimits": "PDF, JPG, PNG • Max {perFile} MB per file • Max {total} MB total"
+      },
+      "errors": {
+        "missingClaim": "Missing claim reference. Please go back and try again.",
+        "uploadFailed": "Upload failed. Please try again.",
+        "unsupportedFormat": "\"{file}\" is not a supported format. Please upload PDF, JPG, or PNG.",
+        "fileTooLarge": "\"{file}\" is too large. Max {max} MB per file.",
+        "totalTooLarge": "Total upload is too large. Max {max} MB in total."
+      }
+    },
+    "uploads": {
+      "title": "Upload documents",
+      "attachedFiles": "Attached files",
+      "totalSize": "{size} total",
+      "remove": "Remove",
+      "removeFile": "Remove file",
+      "description": {
+        "before": "Uploading your",
+        "boardingPass": "boarding pass",
+        "middle": ", booking confirmation, or receipts can help us ",
+        "faster": "process your claim faster",
+        "expenses": "If you had extra expenses (hotel, meals, transport), receipts may help us ",
+        "moreMoney": "recover even more money",
+        "after": " for you."
+      },
+      "dropzone": {
+        "dragDrop": "Drag & drop files here",
+        "takePhoto": "Take a photo of your boarding pass or receipts",
+        "or": "or",
+        "camera": "Use your phone camera to quickly upload your document",
+        "browse": "Browse files",
+        "uploadPhoto": "Upload or take photo",
+        "fileLimits": "PDF, JPG, PNG • Max {perFile} MB per file • Max {total} MB total"
+      },
+      "errors": {
+        "missingClaim": "Missing claim reference. Please go back and try again.",
+        "uploadFailed": "Upload failed. Please try again, or skip for now and we'll request documents if needed.",
+        "unsupportedFormat": "\"{file}\" is not a supported format. Please upload PDF, JPG, or PNG.",
+        "fileTooLarge": "\"{file}\" is too large. Max {max} MB per file.",
+        "totalTooLarge": "Total upload is too large. Max {max} MB in total."
+      }
+    },
+    "authorization": {
+      "claimCreationError": "Something went wrong creating the claim.",
+      "amountFallback": "up to €600",
+      "titleBefore": "Good news! It looks like you’re entitled to",
+      "titleAfterAmount": "per person under EU261.",
+      "titleSecondLine": "Sign below and receive the money you are entitled to.",
+      "signaturePlaceholder": "Click & sign here",
+      "clearSignature": "Clear signature",
+      "important": "Important",
+      "signatureGuidance": "Your signature should closely resemble the signature on your ID.",
+      "feeTitle": "Yes — no win, no fee. You only pay 20% incl. VAT if we succeed.",
+      "feeSubtitle": "The fee is deducted from your compensation.",
+      "legal": {
+        "before": "By signing, you agree to our",
+        "terms": "Terms & Conditions",
+        "and": "and",
+        "priceList": "Price List",
+        "middle": ", and you authorize us to use your signature on the",
+        "authorityDocument": "Authority Document"
+      }
+    },
+    "bookingReference": {
+      "title": "What is your booking reference?",
+      "placeholder": "e.g. DS27K3 or YLEHPW",
+      "helpTitle": "How do I find my booking reference?",
+      "helpText1": "Your booking reference (PNR) is usually found in your booking confirmation email from the airline or travel agency. It is typically 5–8 characters long (letters and numbers).",
+      "helpText2": "It can also be shown on your boarding pass or in your airline app.",
+      "examples": "Examples"
+    },
+    "passengerDetails": {
+      "title": "Your contact details",
+      "claimOwner": "Claim owner",
+      "address": "Address",
+      "addressPlaceholder": "Street and number",
+      "address2": "Address line 2",
+      "address2Placeholder": "Apartment, suite, etc.",
+      "city": "City",
+      "postalCode": "Postal code",
+      "state": "State",
+      "statePlaceholder": "State / Region",
+      "country": "Country",
+      "countryPlaceholder": "Start typing country...",
+      "clearCountry": "Clear country",
+      "phone": "Phone number",
+      "optional": "(optional)"
+    },
+    "passengers": {
+      "title": "Other passengers",
+      "info": "Passengers you traveled with may also be eligible for compensation.",
+      "travelingWithOthers": "I was traveling with others",
+      "travelingAlone": "I was traveling alone",
+      "potentialCompensation": "Potential compensation",
+      "manualReview": "Manual review",
+      "totalForOnePassenger": "Total for {count} passenger",
+      "totalForPassengers": "Total for {count} passengers",
+      "perPassenger": "Per passenger",
+      "passengerNumber": "Passenger {number}",
+      "remove": "Remove",
+      "under18": "This person is under 18",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "optional": "(optional)",
+      "addPassenger": "+ Add passenger"
+    },
+    "claimOwner": {
+      "title": "Who should receive the compensation?",
+      "subtitle": "You're just one step away from claiming your compensation",
+      "firstNameLabel": "First name",
+      "firstNamePlaceholder": "First name",
+      "firstNameHint": "Must match your ID",
+      "lastNameLabel": "Last name",
+      "lastNamePlaceholder": "Last name",
+      "lastNameHint": "Please enter all your last name exactly as it appears on your ID or passport.",
+      "emailLabel": "Email",
+      "emailSubtitle": "We'll send your claim updates and payout here",
+      "emailHint": "We’ll use your email to keep you updated about your claim.",
+      "legal": {
+        "before": "By continuing, you agree to our",
+        "terms": "Terms & Conditions",
+        "and": "and",
+        "privacy": "Privacy Policy"
+      }
+    },
+    "verify": {
+      "loading": "Checking flight status…",
+      "verifyFailed": "We couldn’t verify this flight. Please go back and check your details.",
+      "eligibleTitle": "Good news — your flight is eligible for compensation.",
+      "notEligibleTitle": "Not eligible for compensation under EU/UK 261.",
+      "notEligibleExplanation": "Your flight does not appear to be delayed by at least 3 hours on arrival. Therefore, we cannot continue with a compensation claim under EU/UK 261.",
+      "airlineFallback": "Airline",
+      "flight": "Flight",
+      "flightDetails": "Flight details",
+      "badgeEligible": "ELIGIBLE",
+      "badgeNotEligible": "NOT ELIGIBLE",
+      "potentialCompensation": "Potential compensation",
+      "compensation": "Compensation",
+      "entitled": "You're entitled to compensation under EU law",
+      "manualReview": "This case may require manual review",
+      "perPassenger": "per passenger",
+      "scheduledArrivalTime": "Scheduled arrival time",
+      "actualArrivalTime": "Actual arrival time",
+      "flightDistance": "Flight distance",
+      "totalDelay": "Total delay",
+      "confirmTitle": "Confirm your flight details",
+      "confirmYes": "Yes, this is my flight",
+      "confirmNo": "No, something is wrong",
+      "correctDetails": "Please go back and correct your flight details before continuing.",
+      "delay": {
+        "noSignificantDelay": "No significant delay detected",
+        "arrivedOneMinuteEarly": "Arrived 1 minute early",
+        "arrivedMinutesEarly": "Arrived {minutes} minutes early",
+        "arrivedOnTime": "Arrived on time",
+        "minutes": "{minutes} minutes",
+        "hours": "{hours} hours",
+        "hoursMinutes": "{hours} hours {minutes} minutes"
+      }
+    },
+    "direct": {
+      "departureDateTitle": "What was your scheduled departure date?",
+      "dateLabel": "Date",
+      "airlineTitle": "Which airline did you fly with?",
+      "airlineLabel": "Airline",
+      "airlinePlaceholder": "e.g. British Airways",
+      "clearAirline": "Clear airline",
+      "flightListTitle": "Next up, please select your flight from the list below:",
+      "scheduledTime": "Scheduled time",
+      "flightNumber": "Flight number",
+      "loadingFlights": "Loading available flights…",
+      "noFlightsFound": "No flights found for this route. You can still continue manually.",
+      "manualEnterDetails": "Enter flight details manually",
+      "manualCantFind": "I can’t find my flight",
+      "manualFlightNumberLabel": "Enter your flight number",
+      "manualFlightNumberPlaceholder": "e.g. SK2814",
+      "errors": {
+        "searchFailed": "Flight search failed",
+        "loadFailed": "We couldn't load flights. You can still continue manually."
+      }
+    },
+    "directOrLayover": {
+      "title": "Was this a direct flight?",
+      "routeTitle": "Where did you fly?",
+      "fromLabel": "Departure airport",
+      "toLabel": "Final destination",
+      "airportOrCity": "Airport or city",
+      "direct": "Direct flight",
+      "layovers": "With layovers",
+      "connectionTitle": "Where did you have a connection?",
+      "cityOrAirport": "City or airport name",
+      "airportPlaceholder": "e.g. London or LHR",
+      "removeLayover": "Remove layover",
+      "addAirport": "+ Add another airport",
+      "connectionRequired": "Add at least one connection airport to continue."
+    },
+    "layout": {
+      "progress": "Your claim progress",
+      "back": "Back",
+      "continue": "Continue",
+      "processing": "Processing...",
+      "steps": {
+        "eligibility": "Eligibility",
+        "passengerDetails": "Passenger details",
+        "documents": "Documents",
+        "finish": "Finish"
+      },
+      "footer": {
+        "help": "Help",
+        "terms": "Terms & Conditions",
+        "privacy": "Privacy"
       }
     }
   }

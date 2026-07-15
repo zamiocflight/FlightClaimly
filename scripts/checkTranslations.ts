@@ -1,15 +1,22 @@
 import fs from "fs";
 import path from "path";
 
-const en = JSON.parse(
-  fs.readFileSync(path.join(process.cwd(), "messages/en.json"), "utf8")
-);
+const locales = ["sv", "da", "de", "pl", "fi"] as const;
 
-const sv = JSON.parse(
-  fs.readFileSync(path.join(process.cwd(), "messages/sv.json"), "utf8")
-);
+function readMessages(locale: string) {
+  return JSON.parse(
+    fs.readFileSync(
+      path.join(process.cwd(), `messages/${locale}.json`),
+      "utf8"
+    )
+  );
+}
 
-function flatten(obj: any, prefix = ""): string[] {
+function flatten(obj: unknown, prefix = ""): string[] {
+  if (!obj || typeof obj !== "object" || Array.isArray(obj)) {
+    return prefix ? [prefix] : [];
+  }
+
   return Object.entries(obj).flatMap(([key, value]) => {
     const next = prefix ? `${prefix}.${key}` : key;
 
@@ -25,29 +32,34 @@ function flatten(obj: any, prefix = ""): string[] {
   });
 }
 
-const enKeys = new Set(flatten(en));
-const svKeys = new Set(flatten(sv));
+const english = readMessages("en");
+const englishKeys = new Set(flatten(english));
 
-const missingInSv = [...enKeys].filter((k) => !svKeys.has(k));
-const extraInSv = [...svKeys].filter((k) => !enKeys.has(k));
+for (const locale of locales) {
+  const messages = readMessages(locale);
+  const localeKeys = new Set(flatten(messages));
 
-console.log("\n=== Missing in sv.json ===\n");
+  const missing = [...englishKeys].filter(
+    (key) => !localeKeys.has(key)
+  );
 
-if (missingInSv.length === 0) {
-  console.log("None 🎉");
-} else {
-  missingInSv.forEach((k) => console.log(k));
+  const extra = [...localeKeys].filter(
+    (key) => !englishKeys.has(key)
+  );
+
+  console.log(`\n=== ${locale.toUpperCase()} ===`);
+  console.log(`Missing: ${missing.length}`);
+  console.log(`Extra: ${extra.length}`);
+
+  if (missing.length > 0) {
+    console.log("\nMissing keys:");
+    missing.forEach((key) => console.log(`- ${key}`));
+  }
+
+  if (extra.length > 0) {
+    console.log("\nExtra keys:");
+    extra.forEach((key) => console.log(`- ${key}`));
+  }
 }
 
-console.log("\n=== Extra in sv.json ===\n");
-
-if (extraInSv.length === 0) {
-  console.log("None 🎉");
-} else {
-  extraInSv.forEach((k) => console.log(k));
-}
-
-console.log("\n====================");
-console.log(`Missing: ${missingInSv.length}`);
-console.log(`Extra: ${extraInSv.length}`);
-console.log("====================\n");
+console.log("\nTranslation audit complete.\n");

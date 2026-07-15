@@ -6,49 +6,397 @@
     "invalidFlightNumber": "Bitte gib eine gültige Flugnummer ein (z. B. SK123)."
   },
 
-  "header": {
-    "language": {
-      "label": "DE ▾",
-      "aria": "Sprache wechseln"
+ "check": {
+  "itinerary": {
+    "intro": "Okay, ich benötige nur noch einige Flugdaten, damit ich Ihren Anspruch prüfen kann.",
+    "airline": "Fluggesellschaft",
+    "airlinePlaceholder": "z. B. British Airways",
+    "clearAirline": "Fluggesellschaft löschen",
+    "flightNumber": "Flugnummer",
+    "date": "Flugdatum",
+    "continueHint": "Geben Sie für jeden Flugabschnitt die Fluggesellschaft, die Flugnummer und das Datum ein, um fortzufahren.",
+    "missedConnection": {
+      "title": "Haben Sie einen Anschlussflug verpasst?",
+      "yes": "Ja",
+      "no": "Nein"
+    },
+    "whatHappened": {
+      "title": "Was ist passiert?",
+      "disruption": {
+        "delayed": "Mein Flug hatte Verspätung",
+        "cancelled": "Mein Flug wurde annulliert",
+        "denied": "Mir wurde die Beförderung verweigert"
+      },
+      "whichFlight": {
+        "delayed": "Welcher Flug hatte Verspätung?",
+        "cancelled": "Welcher Flug wurde annulliert?",
+        "denied": "Bei welchem Flug wurde Ihnen die Beförderung verweigert?"
+      },
+      "destinationFallback": "Ihrem Reiseziel",
+      "arrivalQuestion": "Mit wie vielen Stunden Verspätung sind Sie in {destination} angekommen?",
+      "outcome": {
+        "gte3": "3 Stunden oder mehr",
+        "lt3": "Weniger als 3 Stunden",
+        "never": "Nie angekommen"
+      },
+      "cancelNotice": {
+        "title": "Wie viele Tage vor dem Abflug wurden Sie über die Flugänderung informiert?",
+        "lt14": "Weniger als 14 Tage",
+        "gte14": "14 Tage oder mehr"
+      },
+      "volunteer": {
+        "title": "Haben Sie freiwillig auf Ihren Sitzplatz verzichtet und dafür andere Leistungen von der Fluggesellschaft erhalten?",
+        "yes": "Ja",
+        "no": "Nein"
+      }
+    },
+    "missedConnectionHours": {
+      "title": "Wie lang war die Verspätung bei Ihrem Anschluss?",
+      "label": "Verspätungsdauer auswählen",
+      "placeholder": "Verspätungsdauer auswählen",
+      "neverArrived": "Ich bin nie angekommen",
+      "options": {
+        "0-1": "0–1 Stunden",
+        "1-2": "1–2 Stunden",
+        "2-3": "2–3 Stunden",
+        "3-4": "3–4 Stunden",
+        "4-5": "4–5 Stunden",
+        "5-6": "5–6 Stunden",
+        "6-7": "6–7 Stunden",
+        "7-8": "7–8 Stunden",
+        "8-9": "8–9 Stunden",
+        "9plus": "9+ Stunden"
+      }
     }
   },
-
-  "mobileNav": {
-    "title": "Menü",
-    "openAria": "Menü öffnen",
-    "openSr": "Menü öffnen",
-    "closeAria": "Menü schließen"
+  "itineraryNotice": {
+    "before": "Bitte geben Sie die Daten für Ihren",
+    "originalFlight": "ursprünglich gebuchten Flug",
+    "after": "an (nicht für einen umgebuchten oder Ersatzflug)."
   },
-
-  "nav": {
-    "compensation": "Entschädigung erhalten",
-    "delays": "Flugverspätungen",
-    "cancellations": "Flugannullierungen",
-    "rights": "Deine Rechte",
-    "faq": "FAQ",
-    "about": "Über uns",
-    "contact": "Kontakt",
-    "track": "Vorgang verfolgen",
-    "langLabel": "Sprache"
+  "thanks": {
+    "title": "Ihr Anspruch wurde eingereicht",
+    "description": "Ihre Vollmacht wurde erfolgreich unterzeichnet und Ihr Anspruch wird nun für die Einreichung bei der Fluggesellschaft vorbereitet.",
+    "claimId": "Vorgangsnummer",
+    "track": "Anspruch verfolgen",
+    "emailNotice": "Wir haben den Tracking-Link außerdem an Ihre E-Mail-Adresse gesendet.",
+    "reassurance": "FlightClaimly prüft nun Ihren Fall und reicht ihn bei der Fluggesellschaft ein. Sie werden benachrichtigt, sobald es Neuigkeiten gibt."
   },
-
-  "track": {
-    "button": "Vorgang verfolgen",
-    "title": "Verfolge deinen Vorgang",
-    "description": "Gib die E-Mail-Adresse ein, die du beim Einreichen deines Vorgangs verwendet hast. Wenn wir einen Vorgang finden, senden wir dir einen sicheren Link, über den du den Status verfolgen kannst.",
-    "closeAria": "Schließen",
-    "emailLabel": "E-Mail-Adresse",
-    "emailPlaceholder": "deine@mail.de",
-    "cancel": "Abbrechen",
-    "resend": "Link nicht gefunden? Erneut senden",
-    "send": "Link senden",
-    "sending": "Link wird gesendet…",
-    "messages": {
-      "success": "Wenn wir einen Vorgang finden, der mit dieser E-Mail verknüpft ist, senden wir dir innerhalb weniger Minuten einen sicheren Tracking-Link.",
-      "errorGeneric": "Der Link konnte gerade nicht gesendet werden. Bitte versuche es in Kürze erneut.",
-      "errorTechnical": "Technischer Fehler – bitte versuche es in Kürze erneut."
+  "finish": {
+    "finalizing": "Ihr Anspruch wird abgeschlossen…",
+    "errors": {
+      "missingClaimId": "Die Vorgangsnummer fehlt.",
+      "finalizeFailed": "Beim Abschluss Ihres Anspruchs ist ein Fehler aufgetreten."
     }
   },
+  "additional": {
+    "title": "Sind Ihnen zusätzliche Kosten entstanden?",
+    "intro1": "Wenn Ihr Flug verspätet war, haben Sie möglicherweise Anspruch auf Erstattung von Kosten für Mahlzeiten, Hotel oder Transport.",
+    "intro2": {
+      "before": "Laden Sie Belege hoch, damit wir Ihnen helfen können, ",
+      "highlight": "noch mehr Geld zurückzuerhalten",
+      "after": "."
+    },
+    "attachedFiles": "Angehängte Dateien",
+    "totalSize": "{size} insgesamt",
+    "remove": "Entfernen",
+    "removeFile": "Datei entfernen",
+    "skip": "Vorerst überspringen",
+    "tip": "Tipp: Durch das Hochladen von Belegen kann sich Ihre Erstattung erhöhen.",
+    "dropzone": {
+      "dragDrop": "Dateien hierher ziehen und ablegen",
+      "or": "oder",
+      "browse": "Dateien auswählen",
+      "fileLimits": "PDF, JPG, PNG • Max. {perFile} MB pro Datei • Max. {total} MB insgesamt"
+    },
+    "errors": {
+      "missingClaim": "Die Anspruchsreferenz fehlt. Bitte gehen Sie zurück und versuchen Sie es erneut.",
+      "uploadFailed": "Der Upload ist fehlgeschlagen. Bitte versuchen Sie es erneut oder überspringen Sie diesen Schritt vorerst. Wir fordern die Unterlagen bei Bedarf später an.",
+      "unsupportedFormat": "\"{file}\" hat ein nicht unterstütztes Format. Bitte laden Sie eine PDF-, JPG- oder PNG-Datei hoch.",
+      "fileTooLarge": "\"{file}\" ist zu groß. Maximal {max} MB pro Datei.",
+      "totalTooLarge": "Der gesamte Upload ist zu groß. Maximal {max} MB insgesamt."
+    }
+  },
+  "uploadsId": {
+    "title": "Jetzt benötigen wir Ihren Personalausweis oder Reisepass. Dies ist für Ihren Anspruch gegenüber der Fluggesellschaft sehr wichtig.",
+    "privacyNotice": "Ihr Dokument wird ausschließlich zur Bearbeitung Ihres Anspruchs verwendet und innerhalb von 30 Tagen nach Abschluss des Falls gelöscht.",
+    "uploadPromptBefore": "Bitte laden Sie Ihren",
+    "idOrPassport": "Personalausweis oder Reisepass",
+    "attachedFiles": "Angehängte Dateien",
+    "totalSize": "{size} insgesamt",
+    "remove": "Entfernen",
+    "removeFile": "Datei entfernen",
+    "highWarning": "Einige Fluggesellschaften verlangen häufig eine Identitätsprüfung, bevor sie Ansprüche durch Dritte bearbeiten. Wenn Sie Ihren Ausweis jetzt hochladen, lassen sich spätere Verzögerungen vermeiden.",
+    "mediumWarning": "Wenn Sie Ihren Ausweis jetzt bereitstellen, kann die Bearbeitung beschleunigt werden, falls die Fluggesellschaft eine Identitätsprüfung verlangt.",
+    "dropzone": {
+      "dragDrop": "Dateien hierher ziehen und ablegen",
+      "takePhoto": "Foto Ihres Personalausweises oder Reisepasses aufnehmen",
+      "or": "oder",
+      "camera": "Verwenden Sie die Kamera Ihres Smartphones, um Ihren Reisepass oder Personalausweis schnell hochzuladen",
+      "browse": "Dateien auswählen",
+      "uploadPhoto": "Foto hochladen oder aufnehmen",
+      "fileLimits": "PDF, JPG, PNG • Max. {perFile} MB pro Datei • Max. {total} MB insgesamt"
+    },
+    "errors": {
+      "missingClaim": "Die Anspruchsreferenz fehlt. Bitte gehen Sie zurück und versuchen Sie es erneut.",
+      "uploadFailed": "Der Upload ist fehlgeschlagen. Bitte versuchen Sie es erneut.",
+      "unsupportedFormat": "\"{file}\" hat ein nicht unterstütztes Format. Bitte laden Sie eine PDF-, JPG- oder PNG-Datei hoch.",
+      "fileTooLarge": "\"{file}\" ist zu groß. Maximal {max} MB pro Datei.",
+      "totalTooLarge": "Der gesamte Upload ist zu groß. Maximal {max} MB insgesamt."
+    }
+  },
+  "uploads": {
+    "title": "Dokumente hochladen",
+    "attachedFiles": "Angehängte Dateien",
+    "totalSize": "{size} insgesamt",
+    "remove": "Entfernen",
+    "removeFile": "Datei entfernen",
+    "description": {
+      "before": "Durch das Hochladen Ihrer",
+      "boardingPass": "Bordkarte",
+      "middle": ", Buchungsbestätigung oder Belege können wir ",
+      "faster": "Ihren Anspruch schneller bearbeiten",
+      "expenses": "Wenn Ihnen zusätzliche Kosten entstanden sind (Hotel, Mahlzeiten, Transport), können Belege uns helfen, ",
+      "moreMoney": "noch mehr Geld für Sie zurückzuerhalten",
+      "after": "."
+    },
+    "dropzone": {
+      "dragDrop": "Dateien hierher ziehen und ablegen",
+      "takePhoto": "Foto Ihrer Bordkarte oder Belege aufnehmen",
+      "or": "oder",
+      "camera": "Verwenden Sie die Kamera Ihres Smartphones, um Ihr Dokument schnell hochzuladen",
+      "browse": "Dateien auswählen",
+      "uploadPhoto": "Foto hochladen oder aufnehmen",
+      "fileLimits": "PDF, JPG, PNG • Max. {perFile} MB pro Datei • Max. {total} MB insgesamt"
+    },
+    "errors": {
+      "missingClaim": "Die Anspruchsreferenz fehlt. Bitte gehen Sie zurück und versuchen Sie es erneut.",
+      "uploadFailed": "Der Upload ist fehlgeschlagen. Bitte versuchen Sie es erneut oder überspringen Sie diesen Schritt vorerst. Wir fordern die Unterlagen bei Bedarf später an.",
+      "unsupportedFormat": "\"{file}\" hat ein nicht unterstütztes Format. Bitte laden Sie eine PDF-, JPG- oder PNG-Datei hoch.",
+      "fileTooLarge": "\"{file}\" ist zu groß. Maximal {max} MB pro Datei.",
+      "totalTooLarge": "Der gesamte Upload ist zu groß. Maximal {max} MB insgesamt."
+    }
+  },
+  "authorization": {
+    "claimCreationError": "Beim Erstellen des Anspruchs ist ein Fehler aufgetreten.",
+    "amountFallback": "bis zu 600 €",
+    "titleBefore": "Gute Nachrichten! Es sieht so aus, als hätten Sie Anspruch auf",
+    "titleAfterAmount": "pro Person gemäß EU261.",
+    "titleSecondLine": "Unterschreiben Sie unten und erhalten Sie das Geld, das Ihnen zusteht.",
+    "signaturePlaceholder": "Hier klicken und unterschreiben",
+    "clearSignature": "Unterschrift löschen",
+    "important": "Wichtig",
+    "signatureGuidance": "Ihre Unterschrift sollte der Unterschrift auf Ihrem Ausweisdokument möglichst ähnlich sein.",
+    "feeTitle": "Ja — kein Erfolg, keine Gebühr. Sie zahlen nur 20 % inkl. MwSt., wenn wir erfolgreich sind.",
+    "feeSubtitle": "Die Gebühr wird von Ihrer Entschädigung abgezogen.",
+    "legal": {
+      "before": "Mit Ihrer Unterschrift stimmen Sie unseren",
+      "terms": "Allgemeinen Geschäftsbedingungen",
+      "and": "und",
+      "priceList": "Preisbedingungen",
+      "middle": "zu und ermächtigen uns, Ihre Unterschrift auf der",
+      "authorityDocument": "Vollmacht"
+    }
+  },
+  "bookingReference": {
+    "title": "Wie lautet Ihre Buchungsreferenz?",
+    "placeholder": "z. B. DS27K3 oder YLEHPW",
+    "helpTitle": "Wo finde ich meine Buchungsreferenz?",
+    "helpText1": "Ihre Buchungsreferenz (PNR) finden Sie in der Regel in der Buchungsbestätigung der Fluggesellschaft oder des Reisebüros. Sie besteht üblicherweise aus 5–8 Zeichen (Buchstaben und Zahlen).",
+    "helpText2": "Sie kann auch auf Ihrer Bordkarte oder in der App der Fluggesellschaft angezeigt werden.",
+    "examples": "Beispiele"
+  },
+  "passengerDetails": {
+    "title": "Ihre Kontaktdaten",
+    "claimOwner": "Anspruchsinhaber",
+    "address": "Adresse",
+    "addressPlaceholder": "Straße und Hausnummer",
+    "address2": "Adresszusatz",
+    "address2Placeholder": "Wohnung, Etage usw.",
+    "city": "Ort",
+    "postalCode": "Postleitzahl",
+    "state": "Bundesland/Region",
+    "statePlaceholder": "Bundesland / Region",
+    "country": "Land",
+    "countryPlaceholder": "Land eingeben...",
+    "clearCountry": "Land löschen",
+    "phone": "Telefonnummer",
+    "optional": "(optional)"
+  },
+  "passengers": {
+    "title": "Weitere Passagiere",
+    "info": "Mitreisende Passagiere können ebenfalls Anspruch auf Entschädigung haben.",
+    "travelingWithOthers": "Ich bin mit weiteren Personen gereist",
+    "travelingAlone": "Ich bin allein gereist",
+    "potentialCompensation": "Mögliche Entschädigung",
+    "manualReview": "Manuelle Prüfung",
+    "totalForOnePassenger": "Gesamtbetrag für {count} Passagier",
+    "totalForPassengers": "Gesamtbetrag für {count} Passagiere",
+    "perPassenger": "Pro Passagier",
+    "passengerNumber": "Passagier {number}",
+    "remove": "Entfernen",
+    "under18": "Diese Person ist unter 18 Jahre alt",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "optional": "(optional)",
+    "addPassenger": "+ Passagier hinzufügen"
+  },
+  "claimOwner": {
+    "title": "Wer soll die Entschädigung erhalten?",
+    "subtitle": "Sie sind nur noch einen Schritt davon entfernt, Ihre Entschädigung geltend zu machen",
+    "firstNameLabel": "Vorname",
+    "firstNamePlaceholder": "Vorname",
+    "firstNameHint": "Muss mit Ihrem Ausweisdokument übereinstimmen",
+    "lastNameLabel": "Nachname",
+    "lastNamePlaceholder": "Nachname",
+    "lastNameHint": "Bitte geben Sie alle Nachnamen genau so ein, wie sie auf Ihrem Personalausweis oder Reisepass stehen.",
+    "emailLabel": "E-Mail",
+    "emailSubtitle": "An diese Adresse senden wir Aktualisierungen zu Ihrem Anspruch und zur Auszahlung",
+    "emailHint": "Wir verwenden Ihre E-Mail-Adresse, um Sie über Ihren Anspruch auf dem Laufenden zu halten.",
+    "legal": {
+      "before": "Indem Sie fortfahren, stimmen Sie unseren",
+      "terms": "Allgemeinen Geschäftsbedingungen",
+      "and": "und",
+      "privacy": "Datenschutzbestimmungen"
+    }
+  },
+  "verify": {
+    "loading": "Flugstatus wird geprüft…",
+    "verifyFailed": "Wir konnten diesen Flug nicht überprüfen. Bitte gehen Sie zurück und prüfen Sie Ihre Angaben.",
+    "eligibleTitle": "Gute Nachrichten — für Ihren Flug besteht voraussichtlich Anspruch auf Entschädigung.",
+    "notEligibleTitle": "Kein Anspruch auf Entschädigung gemäß EU/UK 261.",
+    "notEligibleExplanation": "Ihr Flug scheint bei der Ankunft keine Verspätung von mindestens 3 Stunden gehabt zu haben. Daher können wir keinen Entschädigungsanspruch gemäß EU/UK 261 weiterverfolgen.",
+    "airlineFallback": "Fluggesellschaft",
+    "flight": "Flug",
+    "flightDetails": "Flugdaten",
+    "badgeEligible": "ANSPRUCH BERECHTIGT",
+    "badgeNotEligible": "KEIN ANSPRUCH",
+    "potentialCompensation": "Mögliche Entschädigung",
+    "compensation": "Entschädigung",
+    "entitled": "Sie haben nach EU-Recht Anspruch auf Entschädigung",
+    "manualReview": "Dieser Fall muss möglicherweise manuell geprüft werden",
+    "perPassenger": "pro Passagier",
+    "scheduledArrivalTime": "Planmäßige Ankunftszeit",
+    "actualArrivalTime": "Tatsächliche Ankunftszeit",
+    "flightDistance": "Flugstrecke",
+    "totalDelay": "Gesamtverspätung",
+    "confirmTitle": "Bestätigen Sie Ihre Flugdaten",
+    "confirmYes": "Ja, das ist mein Flug",
+    "confirmNo": "Nein, etwas stimmt nicht",
+    "correctDetails": "Bitte gehen Sie zurück und korrigieren Sie Ihre Flugdaten, bevor Sie fortfahren.",
+    "delay": {
+      "noSignificantDelay": "Keine erhebliche Verspätung festgestellt",
+      "arrivedOneMinuteEarly": "1 Minute früher angekommen",
+      "arrivedMinutesEarly": "{minutes} Minuten früher angekommen",
+      "arrivedOnTime": "Pünktlich angekommen",
+      "minutes": "{minutes} Minuten",
+      "hours": "{hours} Stunden",
+      "hoursMinutes": "{hours} Stunden {minutes} Minuten"
+    }
+  },
+  "direct": {
+    "departureDateTitle": "Wann war Ihr planmäßiges Abflugdatum?",
+    "dateLabel": "Datum",
+    "airlineTitle": "Mit welcher Fluggesellschaft sind Sie geflogen?",
+    "airlineLabel": "Fluggesellschaft",
+    "airlinePlaceholder": "z. B. British Airways",
+    "clearAirline": "Fluggesellschaft löschen",
+    "flightListTitle": "Bitte wählen Sie nun Ihren Flug aus der folgenden Liste aus:",
+    "scheduledTime": "Planmäßige Zeit",
+    "flightNumber": "Flugnummer",
+    "loadingFlights": "Verfügbare Flüge werden geladen…",
+    "noFlightsFound": "Für diese Strecke wurden keine Flüge gefunden. Sie können die Angaben trotzdem manuell eingeben.",
+    "manualEnterDetails": "Flugdaten manuell eingeben",
+    "manualCantFind": "Ich kann meinen Flug nicht finden",
+    "manualFlightNumberLabel": "Geben Sie Ihre Flugnummer ein",
+    "manualFlightNumberPlaceholder": "z. B. SK2814",
+    "errors": {
+      "searchFailed": "Die Flugsuche ist fehlgeschlagen",
+      "loadFailed": "Wir konnten die Flüge nicht laden. Sie können die Angaben trotzdem manuell eingeben."
+    }
+  },
+  "directOrLayover": {
+    "title": "War dies ein Direktflug?",
+    "routeTitle": "Welche Strecke sind Sie geflogen?",
+    "fromLabel": "Abflughafen",
+    "toLabel": "Endziel",
+    "airportOrCity": "Flughafen oder Stadt",
+    "direct": "Direktflug",
+    "layovers": "Mit Zwischenstopp",
+    "connectionTitle": "Wo hatten Sie einen Anschluss?",
+    "cityOrAirport": "Stadt- oder Flughafenname",
+    "airportPlaceholder": "z. B. London oder LHR",
+    "removeLayover": "Zwischenstopp entfernen",
+    "addAirport": "+ Weiteren Flughafen hinzufügen",
+    "connectionRequired": "Fügen Sie mindestens einen Umsteigeflughafen hinzu, um fortzufahren."
+  },
+
+  "layout": {
+    "progress": "Fortschritt Ihres Anspruchs",
+    "back": "Zurück",
+    "continue": "Weiter",
+    "processing": "Wird verarbeitet...",
+
+    "steps": {
+      "eligibility": "Anspruchsprüfung",
+      "passengerDetails": "Passagierdaten",
+      "documents": "Dokumente",
+      "finish": "Abschluss"
+    },
+    
+    "footer": {
+      "help": "Hilfe",
+      "terms": "Allgemeine Geschäftsbedingungen",
+      "privacy": "Datenschutz"
+    }
+  }
+},
+
+"header": {
+  "language": {
+    "label": "DE ▾",
+    "aria": "Sprache ändern"
+  }
+},
+
+"mobileNav": {
+  "title": "Menü",
+  "openAria": "Menü öffnen",
+  "openSr": "Menü öffnen",
+  "closeAria": "Menü schließen"
+},
+
+"nav": {
+  "compensation": "Entschädigung erhalten",
+  "delays": "Flugverspätungen",
+  "cancellations": "Flugannullierungen",
+  "rights": "Ihre Rechte",
+  "faq": "FAQ",
+  "about": "Über uns",
+  "contact": "Kontakt",
+  "track": "Anspruch verfolgen",
+  "langLabel": "Sprache"
+},
+
+"track": {
+  "button": "Anspruch verfolgen",
+  "title": "Ihren Anspruch verfolgen",
+  "description": "Geben Sie die E-Mail-Adresse ein, die Sie bei der Einreichung Ihres Anspruchs verwendet haben. Wenn wir einen passenden Vorgang finden, senden wir Ihnen einen sicheren Tracking-Link.",
+  "closeAria": "Schließen",
+  "emailLabel": "E-Mail-Adresse",
+  "emailPlaceholder": "sie@beispiel.de",
+  "cancel": "Abbrechen",
+  "resend": "Nicht erhalten? Erneut senden",
+  "send": "Link senden",
+  "sending": "Wird gesendet…",
+  "messages": {
+    "success": "Wenn wir einen Anspruch zu dieser E-Mail-Adresse finden, senden wir Ihnen innerhalb weniger Minuten einen sicheren Tracking-Link.",
+    "errorGeneric": "Der Link konnte momentan nicht gesendet werden. Bitte versuchen Sie es in Kürze erneut.",
+    "errorTechnical": "Technischer Fehler — bitte versuchen Sie es in Kürze erneut."
+  }
+},
+
 
   "sections": {
     "readMore": "Mehr lesen"
@@ -149,7 +497,14 @@
       "beforeLink": "Dauert ca. 2 Minuten. Nichts zu zahlen, wenn du keine Entschädigung erhältst –",
       "link": "mehr über unsere Gebühr erfahren.",
       "afterLink": ""
-    }
+    },
+    "titleLine1": "Get up to €600 in compensation",
+    "titleLine2": "for delayed or cancelled flights!",
+    "fromLabel": "Departure airport",
+    "fromPlaceholder": "Departure airport",
+    "toLabel": "Final destination airport",
+    "toPlaceholder": "Final destination airport",
+    "searchCta": "Check compensation"
   },
 
   "precheck": {
@@ -186,9 +541,9 @@
         "checking": "Wird geprüft…"
       },
       "result": {
-  "eligible": "Basierend auf historischen Flugdaten scheint Ihr Flug um mehr als 3 Stunden verspätet gewesen zu sein. Möglicherweise haben Sie Anspruch auf Entschädigung.",
-  "notConfirmed": "Wir konnten anhand der verfügbaren Daten keine Verspätung von über 3 Stunden bestätigen. Sie können dennoch fortfahren — die Angaben der Fluggesellschaft können abweichen."
-}
+        "eligible": "Basierend auf historischen Flugdaten scheint Ihr Flug um mehr als 3 Stunden verspätet gewesen zu sein. Möglicherweise haben Sie Anspruch auf Entschädigung.",
+        "notConfirmed": "Wir konnten anhand der verfügbaren Daten keine Verspätung von über 3 Stunden bestätigen. Sie können dennoch fortfahren — die Angaben der Fluggesellschaft können abweichen."
+      }
     },
     "details": {
       "goodNewsStrong": "Gute Nachrichten!",
@@ -651,12 +1006,10 @@
     "badge": "Datenschutz",
     "title": "Datenschutzerklärung von FlightClaimly",
     "intro": "Deine Privatsphäre ist uns wichtig. Auf dieser Seite erklären wir, welche Daten wir erheben, warum wir das tun, wie wir sie verwenden und welche Rechte du hast.",
-
     "controller": {
       "title": "Verantwortlicher",
       "body": "FlightClaimly („wir“, „uns“) ist Verantwortlicher für die Verarbeitung personenbezogener Daten im Zusammenhang mit unserem Service zur Flugentschädigung."
     },
-
     "dataCollected": {
       "title": "Welche Daten erheben wir?",
       "intro": "Wenn du unseren Service nutzt, können wir folgende Arten personenbezogener Daten verarbeiten:",
@@ -669,7 +1022,6 @@
         "Technische Informationen (IP-Adresse, Gerät, Browser), soweit für Sicherheit und Betrieb erforderlich"
       ]
     },
-
     "purpose": {
       "title": "Warum verarbeiten wir deine Daten?",
       "intro": "Wir verarbeiten deine personenbezogenen Daten, um:",
@@ -682,7 +1034,6 @@
         "unseren Service zu verbessern und abzusichern"
       ]
     },
-
     "legalBasis": {
       "title": "Rechtsgrundlage der Verarbeitung",
       "intro": "Die Verarbeitung deiner personenbezogenen Daten basiert hauptsächlich auf:",
@@ -692,7 +1043,6 @@
         "<strong>Berechtigtem Interesse</strong> – Sicherheit und Betrieb"
       ]
     },
-
     "retention": {
       "title": "Wie lange speichern wir deine Daten?",
       "intro": "Wir speichern deine Daten so lange, wie es erforderlich ist, um:",
@@ -703,7 +1053,6 @@
       ],
       "note": "Wenn die Daten nicht mehr benötigt werden, löschen oder anonymisieren wir sie sicher."
     },
-
     "sharing": {
       "title": "Mit wem teilen wir deine Daten?",
       "intro": "Wir teilen deine Daten nur mit Parteien, die für die Bereitstellung des Services erforderlich sind:",
@@ -714,7 +1063,6 @@
       ],
       "note": "Wir verkaufen deine personenbezogenen Daten nicht an Dritte."
     },
-
     "rights": {
       "title": "Deine Rechte",
       "intro": "Als betroffene Person hast du das Recht,",
@@ -727,22 +1075,18 @@
       ],
       "contactBefore": "Möchtest du eines dieser Rechte ausüben? Kontaktiere uns über"
     },
-
     "complaints": {
       "title": "Beschwerden",
       "body": "Wenn du der Ansicht bist, dass wir deine Daten entgegen den geltenden Regeln verarbeiten, kannst du bei der zuständigen Datenschutzbehörde Beschwerde einreichen."
     },
-
     "changes": {
       "title": "Änderungen dieser Erklärung",
       "body": "Wir können diese Datenschutzerklärung bei Bedarf aktualisieren. Die neueste Version ist immer hier veröffentlicht."
     },
-
     "footer": {
       "before": "Hast du Fragen dazu, wie wir deine personenbezogenen Daten verarbeiten? Schreib uns an"
     }
   },
-
   "rights": {
     "meta": {
       "title": "EU261 – deine Rechte als Fluggast | FlightClaimly",
@@ -751,7 +1095,6 @@
     "badge": "Deine Rechte",
     "title": "Deine Rechte als Fluggast nach EU261",
     "intro": "Die EU-Verordnung 261/2004 („EU261“) gibt dir als Fluggast starke Rechte bei verspäteten, annullierten oder überbuchten Flügen. Hier erklären wir die Grundlagen – und wie FlightClaimly dir helfen kann, die Entschädigung zu erhalten, auf die du Anspruch hast.",
-
     "whenApplies": {
       "title": "Wann gilt EU261?",
       "intro": "EU261 gilt in folgenden Situationen:",
@@ -762,7 +1105,6 @@
       ],
       "note": "Auch bestimmte Anschlussflüge und Reisen mit Zwischenstopps können erfasst sein – je nachdem, wie das Ticket gebucht wurde. Dabei helfen wir dir."
     },
-
     "covered": {
       "title": "Welche Situationen sind erfasst?",
       "lead": "Du kannst Anspruch auf Entschädigung haben, wenn:",
@@ -773,7 +1115,6 @@
       ],
       "after": "Neben der finanziellen Entschädigung kannst du – je nach Dauer und Reiselänge – Anspruch auf Verpflegung, Hotel und Umbuchung haben."
     },
-
     "amounts": {
       "title": "Wie viel kannst du erhalten?",
       "intro": "Die Entschädigung hängt vor allem von der Flugstrecke ab und davon, wie stark deine Reise beeinträchtigt wurde. Übliche Pauschalbeträge nach EU261 sind:",
@@ -784,7 +1125,6 @@
       ],
       "note": "Der genaue Betrag kann je nach Route, Länge der Verspätung und angebotener Umbuchung variieren. FlightClaimly hilft dir, die richtige Stufe für deine Reise zu ermitteln."
     },
-
     "exceptions": {
       "title": "Wann hast du keinen Anspruch auf Entschädigung?",
       "intro": "Die Fluggesellschaft kann von der Zahlung befreit sein, wenn die Verspätung oder Annullierung auf sogenannte „außergewöhnliche Umstände“ zurückzuführen ist, z. B.:",
@@ -797,7 +1137,6 @@
       "afterStrong": "nicht",
       "afterTail": " als außergewöhnliche Umstände. Viele Ablehnungen der Airlines sind falsch – dabei helfen wir dir, Widerspruch einzulegen."
     },
-
     "save": {
       "title": "Was solltest du aufbewahren?",
       "intro": "Um einen Vorgang zu bearbeiten, ist es gut, wenn du Folgendes hast:",
@@ -809,7 +1148,6 @@
       ],
       "note": "Du kannst alles direkt beim Erstellen eines Vorgangs bei uns hochladen – wir helfen dir beim Sortieren."
     },
-
     "links": {
       "title": "Möchtest du mehr über bestimmte Situationen erfahren?",
       "lead": "Lies mehr über:",
@@ -820,13 +1158,11 @@
       "faqText": "Häufige Fragen",
       "faqAfter": " – kurze Antworten auf das, was die meisten wissen möchten."
     },
-
     "footer": {
       "lead": "Glaubst du, dass dein Flug unter EU261 fällt? Prüfe sofort, ob du Anspruch auf Entschädigung hast – das dauert nur eine Minute.",
       "cta": "Prüfen, ob ich Anspruch habe"
     }
   },
-
   "terms": {
     "meta": {
       "title": "Nutzungsbedingungen | FlightClaimly",
@@ -835,14 +1171,12 @@
     "badge": "Bedingungen",
     "title": "Nutzungsbedingungen für FlightClaimly",
     "intro": "Diese Bedingungen beschreiben, wie FlightClaimly funktioniert und welche Rechte und Pflichten gelten, wenn du unseren Service zur Durchsetzung von Flugentschädigungsansprüchen nutzt.",
-
     "sections": {
       "service": {
         "title": "1. Über den Service",
         "text": "FlightClaimly ist ein Service, der Fluggästen hilft, Ansprüche auf Entschädigung nach EU261 und ähnlichen Regelwerken zu prüfen und durchzusetzen. Wir handeln als Bevollmächtigter in deinem Namen gegenüber der Fluggesellschaft.",
         "note": "Durch das Einreichen eines Vorgangs über unsere Website stimmst du diesen Bedingungen zu."
       },
-
       "usage": {
         "title": "2. Deine Nutzung des Services",
         "intro": "Du verpflichtest dich:",
@@ -853,13 +1187,11 @@
         ],
         "note": "Wir behalten uns das Recht vor, die Bearbeitung eines Vorgangs zu beenden, wenn wir die Angaben als falsch einschätzen oder die Voraussetzungen für einen Anspruch nicht vorliegen."
       },
-
       "power": {
         "title": "3. Vertretung und Vollmacht",
         "text": "Um deinen Anspruch durchzusetzen, müssen wir gelegentlich in deinem Namen gegenüber der Fluggesellschaft handeln. Durch die Nutzung des Services stimmst du zu, dass wir die Fluggesellschaft in deinem Namen kontaktieren und deine Interessen im Rahmen des Vorgangs vertreten.",
         "note": "In bestimmten Fällen bitten wir dich, eine separate Vollmacht oder einen gesonderten Auftrag zu unterzeichnen – etwa, wenn der Vorgang eskaliert werden muss."
       },
-
       "fees": {
         "title": "4. Gebühren und Vergütung",
         "lead": "FlightClaimly arbeitet nach dem Prinzip",
@@ -871,7 +1203,6 @@
         ],
         "note": "Der genaue Prozentsatz und etwaige weitere Bedingungen werden dir klar angezeigt, bevor du zustimmst, dass wir deinen Vorgang bearbeiten."
       },
-
       "payout": {
         "title": "5. Auszahlung an dich",
         "intro": "Wenn die Fluggesellschaft die Entschädigung gezahlt hat, kann die Auszahlung entweder erfolgen:",
@@ -881,44 +1212,36 @@
         ],
         "note": "Wir bemühen uns, Auszahlungen so schnell wie möglich vorzunehmen, nachdem die Entschädigung eingegangen und zugeordnet wurde."
       },
-
       "liability": {
         "title": "6. Haftung und Beschränkungen",
         "text1": "Wir können nicht garantieren, dass ein Anspruch zu einer Entschädigung führt. Die Bewertung erfolgt stets anhand der verfügbaren Informationen und des geltenden Regelwerks.",
         "text2": "FlightClaimly haftet nicht für indirekte Schäden, wie entgangenen Gewinn oder Folgekosten. Unsere Haftung ist in der Regel auf die Gebühr beschränkt, die du für den Service bezahlt hast."
       },
-
       "privacy": {
         "title": "7. Personenbezogene Daten und Datenschutz",
         "text": "Wir verarbeiten personenbezogene Daten gemäß den geltenden Datenschutzgesetzen. Weitere Informationen findest du in unserer",
         "link": "Datenschutzerklärung"
       },
-
       "changes": {
         "title": "8. Änderungen der Bedingungen",
         "text": "Wir können diese Bedingungen bei Bedarf aktualisieren. Die neueste Version ist immer auf unserer Website verfügbar."
       },
-
       "contact": {
         "title": "9. Kontakt",
         "text": "Wenn du Fragen zu diesen Bedingungen hast, kontaktiere uns unter"
       }
     },
-
     "footer": "Durch die Nutzung von FlightClaimly bestätigst du, dass du diese Bedingungen gelesen und verstanden hast."
   },
-
   "thanks": {
     "brandTagline": "Wir treiben deinen Anspruch gegen die Airline voran – du musst dich nicht ärgern.",
     "backHome": "← Zur Startseite",
-
     "header": {
       "badge": "FLIGHTCLAIMLY • DEIN VORGANG IST REGISTRIERT",
       "title": "Danke! Wir haben deinen Vorgang erhalten.",
       "claimId": "Vorgangs-ID",
       "intro": "Als nächstes bestätigst du die Vollmacht und lädst hier auf der Seite Unterlagen hoch. Sobald das erledigt ist, beginnen wir sofort mit der Bearbeitung und kontaktieren die Airline in deinem Namen."
     },
-
     "precheck": {
       "badge": "Vorläufige Einschätzung",
       "eligibleTitle": "Gute Nachrichten – es sieht so aus, als hättest du Anspruch auf Entschädigung.",
@@ -928,7 +1251,6 @@
       "unclearFallback": "Bitte reiche Unterlagen ein, dann prüfen wir deinen Vorgang manuell.",
       "amountPrefix": "Indikation:"
     },
-
     "upload": {
       "title": "Unterlagen hochladen",
       "intro": "Die Vollmacht gibt uns das Recht, den Vorgang gegenüber der Airline zu bearbeiten. Lade gern auch Boardingpass, Buchungsbestätigung und Belege hoch, falls dir Zusatzkosten entstanden sind.",
@@ -939,7 +1261,6 @@
         "Belege für Zusatzkosten (falls vorhanden)"
       ]
     },
-
     "loa": {
       "title": "Digitale Vollmacht (LoA)",
       "description": "Indem du deinen Namen eingibst und das Kästchen ankreuzt, erteilst du FlightClaimly eine Vollmacht, dich gegenüber der Airline in diesem Vorgang zu vertreten.",
@@ -949,37 +1270,31 @@
       "consent": "Ich erteile FlightClaimly eine Vollmacht (Letter of Authorization), mich gegenüber der Airline in diesem Vorgang zu vertreten.",
       "error": "Bitte gib deinen Namen ein und setze das Häkchen, damit die Vollmacht gültig ist."
     },
-
     "attachments": {
       "title": "Weitere Anhänge (optional)",
       "description": "Lade gern Boardingpass, Buchungsbestätigung und Belege hoch. Du kannst mehrere Dateien gleichzeitig hochladen.",
       "choose": "Dateien auswählen",
       "types": "PDF, JPG, PNG, HEIC. Maximal einige Dateien pro Upload."
     },
-
     "actions": {
       "submit": "Vollmacht bestätigen und hochladen",
       "submitting": "Wird verarbeitet…",
       "later": "Du kannst später jederzeit weitere Anhänge ergänzen, indem du uns kontaktierst, falls nötig."
     },
-
     "success": {
       "title": "Vollmacht bestätigt!",
       "text": "Danke – wir beginnen sofort mit der Bearbeitung deines Vorgangs. Du erhältst E-Mails bei Status-Updates und kannst alles über deinen Tracking-Link verfolgen."
     },
-
     "errors": {
       "missingId": "Wir konnten deine Vorgangs-ID nicht finden. Geh zurück zur Startseite und sende das Formular erneut ab.",
       "generic": "❌ Schritt konnte nicht abgeschlossen werden. Bitte versuche es erneut."
     },
-
     "security": {
       "badge": "Sicherer Dateitransfer",
       "text": "Deine Dateien werden verschlüsselt gespeichert und ausschließlich zur Bearbeitung deines Vorgangs verwendet. Wir geben sie an niemanden weiter, außer an die Airline und ggf. an einen juristischen Vertreter, der mit genau diesem Vorgang befasst ist.",
       "independentTitle": "Unabhängiger Anbieter",
       "independentText": "FlightClaimly ist ein unabhängiger Anbieter und nicht mit einer Fluggesellschaft verbunden. Wir handeln immer im Auftrag von dir als Reisendem."
     },
-
     "loaText": {
       "title": "Vollmacht – FlightClaimly",
       "intro": "Hiermit erteile ich FlightClaimly die Vollmacht, mich in einem Anspruch auf Flugentschädigung gemäß der EU-Verordnung 261/2004 zu vertreten.",
@@ -991,11 +1306,9 @@
       ],
       "note": "Die Vollmacht gilt nur für diesen konkreten Vorgang und kann jederzeit schriftlich widerrufen werden."
     },
-
     "loading": "Seite wird geladen…",
     "home": "Zur Startseite"
   },
-
   "about": {
     "meta": {
       "title": "Über FlightClaimly | Flugentschädigung ohne Stress",
@@ -1004,13 +1317,11 @@
     "badge": "Über uns",
     "title": "Wir helfen dir, Entschädigung zu erhalten, wenn dein Flug Probleme macht",
     "intro": "FlightClaimly ist ein EU-basierter Service, der es einfach macht, Entschädigung von Fluggesellschaften nach EU261 zu verlangen. Das Ziel: Du erhältst das Geld, auf das du Anspruch hast – ohne Stress, ohne Aufwand und ohne juristische Hürden.",
-
     "why": {
       "title": "Warum gibt es FlightClaimly?",
       "p1": "Jedes Jahr gehen große Summen an Flugentschädigungen verloren, weil Passagiere nicht wissen, wie die Regeln funktionieren, aufgeben oder beim ersten „Nein“ aufhören.",
       "p2": "FlightClaimly wurde geschaffen, um den Prozess so einfach wie möglich zu machen: Du gibst deinen Flug ein, lädst deine Buchung hoch – wir kümmern uns um den Rest und treiben den Anspruch gegenüber der Airline für dich voran."
     },
-
     "how": {
       "title": "So funktioniert der Service",
       "steps": [
@@ -1021,7 +1332,6 @@
       ],
       "note": "Alles läuft digital – schnell, sicher und transparent."
     },
-
     "model": {
       "title": "Unser Modell – einfach und transparent",
       "p1": "Wir glauben an ein einfaches Prinzip:",
@@ -1034,7 +1344,6 @@
       ],
       "note": "Keine Entschädigung von der Airline = keine Kosten für dich."
     },
-
     "trust": {
       "title": "Fokus auf Klarheit und Sicherheit",
       "p1": "Wir möchten, dass du jederzeit weißt, wo dein Vorgang steht. Deshalb kannst du den Prozess über unsere Tracking-Seite verfolgen, wo du siehst:",
@@ -1046,19 +1355,16 @@
       ],
       "p2": "Du erhältst außerdem eine E-Mail, wenn sich der Status ändert – so musst du nicht ständig nachfragen oder dich in unnötige Portale einloggen."
     },
-
     "independent": {
       "title": "Unabhängig und auf deiner Seite",
       "p1": "FlightClaimly arbeitet strikt nach den EU-Passagierrechten (EU261/2004) und ist unabhängig von Fluggesellschaften. Unser einziger Auftrag ist, dich als Passagier zu vertreten und dafür zu sorgen, dass die Regeln auch in der Praxis gelten – nicht nur auf dem Papier.",
       "p2": "Wir übernehmen den Ärger mit Airlines und Bürokratie, damit du dich auf deine Reise konzentrieren kannst – nicht auf Paragraphen und Formulare."
     },
-
     "footer": {
       "cta": "Hatte dein Flug Probleme? Prüfe, ob du Anspruch auf Entschädigung hast – das dauert nur eine Minute.",
       "primary": "Entschädigung erhalten",
       "secondary": "Kontakt & Kooperationen"
     },
-
     "email": {
       "footer": {
         "disclaimer": {
@@ -1079,4 +1385,5 @@
       }
     }
   }
+  
 }
