@@ -397,7 +397,6 @@
   }
 },
 
-
   "sections": {
     "readMore": "Mehr lesen"
   },
@@ -498,13 +497,13 @@
       "link": "mehr über unsere Gebühr erfahren.",
       "afterLink": ""
     },
-    "titleLine1": "Get up to €600 in compensation",
-    "titleLine2": "for delayed or cancelled flights!",
-    "fromLabel": "Departure airport",
-    "fromPlaceholder": "Departure airport",
-    "toLabel": "Final destination airport",
-    "toPlaceholder": "Final destination airport",
-    "searchCta": "Check compensation"
+  "titleLine1": "Erhalte bis zu 600 € Entschädigung",
+"titleLine2": "für verspätete oder annullierte Flüge!",
+"fromLabel": "Abflughafen",
+"fromPlaceholder": "Abflughafen",
+"toLabel": "Zielflughafen",
+"toPlaceholder": "Zielflughafen",
+"searchCta": "Entschädigung prüfen"
   },
 
   "precheck": {

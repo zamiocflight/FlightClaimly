@@ -1,8 +1,8 @@
 "use client";
 
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState, useRef } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Combobox } from "@headlessui/react";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
@@ -21,6 +21,7 @@ const COUNTRIES: Country[] = [
   { code: "DK", nameEn: "Denmark", nameLocal: "Danmark" },
   { code: "NO", nameEn: "Norway", nameLocal: "Norge" },
   { code: "FI", nameEn: "Finland", nameLocal: "Suomi" },
+  { code: "PL", nameEn: "Poland", nameLocal: "Polska" },
   { code: "DE", nameEn: "Germany", nameLocal: "Deutschland" },
   { code: "FR", nameEn: "France", nameLocal: "France" },
   { code: "ES", nameEn: "Spain", nameLocal: "España" },
@@ -31,9 +32,9 @@ const COUNTRIES: Country[] = [
 
 export default function PassengerDetailsPage() {
   const t = useTranslations("check.passengerDetails");
+  const locale = useLocale();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const pathname = usePathname();
 
   // Pre-fill name from previous step
   const firstName = searchParams.get("firstName") || "";
@@ -52,15 +53,29 @@ const postalRef = useRef<HTMLInputElement>(null);
 const countryRef = useRef<HTMLInputElement>(null);
 const phoneRef = useRef<HTMLInputElement>(null);
 
-  // Country combobox
-  const locale = pathname.split("/")[1]; // ex: "sv", "da"
-  const defaultCountry = useMemo<Country>(() => {
-    if (locale === "sv") return COUNTRIES.find((c) => c.code === "SE")!;
-    if (locale === "da") return COUNTRIES.find((c) => c.code === "DK")!;
-    if (locale === "no") return COUNTRIES.find((c) => c.code === "NO")!;
-    if (locale === "fi") return COUNTRIES.find((c) => c.code === "FI")!;
-    return COUNTRIES.find((c) => c.code === "SE")!;
-  }, [locale]);
+// Country combobox
+const localeToCountryCode: Record<string, string> = {
+  sv: "SE",
+  da: "DK",
+  no: "NO",
+  fi: "FI",
+  de: "DE",
+  fr: "FR",
+  es: "ES",
+  it: "IT",
+  nl: "NL",
+  pl: "PL",
+  en: "GB",
+};
+
+const defaultCountryCode = localeToCountryCode[locale] ?? "GB";
+
+const defaultCountry = useMemo<Country>(() => {
+  return (
+    COUNTRIES.find((country) => country.code === defaultCountryCode) ??
+    COUNTRIES.find((country) => country.code === "GB")!
+  );
+}, [defaultCountryCode]);
 
   const [countryQuery, setCountryQuery] = useState("");
   const [country, setCountry] = useState<Country | null>(defaultCountry);
@@ -274,19 +289,23 @@ className="w-full h-[56px] md:h-[52px] rounded-lg border border-black/10 bg-whit
 
 {/* Phone */}
 <div className="relative z-30">
-  <label className="block text-sm font-semibold text-sky-900">{t("phone")}</label>
+  <label className="block text-sm font-semibold text-sky-900">
+    {t("phone")}
+  </label>
 
   <div className="relative z-[60] mt-1 w-full md:w-2/3">
     <PhoneInput
-  key={country?.code || "SE"}
+      key={country?.code || defaultCountryCode}
       inputRef={phoneRef}
-      defaultCountry={(country?.code || "SE").toLowerCase() as any}
+      defaultCountry={(
+        country?.code || defaultCountryCode
+      ).toLowerCase() as any}
       value={phone}
       onChange={(value) => setPhone(value)}
       forceDialCode
       disableDialCodePrefill={false}
       className="!w-full"
-inputClassName="!w-full !h-[56px] md:!h-[52px] !text-[16px] !text-slate-900"
+      inputClassName="!w-full !h-[56px] md:!h-[52px] !text-[16px] !text-slate-900"
     />
   </div>
 </div>

@@ -1,50 +1,402 @@
 {
   "errors": {
-    "sendFailed": "Lähetys epäonnistui, yritä uudelleen.",
-    "noClaimId": "Vastauksessa ei ole tapaus-ID:tä.",
+    "sendFailed": "Lähetys epäonnistui juuri nyt — yritä uudelleen.",
+    "noClaimId": "Palvelin ei palauttanut korvausvaatimuksen tunnusta.",
     "network": "Verkkovirhe. Yritä uudelleen.",
-    "invalidFlightNumber": "Anna kelvollinen lentonumero (esim. SK123)."
+    "invalidFlightNumber": "Anna kelvollinen lennon numero (esim. SK123)."
   },
-  "header": {
-    "language": {
-      "label": "FI ▾",
-      "aria": "Vaihda kieltä"
-    }
+
+  "check": {
+    "itinerary": {
+      "intro": "Hyvä, tarvitsen vain muutamat lentotiedot tarkistaakseni, oletko oikeutettu korvaukseen.",
+      "airline": "Lentoyhtiö",
+      "airlinePlaceholder": "esim. British Airways",
+      "clearAirline": "Tyhjennä lentoyhtiö",
+      "flightNumber": "Lennon numero",
+      "date": "Lennon päivämäärä",
+      "continueHint": "Täytä lentoyhtiö, lennon numero ja päivämäärä jokaiselle lentosegmentille jatkaaksesi.",
+      "missedConnection": {
+        "title": "Myöhästyitkö jatkolennolta?",
+        "yes": "Kyllä",
+        "no": "Ei"
+      },
+      "whatHappened": {
+        "title": "Mitä tapahtui?",
+        "disruption": {
+          "delayed": "Lentoni myöhästyi",
+          "cancelled": "Lentoni peruttiin",
+          "denied": "Minulta evättiin pääsy lennolle"
+        },
+        "whichFlight": {
+          "delayed": "Mikä lento myöhästyi?",
+          "cancelled": "Mikä lento peruttiin?",
+          "denied": "Mille lennolle sinulta evättiin pääsy?"
+        },
+        "destinationFallback": "määränpäähäsi",
+        "arrivalQuestion": "Kuinka monta tuntia myöhässä saavuit kohteeseen {destination}?",
+        "outcome": {
+          "gte3": "3 tuntia tai enemmän",
+          "lt3": "Alle 3 tuntia",
+          "never": "En koskaan saapunut"
+        },
+        "cancelNotice": {
+          "title": "Kuinka monta päivää ennen lähtöä sinulle ilmoitettiin lennon muutoksesta?",
+          "lt14": "Alle 14 päivää",
+          "gte14": "14 päivää tai enemmän"
+        },
+        "volunteer": {
+          "title": "Luovuitko vapaaehtoisesti paikastasi saadaksesi lentoyhtiöltä muita etuja?",
+          "yes": "Kyllä",
+          "no": "Ei"
+        }
+      },
+      "missedConnectionHours": {
+        "title": "Kuinka pitkä viivästys jatkoyhteydessäsi oli?",
+        "label": "Valitse viivästyksen pituus",
+        "placeholder": "Valitse viivästyksen pituus",
+        "neverArrived": "En koskaan saapunut",
+        "options": {
+          "0-1": "0–1 tuntia",
+          "1-2": "1–2 tuntia",
+          "2-3": "2–3 tuntia",
+          "3-4": "3–4 tuntia",
+          "4-5": "4–5 tuntia",
+          "5-6": "5–6 tuntia",
+          "6-7": "6–7 tuntia",
+          "7-8": "7–8 tuntia",
+          "8-9": "8–9 tuntia",
+          "9plus": "9+ tuntia"
+        }
+      }
+    },
+    "itineraryNotice": {
+      "before": "Anna tiedot",
+      "originalFlight": "alkuperäisestä lennostasi",
+      "after": "(ei uudelleenvaratusta tai korvaavasta lennosta)."
+    },
+    "thanks": {
+      "title": "Korvausvaatimuksesi on lähetetty",
+      "description": "Valtuutusasiakirjasi on allekirjoitettu onnistuneesti, ja korvausvaatimustasi valmistellaan nyt lähetettäväksi lentoyhtiölle.",
+      "claimId": "Korvausvaatimuksen tunnus",
+      "track": "Seuraa korvausvaatimustasi",
+      "emailNotice": "Olemme lähettäneet seurantalinkin myös sähköpostiisi.",
+      "reassurance": "FlightClaimly tarkistaa nyt tapauksesi ja toimittaa korvausvaatimuksen lentoyhtiölle. Saat ilmoituksen heti, kun asiassa tapahtuu päivityksiä."
+    },
+    "finish": {
+      "finalizing": "Viimeistellään korvausvaatimustasi…",
+      "errors": {
+        "missingClaimId": "Korvausvaatimuksen tunnus puuttuu.",
+        "finalizeFailed": "Jotain meni pieleen korvausvaatimuksesi viimeistelyssä."
+      }
+    },
+"additional": {
+  "title": "Onko sinulle aiheutunut lisäkuluja?",
+  "intro1": "Jos lentosi viivästyi, sinulla voi olla oikeus korvaukseen aterioista, hotellista tai kuljetuksesta.",
+  "intro2": {
+    "before": "Lataa kuitit, jotta voimme ",
+    "highlight": "periä sinulle vielä enemmän korvauksia",
+    "after": "."
   },
-  "mobileNav": {
-    "title": "Valikko",
-    "openAria": "Avaa valikko",
-    "openSr": "Avaa valikko",
-    "closeAria": "Sulje valikko"
+  "attachedFiles": "Liitetyt tiedostot",
+  "totalSize": "{size} yhteensä",
+  "remove": "Poista",
+  "removeFile": "Poista tiedosto",
+  "skip": "Ohita toistaiseksi",
+  "tip": "Vinkki: kuittien lataaminen voi kasvattaa korvaussummaasi.",
+  "dropzone": {
+    "dragDrop": "Vedä ja pudota tiedostot tähän",
+    "or": "tai",
+    "browse": "Selaa tiedostoja",
+    "fileLimits": "PDF, JPG, PNG • Enintään {perFile} Mt per tiedosto • Enintään {total} Mt yhteensä"
   },
-  "nav": {
-    "compensation": "Hae korvausta",
-    "delays": "Lentojen viivästykset",
-    "cancellations": "Lentojen peruutukset",
-    "rights": "Oikeutesi",
-    "faq": "UKK",
-    "about": "Tietoa meistä",
-    "contact": "Yhteystiedot",
-    "track": "Seuraa tapausta",
-    "langLabel": "Kieli"
+  "errors": {
+    "missingClaim": "Korvausvaatimuksen viite puuttuu. Palaa takaisin ja yritä uudelleen.",
+    "uploadFailed": "Lataus epäonnistui. Yritä uudelleen tai ohita toistaiseksi – pyydämme asiakirjat tarvittaessa myöhemmin.",
+    "unsupportedFormat": "\"{file}\" ei ole tuettu tiedostomuoto. Lataa PDF-, JPG- tai PNG-tiedosto.",
+    "fileTooLarge": "\"{file}\" on liian suuri. Enimmäiskoko on {max} Mt per tiedosto.",
+    "totalTooLarge": "Ladattujen tiedostojen yhteiskoko on liian suuri. Enimmäiskoko on {max} Mt."
+  }
+},
+"uploadsId": {
+  "title": "Tarvitsemme nyt henkilökorttisi tai passisi. Tämä on erittäin tärkeää lentoyhtiökäsittelyä varten.",
+  "privacyNotice": "Asiakirjaasi käytetään vain korvausvaatimuksesi käsittelyyn, ja se poistetaan 30 päivän kuluessa asian loppuun saattamisesta.",
+  "uploadPromptBefore": "Lataa",
+  "idOrPassport": "henkilökorttisi tai passisi",
+  "attachedFiles": "Liitetyt tiedostot",
+  "totalSize": "{size} yhteensä",
+  "remove": "Poista",
+  "removeFile": "Poista tiedosto",
+  "highWarning": "Jotkin lentoyhtiöt vaativat usein henkilöllisyyden vahvistamisen ennen kolmannen osapuolen korvausvaatimusten käsittelyä. Henkilöllisyystodistuksen lataaminen nyt vähentää myöhempiä viivästyksiä.",
+  "mediumWarning": "Henkilöllisyystodistuksen lataaminen nyt voi nopeuttaa käsittelyä, jos lentoyhtiö pyytää henkilöllisyyden vahvistamista.",
+  "dropzone": {
+    "dragDrop": "Vedä ja pudota tiedostot tähän",
+    "takePhoto": "Ota kuva henkilökortistasi tai passistasi",
+    "or": "tai",
+    "camera": "Käytä puhelimesi kameraa ladataksesi passisi tai henkilökorttisi nopeasti",
+    "browse": "Selaa tiedostoja",
+    "uploadPhoto": "Lataa tai ota kuva",
+    "fileLimits": "PDF, JPG, PNG • Enintään {perFile} Mt per tiedosto • Enintään {total} Mt yhteensä"
   },
-  "track": {
-    "button": "Seuraa tapausta",
-    "title": "Seuraa tapaustasi",
-    "description": "Syötä sähköpostiosoite, jota käytit lähettäessäsi tapauksen. Jos löydämme tapauksen, lähetämme sinulle suojatun linkin, jolla voit seurata tilaa.",
-    "closeAria": "Sulje",
-    "emailLabel": "Sähköpostiosoite",
-    "emailPlaceholder": "sinun@mail.fi",
-    "cancel": "Peruuta",
-    "resend": "Etkö löytänyt linkkiä? Lähetä uudelleen",
-    "send": "Lähetä linkki",
-    "sending": "Lähetetään linkkiä…",
-    "messages": {
-      "success": "Jos löydämme tähän sähköpostiin liittyvän tapauksen, lähetämme suojatun seurantasilinkin muutaman minuutin kuluessa.",
-      "errorGeneric": "Linkkiä ei voitu lähettää juuri nyt. Yritä hetken kuluttua uudelleen.",
-      "errorTechnical": "Tekninen virhe – yritä hetken kuluttua uudelleen."
-    }
+  "errors": {
+    "missingClaim": "Korvausvaatimuksen viite puuttuu. Palaa takaisin ja yritä uudelleen.",
+    "uploadFailed": "Lataus epäonnistui. Yritä uudelleen.",
+    "unsupportedFormat": "\"{file}\" ei ole tuettu tiedostomuoto. Lataa PDF-, JPG- tai PNG-tiedosto.",
+    "fileTooLarge": "\"{file}\" on liian suuri. Enimmäiskoko on {max} Mt per tiedosto.",
+    "totalTooLarge": "Ladattujen tiedostojen yhteiskoko on liian suuri. Enimmäiskoko on {max} Mt."
+  }
+},
+"uploads": {
+  "title": "Lataa asiakirjat",
+  "attachedFiles": "Liitetyt tiedostot",
+  "totalSize": "{size} yhteensä",
+  "remove": "Poista",
+  "removeFile": "Poista tiedosto",
+  "description": {
+    "before": "Lataamalla",
+    "boardingPass": "boardingpassisi",
+    "middle": ", varausvahvistuksesi tai kuittisi voimme ",
+    "faster": "käsitellä korvausvaatimuksesi nopeammin",
+    "expenses": "Jos sinulle aiheutui lisäkuluja (hotelli, ateriat, kuljetus), kuitit voivat auttaa meitä ",
+    "moreMoney": "saamaan sinulle vielä enemmän korvauksia",
+    "after": "."
   },
+  "dropzone": {
+    "dragDrop": "Vedä ja pudota tiedostot tähän",
+    "takePhoto": "Ota kuva boardingpassistasi tai kuiteistasi",
+    "or": "tai",
+    "camera": "Käytä puhelimesi kameraa ladataksesi asiakirjasi nopeasti",
+    "browse": "Selaa tiedostoja",
+    "uploadPhoto": "Lataa tai ota kuva",
+    "fileLimits": "PDF, JPG, PNG • Enintään {perFile} Mt per tiedosto • Enintään {total} Mt yhteensä"
+  },
+  "errors": {
+    "missingClaim": "Korvausvaatimuksen viite puuttuu. Palaa takaisin ja yritä uudelleen.",
+    "uploadFailed": "Lataus epäonnistui. Yritä uudelleen tai ohita toistaiseksi – pyydämme asiakirjat tarvittaessa myöhemmin.",
+    "unsupportedFormat": "\"{file}\" ei ole tuettu tiedostomuoto. Lataa PDF-, JPG- tai PNG-tiedosto.",
+    "fileTooLarge": "\"{file}\" on liian suuri. Enimmäiskoko on {max} Mt per tiedosto.",
+    "totalTooLarge": "Ladattujen tiedostojen yhteiskoko on liian suuri. Enimmäiskoko on {max} Mt."
+  }
+},
+"authorization": {
+  "claimCreationError": "Korvausvaatimuksen luomisessa tapahtui virhe.",
+  "amountFallback": "enintään 600 €",
+  "titleBefore": "Hyviä uutisia! Näyttää siltä, että sinulla on oikeus",
+  "titleAfterAmount": "korvaukseen henkilöä kohden EU261-asetuksen mukaisesti.",
+  "titleSecondLine": "Allekirjoita alla ja saat sinulle kuuluvan korvauksen.",
+  "signaturePlaceholder": "Napsauta ja allekirjoita tähän",
+  "clearSignature": "Tyhjennä allekirjoitus",
+  "important": "Tärkeää",
+  "signatureGuidance": "Allekirjoituksesi tulee vastata mahdollisimman hyvin henkilöllisyystodistuksessasi olevaa allekirjoitusta.",
+  "feeTitle": "Kyllä — ei voittoa, ei maksua. Maksat vain 20 % (sis. ALV:n), jos onnistumme.",
+  "feeSubtitle": "Palkkiomme vähennetään korvauksestasi.",
+  "legal": {
+    "before": "Allekirjoittamalla hyväksyt",
+    "terms": "käyttöehtomme",
+    "and": "ja",
+    "priceList": "hinnastomme",
+    "middle": ", sekä valtuutat meidät käyttämään allekirjoitustasi",
+    "authorityDocument": "valtakirjassa"
+  }
+},
+"bookingReference": {
+  "title": "Mikä on varausviitteesi?",
+  "placeholder": "esim. DS27K3 tai YLEHPW",
+  "helpTitle": "Mistä löydän varausviitteeni?",
+  "helpText1": "Varausviite (PNR) löytyy yleensä lentoyhtiön tai matkatoimiston lähettämästä varausvahvistuksesta. Se koostuu tavallisesti 5–8 merkistä (kirjaimia ja numeroita).",
+  "helpText2": "Se voi näkyä myös boardingpassissasi tai lentoyhtiön sovelluksessa.",
+  "examples": "Esimerkkejä"
+},
+"passengerDetails": {
+  "title": "Yhteystietosi",
+  "claimOwner": "Korvauksen vastaanottaja",
+  "address": "Osoite",
+  "addressPlaceholder": "Katu ja numero",
+  "address2": "Osoiterivi 2",
+  "address2Placeholder": "Asunto, huoneisto jne.",
+  "city": "Kaupunki",
+  "postalCode": "Postinumero",
+  "state": "Osavaltio",
+  "statePlaceholder": "Osavaltio / Alue",
+  "country": "Maa",
+  "countryPlaceholder": "Aloita maan kirjoittaminen...",
+  "clearCountry": "Tyhjennä maa",
+  "phone": "Puhelinnumero",
+  "optional": "(valinnainen)"
+},
+"passengers": {
+  "title": "Muut matkustajat",
+  "info": "Kanssasi matkustaneet henkilöt voivat myös olla oikeutettuja korvaukseen.",
+  "travelingWithOthers": "Matkustin muiden kanssa",
+  "travelingAlone": "Matkustin yksin",
+  "potentialCompensation": "Mahdollinen korvaus",
+  "manualReview": "Manuaalinen tarkistus",
+  "totalForOnePassenger": "Yhteensä {count} matkustajalle",
+  "totalForPassengers": "Yhteensä {count} matkustajalle",
+  "perPassenger": "Matkustajaa kohden",
+  "passengerNumber": "Matkustaja {number}",
+  "remove": "Poista",
+  "under18": "Tämä henkilö on alle 18-vuotias",
+  "firstName": "Etunimi",
+  "lastName": "Sukunimi",
+  "email": "Sähköposti",
+  "optional": "(valinnainen)",
+  "addPassenger": "+ Lisää matkustaja"
+},
+"claimOwner": {
+  "title": "Kenelle korvaus maksetaan?",
+  "subtitle": "Olet enää yhden vaiheen päässä korvauksesi hakemisesta",
+  "firstNameLabel": "Etunimi",
+  "firstNamePlaceholder": "Etunimi",
+  "firstNameHint": "Täytyy vastata henkilöllisyystodistustasi",
+  "lastNameLabel": "Sukunimi",
+  "lastNamePlaceholder": "Sukunimi",
+  "lastNameHint": "Kirjoita koko sukunimesi täsmälleen siinä muodossa kuin se näkyy henkilökortissasi tai passissasi.",
+  "emailLabel": "Sähköposti",
+  "emailSubtitle": "Lähetämme korvausvaatimuksesi päivitykset ja maksutiedot tähän osoitteeseen",
+  "emailHint": "Käytämme sähköpostiosoitettasi pitääksemme sinut ajan tasalla korvausvaatimuksestasi.",
+  "legal": {
+    "before": "Jatkamalla hyväksyt",
+    "terms": "käyttöehtomme",
+    "and": "ja",
+    "privacy": "tietosuojakäytäntömme"
+  }
+},
+"verify": {
+  "loading": "Tarkistetaan lennon tila…",
+  "verifyFailed": "Emme voineet vahvistaa tätä lentoa. Palaa takaisin ja tarkista tiedot.",
+  "eligibleTitle": "Hyviä uutisia — lentosi on oikeutettu korvaukseen.",
+  "notEligibleTitle": "Lento ei ole oikeutettu korvaukseen EU/UK 261 -asetuksen mukaisesti.",
+  "notEligibleExplanation": "Lentosi ei näytä viivästyneen saapuessaan vähintään kolme tuntia. Siksi emme voi jatkaa korvausvaatimusta EU/UK 261 -asetuksen perusteella.",
+  "airlineFallback": "Lentoyhtiö",
+  "flight": "Lento",
+  "flightDetails": "Lennon tiedot",
+  "badgeEligible": "OIKEUTETTU",
+  "badgeNotEligible": "EI OIKEUTETTU",
+  "potentialCompensation": "Mahdollinen korvaus",
+  "compensation": "Korvaus",
+  "entitled": "Sinulla on oikeus korvaukseen EU-lainsäädännön mukaisesti",
+  "manualReview": "Tämä tapaus saattaa vaatia manuaalisen tarkistuksen",
+  "perPassenger": "matkustajaa kohden",
+  "scheduledArrivalTime": "Aikataulun mukainen saapumisaika",
+  "actualArrivalTime": "Todellinen saapumisaika",
+  "flightDistance": "Lennon pituus",
+  "totalDelay": "Kokonaisviivästys",
+  "confirmTitle": "Vahvista lentosi tiedot",
+  "confirmYes": "Kyllä, tämä on lentoni",
+  "confirmNo": "Ei, tiedoissa on virhe",
+  "correctDetails": "Palaa takaisin ja korjaa lentosi tiedot ennen jatkamista.",
+  "delay": {
+    "noSignificantDelay": "Merkittävää viivästystä ei havaittu",
+    "arrivedOneMinuteEarly": "Saapui 1 minuutin etuajassa",
+    "arrivedMinutesEarly": "Saapui {minutes} minuuttia etuajassa",
+    "arrivedOnTime": "Saapui ajallaan",
+    "minutes": "{minutes} minuuttia",
+    "hours": "{hours} tuntia",
+    "hoursMinutes": "{hours} tuntia {minutes} minuuttia"
+  }
+},
+"direct": {
+  "departureDateTitle": "Mikä oli suunniteltu lähtöpäiväsi?",
+  "dateLabel": "Päivämäärä",
+  "airlineTitle": "Millä lentoyhtiöllä lensit?",
+  "airlineLabel": "Lentoyhtiö",
+  "airlinePlaceholder": "esim. Finnair",
+  "clearAirline": "Tyhjennä lentoyhtiö",
+  "flightListTitle": "Valitse seuraavaksi lentosi alla olevasta luettelosta:",
+  "scheduledTime": "Aikataulun mukainen aika",
+  "flightNumber": "Lennon numero",
+  "loadingFlights": "Ladataan saatavilla olevia lentoja…",
+  "noFlightsFound": "Tälle reitille ei löytynyt lentoja. Voit silti jatkaa syöttämällä tiedot manuaalisesti.",
+  "manualEnterDetails": "Syötä lentotiedot manuaalisesti",
+  "manualCantFind": "En löydä lentoani",
+  "manualFlightNumberLabel": "Anna lentosi numero",
+  "manualFlightNumberPlaceholder": "esim. AY2814",
+  "errors": {
+    "searchFailed": "Lentojen haku epäonnistui",
+    "loadFailed": "Lentoja ei voitu ladata. Voit silti jatkaa syöttämällä tiedot manuaalisesti."
+  }
+},
+"directOrLayover": {
+  "title": "Oliko tämä suora lento?",
+  "routeTitle": "Mistä minne lensit?",
+  "fromLabel": "Lähtölentokenttä",
+  "toLabel": "Lopullinen määränpää",
+  "airportOrCity": "Lentokenttä tai kaupunki",
+  "direct": "Suora lento",
+  "layovers": "Välilaskuilla",
+  "connectionTitle": "Missä vaihdoit lentoa?",
+  "cityOrAirport": "Kaupungin tai lentokentän nimi",
+  "airportPlaceholder": "esim. Lontoo tai LHR",
+  "removeLayover": "Poista välilasku",
+  "addAirport": "+ Lisää toinen lentokenttä",
+  "connectionRequired": "Lisää vähintään yksi vaihtolentokenttä jatkaaksesi."
+},
+
+"layout": {
+  "progress": "Korvausvaatimuksesi eteneminen",
+  "back": "Takaisin",
+  "continue": "Jatka",
+  "processing": "Käsitellään...",
+
+  "steps": {
+    "eligibility": "Kelpoisuus",
+    "passengerDetails": "Matkustajan tiedot",
+    "documents": "Asiakirjat",
+    "finish": "Valmis"
+  },
+
+  "footer": {
+    "help": "Ohje",
+    "terms": "Käyttöehdot",
+    "privacy": "Tietosuoja"
+  }
+}
+},
+
+"header": {
+  "language": {
+    "label": "FI ▾",
+    "aria": "Vaihda kieli"
+  }
+},
+
+"mobileNav": {
+  "title": "Valikko",
+  "openAria": "Avaa valikko",
+  "openSr": "Avaa valikko",
+  "closeAria": "Sulje valikko"
+},
+
+"nav": {
+  "compensation": "Hae korvausta",
+  "delays": "Lentojen viivästykset",
+  "cancellations": "Lentojen peruutukset",
+  "rights": "Oikeutesi",
+  "faq": "UKK",
+  "about": "Tietoa meistä",
+  "contact": "Yhteystiedot",
+  "track": "Seuraa korvausvaatimusta",
+  "langLabel": "Kieli"
+},
+
+"track": {
+  "button": "Seuraa korvausvaatimusta",
+  "title": "Seuraa korvausvaatimustasi",
+  "description": "Anna sähköpostiosoite, jota käytit lähettäessäsi korvausvaatimuksen. Jos löydämme vastaavan vaatimuksen, lähetämme sinulle turvallisen seurantalinkin.",
+  "closeAria": "Sulje",
+  "emailLabel": "Sähköpostiosoite",
+  "emailPlaceholder": "sinä@esimerkki.fi",
+  "cancel": "Peruuta",
+  "resend": "Etkö saanut viestiä? Lähetä uudelleen",
+  "send": "Lähetä linkki",
+  "sending": "Lähetetään…",
+  "messages": {
+    "success": "Jos löydämme tähän sähköpostiosoitteeseen liittyvän korvausvaatimuksen, lähetämme sinulle turvallisen seurantalinkin muutaman minuutin kuluessa.",
+    "errorGeneric": "Linkkiä ei voitu lähettää juuri nyt. Yritä hetken kuluttua uudelleen.",
+    "errorTechnical": "Tekninen virhe – yritä hetken kuluttua uudelleen."
+  }
+},
+
   "sections": {
     "readMore": "Lue lisää"
   },
@@ -140,13 +492,13 @@
       "link": "lue lisää palkkiostamme.",
       "afterLink": ""
     },
-    "titleLine1": "Get up to €600 in compensation",
-    "titleLine2": "for delayed or cancelled flights!",
-    "fromLabel": "Departure airport",
-    "fromPlaceholder": "Departure airport",
-    "toLabel": "Final destination airport",
-    "toPlaceholder": "Final destination airport",
-    "searchCta": "Check compensation"
+    "titleLine1": "Hae jopa 600 € korvausta",
+"titleLine2": "myöhästyneistä tai perutuista lennoista!",
+"fromLabel": "Lähtölentokenttä",
+"fromPlaceholder": "Lähtölentokenttä",
+"toLabel": "Lopullinen määränpää",
+"toPlaceholder": "Lopullinen määränpää",
+"searchCta": "Tarkista korvaus"
   },
   "precheck": {
     "steps": {

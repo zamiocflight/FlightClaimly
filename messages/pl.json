@@ -492,13 +492,13 @@
       "link": "dowiedz się więcej o naszej opłacie.",
       "afterLink": ""
     },
-    "titleLine1": "Get up to €600 in compensation",
-    "titleLine2": "for delayed or cancelled flights!",
-    "fromLabel": "Departure airport",
-    "fromPlaceholder": "Departure airport",
-    "toLabel": "Final destination airport",
-    "toPlaceholder": "Final destination airport",
-    "searchCta": "Check compensation"
+    "titleLine1": "Otrzymaj do 600 € odszkodowania",
+"titleLine2": "za opóźnione lub odwołane loty!",
+"fromLabel": "Lotnisko wylotu",
+"fromPlaceholder": "Lotnisko wylotu",
+"toLabel": "Lotnisko docelowe",
+"toPlaceholder": "Lotnisko docelowe",
+"searchCta": "Sprawdź odszkodowanie"
   },
   "precheck": {
     "steps": {
