@@ -2,16 +2,21 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 type Props = {
+  params: Promise<{
+    locale: string;
+  }>;
   searchParams: Promise<{
     claimId?: string;
-    locale?: string;
   }>;
 };
 
-export default async function ThanksPage({ searchParams }: Props) {
+export default async function ThanksPage({
+  params,
+  searchParams,
+}: Props) {
+  const { locale } = await params;
   const sp = await searchParams;
   const claimId = sp.claimId || "FC-XXXXXX";
-  const locale = sp.locale || "sv";
   const t = await getTranslations({ locale, namespace: "check.thanks" });
 
   return (
