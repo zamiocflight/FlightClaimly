@@ -73,7 +73,7 @@ if (updated.email) {
       to: updated.to,
       flightDate: (updated as any).date ?? null,
       publicToken: payoutToken, // 👈 används för ?t=... i payout-länken
-      lang: 'sv',
+      lang: updated.locale as "sv" | "en" | "da" | "de" | "pl" | "fi",
     });
 
     emailSent = true;

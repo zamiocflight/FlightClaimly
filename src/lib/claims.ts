@@ -39,6 +39,8 @@ export type Claim = {
   status: string;                         // DB: status
   updatedAt: string;                      // DB: updated_at (ISO)
 
+  locale?: string | null;
+
     // Payout (bank details)
   payoutAccountHolder?: string | null;        // DB: payout_account_holder
   payoutIban?: string | null;                  // DB: payout_iban
@@ -91,6 +93,7 @@ type ClaimRow = {
   booking_number: string;
   status: string;
   updated_at: string;
+  locale: string | null;
   attachments: Attachment[] | null;
 
   payout_account_holder: string | null;
@@ -143,6 +146,7 @@ function fromRow(r: ClaimRow): Claim {
     bookingNumber: r.booking_number,
     status: r.status,
     updatedAt: r.updated_at,
+    locale: r.locale,
     attachments: r.attachments ?? [],
     viewerToken: r.viewer_token,
     viewerTokenCreatedAt: r.viewer_token_created_at,
@@ -184,6 +188,8 @@ function toInsert(input: {
   email: string;
   bookingNumber: string;
   status?: string;
+  locale?: string | null;
+ 
 
   viewerToken?: string;
   viewerTokenCreatedAt?: string;
@@ -210,6 +216,7 @@ layovers?: any;
     email: input.email,
     booking_number: input.bookingNumber,
     status: input.status ?? 'new',
+    locale: input.locale ?? 'en',
 
     viewer_token: input.viewerToken ?? null,
     viewer_token_created_at: input.viewerTokenCreatedAt ?? null,
@@ -283,6 +290,7 @@ export async function addClaim(input: {
   email: string;
   bookingNumber: string;
   status?: string;
+  locale?: string | null;
   viewerToken?: string;
   viewerTokenCreatedAt?: string;
   phone?: string | null;
