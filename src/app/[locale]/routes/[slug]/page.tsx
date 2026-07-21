@@ -48,7 +48,7 @@ export default async function RoutePage({ params }: Props) {
     notFound();
   }
 
-  const authoritySources = getEntityAuthority(route.slug);
+ const authoritySources = getEntityAuthority(route.slug, route);
 
   const facts = [
     {
