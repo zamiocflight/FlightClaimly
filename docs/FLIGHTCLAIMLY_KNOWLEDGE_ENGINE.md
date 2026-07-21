@@ -252,6 +252,109 @@ The Authority Engine is designed to become the legal foundation shared by every 
 
 ---
 
+---
+
+# Authority Rules Engine
+
+## Status
+
+🟢 ACTIVE
+
+The Authority Rules Engine is the first reasoning engine inside FlightClaimly.
+
+Unlike previous engines that primarily retrieve structured knowledge, the Rules Engine can infer which official authorities apply based on contextual information.
+
+Example:
+
+Route
+
+↓
+
+Origin Country
+
+↓
+
+Destination Country
+
+↓
+
+Applicable Regulation
+
+↓
+
+Official Authority Sources
+
+The first implemented rule automatically identifies routes operating entirely within the European Union and attaches:
+
+- EU261
+- European Commission Guidelines
+
+without requiring explicit route mappings.
+
+---
+
+## Philosophy
+
+Knowledge should not only be stored.
+
+Knowledge should be interpreted.
+
+The Authority Rules Engine represents the first step from static knowledge retrieval toward rule-based knowledge reasoning.
+
+Future engines—including Delay Reasons, Flight Numbers, Compensation Logic and Extraordinary Circumstances—will follow the same architectural philosophy.
+
+## Authority Resolver
+
+Authority resolution follows the Resolver Pattern.
+
+Instead of exposing multiple helper functions, every knowledge entity resolves legal authority through a single generic resolver.
+
+
+Current supported entity types:
+
+- Route
+- Airline
+- Airport
+- Country
+
+The generic design allows future engines to integrate without modifying the public API.
+
+Examples:
+
+- Delay Reason
+- Flight Number
+- Regulation
+- Case Law
+- Airport Procedure
+- Passenger Right
+
+The resolver determines authority by applying:
+
+1. Explicit authority relationships
+2. Entity-specific authority logic
+3. Rule engines
+4. Empty result
+
+### Resolver Pattern
+
+Every Knowledge Engine exposes a single public resolver.
+
+Pages never perform knowledge resolution directly.
+
+Instead, pages delegate all domain-specific resolution to the engine responsible for that domain.
+
+Current example:
+
+- `resolveAuthority<T>()`
+
+Planned examples:
+
+- `resolveDelayReason<T>()`
+- `resolveFlightNumber<T>()`
+
+This architecture centralizes business logic, provides a stable public API for every engine, and allows new entity types to be introduced without changing page implementations.
+---
+
 # Upcoming Engines
 
 ## Route Engine

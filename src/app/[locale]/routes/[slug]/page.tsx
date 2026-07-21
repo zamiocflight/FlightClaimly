@@ -8,7 +8,8 @@ import { getRelatedRoutes } from "@/lib/knowledge/routes";
 import { getRouteBreadcrumbs, getRouteMetadata } from "@/lib/seo/routes";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import FAQSchema from "@/components/seo/FAQSchema";
-import { getEntityAuthority } from "@/lib/authority";
+import { resolveAuthority } from "@/lib/authority/resolver";
+import type { FlightRoute } from "@/data/seo/routes";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -48,7 +49,11 @@ export default async function RoutePage({ params }: Props) {
     notFound();
   }
 
- const authoritySources = getEntityAuthority(route.slug, route);
+ const authoritySources = resolveAuthority<FlightRoute>({
+  entityType: "route",
+  slug: route.slug,
+ entity: route,
+ });
 
   const facts = [
     {

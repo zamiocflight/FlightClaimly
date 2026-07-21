@@ -881,3 +881,106 @@ Future evolution:
 Authority Engine v2 will introduce a Rules Engine capable of attaching authority sources automatically based on reusable business rules (for example EU carriers, UK carriers or US airlines), while still supporting manual overrides for exceptional cases.
 
 The existing architecture is designed so this upgrade can be implemented without changing the Knowledge Page Template or the rendering layer.
+
+---
+
+# Authority Rules Engine (v2)
+
+## Status
+
+✅ ACTIVE
+
+## Purpose
+
+The Authority Rules Engine extends the Authority Engine from simple entity lookups to rule-based authority resolution.
+
+Instead of requiring every entity to define authority sources manually, the Rules Engine can infer applicable legislation and official sources based on the entity's context.
+
+This allows FlightClaimly to scale authority coverage without maintaining thousands of explicit mappings.
+
+---
+
+## Current Architecture
+
+Authority Registry
+↓
+Authority Relationships
+↓
+Authority Rules
+↓
+Authority Resolver
+↓
+Knowledge Engine
+
+---
+
+## Current Rules
+
+### EU → EU Routes
+
+If both the origin and destination airports are located within the European Union:
+
+- EU261
+- European Commission Guidelines
+
+are automatically attached as authority sources.
+
+No manual route relationship is required.
+
+---
+
+## Resolution Order
+
+Authority resolution follows a deterministic order.
+
+1. Explicit Relationships
+2. Rules Engine
+3. No Authority
+
+Explicit relationships always override automatic inference.
+
+---
+
+## Design Principles
+
+- Explicit relationships always have highest priority.
+- Rules should be deterministic.
+- Rules should never duplicate registry data.
+- Rules may only reference registered authority sources.
+- Engines consume authority through a single resolver.
+
+---
+
+## Planned Rules
+
+Future rules may include:
+
+- UK261
+- EU → UK
+- UK → EU
+- Montreal Convention
+- National Enforcement Bodies
+- Civil Aviation Authorities
+- ECJ Case Law
+- ADR Organisations
+
+The goal is for FlightClaimly to determine applicable legal authority from structured knowledge rather than manually maintained mappings.
+
+## Authority Resolver
+
+The Authority Engine is accessed exclusively through a single public resolver.
+
+
+### Design Principles
+
+- Every authority lookup passes through `resolveAuthority<T>()`.
+- The resolver is the single public entry point for the Authority Engine.
+- Resolution is determined by the entity type.
+- Entity-specific logic is isolated inside the resolver.
+- Future entity types can be added without changing the resolver API.
+
+### Resolution Order
+
+1. Explicit Authority Relationships
+2. Entity-specific Authority Resolution
+3. No Authority

@@ -1,4 +1,5 @@
-export { getEntityAuthority } from "./relationships";
+export { resolveAuthority } from "./resolver";
+
 export {
   getAuthoritySource,
   getAuthoritySources,
