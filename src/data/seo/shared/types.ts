@@ -57,6 +57,7 @@ export type Airline = {
 };
 
   title: string;
+  metadataTitle?: string;
   description: string;
   intro: string;
   overview: string;

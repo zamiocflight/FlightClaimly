@@ -119,8 +119,10 @@ claimProcess: standardClaimProcess,
 
   title: "SAS flight compensation",
 
+  metadataTitle: "SAS Flight Compensation – Claim Up to €600 | FlightClaimly",
+
     description:
-      "Find out if you can claim compensation for a delayed or cancelled SAS flight under EU261.",
+  "Was your SAS flight delayed or cancelled? Check your EU261 eligibility and claim up to €600 per passenger. No win, no fee.",
     intro:
       "If your SAS flight was delayed, cancelled, or caused you to miss a connection, you may be entitled to compensation under EU261. FlightClaimly helps you check your case and handle the claim process.",
     overview:

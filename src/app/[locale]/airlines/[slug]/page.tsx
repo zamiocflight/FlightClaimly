@@ -8,6 +8,7 @@ import { getInternalLinkSections } from "@/lib/seo/internalLinks";
 
 import { getAirlineBySlug, airlines } from "@/data/seo/airlines";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { getEntityAuthority } from "@/lib/authority";
 
 
 type PageProps = {
@@ -46,7 +47,9 @@ export default async function AirlinePage({ params }: PageProps) {
 
   if (!airline) notFound();
 
-  const checkUrl = `/${locale}/check/direct-or-layover`;
+const checkUrl = `/${locale}/check/direct-or-layover`;
+
+const authoritySources = getEntityAuthority(airline.slug);
 
 const internalLinkSections = getInternalLinkSections(
   "airline",
@@ -79,6 +82,7 @@ const internalLinkSections = getInternalLinkSections(
         entity={airline}
         checkUrl={checkUrl}
         locale={locale}
+        authoritySources={authoritySources}
         facts={[
           { label: "Airline", value: airline.name },
           { label: "IATA code", value: airline.iata },

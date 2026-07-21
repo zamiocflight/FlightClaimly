@@ -212,6 +212,46 @@ The Airline Engine now acts as the primary airline data source across the platfo
 
 ---
 
+---
+
+## Authority Engine
+
+Status:
+
+✅ COMPLETE (Version 1)
+
+Purpose:
+
+Provide reusable legal and official authority sources across the entire Knowledge Engine.
+
+Instead of embedding regulations, legal references and official guidance directly into knowledge objects, the Authority Engine centralizes all authority information into a reusable system.
+
+Current capabilities:
+
+- Central Authority Registry
+- Typed authority sources
+- Multiple authority sources per entity
+- Official source references
+- Reusable Authority Section
+- Knowledge Template integration
+
+The Authority Engine currently supports manual authority relationships between entities and official sources.
+
+Future evolution:
+
+Version 2 will introduce an Authority Rules Engine capable of attaching authority sources automatically based on reusable business rules such as jurisdiction, carrier type and regulatory applicability, while still supporting manual overrides where necessary.
+
+The Authority Engine is designed to become the legal foundation shared by every future knowledge engine, including:
+
+- Airline Engine
+- Airport Engine
+- Route Engine
+- Country Engine
+- Delay Reason Engine
+- Flight Number Engine
+
+---
+
 # Upcoming Engines
 
 ## Route Engine

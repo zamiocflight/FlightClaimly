@@ -6,6 +6,8 @@ type MetadataEntity = {
   slug: string;
   name: string;
   description: string;
+  title?: string;
+  metadataTitle?: string;
 };
 
 type BuildMetadataInput = {
@@ -22,7 +24,10 @@ export function buildMetadata({
   titleSuffix = "flight compensation",
 }: BuildMetadataInput): Metadata {
   const url = `${SITE_URL}/${locale}/${pathPrefix}/${entity.slug}`;
-  const title = `${entity.name} ${titleSuffix} | FlightClaimly`;
+
+  const title =
+    entity.metadataTitle ??
+    `${entity.title ?? `${entity.name} ${titleSuffix}`} | FlightClaimly`;
 
   return {
     title,
@@ -30,12 +35,20 @@ export function buildMetadata({
     alternates: {
       canonical: url,
     },
-    openGraph: {
-      title,
-      description: entity.description,
-      url,
-      siteName: "FlightClaimly",
-      type: "article",
-    },
+
+    twitter: {
+  card: "summary_large_image",
+  title,
+  description: entity.description,
+},
+
+   openGraph: {
+  title,
+  description: entity.description,
+  url,
+  siteName: "FlightClaimly",
+  locale,
+  type: "article",
+},
   };
 }

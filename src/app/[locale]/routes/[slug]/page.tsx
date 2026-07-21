@@ -8,6 +8,7 @@ import { getRelatedRoutes } from "@/lib/knowledge/routes";
 import { getRouteBreadcrumbs, getRouteMetadata } from "@/lib/seo/routes";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import FAQSchema from "@/components/seo/FAQSchema";
+import { getEntityAuthority } from "@/lib/authority";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -46,6 +47,8 @@ export default async function RoutePage({ params }: Props) {
   if (!route) {
     notFound();
   }
+
+  const authoritySources = getEntityAuthority(route.slug);
 
   const facts = [
     {
@@ -89,6 +92,7 @@ return (
       checkUrl={`/${locale}/check`}
       facts={facts}
       locale={locale}
+      authoritySources={authoritySources}
     />
 
 <InternalLinks sections={internalLinkSections} />

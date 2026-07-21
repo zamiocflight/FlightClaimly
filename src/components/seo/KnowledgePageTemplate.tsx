@@ -10,6 +10,8 @@ import ClaimProcess from "@/components/seo/ClaimProcess";
 import CommonIssues from "@/components/seo/CommonIssues";
 import FAQ from "@/components/seo/FAQ";
 import MajorAirlines from "@/components/seo/MajorAirlines";
+import AuthoritySection from "@/components/authority/AuthoritySection";
+import type { AuthoritySource } from "@/data/authority/shared/types";
 
 type Fact = {
   label: string;
@@ -59,6 +61,7 @@ type KnowledgePageTemplateProps = {
   checkUrl: string;
   facts: Fact[];
   locale: string;
+  authoritySources?: AuthoritySource[];
 };
 
 export default function KnowledgePageTemplate({
@@ -66,6 +69,7 @@ export default function KnowledgePageTemplate({
   checkUrl,
   facts,
   locale,
+  authoritySources = [],
 }: KnowledgePageTemplateProps) {
   return (
     <>
@@ -109,6 +113,11 @@ export default function KnowledgePageTemplate({
           />
         </div>
       </section>
+
+             <AuthoritySection
+        title="Official sources"
+        sources={authoritySources}
+      />
 
       <section className="px-6 py-12">
         <div className="mx-auto max-w-5xl">

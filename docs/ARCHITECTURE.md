@@ -781,3 +781,103 @@ Next:
 🚧 Route Engine Foundation
 
 The Airline Engine now serves as the base layer for all upcoming SEO engines.
+
+---
+
+# Authority Engine v1
+
+Status:
+
+✅ LOCKED
+
+Completed:
+
+2026-07-18
+
+Purpose:
+
+The Authority Engine provides reusable legal and official sources for every knowledge page.
+
+Rather than embedding legal references directly into airline, airport or route content, the engine exposes authority data through a centralized registry.
+
+Current architecture:
+
+Authority Registry
+
+↓
+
+Authority Relationships
+
+↓
+
+Authority Lookup
+
+↓
+
+Knowledge Page Template
+
+↓
+
+Authority Section
+
+Current implementation:
+
+Data:
+
+- src/data/authority/registry.ts
+- src/data/authority/relationships.ts
+- src/data/authority/shared/types.ts
+
+Logic:
+
+- src/lib/authority/index.ts
+- src/lib/authority/registry.ts
+- src/lib/authority/relationships.ts
+
+UI:
+
+- src/components/authority/AuthoritySection.tsx
+
+Integrated into:
+
+- KnowledgePageTemplate
+- Airline Engine
+
+Capabilities:
+
+- Central Authority Registry
+- Typed authority sources
+- Multiple authority sources per entity
+- Official source links
+- Reusable authority rendering
+- Type-safe architecture
+
+Example:
+
+SAS
+
+↓
+
+EU261 Regulation
+
++
+
+EU Passenger Rights Interpretative Guidelines
+
+↓
+
+Authority Section
+
+Design Principles:
+
+- Authority data lives in src/data.
+- Authority logic lives in src/lib.
+- Rendering lives in src/components.
+- Knowledge pages never contain authority logic.
+- New authority sources should be added once and reused everywhere.
+
+Future evolution:
+
+Authority Engine v2 will introduce a Rules Engine capable of attaching authority sources automatically based on reusable business rules (for example EU carriers, UK carriers or US airlines), while still supporting manual overrides for exceptional cases.
+
+The existing architecture is designed so this upgrade can be implemented without changing the Knowledge Page Template or the rendering layer.
