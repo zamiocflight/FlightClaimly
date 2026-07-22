@@ -7,7 +7,8 @@ export type AuthorityEntityType =
   | "route"
   | "airline"
   | "airport"
-  | "country";
+  | "country"
+  | "delay-reason";
 
 export interface AuthorityResolverInput<T = unknown> {
   entityType: AuthorityEntityType;
@@ -37,6 +38,7 @@ export function resolveAuthority<T>({
     case "airline":
     case "airport":
     case "country":
+    case "delay-reason":
       return [];
   }
 }

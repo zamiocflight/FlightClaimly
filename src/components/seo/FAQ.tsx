@@ -1,4 +1,4 @@
-import type { FAQ as FAQItem } from "@/data/seo/shared/faq";
+import type { FAQ as FAQItem } from "@/data/seo/shared/types";
 
 type FAQProps = {
   items: FAQItem[];

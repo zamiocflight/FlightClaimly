@@ -984,3 +984,51 @@ The Authority Engine is accessed exclusively through a single public resolver.
 1. Explicit Authority Relationships
 2. Entity-specific Authority Resolution
 3. No Authority
+
+Architecture decisions are frozen during an active sprint.
+
+New architectural improvements discovered during implementation are recorded as CTO Notes and evaluated after the sprint.
+
+Avoid mid-sprint refactors unless they fix a correctness issue or provide overwhelming long-term value.
+
+---
+
+# Foundation Lock Update (2026-07-22)
+
+## Status
+
+🟢 Foundation v1 is now considered feature complete.
+
+The core architecture has been unified around reusable engines rather than page-specific implementations.
+
+Completed since the previous architecture update:
+
+- ✅ Delay Reason Engine completed
+- ✅ Shared Knowledge Templates finalized
+- ✅ Central Metadata Engine adopted across Knowledge Engines
+- ✅ Delay Reason integrated into the Authority Engine architecture
+- ✅ Legal Graph foundation established for Delay Reasons
+- ✅ Route Engine completed as part of the Knowledge Foundation
+
+## Foundation Engines
+
+The following engines are now considered locked:
+
+- Metadata Engine
+- Entity Registry
+- Relationship Engine
+- Authority Engine
+- Knowledge Components
+- Knowledge Templates
+
+Future development should extend these engines rather than redesign them.
+
+## Next Sprint
+
+With Foundation complete, development moves to:
+
+1. Flight Number Engine
+2. Content Engine
+3. Publishing & Growth
+
+No architectural refactoring should be performed unless a correctness issue is discovered.

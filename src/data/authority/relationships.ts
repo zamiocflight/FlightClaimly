@@ -8,4 +8,8 @@ export const authorityRelationships: AuthorityRelationship[] = [
     slug: "sas",
     authorityIds: ["eu261", "eu261-guidelines"],
   },
+  {
+  slug: "technical-problems",
+  authorityIds: ["eu261", "eu261-guidelines"],
+},
 ];
