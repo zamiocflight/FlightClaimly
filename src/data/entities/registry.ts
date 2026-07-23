@@ -1,3 +1,4 @@
+import { flightNumbers } from "@/data/flight-numbers/flightNumbers";
 import { airlines } from "@/data/seo/airlines";
 import { airports } from "@/data/seo/airports";
 import { countries } from "@/data/seo/countries";
@@ -9,7 +10,8 @@ export type EntityType =
   | "country"
   | "route"
   | "law"
-  | "article";
+  | "article"
+  | "flight-number";
 
 export type RegistryEntity = {
   type: EntityType;
@@ -45,6 +47,13 @@ export const registry: RegistryEntity[] = [
     slug: route.slug,
     name: route.name,
     hrefBase: "routes",
+  })),
+
+  ...flightNumbers.map((flightNumber) => ({
+    type: "flight-number" as const,
+    slug: flightNumber.slug,
+    name: flightNumber.flightNumber,
+    hrefBase: "flight-numbers",
   })),
 ];
 

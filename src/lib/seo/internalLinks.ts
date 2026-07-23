@@ -70,6 +70,29 @@ const internalLinkConfigs = {
     },
   ],
 
+  "flight-number": [
+    {
+      title: "Flight airline",
+      allowedTypes: ["airline"],
+      limit: 1,
+    },
+    {
+      title: "Flight route",
+      allowedTypes: ["route"],
+      limit: 1,
+    },
+    {
+      title: "Airports",
+      allowedTypes: ["airport"],
+      limit: 2,
+    },
+    {
+      title: "Countries",
+      allowedTypes: ["country"],
+      limit: 2,
+    },
+  ],
+
   country: [
     {
       title: "Airports in this country",
@@ -88,7 +111,7 @@ const internalLinkConfigs = {
     },
   ],
 } satisfies Record<
-  "route" | "airport" | "airline" | "country",
+  "route" | "airport" | "airline" | "flight-number" | "country",
   SectionConfig[]
 >;
 

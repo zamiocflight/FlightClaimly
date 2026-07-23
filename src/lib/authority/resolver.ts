@@ -8,7 +8,8 @@ export type AuthorityEntityType =
   | "airline"
   | "airport"
   | "country"
-  | "delay-reason";
+  | "delay-reason"
+  | "flight-number";
 
 export interface AuthorityResolverInput<T = unknown> {
   entityType: AuthorityEntityType;
@@ -35,10 +36,11 @@ export function resolveAuthority<T>({
       const route = entity as FlightRoute | undefined;
     return route ? getRouteAuthority(route) : [];
 
-    case "airline":
+        case "airline":
     case "airport":
     case "country":
     case "delay-reason":
+    case "flight-number":
       return [];
   }
 }

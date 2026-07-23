@@ -2,6 +2,7 @@ import { airlines } from "@/data/seo/airlines";
 import { airports } from "@/data/seo/airports";
 import { countries } from "@/data/seo/countries";
 import { routes } from "@/data/seo/routes";
+import { flightNumberRelationships } from "@/data/flight-numbers/relationships";
 
 export type RelationshipType =
   | "airline"
@@ -232,9 +233,41 @@ const countryRelationships: EntityRelationships[] = countries.map(
   }
 );
 
+const flightNumberKnowledgeRelationships: EntityRelationships[] =
+  flightNumberRelationships.map((flightNumber) => ({
+    slug: flightNumber.slug,
+    relationships: removeDuplicateRelationships([
+      {
+        type: "airline",
+        slug: flightNumber.airline,
+      },
+      {
+        type: "route",
+        slug: flightNumber.route,
+      },
+      {
+        type: "airport",
+        slug: flightNumber.originAirport,
+      },
+      {
+        type: "airport",
+        slug: flightNumber.destinationAirport,
+      },
+      {
+        type: "country",
+        slug: flightNumber.originCountry,
+      },
+      {
+        type: "country",
+        slug: flightNumber.destinationCountry,
+      },
+    ]),
+  }));
+
 export const relationships: EntityRelationships[] = [
   ...routeRelationships,
   ...airportRelationships,
   ...airlineRelationships,
   ...countryRelationships,
+  ...flightNumberKnowledgeRelationships,
 ];

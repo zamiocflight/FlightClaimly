@@ -34,7 +34,7 @@ export type Airline = {
   slug: string;
   name: string;
   iata: string;
-  icao?: string;
+  icao: string;
 
   country: string;
   countrySlugs?: string[];
