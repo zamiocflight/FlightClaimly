@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "populate:flight-numbers": "tsx --env-file=.env.local scripts/populate-flight-numbers.ts",
+    "build:flight-numbers": "tsx scripts/build-flight-numbers.ts"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",
