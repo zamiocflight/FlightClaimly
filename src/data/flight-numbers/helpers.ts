@@ -1,5 +1,5 @@
 import { getAirlineBySlug } from "@/data/seo/airlines";
-import { routes } from "@/data/seo/routes";
+import { getOrCreateRouteByAirportIata } from "@/data/seo/routes";
 
 import type { FlightNumberSeed } from "./types";
 
@@ -15,12 +15,9 @@ export function getFlightNumberRoute(
   originIata: string,
   destinationIata: string
 ) {
-  return routes.find(
-    (route) =>
-      route.origin.iata.toUpperCase() ===
-        originIata.toUpperCase() &&
-      route.destination.iata.toUpperCase() ===
-        destinationIata.toUpperCase()
+  return getOrCreateRouteByAirportIata(
+    originIata,
+    destinationIata
   );
 }
 

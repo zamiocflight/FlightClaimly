@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "populate:flight-numbers": "tsx --env-file=.env.local scripts/populate-flight-numbers.ts",
-    "build:flight-numbers": "tsx scripts/build-flight-numbers.ts"
+    "build:flight-numbers": "tsx scripts/build-flight-numbers.ts",
+    "build:airport-registry": "tsx scripts/generate-airport-registry.ts"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",

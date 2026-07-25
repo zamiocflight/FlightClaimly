@@ -1,4 +1,4 @@
-import { flightNumbers } from "@/data/flight-numbers/flightNumbers";
+import { flightNumbers } from "@/data/master/flightNumbers";
 
 export function getFlightNumberBySlug(slug: string) {
   return flightNumbers.find(

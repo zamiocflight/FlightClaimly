@@ -2,16 +2,29 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 import { flightNumberSeeds } from "../src/data/master/flightNumberSeeds";
+import { createFlightNumber } from "../src/data/flight-numbers/createFlightNumber";
 import type { FlightNumberSeed } from "../src/data/flight-numbers/types";
+
+function normalizeFlightNumber(flightNumber: string): string {
+  return flightNumber
+    .trim()
+    .replace(/\s+/g, "")
+    .toUpperCase();
+}
 
 function createSeedKey(seed: FlightNumberSeed): string {
   return [
-    seed.flightNumber,
-    seed.airline,
-    seed.originIata,
-    seed.destinationIata,
-    seed.schedule,
+    seed.airline.trim().toLowerCase(),
+    normalizeFlightNumber(seed.flightNumber),
   ].join("|");
+}
+
+function describeSeed(seed: FlightNumberSeed): string {
+  return [
+    normalizeFlightNumber(seed.flightNumber),
+    `${seed.originIata.toUpperCase()} → ${seed.destinationIata.toUpperCase()}`,
+    seed.schedule ?? "no schedule",
+  ].join(" | ");
 }
 
 function deduplicateSeeds(
@@ -21,9 +34,33 @@ function deduplicateSeeds(
 
   for (const seed of seeds) {
     const key = createSeedKey(seed);
+    const existingSeed = uniqueSeeds.get(key);
 
-    if (!uniqueSeeds.has(key)) {
-      uniqueSeeds.set(key, seed);
+    if (!existingSeed) {
+      uniqueSeeds.set(key, {
+        ...seed,
+        flightNumber: normalizeFlightNumber(seed.flightNumber),
+        airline: seed.airline.trim().toLowerCase(),
+        originIata: seed.originIata.trim().toUpperCase(),
+        destinationIata: seed.destinationIata.trim().toUpperCase(),
+      });
+
+      continue;
+    }
+
+    const routeChanged =
+      existingSeed.originIata !== seed.originIata.trim().toUpperCase() ||
+      existingSeed.destinationIata !==
+        seed.destinationIata.trim().toUpperCase();
+
+    if (routeChanged) {
+      console.warn(
+        [
+          `Conflicting route for ${normalizeFlightNumber(seed.flightNumber)}.`,
+          `Keeping: ${describeSeed(existingSeed)}`,
+          `Ignoring: ${describeSeed(seed)}`,
+        ].join("\n")
+      );
     }
   }
 
@@ -34,30 +71,16 @@ function sortSeeds(
   seeds: FlightNumberSeed[]
 ): FlightNumberSeed[] {
   return [...seeds].sort((a, b) => {
-    const flightNumberComparison = a.flightNumber.localeCompare(
-      b.flightNumber
-    );
+    const airlineComparison = a.airline.localeCompare(b.airline);
 
-    if (flightNumberComparison !== 0) {
-      return flightNumberComparison;
+    if (airlineComparison !== 0) {
+      return airlineComparison;
     }
 
-    const originComparison = a.originIata.localeCompare(
-      b.originIata
-    );
-
-    if (originComparison !== 0) {
-      return originComparison;
-    }
-
-    const destinationComparison =
-      a.destinationIata.localeCompare(b.destinationIata);
-
-    if (destinationComparison !== 0) {
-      return destinationComparison;
-    }
-
-    return (a.schedule ?? "").localeCompare(b.schedule ?? "");
+    return a.flightNumber.localeCompare(b.flightNumber, undefined, {
+      numeric: true,
+      sensitivity: "base",
+    });
   });
 }
 
@@ -66,18 +89,17 @@ async function main(): Promise<void> {
 
   const importedCount = flightNumberSeeds.length;
 
-  const uniqueFlightNumbers = deduplicateSeeds(
-    flightNumberSeeds
-  );
+  const uniqueSeeds = deduplicateSeeds(flightNumberSeeds);
+  const sortedSeeds = sortSeeds(uniqueSeeds);
 
-  const flightNumbers = sortSeeds(uniqueFlightNumbers);
+  const flightNumbers = sortedSeeds.map(createFlightNumber);
 
   const duplicatesRemoved =
     importedCount - flightNumbers.length;
 
-  const output = `import type { FlightNumberSeed } from "../flight-numbers/types";
+  const output = `import type { FlightNumber } from "../flight-numbers/types";
 
-export const flightNumbers: FlightNumberSeed[] = ${JSON.stringify(
+export const flightNumbers: FlightNumber[] = ${JSON.stringify(
     flightNumbers,
     null,
     2
@@ -95,9 +117,9 @@ export const flightNumbers: FlightNumberSeed[] = ${JSON.stringify(
 
   await fs.writeFile(outputPath, output, "utf8");
 
-  console.log("Flight numbers imported:", importedCount);
-  console.log("Duplicates removed:", duplicatesRemoved);
-  console.log("Flight numbers written:", flightNumbers.length);
+  console.log("Flight-number seeds imported:", importedCount);
+  console.log("Duplicate flight numbers removed:", duplicatesRemoved);
+  console.log("Unique flight numbers written:", flightNumbers.length);
   console.log("Written:", outputPath);
 }
 

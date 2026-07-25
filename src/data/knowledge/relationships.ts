@@ -2,7 +2,7 @@ import { airlines } from "@/data/seo/airlines";
 import { airports } from "@/data/seo/airports";
 import { countries } from "@/data/seo/countries";
 import { routes } from "@/data/seo/routes";
-import { flightNumberRelationships } from "@/data/flight-numbers/relationships";
+import { flightNumbers } from "@/data/master/flightNumbers";
 
 export type RelationshipType =
   | "airline"
@@ -234,35 +234,55 @@ const countryRelationships: EntityRelationships[] = countries.map(
 );
 
 const flightNumberKnowledgeRelationships: EntityRelationships[] =
-  flightNumberRelationships.map((flightNumber) => ({
-    slug: flightNumber.slug,
-    relationships: removeDuplicateRelationships([
-      {
-        type: "airline",
-        slug: flightNumber.airline,
-      },
-      {
-        type: "route",
-        slug: flightNumber.route,
-      },
-      {
-        type: "airport",
-        slug: flightNumber.originAirport,
-      },
-      {
-        type: "airport",
-        slug: flightNumber.destinationAirport,
-      },
-      {
-        type: "country",
-        slug: flightNumber.originCountry,
-      },
-      {
-        type: "country",
-        slug: flightNumber.destinationCountry,
-      },
-    ]),
-  }));
+  flightNumbers.map((flightNumber) => {
+    const originCountrySlug = getCountrySlug(
+      flightNumber.originCountry
+    );
+
+    const destinationCountrySlug = getCountrySlug(
+      flightNumber.destinationCountry
+    );
+
+    return {
+      slug: flightNumber.slug,
+      relationships: removeDuplicateRelationships([
+        {
+          type: "airline",
+          slug: flightNumber.relationships.airline,
+        },
+        {
+          type: "route",
+          slug: flightNumber.relationships.route,
+        },
+        {
+          type: "airport",
+          slug: flightNumber.relationships.originAirport,
+        },
+        {
+          type: "airport",
+          slug: flightNumber.relationships.destinationAirport,
+        },
+
+        ...(originCountrySlug
+          ? [
+              {
+                type: "country" as const,
+                slug: originCountrySlug,
+              },
+            ]
+          : []),
+
+        ...(destinationCountrySlug
+          ? [
+              {
+                type: "country" as const,
+                slug: destinationCountrySlug,
+              },
+            ]
+          : []),
+      ]),
+    };
+  });
 
 export const relationships: EntityRelationships[] = [
   ...routeRelationships,

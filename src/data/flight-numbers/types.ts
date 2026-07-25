@@ -10,10 +10,10 @@ export type FlightNumber = {
   airlineIata: string;
   airlineIcao: string;
 
-  originAirport: string;
-  destinationAirport: string;
+  originAirportSlug: string;
+  destinationAirportSlug: string;
 
-  route: string;
+  routeSlug: string;
 
   originCountry: string;
   destinationCountry: string;
@@ -62,9 +62,21 @@ export type FlightNumber = {
     answer: string;
   }[];
 
+  relationships: {
+    airline: string;
+    originAirport: string;
+    destinationAirport: string;
+    route: string;
+  };
+
+  metadata: {
+    canonical: string;
+  };
+
   aircraft?: string;
   schedule?: string;
 };
+
 export type FlightNumberSeed = {
   flightNumber: string;
 

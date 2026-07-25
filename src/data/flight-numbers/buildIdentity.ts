@@ -9,9 +9,9 @@ type FlightNumberIdentity = Pick<
   | "airlineCountrySlugs"
   | "airlineIata"
   | "airlineIcao"
-  | "originAirport"
-  | "destinationAirport"
-  | "route"
+  | "originAirportSlug"
+  | "destinationAirportSlug"
+  | "routeSlug"
   | "originCountry"
   | "destinationCountry"
 >;
@@ -33,11 +33,11 @@ export function buildFlightNumberIdentity({
 
     airlineIcao: airline.icao.toUpperCase(),
 
-    originAirport: route.origin.slug,
+    originAirportSlug: route.origin.slug,
 
-    destinationAirport: route.destination.slug,
+    destinationAirportSlug: route.destination.slug,
 
-    route: route.slug,
+    routeSlug: route.slug,
 
     originCountry: route.origin.country,
 

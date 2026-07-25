@@ -50,6 +50,17 @@ export function createFlightNumber(
   const knowledge = buildFlightNumberKnowledge();
   const identity = buildFlightNumberIdentity(context);
 
+  const relationships = {
+  airline: airline.slug,
+  originAirport: route.origin.slug,
+  destinationAirport: route.destination.slug,
+  route: route.slug,
+};
+
+const metadata = {
+  canonical: `/flight-numbers/${createFlightNumberSlug(flightNumber)}`,
+};
+
   return {
     slug: createFlightNumberSlug(flightNumber),
 
@@ -64,6 +75,10 @@ export function createFlightNumber(
     ...seo,
 
     ...knowledge,
+
+    relationships,
+
+    metadata,
 
     ...(seed.aircraft
       ? {

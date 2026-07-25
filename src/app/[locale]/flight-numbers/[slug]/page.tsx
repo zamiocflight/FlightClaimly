@@ -5,11 +5,12 @@ import FAQSchema from "@/components/seo/FAQSchema";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import InternalLinks from "@/components/seo/InternalLinks";
 
-import { flightNumbers } from "@/data/flight-numbers/flightNumbers";
+import { flightNumbers } from "@/data/master/flightNumbers";
 import { getFlightNumberBySlug } from "@/lib/flight-numbers";
 import { buildFlightNumberMetadata } from "@/lib/flight-numbers/metadata";
 import { getInternalLinkSections } from "@/lib/seo/internalLinks";
 import { resolveAuthority } from "@/lib/authority";
+import { getAirportIdentityBySlug } from "@/lib/knowledge/airports";
 
 type PageProps = {
   params: Promise<{
@@ -45,6 +46,14 @@ export default async function FlightNumberPage({
   const flightNumber = getFlightNumberBySlug(slug);
 
   if (!flightNumber) notFound();
+
+    const originAirport = getAirportIdentityBySlug(
+    flightNumber.originAirportSlug
+  );
+
+  const destinationAirport = getAirportIdentityBySlug(
+    flightNumber.destinationAirportSlug
+  );
 
   const checkUrl = `/${locale}/check/direct-or-layover`;
 
@@ -104,13 +113,17 @@ export default async function FlightNumberPage({
             label: "ICAO airline code",
             value: flightNumber.airlineIcao,
           },
-          {
+                    {
             label: "Origin airport",
-            value: flightNumber.originAirport,
+            value:
+              originAirport?.name ??
+              flightNumber.originAirportSlug,
           },
           {
             label: "Destination airport",
-            value: flightNumber.destinationAirport,
+            value:
+              destinationAirport?.name ??
+              flightNumber.destinationAirportSlug,
           },
           {
             label: "Distance category",

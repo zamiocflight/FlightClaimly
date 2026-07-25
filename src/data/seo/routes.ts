@@ -10,6 +10,7 @@ import type {
 } from "./shared/types";
 import { getAirportByIata } from "@/lib/knowledge/airports";
 import { getAirlinesBySlugs } from "@/lib/knowledge/airlines";
+import { getAirportRegistryEntryByIata } from "@/data/master/airportRegistry";
 
 export type RouteSeed = {
   origin: string;
@@ -58,6 +59,15 @@ export type FlightRoute = {
   claimProcess: string[];
   commonIssues: string[];
   faq: FAQ[];
+};
+
+type RouteAirport = {
+  slug: string;
+  name: string;
+  iata: string;
+  city: string;
+  country: string;
+  mainAirlines?: string[];
 };
 
 const standardCompensationAmounts: CompensationAmount[] = [
@@ -245,9 +255,38 @@ function getRouteAirlines(originAirlines?: string[], destinationAirlines?: strin
   return getAirlinesBySlugs(unique).slice(0, 6);
 }
 
+function resolveRouteAirport(iata: string): RouteAirport | undefined {
+  const seoAirport = getAirportByIata(iata);
+
+  if (seoAirport) {
+    return {
+      slug: seoAirport.slug,
+      name: seoAirport.name,
+      iata: seoAirport.iata,
+      city: seoAirport.city,
+      country: seoAirport.country,
+      mainAirlines: seoAirport.mainAirlines,
+    };
+  }
+
+  const registryAirport = getAirportRegistryEntryByIata(iata);
+
+  if (!registryAirport) {
+    return undefined;
+  }
+
+  return {
+    slug: registryAirport.slug,
+    name: registryAirport.name,
+    iata: registryAirport.iata,
+    city: registryAirport.city,
+    country: registryAirport.country,
+  };
+}
+
 function createRoute(seed: RouteSeed): FlightRoute {
-  const origin = getAirportByIata(seed.origin);
-  const destination = getAirportByIata(seed.destination);
+  const origin = resolveRouteAirport(seed.origin);
+  const destination = resolveRouteAirport(seed.destination);
 
   if (!origin) {
     throw new Error(`Route origin airport not found: ${seed.origin}`);
@@ -357,6 +396,35 @@ export const routes: FlightRoute[] = routeSeeds.map(createRoute);
 
 export function getRouteBySlug(slug: string) {
   return routes.find((route) => route.slug === slug);
+}
+
+export function getOrCreateRouteByAirportIata(
+  originIata: string,
+  destinationIata: string
+): FlightRoute | undefined {
+  const existingRoute = routes.find(
+    (route) =>
+      route.origin.iata.toUpperCase() ===
+        originIata.toUpperCase() &&
+      route.destination.iata.toUpperCase() ===
+        destinationIata.toUpperCase()
+  );
+
+  if (existingRoute) {
+    return existingRoute;
+  }
+
+  const origin = resolveRouteAirport(originIata);
+  const destination = resolveRouteAirport(destinationIata);
+
+  if (!origin || !destination) {
+    return undefined;
+  }
+
+  return createRoute({
+    origin: origin.iata,
+    destination: destination.iata,
+  });
 }
 
 export function getRoutesByAirportIata(iata: string) {
