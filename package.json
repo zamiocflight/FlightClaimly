@@ -10,7 +10,9 @@
     "populate:flight-numbers": "tsx --env-file=.env.local scripts/populate-flight-numbers.ts",
     "populate:nordics": "FLIGHTAWARE_PROFILE=nordics npm run populate:flight-numbers",
     "build:flight-numbers": "tsx scripts/build-flight-numbers.ts",
-    "build:airport-registry": "tsx scripts/generate-airport-registry.ts"
+    "build:airport-registry": "tsx scripts/generate-airport-registry.ts",
+    "typecheck": "tsc --noEmit",
+    "publish": "npm run build:flight-numbers && npm run typecheck && npm run build"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",

@@ -89,9 +89,9 @@ export default async function FlightNumberPage({
             url: `https://www.flightclaimly.com/${locale}/flight-numbers`,
           },
           {
-            name: flightNumber.flightNumber,
-            url: `https://www.flightclaimly.com/${locale}/flight-numbers/${flightNumber.slug}`,
-          },
+  name: flightNumber.flightNumber,
+  url: `https://www.flightclaimly.com/${locale}/flight/${flightNumber.slug}`,
+},
         ]}
       />
 

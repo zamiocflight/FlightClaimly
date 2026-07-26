@@ -2,6 +2,7 @@
 import { MetadataRoute } from "next";
 import { locales } from "@/i18n/routing";
 import { routes as flightRoutes } from "@/data/seo/routes";
+import { flightNumbers } from "@/data/master/flightNumbers";
 import { getRouteSitemapEntry } from "@/lib/seo/routes";
 
 function getSiteUrl() {
@@ -34,6 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const now = new Date();
+  const flightNumberLocales = ["sv", "en"];
 
   const staticEntries = locales.flatMap((locale) =>
     staticRoutes.map((route) => {
@@ -55,5 +57,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     flightRoutes.map((route) => getRouteSitemapEntry(route, locale, siteUrl))
   );
 
-  return [...staticEntries, ...routeEntries];
+const flightNumberEntries = flightNumberLocales.flatMap((locale) =>
+  flightNumbers.map((flightNumber) => ({
+    url: `${siteUrl}/${locale}/flight/${flightNumber.slug}`,
+    lastModified: now,
+    changeFrequency: "daily" as const,
+    priority: 0.8,
+  }))
+);
+
+  return [
+  ...staticEntries,
+  ...routeEntries,
+  ...flightNumberEntries,
+];
 }

@@ -13,7 +13,7 @@ export function buildFlightNumberMetadata(
       description: flightNumber.description,
     },
     locale,
-    pathPrefix: "flight-numbers",
+    pathPrefix: "flight",
     titleSuffix: "flight compensation",
   });
 }

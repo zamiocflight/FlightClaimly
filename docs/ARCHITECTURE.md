@@ -1032,3 +1032,21 @@ With Foundation complete, development moves to:
 3. Publishing & Growth
 
 No architectural refactoring should be performed unless a correctness issue is discovered.
+
+## Flight Number Population Engine
+
+The Flight Number Population Engine is responsible for importing
+scheduled flights from FlightAware and producing deterministic
+FlightNumberSeed data.
+
+Architecture principles:
+
+- Profile-based population
+- Multi-airline support
+- Incremental merge
+- Idempotent writes
+- Structured execution reports
+- Environment validation
+- Date validation
+- Request timeout
+- Failure reporting
