@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "status": "success",
+  "startedAt": "2026-07-26T14:45:27.916Z",
+  "completedAt": "2026-07-26T14:45:29.079Z",
+  "durationMs": 1163,
+  "configuration": {
+    "profile": "nordics",
+    "startDate": "2026-07-26",
+    "endDate": "2026-07-27",
+    "maximumPagesPerAirline": 1,
+    "airlineCount": 2,
+    "airlines": [
+      "SK",
+      "DY"
+    ]
+  },
+  "airlines": [
+    {
+      "slug": "sas",
+      "name": "SAS",
+      "iata": "SK",
+      "icao": "SAS",
+      "pagesFetched": 1,
+      "schedulesReturned": 15,
+      "validNormalizedSeeds": 15,
+      "rejectedSchedules": 0,
+      "duplicateFetchedSeeds": 0,
+      "uniqueFetchedSeeds": 15
+    },
+    {
+      "slug": "norwegian",
+      "name": "Norwegian",
+      "iata": "DY",
+      "icao": "NOZ",
+      "pagesFetched": 1,
+      "schedulesReturned": 15,
+      "validNormalizedSeeds": 15,
+      "rejectedSchedules": 0,
+      "duplicateFetchedSeeds": 0,
+      "uniqueFetchedSeeds": 15
+    }
+  ],
+  "totals": {
+    "existingSeedsBeforeMerge": 50,
+    "schedulesReturned": 30,
+    "validNormalizedSeeds": 30,
+    "rejectedSchedules": 0,
+    "duplicateFetchedSeeds": 0,
+    "uniqueFetchedSeeds": 30,
+    "seedsAdded": 0,
+    "seedsUpdated": 0,
+    "seedsUnchanged": 30,
+    "totalSeedsAfterMerge": 50
+  },
+  "output": {
+    "seedsFile": "src/data/master/flightNumberSeeds.ts",
+    "seedsFileWritten": false,
+    "reportFile": "reports/population/latest.json"
+  }
+}

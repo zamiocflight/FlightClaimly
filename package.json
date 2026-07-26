@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "populate:flight-numbers": "tsx --env-file=.env.local scripts/populate-flight-numbers.ts",
+    "populate:nordics": "FLIGHTAWARE_PROFILE=nordics npm run populate:flight-numbers",
     "build:flight-numbers": "tsx scripts/build-flight-numbers.ts",
     "build:airport-registry": "tsx scripts/generate-airport-registry.ts"
   },
