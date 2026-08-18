@@ -6,7 +6,7 @@
       "invalidFlightNumber": "Please enter a valid flight number (e.g. SK123)."
   },
 
-"check": {
+ "check": {
   "itinerary": {
   "intro": "OK, I'll just need a few flight details so I can check your eligibility.",
   "airline": "Airline",
@@ -1179,10 +1179,10 @@
   }
 },
 "terms": {
-    "meta": {
-  "title": "Terms of service | FlightClaimly",
-  "description": "Read FlightClaimly’s terms of service, including how the service works, fees, payouts, liability, and contact details."
-},
+  "meta": {
+    "title": "Terms of service | FlightClaimly",
+    "description": "Read FlightClaimly’s terms of service, including how the service works, fees, payouts, liability, and contact details."
+  },
   "badge": "Terms",
   "title": "Terms of Use for FlightClaimly",
   "intro": "These terms describe how FlightClaimly works and the rights and obligations that apply when you use our service to pursue flight compensation claims.",
@@ -1217,10 +1217,11 @@
       "highlight": "no win, no fee",
       "bullets": [
         "there is no cost to submit a claim",
-        "we only charge a fee if we successfully obtain compensation",
-        "our fee is a percentage of the compensation you receive"
+        "we only charge a fee if we successfully obtain compensation for you",
+        "our standard service fee is 20% of the compensation recovered, including VAT",
+        "the fee is deducted from the compensation before your share is paid to you, unless the airline pays you directly"
       ],
-      "note": "The applicable percentage and any additional conditions are clearly stated when you approve that we handle your claim."
+      "note": "Example: if €600 is recovered, our standard fee is €120 and €480 remains for you. If no compensation is recovered, you pay no service fee."
     },
 
     "payout": {
@@ -1426,6 +1427,49 @@
 }
   }
 }
+},
+"homeEligibility": {
+  "badge": "EU261 COMPENSATION",
+  "title": "Could your flight qualify for compensation?",
+  "description": "EU passenger rights may entitle you to compensation when a flight is seriously delayed, cancelled or you are denied boarding. The amount can depend on the route, distance and circumstances.",
+  "bands": {
+    "short": {
+      "title": "Shorter flights",
+      "body": "Up to €250 per passenger for eligible flights of 1,500 km or less."
+    },
+    "medium": {
+      "title": "Medium-distance flights",
+      "body": "Up to €400 per passenger for eligible intra-EU flights over 1,500 km and certain other flights between 1,500 and 3,500 km."
+    },
+    "long": {
+      "title": "Long-distance flights",
+      "body": "Up to €600 per passenger for eligible flights over 3,500 km where the €600 compensation band applies."
+    }
+  },
+  "reasons": {
+    "delay": "Arrival delayed by 3+ hours",
+    "cancellation": "Flight cancelled",
+    "deniedBoarding": "Denied boarding"
+  },
+  "disclaimer": "Compensation is not automatic. Eligibility depends on the circumstances of the disruption, the route and the applicable passenger-rights rules. Extraordinary circumstances may affect entitlement.",
+  "cta": "Check my flight"
+},
+"homeFee": {
+  "badge": "CLEAR PRICING",
+  "title": "One simple fee. More compensation stays with you.",
+  "description": "Our standard service fee is 20% including VAT. You pay nothing upfront, and no service fee if we do not recover compensation for you.",
+  "points": {
+    "noUpfront": "No upfront cost",
+    "onlyIfPaid": "No win, no fee",
+    "vatIncluded": "20% incl. VAT"
+  },
+  "termsLink": "See our terms",
+  "exampleLabel": "Example",
+  "compensation": "Compensation recovered",
+  "fee": "FlightClaimly fee",
+  "youKeep": "You keep",
+  "exampleNote": "If €600 is recovered, our standard fee is €120 and €480 remains for you."
 }
 }
+
 

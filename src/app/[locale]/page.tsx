@@ -8,6 +8,8 @@ import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import AirportInput from '@/components/AirportInput';
+import EligibilitySection from '@/components/home/EligibilitySection';
+import FeeSection from '@/components/home/FeeSection';
 
 
 
@@ -718,16 +720,19 @@ placeholder={t("hero.toPlaceholder")}
 
         </section>
 
+
         {/* Läs mer – precis vid kanten innan man scrollar till stegen */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-2 mb-4 flex justify-center">
           <a
-            href="#how"
+            href="#eligibility"
             className="inline-flex items-center gap-1 text-[15px] font-semibold text-slate-800 hover:text-slate-900 transition-colors"
           >
             {t('sections.readMore')}
             <span className="text-slate-400 text-base animate-bounce">↓</span>
           </a>
         </div>
+
+         <EligibilitySection />
 
         {/* Dina 3 enkla steg – ljusgrå band-sektion */}
         <section id="how" className="bg-slate-50/80 border-y border-slate-100">
@@ -794,6 +799,8 @@ placeholder={t("hero.toPlaceholder")}
             </div>
           </div>
         </section>
+
+        <FeeSection />
 
         {/* ---------------------------------------------------- */}
         {/* ⭐ ULTRA CLEAN TRUST ROW – No background boxes */}
