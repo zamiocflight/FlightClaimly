@@ -427,9 +427,9 @@
   },
 
   "trustRow": {
-    "eu261": "EU261 rights",
-    "lowFee": "No win, no fee — low fee",
-    "gdpr": "GDPR-safe handling"
+    "eu261": "EU261 passenger rights",
+"lowFee": "No hidden fees",
+"gdpr": "Secure data handling"
   },
 
   "why": {
@@ -1432,20 +1432,23 @@
   "badge": "EU261 COMPENSATION",
   "title": "Could your flight qualify for compensation?",
   "description": "EU passenger rights may entitle you to compensation when a flight is seriously delayed, cancelled or you are denied boarding. The amount can depend on the route, distance and circumstances.",
-  "bands": {
-    "short": {
-      "title": "Shorter flights",
-      "body": "Up to €250 per passenger for eligible flights of 1,500 km or less."
-    },
-    "medium": {
-      "title": "Medium-distance flights",
-      "body": "Up to €400 per passenger for eligible intra-EU flights over 1,500 km and certain other flights between 1,500 and 3,500 km."
-    },
-    "long": {
-      "title": "Long-distance flights",
-      "body": "Up to €600 per passenger for eligible flights over 3,500 km where the €600 compensation band applies."
-    }
+"bands": {
+  "short": {
+    "distance": "UP TO 1,500 KM",
+    "title": "Shorter flights",
+    "body": "Up to €250 per passenger for eligible flights of 1,500 km or less."
   },
+  "medium": {
+    "distance": "MID & LONGER EU FLIGHTS",
+    "title": "Medium-distance flights",
+    "body": "Up to €400 per passenger for eligible intra-EU flights over 1,500 km and certain other flights between 1,500 and 3,500 km."
+  },
+  "long": {
+    "distance": "CERTAIN FLIGHTS OVER 3,500 KM",
+    "title": "Long-distance flights",
+    "body": "Up to €600 per passenger for eligible flights over 3,500 km where the €600 compensation band applies."
+  }
+},
   "reasons": {
     "delay": "Arrival delayed by 3+ hours",
     "cancellation": "Flight cancelled",
@@ -1469,6 +1472,41 @@
   "fee": "FlightClaimly fee",
   "youKeep": "You keep",
   "exampleNote": "If €600 is recovered, our standard fee is €120 and €480 remains for you."
+},
+"homeBrandStory": {
+  "badge": "WE HANDLE THE CLAIM",
+  "title": "We handle the airline. You get on with your life.",
+  "description": "Flight disruption is stressful enough. We take care of the claim process, communication and follow-up with the airline — while keeping you informed from start to payout.",
+  "points": {
+    "airline": "We deal with the airline",
+    "updates": "Clear case updates",
+    "payout": "You keep track from start to payout"
+  },
+  "cta": "Why FlightClaimly",
+  "imageAlt": "Airplane wing above the clouds at sunset"
+},
+"homeExplore": {
+  "badge": "EXPLORE FLIGHT RIGHTS",
+  "title": "Know what applies to your journey.",
+  "description": "Flight disruption rules can be confusing. Explore the situation that applies to you and understand your rights before you make a claim.",
+  "cards": {
+    "delays": {
+      "title": "Delayed flight",
+      "description": "See when a flight delay may qualify for compensation and what rules apply."
+    },
+    "cancellations": {
+      "title": "Cancelled flight",
+      "description": "Understand your rights when an airline cancels your flight."
+    },
+    "rights": {
+      "title": "Passenger rights",
+      "description": "Explore EU261 passenger rights, compensation rules and when airlines must pay."
+    },
+    "explore": {
+      "title": "Explore airlines & airports",
+      "description": "Find passenger-rights information connected to airlines, airports and your journey."
+    }
+  }
 }
 }
 

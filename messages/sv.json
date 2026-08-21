@@ -1430,6 +1430,86 @@
 }
   }
 }
+},
+"homeEligibility": {
+  "badge": "EU261-ERSÄTTNING",
+  "title": "Kan ditt flyg ge rätt till ersättning?",
+  "description": "EU:s passagerarrättigheter kan ge dig rätt till ersättning om ditt flyg är kraftigt försenat, inställt eller om du nekas ombordstigning. Beloppet kan bero på rutten, avståndet och omständigheterna.",
+  "bands": {
+  "short": {
+    "distance": "UPP TILL 1 500 KM",
+    "title": "Kortare flygningar",
+    "body": "Upp till €250 per passagerare för berättigade flygningar på 1 500 km eller mindre."
+  },
+  "medium": {
+    "distance": "MEDELLÅNGA OCH LÄNGRE EU-FLYG",
+    "title": "Medellånga flygningar",
+    "body": "Upp till €400 per passagerare för berättigade flygningar inom EU över 1 500 km och vissa andra flygningar mellan 1 500 och 3 500 km."
+  },
+  "long": {
+    "distance": "VISSA FLYG ÖVER 3 500 KM",
+    "title": "Långdistansflygningar",
+    "body": "Upp till €600 per passagerare för berättigade flygningar över 3 500 km där ersättningsnivån på €600 gäller."
+  }
+},
+  "reasons": {
+    "delay": "Ankomst försenad med 3+ timmar",
+    "cancellation": "Flyget inställt",
+    "deniedBoarding": "Nekad ombordstigning"
+  },
+  "disclaimer": "Ersättning är inte automatisk. Din rätt till ersättning beror på omständigheterna kring störningen, rutten och vilka passagerarrättigheter som gäller. Extraordinära omständigheter kan påverka rätten till ersättning.",
+  "cta": "Kontrollera mitt flyg"
+},
+"homeFee": {
+  "badge": "TYDLIG PRISSÄTTNING",
+  "title": "En enkel avgift. Mer av ersättningen stannar hos dig.",
+  "description": "Vår standardavgift är 20 % inklusive moms. Du betalar ingenting i förskott och ingen serviceavgift om vi inte lyckas få ersättning åt dig.",
+  "points": {
+    "noUpfront": "Ingen kostnad i förskott",
+    "onlyIfPaid": "Ingen ersättning, ingen avgift",
+    "vatIncluded": "20 % inkl. moms"
+  },
+  "termsLink": "Se våra villkor",
+  "exampleLabel": "Exempel",
+  "compensation": "Ersättning vi får ut",
+  "fee": "FlightClaimlys avgift",
+  "youKeep": "Du behåller",
+  "exampleNote": "Om vi får ut €600 är vår standardavgift €120 och du behåller €480."
+},
+"homeBrandStory": {
+  "badge": "VI HANTERAR ÄRENDET",
+  "title": "Vi tar hand om flygbolaget. Du går vidare med ditt liv.",
+  "description": "En flygstörning är stressig nog. Vi tar hand om ersättningsärendet, kommunikationen och uppföljningen med flygbolaget — samtidigt som vi håller dig informerad från start till utbetalning.",
+  "points": {
+    "airline": "Vi sköter kontakten med flygbolaget",
+    "updates": "Tydliga uppdateringar om ditt ärende",
+    "payout": "Följ ärendet från start till utbetalning"
+  },
+  "cta": "Varför FlightClaimly",
+  "imageAlt": "Flygplansvinge ovanför molnen i solnedgång"
+},
+"homeExplore": {
+  "badge": "UTFORSKA DINA FLYGRÄTTIGHETER",
+  "title": "Ta reda på vad som gäller för din resa.",
+  "description": "Reglerna vid flygstörningar kan vara svåra att förstå. Utforska vad som gäller för just din situation och förstå dina rättigheter innan du gör ett ersättningsanspråk.",
+  "cards": {
+    "delays": {
+      "title": "Försenat flyg",
+      "description": "Se när en flygförsening kan ge rätt till ersättning och vilka regler som gäller."
+    },
+    "cancellations": {
+      "title": "Inställt flyg",
+      "description": "Förstå dina rättigheter när ett flygbolag ställer in ditt flyg."
+    },
+    "rights": {
+      "title": "Passagerarrättigheter",
+      "description": "Utforska EU261, reglerna för flygersättning och när flygbolag är skyldiga att betala."
+    },
+    "explore": {
+      "title": "Utforska flygbolag & flygplatser",
+      "description": "Hitta information om passagerarrättigheter kopplad till flygbolag, flygplatser och din resa."
+    }
+  }
 }
 
 }

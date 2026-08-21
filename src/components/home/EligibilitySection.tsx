@@ -7,17 +7,14 @@ const compensationBands = [
   {
     amount: '€250',
     key: 'short',
-    distance: 'UP TO 1,500 KM',
   },
   {
     amount: '€400',
     key: 'medium',
-    distance: 'MID & LONGER EU FLIGHTS',
   },
   {
     amount: '€600',
     key: 'long',
-    distance: 'CERTAIN FLIGHTS OVER 3,500 KM',
   },
 ] as const;
 
@@ -142,7 +139,7 @@ export default function EligibilitySection() {
                 </div>
 
                 <div className="mt-5 text-sm font-bold uppercase tracking-[0.14em] text-white/55">
-                  {band.distance}
+                  {t(`bands.${band.key}.distance`)}
                 </div>
 
                 <h3 className="mt-3 text-xl font-bold text-white">

@@ -1383,6 +1383,83 @@
         }
       }
     }
+  },
+  "homeEligibility": {
+  "badge": "EU261-ENTSCHÄDIGUNG",
+  "title": "Könnte Ihr Flug für eine Entschädigung infrage kommen?",
+  "description": "Nach den EU-Fluggastrechten können Sie Anspruch auf Entschädigung haben, wenn Ihr Flug erheblich verspätet oder annulliert wurde oder Ihnen die Beförderung verweigert wurde. Die Höhe kann von Strecke, Entfernung und den Umständen abhängen.",
+  "bands": {
+    "short": {
+      "title": "Kürzere Flüge",
+      "body": "Bis zu 250 € pro Passagier für anspruchsberechtigte Flüge über 1.500 km oder weniger."
+    },
+    "medium": {
+      "title": "Mittelstreckenflüge",
+      "body": "Bis zu 400 € pro Passagier für anspruchsberechtigte Flüge innerhalb der EU über 1.500 km sowie bestimmte andere Flüge zwischen 1.500 und 3.500 km."
+    },
+    "long": {
+      "title": "Langstreckenflüge",
+      "body": "Bis zu 600 € pro Passagier für anspruchsberechtigte Flüge über 3.500 km, sofern die Entschädigungsstufe von 600 € gilt."
+    }
+  },
+  "reasons": {
+    "delay": "Ankunft um 3+ Stunden verspätet",
+    "cancellation": "Flug annulliert",
+    "deniedBoarding": "Beförderung verweigert"
+  },
+  "disclaimer": "Eine Entschädigung erfolgt nicht automatisch. Der Anspruch hängt von den Umständen der Flugstörung, der Strecke und den anwendbaren Fluggastrechten ab. Außergewöhnliche Umstände können den Anspruch beeinflussen.",
+  "cta": "Meinen Flug prüfen"
+},
+"homeFee": {
+  "badge": "TRANSPARENTE PREISE",
+  "title": "Eine einfache Gebühr. Mehr von Ihrer Entschädigung bleibt bei Ihnen.",
+  "description": "Unsere Standard-Servicegebühr beträgt 20 % inklusive MwSt. Sie zahlen nichts im Voraus und keine Servicegebühr, wenn wir keine Entschädigung für Sie durchsetzen.",
+  "points": {
+    "noUpfront": "Keine Vorauszahlung",
+    "onlyIfPaid": "Kein Erfolg, keine Gebühr",
+    "vatIncluded": "20 % inkl. MwSt."
+  },
+  "termsLink": "Unsere Bedingungen ansehen",
+  "exampleLabel": "Beispiel",
+  "compensation": "Erhaltene Entschädigung",
+  "fee": "FlightClaimly-Gebühr",
+  "youKeep": "Sie behalten",
+  "exampleNote": "Wenn 600 € durchgesetzt werden, beträgt unsere Standardgebühr 120 € und Sie behalten 480 €."
+},
+"homeBrandStory": {
+  "badge": "WIR KÜMMERN UNS UM DEN FALL",
+  "title": "Wir kümmern uns um die Airline. Sie machen mit Ihrem Leben weiter.",
+  "description": "Eine Flugstörung ist stressig genug. Wir übernehmen die Bearbeitung Ihres Anspruchs, die Kommunikation und die Nachverfolgung mit der Airline — und halten Sie vom Start bis zur Auszahlung auf dem Laufenden.",
+  "points": {
+    "airline": "Wir übernehmen die Kommunikation mit der Airline",
+    "updates": "Klare Updates zu Ihrem Fall",
+    "payout": "Verfolgen Sie Ihren Fall vom Start bis zur Auszahlung"
+  },
+  "cta": "Warum FlightClaimly",
+  "imageAlt": "Flugzeugflügel über den Wolken bei Sonnenuntergang"
+},
+"homeExplore": {
+  "badge": "FLUGGASTRECHTE ENTDECKEN",
+  "title": "Erfahren Sie, was für Ihre Reise gilt.",
+  "description": "Die Regeln bei Flugstörungen können kompliziert sein. Finden Sie heraus, was auf Ihre Situation zutrifft, und verstehen Sie Ihre Rechte, bevor Sie einen Entschädigungsanspruch einreichen.",
+  "cards": {
+    "delays": {
+      "title": "Verspäteter Flug",
+      "description": "Erfahren Sie, wann eine Flugverspätung zu einer Entschädigung berechtigen kann und welche Regeln gelten."
+    },
+    "cancellations": {
+      "title": "Annullierter Flug",
+      "description": "Verstehen Sie Ihre Rechte, wenn eine Airline Ihren Flug annulliert."
+    },
+    "rights": {
+      "title": "Fluggastrechte",
+      "description": "Entdecken Sie Ihre Rechte nach EU261, die Entschädigungsregeln und wann Airlines zahlen müssen."
+    },
+    "explore": {
+      "title": "Airlines & Flughäfen entdecken",
+      "description": "Finden Sie Informationen zu Fluggastrechten in Verbindung mit Airlines, Flughäfen und Ihrer Reise."
+    }
   }
+}
   
 }

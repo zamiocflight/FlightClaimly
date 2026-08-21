@@ -1426,5 +1426,82 @@
 }
   }
 }
+},
+"homeEligibility": {
+  "badge": "EU261-COMPENSATIE",
+  "title": "Komt uw vlucht mogelijk in aanmerking voor compensatie?",
+  "description": "Volgens de Europese passagiersrechten kunt u recht hebben op compensatie wanneer uw vlucht ernstig vertraagd of geannuleerd is, of wanneer u de toegang tot de vlucht wordt geweigerd. Het bedrag kan afhangen van de route, afstand en omstandigheden.",
+  "bands": {
+    "short": {
+      "title": "Kortere vluchten",
+      "body": "Tot €250 per passagier voor in aanmerking komende vluchten van 1.500 km of minder."
+    },
+    "medium": {
+      "title": "Middellange vluchten",
+      "body": "Tot €400 per passagier voor in aanmerking komende vluchten binnen de EU van meer dan 1.500 km en bepaalde andere vluchten tussen 1.500 en 3.500 km."
+    },
+    "long": {
+      "title": "Langeafstandsvluchten",
+      "body": "Tot €600 per passagier voor in aanmerking komende vluchten van meer dan 3.500 km waarvoor het compensatieniveau van €600 geldt."
+    }
+  },
+  "reasons": {
+    "delay": "Aankomst 3+ uur vertraagd",
+    "cancellation": "Vlucht geannuleerd",
+    "deniedBoarding": "Instappen geweigerd"
+  },
+  "disclaimer": "Compensatie is niet automatisch. Of u in aanmerking komt, hangt af van de omstandigheden van de verstoring, de route en de toepasselijke passagiersrechten. Buitengewone omstandigheden kunnen van invloed zijn op uw recht op compensatie.",
+  "cta": "Mijn vlucht controleren"
+},
+"homeFee": {
+  "badge": "TRANSPARANTE PRIJZEN",
+  "title": "Eén eenvoudige vergoeding. Meer compensatie blijft voor u.",
+  "description": "Onze standaard servicevergoeding is 20% inclusief btw. U betaalt niets vooraf en geen servicevergoeding als we geen compensatie voor u verkrijgen.",
+  "points": {
+    "noUpfront": "Geen kosten vooraf",
+    "onlyIfPaid": "Geen resultaat, geen kosten",
+    "vatIncluded": "20% incl. btw"
+  },
+  "termsLink": "Bekijk onze voorwaarden",
+  "exampleLabel": "Voorbeeld",
+  "compensation": "Verkregen compensatie",
+  "fee": "FlightClaimly-vergoeding",
+  "youKeep": "U houdt",
+  "exampleNote": "Als €600 wordt verkregen, bedraagt onze standaardvergoeding €120 en houdt u €480 over."
+},
+"homeBrandStory": {
+  "badge": "WIJ REGELEN UW CLAIM",
+  "title": "Wij regelen het met de luchtvaartmaatschappij. U gaat verder met uw leven.",
+  "description": "Een vluchtverstoring is al stressvol genoeg. Wij verzorgen de claim, de communicatie en de opvolging met de luchtvaartmaatschappij — terwijl we u van begin tot uitbetaling op de hoogte houden.",
+  "points": {
+    "airline": "Wij nemen contact op met de luchtvaartmaatschappij",
+    "updates": "Duidelijke updates over uw zaak",
+    "payout": "Volg uw zaak van begin tot uitbetaling"
+  },
+  "cta": "Waarom FlightClaimly",
+  "imageAlt": "Vliegtuigvleugel boven de wolken bij zonsondergang"
+},
+"homeExplore": {
+  "badge": "ONTDEK UW VLIEGRECHTEN",
+  "title": "Ontdek wat voor uw reis van toepassing is.",
+  "description": "Regels bij vluchtverstoringen kunnen verwarrend zijn. Bekijk wat op uw situatie van toepassing is en begrijp uw rechten voordat u een compensatieclaim indient.",
+  "cards": {
+    "delays": {
+      "title": "Vertraagde vlucht",
+      "description": "Bekijk wanneer een vluchtvertraging recht kan geven op compensatie en welke regels gelden."
+    },
+    "cancellations": {
+      "title": "Geannuleerde vlucht",
+      "description": "Begrijp uw rechten wanneer een luchtvaartmaatschappij uw vlucht annuleert."
+    },
+    "rights": {
+      "title": "Passagiersrechten",
+      "description": "Ontdek uw EU261-passagiersrechten, de compensatieregels en wanneer luchtvaartmaatschappijen moeten betalen."
+    },
+    "explore": {
+      "title": "Ontdek luchtvaartmaatschappijen & luchthavens",
+      "description": "Vind informatie over passagiersrechten die verband houdt met luchtvaartmaatschappijen, luchthavens en uw reis."
+    }
+  }
 }
 }

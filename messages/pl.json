@@ -1681,6 +1681,83 @@
         "terms": "Terms & Conditions",
         "privacy": "Privacy"
       }
+    },
+    "homeEligibility": {
+  "badge": "ODSZKODOWANIE EU261",
+  "title": "Czy Twój lot może kwalifikować się do odszkodowania?",
+  "description": "Zgodnie z prawami pasażerów w UE możesz mieć prawo do odszkodowania, jeśli Twój lot był znacznie opóźniony, został odwołany lub odmówiono Ci wejścia na pokład. Wysokość odszkodowania może zależeć od trasy, odległości i okoliczności.",
+  "bands": {
+    "short": {
+      "title": "Krótsze loty",
+      "body": "Do €250 na pasażera w przypadku kwalifikujących się lotów o długości do 1 500 km."
+    },
+    "medium": {
+      "title": "Loty średniodystansowe",
+      "body": "Do €400 na pasażera w przypadku kwalifikujących się lotów wewnątrz UE powyżej 1 500 km oraz niektórych innych lotów o długości od 1 500 do 3 500 km."
+    },
+    "long": {
+      "title": "Loty długodystansowe",
+      "body": "Do €600 na pasażera w przypadku kwalifikujących się lotów powyżej 3 500 km, do których ma zastosowanie stawka odszkodowania w wysokości €600."
     }
+  },
+  "reasons": {
+    "delay": "Przylot opóźniony o 3+ godziny",
+    "cancellation": "Lot odwołany",
+    "deniedBoarding": "Odmowa wejścia na pokład"
+  },
+  "disclaimer": "Odszkodowanie nie jest przyznawane automatycznie. Prawo do odszkodowania zależy od okoliczności zakłócenia lotu, trasy oraz obowiązujących przepisów dotyczących praw pasażerów. Nadzwyczajne okoliczności mogą mieć wpływ na prawo do odszkodowania.",
+  "cta": "Sprawdź mój lot"
+},
+"homeFee": {
+  "badge": "JASNE CENY",
+  "title": "Jedna prosta opłata. Więcej odszkodowania zostaje dla Ciebie.",
+  "description": "Nasza standardowa opłata za usługę wynosi 20% z VAT. Nie płacisz nic z góry ani żadnej opłaty za usługę, jeśli nie uzyskamy dla Ciebie odszkodowania.",
+  "points": {
+    "noUpfront": "Brak opłat z góry",
+    "onlyIfPaid": "Brak wygranej, brak opłaty",
+    "vatIncluded": "20% z VAT"
+  },
+  "termsLink": "Zobacz nasze warunki",
+  "exampleLabel": "Przykład",
+  "compensation": "Uzyskane odszkodowanie",
+  "fee": "Opłata FlightClaimly",
+  "youKeep": "Dla Ciebie",
+  "exampleNote": "Jeśli uzyskamy €600 odszkodowania, nasza standardowa opłata wyniesie €120, a dla Ciebie pozostanie €480."
+},
+"homeBrandStory": {
+  "badge": "MY ZAJMUJEMY SIĘ ROSZCZENIEM",
+  "title": "My zajmujemy się linią lotniczą. Ty zajmujesz się swoim życiem.",
+  "description": "Zakłócenie lotu jest wystarczająco stresujące. Zajmujemy się procesem dochodzenia odszkodowania, kontaktem i dalszą komunikacją z linią lotniczą — a Ty jesteś na bieżąco od początku sprawy aż do wypłaty.",
+  "points": {
+    "airline": "My kontaktujemy się z linią lotniczą",
+    "updates": "Jasne informacje o statusie sprawy",
+    "payout": "Śledzisz sprawę od początku aż do wypłaty"
+  },
+  "cta": "Dlaczego FlightClaimly",
+  "imageAlt": "Skrzydło samolotu nad chmurami o zachodzie słońca"
+},
+"homeExplore": {
+  "badge": "POZNAJ PRAWA PASAŻERA",
+  "title": "Sprawdź, jakie prawa dotyczą Twojej podróży.",
+  "description": "Przepisy dotyczące zakłóceń lotów mogą być skomplikowane. Sprawdź sytuację, która dotyczy Ciebie, i poznaj swoje prawa przed złożeniem wniosku o odszkodowanie.",
+  "cards": {
+    "delays": {
+      "title": "Opóźniony lot",
+      "description": "Sprawdź, kiedy opóźnienie lotu może kwalifikować się do odszkodowania i jakie przepisy mają zastosowanie."
+    },
+    "cancellations": {
+      "title": "Odwołany lot",
+      "description": "Poznaj swoje prawa, gdy linia lotnicza odwołuje Twój lot."
+    },
+    "rights": {
+      "title": "Prawa pasażera",
+      "description": "Poznaj prawa pasażerów wynikające z EU261, zasady dotyczące odszkodowań oraz sytuacje, w których linie lotnicze muszą wypłacić odszkodowanie."
+    },
+    "explore": {
+      "title": "Poznaj linie lotnicze i lotniska",
+      "description": "Znajdź informacje o prawach pasażera związane z liniami lotniczymi, lotniskami i Twoją podróżą."
+    }
+  }
+}
   }
 

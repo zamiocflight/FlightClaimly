@@ -1366,5 +1366,82 @@
         }
       }
     }
+  },
+  "homeEligibility": {
+  "badge": "EU261-KOMPENSATION",
+  "title": "Kan din flyvning give ret til kompensation?",
+  "description": "EU's passagerrettigheder kan give dig ret til kompensation, hvis din flyvning er væsentligt forsinket, aflyst, eller hvis du bliver nægtet boarding. Beløbet kan afhænge af ruten, afstanden og omstændighederne.",
+  "bands": {
+    "short": {
+      "title": "Kortere flyvninger",
+      "body": "Op til €250 pr. passager for berettigede flyvninger på 1.500 km eller mindre."
+    },
+    "medium": {
+      "title": "Mellemlange flyvninger",
+      "body": "Op til €400 pr. passager for berettigede flyvninger inden for EU på over 1.500 km og visse andre flyvninger mellem 1.500 og 3.500 km."
+    },
+    "long": {
+      "title": "Langdistanceflyvninger",
+      "body": "Op til €600 pr. passager for berettigede flyvninger på over 3.500 km, hvor kompensationsniveauet på €600 gælder."
+    }
+  },
+  "reasons": {
+    "delay": "Ankomst forsinket med 3+ timer",
+    "cancellation": "Flyvningen aflyst",
+    "deniedBoarding": "Nægtet boarding"
+  },
+  "disclaimer": "Kompensation er ikke automatisk. Din ret til kompensation afhænger af omstændighederne omkring forstyrrelsen, ruten og de gældende passagerrettigheder. Ekstraordinære omstændigheder kan påvirke retten til kompensation.",
+  "cta": "Tjek min flyvning"
+},
+"homeFee": {
+  "badge": "KLAR PRISSÆTNING",
+  "title": "Ét enkelt gebyr. Mere af kompensationen bliver hos dig.",
+  "description": "Vores standardgebyr er 20 % inklusive moms. Du betaler intet på forhånd og intet servicegebyr, hvis vi ikke opnår kompensation til dig.",
+  "points": {
+    "noUpfront": "Ingen betaling på forhånd",
+    "onlyIfPaid": "Ingen kompensation, intet gebyr",
+    "vatIncluded": "20 % inkl. moms"
+  },
+  "termsLink": "Se vores vilkår",
+  "exampleLabel": "Eksempel",
+  "compensation": "Opnået kompensation",
+  "fee": "FlightClaimlys gebyr",
+  "youKeep": "Du beholder",
+  "exampleNote": "Hvis vi opnår €600 i kompensation, er vores standardgebyr €120, og du beholder €480."
+},
+"homeBrandStory": {
+  "badge": "VI HÅNDTERER KRAVET",
+  "title": "Vi tager os af flyselskabet. Du kommer videre med dit liv.",
+  "description": "En flyforstyrrelse er stressende nok. Vi tager os af kompensationskravet, kommunikationen og opfølgningen med flyselskabet — samtidig med at vi holder dig informeret fra start til udbetaling.",
+  "points": {
+    "airline": "Vi tager os af kontakten med flyselskabet",
+    "updates": "Klare opdateringer om din sag",
+    "payout": "Følg sagen fra start til udbetaling"
+  },
+  "cta": "Hvorfor FlightClaimly",
+  "imageAlt": "Flyvinge over skyerne ved solnedgang"
+},
+"homeExplore": {
+  "badge": "UDFORSK DINE FLYRETTIGHEDER",
+  "title": "Find ud af, hvad der gælder for din rejse.",
+  "description": "Reglerne ved flyforstyrrelser kan være svære at gennemskue. Udforsk, hvad der gælder for din situation, og forstå dine rettigheder, før du indsender et kompensationskrav.",
+  "cards": {
+    "delays": {
+      "title": "Forsinket fly",
+      "description": "Se, hvornår en flyforsinkelse kan give ret til kompensation, og hvilke regler der gælder."
+    },
+    "cancellations": {
+      "title": "Aflyst fly",
+      "description": "Forstå dine rettigheder, når et flyselskab aflyser din flyvning."
+    },
+    "rights": {
+      "title": "Passagerrettigheder",
+      "description": "Udforsk EU261-passagerrettigheder, reglerne for kompensation, og hvornår flyselskaber skal betale."
+    },
+    "explore": {
+      "title": "Udforsk flyselskaber & lufthavne",
+      "description": "Find information om passagerrettigheder knyttet til flyselskaber, lufthavne og din rejse."
+    }
   }
+}
 }

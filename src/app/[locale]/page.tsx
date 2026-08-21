@@ -10,6 +10,8 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 import AirportInput from '@/components/AirportInput';
 import EligibilitySection from '@/components/home/EligibilitySection';
 import FeeSection from '@/components/home/FeeSection';
+import ExploreSection from '@/components/home/ExploreSection';
+import BrandStorySection from '@/components/home/BrandStorySection';
 
 
 
@@ -736,7 +738,7 @@ placeholder={t("hero.toPlaceholder")}
 
         {/* Dina 3 enkla steg – ljusgrå band-sektion */}
         <section id="how" className="bg-slate-50/80 border-y border-slate-100">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14 md:py-20">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 md:pt-14 md:pb-14">
             {/* Header */}
             <div className="mb-8 md:mb-10 max-w-2xl">
               <div className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 shadow-sm ring-1 ring-slate-200 mb-3">
@@ -794,7 +796,7 @@ placeholder={t("hero.toPlaceholder")}
             </div>
 
             {/* Subtil divider mot nästa sektion */}
-            <div className="mt-12 flex justify-center">
+            <div className="mt-9 flex justify-center">
               <div className="h-px w-16 bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200 rounded-full" />
             </div>
           </div>
@@ -829,10 +831,18 @@ placeholder={t("hero.toPlaceholder")}
           </div>
         </div>
 
+        <BrandStorySection />
+
         {/* Varför välja FlightClaimly – vit sektion */}
         <section id="why" className="bg-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-18 pb-16 md:pt-20 md:pb-20">
             <div className="mb-10 max-w-3xl">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 shadow-sm ring-1 ring-slate-200">
+  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+  <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-600">
+    WHY FLIGHTCLAIMLY
+  </span>
+</div>
               <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 mb-4">
                 {t('why.title')}
               </h2>
@@ -880,6 +890,8 @@ placeholder={t("hero.toPlaceholder")}
             </div>
           </div>
         </section>
+
+         <ExploreSection />
 
         {/* GLOBAL FOOTER */}
         <footer className="bg-slate-950 text-slate-300">

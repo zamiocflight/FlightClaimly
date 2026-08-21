@@ -1650,6 +1650,83 @@
         "terms": "Terms & Conditions",
         "privacy": "Privacy"
       }
+    },
+    "homeEligibility": {
+  "badge": "EU261-KORVAUS",
+  "title": "Voisiko lentosi oikeuttaa korvaukseen?",
+  "description": "EU:n lentomatkustajan oikeuksien perusteella saatat olla oikeutettu korvaukseen, jos lentosi viivästyy merkittävästi, perutaan tai sinulta evätään pääsy lennolle. Korvauksen määrä voi riippua reitistä, etäisyydestä ja olosuhteista.",
+  "bands": {
+    "short": {
+      "title": "Lyhyemmät lennot",
+      "body": "Enintään €250 matkustajaa kohden korvaukseen oikeuttavista lennoista, joiden pituus on enintään 1 500 km."
+    },
+    "medium": {
+      "title": "Keskipitkät lennot",
+      "body": "Enintään €400 matkustajaa kohden korvaukseen oikeuttavista EU:n sisäisistä yli 1 500 km:n lennoista sekä tietyistä muista 1 500–3 500 km:n lennoista."
+    },
+    "long": {
+      "title": "Pitkän matkan lennot",
+      "body": "Enintään €600 matkustajaa kohden korvaukseen oikeuttavista yli 3 500 km:n lennoista, joihin sovelletaan €600:n korvaustasoa."
     }
+  },
+  "reasons": {
+    "delay": "Saapuminen viivästyi 3+ tuntia",
+    "cancellation": "Lento peruttiin",
+    "deniedBoarding": "Pääsy lennolle evättiin"
+  },
+  "disclaimer": "Korvausta ei makseta automaattisesti. Oikeus korvaukseen riippuu lennon häiriön olosuhteista, reitistä ja sovellettavista lentomatkustajan oikeuksista. Poikkeukselliset olosuhteet voivat vaikuttaa oikeuteen saada korvausta.",
+  "cta": "Tarkista lentoni"
+},
+"homeFee": {
+  "badge": "SELKEÄ HINNOITTELU",
+  "title": "Yksi selkeä palkkio. Sinulle jää enemmän korvauksesta.",
+  "description": "Palvelumaksumme on normaalisti 20 % sisältäen ALV:n. Et maksa mitään etukäteen etkä palvelumaksua, jos emme saa sinulle korvausta.",
+  "points": {
+    "noUpfront": "Ei ennakkomaksua",
+    "onlyIfPaid": "Ei korvausta, ei maksua",
+    "vatIncluded": "20 % sis. ALV"
+  },
+  "termsLink": "Katso ehtomme",
+  "exampleLabel": "Esimerkki",
+  "compensation": "Saatu korvaus",
+  "fee": "FlightClaimlyn palvelumaksu",
+  "youKeep": "Sinulle jää",
+  "exampleNote": "Jos saamme sinulle €600 korvauksen, palvelumaksumme on €120 ja sinulle jää €480."
+},
+"homeBrandStory": {
+  "badge": "ME HOIDAMME KORVAUSASIAN",
+  "title": "Me hoidamme asian lentoyhtiön kanssa. Sinä voit jatkaa elämääsi.",
+  "description": "Lentohäiriö on jo itsessään tarpeeksi stressaava. Me hoidamme korvausasian, yhteydenpidon ja seurannan lentoyhtiön kanssa — ja pidämme sinut ajan tasalla alusta aina korvauksen maksamiseen asti.",
+  "points": {
+    "airline": "Me hoidamme yhteydenpidon lentoyhtiön kanssa",
+    "updates": "Selkeät päivitykset tapauksestasi",
+    "payout": "Seuraa tapaustasi alusta korvauksen maksuun asti"
+  },
+  "cta": "Miksi FlightClaimly",
+  "imageAlt": "Lentokoneen siipi pilvien yläpuolella auringonlaskussa"
+},
+"homeExplore": {
+  "badge": "TUTUSTU LENTOMATKUSTAJAN OIKEUKSIIN",
+  "title": "Selvitä, mitkä oikeudet koskevat matkaasi.",
+  "description": "Lentohäiriöitä koskevat säännöt voivat olla monimutkaisia. Tutustu omaan tilanteeseesi sovellettaviin sääntöihin ja oikeuksiisi ennen korvausvaatimuksen tekemistä.",
+  "cards": {
+    "delays": {
+      "title": "Viivästynyt lento",
+      "description": "Katso, milloin lennon viivästyminen voi oikeuttaa korvaukseen ja mitä sääntöjä sovelletaan."
+    },
+    "cancellations": {
+      "title": "Peruttu lento",
+      "description": "Tutustu oikeuksiisi, kun lentoyhtiö peruu lentosi."
+    },
+    "rights": {
+      "title": "Lentomatkustajan oikeudet",
+      "description": "Tutustu EU261-matkustajanoikeuksiin, korvaussääntöihin ja siihen, milloin lentoyhtiön on maksettava korvausta."
+    },
+    "explore": {
+      "title": "Tutustu lentoyhtiöihin & lentoasemiin",
+      "description": "Löydä lentomatkustajan oikeuksia koskevaa tietoa lentoyhtiöistä, lentoasemista ja matkastasi."
+    }
+  }
+}
   }
 
