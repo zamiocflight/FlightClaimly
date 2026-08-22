@@ -397,185 +397,185 @@
   }
 },
 
-  "sections": {
-    "readMore": "Learn more"
-  },
+"sections": {
+  "readMore": "Meer informatie"
+},
 
-  "how": {
-    "badge": "How it works",
-    "title": "3 simple steps to compensation",
-    "desc": {
-      "before": "We keep it simple: you submit your flight, we handle the airline, and you receive compensation under",
-      "link": "EU261 passenger rights",
-      "after": "."
+"how": {
+  "badge": "Zo werkt het",
+  "title": "3 eenvoudige stappen naar compensatie",
+  "desc": {
+    "before": "We houden het eenvoudig: u dient uw vlucht in, wij regelen de communicatie met de luchtvaartmaatschappij en u ontvangt compensatie volgens",
+    "link": "EU261-passagiersrechten",
+    "after": "."
+  },
+  "stepLabel": "Stap {n}",
+  "steps": {
+    "1": {
+      "title": "Dien uw vlucht in",
+      "body": "Voer uw vluchtnummer, datum en route in. We voeren een snelle eerste controle uit en bekijken of uw zaak mogelijk in aanmerking komt onder EU261."
     },
-    "stepLabel": "Step {n}",
-    "steps": {
-      "1": {
-        "title": "Submit your flight",
-        "body": "Enter your flight number, date and route. We run a quick pre-check and confirm whether your case may qualify under EU261."
-      },
-      "2": {
-        "title": "We handle the claim",
-        "body": "Add your details and documents. We contact the airline, manage the formal process, and keep you updated by email and on your claim page."
-      },
-      "3": {
-        "title": "Get paid",
-        "body": "Once the airline pays, we transfer your compensation to you minus our fee. No result — no fee. You’ll always receive a clear payout summary."
-      }
+    "2": {
+      "title": "Wij behandelen de claim",
+      "body": "Voeg uw gegevens en documenten toe. Wij nemen contact op met de luchtvaartmaatschappij, behandelen het formele proces en houden u via e-mail en uw claimpagina op de hoogte."
+    },
+    "3": {
+      "title": "Ontvang uw compensatie",
+      "body": "Zodra de luchtvaartmaatschappij betaalt, maken wij uw compensatie minus onze vergoeding aan u over. Geen resultaat — geen kosten. U ontvangt altijd een duidelijk overzicht van de uitbetaling."
     }
-  },
+  }
+},
 
-  "trustRow": {
-    "eu261": "EU261 rights",
-    "lowFee": "No win, no fee — low fee",
-    "gdpr": "GDPR-safe handling"
-  },
+"trustRow": {
+  "eu261": "EU261-passagiersrechten",
+  "lowFee": "Geen verborgen kosten",
+  "gdpr": "Veilige verwerking van gegevens"
+},
 
-  "why": {
-    "title": "Why choose FlightClaimly?",
-    "cards": {
-      "peace": {
-        "badge": "Peace of mind",
-        "title": "We deal with the airline — you relax",
-        "body": "We handle all communication with the airline for you. No long email threads, no legal maze — just clear status updates so you can focus on life and your next trip."
-      },
-      "fee": {
-        "badge": "Low fee",
-        "title": "You keep more than with competitors",
-        "body": "Our fee is among the lowest in the Nordics. Many competitors charge more or hide costs in the fine print. We keep it transparent so you keep a larger share of your compensation."
-      },
-      "smart": {
-        "badge": "Smart & fair",
-        "title": "Automated when possible — legal help when needed",
-        "body": "We use smart tech to speed up straightforward cases. If legal help is needed, we cover it up front and only deduct it if we win. You never pay out of pocket and always know the terms in advance."
-      }
+"why": {
+  "title": "Waarom kiezen voor FlightClaimly?",
+  "cards": {
+    "peace": {
+      "badge": "Gemoedsrust",
+      "title": "Wij regelen het met de luchtvaartmaatschappij — u hoeft niets te doen",
+      "body": "Wij verzorgen alle communicatie met de luchtvaartmaatschappij voor u. Geen lange e-mailwisselingen en geen juridisch doolhof — alleen duidelijke statusupdates, zodat u zich kunt richten op uw leven en uw volgende reis."
+    },
+    "fee": {
+      "badge": "Lage vergoeding",
+      "title": "U houdt meer over dan bij veel concurrenten",
+      "body": "Onze vergoeding behoort tot de laagste in de Nordics. Veel concurrenten rekenen meer of verbergen kosten in de kleine lettertjes. Wij houden het transparant, zodat een groter deel van uw compensatie bij u blijft."
+    },
+    "smart": {
+      "badge": "Slim & eerlijk",
+      "title": "Geautomatiseerd waar mogelijk — juridische hulp wanneer nodig",
+      "body": "We gebruiken slimme technologie om eenvoudige zaken sneller te behandelen. Als juridische hulp nodig is, schieten wij de kosten voor en brengen we deze alleen in rekening als we winnen. U betaalt nooit vooraf en weet altijd vooraf welke voorwaarden gelden."
     }
-  },
+  }
+},
 
-  "footer": {
-    "pitch": "We help passengers get the compensation they’re entitled to under EU261 — with no upfront costs, no hidden fees, and no legal hassle.",
-    "badges": {
-      "lowFee": "No win, no fee — low fee",
-      "eu": "EU261 / UK261",
-      "gdpr": "GDPR-compliant handling"
-    },
-    "columns": {
-      "services": "Services",
-      "company": "About FlightClaimly"
-    },
-    "links": {
-      "rightsLabel": "Your rights (EU261)",
-      "terms": "Terms",
-      "privacy": "Privacy"
-    },
-    "bottom": {
-      "copyright": "© {year} FlightClaimly. All rights reserved.",
-      "disclaimer": "FlightClaimly is an independent service and not affiliated with airlines. We act on your behalf as a passenger."
-    }
+"footer": {
+  "pitch": "Wij helpen passagiers de compensatie te krijgen waar zij volgens EU261 recht op hebben — zonder kosten vooraf, verborgen kosten of juridisch gedoe.",
+  "badges": {
+    "lowFee": "Geen resultaat, geen kosten",
+    "eu": "EU261 / UK261",
+    "gdpr": "AVG-conforme gegevensverwerking"
   },
+  "columns": {
+    "services": "Diensten",
+    "company": "Over FlightClaimly"
+  },
+  "links": {
+    "rightsLabel": "Uw rechten (EU261)",
+    "terms": "Voorwaarden",
+    "privacy": "Privacy"
+  },
+  "bottom": {
+    "copyright": "© {year} FlightClaimly. Alle rechten voorbehouden.",
+    "disclaimer": "FlightClaimly is een onafhankelijke dienst en is niet verbonden aan luchtvaartmaatschappijen. Wij handelen namens u als passagier."
+  }
+},
 
 "hero": {
   "badges": {
     "eu": "EU261 / UK261",
-    "fee": "LOW FEE",
-    "noWinNoFee": "NO WIN, NO FEE"
+    "fee": "LAGE VERGOEDING",
+    "noWinNoFee": "GEEN RESULTAAT, GEEN KOSTEN"
   },
-  "title": "Get up to €600 compensation for delayed or cancelled flights — without the hassle.",
-  "titleLine1": "Get up to €600 in compensation",
-  "titleLine2": "for delayed or cancelled flights!",
-  "fromLabel": "Departure airport",
-  "fromPlaceholder": "Departure airport",
-  "toLabel": "Final destination airport",
-  "toPlaceholder": "Final destination airport",
+  "title": "Ontvang tot €600 compensatie voor een vertraagde of geannuleerde vlucht — zonder gedoe.",
+  "titleLine1": "Ontvang tot €600 compensatie",
+  "titleLine2": "voor vertraagde of geannuleerde vluchten!",
+  "fromLabel": "Vertrekluchthaven",
+  "fromPlaceholder": "Vertrekluchthaven",
+  "toLabel": "Eindbestemming",
+  "toPlaceholder": "Luchthaven van eindbestemming",
   "subtitle": {
-    "beforeDelayed": "Check if your",
-    "delayedLink": "delayed flight",
-    "between": "or",
-    "cancelledLink": "cancelled flight",
-    "afterCancelled": "qualifies for compensation under",
+    "beforeDelayed": "Controleer of uw",
+    "delayedLink": "vertraagde vlucht",
+    "between": "of",
+    "cancelledLink": "geannuleerde vlucht",
+    "afterCancelled": "in aanmerking komt voor compensatie volgens",
     "eu261Link": "EU261",
-    "afterEu261": ". We handle your claim with the airline — you only pay if you get paid."
+    "afterEu261": ". Wij behandelen uw claim met de luchtvaartmaatschappij — u betaalt alleen als u betaald krijgt."
   },
-  "cta": "Check my flight now",
-  "searchCta": "Check compensation",
+  "cta": "Controleer mijn vlucht",
+  "searchCta": "Controleer compensatie",
   "trust": {
-    "beforeLink": "Takes about 2 minutes. No payment unless you receive compensation —",
-    "link": "learn more about our fee.",
+    "beforeLink": "Duurt ongeveer 2 minuten. U betaalt niets tenzij u compensatie ontvangt —",
+    "link": "lees meer over onze vergoeding.",
     "afterLink": ""
   }
 },
 
-  "precheck": {
-    "steps": {
-      "step1": "Check your flight",
-      "step2": "Enter your details"
+"precheck": {
+  "steps": {
+    "step1": "Controleer uw vlucht",
+    "step2": "Vul uw gegevens in"
+  },
+  "quick": {
+    "title": "Snelle controle",
+    "descBeforeLink": "Vul uw vluchtgegevens in — we schatten snel in of u mogelijk recht heeft op compensatie volgens",
+    "eu261Link": "EU261",
+    "descAfterLink": ".",
+    "labels": {
+      "flightNumber": "Vluchtnummer",
+      "date": "Datum",
+      "from": "Van",
+      "to": "Naar",
+      "connectionTitle": "Overstap",
+      "direct": "Rechtstreekse vlucht",
+      "withConnection": "Met overstap"
     },
-    "quick": {
-      "title": "Quick eligibility check",
-      "descBeforeLink": "Enter your flight details — we’ll quickly estimate whether you may be entitled to compensation under",
-      "eu261Link": "EU261",
-      "descAfterLink": ".",
-      "labels": {
-        "flightNumber": "Flight number",
-        "date": "Date",
-        "from": "From",
-        "to": "To",
-        "connectionTitle": "Connection",
-        "direct": "Direct flight",
-        "withConnection": "With a connection"
-      },
-      "placeholders": {
-        "flightNumber": "e.g. SK1420",
-        "from": "CPH",
-        "to": "ARN",
-        "connection": "e.g. FRA, DOH or Paris CDG"
-      },
-      "actions": {
-        "remove": "Remove",
-        "addAirport": "+ Add another airport"
-      },
-      "submit": {
-        "default": "Check my flight",
-        "checking": "Checking…"
-      },
-      "result": {
-  "eligible": "Based on historical flight data, your flight appears to have been delayed by more than 3 hours. You may be entitled to compensation.",
-  "notConfirmed": "We couldn’t confirm a delay of more than 3 hours using available data. You can still continue — airline records may differ."
+    "placeholders": {
+      "flightNumber": "bijv. SK1420",
+      "from": "CPH",
+      "to": "AMS",
+      "connection": "bijv. FRA, DOH of Parijs CDG"
+    },
+    "actions": {
+      "remove": "Verwijderen",
+      "addAirport": "+ Nog een luchthaven toevoegen"
+    },
+    "submit": {
+      "default": "Controleer mijn vlucht",
+      "checking": "Controleren…"
+    },
+    "result": {
+      "eligible": "Op basis van historische vluchtgegevens lijkt uw vlucht meer dan 3 uur vertraagd te zijn geweest. Mogelijk heeft u recht op compensatie.",
+      "notConfirmed": "We konden met de beschikbare gegevens geen vertraging van meer dan 3 uur bevestigen. U kunt nog steeds doorgaan — de gegevens van de luchtvaartmaatschappij kunnen afwijken."
+    }
+  },
+  "details": {
+    "goodNewsStrong": "Goed nieuws!",
+    "goodNewsText": "Het lijkt erop dat uw vlucht mogelijk in aanmerking komt voor compensatie volgens EU261. Vul uw gegevens in en wij nemen het vanaf hier over.",
+    "title": "Uw gegevens",
+    "labels": {
+      "fullName": "Volledige naam",
+      "email": "E-mail",
+      "phone": "Telefoonnummer",
+      "bookingNumber": "Boekingsreferentie"
+    },
+    "placeholders": {
+      "fullName": "Uw naam",
+      "email": "u@voorbeeld.nl",
+      "phone": "+31 20 123 4567",
+      "bookingNumber": "Bijv. AB12CD"
+    },
+     "submit": {
+  "default": "Dien mijn claim in",
+  "sending": "Uw claim wordt ingediend…"
+},
+"consent": {
+  "before": "Door uw claim in te dienen, gaat u akkoord met onze",
+  "terms": "Voorwaarden",
+  "and": "en",
+  "privacy": "Privacyverklaring",
+  "after": "."
+},
+"trust": {
+  "gdpr": "AVG-conform",
+  "noWinNoFee": "Geen resultaat, geen kosten",
+  "fastHandling": "Snelle afhandeling"
 }
-    },
-    "details": {
-      "goodNewsStrong": "Good news!",
-      "goodNewsText": "It looks like your flight may qualify for compensation under EU261. Enter your details and we’ll take it from here.",
-      "title": "Your details",
-      "labels": {
-        "fullName": "Full name",
-        "email": "Email",
-        "phone": "Phone number",
-        "bookingNumber": "Booking reference"
-      },
-      "placeholders": {
-        "fullName": "Your name",
-        "email": "you@email.com",
-        "phone": "+44 20 1234 5678",
-        "bookingNumber": "ABC123"
-      },
-      "submit": {
-        "default": "Submit my claim",
-        "sending": "Submitting your claim…"
-      },
-      "consent": {
-        "before": "By submitting, you agree to our",
-        "terms": "Terms",
-        "and": "&",
-        "privacy": "Privacy",
-        "after": "."
-      },
-      "trust": {
-        "gdpr": "GDPR-ready",
-        "noWinNoFee": "No win, no fee",
-        "fastHandling": "Fast handling"
-      }
     }
   },
 
@@ -1433,17 +1433,20 @@
   "description": "Volgens de Europese passagiersrechten kunt u recht hebben op compensatie wanneer uw vlucht ernstig vertraagd of geannuleerd is, of wanneer u de toegang tot de vlucht wordt geweigerd. Het bedrag kan afhangen van de route, afstand en omstandigheden.",
   "bands": {
     "short": {
-      "title": "Kortere vluchten",
-      "body": "Tot €250 per passagier voor in aanmerking komende vluchten van 1.500 km of minder."
-    },
-    "medium": {
-      "title": "Middellange vluchten",
-      "body": "Tot €400 per passagier voor in aanmerking komende vluchten binnen de EU van meer dan 1.500 km en bepaalde andere vluchten tussen 1.500 en 3.500 km."
-    },
-    "long": {
-      "title": "Langeafstandsvluchten",
-      "body": "Tot €600 per passagier voor in aanmerking komende vluchten van meer dan 3.500 km waarvoor het compensatieniveau van €600 geldt."
-    }
+  "distance": "TOT 1.500 KM",
+  "title": "Kortere vluchten",
+  "body": "Tot €250 per passagier voor in aanmerking komende vluchten van 1.500 km of minder."
+},
+"medium": {
+  "distance": "MIDDELLANGE EN LANGERE EU-VLUCHTEN",
+  "title": "Middellange vluchten",
+  "body": "Tot €400 per passagier voor in aanmerking komende vluchten binnen de EU van meer dan 1.500 km en bepaalde andere vluchten tussen 1.500 en 3.500 km."
+},
+"long": {
+  "distance": "BEPAALDE VLUCHTEN BOVEN 3.500 KM",
+  "title": "Langeafstandsvluchten",
+  "body": "Tot €600 per passagier voor in aanmerking komende vluchten van meer dan 3.500 km waarvoor het compensatieniveau van €600 geldt."
+}
   },
   "reasons": {
     "delay": "Aankomst 3+ uur vertraagd",

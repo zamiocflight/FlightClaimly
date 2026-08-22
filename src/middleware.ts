@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 
 const intlMiddleware = createMiddleware({
-  locales: ["sv", "en", "da", "de", "pl", "fi"], // <-- håll dessa "live" tills da/de har copy
+  locales: ["sv", "en", "da", "de", "nl", "pl", "fi"], // <-- håll dessa "live" tills da/de har copy
   defaultLocale: "sv",
   localePrefix: "always",
 });
@@ -13,6 +13,7 @@ const SUPPORTED_LOCALES = new Set([
   "en",
   "da",
   "de",
+  "nl",
   "pl",
   "fi",
 ]);

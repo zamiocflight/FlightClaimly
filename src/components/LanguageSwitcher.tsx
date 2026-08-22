@@ -9,6 +9,7 @@ const LOCALES = [
   { code: 'en', label: 'EN' },
   { code: 'da', label: 'DA' },
   { code: 'de', label: 'DE' },
+  { code: 'nl', label: 'NL' },
   { code: 'pl', label: 'PL' },
   { code: 'fi', label: 'FI' },
 ] as const;
@@ -30,6 +31,7 @@ function Flag({ locale }: { locale: LocaleCode }) {
       {locale === 'en' && <FlagGB />}
       {locale === 'da' && <FlagDK />}
       {locale === 'de' && <FlagDE />}
+      {locale === 'nl' && <FlagNL />}
       {locale === 'pl' && <FlagPL />}
       {locale === 'fi' && <FlagFI />}
     </span>
@@ -65,6 +67,16 @@ function FlagDE() {
       <rect width="22" height="14" fill="#000000" />
       <rect y="4.6667" width="22" height="4.6667" fill="#DD0000" />
       <rect y="9.3334" width="22" height="4.6666" fill="#FFCE00" />
+    </svg>
+  );
+}
+
+function FlagNL() {
+  return (
+    <svg viewBox="0 0 22 14" width="18" height="12" xmlns="http://www.w3.org/2000/svg">
+      <rect width="22" height="4.6667" fill="#AE1C28" />
+      <rect y="4.6667" width="22" height="4.6667" fill="#FFFFFF" />
+      <rect y="9.3334" width="22" height="4.6666" fill="#21468B" />
     </svg>
   );
 }
