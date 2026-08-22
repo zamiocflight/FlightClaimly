@@ -1688,17 +1688,20 @@
   "description": "Zgodnie z prawami pasażerów w UE możesz mieć prawo do odszkodowania, jeśli Twój lot był znacznie opóźniony, został odwołany lub odmówiono Ci wejścia na pokład. Wysokość odszkodowania może zależeć od trasy, odległości i okoliczności.",
   "bands": {
     "short": {
-      "title": "Krótsze loty",
-      "body": "Do €250 na pasażera w przypadku kwalifikujących się lotów o długości do 1 500 km."
-    },
-    "medium": {
-      "title": "Loty średniodystansowe",
-      "body": "Do €400 na pasażera w przypadku kwalifikujących się lotów wewnątrz UE powyżej 1 500 km oraz niektórych innych lotów o długości od 1 500 do 3 500 km."
-    },
-    "long": {
-      "title": "Loty długodystansowe",
-      "body": "Do €600 na pasażera w przypadku kwalifikujących się lotów powyżej 3 500 km, do których ma zastosowanie stawka odszkodowania w wysokości €600."
-    }
+  "distance": "DO 1 500 KM",
+  "title": "Krótsze loty",
+  "body": "Do €250 na pasażera w przypadku kwalifikujących się lotów o długości do 1 500 km."
+},
+"medium": {
+  "distance": "ŚREDNIE I DŁUŻSZE LOTY W UE",
+  "title": "Loty średniodystansowe",
+  "body": "Do €400 na pasażera w przypadku kwalifikujących się lotów wewnątrz UE powyżej 1 500 km oraz niektórych innych lotów o długości od 1 500 do 3 500 km."
+},
+"long": {
+  "distance": "WYBRANE LOTY POWYŻEJ 3 500 KM",
+  "title": "Loty długodystansowe",
+  "body": "Do €600 na pasażera w przypadku kwalifikujących się lotów powyżej 3 500 km, do których ma zastosowanie stawka odszkodowania w wysokości €600."
+}
   },
   "reasons": {
     "delay": "Przylot opóźniony o 3+ godziny",
