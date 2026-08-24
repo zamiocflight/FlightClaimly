@@ -108,11 +108,12 @@ export async function POST(
       "http://localhost:3000";
 
     const previewUrl =
-      `${baseUrl.replace(/\/$/, "")}/en/power-of-attorney` +
-      `?fullName=${encodeURIComponent(fullName)}` +
-      `&bookingReference=${encodeURIComponent(bookingReference)}` +
-      `&claimId=${encodeURIComponent(claimId)}` +
-      `&final=true`;
+  `${baseUrl.replace(/\/$/, "")}/en/power-of-attorney` +
+  `?fullName=${encodeURIComponent(fullName)}` +
+  `&bookingReference=${encodeURIComponent(bookingReference)}` +
+  `&claimId=${encodeURIComponent(claimId)}` +
+  `&final=true` +
+  `&signature=${encodeURIComponent(signatureDataUrl)}`;
 
     const htmlPdfBuffer = await renderAuthorityHtmlToPdf(previewUrl);
 
@@ -123,16 +124,6 @@ export async function POST(
     const page = pages[pages.length - 1];
 
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-
-    const sigBytes = dataUrlToUint8Array(signatureDataUrl);
-    const sigPng = await pdfDoc.embedPng(sigBytes);
-
-    page.drawImage(sigPng, {
-      x: 50,
-      y: 110,
-      width: 220,
-      height: 80,
-    });
 
     // 5. Digital verification stamp
     const stampPayload =
