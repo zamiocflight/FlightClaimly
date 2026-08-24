@@ -54,7 +54,9 @@ export default function PassengerAuthorityClient({
     setError("");
 
     try {
-      const signatureDataUrl = sigRef.current.toDataURL("image/png");
+      const signatureDataUrl = sigRef.current
+  .getTrimmedCanvas()
+  .toDataURL("image/png");
 
       const res = await fetch(
         `/api/passenger-authority/${encodeURIComponent(token)}/sign`,

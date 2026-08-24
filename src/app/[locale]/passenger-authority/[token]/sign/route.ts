@@ -122,8 +122,16 @@ export async function POST(
     // 4. Add passenger signature to PDF
     const pdfDoc = await PDFDocument.load(htmlPdfBuffer);
 
-    const pages = pdfDoc.getPages();
-    const page = pages[pages.length - 1];
+    let pages = pdfDoc.getPages();
+
+// Chromium creates one trailing blank page for the current LOA layout.
+// The actual authority document, including the signature box, fits on 2 pages.
+if (pages.length === 3) {
+  pdfDoc.removePage(2);
+  pages = pdfDoc.getPages();
+}
+
+const page = pages[pages.length - 1];
 
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
