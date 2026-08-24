@@ -461,3 +461,172 @@ Verification:
 
 Next Sprint:
 Sprint 6 – Flight Number Knowledge Engine
+
+---
+
+# Current Project State — 2026-08-24
+
+> This section supersedes older "Next Sprint" notes above.
+
+## Production Status
+
+🟢 Claim platform operational  
+🟢 Primary authority flow production verified  
+🟢 Multi-passenger authority flow production verified  
+🟢 Resend transactional email production verified  
+🟢 Admin document visibility verified  
+🟢 TypeScript clean  
+🟢 Main branch deployed
+
+---
+
+# Completed — Multi-Passenger Authority
+
+Completed and production tested:
+
+- individual authorization record per additional adult passenger
+- secure invitation token
+- Resend passenger invitation email
+- passenger authority landing page
+- authority review before signing
+- electronic signature
+- separate passenger authority PDF
+- shared parent claim
+- signed status and timestamps
+- authority PDF visible in admin
+- duplicate-sign protection
+- email failure does not invalidate claim
+- primary and passenger signatures use the same HTML/Puppeteer rendering model
+- two-page authority PDF
+- trimmed signature images
+- consistent authority fee/court language
+
+---
+
+# Legal / Terms Update
+
+Completed:
+
+- standard 20% incl. VAT fee remains the normal service fee
+- legal proceedings may involve additional fees or costs
+- any additional litigation terms require separate customer approval
+- broad authority remains available so customers do not automatically need to repeat the complete authorization process
+- separate procedural POA may still be requested if required by court/local counsel
+
+English and Swedish fee/Terms copy updated.
+
+Remaining localization cleanup:
+
+- da
+- de
+- pl
+- fi
+- nl
+
+These should be synchronized after English master wording is locked.
+
+---
+
+# Current Claims Work
+
+## Reijo / TAP legacy claim
+
+Status:
+
+🟡 Awaiting supporting evidence before final onboarding.
+
+Completed:
+
+- itinerary and disruption review
+- historical FlightAware investigation
+- TAP IATA → ICAO normalization (`TP → TAP`)
+- Portuguese limitation research
+- EU261 / Montreal Convention distinction reviewed
+- customer advised that the case appears worth pursuing
+- customer asked to forward the original Finnish consumer-authority communication regarding the claimed 20-year Portuguese limitation period
+
+Next:
+
+1. Receive original Finnish authority communication
+2. Translate/review original
+3. Verify cited legal basis
+4. Produce Final Claim Assessment
+5. Create Manual / Legacy Claim
+6. Generate individual secure authority links for both adult passengers
+7. Obtain both signatures
+8. Submit formal claim to TAP
+9. Manage airline correspondence
+10. Consider escalation only after merits/cost approval
+
+---
+
+# Next Product Capability
+
+## Manual / Legacy Claim Onboarding
+
+Purpose:
+
+Handle valid claims that are:
+
+- too old for the standard flight-search customer journey
+- manually investigated
+- received through email
+- imported from another channel
+- otherwise unsuitable for automated precheck
+
+Principle:
+
+Do NOT make the customer repeat irrelevant eligibility steps.
+
+Proposed flow:
+
+    Manual claim created/reviewed
+    ↓
+    claim data stored
+    ↓
+    secure authority link generated
+    ↓
+    customer reviews authority
+    ↓
+    customer signs
+    ↓
+    additional adult passengers receive individual authority links
+    ↓
+    documents appear in admin
+    ↓
+    claim ready for airline submission
+
+This should reuse the existing passenger token/signing/PDF architecture rather than create a parallel authorization system.
+
+---
+
+# Operational Workstreams
+
+FlightClaimly work should now be separated into two conversational workstreams:
+
+## Product / Growth
+
+- development
+- SEO
+- Knowledge Engine
+- programmatic SEO
+- SoMe
+- analytics
+- conversion
+- content
+
+## Claims Desk
+
+- customer claims
+- evidence review
+- itinerary reconstruction
+- legal analysis
+- compensation calculation
+- limitation
+- authority
+- airline demands
+- correspondence
+- escalation
+- recovery
+
+Individual customer facts should not be stored in general architecture documentation.

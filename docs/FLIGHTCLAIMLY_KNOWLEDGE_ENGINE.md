@@ -516,3 +516,80 @@ Priority order:
 8. Live Content Engine
 
 This approach ensures every completed engine becomes a reusable building block for future SEO expansion.
+
+---
+
+# Claims Intelligence Integration — 2026-08-24
+
+The Knowledge Engine and Claims Platform remain separate systems with separate responsibilities.
+
+However, real claims can become a future source of structured knowledge.
+
+## Principle
+
+Customer-specific facts must never be published or copied into the Knowledge Engine.
+
+Instead, resolved claims may produce anonymized and structured operational knowledge.
+
+Examples:
+
+- airline rejection categories
+- airline response times
+- extraordinary circumstance patterns
+- applicable limitation rules
+- ADR outcomes
+- court decisions
+- successful legal arguments
+- reimbursement categories
+- route-specific disruption patterns
+- authority requirements
+- jurisdiction-specific procedures
+
+---
+
+## Future Architecture
+
+    Claims Platform
+    ↓
+    Anonymized Operational Findings
+    ↓
+    Claims Intelligence Layer
+    ↓
+    Validated Knowledge
+    ↓
+    Knowledge Engine
+    ↓
+    SEO / Content / Support / AI
+
+Raw customer cases must never directly become public knowledge.
+
+Only validated, anonymized and reusable findings may cross from Claims Operations into the Knowledge Engine.
+
+---
+
+## Example
+
+A single historical TAP claim may reveal:
+
+- Portuguese limitation uncertainty
+- interaction between EU261 and the Montreal Convention
+- airline-specific handling practices
+- procedural authority requirements
+
+These findings should first remain within Claims Operations.
+
+If verified through authoritative sources or repeated case outcomes, they may later become reusable structured knowledge.
+
+---
+
+## Strategic Goal
+
+The Knowledge Engine should eventually learn from FlightClaimly's operational claims experience without compromising customer privacy or source quality.
+
+This creates a long-term feedback loop:
+
+    Knowledge improves claims
+    ↓
+    Claims generate operational evidence
+    ↓
+    Validated evidence improves knowledge

@@ -1050,3 +1050,219 @@ Architecture principles:
 - Date validation
 - Request timeout
 - Failure reporting
+---
+
+# Claims Platform Architecture Update — 2026-08-24
+
+## Status
+
+🟢 Production verified
+
+FlightClaimly's claim platform now supports individual authority management for multiple adult passengers within the same claim.
+
+This claims architecture is separate from the Knowledge Engine architecture and should not be confused with the SEO Authority Engine.
+
+---
+
+## Claim Structure
+
+One claim represents the shared travel case.
+
+A claim may contain:
+
+- Claim owner
+- One or more additional passengers
+- Individual authority documents
+- Supporting documents
+- Booking information
+- Flight information
+- Claim status
+- Claim correspondence
+
+Additional passengers do not create separate claims.
+
+They are connected to the parent claim through `claim_id`.
+
+---
+
+## Passenger Authority Architecture
+
+Database:
+
+`passenger_authorizations`
+
+Each adult additional passenger receives an individual authorization record containing:
+
+- passenger identity
+- claim relationship
+- email
+- authorization status
+- invite token
+- invited timestamp
+- signed timestamp
+- authority document path
+
+Authorization lifecycle:
+
+    pending
+    ↓
+    invite email successfully sent
+    ↓
+    invited
+    ↓
+    passenger opens secure token link
+    ↓
+    reviews authority
+    ↓
+    signs
+    ↓
+    signed
+
+A failed invitation email must never fail or invalidate the parent claim.
+
+The passenger remains `pending` if delivery is unsuccessful.
+
+---
+
+## Secure Passenger Signing
+
+Public route:
+
+`/[locale]/passenger-authority/[token]`
+
+The token identifies the individual passenger authorization.
+
+The signing page:
+
+- resolves the authorization securely by token
+- loads the associated parent claim
+- displays passenger and journey information
+- explains why individual authority is required
+- allows the passenger to review the authority before signing
+- allows the passenger to sign electronically
+- prevents duplicate signing
+
+Signing API:
+
+`/[locale]/passenger-authority/[token]/sign`
+
+Successful signing:
+
+1. generates the passenger's authority PDF
+2. stores the PDF in Supabase Storage
+3. marks the authorization `signed`
+4. records `signed_at`
+5. records `authority_path`
+6. adds the document to the parent claim attachments
+
+---
+
+## Authority Document Storage
+
+Claim owner authority:
+
+    claims/{claimId}/authority.pdf
+
+Additional adult passenger authority:
+
+    claims/{claimId}/passenger-authorities/{passengerAuthorizationId}.pdf
+
+Individual passenger authorities must never overwrite the claim owner's authority.
+
+---
+
+## Authority PDF Rendering
+
+Both primary and additional-passenger authorities now use the same HTML-based signature rendering architecture.
+
+Authority document:
+
+`src/app/[locale]/power-of-attorney/page.tsx`
+
+PDF renderer:
+
+`src/lib/authority/renderHtmlToPdf.ts`
+
+The signature is inserted into:
+
+`#authority-signature-box`
+
+before Puppeteer generates the PDF.
+
+Do not return to fixed PDF x/y signature placement.
+
+The HTML signature box is the source of truth for signature placement.
+
+Signature images are trimmed before PDF generation to remove unnecessary transparent canvas space.
+
+Production verification completed:
+
+- two-page authority document
+- signature inside Passenger Signature box
+- primary passenger working
+- additional passenger working
+
+---
+
+## Legal Authority Model
+
+The standard FlightClaimly authority remains broad enough to allow FlightClaimly to represent the passenger throughout the claim process, including judicial proceedings where appropriate.
+
+However:
+
+- the authority itself is not advance acceptance of additional court fees
+- additional legal/court fees or costs require separate customer approval before proceeding
+- a court or local lawyer may still require a separate procedural power of attorney
+
+This distinction must remain consistent across:
+
+- Authority Document
+- Authorization UI
+- Terms and Conditions
+
+---
+
+## Email Architecture
+
+Resend is used for transactional claim email.
+
+Verified flows:
+
+- internal new-claim notification
+- claim-owner status email
+- additional-passenger authority invitation
+
+Email delivery failure must not make a successfully stored claim appear to have failed.
+
+Passenger authorization status changes to `invited` only after the invitation email has been successfully sent.
+
+---
+
+## FlightAware
+
+FlightAware remains the primary live/historical flight-data provider.
+
+IATA → ICAO normalization includes:
+
+`TP → TAP`
+
+Historical cases that cannot be handled cleanly by the standard customer flow should not trigger redesign of the normal FlightAware flow.
+
+They should instead use the planned Manual / Legacy Claim Onboarding architecture.
+
+---
+
+## Claims Architecture Rule
+
+Do not build one-off customer-specific claim systems.
+
+If an exceptional case reveals a reusable operational requirement, implement it as a generic claims capability.
+
+Current example:
+
+    Reijo legacy claim
+    ↓
+    reveals need for
+    Manual / Legacy Claim Onboarding
+    ↓
+    reusable for future historical or manually reviewed claims.
