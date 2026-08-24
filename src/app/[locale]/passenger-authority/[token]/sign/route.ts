@@ -108,14 +108,16 @@ export async function POST(
       "http://localhost:3000";
 
     const previewUrl =
-  `${baseUrl.replace(/\/$/, "")}/en/power-of-attorney` +
-  `?fullName=${encodeURIComponent(fullName)}` +
-  `&bookingReference=${encodeURIComponent(bookingReference)}` +
-  `&claimId=${encodeURIComponent(claimId)}` +
-  `&final=true` +
-  `&signature=${encodeURIComponent(signatureDataUrl)}`;
+      `${baseUrl.replace(/\/$/, "")}/en/power-of-attorney` +
+      `?fullName=${encodeURIComponent(fullName)}` +
+      `&bookingReference=${encodeURIComponent(bookingReference)}` +
+      `&claimId=${encodeURIComponent(claimId)}` +
+      `&final=true`;
 
-    const htmlPdfBuffer = await renderAuthorityHtmlToPdf(previewUrl);
+    const htmlPdfBuffer = await renderAuthorityHtmlToPdf(
+  previewUrl,
+  signatureDataUrl
+);
 
     // 4. Add passenger signature to PDF
     const pdfDoc = await PDFDocument.load(htmlPdfBuffer);

@@ -110,7 +110,9 @@ export default async function PowerOfAttorneyPage({
                   Passenger Signature
                 </div>
 
-                <div className="h-14 border border-slate-300 rounded bg-slate-50 flex items-center px-2 overflow-hidden">
+                <div
+      id="authority-signature-box"
+      className="h-14 border border-slate-300 rounded bg-slate-50 flex items-center px-2 overflow-hidden">
                   {isFinal && signatureUrl ? (
                     <img
                       src={signatureUrl}

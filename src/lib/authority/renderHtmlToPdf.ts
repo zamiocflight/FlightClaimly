@@ -16,7 +16,10 @@ function findLocalChromeExecutable() {
   return candidates.find((path) => fs.existsSync(path));
 }
 
-export async function renderAuthorityHtmlToPdf(url: string) {
+export async function renderAuthorityHtmlToPdf(
+  url: string,
+  signatureDataUrl?: string
+) {
   const isProduction = process.env.NODE_ENV === "production";
 
   const executablePath = isProduction
@@ -49,6 +52,36 @@ export async function renderAuthorityHtmlToPdf(url: string) {
       waitUntil: "networkidle0",
       timeout: 60000,
     });
+
+   if (signatureDataUrl) {
+  await page.evaluate(async (signature) => {
+    const box = document.getElementById("authority-signature-box");
+
+    if (!box) {
+      throw new Error("Authority signature box not found");
+    }
+
+    box.innerHTML = "";
+
+    const img = document.createElement("img");
+    img.src = signature;
+    img.alt = "Passenger signature";
+
+    img.style.display = "block";
+    img.style.maxWidth = "100%";
+    img.style.maxHeight = "48px";
+    img.style.width = "auto";
+    img.style.height = "auto";
+    img.style.objectFit = "contain";
+    img.style.margin = "0 auto";
+
+    box.appendChild(img);
+
+    if (typeof img.decode === "function") {
+      await img.decode();
+    }
+  }, signatureDataUrl);
+}
 
     await page.emulateMediaType("screen");
 
