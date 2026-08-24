@@ -1215,16 +1215,17 @@
     },
 
     "fees": {
-      "title": "4. Avgifter och ersättning",
-      "lead": "FlightClaimly arbetar enligt principen",
-      "highlight": "no win, no fee",
-      "bullets": [
-        "det kostar ingenting att skicka in ett ärende",
-        "vi tar bara betalt om vi lyckas få ersättning från flygbolaget",
-        "vår avgift är en procentuell andel av den ersättning du får"
-      ],
-      "note": "Den aktuella procentsatsen och eventuella övriga villkor framgår tydligt i samband med att du godkänner att vi driver ditt ärende."
-    },
+  "title": "4. Avgifter och ersättning",
+  "lead": "FlightClaimly arbetar enligt principen",
+  "highlight": "no win, no fee",
+  "bullets": [
+    "det kostar ingenting att skicka in ett ärende",
+    "vi tar bara betalt om vi lyckas få ersättning från flygbolaget",
+    "vår standardavgift är 20 % inklusive moms av den ersättning vi återvinner åt dig",
+    "om rättsliga åtgärder blir nödvändiga kan ytterligare avgifter eller kostnader tillkomma"
+  ],
+  "note": "Innan vi inleder rättsliga åtgärder som innebär ytterligare avgifter eller kostnader för dig informerar vi dig om de tillämpliga villkoren och inhämtar ditt separata godkännande. Fullmakten du lämnar till FlightClaimly innebär inte i sig att du på förhand accepterar sådana ytterligare avgifter eller kostnader."
+   },
 
     "payout": {
       "title": "5. Utbetalning till dig",

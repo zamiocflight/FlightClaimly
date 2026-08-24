@@ -188,8 +188,8 @@
   "important": "Important",
   "signatureGuidance": "Your signature should closely resemble the signature on your ID.",
   "feeTitle": "Yes — no win, no fee. You only pay 20% incl. VAT if we succeed.",
-  "feeSubtitle": "The fee is deducted from your compensation.",
-  "legal": {
+  "feeSubtitle": "The fee is deducted from your compensation. If legal action becomes necessary, additional fees or costs may apply. We will explain the applicable terms and obtain your approval before proceeding.",
+    "legal": {
     "before": "By signing, you agree to our",
     "terms": "Terms & Conditions",
     "and": "and",
@@ -1212,17 +1212,17 @@
     },
 
     "fees": {
-      "title": "4. Fees and compensation",
-      "lead": "FlightClaimly operates on a",
-      "highlight": "no win, no fee",
-      "bullets": [
-        "there is no cost to submit a claim",
-        "we only charge a fee if we successfully obtain compensation for you",
-        "our standard service fee is 20% of the compensation recovered, including VAT",
-        "the fee is deducted from the compensation before your share is paid to you, unless the airline pays you directly"
-      ],
-      "note": "Example: if €600 is recovered, our standard fee is €120 and €480 remains for you. If no compensation is recovered, you pay no service fee."
-    },
+  "title": "4. Fees and compensation",
+  "lead": "FlightClaimly operates on a",
+  "highlight": "no win, no fee",
+  "bullets": [
+    "there is no charge to submit a claim",
+    "we only charge a fee if we successfully recover compensation for you",
+    "our standard fee is 20% including VAT of the compensation we recover for you",
+    "if legal action becomes necessary, additional fees or costs may apply"
+  ],
+  "note": "Before we commence legal proceedings that involve additional fees or costs payable by you, we will explain the applicable terms and obtain your separate approval. The authority you grant to FlightClaimly does not by itself constitute advance acceptance of any such additional fees or costs."
+  },
 
     "payout": {
       "title": "5. Payment to you",

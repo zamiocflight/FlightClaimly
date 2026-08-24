@@ -50,6 +50,7 @@ function toFlightAwareIdent(flightNumber: string) {
     DY: "NOZ",
     D8: "NSZ",
     TK: "THY",
+    TP: "TAP",
   };
 
   const match = cleaned.match(/^([A-Z0-9]{2})(\d+)$/);

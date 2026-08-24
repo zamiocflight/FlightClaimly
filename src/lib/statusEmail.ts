@@ -27,7 +27,7 @@ export type StatusCode =
   | 'rejected';
 
 // ✅ Utökad language support (utan att ändra layout)
-export type Lang = 'sv' | 'en' | 'da' | 'de' | 'pl' | 'fi';
+export type Lang = 'sv' | 'en' | 'da' | 'de' | 'pl' | 'fi' | "nl";
 
 type SendStatusEmailArgs = {
   id: string;

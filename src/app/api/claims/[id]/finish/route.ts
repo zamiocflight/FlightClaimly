@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { getClaimById, markFinishEmailSent } from "@/lib/claims";
 import { sendStatusEmail } from "@/lib/statusEmail";
 
-type Lang = "sv" | "en" | "da" | "de" | "pl" | "fi";
+type Lang = "sv" | "en" | "da" | "de" | "pl" | "fi" | "nl";
 
 export async function POST(
   req: Request,
@@ -45,10 +45,15 @@ const ok = await sendStatusEmail({
 });
 
 if (!ok) {
-  return NextResponse.json(
-    { error: "Mail failed" },
-    { status: 500 }
+  console.warn(
+    "⚠️ Finish email failed, but claim is already saved:",
+    claim.id
   );
+
+  return NextResponse.json({
+    ok: true,
+    emailSent: false,
+  });
 }
 
 await markFinishEmailSent(claim.id);

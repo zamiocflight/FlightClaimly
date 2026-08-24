@@ -116,24 +116,61 @@ const layovers = (() => {
         <p>{claim.status}</p>
       </div>
 
-      {/* Attachments */}
+            {/* Attachments */}
       <div>
         <h2 className="font-semibold text-lg mb-2">Documents</h2>
 
         {claim.attachments && claim.attachments.length > 0 ? (
-          <ul className="space-y-2">
-            {claim.attachments.map((att, i) => (
-              <li key={i}>
-                <a
-                  href={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/attachments/${att.path}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sky-600 hover:underline"
+          <ul className="space-y-3">
+            {claim.attachments.map((att: any, i: number) => {
+              const isPassengerAuthority =
+                att.type === "passenger_authority";
+
+              const isMainAuthority =
+                att.type === "authority";
+
+              let label = att.filename || att.path;
+
+              if (isMainAuthority) {
+                label = `Authority document — ${claim.name}`;
+              }
+
+              if (isPassengerAuthority) {
+                label = `Passenger authority — ${
+                  att.passengerName || "Additional passenger"
+                }`;
+              }
+
+              return (
+                <li
+                  key={i}
+                  className="rounded-lg border border-slate-200 bg-white px-4 py-3"
                 >
-                  {att.filename || att.path}
-                </a>
-              </li>
-            ))}
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <div className="font-medium text-slate-900">
+                        {label}
+                      </div>
+
+                      {isPassengerAuthority && (
+                        <div className="mt-1 text-sm text-emerald-700">
+                          Signed
+                        </div>
+                      )}
+                    </div>
+
+                    <a
+                      href={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/attachments/${att.path}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sky-600 hover:underline"
+                    >
+                      View document
+                    </a>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         ) : (
           <p>—</p>

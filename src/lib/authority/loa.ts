@@ -114,7 +114,15 @@ Failure to cooperate may result in suspension or discontinuation of the Claim.
 
 FlightClaimly reserves the right to discontinue pursuit of the Claim where further action would be economically unreasonable, legally futile, disproportionate in cost relative to the likely recovery, or otherwise not commercially justified.
 
-9. Digital Signature and Automated Processing
+9. Judicial Proceedings and Additional Costs
+
+The authority granted under this Mandate to initiate or conduct judicial proceedings does not constitute advance acceptance of any additional court-related service fee, court fee, legal cost, or other charge payable by me.
+
+If FlightClaimly recommends judicial proceedings that may involve additional fees or costs payable by me, FlightClaimly shall inform me of the applicable terms before proceeding and obtain my separate approval.
+
+Where a court, external legal representative, or applicable procedural law requires a separate or additional power of attorney, authorisation, or other document, I agree to provide such documentation as reasonably required to pursue the Claim.
+
+10. Digital Signature and Automated Processing
 
 I acknowledge that this Mandate may be signed electronically and that my digital signature may be used in claims, pleadings, court filings, submissions, and communications necessary to enforce the Claim.
 
@@ -122,7 +130,7 @@ I further acknowledge and authorise that FlightClaimly may use automated claim s
 
 My personal data may be processed and transferred within the European Union to the extent necessary for pursuing and enforcing the Claim.
 
-10. Governing Law
+11. Governing Law
 
 This Mandate shall be governed by Estonian law and applicable European Union passenger rights legislation.
 `.trim();
@@ -220,7 +228,15 @@ La falta de cooperación podrá dar lugar a la suspensión o interrupción de la
 
 FlightClaimly se reserva el derecho de interrumpir la tramitación de la Reclamación cuando continuar resulte económicamente irrazonable, jurídicamente inútil, desproporcionado en relación con la recuperación probable o de otro modo no comercialmente justificado.
 
-9. Firma Electrónica y Tratamiento Automatizado
+9. Procedimientos Judiciales y Costes Adicionales
+
+La autoridad otorgada en virtud de este Mandato para iniciar o llevar a cabo procedimientos judiciales no constituye una aceptación anticipada de ninguna tarifa adicional por servicios relacionados con procedimientos judiciales, tasa judicial, coste legal u otro cargo que deba ser abonado por mí.
+
+Si FlightClaimly recomienda iniciar procedimientos judiciales que puedan implicar tarifas o costes adicionales a mi cargo, FlightClaimly me informará de las condiciones aplicables antes de proceder y obtendrá mi aprobación por separado.
+
+Cuando un tribunal, representante legal externo o la legislación procesal aplicable requiera un poder, autorización u otro documento separado o adicional, me comprometo a proporcionar dicha documentación en la medida en que sea razonablemente necesaria para tramitar la Reclamación.
+
+10. Firma Electrónica y Tratamiento Automatizado
 
 Reconozco que este Mandato puede ser firmado electrónicamente y que mi firma digital podrá utilizarse en reclamaciones, escritos, presentaciones judiciales, solicitudes y comunicaciones necesarias para hacer valer la Reclamación.
 
@@ -228,7 +244,7 @@ Asimismo, reconozco y autorizo que FlightClaimly pueda utilizar sistemas automat
 
 Mis datos personales podrán ser tratados y transferidos dentro de la Unión Europea en la medida necesaria para perseguir y hacer valer la Reclamación.
 
-10. Legislación Aplicable
+11. Legislación Aplicable
 
 Este Mandato se regirá por la legislación de Estonia y por la normativa aplicable de derechos de los pasajeros de la Unión Europea.
 `.trim();

@@ -4,6 +4,10 @@ export const runtime = 'nodejs';
 import { NextResponse } from 'next/server';
 import { addClaim } from '@/lib/claims';
 import { sendClaimNotificationEmail } from "@/lib/claimNotificationEmail";
+import {
+  createPassengerAuthorizationsForClaim,
+  invitePendingAdultPassengers,
+} from "@/lib/passengerAuthorizations";
 
 type Lang = 'sv' | 'en' | 'da' | 'de' | 'pl' | 'fi';
 
@@ -105,6 +109,14 @@ const claim = await addClaim({
   compensationAmount,
   locale,
 });
+
+    await createPassengerAuthorizationsForClaim(claim.id, pax);
+
+    await invitePendingAdultPassengers(
+  claim.id,
+  claim.name,
+  locale
+);
 
     console.log('✅ /api/claims – NYTT ärende skapat i Supabase:', claim);
 
