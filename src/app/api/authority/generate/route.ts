@@ -6,10 +6,7 @@ import crypto from "crypto";
 import { renderAuthorityHtmlToPdf } from "@/lib/authority/renderHtmlToPdf";
 import { createClient } from "@supabase/supabase-js";
 
-function dataUrlToUint8Array(dataUrl: string) {
-  const base64 = dataUrl.split(",")[1] || "";
-  return Uint8Array.from(Buffer.from(base64, "base64"));
-}
+
 
 export async function POST(req: Request) {
   console.log("ENV CHECK");
@@ -47,31 +44,25 @@ export async function POST(req: Request) {
       `&claimId=${encodeURIComponent(claimId)}` +
       `&final=true`;
 
-    const htmlPdfBuffer = await renderAuthorityHtmlToPdf(previewUrl);
+    const htmlPdfBuffer = await renderAuthorityHtmlToPdf(
+   previewUrl,
+   signatureDataUrl
+   );
 
     // 2️⃣ Load PDF into pdf-lib
     const pdfDoc = await PDFDocument.load(htmlPdfBuffer);
 
-    const pages = pdfDoc.getPages();
-    const page = pages[pages.length - 1]; // always last page
+    let pages = pdfDoc.getPages();
+
+if (pages.length === 3) {
+  pdfDoc.removePage(2);
+  pages = pdfDoc.getPages();
+}
+
+const page = pages[pages.length - 1];
 
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-    // 3️⃣ Embed signature
-    const sigBytes = dataUrlToUint8Array(signatureDataUrl);
-    const sigPng = await pdfDoc.embedPng(sigBytes);
-
-    const sigWidth = 220;
-    const sigHeight = 80;
-    const sigX = 50;
-    const sigY = 110;
-
-    page.drawImage(sigPng, {
-      x: sigX,
-      y: sigY,
-      width: sigWidth,
-      height: sigHeight,
-    });
 
     // 4️⃣ Digital verification stamp
     const stampPayload = `${claimId}|${bookingReference}|${fullName}`;
