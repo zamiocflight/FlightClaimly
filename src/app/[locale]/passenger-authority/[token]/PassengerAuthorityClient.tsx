@@ -10,6 +10,70 @@ type Props = {
   locale: string;
 };
 
+function getTrimmedSignatureDataUrl(canvas: HTMLCanvasElement) {
+  const ctx = canvas.getContext("2d");
+
+  if (!ctx) {
+    return canvas.toDataURL("image/png");
+  }
+
+  const { width, height } = canvas;
+  const pixels = ctx.getImageData(0, 0, width, height).data;
+
+  let minX = width;
+  let minY = height;
+  let maxX = -1;
+  let maxY = -1;
+
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const alpha = pixels[(y * width + x) * 4 + 3];
+
+      if (alpha > 0) {
+        minX = Math.min(minX, x);
+        minY = Math.min(minY, y);
+        maxX = Math.max(maxX, x);
+        maxY = Math.max(maxY, y);
+      }
+    }
+  }
+
+  if (maxX < minX || maxY < minY) {
+    return canvas.toDataURL("image/png");
+  }
+
+  const padding = 20;
+
+  const sx = Math.max(0, minX - padding);
+  const sy = Math.max(0, minY - padding);
+  const sw = Math.min(width - sx, maxX - minX + 1 + padding * 2);
+  const sh = Math.min(height - sy, maxY - minY + 1 + padding * 2);
+
+  const trimmed = document.createElement("canvas");
+  trimmed.width = sw;
+  trimmed.height = sh;
+
+  const trimmedCtx = trimmed.getContext("2d");
+
+  if (!trimmedCtx) {
+    return canvas.toDataURL("image/png");
+  }
+
+  trimmedCtx.drawImage(
+    canvas,
+    sx,
+    sy,
+    sw,
+    sh,
+    0,
+    0,
+    sw,
+    sh
+  );
+
+  return trimmed.toDataURL("image/png");
+}
+
 export default function PassengerAuthorityClient({
   token,
   firstName,
@@ -54,9 +118,9 @@ export default function PassengerAuthorityClient({
     setError("");
 
     try {
-      const signatureDataUrl = sigRef.current
-  .getTrimmedCanvas()
-  .toDataURL("image/png");
+      const signatureDataUrl = getTrimmedSignatureDataUrl(
+  sigRef.current.getCanvas()
+);
 
       const res = await fetch(
         `/api/passenger-authority/${encodeURIComponent(token)}/sign`,
