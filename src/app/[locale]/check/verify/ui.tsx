@@ -75,8 +75,10 @@ function isDelayedOver3h(scheduledIso: string, actualIso: string) {
   return diffHours >= 3;
 }
 
-function calculateCompensationEUR(distanceKm: number | null | undefined) {
-  if (typeof distanceKm !== "number") return 250;
+function calculateCompensationEUR(
+  distanceKm: number | null | undefined
+): number | null {
+  if (typeof distanceKm !== "number") return null;
 
   if (distanceKm <= 1500) return 250;
   if (distanceKm <= 3500) return 400;
@@ -180,32 +182,20 @@ export function VerifyClient() {
     const qs = new URLSearchParams(searchParams.toString());
 
     if (result) {
-  qs.set("verifyMatched", result.matched ? "1" : "0");
-  qs.set("verifyEligible", result.eligible ? "1" : "0");
+      qs.set("verifyMatched", result.matched ? "1" : "0");
+      qs.set("verifyEligible", result.eligible ? "1" : "0");
 
-  if (choice === "direct" && result.eligible) {
-    const roundedDistance =
-      typeof result.distanceKm === "number"
-        ? Math.round(result.distanceKm)
-        : null;
+      if (result.eligible && typeof result.distanceKm === "number") {
+        const roundedDistance = Math.round(result.distanceKm);
+        const amount = calculateCompensationEUR(roundedDistance);
 
-    const amount =
-      roundedDistance === null
-        ? 250
-        : calculateCompensationEUR(roundedDistance);
-
-    qs.set("amount", String(amount));
-
-    if (roundedDistance !== null) {
-      qs.set("distanceKm", String(roundedDistance));
+        qs.set("amount", String(amount));
+        qs.set("distanceKm", String(roundedDistance));
+      } else {
+        qs.delete("amount");
+        qs.delete("distanceKm");
+      }
     } else {
-      qs.delete("distanceKm");
-    }
-  } else {
-    qs.delete("amount");
-    qs.delete("distanceKm");
-  }
-} else {
       qs.delete("verifyMatched");
       qs.delete("verifyEligible");
     }
@@ -288,6 +278,7 @@ const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
   }
 
   const eligible = result.eligible;
+  const hasCompensationAmount = eligible && compEUR !== null;
 
   return (
 <div className="mx-auto max-w-3xl px-[16px] py-2 md:p-6 text-sky-900 overflow-x-hidden">
@@ -352,25 +343,25 @@ const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
     eligible ? "text-emerald-600" : "text-slate-500",
   ].join(" ")}
 >
-  {eligible
-    ? t("entitled")
-: t("manualReview")}
+  {hasCompensationAmount
+  ? t("entitled")
+  : t("manualReview")}
 </div>
+  {hasCompensationAmount ? (
   <div className="flex items-end gap-1">
-    <span
-      className={[
-        "font-bold leading-none",
-        "text-3xl md:text-2xl", // 👈 MOBILE större än desktop
-        eligible ? "text-emerald-600" : "text-red-600",
-      ].join(" ")}
-    >
-      €{eligible ? compEUR : 0}
+    <span className="font-bold leading-none text-3xl md:text-2xl text-emerald-600">
+      €{compEUR}
     </span>
 
     <span className="text-sm text-slate-600">
       {t("perPassenger")}
     </span>
   </div>
+) : (
+  <div className="text-xl font-semibold text-slate-600">
+    —
+  </div>
+)}
 </div>
 
         {/* INFO GRID */}

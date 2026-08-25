@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { verifyFlightFlightAware } from "@/lib/flight/providers/flightaware";
+import { calculateGreatCircleDistanceKm } from "@/lib/aviation/distance";
 
 type Leg = {
   id: string;
@@ -24,6 +25,17 @@ type ItineraryInput = {
   cancelNotice: "lt14" | "gte14" | null;
   volunteer: "yes" | "no" | null;
 };
+
+function extractIataCode(value: string): string | null {
+  const trimmed = value.trim().toUpperCase();
+
+  if (/^[A-Z]{3}$/.test(trimmed)) {
+    return trimmed;
+  }
+
+  const match = trimmed.match(/\(([A-Z]{3})\)/);
+  return match ? match[1] : null;
+}
 
 export async function POST(req: Request) {
   let input: any;
@@ -58,6 +70,16 @@ if (hasDirect) {
     (typeof result.arrivalDelayMinutes === "number" &&
       result.arrivalDelayMinutes >= 180);
 
+      const originIata = extractIataCode(input.from);
+const destinationIata = extractIataCode(input.to);
+
+const distanceKm =
+  typeof result.distanceKm === "number"
+    ? result.distanceKm
+    : originIata && destinationIata
+      ? calculateGreatCircleDistanceKm(originIata, destinationIata)
+      : null;
+
 return NextResponse.json({
   matched: result.matched,
   eligible,
@@ -70,7 +92,7 @@ return NextResponse.json({
   actualDeparture: result.actualDeparture ?? null,
   scheduledArrival: result.scheduledArrival ?? null,
   actualArrival: result.actualArrival ?? null,
-  distanceKm: result.distanceKm ?? null,
+  distanceKm,
 });
 }
 
@@ -110,10 +132,22 @@ return NextResponse.json({
     else reasonCode = "VOLUNTARY_DENIED";
   }
 
+    const journeyOrigin = legs[0]?.fromCode;
+  const journeyDestination = legs[legs.length - 1]?.toCode;
+
+  const distanceKm =
+    journeyOrigin && journeyDestination
+      ? calculateGreatCircleDistanceKm(
+          journeyOrigin,
+          journeyDestination
+        )
+      : null;
+
   return NextResponse.json({
     matched: true,
     eligible,
     source: "mock" as const,
+    distanceKm,
     ...(reasonCode ? { reasonCode } : {}),
   });
 }

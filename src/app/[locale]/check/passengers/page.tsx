@@ -11,7 +11,7 @@ type Pax = {
   under18: boolean;
 };
 
-const BASE_COMPENSATION = 250;
+
 
 export default function PassengersPage() {
   const t = useTranslations("check.passengers");
@@ -122,10 +122,24 @@ setTimeout(() => {
     updateQuery({ pax: next });
   }
 
-  const verifyEligible = searchParams.get("verifyEligible") === "1";
+const verifyEligible = searchParams.get("verifyEligible") === "1";
+
+const amountParam = searchParams.get("amount");
+const calculatedAmount =
+  amountParam !== null && Number.isFinite(Number(amountParam))
+    ? Number(amountParam)
+    : null;
 
 const passengerCount = travelingWithOthers ? 1 + passengers.length : 1;
-const perPassenger = verifyEligible ? BASE_COMPENSATION : 0;
+
+const hasCalculatedCompensation =
+  verifyEligible && calculatedAmount !== null;
+
+const perPassenger =
+  hasCalculatedCompensation
+    ? calculatedAmount
+    : 0;
+
 const totalCompensation = perPassenger * passengerCount;
 
   return (
@@ -175,10 +189,12 @@ const totalCompensation = perPassenger * passengerCount;
        {/* Compensation summary banner (Verify-style) */}
           <div className="mt-6 rounded-xl bg-emerald-50 px-6 py-5 flex items-center justify-between">
             <div>
-              <div className="text-sm text-slate-600">{verifyEligible ? t("potentialCompensation") : t("manualReview")}</div>
+              <div className="text-sm text-slate-600">{hasCalculatedCompensation
+  ? t("potentialCompensation")
+  : t("manualReview")}</div>
               <div className="mt-1 text-3xl font-bold text-emerald-600">
-                €{totalCompensation}
-              </div>
+  {hasCalculatedCompensation ? `€${totalCompensation}` : "—"}
+</div>
               <div className="text-slate-600 text-sm">
                 {passengerCount === 1
   ? t("totalForOnePassenger", { count: passengerCount })
@@ -189,8 +205,8 @@ const totalCompensation = perPassenger * passengerCount;
             <div className="text-right">
               <div className="text-sm text-slate-600">{t("perPassenger")}</div>
               <div className="text-xl font-semibold text-emerald-700">
-                €{perPassenger}
-              </div>
+  {hasCalculatedCompensation ? `€${perPassenger}` : "—"}
+</div>
             </div>
           </div>
 
