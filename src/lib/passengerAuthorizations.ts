@@ -225,3 +225,55 @@ Customer Claims Team`;
     }
   }
 }
+export async function createManualPassengerAuthorization({
+  claimId,
+  passengerIndex,
+  firstName,
+  lastName,
+  email,
+}: {
+  claimId: string;
+  passengerIndex: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+}) {
+  const sb = supabaseAdmin();
+
+  const token = crypto.randomUUID();
+  const now = new Date().toISOString();
+
+  const { data, error } = await sb
+    .from("passenger_authorizations")
+    .upsert(
+      {
+        claim_id: claimId,
+        passenger_index: passengerIndex,
+        first_name: firstName.trim(),
+        last_name: lastName.trim(),
+        email: email.trim(),
+        under_18: false,
+        status: "pending",
+        invite_token: token,
+        updated_at: now,
+      },
+      {
+        onConflict: "claim_id,passenger_index",
+      }
+    )
+    .select("*")
+    .single();
+
+  if (error) {
+    console.error(
+      "Failed to create manual passenger authorization:",
+      error
+    );
+    throw error;
+  }
+
+  return {
+    passengerAuthorization: data,
+    token,
+  };
+}
