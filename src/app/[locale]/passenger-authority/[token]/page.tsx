@@ -40,6 +40,12 @@ export default async function PassengerAuthorityPage({
 
   const fullName = `${passenger.first_name} ${passenger.last_name}`.trim();
 
+  const authorityPreviewUrl =
+  `/${locale}/power-of-attorney` +
+  `?fullName=${encodeURIComponent(fullName)}` +
+  `&bookingReference=${encodeURIComponent(claim.bookingNumber || "")}` +
+  `&claimId=${encodeURIComponent(claim.id)}`;
+
   return (
     <main className="min-h-screen bg-slate-50 px-4 py-12">
       <div className="mx-auto max-w-2xl">
@@ -105,6 +111,25 @@ export default async function PassengerAuthorityPage({
             is later recommended, FlightClaimly will explain any additional
             terms and ask for your approval before proceeding.
           </p>
+
+          <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-4">
+  <div className="text-sm font-semibold text-slate-900">
+    Review your authorisation
+  </div>
+
+  <p className="mt-1 text-sm leading-6 text-slate-600">
+    Please review the full authority document before signing.
+  </p>
+
+  <a
+    href={authorityPreviewUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="mt-3 inline-flex items-center justify-center rounded-lg border border-sky-200 bg-white px-4 py-2.5 text-sm font-semibold text-sky-700 shadow-sm transition hover:border-sky-300 hover:bg-sky-50"
+  >
+    Review authorisation document
+  </a>
+</div>
 
          <PassengerAuthorityClient
   token={token}
