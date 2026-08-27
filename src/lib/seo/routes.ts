@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { MetadataRoute } from "next";
 import type { FlightRoute } from "@/data/seo/routes";
+import { buildLanguageAlternates } from "@/lib/seo/alternates";
 
 export function getRouteMetadata(
   route: FlightRoute,
@@ -22,6 +23,9 @@ export function getRouteMetadata(
 
     alternates: {
       canonical,
+      languages: buildLanguageAlternates(
+        `routes/${route.slug}`
+      ),
     },
 
     openGraph: {
@@ -71,7 +75,6 @@ export function getRouteSitemapEntry(
 ): MetadataRoute.Sitemap[number] {
   return {
     url: `${siteUrl}/${locale}/routes/${route.slug}`,
-    lastModified: new Date(),
     changeFrequency: "weekly",
     priority: 0.8,
   };

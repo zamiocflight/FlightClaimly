@@ -34,7 +34,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "terms", changeFrequency: "yearly", priority: 0.3 },
   ];
 
-  const now = new Date();
   const flightNumberLocales = ["sv", "en"];
 
   const staticEntries = locales.flatMap((locale) =>
@@ -46,7 +45,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
       return {
         url,
-        lastModified: now,
         changeFrequency: route.changeFrequency,
         priority: route.priority,
       };
@@ -59,8 +57,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
 const flightNumberEntries = flightNumberLocales.flatMap((locale) =>
   flightNumbers.map((flightNumber) => ({
-    url: `${siteUrl}/${locale}/flight/${flightNumber.slug}`,
-    lastModified: now,
+    url: `${siteUrl}/${locale}/flight-numbers/${flightNumber.slug}`,
     changeFrequency: "daily" as const,
     priority: 0.8,
   }))

@@ -2,6 +2,7 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { locales } from "@/i18n/routing";
+import { buildLanguageAlternates } from "@/lib/seo/alternates";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import Providers from "./providers";
 
@@ -24,12 +25,7 @@ export async function generateMetadata({
     metadataBase: new URL(SITE_URL),
     alternates: {
       canonical: `/${locale}`,
-      languages: {
-        sv: "/sv",
-        en: "/en",
-        da: "/da",
-        de: "/de",
-      },
+      languages: buildLanguageAlternates(),
     },
   };
 }

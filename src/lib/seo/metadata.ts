@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildLanguageAlternates } from "@/lib/seo/alternates";
 
 const SITE_URL = "https://www.flightclaimly.com";
 
@@ -34,6 +35,9 @@ export function buildMetadata({
     description: entity.description,
     alternates: {
       canonical: url,
+      languages: buildLanguageAlternates(
+        `${pathPrefix}/${entity.slug}`
+      ),
     },
 
     twitter: {
