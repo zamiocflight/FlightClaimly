@@ -262,6 +262,78 @@ const countrySeeds: CountrySeed[] = [
   descriptionText:
     "Serbia's aviation network is centred around Belgrade Nikola Tesla Airport, the country's main international gateway.",
 },
+{
+  slug: "iceland",
+  name: "Iceland",
+  descriptionText:
+    "Iceland's international aviation market is centred around Keflavík International Airport, connecting the country with destinations across Europe and North America.",
+},
+{
+  slug: "latvia",
+  name: "Latvia",
+  descriptionText:
+    "Latvia's aviation network is centred around Riga International Airport, an important gateway connecting the Baltic region with destinations across Europe.",
+},
+{
+  slug: "estonia",
+  name: "Estonia",
+  descriptionText:
+    "Estonia's international air traffic is centred around Tallinn Airport, providing connections to destinations across Europe.",
+},
+{
+  slug: "lithuania",
+  name: "Lithuania",
+  descriptionText:
+    "Lithuania is served by airports including Vilnius, Kaunas and Palanga, connecting passengers with destinations across Europe.",
+},
+{
+  slug: "luxembourg",
+  name: "Luxembourg",
+  descriptionText:
+    "Luxembourg Airport is the country's main international gateway, serving passengers travelling throughout Europe and beyond.",
+},
+{
+  slug: "albania",
+  name: "Albania",
+  descriptionText:
+    "Albania's international aviation market is centred around Tirana International Airport, with an expanding network of routes across Europe.",
+},
+{
+  slug: "malta",
+  name: "Malta",
+  descriptionText:
+    "Malta International Airport is the country's main aviation gateway, connecting the Maltese Islands with destinations across Europe and the Mediterranean.",
+},
+{
+  slug: "slovenia",
+  name: "Slovenia",
+  descriptionText:
+    "Slovenia's international aviation network is centred around Ljubljana Jože Pučnik Airport, with connections to major European destinations.",
+},
+{
+  slug: "north-macedonia",
+  name: "North Macedonia",
+  descriptionText:
+    "North Macedonia is primarily served by Skopje International Airport, with additional seasonal and regional traffic through Ohrid.",
+},
+{
+  slug: "moldova",
+  name: "Moldova",
+  descriptionText:
+    "Moldova's international aviation market is centred around Chișinău International Airport, connecting passengers with destinations across Europe and neighbouring regions.",
+},
+{
+  slug: "turkiye",
+  name: "Türkiye",
+  descriptionText:
+    "Türkiye has one of the region's largest aviation networks, with major international airports in Istanbul, Antalya and other destinations across the country.",
+},
+{
+  slug: "united-states",
+  name: "United States",
+  descriptionText:
+    "The United States has one of the world's largest aviation networks, with major international gateways connecting passengers with destinations across Europe and the rest of the world.",
+},
 ];
 export const countries = countrySeeds.map(createCountry);
 

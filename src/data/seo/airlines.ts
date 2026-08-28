@@ -212,7 +212,7 @@ claimProcess: standardClaimProcess,
     intro:
       "If your Ryanair flight was delayed, cancelled, or caused you to miss a connection, you may be entitled to compensation under EU261. FlightClaimly helps you check your case and handle the claim process.",
     overview:
-  "SAS is one of Scandinavia's most established airlines, operating flights across Denmark, Norway, Sweden and the rest of Europe. If your SAS flight was delayed, cancelled or disrupted, you may be entitled to compensation under EU261 depending on the circumstances.",
+  "Ryanair is one of Europe's largest low-cost airlines, operating an extensive network of routes across Europe and to destinations in neighbouring regions. If your Ryanair flight was delayed, cancelled or disrupted, you may be entitled to compensation under EU261 depending on the circumstances.",
      passengerRights:
   "Under EU261, passengers may have the right to compensation when a flight arrives at least three hours late, is cancelled at short notice, or causes a missed connection, as long as the disruption was within the airline's control.", 
   compensationIntro:
@@ -9749,6 +9749,253 @@ claimProcess: standardClaimProcess,
   commonIssues: standardCommonIssues,
   faq: standardFAQ,
 },
+
+{
+  slug: "sky-express",
+  name: "SKY express",
+  iata: "GQ",
+  icao: "SEH",
+  country: "Greece",
+  countrySlugs: ["greece"],
+  mainHub: "Athens International Airport (ATH)",
+  traits: {
+    hub: true,
+    popular: true,
+  },
+  title: "SKY express flight compensation",
+  metadataTitle: "SKY express Flight Compensation – Claim Up to €600 | FlightClaimly",
+  description:
+    "Was your SKY express flight delayed or cancelled? Check whether EU261 applies and whether you may be entitled to compensation.",
+  intro:
+    "If your SKY express flight was delayed, cancelled, or caused you to miss a connection, you may have passenger rights under EU261. FlightClaimly helps you check your eligibility and handle the claim.",
+  overview:
+    "SKY express is a Greek airline with a major operation from Athens and an extensive domestic and international network. Passengers affected by qualifying disruptions may be entitled to compensation under EU261.",
+  passengerRights:
+    "EU261 may protect SKY express passengers when an eligible flight is cancelled at short notice, arrives at least three hours late, or causes a qualifying missed connection.",
+  compensationIntro:
+    "Eligible EU261 compensation is based primarily on flight distance and the circumstances of the disruption, with compensation of up to €600 per passenger.",
+  compensationAmounts: [
+    { label: "Up to 1,500 km", distance: "Short-haul flights", amount: "€250" },
+    { label: "1,500–3,500 km", distance: "Medium-haul flights", amount: "€400" },
+    { label: "Over 3,500 km", distance: "Long-haul flights", amount: "€600" },
+  ],
+  compensationRules:
+    "Compensation normally depends on whether the disruption falls within EU261 and was not caused by extraordinary circumstances outside the airline's control.",
+  statisticsIntro:
+    "These figures summarise the main EU261 compensation thresholds that may apply to eligible SKY express disruptions.",
+  statistics: [
+    { label: "Maximum compensation", value: "€600", description: "Per passenger on eligible flights." },
+    { label: "Delay threshold", value: "3h+", description: "Arrival delay normally required for delay compensation." },
+    { label: "Primary protection", value: "EU261", description: "European passenger-rights framework." },
+  ],
+  timelineIntro:
+    "FlightClaimly reviews the disruption, prepares the claim and follows the case with SKY express.",
+  timeline: [
+    { title: "Submit your flight", description: "Provide your SKY express flight and passenger details." },
+    { title: "Eligibility review", description: "FlightClaimly reviews the disruption and applicable passenger rights." },
+    { title: "Claim handling", description: "If eligible, the claim is prepared and pursued with the airline." },
+    { title: "Outcome", description: "If compensation is recovered, the payout process is completed." },
+  ],
+  claimProcess: standardClaimProcess,
+  commonIssues: standardCommonIssues,
+  faq: standardFAQ,
+},
+{
+  slug: "bulgaria-air",
+  name: "Bulgaria Air",
+  iata: "FB",
+  icao: "LZB",
+  country: "Bulgaria",
+  countrySlugs: ["bulgaria"],
+  mainHub: "Sofia Airport (SOF)",
+  traits: {
+    hub: true,
+    flagCarrier: true,
+  },
+  title: "Bulgaria Air flight compensation",
+  metadataTitle: "Bulgaria Air Flight Compensation – Claim Up to €600 | FlightClaimly",
+  description:
+    "Was your Bulgaria Air flight delayed or cancelled? Check your EU261 rights and whether you may be entitled to compensation.",
+  intro:
+    "Passengers travelling with Bulgaria Air may be protected by EU261 when a flight is significantly delayed, cancelled, or causes a missed connection.",
+  overview:
+    "Bulgaria Air is Bulgaria's national airline and operates scheduled services from Sofia. Because Bulgaria is an EU member state, many Bulgaria Air disruptions fall within the EU261 passenger-rights framework.",
+  passengerRights:
+    "Depending on the route and circumstances, EU261 can provide rights to compensation, rerouting, reimbursement and care following a Bulgaria Air disruption.",
+  compensationIntro:
+    "For qualifying disruptions, EU261 compensation can range from €250 to €600 per passenger depending mainly on flight distance.",
+  compensationAmounts: [
+    { label: "Up to 1,500 km", distance: "Short-haul flights", amount: "€250" },
+    { label: "1,500–3,500 km", distance: "Medium-haul flights", amount: "€400" },
+    { label: "Over 3,500 km", distance: "Long-haul flights", amount: "€600" },
+  ],
+  compensationRules:
+    "Eligibility depends on factors including arrival delay, cancellation timing and whether extraordinary circumstances caused the disruption.",
+  statisticsIntro:
+    "The key EU261 thresholds below provide a starting point for assessing a Bulgaria Air compensation claim.",
+  statistics: [
+    { label: "Maximum compensation", value: "€600", description: "Per passenger on eligible flights." },
+    { label: "Delay threshold", value: "3h+", description: "Arrival delay normally required for delay compensation." },
+    { label: "Primary protection", value: "EU261", description: "European passenger-rights framework." },
+  ],
+  timelineIntro:
+    "FlightClaimly checks the flight circumstances and handles eligible claims with Bulgaria Air.",
+  timeline: [
+    { title: "Send your details", description: "Provide the disrupted flight and passenger information." },
+    { title: "Case assessment", description: "The circumstances and EU261 eligibility are reviewed." },
+    { title: "Airline claim", description: "An eligible claim is prepared and pursued with Bulgaria Air." },
+    { title: "Compensation", description: "If the claim succeeds, the payout process is completed." },
+  ],
+  claimProcess: standardClaimProcess,
+  commonIssues: standardCommonIssues,
+  faq: standardFAQ,
+},
+{
+  slug: "cyprus-airways",
+  name: "Cyprus Airways",
+  iata: "CY",
+  icao: "CYP",
+  country: "Cyprus",
+  countrySlugs: ["cyprus"],
+  mainHub: "Larnaca International Airport (LCA)",
+  traits: {
+    hub: true,
+    flagCarrier: true,
+  },
+  title: "Cyprus Airways flight compensation",
+  metadataTitle: "Cyprus Airways Flight Compensation – Claim Up to €600 | FlightClaimly",
+  description:
+    "Was your Cyprus Airways flight delayed or cancelled? Check whether EU261 applies and whether compensation may be available.",
+  intro:
+    "If a Cyprus Airways flight is delayed, cancelled, or causes a missed connection, EU261 may give passengers rights to compensation and assistance.",
+  overview:
+    "Cyprus Airways is based at Larnaca International Airport and connects Cyprus with destinations in Europe and neighbouring regions. Eligible disruptions can fall under EU261.",
+  passengerRights:
+    "EU261 can provide Cyprus Airways passengers with rights including compensation for qualifying disruptions and, in applicable cases, care, reimbursement or rerouting.",
+  compensationIntro:
+    "Eligible passengers may receive €250, €400 or €600 depending primarily on the distance of the affected flight.",
+  compensationAmounts: [
+    { label: "Up to 1,500 km", distance: "Short-haul flights", amount: "€250" },
+    { label: "1,500–3,500 km", distance: "Medium-haul flights", amount: "€400" },
+    { label: "Over 3,500 km", distance: "Long-haul flights", amount: "€600" },
+  ],
+  compensationRules:
+    "The disruption must meet the applicable EU261 requirements, and compensation may not be due where extraordinary circumstances were responsible.",
+  statisticsIntro:
+    "These thresholds summarise the main EU261 compensation framework relevant to eligible Cyprus Airways flights.",
+  statistics: [
+    { label: "Maximum compensation", value: "€600", description: "Per passenger on eligible flights." },
+    { label: "Delay threshold", value: "3h+", description: "Arrival delay normally required for delay compensation." },
+    { label: "Primary protection", value: "EU261", description: "European passenger-rights framework." },
+  ],
+  timelineIntro:
+    "FlightClaimly reviews the disruption and handles eligible claims with Cyprus Airways.",
+  timeline: [
+    { title: "Submit the flight", description: "Tell us what happened and provide the passenger details." },
+    { title: "Review", description: "We assess the flight and applicable passenger rights." },
+    { title: "Claim", description: "If eligible, the compensation claim is pursued with Cyprus Airways." },
+    { title: "Payout", description: "Successful compensation is processed for payout." },
+  ],
+  claimProcess: standardClaimProcess,
+  commonIssues: standardCommonIssues,
+  faq: standardFAQ,
+},
+{
+  slug: "flyone",
+  name: "FLYONE",
+  iata: "5F",
+  icao: "FIA",
+  country: "Moldova",
+  mainHub: "Chișinău International Airport (RMO)",
+  title: "FLYONE flight compensation",
+  metadataTitle: "FLYONE Flight Compensation – Check Your Passenger Rights | FlightClaimly",
+  description:
+    "Was your FLYONE flight delayed or cancelled? Check whether European passenger-rights rules apply to your journey.",
+  intro:
+    "A delayed or cancelled FLYONE flight may be protected by EU261 depending on where the journey departed and the operating carrier involved.",
+  overview:
+    "FLYONE is a Moldovan airline based in Chișinău. Because Moldova is outside the EU, EU261 coverage depends particularly on the route: departures from EU airports can be covered even when the operating airline is non-EU.",
+  passengerRights:
+    "For FLYONE flights, passenger rights depend on the itinerary and applicable law. EU261 generally covers departures from EU airports, while a flight into the EU operated by a non-EU carrier does not qualify solely because it lands in the EU.",
+  compensationIntro:
+    "Where EU261 applies and its compensation conditions are met, eligible passengers may receive up to €600 depending on flight distance.",
+  compensationAmounts: [
+    { label: "Up to 1,500 km", distance: "Short-haul flights", amount: "€250" },
+    { label: "1,500–3,500 km", distance: "Medium-haul flights", amount: "€400" },
+    { label: "Over 3,500 km", distance: "Long-haul flights", amount: "€600" },
+  ],
+  compensationRules:
+    "Coverage must be checked carefully for FLYONE because Moldova is not an EU member state. The departure airport, operating carrier and cause of disruption all matter.",
+  statisticsIntro:
+    "When EU261 applies to a FLYONE journey, these are the principal compensation thresholds.",
+  statistics: [
+    { label: "Maximum EU261 compensation", value: "€600", description: "Per passenger where EU261 applies and eligibility requirements are met." },
+    { label: "Delay threshold", value: "3h+", description: "Arrival delay normally required for delay compensation." },
+    { label: "Coverage", value: "Route-dependent", description: "EU261 does not apply to every FLYONE journey." },
+  ],
+  timelineIntro:
+    "FlightClaimly first determines which passenger-rights regime applies before pursuing a FLYONE claim.",
+  timeline: [
+    { title: "Submit your journey", description: "Provide the route, flight number and disruption details." },
+    { title: "Coverage check", description: "We determine whether EU261 or another relevant passenger-rights framework applies." },
+    { title: "Claim handling", description: "An eligible claim is prepared and pursued with the airline." },
+    { title: "Outcome", description: "If compensation is recovered, the payout process is completed." },
+  ],
+  claimProcess: standardClaimProcess,
+  commonIssues: standardCommonIssues,
+  faq: standardFAQ,
+},
+{
+  slug: "km-malta-airlines",
+  name: "KM Malta Airlines",
+  iata: "KM",
+  icao: "KMM",
+  country: "Malta",
+  countrySlugs: ["malta"],
+  mainHub: "Malta International Airport (MLA)",
+  traits: {
+    hub: true,
+    flagCarrier: true,
+  },
+  title: "KM Malta Airlines flight compensation",
+  metadataTitle: "KM Malta Airlines Flight Compensation – Claim Up to €600 | FlightClaimly",
+  description:
+    "Was your KM Malta Airlines flight delayed or cancelled? Check your EU261 rights and possible compensation.",
+  intro:
+    "KM Malta Airlines passengers affected by significant delays, cancellations or missed connections may have rights under EU261.",
+  overview:
+    "KM Malta Airlines is the national airline of the Maltese Islands and began operations in 2024. From Malta it provides scheduled connectivity to major European destinations, with eligible disruptions covered by EU261.",
+  passengerRights:
+    "As an EU airline, KM Malta Airlines operates within the EU261 passenger-rights framework on covered journeys. Depending on the circumstances, passengers may have rights to compensation, care, rerouting or reimbursement.",
+  compensationIntro:
+    "Eligible EU261 compensation ranges from €250 to €600 per passenger, primarily according to flight distance.",
+  compensationAmounts: [
+    { label: "Up to 1,500 km", distance: "Short-haul flights", amount: "€250" },
+    { label: "1,500–3,500 km", distance: "Medium-haul flights", amount: "€400" },
+    { label: "Over 3,500 km", distance: "Long-haul flights", amount: "€600" },
+  ],
+  compensationRules:
+    "Compensation depends on the nature and timing of the disruption and whether extraordinary circumstances outside the airline's control apply.",
+  statisticsIntro:
+    "These are the principal EU261 thresholds relevant when assessing a KM Malta Airlines compensation claim.",
+  statistics: [
+    { label: "Maximum compensation", value: "€600", description: "Per passenger on eligible flights." },
+    { label: "Delay threshold", value: "3h+", description: "Arrival delay normally required for delay compensation." },
+    { label: "Primary protection", value: "EU261", description: "European passenger-rights framework." },
+  ],
+  timelineIntro:
+    "FlightClaimly reviews eligible KM Malta Airlines disruptions and handles the claim process with the airline.",
+  timeline: [
+    { title: "Submit the case", description: "Provide your flight and passenger information." },
+    { title: "EU261 assessment", description: "We review the disruption and compensation eligibility." },
+    { title: "Claim submission", description: "An eligible claim is prepared and pursued with KM Malta Airlines." },
+    { title: "Payout", description: "If compensation is recovered, the payout process is completed." },
+  ],
+  claimProcess: standardClaimProcess,
+  commonIssues: standardCommonIssues,
+  faq: standardFAQ,
+},
+
 ];
 
 export function getAirlineBySlug(slug: string) {

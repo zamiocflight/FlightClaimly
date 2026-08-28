@@ -11,6 +11,7 @@ import type {
 import { getAirportByIata } from "@/lib/knowledge/airports";
 import { getAirlinesBySlugs } from "@/lib/knowledge/airlines";
 import { getAirportRegistryEntryByIata } from "@/data/master/airportRegistry";
+import { flightNumberSeeds } from "@/data/master/flightNumberSeeds";
 
 export type RouteSeed = {
   origin: string;
@@ -390,7 +391,21 @@ function createRoute(seed: RouteSeed): FlightRoute {
   };
 }
 
-const routeSeeds = createRouteSeedsFromNetwork(coreAirportNetwork);
+const coreRouteSeeds = createRouteSeedsFromNetwork(coreAirportNetwork);
+
+const flightNumberRouteSeeds: RouteSeed[] = flightNumberSeeds.map((flight) => ({
+  origin: flight.originIata,
+  destination: flight.destinationIata,
+}));
+
+const routeSeedsByKey = new Map<string, RouteSeed>();
+
+for (const seed of [...coreRouteSeeds, ...flightNumberRouteSeeds]) {
+  const key = `${seed.origin.toUpperCase()}-${seed.destination.toUpperCase()}`;
+  routeSeedsByKey.set(key, seed);
+}
+
+const routeSeeds = [...routeSeedsByKey.values()];
 
 export const routes: FlightRoute[] = routeSeeds.map(createRoute);
 

@@ -36,7 +36,8 @@ export function buildMetadata({
     alternates: {
       canonical: url,
       languages: buildLanguageAlternates(
-        `${pathPrefix}/${entity.slug}`
+        `${pathPrefix}/${entity.slug}`,
+        ["sv", "en"]
       ),
     },
 
