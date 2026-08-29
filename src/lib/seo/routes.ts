@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
 import type { MetadataRoute } from "next";
 import type { FlightRoute } from "@/data/seo/routes";
-import { buildLanguageAlternates } from "@/lib/seo/alternates";
+import { buildLanguageAlternates, routeSeoLocales } from "@/lib/seo/alternates";
 
 export function getRouteMetadata(
   route: FlightRoute,
   locale = "en",
-  siteUrl =
-    process.env.NEXT_PUBLIC_APP_URL ||
+  siteUrl = process.env.NEXT_PUBLIC_APP_URL ||
     process.env.APP_URL ||
-    "https://www.flightclaimly.com"
+    "https://www.flightclaimly.com",
 ): Metadata {
   const canonical = getRouteCanonical(
     route,
     locale,
-    siteUrl.replace(/\/+$/, "")
+    siteUrl.replace(/\/+$/, ""),
   );
 
   return {
@@ -24,7 +23,8 @@ export function getRouteMetadata(
     alternates: {
       canonical,
       languages: buildLanguageAlternates(
-        `routes/${route.slug}`
+        `routes/${route.slug}`,
+        routeSeoLocales,
       ),
     },
 
@@ -47,15 +47,12 @@ export function getRouteMetadata(
 export function getRouteCanonical(
   route: FlightRoute,
   locale: string,
-  siteUrl: string
+  siteUrl: string,
 ) {
   return `${siteUrl}/${locale}/routes/${route.slug}`;
 }
 
-export function getRouteBreadcrumbs(
-  route: FlightRoute,
-  locale: string
-) {
+export function getRouteBreadcrumbs(route: FlightRoute, locale: string) {
   return [
     {
       label: "Routes",
@@ -71,7 +68,7 @@ export function getRouteBreadcrumbs(
 export function getRouteSitemapEntry(
   route: FlightRoute,
   locale: string,
-  siteUrl: string
+  siteUrl: string,
 ): MetadataRoute.Sitemap[number] {
   return {
     url: `${siteUrl}/${locale}/routes/${route.slug}`,

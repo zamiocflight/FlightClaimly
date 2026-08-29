@@ -70,5 +70,7 @@ export function getEntityHref(slug: string, locale: string) {
 
   if (!entity) return "#";
 
-  return `/${locale}/${entity.hrefBase}/${entity.slug}`;
+  const targetLocale = entity.type === "route" ? "en" : locale;
+
+  return `/${targetLocale}/${entity.hrefBase}/${entity.slug}`;
 }

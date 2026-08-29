@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { routes } from "@/data/seo/routes";
 
 type Props = {
@@ -17,6 +18,10 @@ export async function generateMetadata() {
 
 export default async function RoutesPage({ params }: Props) {
   const { locale } = await params;
+
+  if (locale !== "en") {
+    notFound();
+  }
 
   return (
     <main className="px-6 py-16">

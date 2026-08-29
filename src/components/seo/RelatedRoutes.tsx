@@ -27,7 +27,7 @@ export default function RelatedRoutes({
           {routes.map((route) => (
             <Link
               key={route.slug}
-              href={`/${locale}/routes/${route.slug}`}
+              href={`/en/routes/${route.slug}`}
               className="rounded-2xl border border-slate-200 p-5 transition hover:border-emerald-400 hover:shadow-sm"
             >
               <h3 className="text-lg font-semibold text-slate-950">

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getRouteBySlug, routes, } from "@/data/seo/routes";
+import { getRouteBySlug, routes } from "@/data/seo/routes";
 import KnowledgePageTemplate from "@/components/seo/KnowledgePageTemplate";
 import RelatedRoutes from "@/components/seo/RelatedRoutes";
 import InternalLinks from "@/components/seo/InternalLinks";
@@ -12,7 +12,6 @@ import { resolveAuthority } from "@/lib/authority/resolver";
 import type { FlightRoute } from "@/data/seo/routes";
 
 export const dynamic = "force-static";
-export const dynamicParams = false;
 export const revalidate = false;
 
 type Props = {
@@ -24,12 +23,17 @@ type Props = {
 
 export function generateStaticParams() {
   return routes.map((route) => ({
+    locale: "en",
     slug: route.slug,
   }));
 }
 
 export async function generateMetadata({ params }: Props) {
   const { locale, slug } = await params;
+
+  if (locale !== "en") {
+    return {};
+  }
 
   const route = getRouteBySlug(slug);
 
@@ -43,17 +47,21 @@ export async function generateMetadata({ params }: Props) {
 export default async function RoutePage({ params }: Props) {
   const { locale, slug } = await params;
 
+  if (locale !== "en") {
+    notFound();
+  }
+
   const route = getRouteBySlug(slug);
 
   if (!route) {
     notFound();
   }
 
- const authoritySources = resolveAuthority<FlightRoute>({
-  entityType: "route",
-  slug: route.slug,
- entity: route,
- });
+  const authoritySources = resolveAuthority<FlightRoute>({
+    entityType: "route",
+    slug: route.slug,
+    entity: route,
+  });
 
   const facts = [
     {
@@ -74,39 +82,39 @@ export default async function RoutePage({ params }: Props) {
     },
   ];
 
- const relatedRoutes = getRelatedRoutes(route);
+  const relatedRoutes = getRelatedRoutes(route);
 
- const internalLinkSections = getInternalLinkSections(
-  "route",
-  route.slug,
-  locale
-);
+  const internalLinkSections = getInternalLinkSections(
+    "route",
+    route.slug,
+    locale,
+  );
 
- const breadcrumbItems = getRouteBreadcrumbs(route, locale).map((item) => ({
-  name: item.label,
-  url: item.href,
-}));
+  const breadcrumbItems = getRouteBreadcrumbs(route, locale).map((item) => ({
+    name: item.label,
+    url: item.href,
+  }));
 
-return (
-  <>
-    <BreadcrumbSchema items={breadcrumbItems} />
-    <FAQSchema items={route.faq} />
+  return (
+    <>
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <FAQSchema items={route.faq} />
 
-    <KnowledgePageTemplate
-      entity={route}
-      checkUrl={`/${locale}/check`}
-      facts={facts}
-      locale={locale}
-      authoritySources={authoritySources}
-    />
+      <KnowledgePageTemplate
+        entity={route}
+        checkUrl={`/${locale}/check`}
+        facts={facts}
+        locale={locale}
+        authoritySources={authoritySources}
+      />
 
-<InternalLinks sections={internalLinkSections} />
+      <InternalLinks sections={internalLinkSections} />
 
-    <RelatedRoutes
-      title={`More routes from ${route.origin.city}`}
-      routes={relatedRoutes}
-      locale={locale}
-    />
-  </>
-);
+      <RelatedRoutes
+        title={`More routes from ${route.origin.city}`}
+        routes={relatedRoutes}
+        locale={locale}
+      />
+    </>
+  );
 }

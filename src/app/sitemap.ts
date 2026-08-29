@@ -4,6 +4,7 @@ import { locales } from "@/i18n/routing";
 import { routes as flightRoutes } from "@/data/seo/routes";
 import { flightNumbers } from "@/data/master/flightNumbers";
 import { getRouteSitemapEntry } from "@/lib/seo/routes";
+import { routeSeoLocales } from "@/lib/seo/alternates";
 
 function getSiteUrl() {
   const raw =
@@ -23,7 +24,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: number;
   }> = [
     { path: "", changeFrequency: "daily", priority: 1.0 },
-    { path: "routes", changeFrequency: "weekly", priority: 0.9 },
     { path: "delays", changeFrequency: "weekly", priority: 0.9 },
     { path: "cancellations", changeFrequency: "weekly", priority: 0.9 },
     { path: "rights", changeFrequency: "weekly", priority: 0.9 },
@@ -48,24 +48,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: route.changeFrequency,
         priority: route.priority,
       };
-    })
+    }),
   );
 
-  const routeEntries = locales.flatMap((locale) =>
-    flightRoutes.map((route) => getRouteSitemapEntry(route, locale, siteUrl))
+  const routeIndexEntries = routeSeoLocales.map((locale) => ({
+    url: `${siteUrl}/${locale}/routes`,
+    changeFrequency: "weekly" as const,
+    priority: 0.9,
+  }));
+
+  const routeEntries = routeSeoLocales.flatMap((locale) =>
+    flightRoutes.map((route) => getRouteSitemapEntry(route, locale, siteUrl)),
   );
 
-const flightNumberEntries = flightNumberLocales.flatMap((locale) =>
-  flightNumbers.map((flightNumber) => ({
-    url: `${siteUrl}/${locale}/flight-numbers/${flightNumber.slug}`,
-    changeFrequency: "daily" as const,
-    priority: 0.8,
-  }))
-);
+  const flightNumberEntries = flightNumberLocales.flatMap((locale) =>
+    flightNumbers.map((flightNumber) => ({
+      url: `${siteUrl}/${locale}/flight-numbers/${flightNumber.slug}`,
+      changeFrequency: "daily" as const,
+      priority: 0.8,
+    })),
+  );
 
   return [
-  ...staticEntries,
-  ...routeEntries,
-  ...flightNumberEntries,
-];
+    ...staticEntries,
+    ...routeIndexEntries,
+    ...routeEntries,
+    ...flightNumberEntries,
+  ];
 }
