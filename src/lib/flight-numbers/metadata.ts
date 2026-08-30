@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { FlightNumber } from "@/data/flight-numbers/types";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { flightNumberSeoLocales } from "@/lib/seo/alternates";
 
 export function buildFlightNumberMetadata(
   flightNumber: FlightNumber,
@@ -15,5 +16,6 @@ export function buildFlightNumberMetadata(
     locale,
     pathPrefix: "flight-numbers",
     titleSuffix: "flight compensation",
+    availableLocales: flightNumberSeoLocales,
   });
 }

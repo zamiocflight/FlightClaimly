@@ -6,6 +6,7 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 
 import { countries, getCountryBySlug } from "@/data/seo/countries";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { countrySeoLocales } from "@/lib/seo/alternates";
 
 import InternalLinks from "@/components/seo/InternalLinks";
 import { getInternalLinkSections } from "@/lib/seo/internalLinks";
@@ -19,7 +20,7 @@ type PageProps = {
 
 export function generateStaticParams() {
   return countries.flatMap((country) =>
-    ["sv", "en"].map((locale) => ({
+    countrySeoLocales.map((locale) => ({
       locale,
       slug: country.slug,
     }))
@@ -36,11 +37,16 @@ export async function generateMetadata({ params }: PageProps) {
     entity: country,
     locale,
     pathPrefix: "countries",
+    availableLocales: countrySeoLocales,
   });
 }
 
 export default async function CountryPage({ params }: PageProps) {
   const { locale, slug } = await params;
+
+    if (!countrySeoLocales.includes(locale as (typeof countrySeoLocales)[number])) {
+    notFound();
+  }
   const country = getCountryBySlug(slug);
 
   if (!country) notFound();

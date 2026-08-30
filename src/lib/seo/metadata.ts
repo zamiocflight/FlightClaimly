@@ -15,6 +15,7 @@ type BuildMetadataInput = {
   entity: MetadataEntity;
   locale: string;
   pathPrefix: string;
+  availableLocales: readonly string[];
   titleSuffix?: string;
 };
 
@@ -22,6 +23,7 @@ export function buildMetadata({
   entity,
   locale,
   pathPrefix,
+  availableLocales,
   titleSuffix = "flight compensation",
 }: BuildMetadataInput): Metadata {
   const url = `${SITE_URL}/${locale}/${pathPrefix}/${entity.slug}`;
@@ -36,9 +38,9 @@ export function buildMetadata({
     alternates: {
       canonical: url,
       languages: buildLanguageAlternates(
-        `${pathPrefix}/${entity.slug}`,
-        ["sv", "en"]
-      ),
+  `${pathPrefix}/${entity.slug}`,
+  availableLocales
+),
     },
 
     twitter: {

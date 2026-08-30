@@ -1,7 +1,20 @@
 import Link from "next/link";
 import { countries } from "@/data/seo/countries";
+import { notFound } from "next/navigation";
+import { countrySeoLocales } from "@/lib/seo/alternates";
 
-export default function CountriesPage() {
+type PageProps = {
+  params: Promise<{
+    locale: string;
+  }>;
+};
+
+export default async function CountriesPage({ params }: PageProps) {
+  const { locale } = await params;
+
+  if (!countrySeoLocales.includes(locale as (typeof countrySeoLocales)[number])) {
+    notFound();
+  }
   return (
     <main className="mx-auto max-w-6xl px-6 py-16">
       <h1 className="mb-8 text-4xl font-bold">

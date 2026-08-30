@@ -8,6 +8,7 @@ import { getInternalLinkSections } from "@/lib/seo/internalLinks";
 
 import { getAirlineBySlug, airlines } from "@/data/seo/airlines";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { airlineSeoLocales } from "@/lib/seo/alternates";
 import { resolveAuthority } from "@/lib/authority";
 
 
@@ -20,7 +21,7 @@ type PageProps = {
 
 export function generateStaticParams() {
   return airlines.flatMap((airline) =>
-    ["sv", "en"].map((locale) => ({
+    airlineSeoLocales.map((locale) => ({
       locale,
       slug: airline.slug,
     }))
@@ -38,11 +39,16 @@ export async function generateMetadata({ params }: PageProps) {
     entity: airline,
     locale,
     pathPrefix: "airlines",
+    availableLocales: airlineSeoLocales,
   });
 }
 
 export default async function AirlinePage({ params }: PageProps) {
   const { locale, slug } = await params;
+
+    if (!airlineSeoLocales.includes(locale as (typeof airlineSeoLocales)[number])) {
+    notFound();
+  }
   const airline = getAirlineBySlug(slug);
 
   if (!airline) notFound();

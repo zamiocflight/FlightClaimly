@@ -3,8 +3,17 @@ import { MetadataRoute } from "next";
 import { locales } from "@/i18n/routing";
 import { routes as flightRoutes } from "@/data/seo/routes";
 import { flightNumbers } from "@/data/master/flightNumbers";
+import { airports } from "@/data/seo/airports";
+import { airlines } from "@/data/seo/airlines";
+import { countries } from "@/data/seo/countries";
 import { getRouteSitemapEntry } from "@/lib/seo/routes";
-import { routeSeoLocales } from "@/lib/seo/alternates";
+import {
+  routeSeoLocales,
+  airportSeoLocales,
+  airlineSeoLocales,
+  countrySeoLocales,
+  flightNumberSeoLocales,
+} from "@/lib/seo/alternates";
 
 function getSiteUrl() {
   const raw =
@@ -34,7 +43,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "terms", changeFrequency: "yearly", priority: 0.3 },
   ];
 
-  const flightNumberLocales = ["sv", "en"];
 
   const staticEntries = locales.flatMap((locale) =>
     staticRoutes.map((route) => {
@@ -61,7 +69,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
     flightRoutes.map((route) => getRouteSitemapEntry(route, locale, siteUrl)),
   );
 
-  const flightNumberEntries = flightNumberLocales.flatMap((locale) =>
+  const airportEntries = airportSeoLocales.flatMap((locale) =>
+  airports.map((airport) => ({
+    url: `${siteUrl}/${locale}/airports/${airport.slug}`,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  })),
+);
+
+const airlineEntries = airlineSeoLocales.flatMap((locale) =>
+  airlines.map((airline) => ({
+    url: `${siteUrl}/${locale}/airlines/${airline.slug}`,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  })),
+);
+
+const countryEntries = countrySeoLocales.flatMap((locale) =>
+  countries.map((country) => ({
+    url: `${siteUrl}/${locale}/countries/${country.slug}`,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  })),
+);
+
+  const flightNumberEntries = flightNumberSeoLocales.flatMap((locale) =>
     flightNumbers.map((flightNumber) => ({
       url: `${siteUrl}/${locale}/flight-numbers/${flightNumber.slug}`,
       changeFrequency: "daily" as const,
@@ -70,9 +102,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   return [
-    ...staticEntries,
-    ...routeIndexEntries,
-    ...routeEntries,
-    ...flightNumberEntries,
-  ];
+  ...staticEntries,
+  ...routeIndexEntries,
+  ...routeEntries,
+  ...airportEntries,
+  ...airlineEntries,
+  ...countryEntries,
+  ...flightNumberEntries,
+];
 }

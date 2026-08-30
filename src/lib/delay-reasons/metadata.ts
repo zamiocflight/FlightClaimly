@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import type { DelayReason } from "@/data/delay-reasons/types";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { delayReasonSeoLocales } from "@/lib/seo/alternates";
 
 export function buildDelayReasonMetadata(
   delayReason: DelayReason,
@@ -16,5 +17,6 @@ export function buildDelayReasonMetadata(
     locale,
     pathPrefix: "delay-reasons",
     titleSuffix: "flight compensation",
+    availableLocales: delayReasonSeoLocales,
   });
 }

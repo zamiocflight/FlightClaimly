@@ -11,6 +11,7 @@ import { buildFlightNumberMetadata } from "@/lib/flight-numbers/metadata";
 import { getInternalLinkSections } from "@/lib/seo/internalLinks";
 import { resolveAuthority } from "@/lib/authority";
 import { getAirportIdentityBySlug } from "@/lib/knowledge/airports";
+import { flightNumberSeoLocales } from "@/lib/seo/alternates";
 
 type PageProps = {
   params: Promise<{
@@ -21,7 +22,7 @@ type PageProps = {
 
 export function generateStaticParams() {
   return flightNumbers.flatMap((flightNumber) =>
-    ["sv", "en"].map((locale) => ({
+    flightNumberSeoLocales.map((locale) => ({
       locale,
       slug: flightNumber.slug,
     }))
@@ -30,6 +31,14 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps) {
   const { locale, slug } = await params;
+
+  if (
+  !flightNumberSeoLocales.includes(
+    locale as (typeof flightNumberSeoLocales)[number]
+  )
+) {
+  return {};
+}
 
   const flightNumber = getFlightNumberBySlug(slug);
 
@@ -42,6 +51,14 @@ export default async function FlightNumberPage({
   params,
 }: PageProps) {
   const { locale, slug } = await params;
+
+  if (
+  !flightNumberSeoLocales.includes(
+    locale as (typeof flightNumberSeoLocales)[number]
+  )
+) {
+  notFound();
+}
 
   const flightNumber = getFlightNumberBySlug(slug);
 

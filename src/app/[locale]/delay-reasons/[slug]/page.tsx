@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import DelayReasonKnowledgeTemplate from "@/components/seo/delay-reasons/DelayReasonKnowledgeTemplate";
 import FAQSchema from "@/components/seo/FAQSchema";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import { delayReasonSeoLocales } from "@/lib/seo/alternates";
 
 import {
   buildDelayReasonMetadata,
@@ -19,6 +20,14 @@ type Props = {
 export async function generateMetadata({ params }: Props) {
   const { locale, slug } = await params;
 
+  if (
+  !delayReasonSeoLocales.includes(
+    locale as (typeof delayReasonSeoLocales)[number]
+  )
+) {
+  return {};
+}
+
   const delayReason = resolveDelayReason({
     slug,
   });
@@ -32,6 +41,14 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function DelayReasonPage({ params }: Props) {
   const { locale, slug } = await params;
+
+  if (
+  !delayReasonSeoLocales.includes(
+    locale as (typeof delayReasonSeoLocales)[number]
+  )
+) {
+  notFound();
+}
 
   const delayReason = resolveDelayReason({
     slug,

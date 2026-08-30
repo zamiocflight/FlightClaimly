@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { airports } from "@/data/seo/airports";
+import { notFound } from "next/navigation";
+import { airportSeoLocales } from "@/lib/seo/alternates";
 
 type PageProps = {
   params: Promise<{
@@ -17,6 +19,10 @@ export async function generateMetadata() {
 
 export default async function AirportsIndexPage({ params }: PageProps) {
   const { locale } = await params;
+
+  if (!airportSeoLocales.includes(locale as (typeof airportSeoLocales)[number])) {
+  notFound();
+}
 
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-20">

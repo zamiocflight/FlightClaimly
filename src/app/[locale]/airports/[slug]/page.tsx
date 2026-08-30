@@ -6,6 +6,7 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 
 import { airports, getAirportBySlug } from "@/data/seo/airports";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { airportSeoLocales } from "@/lib/seo/alternates";
 import InternalLinks from "@/components/seo/InternalLinks";
 import { getInternalLinkSections } from "@/lib/seo/internalLinks";
 
@@ -18,7 +19,7 @@ type PageProps = {
 
 export function generateStaticParams() {
   return airports.flatMap((airport) =>
-    ["sv", "en"].map((locale) => ({
+    airportSeoLocales.map((locale) => ({
       locale,
       slug: airport.slug,
     }))
@@ -36,11 +37,16 @@ export async function generateMetadata({ params }: PageProps) {
     entity: airport,
     locale,
     pathPrefix: "airports",
+    availableLocales: airportSeoLocales,
   });
 }
 
 export default async function AirportPage({ params }: PageProps) {
   const { locale, slug } = await params;
+
+    if (!airportSeoLocales.includes(locale as (typeof airportSeoLocales)[number])) {
+    notFound();
+  }
   const airport = getAirportBySlug(slug);
 
   if (!airport) notFound();
