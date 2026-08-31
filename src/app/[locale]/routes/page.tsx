@@ -1,6 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
 import { routes } from "@/data/seo/routes";
+import {
+  buildLanguageAlternates,
+  routeSeoLocales,
+} from "@/lib/seo/alternates";
+
+const SITE_URL = "https://www.flightclaimly.com";
 
 type Props = {
   params: Promise<{
@@ -8,18 +16,30 @@ type Props = {
   }>;
 };
 
-export async function generateMetadata() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+
+  if (!routeSeoLocales.includes(locale as (typeof routeSeoLocales)[number])) {
+    return {};
+  }
+
+  const canonical = `${SITE_URL}/${locale}/routes`;
+
   return {
     title: "Flight compensation routes | FlightClaimly",
     description:
       "Find flight compensation guides for popular European routes and check if your delayed or cancelled flight may qualify under EU261.",
+    alternates: {
+      canonical,
+      languages: buildLanguageAlternates("routes", routeSeoLocales),
+    },
   };
 }
 
 export default async function RoutesPage({ params }: Props) {
   const { locale } = await params;
 
-  if (locale !== "en") {
+  if (!routeSeoLocales.includes(locale as (typeof routeSeoLocales)[number])) {
     notFound();
   }
 
