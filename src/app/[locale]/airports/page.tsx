@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { airports } from "@/data/seo/airports";
 import { notFound } from "next/navigation";
-import { airportSeoLocales } from "@/lib/seo/alternates";
+
+import { airports } from "@/data/seo/airports";
+import {
+  airportSeoLocales,
+  buildLanguageAlternates,
+} from "@/lib/seo/alternates";
+
+const SITE_URL = "https://www.flightclaimly.com";
 
 type PageProps = {
   params: Promise<{
@@ -9,11 +16,23 @@ type PageProps = {
   }>;
 };
 
-export async function generateMetadata() {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+
+  if (!airportSeoLocales.includes(locale as (typeof airportSeoLocales)[number])) {
+    return {};
+  }
+
+  const canonical = `${SITE_URL}/${locale}/airports`;
+
   return {
     title: "Airport flight compensation | FlightClaimly",
     description:
       "Find airport-specific flight compensation guides for delayed, cancelled and disrupted flights under EU261.",
+    alternates: {
+      canonical,
+      languages: buildLanguageAlternates("airports", airportSeoLocales),
+    },
   };
 }
 
@@ -21,8 +40,8 @@ export default async function AirportsIndexPage({ params }: PageProps) {
   const { locale } = await params;
 
   if (!airportSeoLocales.includes(locale as (typeof airportSeoLocales)[number])) {
-  notFound();
-}
+    notFound();
+  }
 
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-20">
