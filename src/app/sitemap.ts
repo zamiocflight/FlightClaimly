@@ -6,12 +6,14 @@ import { flightNumbers } from "@/data/master/flightNumbers";
 import { airports } from "@/data/seo/airports";
 import { airlines } from "@/data/seo/airlines";
 import { countries } from "@/data/seo/countries";
+import { delayReasons } from "@/data/delay-reasons/delayReasons";
 import { getRouteSitemapEntry } from "@/lib/seo/routes";
 import {
   routeSeoLocales,
   airportSeoLocales,
   airlineSeoLocales,
   countrySeoLocales,
+  delayReasonSeoLocales,
   flightNumberSeoLocales,
 } from "@/lib/seo/alternates";
 
@@ -43,7 +45,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "terms", changeFrequency: "yearly", priority: 0.3 },
   ];
 
-
   const staticEntries = locales.flatMap((locale) =>
     staticRoutes.map((route) => {
       const url =
@@ -70,28 +71,42 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const airportEntries = airportSeoLocales.flatMap((locale) =>
-  airports.map((airport) => ({
-    url: `${siteUrl}/${locale}/airports/${airport.slug}`,
-    changeFrequency: "weekly" as const,
-    priority: 0.8,
-  })),
-);
+    airports.map((airport) => ({
+      url: `${siteUrl}/${locale}/airports/${airport.slug}`,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
+  );
 
-const airlineEntries = airlineSeoLocales.flatMap((locale) =>
-  airlines.map((airline) => ({
-    url: `${siteUrl}/${locale}/airlines/${airline.slug}`,
-    changeFrequency: "weekly" as const,
-    priority: 0.8,
-  })),
-);
+  const airlineEntries = airlineSeoLocales.flatMap((locale) =>
+    airlines.map((airline) => ({
+      url: `${siteUrl}/${locale}/airlines/${airline.slug}`,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
+  );
 
-const countryEntries = countrySeoLocales.flatMap((locale) =>
-  countries.map((country) => ({
-    url: `${siteUrl}/${locale}/countries/${country.slug}`,
+  const countryEntries = countrySeoLocales.flatMap((locale) =>
+    countries.map((country) => ({
+      url: `${siteUrl}/${locale}/countries/${country.slug}`,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
+  );
+
+  const delayReasonIndexEntries = delayReasonSeoLocales.map((locale) => ({
+    url: `${siteUrl}/${locale}/delay-reasons`,
     changeFrequency: "weekly" as const,
-    priority: 0.8,
-  })),
-);
+    priority: 0.9,
+  }));
+
+  const delayReasonEntries = delayReasonSeoLocales.flatMap((locale) =>
+    delayReasons.map((reason) => ({
+      url: `${siteUrl}/${locale}/delay-reasons/${reason.slug}`,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
+  );
 
   const flightNumberEntries = flightNumberSeoLocales.flatMap((locale) =>
     flightNumbers.map((flightNumber) => ({
@@ -102,12 +117,14 @@ const countryEntries = countrySeoLocales.flatMap((locale) =>
   );
 
   return [
-  ...staticEntries,
-  ...routeIndexEntries,
-  ...routeEntries,
-  ...airportEntries,
-  ...airlineEntries,
-  ...countryEntries,
-  ...flightNumberEntries,
-];
+    ...staticEntries,
+    ...routeIndexEntries,
+    ...routeEntries,
+    ...airportEntries,
+    ...airlineEntries,
+    ...countryEntries,
+    ...delayReasonIndexEntries,
+    ...delayReasonEntries,
+    ...flightNumberEntries,
+  ];
 }
