@@ -70,6 +70,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     flightRoutes.map((route) => getRouteSitemapEntry(route, locale, siteUrl)),
   );
 
+  const airportIndexEntries = airportSeoLocales.map((locale) => ({
+    url: `${siteUrl}/${locale}/airports`,
+    changeFrequency: "weekly" as const,
+    priority: 0.9,
+  }));
+
   const airportEntries = airportSeoLocales.flatMap((locale) =>
     airports.map((airport) => ({
       url: `${siteUrl}/${locale}/airports/${airport.slug}`,
@@ -78,6 +84,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
+  const airlineIndexEntries = airlineSeoLocales.map((locale) => ({
+    url: `${siteUrl}/${locale}/airlines`,
+    changeFrequency: "weekly" as const,
+    priority: 0.9,
+  }));
+
   const airlineEntries = airlineSeoLocales.flatMap((locale) =>
     airlines.map((airline) => ({
       url: `${siteUrl}/${locale}/airlines/${airline.slug}`,
@@ -85,6 +97,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     })),
   );
+
+  const countryIndexEntries = countrySeoLocales.map((locale) => ({
+    url: `${siteUrl}/${locale}/countries`,
+    changeFrequency: "weekly" as const,
+    priority: 0.9,
+  }));
 
   const countryEntries = countrySeoLocales.flatMap((locale) =>
     countries.map((country) => ({
@@ -108,6 +126,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
+  const flightNumberIndexEntries = flightNumberSeoLocales.map((locale) => ({
+    url: `${siteUrl}/${locale}/flight-numbers`,
+    changeFrequency: "daily" as const,
+    priority: 0.9,
+  }));
+
   const flightNumberEntries = flightNumberSeoLocales.flatMap((locale) =>
     flightNumbers.map((flightNumber) => ({
       url: `${siteUrl}/${locale}/flight-numbers/${flightNumber.slug}`,
@@ -120,11 +144,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticEntries,
     ...routeIndexEntries,
     ...routeEntries,
+    ...airportIndexEntries,
     ...airportEntries,
+    ...airlineIndexEntries,
     ...airlineEntries,
+    ...countryIndexEntries,
     ...countryEntries,
     ...delayReasonIndexEntries,
     ...delayReasonEntries,
+    ...flightNumberIndexEntries,
     ...flightNumberEntries,
   ];
 }
