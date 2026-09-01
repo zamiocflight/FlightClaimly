@@ -792,3 +792,121 @@ Before committing the scale checkpoint:
 5. only after that checkpoint is safely committed, continue to the next Flight Number population cohort / broader acquisition scale
 
 Do not expand Delay Reason coverage or additional locales until this Flight Number scale checkpoint is secured unless priorities are explicitly changed.
+
+---
+
+# Exact Recovery-Safe Checkpoint — 2026-09-01
+
+> **AUTHORITATIVE RESUME POINT.** If a browser/chat/session failure happens again, resume from this section first. Do not reconstruct earlier work from memory before reading this checkpoint.
+
+## Exact Local State at Pause
+
+Status: **🟡 VALIDATED AND STAGED LOCALLY — NOT YET COMMITTED**
+
+The Europe Core Flight Number scale work is complete enough to checkpoint, but the generated artifacts have intentionally not yet been committed because the final Git synchronization/commit step remains.
+
+Exactly four files are staged locally for the Flight Number Europe Scale checkpoint:
+
+- `reports/population/latest.json`
+- `src/data/master/airportRegistry.ts`
+- `src/data/master/flightNumberSeeds.ts`
+- `src/data/master/flightNumbers.ts`
+
+Staged diff summary:
+
+- **4 files changed**
+- **80,157 insertions**
+- **52,296 deletions**
+- `reports/population/latest.json`: 143-line diff
+- `airportRegistry.ts`: 58,673-line diff
+- `flightNumberSeeds.ts`: 6,044-line diff
+- `flightNumbers.ts`: 67,593-line diff
+
+These unrelated Claims Desk / Reijo files are present locally but are **NOT staged and must not be included in the Flight Number commit**:
+
+- `docs/CLAIMS_DESK.md` — modified, unstaged
+- `scripts/test-manual-claim.ts` — modified, unstaged
+- `scripts/create-reijo-claim.ts` — untracked
+
+Do **not** run `git add .`, `git reset --hard`, `git clean`, or any destructive recovery command.
+
+## Airport Registry Validation — COMPLETED
+
+The large registry rewrite was investigated before approval. It is not treated as an unexplained data-loss event.
+
+Current generator output:
+
+- source CSV rows: **84,428**
+- commercial scheduled candidates: **4,189**
+- European commercial candidates: **678**
+- final Airport Registry entries: **3,913**
+- European Registry entries: **650**
+- countries represented globally: **235**
+- countries represented in Europe: **47**
+- airport types globally: **957 large / 2,167 medium / 789 small**
+- verified override injected: **BGY**
+
+The previous HEAD registry contained 8,210 IATA entries. The smaller generated registry is intentional under the new Global Commercial Airport Registry policy: commercial airport type + scheduled service + valid IATA/core data, with non-commercial/irrelevant entries filtered out. The registry now also carries `continent` and `isEuropean` fields.
+
+After regenerating the Airport Registry, the Flight Number audit was rerun successfully, proving the stricter registry does not block the current Flight Number publication layer.
+
+## Final Flight Number Audit — GREEN
+
+Latest exact audit result after Airport Registry regeneration:
+
+- entities: **548**
+- publishable: **548**
+- blocked: **0**
+- duplicate slugs: **0**
+- duplicate identities: **0**
+- airlines represented: **8**
+
+By airline:
+
+- Air France: **62**
+- British Airways: **60**
+- easyJet: **63**
+- KLM: **71**
+- Lufthansa: **63**
+- Norwegian: **72**
+- Ryanair: **59**
+- SAS: **98**
+
+Important data-layer distinction:
+
+- **601** = seeds after Population Engine merge
+- **548** = final generated/audited Flight Number entities
+
+Do not describe 601 as the final public Flight Number entity count.
+
+## Build State
+
+Latest full production build before this pause is green:
+
+- compiled successfully
+- TypeScript validation passed
+- static generation completed: **3,058 / 3,058 pages**
+- Flight Number generation expanded successfully
+- Route generation remained healthy
+
+## Git / Remote Coordination State
+
+`docs/CURRENT_SPRINT.md` has been updated directly on remote `main` during recovery documentation. Therefore the local branch may be behind remote even though the four generated Flight Number files are staged locally.
+
+Do **not** force-push or reset to reconcile this.
+
+## Exact Next Action on Resume
+
+Do not repopulate, regenerate, or restage the dataset. The data has already been validated.
+
+Resume with Git synchronization/checkpointing only:
+
+1. inspect local/remote branch relationship safely (`git fetch origin` followed by branch/status inspection)
+2. preserve the four staged Flight Number files and the three unrelated Claims/Reijo local files
+3. reconcile the remote `CURRENT_SPRINT.md` documentation commit without destructive reset/force
+4. commit the four validated staged artifacts as the Europe Core Flight Number scale checkpoint
+5. push the checkpoint normally
+6. verify remote/main contains both the documentation checkpoint and the Flight Number checkpoint
+7. only then mark this scale checkpoint secured and choose the next Flight Number population cohort
+
+**Do not continue broader population before this exact staged checkpoint is safely committed and pushed.**
