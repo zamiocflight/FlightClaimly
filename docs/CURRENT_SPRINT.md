@@ -1,5 +1,13 @@
 # FlightClaimly – Current Sprint
 
+> **DOCUMENT HISTORY NOTICE**
+>
+> This file intentionally preserves previous sprint plans, statuses and roadmap notes as project history.
+> Older sections may therefore describe work as "Current", "Next Sprint" or "Upcoming" even when that work has since been completed.
+>
+> **Always treat the most recent dated project-state or sprint-status section as authoritative.**
+> Earlier sections are historical records and must not be deleted merely because they are outdated.
+
 **Status:** Sprint 1 (Knowledge Foundation)
 
 Last Updated: 2026-07-03
@@ -630,3 +638,56 @@ FlightClaimly work should now be separated into two conversational workstreams:
 - recovery
 
 Individual customer facts should not be stored in general architecture documentation.
+
+---
+
+# Current Sprint Status — 2026-09-01
+
+> This is the latest authoritative sprint-status section. Earlier sprint and roadmap sections above remain intentionally preserved as project history.
+
+## SEO Integrity / Publication Architecture
+
+Status: **FINAL VERIFICATION**
+
+Completed:
+
+- Route programmatic SEO publication restricted to English until genuine localized programmatic copy exists
+- Airport, Airline, Country, Delay Reason and Flight Number programmatic publication aligned to the same EN-only policy
+- canonical and language-alternate policy centralized and verified
+- programmatic hubs use correct self-canonical URLs
+- sitemap publication aligned with intended indexable surface
+- `/en/flight-numbers` knowledge/discovery hub added
+- Flight Number detail breadcrumbs now resolve through a real hub
+- Flight Number Registry unified with `src/data/master/flightNumbers` as the authoritative source of truth
+- Route/entity relationship links aligned with publication policy
+- false sitemap freshness removed
+
+## Current Knowledge Surface
+
+- Airports: 98
+- Airlines: 96
+- Countries: 36
+- Routes: 1,594
+- Flight numbers: 50
+- Delay Reason Engine currently contains the first substantive reason entity (`technical-problems`)
+
+## Verification — 2026-09-01
+
+- ✅ `npx tsc --noEmit`
+- ✅ `npx tsx scripts/audit-seo-data.ts`
+- ✅ SEO audit: 0 errors / 20 known copy-reference warnings / 0 info
+- ✅ `npm run build`
+- ✅ production build generated 2,164 / 2,164 static pages
+- ✅ EN programmatic hub publication verified
+- ✅ unsupported SV programmatic hub publication returns 404
+- ✅ programmatic hub canonicals verified
+- ✅ sitemap EN/SV publication boundaries verified
+
+The 20 SEO audit warnings are known lexical/relationship references between airlines (for example Lufthansa-group or brand relationships) and are not data-integrity failures.
+
+## Remaining Before Sprint Closure
+
+1. Final production sanity-check after the Flight Number source-of-truth deployment
+2. Confirm Delay Reason hub/detail production publication boundary and canonical/sitemap behavior
+3. Close the SEO integrity sprint
+4. Move to the next Knowledge Engine expansion phase based on the maintained roadmap
