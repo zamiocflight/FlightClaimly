@@ -21,6 +21,7 @@ export type FlightNumber = {
   distanceBand: "short" | "medium" | "long";
 
   eu261Eligible: boolean;
+  uk261Eligible?: boolean;
 
   title: string;
   description: string;
