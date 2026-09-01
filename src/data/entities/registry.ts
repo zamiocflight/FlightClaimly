@@ -1,4 +1,4 @@
-import { flightNumbers } from "@/data/flight-numbers/flightNumbers";
+import { flightNumbers } from "@/data/master/flightNumbers";
 import { airlines } from "@/data/seo/airlines";
 import { airports } from "@/data/seo/airports";
 import { countries } from "@/data/seo/countries";
@@ -71,16 +71,16 @@ export function getEntityHref(slug: string, locale: string) {
   if (!entity) return "#";
 
   const englishOnlyEntityTypes: EntityType[] = [
-  "route",
-  "airport",
-  "airline",
-  "country",
-  "flight-number",
-];
+    "route",
+    "airport",
+    "airline",
+    "country",
+    "flight-number",
+  ];
 
-const targetLocale = englishOnlyEntityTypes.includes(entity.type)
-  ? "en"
-  : locale;
+  const targetLocale = englishOnlyEntityTypes.includes(entity.type)
+    ? "en"
+    : locale;
 
   return `/${targetLocale}/${entity.hrefBase}/${entity.slug}`;
 }
