@@ -16,6 +16,7 @@ import {
   resolveFlightNumberAirline,
   validateFlightNumberSeed,
 } from "./helpers";
+import { resolvePassengerRightsCoverage } from "@/lib/aviation/passengerRightsCoverage";
 
 export function createFlightNumber(
   seed: FlightNumberSeed
@@ -37,13 +38,19 @@ export function createFlightNumber(
 
   const flightNumber = seed.flightNumber.toUpperCase();
   const routeLabel = `${route.origin.city} to ${route.destination.city}`;
+  const coverage = resolvePassengerRightsCoverage({
+    originCountry: route.origin.country,
+    destinationCountry: route.destination.country,
+    airline,
+  });
 
   const context = {
     airline,
     route,
     flightNumber,
     routeLabel,
-    eu261Eligible: seed.eu261Eligible,
+    eu261Eligible: coverage.eu261,
+    uk261Eligible: coverage.uk261,
   } satisfies FlightNumberBuildContext;
 
   const seo = buildFlightNumberSeoCopy(context);
@@ -51,15 +58,15 @@ export function createFlightNumber(
   const identity = buildFlightNumberIdentity(context);
 
   const relationships = {
-  airline: airline.slug,
-  originAirport: route.origin.slug,
-  destinationAirport: route.destination.slug,
-  route: route.slug,
-};
+    airline: airline.slug,
+    originAirport: route.origin.slug,
+    destinationAirport: route.destination.slug,
+    route: route.slug,
+  };
 
-const metadata = {
-  canonical: `/flight-numbers/${createFlightNumberSlug(flightNumber)}`,
-};
+  const metadata = {
+    canonical: `/flight-numbers/${createFlightNumberSlug(flightNumber)}`,
+  };
 
   return {
     slug: createFlightNumberSlug(flightNumber),
@@ -70,7 +77,8 @@ const metadata = {
 
     distanceBand: seed.distanceBand,
 
-    eu261Eligible: seed.eu261Eligible,
+    eu261Eligible: coverage.eu261,
+    uk261Eligible: coverage.uk261,
 
     ...seo,
 
