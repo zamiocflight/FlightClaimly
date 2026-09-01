@@ -1,4 +1,5 @@
 import type { FlightNumber, FlightNumberSeed } from "./types";
+import { getAirlineBySlug } from "@/data/seo/airlines";
 
 export type FlightNumberPublicationDecision = {
   publish: boolean;
@@ -15,13 +16,28 @@ export function evaluateFlightNumberSeedForPublication(
   const flightNumber = seed.flightNumber.trim().replace(/\s+/g, "").toUpperCase();
   const originIata = seed.originIata.trim().toUpperCase();
   const destinationIata = seed.destinationIata.trim().toUpperCase();
+  const airlineSlug = seed.airline.trim();
+  const airline = airlineSlug ? getAirlineBySlug(airlineSlug) : undefined;
 
   if (!FLIGHT_NUMBER_PATTERN.test(flightNumber)) {
     reasons.push("invalid-flight-number");
   }
 
-  if (!seed.airline.trim()) {
+  if (!airlineSlug) {
     reasons.push("missing-airline");
+  } else if (!airline) {
+    reasons.push("unknown-airline");
+  } else {
+    const airlineIata = airline.iata.trim().toUpperCase();
+
+    // A public flight-number entity must belong to its marketing carrier.
+    // FlightAware schedule responses can contain codeshare identifiers, so a
+    // query for one operating carrier may surface another carrier's marketed
+    // flight number. Without this check those records produce distinct
+    // airline identities that collapse onto the same canonical URL slug.
+    if (!flightNumber.startsWith(airlineIata)) {
+      reasons.push("airline-flight-number-mismatch");
+    }
   }
 
   if (!IATA_AIRPORT_PATTERN.test(originIata)) {
