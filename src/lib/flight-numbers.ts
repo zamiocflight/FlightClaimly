@@ -1,18 +1,18 @@
-import { flightNumbers } from "@/data/master/flightNumbers";
+import { publishableFlightNumbers } from "@/lib/flight-numbers/catalog";
 
 export function getFlightNumberBySlug(slug: string) {
-  return flightNumbers.find(
+  return publishableFlightNumbers.find(
     (flightNumber) => flightNumber.slug === slug,
   );
 }
 
 export function getFlightNumberByNumber(flightNumber: string) {
-  return flightNumbers.find(
+  return publishableFlightNumbers.find(
     (item) =>
       item.flightNumber.toLowerCase() === flightNumber.toLowerCase(),
   );
 }
 
 export function getAllFlightNumbers() {
-  return flightNumbers;
+  return publishableFlightNumbers;
 }
