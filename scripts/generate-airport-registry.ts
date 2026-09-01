@@ -30,23 +30,9 @@ type AirportRegistryEntry = {
   longitude: number;
 };
 
-const EXCLUDE_NAME_PATTERNS = [
-  "heliport",
-  "seaplane",
-  "air base",
-  "air force",
-  "naval",
-  "army",
-];
+const EXCLUDE_NAME_PATTERNS = ["heliport", "seaplane", "air base", "air force", "naval", "army"];
+const COMMERCIAL_AIRPORT_TYPES = new Set(["large_airport", "medium_airport", "small_airport"]);
 
-const COMMERCIAL_AIRPORT_TYPES = new Set([
-  "large_airport",
-  "medium_airport",
-  "small_airport",
-]);
-
-// Explicitly supplements OurAirports' continent field for European edge cases
-// and transcontinental countries that are commercially relevant to FlightClaimly.
 const EUROPEAN_COMMERCIAL_COUNTRY_CODES = new Set([
   "AL", "AD", "AT", "BY", "BE", "BA", "BG", "HR", "CY", "CZ", "DK",
   "EE", "FI", "FR", "DE", "GR", "HU", "IS", "IE", "IT", "XK", "LV",
@@ -55,90 +41,73 @@ const EUROPEAN_COMMERCIAL_COUNTRY_CODES = new Set([
   "GB", "VA",
 ]);
 
-function normalize(value: string): string {
-  return value.trim().toLowerCase();
-}
+// The bundled airport CSV is a snapshot and individual scheduled_service flags can
+// lag reality. These overrides are intentionally small, evidence-backed exceptions;
+// they prevent a known commercial airport from disappearing from the support graph
+// while keeping the registry conservative.
+const COMMERCIAL_SERVICE_OVERRIDES = new Set(["BGY"]);
 
+function normalize(value: string): string { return value.trim().toLowerCase(); }
 function shouldExcludeByName(name: string): boolean {
   const normalizedName = normalize(name);
   return EXCLUDE_NAME_PATTERNS.some((pattern) => normalizedName.includes(pattern));
 }
-
 function createSlug(value: string): string {
-  return value
-    .toLowerCase()
-    .normalize("NFKD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+  return value.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 }
-
 function getCountryName(countryCode: string): string {
   if (!countryCode) return "Unknown";
-
-  const displayNames = new Intl.DisplayNames(["en"], {
-    type: "region",
-  });
-
+  const displayNames = new Intl.DisplayNames(["en"], { type: "region" });
   return displayNames.of(countryCode) ?? countryCode;
 }
-
-function isCommercialScheduledAirport(record: AirportCsvRow): boolean {
-  const scheduledService = record.scheduled_service?.trim() ?? "";
-  const type = record.type?.trim() ?? "";
-
-  return scheduledService === "1" && COMMERCIAL_AIRPORT_TYPES.has(type);
+function hasCommercialAirportType(record: AirportCsvRow): boolean {
+  return COMMERCIAL_AIRPORT_TYPES.has(record.type?.trim() ?? "");
 }
-
+function isCommercialScheduledAirport(record: AirportCsvRow): boolean {
+  const iata = record.iata_code?.trim().toUpperCase() ?? "";
+  const scheduledService = record.scheduled_service?.trim() ?? "";
+  return hasCommercialAirportType(record) &&
+    (scheduledService === "1" || COMMERCIAL_SERVICE_OVERRIDES.has(iata));
+}
 function isEuropeanAirport(record: AirportCsvRow): boolean {
   const continent = record.continent?.trim().toUpperCase() ?? "";
   const countryCode = record.iso_country?.trim().toUpperCase() ?? "";
-
   return continent === "EU" || EUROPEAN_COMMERCIAL_COUNTRY_CODES.has(countryCode);
 }
 
 async function main(): Promise<void> {
   const csvPath = path.join(process.cwd(), "scripts/data/airports.csv");
-  const outputPath = path.join(
-    process.cwd(),
-    "src/data/master/airportRegistry.ts"
-  );
-
+  const outputPath = path.join(process.cwd(), "src/data/master/airportRegistry.ts");
   const csv = await fs.readFile(csvPath, "utf8");
-  const records = parse(csv, {
-    columns: true,
-    skip_empty_lines: true,
-  }) as AirportCsvRow[];
-
+  const records = parse(csv, { columns: true, skip_empty_lines: true }) as AirportCsvRow[];
   const airportsByIata = new Map<string, AirportRegistryEntry>();
-
   let commercialCandidates = 0;
   let europeanCommercialCandidates = 0;
+  const appliedOverrides: string[] = [];
 
   for (const record of records) {
     if (!isCommercialScheduledAirport(record)) continue;
-
     commercialCandidates++;
     if (isEuropeanAirport(record)) europeanCommercialCandidates++;
 
     const iata = record.iata_code?.trim().toUpperCase() ?? "";
     if (!/^[A-Z]{3}$/.test(iata)) continue;
-
     const name = record.name?.trim() ?? "";
     const city = record.municipality?.trim() ?? "";
     const countryCode = record.iso_country?.trim().toUpperCase() ?? "";
     const continent = record.continent?.trim().toUpperCase() ?? "";
     const type = record.type?.trim() ?? "";
-
     if (!name || !city || !countryCode || !type) continue;
     if (shouldExcludeByName(name)) continue;
-
     const latitude = Number(record.latitude_deg);
     const longitude = Number(record.longitude_deg);
-
     if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) continue;
-
     const icao = record.icao_code?.trim().toUpperCase();
+
+    if (COMMERCIAL_SERVICE_OVERRIDES.has(iata) && record.scheduled_service?.trim() !== "1") {
+      appliedOverrides.push(iata);
+    }
 
     airportsByIata.set(iata, {
       slug: `${createSlug(name)}-${iata.toLowerCase()}`,
@@ -156,10 +125,7 @@ async function main(): Promise<void> {
     });
   }
 
-  const airports = Array.from(airportsByIata.values()).sort((a, b) =>
-    a.iata.localeCompare(b.iata)
-  );
-
+  const airports = Array.from(airportsByIata.values()).sort((a, b) => a.iata.localeCompare(b.iata));
   const output = `export type AirportRegistryEntry = {
   slug: string;
   iata: string;
@@ -175,21 +141,13 @@ async function main(): Promise<void> {
   longitude: number;
 };
 
-export const airportRegistry: AirportRegistryEntry[] = ${JSON.stringify(
-    airports,
-    null,
-    2
-  )};
+export const airportRegistry: AirportRegistryEntry[] = ${JSON.stringify(airports, null, 2)};
 
 export function getAirportRegistryEntryByIata(iata: string) {
-  return airportRegistry.find(
-    (airport) => airport.iata.toUpperCase() === iata.toUpperCase()
-  );
+  return airportRegistry.find((airport) => airport.iata.toUpperCase() === iata.toUpperCase());
 }
 
-export const europeanAirportRegistry = airportRegistry.filter(
-  (airport) => airport.isEuropean
-);
+export const europeanAirportRegistry = airportRegistry.filter((airport) => airport.isEuropean);
 `;
 
   await fs.mkdir(path.dirname(outputPath), { recursive: true });
@@ -197,9 +155,7 @@ export const europeanAirportRegistry = airportRegistry.filter(
 
   const countryCount = new Set(airports.map((airport) => airport.countryCode)).size;
   const europeanAirports = airports.filter((airport) => airport.isEuropean);
-  const europeanCountryCount = new Set(
-    europeanAirports.map((airport) => airport.countryCode)
-  ).size;
+  const europeanCountryCount = new Set(europeanAirports.map((airport) => airport.countryCode)).size;
   const large = airports.filter((airport) => airport.type === "large_airport").length;
   const medium = airports.filter((airport) => airport.type === "medium_airport").length;
   const small = airports.filter((airport) => airport.type === "small_airport").length;
@@ -214,6 +170,7 @@ export const europeanAirportRegistry = airportRegistry.filter(
   console.log("Countries represented globally:", countryCount);
   console.log("Countries represented in Europe:", europeanCountryCount);
   console.log(`By type globally: large ${large}, medium ${medium}, small ${small}`);
+  console.log("Commercial service overrides applied:", appliedOverrides.length ? appliedOverrides.join(", ") : "none");
   console.log("Written:", outputPath);
 }
 
