@@ -4,6 +4,10 @@ import path from "node:path";
 import { flightNumberSeeds } from "../src/data/master/flightNumberSeeds";
 import { createFlightNumber } from "../src/data/flight-numbers/createFlightNumber";
 import type { FlightNumberSeed } from "../src/data/flight-numbers/types";
+import {
+  evaluateFlightNumberForPublication,
+  evaluateFlightNumberSeedForPublication,
+} from "../src/data/flight-numbers/publication";
 
 function normalizeFlightNumber(flightNumber: string): string {
   return flightNumber
@@ -33,32 +37,41 @@ function deduplicateSeeds(
   const uniqueSeeds = new Map<string, FlightNumberSeed>();
 
   for (const seed of seeds) {
+    const publication = evaluateFlightNumberSeedForPublication(seed);
+
+    if (!publication.publish) {
+      console.warn(
+        `Skipping ${normalizeFlightNumber(seed.flightNumber)}: ${publication.reasons.join(", ")}`
+      );
+      continue;
+    }
+
     const key = createSeedKey(seed);
     const existingSeed = uniqueSeeds.get(key);
+    const normalizedSeed: FlightNumberSeed = {
+      ...seed,
+      flightNumber: normalizeFlightNumber(seed.flightNumber),
+      airline: seed.airline.trim().toLowerCase(),
+      originIata: seed.originIata.trim().toUpperCase(),
+      destinationIata: seed.destinationIata.trim().toUpperCase(),
+    };
 
     if (!existingSeed) {
-      uniqueSeeds.set(key, {
-        ...seed,
-        flightNumber: normalizeFlightNumber(seed.flightNumber),
-        airline: seed.airline.trim().toLowerCase(),
-        originIata: seed.originIata.trim().toUpperCase(),
-        destinationIata: seed.destinationIata.trim().toUpperCase(),
-      });
-
+      uniqueSeeds.set(key, normalizedSeed);
       continue;
     }
 
     const routeChanged =
-      existingSeed.originIata !== seed.originIata.trim().toUpperCase() ||
-      existingSeed.destinationIata !==
-        seed.destinationIata.trim().toUpperCase();
+      existingSeed.originIata !== normalizedSeed.originIata ||
+      existingSeed.destinationIata !== normalizedSeed.destinationIata;
 
     if (routeChanged) {
-      console.warn(
+      throw new Error(
         [
-          `Conflicting route for ${normalizeFlightNumber(seed.flightNumber)}.`,
-          `Keeping: ${describeSeed(existingSeed)}`,
-          `Ignoring: ${describeSeed(seed)}`,
+          `Ambiguous route identity for ${normalizeFlightNumber(seed.flightNumber)}.`,
+          `Existing: ${describeSeed(existingSeed)}`,
+          `Conflicting: ${describeSeed(normalizedSeed)}`,
+          "Refusing to overwrite a published flight-number identity. Resolve the route history before rebuilding.",
         ].join("\n")
       );
     }
@@ -88,23 +101,36 @@ async function main(): Promise<void> {
   console.log("Flight Number Builder starting...");
 
   const importedCount = flightNumberSeeds.length;
-
   const uniqueSeeds = deduplicateSeeds(flightNumberSeeds);
   const sortedSeeds = sortSeeds(uniqueSeeds);
+  const builtFlightNumbers = sortedSeeds.map(createFlightNumber);
 
-  const flightNumbers = sortedSeeds.map(createFlightNumber);
+  const publicationFailures = builtFlightNumbers
+    .map((flightNumber) => ({
+      flightNumber,
+      decision: evaluateFlightNumberForPublication(flightNumber),
+    }))
+    .filter(({ decision }) => !decision.publish);
 
-  const duplicatesRemoved =
-    importedCount - flightNumbers.length;
+  if (publicationFailures.length > 0) {
+    throw new Error(
+      [
+        "Flight-number publication quality gate failed.",
+        ...publicationFailures.map(
+          ({ flightNumber, decision }) =>
+            `${flightNumber.flightNumber}: ${decision.reasons.join(", ")}`
+        ),
+      ].join("\n")
+    );
+  }
 
-  const output = `import type { FlightNumber } from "../flight-numbers/types";
+  const duplicatesRemoved = importedCount - builtFlightNumbers.length;
 
-export const flightNumbers: FlightNumber[] = ${JSON.stringify(
-    flightNumbers,
+  const output = `import type { FlightNumber } from "../flight-numbers/types";\n\nexport const flightNumbers: FlightNumber[] = ${JSON.stringify(
+    builtFlightNumbers,
     null,
     2
-  )};
-`;
+  )};\n`;
 
   const outputPath = path.join(
     process.cwd(),
@@ -118,8 +144,8 @@ export const flightNumbers: FlightNumber[] = ${JSON.stringify(
   await fs.writeFile(outputPath, output, "utf8");
 
   console.log("Flight-number seeds imported:", importedCount);
-  console.log("Duplicate flight numbers removed:", duplicatesRemoved);
-  console.log("Unique flight numbers written:", flightNumbers.length);
+  console.log("Seeds rejected or duplicates removed:", duplicatesRemoved);
+  console.log("Publishable flight numbers written:", builtFlightNumbers.length);
   console.log("Written:", outputPath);
 }
 
