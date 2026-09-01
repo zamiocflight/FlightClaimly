@@ -707,3 +707,88 @@ Primary next opportunities:
 4. Introduce additional programmatic locales only through genuine localized templates/content with SEO and legal QA
 
 Parent `[locale]` static generation of non-indexable programmatic hubs remains non-blocking technical debt; runtime gates prevent publication/indexation leakage.
+
+---
+
+# Flight Number Europe Scale Checkpoint — 2026-09-01
+
+> This is the latest authoritative Product / Growth checkpoint and supersedes the earlier "Next Phase" list for the immediate development sequence.
+
+## Current Focus
+
+**Flight Number Engine population at European scale**
+
+Status: **🟡 IN PROGRESS — scale checkpoint validated locally**
+
+The project moved directly from the completed SEO Integrity / Publication Architecture sprint into the first controlled Europe-scale Flight Number population run.
+
+## Architecture / Safety Work Completed Before Scale
+
+- staged Europe population commands added (`pilot` and `scale`)
+- FlightAware pagination links normalized/rebased correctly
+- Flight Number identity enforced as `airline + flight number`
+- seed sanitizer made non-destructive
+- commercial airport coverage expanded and preserved through the Airport Registry
+- stale commercial-airport schedule flags handled generically
+- BGY/Bergamo registry issue resolved before the scale checkpoint
+- Flight Number generation remains downstream of Airport/Route knowledge rather than hardcoded route exceptions
+
+## Europe Core Scale Run
+
+Profile: `europe-core`  
+Airlines: `SK`, `DY`, `FR`, `LH`, `U2`, `AF`, `KL`, `BA`  
+FlightAware maximum pages per airline: `5`
+
+Population report:
+
+- schedules returned: **600**
+- valid normalized seeds: **599**
+- rejected schedules: **1**
+- duplicate fetched seeds: **44**
+- unique fetched seeds: **555**
+- existing seeds before merge: **165**
+- seeds added: **436**
+- seeds updated: **3**
+- seeds unchanged: **116**
+- route conflicts: **0**
+- total seeds after merge: **601**
+
+The successful population report completed in approximately 46.7 seconds.
+
+## Generation / Build Checkpoint
+
+After the scale run the working sequence reached:
+
+1. `npm run populate:europe-core:scale`
+2. `npm run build:flight-numbers`
+3. `npm run audit:flight-numbers`
+4. latest upstream Flight Number identity fix pulled
+5. Flight Number build repeated
+6. Flight Number audit repeated
+7. `npm run build`
+
+The production build has now been rerun after recovery and is green:
+
+- ✅ compiled successfully
+- ✅ TypeScript validation passed inside Next build
+- ✅ static generation completed: **3,058 / 3,058 pages**
+- ✅ Flight Number detail generation expanded from the previous 50-entity surface to the new scale dataset
+- ✅ route generation remains healthy
+
+## Recovery Point
+
+The browser/session failure occurred **after the final production build command**, not during population or generation. The generated local work survived the crash.
+
+At recovery, the large generated Flight Number/seed/registry changes were still present as local uncommitted changes. They must not be regenerated, reset or discarded merely because the chat session was lost.
+
+## Immediate Next Action
+
+Before committing the scale checkpoint:
+
+1. rerun `npm run audit:flight-numbers` against the exact recovered generated dataset
+2. confirm zero blocked entities, duplicate slugs and duplicate airline/flight-number identities
+3. inspect the final Git delta/status without resetting generated files
+4. commit the validated Europe Core scale artifacts as one checkpoint
+5. only after that checkpoint is safely committed, continue to the next Flight Number population cohort / broader acquisition scale
+
+Do not expand Delay Reason coverage or additional locales until this Flight Number scale checkpoint is secured unless priorities are explicitly changed.
