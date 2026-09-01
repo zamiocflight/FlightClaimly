@@ -194,9 +194,15 @@ function mergeFlightNumberSeeds(existingSeeds: FlightNumberSeed[], fetchedSeeds:
 function serializeSeeds(seeds: FlightNumberSeed[]): string {
   return `import type { FlightNumberSeed } from "../flight-numbers/types";\n\nexport const flightNumberSeeds: FlightNumberSeed[] = ${JSON.stringify(seeds, null, 2)};\n`;
 }
-function normalizeNextUrl(next: string): string {
-  if (/^https?:\/\//i.test(next)) return next;
-  return new URL(next, FLIGHTAWARE_API_BASE).toString();
+function normalizeNextUrl(next: string, currentUrl: string): string {
+  const parsed = new URL(next, currentUrl);
+  let pathname = parsed.pathname;
+  if (pathname === "/aeroapi") pathname = "/";
+  else if (pathname.startsWith("/aeroapi/")) pathname = pathname.slice("/aeroapi".length);
+  if (!pathname.startsWith("/schedules/")) {
+    throw new Error(`Unexpected FlightAware pagination path: ${pathname}`);
+  }
+  return `${FLIGHTAWARE_API_BASE}${pathname}${parsed.search}`;
 }
 async function fetchSchedulesForAirline(airline: PopulationAirline, startDate: string, endDate: string, maximumPages: number): Promise<FetchSchedulesResult> {
   const apiKey = getFlightAwareApiKey();
@@ -213,7 +219,7 @@ async function fetchSchedulesForAirline(airline: PopulationAirline, startDate: s
     const data = (await response.json()) as FlightAwareScheduleResponse;
     const pageSchedules = data.scheduled ?? data.schedules ?? data.flights ?? [];
     schedules.push(...pageSchedules); pagesFetched++;
-    url = data.links?.next ? normalizeNextUrl(data.links.next) : null;
+    url = data.links?.next ? normalizeNextUrl(data.links.next, url) : null;
   }
   return { schedules, pagesFetched };
 }
