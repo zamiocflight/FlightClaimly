@@ -2,7 +2,10 @@
 import { MetadataRoute } from "next";
 import { locales } from "@/i18n/routing";
 import { routes as flightRoutes } from "@/data/seo/routes";
-import { flightNumbers } from "@/data/master/flightNumbers";
+import {
+  publishableFlightNumbers,
+  flightNumberAirlineGroups,
+} from "@/lib/flight-numbers/catalog";
 import { airports } from "@/data/seo/airports";
 import { airlines } from "@/data/seo/airlines";
 import { countries } from "@/data/seo/countries";
@@ -132,8 +135,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
+  const flightNumberAirlineIndexEntries = flightNumberSeoLocales.flatMap(
+    (locale) =>
+      flightNumberAirlineGroups.map((group) => ({
+        url: `${siteUrl}/${locale}/flight-numbers/airline/${group.airlineSlug}`,
+        changeFrequency: "daily" as const,
+        priority: 0.8,
+      }))
+  );
+
   const flightNumberEntries = flightNumberSeoLocales.flatMap((locale) =>
-    flightNumbers.map((flightNumber) => ({
+    publishableFlightNumbers.map((flightNumber) => ({
       url: `${siteUrl}/${locale}/flight-numbers/${flightNumber.slug}`,
       changeFrequency: "daily" as const,
       priority: 0.8,
@@ -153,6 +165,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...delayReasonIndexEntries,
     ...delayReasonEntries,
     ...flightNumberIndexEntries,
+    ...flightNumberAirlineIndexEntries,
     ...flightNumberEntries,
   ];
 }
