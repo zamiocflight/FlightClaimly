@@ -41,11 +41,26 @@ const EUROPEAN_COMMERCIAL_COUNTRY_CODES = new Set([
   "GB", "VA",
 ]);
 
-// The bundled airport CSV is a snapshot and individual scheduled_service flags can
-// lag reality. These overrides are intentionally small, evidence-backed exceptions;
-// they prevent a known commercial airport from disappearing from the support graph
-// while keeping the registry conservative.
-const COMMERCIAL_SERVICE_OVERRIDES = new Set(["BGY"]);
+// The bundled CSV is a snapshot. A small set of airports may have stale or
+// incomplete source rows even though current aviation data confirms scheduled
+// commercial service. These full overrides are deliberately evidence-backed and
+// are injected after CSV parsing so they cannot be lost because of one stale field.
+const VERIFIED_AIRPORT_OVERRIDES: AirportRegistryEntry[] = [
+  {
+    slug: "il-caravaggio-international-airport-bgy",
+    iata: "BGY",
+    icao: "LIME",
+    name: "Il Caravaggio International Airport",
+    city: "Bergamo",
+    country: "Italy",
+    countryCode: "IT",
+    continent: "EU",
+    isEuropean: true,
+    type: "large_airport",
+    latitude: 45.669362,
+    longitude: 9.708851,
+  },
+];
 
 function normalize(value: string): string { return value.trim().toLowerCase(); }
 function shouldExcludeByName(name: string): boolean {
@@ -64,11 +79,12 @@ function getCountryName(countryCode: string): string {
 function hasCommercialAirportType(record: AirportCsvRow): boolean {
   return COMMERCIAL_AIRPORT_TYPES.has(record.type?.trim() ?? "");
 }
+function hasScheduledService(record: AirportCsvRow): boolean {
+  const value = record.scheduled_service?.trim().toLowerCase() ?? "";
+  return value === "1" || value === "yes" || value === "true";
+}
 function isCommercialScheduledAirport(record: AirportCsvRow): boolean {
-  const iata = record.iata_code?.trim().toUpperCase() ?? "";
-  const scheduledService = record.scheduled_service?.trim() ?? "";
-  return hasCommercialAirportType(record) &&
-    (scheduledService === "1" || COMMERCIAL_SERVICE_OVERRIDES.has(iata));
+  return hasCommercialAirportType(record) && hasScheduledService(record);
 }
 function isEuropeanAirport(record: AirportCsvRow): boolean {
   const continent = record.continent?.trim().toUpperCase() ?? "";
@@ -84,7 +100,6 @@ async function main(): Promise<void> {
   const airportsByIata = new Map<string, AirportRegistryEntry>();
   let commercialCandidates = 0;
   let europeanCommercialCandidates = 0;
-  const appliedOverrides: string[] = [];
 
   for (const record of records) {
     if (!isCommercialScheduledAirport(record)) continue;
@@ -105,10 +120,6 @@ async function main(): Promise<void> {
     if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) continue;
     const icao = record.icao_code?.trim().toUpperCase();
 
-    if (COMMERCIAL_SERVICE_OVERRIDES.has(iata) && record.scheduled_service?.trim() !== "1") {
-      appliedOverrides.push(iata);
-    }
-
     airportsByIata.set(iata, {
       slug: `${createSlug(name)}-${iata.toLowerCase()}`,
       iata,
@@ -123,6 +134,13 @@ async function main(): Promise<void> {
       latitude,
       longitude,
     });
+  }
+
+  const injectedOverrides: string[] = [];
+  for (const airport of VERIFIED_AIRPORT_OVERRIDES) {
+    const existing = airportsByIata.get(airport.iata);
+    if (!existing) injectedOverrides.push(airport.iata);
+    airportsByIata.set(airport.iata, airport);
   }
 
   const airports = Array.from(airportsByIata.values()).sort((a, b) => a.iata.localeCompare(b.iata));
@@ -170,7 +188,7 @@ export const europeanAirportRegistry = airportRegistry.filter((airport) => airpo
   console.log("Countries represented globally:", countryCount);
   console.log("Countries represented in Europe:", europeanCountryCount);
   console.log(`By type globally: large ${large}, medium ${medium}, small ${small}`);
-  console.log("Commercial service overrides applied:", appliedOverrides.length ? appliedOverrides.join(", ") : "none");
+  console.log("Verified airport overrides injected:", injectedOverrides.length ? injectedOverrides.join(", ") : "none");
   console.log("Written:", outputPath);
 }
 
