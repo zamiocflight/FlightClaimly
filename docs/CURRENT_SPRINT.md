@@ -647,7 +647,7 @@ Individual customer facts should not be stored in general architecture documenta
 
 ## SEO Integrity / Publication Architecture
 
-Status: **FINAL VERIFICATION**
+Status: **✅ COMPLETED**
 
 Completed:
 
@@ -671,7 +671,7 @@ Completed:
 - Flight numbers: 50
 - Delay Reason Engine currently contains the first substantive reason entity (`technical-problems`)
 
-## Verification — 2026-09-01
+## Final Verification — 2026-09-01
 
 - ✅ `npx tsc --noEmit`
 - ✅ `npx tsx scripts/audit-seo-data.ts`
@@ -682,12 +682,28 @@ Completed:
 - ✅ unsupported SV programmatic hub publication returns 404
 - ✅ programmatic hub canonicals verified
 - ✅ sitemap EN/SV publication boundaries verified
+- ✅ Delay Reason hub production: EN 200 / SV 404
+- ✅ Delay Reason `technical-problems` production: EN 200 / SV 404
+- ✅ Delay Reason hub and detail self-canonicals verified
+- ✅ Delay Reason sitemap publication verified: EN present / SV absent
 
 The 20 SEO audit warnings are known lexical/relationship references between airlines (for example Lufthansa-group or brand relationships) and are not data-integrity failures.
 
-## Remaining Before Sprint Closure
+## Sprint Closure
 
-1. Final production sanity-check after the Flight Number source-of-truth deployment
-2. Confirm Delay Reason hub/detail production publication boundary and canonical/sitemap behavior
-3. Close the SEO integrity sprint
-4. Move to the next Knowledge Engine expansion phase based on the maintained roadmap
+The SEO Integrity / Publication Architecture sprint is complete.
+
+The intended programmatic indexation surface is now coherent across Routes, Airports, Airlines, Countries, Delay Reasons and Flight Numbers. Runtime publication gates, canonical URLs and sitemap publication agree with the EN-only policy for programmatic knowledge pages.
+
+## Next Phase
+
+Return to Knowledge Engine expansion and acquisition growth based on the maintained roadmap.
+
+Primary next opportunities:
+
+1. Scale Flight Number Engine population beyond the current 50 entities
+2. Expand Delay Reason Engine coverage
+3. Continue high-value Knowledge Engine population and programmatic search coverage
+4. Introduce additional programmatic locales only through genuine localized templates/content with SEO and legal QA
+
+Parent `[locale]` static generation of non-indexable programmatic hubs remains non-blocking technical debt; runtime gates prevent publication/indexation leakage.
