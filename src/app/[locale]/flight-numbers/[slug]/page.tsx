@@ -5,7 +5,7 @@ import FAQSchema from "@/components/seo/FAQSchema";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import InternalLinks from "@/components/seo/InternalLinks";
 
-import { flightNumbers } from "@/data/master/flightNumbers";
+import { publishableFlightNumbers } from "@/lib/flight-numbers/catalog";
 import { getFlightNumberBySlug } from "@/lib/flight-numbers";
 import { buildFlightNumberMetadata } from "@/lib/flight-numbers/metadata";
 import { getInternalLinkSections } from "@/lib/seo/internalLinks";
@@ -21,7 +21,7 @@ type PageProps = {
 };
 
 export function generateStaticParams() {
-  return flightNumbers.flatMap((flightNumber) =>
+  return publishableFlightNumbers.flatMap((flightNumber) =>
     flightNumberSeoLocales.map((locale) => ({
       locale,
       slug: flightNumber.slug,
@@ -33,12 +33,12 @@ export async function generateMetadata({ params }: PageProps) {
   const { locale, slug } = await params;
 
   if (
-  !flightNumberSeoLocales.includes(
-    locale as (typeof flightNumberSeoLocales)[number]
-  )
-) {
-  return {};
-}
+    !flightNumberSeoLocales.includes(
+      locale as (typeof flightNumberSeoLocales)[number]
+    )
+  ) {
+    return {};
+  }
 
   const flightNumber = getFlightNumberBySlug(slug);
 
@@ -47,24 +47,21 @@ export async function generateMetadata({ params }: PageProps) {
   return buildFlightNumberMetadata(flightNumber, locale);
 }
 
-export default async function FlightNumberPage({
-  params,
-}: PageProps) {
+export default async function FlightNumberPage({ params }: PageProps) {
   const { locale, slug } = await params;
 
   if (
-  !flightNumberSeoLocales.includes(
-    locale as (typeof flightNumberSeoLocales)[number]
-  )
-) {
-  notFound();
-}
+    !flightNumberSeoLocales.includes(
+      locale as (typeof flightNumberSeoLocales)[number]
+    )
+  ) {
+    notFound();
+  }
 
   const flightNumber = getFlightNumberBySlug(slug);
-
   if (!flightNumber) notFound();
 
-    const originAirport = getAirportIdentityBySlug(
+  const originAirport = getAirportIdentityBySlug(
     flightNumber.originAirportSlug
   );
 
@@ -106,9 +103,13 @@ export default async function FlightNumberPage({
             url: `https://www.flightclaimly.com/${locale}/flight-numbers`,
           },
           {
-  name: flightNumber.flightNumber,
-  url: `https://www.flightclaimly.com/${locale}/flight-numbers/${flightNumber.slug}`,
-},
+            name: flightNumber.airlineName,
+            url: `https://www.flightclaimly.com/${locale}/flight-numbers/airline/${flightNumber.airline}`,
+          },
+          {
+            name: flightNumber.flightNumber,
+            url: `https://www.flightclaimly.com/${locale}/flight-numbers/${flightNumber.slug}`,
+          },
         ]}
       />
 
@@ -130,17 +131,15 @@ export default async function FlightNumberPage({
             label: "ICAO airline code",
             value: flightNumber.airlineIcao,
           },
-                    {
+          {
             label: "Origin airport",
             value:
-              originAirport?.name ??
-              flightNumber.originAirportSlug,
+              originAirport?.name ?? flightNumber.originAirportSlug,
           },
           {
             label: "Destination airport",
             value:
-              destinationAirport?.name ??
-              flightNumber.destinationAirportSlug,
+              destinationAirport?.name ?? flightNumber.destinationAirportSlug,
           },
           {
             label: "Distance category",
@@ -149,6 +148,10 @@ export default async function FlightNumberPage({
           {
             label: "EU261 protection",
             value: flightNumber.eu261Eligible ? "Yes" : "No",
+          },
+          {
+            label: "UK261 protection",
+            value: flightNumber.uk261Eligible ? "Yes" : "No",
           },
           ...(flightNumber.aircraft
             ? [
@@ -161,7 +164,7 @@ export default async function FlightNumberPage({
           ...(flightNumber.schedule
             ? [
                 {
-                  label: "Schedule",
+                  label: "Schedule snapshot",
                   value: flightNumber.schedule,
                 },
               ]
