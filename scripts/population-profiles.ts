@@ -1,5 +1,6 @@
 export const populationProfiles = {
   nordics: ["SK", "DY"],
+  "europe-core": ["SK", "DY", "FR", "LH", "U2", "AF", "KL", "BA"],
 } as const;
 
 export type PopulationProfileName =
