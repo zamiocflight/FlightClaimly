@@ -11,4 +11,5 @@ export type FlightNumberBuildContext = {
   routeLabel: string;
 
   eu261Eligible: boolean;
+  uk261Eligible: boolean;
 };
