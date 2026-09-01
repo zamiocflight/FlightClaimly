@@ -1,0 +1,90 @@
+import type { FlightNumber, FlightNumberSeed } from "./types";
+
+export type FlightNumberPublicationDecision = {
+  publish: boolean;
+  reasons: string[];
+};
+
+const IATA_AIRPORT_PATTERN = /^[A-Z]{3}$/;
+const FLIGHT_NUMBER_PATTERN = /^[A-Z0-9]{2,3}\d{1,4}[A-Z]?$/;
+
+export function evaluateFlightNumberSeedForPublication(
+  seed: FlightNumberSeed
+): FlightNumberPublicationDecision {
+  const reasons: string[] = [];
+  const flightNumber = seed.flightNumber.trim().replace(/\s+/g, "").toUpperCase();
+  const originIata = seed.originIata.trim().toUpperCase();
+  const destinationIata = seed.destinationIata.trim().toUpperCase();
+
+  if (!FLIGHT_NUMBER_PATTERN.test(flightNumber)) {
+    reasons.push("invalid-flight-number");
+  }
+
+  if (!seed.airline.trim()) {
+    reasons.push("missing-airline");
+  }
+
+  if (!IATA_AIRPORT_PATTERN.test(originIata)) {
+    reasons.push("invalid-origin-airport");
+  }
+
+  if (!IATA_AIRPORT_PATTERN.test(destinationIata)) {
+    reasons.push("invalid-destination-airport");
+  }
+
+  if (originIata === destinationIata) {
+    reasons.push("identical-origin-destination");
+  }
+
+  if (!["short", "medium", "long"].includes(seed.distanceBand)) {
+    reasons.push("invalid-distance-band");
+  }
+
+  return {
+    publish: reasons.length === 0,
+    reasons,
+  };
+}
+
+export function evaluateFlightNumberForPublication(
+  flightNumber: FlightNumber
+): FlightNumberPublicationDecision {
+  const reasons: string[] = [];
+
+  if (!flightNumber.slug || !flightNumber.flightNumber) {
+    reasons.push("missing-identity");
+  }
+
+  if (!flightNumber.airline || !flightNumber.airlineIata) {
+    reasons.push("missing-airline-relationship");
+  }
+
+  if (
+    !flightNumber.originAirportSlug ||
+    !flightNumber.destinationAirportSlug ||
+    !flightNumber.routeSlug
+  ) {
+    reasons.push("missing-route-relationship");
+  }
+
+  if (!flightNumber.title || !flightNumber.description || !flightNumber.intro) {
+    reasons.push("missing-seo-copy");
+  }
+
+  if (!flightNumber.metadata?.canonical) {
+    reasons.push("missing-canonical");
+  }
+
+  if (!flightNumber.faq?.length || !flightNumber.claimProcess?.length) {
+    reasons.push("missing-knowledge-content");
+  }
+
+  return {
+    publish: reasons.length === 0,
+    reasons,
+  };
+}
+
+export function isFlightNumberPublishable(flightNumber: FlightNumber): boolean {
+  return evaluateFlightNumberForPublication(flightNumber).publish;
+}
