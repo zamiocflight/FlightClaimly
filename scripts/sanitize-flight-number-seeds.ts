@@ -1,15 +1,7 @@
-import fs from "node:fs/promises";
-import path from "node:path";
-
 import { flightNumberSeeds } from "../src/data/master/flightNumberSeeds";
 import type { FlightNumberSeed } from "../src/data/flight-numbers/types";
 import { getAirportByIata } from "../src/lib/knowledge/airports";
 import { getAirportRegistryEntryByIata } from "../src/data/master/airportRegistry";
-
-const OUTPUT_PATH = path.join(
-  process.cwd(),
-  "src/data/master/flightNumberSeeds.ts"
-);
 
 function normalizeIata(value: string): string {
   return value.trim().toUpperCase();
@@ -34,41 +26,19 @@ function normalizeSeed(seed: FlightNumberSeed): FlightNumberSeed {
   };
 }
 
-function sortSeeds(seeds: FlightNumberSeed[]): FlightNumberSeed[] {
-  return [...seeds].sort((a, b) =>
-    a.airline.localeCompare(b.airline) ||
-    a.flightNumber.localeCompare(b.flightNumber, "en", { numeric: true })
-  );
-}
-
 async function main(): Promise<void> {
   const normalized = flightNumberSeeds.map(normalizeSeed);
-  const rejected: FlightNumberSeed[] = [];
+  const rejected = normalized.filter(
+    (seed) =>
+      !airportIsSupported(seed.originIata) ||
+      !airportIsSupported(seed.destinationIata)
+  );
 
-  const accepted = normalized.filter((seed) => {
-    const supported =
-      airportIsSupported(seed.originIata) &&
-      airportIsSupported(seed.destinationIata);
-
-    if (!supported) rejected.push(seed);
-    return supported;
-  });
-
-  const sorted = sortSeeds(accepted);
-
-  const output = `import type { FlightNumberSeed } from "../flight-numbers/types";\n\nexport const flightNumberSeeds: FlightNumberSeed[] = ${JSON.stringify(
-    sorted,
-    null,
-    2
-  )};\n`;
-
-  await fs.writeFile(OUTPUT_PATH, output, "utf8");
-
-  console.log("Flight Number Seed Sanitizer");
-  console.log("============================");
+  console.log("Flight Number Seed Support Audit");
+  console.log("================================");
   console.log("Input seeds:", normalized.length);
-  console.log("Accepted:", sorted.length);
-  console.log("Rejected unsupported routes:", rejected.length);
+  console.log("Supported:", normalized.length - rejected.length);
+  console.log("Unsupported routes:", rejected.length);
 
   if (rejected.length > 0) {
     const unsupportedAirports = [
@@ -85,11 +55,18 @@ async function main(): Promise<void> {
       "Unsupported airport IATA codes:",
       unsupportedAirports.join(", ")
     );
+    console.error(
+      "Support audit failed. Seeds were NOT modified. Expand the airport registry before publishing."
+    );
+    process.exitCode = 1;
+    return;
   }
+
+  console.log("Support audit passed. Seeds were not modified.");
 }
 
 main().catch((error: unknown) => {
-  console.error("Flight Number Seed Sanitizer failed:");
+  console.error("Flight Number Seed Support Audit failed:");
   console.error(error instanceof Error ? error.message : error);
   process.exitCode = 1;
 });
