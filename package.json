@@ -9,9 +9,12 @@
     "lint": "next lint",
     "populate:flight-numbers": "tsx --env-file=.env.local scripts/populate-flight-numbers.ts",
     "populate:nordics": "FLIGHTAWARE_PROFILE=nordics npm run populate:flight-numbers",
+    "populate:europe-core": "FLIGHTAWARE_PROFILE=europe-core npm run populate:flight-numbers",
     "build:flight-numbers": "tsx scripts/build-flight-numbers.ts",
+    "audit:flight-numbers": "tsx scripts/audit-flight-number-scale.ts",
     "build:airport-registry": "tsx scripts/generate-airport-registry.ts",
     "typecheck": "tsc --noEmit",
+    "publish:flight-numbers": "npm run build:flight-numbers && npm run audit:flight-numbers && npm run typecheck && npm run build",
     "publish": "npm run build:flight-numbers && npm run typecheck && npm run build"
   },
   "dependencies": {
