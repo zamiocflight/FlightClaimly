@@ -7,8 +7,10 @@ type AirportCsvRow = {
   name?: string;
   latitude_deg?: string;
   longitude_deg?: string;
+  continent?: string;
   iso_country?: string;
   municipality?: string;
+  scheduled_service?: string;
   icao_code?: string;
   iata_code?: string;
 };
@@ -34,6 +36,23 @@ const EXCLUDE_NAME_PATTERNS = [
   "naval",
   "army",
 ];
+
+const COMMERCIAL_AIRPORT_TYPES = new Set([
+  "large_airport",
+  "medium_airport",
+  "small_airport",
+]);
+
+// Commercial Europe for the FlightClaimly knowledge graph. The explicit
+// country list supplements OurAirports' EU continent classification for
+// transcontinental / edge cases such as Cyprus and Turkey.
+const EUROPEAN_COMMERCIAL_COUNTRY_CODES = new Set([
+  "AL", "AD", "AT", "BY", "BE", "BA", "BG", "HR", "CY", "CZ", "DK",
+  "EE", "FI", "FR", "DE", "GR", "HU", "IS", "IE", "IT", "XK", "LV",
+  "LI", "LT", "LU", "MT", "MD", "MC", "ME", "NL", "MK", "NO", "PL",
+  "PT", "RO", "SM", "RS", "SK", "SI", "ES", "SE", "CH", "TR", "UA",
+  "GB", "VA",
+]);
 
 function normalize(value: string): string {
   return value.trim().toLowerCase();
@@ -68,6 +87,22 @@ function getCountryName(countryCode: string): string {
   return displayNames.of(countryCode) ?? countryCode;
 }
 
+function isCommercialEuropeanAirport(record: AirportCsvRow): boolean {
+  const continent = record.continent?.trim().toUpperCase() ?? "";
+  const countryCode = record.iso_country?.trim().toUpperCase() ?? "";
+  const scheduledService = record.scheduled_service?.trim() ?? "";
+  const type = record.type?.trim() ?? "";
+
+  const isEuropean =
+    continent === "EU" || EUROPEAN_COMMERCIAL_COUNTRY_CODES.has(countryCode);
+
+  return (
+    isEuropean &&
+    scheduledService === "1" &&
+    COMMERCIAL_AIRPORT_TYPES.has(type)
+  );
+}
+
 async function main(): Promise<void> {
   const csvPath = path.join(
     process.cwd(),
@@ -91,7 +126,15 @@ async function main(): Promise<void> {
     AirportRegistryEntry
   >();
 
+  let europeanCommercialCandidates = 0;
+
   for (const record of records) {
+    if (!isCommercialEuropeanAirport(record)) {
+      continue;
+    }
+
+    europeanCommercialCandidates++;
+
     const iata = record.iata_code?.trim().toUpperCase() ?? "";
 
     if (!/^[A-Z]{3}$/.test(iata)) {
@@ -175,8 +218,18 @@ export function getAirportRegistryEntryByIata(iata: string) {
 
   await fs.writeFile(outputPath, output, "utf8");
 
+  const countryCount = new Set(airports.map((airport) => airport.countryCode)).size;
+  const large = airports.filter((airport) => airport.type === "large_airport").length;
+  const medium = airports.filter((airport) => airport.type === "medium_airport").length;
+  const small = airports.filter((airport) => airport.type === "small_airport").length;
+
+  console.log("European Airport Registry");
+  console.log("=========================");
   console.log("CSV rows:", records.length);
+  console.log("Commercial European candidates:", europeanCommercialCandidates);
   console.log("Airport registry entries:", airports.length);
+  console.log("Countries represented:", countryCount);
+  console.log(`By type: large ${large}, medium ${medium}, small ${small}`);
   console.log("Written:", outputPath);
 }
 
