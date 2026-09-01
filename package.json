@@ -10,13 +10,14 @@
     "populate:flight-numbers": "tsx --env-file=.env.local scripts/populate-flight-numbers.ts",
     "populate:nordics": "FLIGHTAWARE_PROFILE=nordics npm run populate:flight-numbers",
     "populate:europe-core": "FLIGHTAWARE_PROFILE=europe-core npm run populate:flight-numbers",
-    "populate:europe-core:pilot": "FLIGHTAWARE_PROFILE=europe-core FLIGHTAWARE_MAX_PAGES=1 npm run populate:flight-numbers",
-    "populate:europe-core:scale": "FLIGHTAWARE_PROFILE=europe-core FLIGHTAWARE_MAX_PAGES=5 npm run populate:flight-numbers",
+    "populate:europe-core:pilot": "FLIGHTAWARE_PROFILE=europe-core FLIGHTAWARE_MAX_PAGES=1 npm run populate:flight-numbers && npm run sanitize:flight-number-seeds",
+    "populate:europe-core:scale": "FLIGHTAWARE_PROFILE=europe-core FLIGHTAWARE_MAX_PAGES=5 npm run populate:flight-numbers && npm run sanitize:flight-number-seeds",
+    "sanitize:flight-number-seeds": "tsx scripts/sanitize-flight-number-seeds.ts",
     "build:flight-numbers": "tsx scripts/build-flight-numbers.ts",
     "audit:flight-numbers": "tsx scripts/audit-flight-number-scale.ts",
     "build:airport-registry": "tsx scripts/generate-airport-registry.ts",
     "typecheck": "tsc --noEmit",
-    "publish:flight-numbers": "npm run build:flight-numbers && npm run audit:flight-numbers && npm run typecheck && npm run build",
+    "publish:flight-numbers": "npm run sanitize:flight-number-seeds && npm run build:flight-numbers && npm run audit:flight-numbers && npm run typecheck && npm run build",
     "publish": "npm run build:flight-numbers && npm run typecheck && npm run build"
   },
   "dependencies": {
