@@ -65,7 +65,16 @@ const VERIFIED_AIRPORT_OVERRIDES: AirportRegistryEntry[] = [
 function normalize(value: string): string { return value.trim().toLowerCase(); }
 function shouldExcludeByName(name: string): boolean {
   const normalizedName = normalize(name);
-  return EXCLUDE_NAME_PATTERNS.some((pattern) => normalizedName.includes(pattern));
+  const hasExcludedPattern = EXCLUDE_NAME_PATTERNS.some((pattern) => normalizedName.includes(pattern));
+  if (!hasExcludedPattern) return false;
+
+  // Some scheduled commercial airports are mixed-use facilities whose source
+  // name also references a colocated military base. Keep those when the same
+  // name explicitly identifies an airport; the surrounding registry gates still
+  // require a commercial airport type, scheduled service, valid IATA and core data.
+  if (normalizedName.includes("airport")) return false;
+
+  return true;
 }
 function createSlug(value: string): string {
   return value.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
