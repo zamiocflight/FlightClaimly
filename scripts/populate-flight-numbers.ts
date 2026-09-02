@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 import { flightNumberSeeds as existingFlightNumberSeeds } from "../src/data/master/flightNumberSeeds";
+import { priorityAirlineEntities } from "../src/data/master/priorityAirlineEntities";
 import type { FlightNumberSeed } from "../src/data/flight-numbers/types";
 import { evaluateFlightNumberSeedForPublication } from "../src/data/flight-numbers/publication";
 import { airlines } from "../src/data/seo/airlines";
@@ -78,8 +79,10 @@ type PopulationFailureReport = {
 };
 type PopulationReport = PopulationSuccessReport | PopulationFailureReport;
 
+const populationAirlines = [...airlines, ...priorityAirlineEntities];
+
 function getSupportedAirlinesDescription(): string {
-  return airlines.map((airline) => `${airline.iata.trim().toUpperCase()} (${airline.slug})`).sort().join(", ");
+  return populationAirlines.map((airline) => `${airline.iata.trim().toUpperCase()} (${airline.slug})`).sort().join(", ");
 }
 
 function resolvePopulationSelection(): PopulationSelection {
@@ -98,8 +101,8 @@ function resolvePopulationSelection(): PopulationSelection {
   const invalidIataCodes = uniqueIataCodes.filter((iata) => !/^[A-Z0-9]{2}$/.test(iata));
   if (invalidIataCodes.length) throw new Error(`Invalid airline IATA code(s): ${invalidIataCodes.join(", ")}. Expected two-character codes, for example SK,DY,FR.`);
   const resolvedAirlines = uniqueIataCodes.map((requestedIata) => {
-    const airline = airlines.find((candidate) => candidate.iata.trim().toUpperCase() === requestedIata);
-    if (!airline) throw new Error(`Airline "${requestedIata}" was not found in src/data/seo/airlines.ts. Configured airlines: ${getSupportedAirlinesDescription()}`);
+    const airline = populationAirlines.find((candidate) => candidate.iata.trim().toUpperCase() === requestedIata);
+    if (!airline) throw new Error(`Airline "${requestedIata}" was not found in the airline knowledge registry. Configured airlines: ${getSupportedAirlinesDescription()}`);
     return { slug: airline.slug, name: airline.name, iata: airline.iata.trim().toUpperCase(), icao: airline.icao.trim().toUpperCase() };
   });
   return { profile: requestedProfile, airlines: resolvedAirlines };
