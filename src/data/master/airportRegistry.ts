@@ -1009,6 +1009,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -4.49911
   },
   {
+    "slug": "agra-airport-agra-air-force-station-agr",
+    "iata": "AGR",
+    "icao": "VIAG",
+    "name": "Agra Airport / Agra Air Force Station",
+    "city": "Agra",
+    "country": "India",
+    "countryCode": "IN",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 27.157975,
+    "longitude": 77.961025
+  },
+  {
     "slug": "augusta-regional-at-bush-field-ags",
     "iata": "AGS",
     "icao": "KAGS",
@@ -1877,6 +1891,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 30.5194
   },
   {
+    "slug": "anshan-teng-ao-airport-anshan-air-base-aog",
+    "iata": "AOG",
+    "icao": "ZYAS",
+    "name": "Anshan Teng'ao Airport / Anshan Air Base",
+    "city": "Anshan",
+    "country": "China",
+    "countryCode": "CN",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 41.105301,
+    "longitude": 122.853996
+  },
+  {
     "slug": "marche-airport-aoi",
     "iata": "AOI",
     "icao": "LIPY",
@@ -2029,6 +2057,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": -21.812,
     "longitude": -48.132999
+  },
+  {
+    "slug": "anqing-tianzhushan-airport-anqing-north-air-base-aqg",
+    "iata": "AQG",
+    "icao": "ZSAQ",
+    "name": "Anqing Tianzhushan Airport / Anqing North Air Base",
+    "city": "Anqing",
+    "country": "China",
+    "countryCode": "CN",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 30.582199,
+    "longitude": 117.050003
   },
   {
     "slug": "al-qaisumah-hafr-al-batin-airport-aqi",
@@ -2910,6 +2952,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -73.970901
   },
   {
+    "slug": "arutua-airport-axr",
+    "iata": "AXR",
+    "icao": "NTGU",
+    "name": "Arutua Airport",
+    "city": "Arutua",
+    "country": "French Polynesia",
+    "countryCode": "PF",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -15.248299598693848,
+    "longitude": -146.61700439453125
+  },
+  {
     "slug": "akita-airport-axt",
     "iata": "AXT",
     "icao": "RJSK",
@@ -2950,6 +3006,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": 26.747736,
     "longitude": 82.163664
+  },
+  {
+    "slug": "air-force-colonel-alfredo-mendivil-duarte-airport-ayp",
+    "iata": "AYP",
+    "icao": "SPHO",
+    "name": "Air Force Colonel Alfredo Mendivil Duarte Airport",
+    "city": "Ayacucho",
+    "country": "Peru",
+    "countryCode": "PE",
+    "continent": "SA",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -13.1548,
+    "longitude": -74.204399
   },
   {
     "slug": "ayers-rock-connellan-airport-ayq",
@@ -4054,6 +4124,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "large_airport",
     "latitude": 44.806364,
     "longitude": -68.826668
+  },
+  {
+    "slug": "baghdad-international-airport-new-al-muthana-air-base-bgw",
+    "iata": "BGW",
+    "icao": "ORBI",
+    "name": "Baghdad International Airport / New Al Muthana Air Base",
+    "city": "Baghdad",
+    "country": "Iraq",
+    "countryCode": "IQ",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "large_airport",
+    "latitude": 33.262501,
+    "longitude": 44.2346
   },
   {
     "slug": "il-caravaggio-international-airport-bgy",
@@ -5549,6 +5633,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -81.466499
   },
   {
+    "slug": "boulia-airport-bql",
+    "iata": "BQL",
+    "icao": "YBOU",
+    "name": "Boulia Airport",
+    "city": "Boulia",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -22.913299560546875,
+    "longitude": 139.89999389648438
+  },
+  {
     "slug": "rafael-hernandez-international-airport-bqn",
     "iata": "BQN",
     "icao": "TJBQ",
@@ -5686,6 +5784,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "large_airport",
     "latitude": 41.138901,
     "longitude": 16.760599
+  },
+  {
+    "slug": "bourke-airport-brk",
+    "iata": "BRK",
+    "icao": "YBKE",
+    "name": "Bourke Airport",
+    "city": "Bourke",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -30.039199829101562,
+    "longitude": 145.95199584960938
   },
   {
     "slug": "southeast-iowa-regional-airport-brl",
@@ -6164,6 +6276,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 154.672698
   },
   {
+    "slug": "burketown-airport-buc",
+    "iata": "BUC",
+    "icao": "YBKT",
+    "name": "Burketown Airport",
+    "city": "Burketown",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": -17.748600006103516,
+    "longitude": 139.53399658203125
+  },
+  {
     "slug": "budapest-liszt-ferenc-international-airport-bud",
     "iata": "BUD",
     "icao": "LHBP",
@@ -6400,6 +6526,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -60.098301
   },
   {
+    "slug": "birdsville-airport-bvi",
+    "iata": "BVI",
+    "icao": "YBDV",
+    "name": "Birdsville Airport",
+    "city": "Birdsville",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -25.897499084472656,
+    "longitude": 139.34800720214844
+  },
+  {
     "slug": "bovanenkovo-airport-bvj",
     "iata": "BVJ",
     "icao": "USDB",
@@ -6524,6 +6664,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "small_airport",
     "latitude": -8.31015,
     "longitude": 114.3401
+  },
+  {
+    "slug": "bendigo-airport-bxg",
+    "iata": "BXG",
+    "icao": "YBDG",
+    "name": "Bendigo Airport",
+    "city": "Bendigo",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": -36.739399,
+    "longitude": 144.330002
   },
   {
     "slug": "balkhash-airport-bxh",
@@ -7043,6 +7197,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -52.361326
   },
   {
+    "slug": "cobar-airport-caz",
+    "iata": "CAZ",
+    "icao": "YCBA",
+    "name": "Cobar Airport",
+    "city": "Cobar",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -31.538299560546875,
+    "longitude": 145.79400634765625
+  },
+  {
     "slug": "jorge-wilsterman-international-airport-cbb",
     "iata": "CBB",
     "icao": "SLCB",
@@ -7432,6 +7600,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": 41.778929,
     "longitude": -124.236403
+  },
+  {
+    "slug": "ceduna-airport-ced",
+    "iata": "CED",
+    "icao": "YCDU",
+    "name": "Ceduna Airport",
+    "city": "Ceduna",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -32.13059997558594,
+    "longitude": 133.7100067138672
   },
   {
     "slug": "cherepovets-airport-cee",
@@ -8174,6 +8356,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -68.903603
   },
   {
+    "slug": "cheongju-international-airport-cheongju-air-base-k-59-g-513-cjj",
+    "iata": "CJJ",
+    "icao": "RKTU",
+    "name": "Cheongju International Airport/Cheongju Air Base (K-59/G-513)",
+    "city": "Cheongju",
+    "country": "South Korea",
+    "countryCode": "KR",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "large_airport",
+    "latitude": 36.71556,
+    "longitude": 127.500289
+  },
+  {
     "slug": "chitral-airport-cjl",
     "iata": "CJL",
     "icao": "OPCH",
@@ -8521,6 +8717,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 8.792984
   },
   {
+    "slug": "cunnamulla-airport-cma",
+    "iata": "CMA",
+    "icao": "YCMU",
+    "name": "Cunnamulla Airport",
+    "city": "Cunnamulla",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -28.030000686645508,
+    "longitude": 145.6219940185547
+  },
+  {
     "slug": "bandaranaike-international-colombo-airport-cmb",
     "iata": "CMB",
     "icao": "VCBI",
@@ -8659,6 +8869,34 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": 47.168399810791016,
     "longitude": -88.48909759521484
+  },
+  {
+    "slug": "coonamble-airport-cnb",
+    "iata": "CNB",
+    "icao": "YCNM",
+    "name": "Coonamble Airport",
+    "city": "Coonamble",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -30.980946,
+    "longitude": 148.377833
+  },
+  {
+    "slug": "coconut-island-airport-cnc",
+    "iata": "CNC",
+    "icao": "YCCT",
+    "name": "Coconut Island Airport",
+    "city": "Coconut Island",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": -10.050139,
+    "longitude": 143.070007
   },
   {
     "slug": "mihail-kogalniceanu-international-airport-cnd",
@@ -8868,6 +9106,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "large_airport",
     "latitude": 6.35723,
     "longitude": 2.38435
+  },
+  {
+    "slug": "choibalsan-airport-coq",
+    "iata": "COQ",
+    "icao": "ZMCD",
+    "name": "Choibalsan Airport",
+    "city": "Choibalsan",
+    "country": "Mongolia",
+    "countryCode": "MN",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 48.135381,
+    "longitude": 114.647231
   },
   {
     "slug": "ingeniero-ambrosio-taravella-airport-cor",
@@ -9106,6 +9358,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": 22.7456,
     "longitude": -74.182404
+  },
+  {
+    "slug": "clark-international-airport-clark-air-base-crk",
+    "iata": "CRK",
+    "icao": "RPLC",
+    "name": "Clark International Airport / Clark Air Base",
+    "city": "Mabalacat",
+    "country": "Philippines",
+    "countryCode": "PH",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 15.186,
+    "longitude": 120.559998
   },
   {
     "slug": "brussels-south-charleroi-airport-crl",
@@ -9370,6 +9636,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": 18.504985,
     "longitude": -88.328018
+  },
+  {
+    "slug": "cooktown-airport-ctn",
+    "iata": "CTN",
+    "icao": "YCKN",
+    "name": "Cooktown Airport",
+    "city": "Cooktown",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -15.443649,
+    "longitude": 145.183221
   },
   {
     "slug": "new-chitose-airport-cts",
@@ -9787,6 +10067,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": -7.64506,
     "longitude": 109.033997
+  },
+  {
+    "slug": "cam-ranh-international-airport-cam-ranh-air-base-cxr",
+    "iata": "CXR",
+    "icao": "VVCR",
+    "name": "Cam Ranh International Airport / Cam Ranh Air Base",
+    "city": "Nha Trang/nha Trang aiurportCam Ranh",
+    "country": "Vietnam",
+    "countryCode": "VN",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "large_airport",
+    "latitude": 11.9982,
+    "longitude": 109.219002
   },
   {
     "slug": "antoine-simon-international-airport-cya",
@@ -11015,6 +11309,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": 42.8536,
     "longitude": 71.303596
+  },
+  {
+    "slug": "doomadgee-airport-dmd",
+    "iata": "DMD",
+    "icao": "YDMG",
+    "name": "Doomadgee Airport",
+    "city": "Doomadgee",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": -17.9403,
+    "longitude": 138.822006
   },
   {
     "slug": "domodedovo-international-airport-dme",
@@ -13196,6 +13504,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -3.413984
   },
   {
+    "slug": "beloyarskiy-airport-eyk",
+    "iata": "EYK",
+    "icao": "USHQ",
+    "name": "Beloyarskiy Airport",
+    "city": "Beloyarskiy",
+    "country": "Russia",
+    "countryCode": "RU",
+    "continent": "EU",
+    "isEuropean": true,
+    "type": "medium_airport",
+    "latitude": 63.686901,
+    "longitude": 66.698601
+  },
+  {
     "slug": "el-alcaravan-yopal-airport-eyp",
     "iata": "EYP",
     "icao": "SKYP",
@@ -13322,6 +13644,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -119.718018
   },
   {
+    "slug": "fakarava-airport-fav",
+    "iata": "FAV",
+    "icao": "NTGF",
+    "name": "Fakarava Airport",
+    "city": "Fakarava",
+    "country": "French Polynesia",
+    "countryCode": "PF",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -16.054100036621094,
+    "longitude": -145.65699768066406
+  },
+  {
     "slug": "fayetteville-regional-airport-grannis-field-fay",
     "iata": "FAY",
     "icao": "KFAY",
@@ -13390,6 +13726,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "large_airport",
     "latitude": 48.310501,
     "longitude": -114.255997
+  },
+  {
+    "slug": "sea-airport-cuxhaven-nordholz-nordholz-naval-airbase-fcn",
+    "iata": "FCN",
+    "icao": "ETMN",
+    "name": "Sea-Airport Cuxhaven/Nordholz / Nordholz Naval Airbase",
+    "city": "Wurster Nordseeküste",
+    "country": "Germany",
+    "countryCode": "DE",
+    "continent": "EU",
+    "isEuropean": true,
+    "type": "medium_airport",
+    "latitude": 53.767689,
+    "longitude": 8.659201
   },
   {
     "slug": "rome-fiumicino-leonardo-da-vinci-international-airport-fco",
@@ -13571,6 +13921,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "large_airport",
     "latitude": -4.38575,
     "longitude": 15.4446
+  },
+  {
+    "slug": "fitzroy-crossing-airport-fiz",
+    "iata": "FIZ",
+    "icao": "YFTZ",
+    "name": "Fitzroy Crossing Airport",
+    "city": "Fitzroy Crossing",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -18.183596,
+    "longitude": 125.559783
   },
   {
     "slug": "fujairah-international-airport-fjr",
@@ -14814,6 +15178,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 166.472783
   },
   {
+    "slug": "lefkoniko-airport-gecitkale-air-base-gec",
+    "iata": "GEC",
+    "icao": "LCGK",
+    "name": "Lefkoniko Airport / Geçitkale Air Base",
+    "city": "Lefkoniko (Geçitkale)",
+    "country": "Cyprus",
+    "countryCode": "CY",
+    "continent": "AS",
+    "isEuropean": true,
+    "type": "medium_airport",
+    "latitude": 35.23591,
+    "longitude": 33.720088
+  },
+  {
     "slug": "spokane-international-airport-geg",
     "iata": "GEG",
     "icao": "KGEG",
@@ -15443,6 +15821,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 100.301144
   },
   {
+    "slug": "totegegie-airport-gmr",
+    "iata": "GMR",
+    "icao": "NTGJ",
+    "name": "Totegegie Airport",
+    "city": "Totegegie",
+    "country": "French Polynesia",
+    "countryCode": "PF",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -23.07990074157715,
+    "longitude": -134.88999938964844
+  },
+  {
     "slug": "la-gomera-airport-gmz",
     "iata": "GMZ",
     "icao": "GCGM",
@@ -15831,6 +16223,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": -34.0056,
     "longitude": 22.378902
+  },
+  {
+    "slug": "killeen-regional-airport-robert-gray-army-airfield-grk",
+    "iata": "GRK",
+    "icao": "KGRK",
+    "name": "Killeen Regional Airport / Robert Gray Army Airfield",
+    "city": "Fort Cavazos",
+    "country": "United States",
+    "countryCode": "US",
+    "continent": "NA",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 31.0672,
+    "longitude": -97.828903
   },
   {
     "slug": "girona-costa-brava-airport-gro",
@@ -16865,6 +17271,34 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -107.218002
   },
   {
+    "slug": "hindon-airport-hindon-air-force-station-hdo",
+    "iata": "HDO",
+    "icao": "VIDX",
+    "name": "Hindon Airport / Hindon Air Force Station",
+    "city": "Ghaziabad",
+    "country": "India",
+    "countryCode": "IN",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": 28.707701,
+    "longitude": 77.358902
+  },
+  {
+    "slug": "hoedspruit-air-force-base-airport-hds",
+    "iata": "HDS",
+    "icao": "FAHS",
+    "name": "Hoedspruit Air Force Base Airport",
+    "city": "Hoedspruit",
+    "country": "South Africa",
+    "countryCode": "ZA",
+    "continent": "AF",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": -24.368600845299998,
+    "longitude": 31.0487003326
+  },
+  {
     "slug": "hat-yai-international-airport-hdy",
     "iata": "HDY",
     "icao": "VTSS",
@@ -17312,6 +17746,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 44.763736
   },
   {
+    "slug": "sacheon-airport-sacheon-air-base-hin",
+    "iata": "HIN",
+    "icao": "RKPS",
+    "name": "Sacheon Airport / Sacheon Air Base",
+    "city": "Sacheon",
+    "country": "South Korea",
+    "countryCode": "KR",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 35.088591,
+    "longitude": 128.071747
+  },
+  {
     "slug": "honiara-international-airport-hir",
     "iata": "HIR",
     "icao": "AGGH",
@@ -17393,6 +17841,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "large_airport",
     "latitude": 22.308901,
     "longitude": 113.915001
+  },
+  {
+    "slug": "hokitika-airfield-hkk",
+    "iata": "HKK",
+    "icao": "NZHK",
+    "name": "Hokitika Airfield",
+    "city": "Hokitika",
+    "country": "New Zealand",
+    "countryCode": "NZ",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -42.713600158691406,
+    "longitude": 170.98500061035156
   },
   {
     "slug": "hoskins-airport-hkn",
@@ -17980,6 +18442,19 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "large_airport",
     "latitude": -17.931801,
     "longitude": 31.0928
+  },
+  {
+    "slug": "hoarafushi-airport-hrf",
+    "iata": "HRF",
+    "name": "Hoarafushi Airport",
+    "city": "Hoarafushi",
+    "country": "Maldives",
+    "countryCode": "MV",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": 6.96967,
+    "longitude": 72.896287
   },
   {
     "slug": "hurghada-international-airport-hrg",
@@ -20402,6 +20877,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 132.889999
   },
   {
+    "slug": "general-antonio-cardenas-rodriguez-national-airport-ixtepec-air-base-izt",
+    "iata": "IZT",
+    "icao": "MMIT",
+    "name": "General Antonio Cárdenas Rodríguez National Airport / Ixtepec Air Base",
+    "city": "Ixtepec",
+    "country": "Mexico",
+    "countryCode": "MX",
+    "continent": "NA",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 16.445961,
+    "longitude": -95.093708
+  },
+  {
     "slug": "jackson-hole-airport-jac",
     "iata": "JAC",
     "icao": "KJAC",
@@ -20568,6 +21057,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": 35.83169937133789,
     "longitude": -90.64640045166016
+  },
+  {
+    "slug": "julia-creek-airport-jck",
+    "iata": "JCK",
+    "icao": "YJLC",
+    "name": "Julia Creek Airport",
+    "city": "Julia Creek",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": -20.66830062866211,
+    "longitude": 141.72300720214844
   },
   {
     "slug": "ceske-budejovice-south-bohemian-airport-jcl",
@@ -21419,6 +21922,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -52.696201
   },
   {
+    "slug": "jharsuguda-airport-jrg",
+    "iata": "JRG",
+    "icao": "VEJH",
+    "name": "Jharsuguda Airport",
+    "city": "Jharsuguda",
+    "country": "India",
+    "countryCode": "IN",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": 21.9135,
+    "longitude": 84.0504
+  },
+  {
     "slug": "jorhat-airport-jrh",
     "iata": "JRH",
     "icao": "VEJT",
@@ -21445,6 +21962,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "large_airport",
     "latitude": -3.427049,
     "longitude": 37.07353
+  },
+  {
+    "slug": "jaisalmer-airport-jsa",
+    "iata": "JSA",
+    "icao": "VIJR",
+    "name": "Jaisalmer Airport",
+    "city": "Jaisalmer",
+    "country": "India",
+    "countryCode": "IN",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 26.8887,
+    "longitude": 70.864998
   },
   {
     "slug": "sitia-airport-jsh",
@@ -22336,6 +22867,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -92.836403
   },
   {
+    "slug": "kalkgurung-airport-kfg",
+    "iata": "KFG",
+    "icao": "YKKG",
+    "name": "Kalkgurung Airport",
+    "city": "Kalkgurung",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": -17.431900024414062,
+    "longitude": 130.80799865722656
+  },
+  {
     "slug": "false-pass-airport-kfp",
     "iata": "KFP",
     "icao": "PAKF",
@@ -22362,6 +22907,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": -5.90005,
     "longitude": 22.4692
+  },
+  {
+    "slug": "kingscote-airport-kgc",
+    "iata": "KGC",
+    "icao": "YKSC",
+    "name": "Kingscote Airport",
+    "city": "Kingscote",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -35.71390151977539,
+    "longitude": 137.52099609375
   },
   {
     "slug": "khrabrovo-airport-kgd",
@@ -22501,6 +23060,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "small_airport",
     "latitude": 62.895187,
     "longitude": -160.066289
+  },
+  {
+    "slug": "khoram-abad-airport-khd",
+    "iata": "KHD",
+    "icao": "OICK",
+    "name": "Khoram Abad Airport",
+    "city": "Khoram Abad",
+    "country": "Iran",
+    "countryCode": "IR",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 33.43539810180664,
+    "longitude": 48.282901763916016
   },
   {
     "slug": "kherson-international-airport-khe",
@@ -23270,6 +23843,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -158.901886
   },
   {
+    "slug": "komatsu-airport-jasdf-komatsu-air-base-kmq",
+    "iata": "KMQ",
+    "icao": "RJNK",
+    "name": "Komatsu Airport / JASDF Komatsu Air Base",
+    "city": "Kanazawa",
+    "country": "Japan",
+    "countryCode": "JP",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 36.3946,
+    "longitude": 136.406998
+  },
+  {
     "slug": "prempeh-i-international-airport-kms",
     "iata": "KMS",
     "icao": "DGSI",
@@ -23380,6 +23967,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": -21.053551,
     "longitude": 164.838768
+  },
+  {
+    "slug": "king-island-airport-kns",
+    "iata": "KNS",
+    "icao": "YKII",
+    "name": "King Island Airport",
+    "city": "King Island",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -39.877498626708984,
+    "longitude": 143.8780059814453
   },
   {
     "slug": "kanpur-airport-knu",
@@ -23701,6 +24302,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 68.86470031738281
   },
   {
+    "slug": "karumba-airport-krb",
+    "iata": "KRB",
+    "icao": "YKMB",
+    "name": "Karumba Airport",
+    "city": "Karumba",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": -17.45669937133789,
+    "longitude": 140.8300018310547
+  },
+  {
     "slug": "departi-parbo-airport-krc",
     "iata": "KRC",
     "name": "Departi Parbo Airport",
@@ -23810,6 +24425,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": 55.4753,
     "longitude": 65.415604
+  },
+  {
+    "slug": "midtjyllands-airport-air-base-karup-krp",
+    "iata": "KRP",
+    "icao": "EKKA",
+    "name": "Midtjyllands Airport / Air Base Karup",
+    "city": "Karup",
+    "country": "Denmark",
+    "countryCode": "DK",
+    "continent": "EU",
+    "isEuropean": true,
+    "type": "medium_airport",
+    "latitude": 56.297139,
+    "longitude": 9.104311
   },
   {
     "slug": "krasnodar-pashkovsky-international-airport-krr",
@@ -24412,6 +25041,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": 31.876699,
     "longitude": 77.154404
+  },
+  {
+    "slug": "gunsan-airport-gunsan-air-base-kuv",
+    "iata": "KUV",
+    "icao": "RKJK",
+    "name": "Gunsan Airport / Gunsan Air Base",
+    "city": "Gunsan",
+    "country": "South Korea",
+    "countryCode": "KR",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 35.903801,
+    "longitude": 126.615997
   },
   {
     "slug": "kavala-alexander-the-great-international-airport-kva",
@@ -25642,6 +26285,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 12.232705
   },
   {
+    "slug": "lake-evella-airport-lel",
+    "iata": "LEL",
+    "icao": "YLEV",
+    "name": "Lake Evella Airport",
+    "city": "Lake Evella",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": -12.498900413513184,
+    "longitude": 135.80599975585938
+  },
+  {
     "slug": "leon-int-l-airport-len",
     "iata": "LEN",
     "icao": "LELN",
@@ -25668,6 +26325,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "small_airport",
     "latitude": 50.102798,
     "longitude": -5.67056
+  },
+  {
+    "slug": "leinster-airport-ler",
+    "iata": "LER",
+    "icao": "YLST",
+    "name": "Leinster Airport",
+    "city": "Leinster",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -27.843299865722656,
+    "longitude": 120.7030029296875
   },
   {
     "slug": "alfredo-vasquez-cobo-international-airport-let",
@@ -25906,6 +26577,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "large_airport",
     "latitude": 31.521601,
     "longitude": 74.403603
+  },
+  {
+    "slug": "lightning-ridge-airport-lhg",
+    "iata": "LHG",
+    "icao": "YLRD",
+    "name": "Lightning Ridge Airport",
+    "city": "Lightning Ridge",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -29.452857,
+    "longitude": 147.977146
   },
   {
     "slug": "london-heathrow-airport-lhr",
@@ -26604,6 +27289,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 167.966995239
   },
   {
+    "slug": "loei-airport-loe",
+    "iata": "LOE",
+    "icao": "VTUL",
+    "name": "Loei Airport",
+    "city": "Loei",
+    "country": "Thailand",
+    "countryCode": "TH",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 17.43910026550293,
+    "longitude": 101.72200012207031
+  },
+  {
     "slug": "ciudad-de-catamayo-airport-loh",
     "iata": "LOH",
     "name": "Ciudad de Catamayo Airport",
@@ -26796,6 +27495,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "small_airport",
     "latitude": 48.4838981628418,
     "longitude": -122.93800354003906
+  },
+  {
+    "slug": "lampang-airport-lpt",
+    "iata": "LPT",
+    "icao": "VTCL",
+    "name": "Lampang Airport",
+    "city": "Lampang",
+    "country": "Thailand",
+    "countryCode": "TH",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 18.27090072631836,
+    "longitude": 99.50420379638672
   },
   {
     "slug": "long-apung-airport-lpu",
@@ -27664,6 +28377,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 106.034417
   },
   {
+    "slug": "liuzhou-bailian-airport-bailian-air-base-lzh",
+    "iata": "LZH",
+    "icao": "ZGZH",
+    "name": "Liuzhou Bailian Airport / Bailian Air Base",
+    "city": "Liuzhou (Liujiang)",
+    "country": "China",
+    "countryCode": "CN",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 24.2075,
+    "longitude": 109.390999
+  },
+  {
     "slug": "matsu-nangan-airport-lzn",
     "iata": "LZN",
     "icao": "RCFG",
@@ -27860,6 +28587,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -60.049702
   },
   {
+    "slug": "mae-sot-airport-maq",
+    "iata": "MAQ",
+    "icao": "VTPM",
+    "name": "Mae Sot Airport",
+    "city": "Mae Sot",
+    "country": "Thailand",
+    "countryCode": "TH",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 16.699899673461914,
+    "longitude": 98.54509735107422
+  },
+  {
     "slug": "la-chinita-international-airport-mar",
     "iata": "MAR",
     "icao": "SVMC",
@@ -27886,6 +28627,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": -2.06189,
     "longitude": 147.423996
+  },
+  {
+    "slug": "maupiti-airport-mau",
+    "iata": "MAU",
+    "icao": "NTTP",
+    "name": "Maupiti Airport",
+    "city": "Maupiti",
+    "country": "French Polynesia",
+    "countryCode": "PF",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -16.42650032043457,
+    "longitude": -152.24400329589844
   },
   {
     "slug": "eugenio-maria-de-hostos-airport-maz",
@@ -29229,6 +29984,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 140.419693
   },
   {
+    "slug": "meekatharra-airport-mkr",
+    "iata": "MKR",
+    "icao": "YMEK",
+    "name": "Meekatharra Airport",
+    "city": "Meekatharra",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -26.6117000579834,
+    "longitude": 118.5479965209961
+  },
+  {
     "slug": "makokou-airport-mku",
     "iata": "MKU",
     "icao": "FOOK",
@@ -29493,6 +30262,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": 54.509201,
     "longitude": -1.42941
+  },
+  {
+    "slug": "mount-magnet-airport-mmg",
+    "iata": "MMG",
+    "icao": "YMOG",
+    "name": "Mount Magnet Airport",
+    "city": "Mount Magnet",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -28.116100311279297,
+    "longitude": 117.84200286865234
   },
   {
     "slug": "mammoth-yosemite-airport-mmh",
@@ -30277,6 +31060,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -91.762802
   },
   {
+    "slug": "misawa-airport-misawa-air-base-msj",
+    "iata": "MSJ",
+    "icao": "RJSM",
+    "name": "Misawa Airport / Misawa Air Base",
+    "city": "Misawa",
+    "country": "Japan",
+    "countryCode": "JP",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 40.703201,
+    "longitude": 141.367996
+  },
+  {
     "slug": "northwest-alabama-regional-airport-msl",
     "iata": "MSL",
     "icao": "KMSL",
@@ -30764,6 +31561,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": 10.451399803161621,
     "longitude": 14.257399559020996
+  },
+  {
+    "slug": "mataiva-airport-mvt",
+    "iata": "MVT",
+    "icao": "NTGV",
+    "name": "Mataiva Airport",
+    "city": "Mataiva",
+    "country": "French Polynesia",
+    "countryCode": "PF",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -14.8681001663208,
+    "longitude": -148.7169952392578
   },
   {
     "slug": "martha-s-vineyard-airport-mvy",
@@ -31463,6 +32274,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 34.5345
   },
   {
+    "slug": "narathiwat-airport-naw",
+    "iata": "NAW",
+    "icao": "VTSC",
+    "name": "Narathiwat Airport",
+    "city": "Narathiwat",
+    "country": "Thailand",
+    "countryCode": "TH",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 6.5199198722839355,
+    "longitude": 101.74299621582031
+  },
+  {
     "slug": "begishevo-airport-nbc",
     "iata": "NBC",
     "icao": "UWKE",
@@ -31979,6 +32804,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 118.865949
   },
   {
+    "slug": "nagoya-airport-jasdf-komaki-air-base-nkm",
+    "iata": "NKM",
+    "icao": "RJNA",
+    "name": "Nagoya Airport / JASDF Komaki Air Base",
+    "city": "Nagoya",
+    "country": "Japan",
+    "countryCode": "JP",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 35.255759,
+    "longitude": 136.924095
+  },
+  {
     "slug": "s-rnak-serafettin-elci-airport-nkt",
     "iata": "NKT",
     "icao": "LTCV",
@@ -32242,6 +33081,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "small_airport",
     "latitude": 53.23030090332031,
     "longitude": -9.467780113220215
+  },
+  {
+    "slug": "nan-airport-nnt",
+    "iata": "NNT",
+    "icao": "VTCN",
+    "name": "Nan Airport",
+    "city": "Nan",
+    "country": "Thailand",
+    "countryCode": "TH",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 18.807899475097656,
+    "longitude": 100.78299713134766
   },
   {
     "slug": "nanyang-jiangying-airport-nny",
@@ -33902,6 +34755,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": -17.878201,
     "longitude": 15.9526
+  },
+  {
+    "slug": "mornington-island-airport-ong",
+    "iata": "ONG",
+    "icao": "YMTI",
+    "name": "Mornington Island Airport",
+    "city": "Mornington Island",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": -16.662500381469727,
+    "longitude": 139.17799377441406
   },
   {
     "slug": "odate-noshiro-airport-onj",
@@ -35672,6 +36539,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -112.005905
   },
   {
+    "slug": "phetchabun-airport-phy",
+    "iata": "PHY",
+    "icao": "VTPB",
+    "name": "Phetchabun Airport",
+    "city": "Phetchabun",
+    "country": "Thailand",
+    "countryCode": "TH",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 16.6760005951,
+    "longitude": 101.194999695
+  },
+  {
     "slug": "general-wayne-a-downing-peoria-international-airport-pia",
     "iata": "PIA",
     "icao": "KPIA",
@@ -35952,6 +36833,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 111.672997
   },
   {
+    "slug": "puka-puka-airport-pkp",
+    "iata": "PKP",
+    "icao": "NTGP",
+    "name": "Puka Puka Airport",
+    "city": "Puka Puka",
+    "country": "French Polynesia",
+    "countryCode": "PF",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": -14.80955,
+    "longitude": -138.812621
+  },
+  {
     "slug": "pokhara-domestic-airport-pkr",
     "iata": "PKR",
     "icao": "VNPK",
@@ -36216,6 +37111,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "large_airport",
     "latitude": 39.551701,
     "longitude": 2.73881
+  },
+  {
+    "slug": "palm-island-airport-pmk",
+    "iata": "PMK",
+    "icao": "YPAM",
+    "name": "Palm Island Airport",
+    "city": "Palm Island",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": -18.755300521850586,
+    "longitude": 146.58099365234375
   },
   {
     "slug": "falcone-borsellino-airport-pmo",
@@ -36679,6 +37588,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 148.553583
   },
   {
+    "slug": "puerto-princesa-international-airport-paf-antonio-bautista-air-base-pps",
+    "iata": "PPS",
+    "icao": "RPVP",
+    "name": "Puerto Princesa International Airport / PAF Antonio Bautista Air Base",
+    "city": "Puerto Princesa",
+    "country": "Philippines",
+    "countryCode": "PH",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 9.74212,
+    "longitude": 118.759003
+  },
+  {
     "slug": "faa-a-international-airport-ppt",
     "iata": "PPT",
     "icao": "NTAA",
@@ -37084,6 +38007,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -158.630219
   },
   {
+    "slug": "portland-airport-ptj",
+    "iata": "PTJ",
+    "icao": "YPOD",
+    "name": "Portland Airport",
+    "city": "Portland",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -38.31809997558594,
+    "longitude": 141.4709930419922
+  },
+  {
     "slug": "juvenal-loureiro-cardoso-airport-pto",
     "iata": "PTO",
     "name": "Juvenal Loureiro Cardoso Airport",
@@ -37179,6 +38116,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": 43.380001,
     "longitude": -0.418611
+  },
+  {
+    "slug": "port-augusta-airport-pug",
+    "iata": "PUG",
+    "icao": "YPAG",
+    "name": "Port Augusta Airport",
+    "city": "Port Augusta",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -32.506900787353516,
+    "longitude": 137.7169952392578
   },
   {
     "slug": "punta-cana-international-airport-puj",
@@ -37796,6 +38747,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -8.035788
   },
   {
+    "slug": "ramingining-airport-ram",
+    "iata": "RAM",
+    "icao": "YRNG",
+    "name": "Ramingining Airport",
+    "city": "Ramingining",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": -12.356399536132812,
+    "longitude": 134.8979949951172
+  },
+  {
     "slug": "leite-lopes-airport-rao",
     "iata": "RAO",
     "icao": "SBRP",
@@ -37975,6 +38940,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": 11.5262,
     "longitude": -72.926
+  },
+  {
+    "slug": "richmond-airport-rcm",
+    "iata": "RCM",
+    "icao": "YRMD",
+    "name": "Richmond Airport",
+    "city": "Richmond",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": -20.701900482177734,
+    "longitude": 143.11500549316406
   },
   {
     "slug": "redding-municipal-airport-rdd",
@@ -38253,6 +39232,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": -53.7777,
     "longitude": -67.7494
+  },
+  {
+    "slug": "rangiroa-airport-rgi",
+    "iata": "RGI",
+    "icao": "NTTG",
+    "name": "Rangiroa Airport",
+    "city": "Rangiroa",
+    "country": "French Polynesia",
+    "countryCode": "PF",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -14.954299926757812,
+    "longitude": -147.66099548339844
   },
   {
     "slug": "piloto-civil-n-fernandez-airport-rgl",
@@ -38632,6 +39625,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -21.93759
   },
   {
+    "slug": "xigaze-peace-airport-shigatse-air-base-rkz",
+    "iata": "RKZ",
+    "icao": "ZURK",
+    "name": "Xigaze Peace Airport / Shigatse Air Base",
+    "city": "Xigazê (Samzhubzê)",
+    "country": "China",
+    "countryCode": "CN",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "large_airport",
+    "latitude": 29.350876,
+    "longitude": 89.299157
+  },
+  {
     "slug": "rostock-laage-airport-rlg",
     "iata": "RLG",
     "icao": "ETNL",
@@ -38741,6 +39748,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "small_airport",
     "latitude": 65.507896,
     "longitude": -150.141007
+  },
+  {
+    "slug": "taichung-international-airport-ching-chuang-kang-air-base-rmq",
+    "iata": "RMQ",
+    "icao": "RCMQ",
+    "name": "Taichung International Airport / Ching Chuang Kang Air Base",
+    "city": "Taichung (Qingshui)",
+    "country": "Taiwan",
+    "countryCode": "TW",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "large_airport",
+    "latitude": 24.2647,
+    "longitude": 120.621002
   },
   {
     "slug": "rimatara-airport-rmt",
@@ -39312,6 +40333,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 55.518894
   },
   {
+    "slug": "rurutu-airport-rur",
+    "iata": "RUR",
+    "icao": "NTAR",
+    "name": "Rurutu Airport",
+    "city": "Rurutu",
+    "country": "French Polynesia",
+    "countryCode": "PF",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -22.434099197387695,
+    "longitude": -151.36099243164062
+  },
+  {
     "slug": "marau-airport-rus",
     "iata": "RUS",
     "icao": "AGGU",
@@ -39380,6 +40415,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "large_airport",
     "latitude": 66.563327,
     "longitude": 25.829751
+  },
+  {
+    "slug": "raivavae-airport-rvv",
+    "iata": "RVV",
+    "icao": "NTAV",
+    "name": "Raivavae Airport",
+    "city": "Raivavae",
+    "country": "French Polynesia",
+    "countryCode": "PF",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": -23.885201,
+    "longitude": -147.662003
   },
   {
     "slug": "rivne-international-airport-rwn",
@@ -40053,6 +41102,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -85.735076
   },
   {
+    "slug": "sanandaj-airport-sdg",
+    "iata": "SDG",
+    "icao": "OICS",
+    "name": "Sanandaj Airport",
+    "city": "Sanandaj",
+    "country": "Iran",
+    "countryCode": "IR",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 35.24589920043945,
+    "longitude": 47.00920104980469
+  },
+  {
     "slug": "sendai-airport-sdj",
     "iata": "SDJ",
     "icao": "RJSS",
@@ -40430,6 +41493,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -122.374821
   },
   {
+    "slug": "subic-bay-international-airport-naval-air-station-cubi-point-sfs",
+    "iata": "SFS",
+    "icao": "RPLB",
+    "name": "Subic Bay International Airport / Naval Air Station Cubi Point",
+    "city": "Olongapo",
+    "country": "Philippines",
+    "countryCode": "PH",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 14.7944,
+    "longitude": 120.271004
+  },
+  {
     "slug": "skelleftea-airport-sft",
     "iata": "SFT",
     "icao": "ESNS",
@@ -40498,6 +41575,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "large_airport",
     "latitude": 10.8188,
     "longitude": 106.652
+  },
+  {
+    "slug": "st-george-airport-sgo",
+    "iata": "SGO",
+    "icao": "YSGE",
+    "name": "St George Airport",
+    "city": "St George",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "small_airport",
+    "latitude": -28.049699783325195,
+    "longitude": 148.59500122070312
   },
   {
     "slug": "st-george-regional-airport-sgu",
@@ -41701,6 +42792,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -8.92482
   },
   {
+    "slug": "sakon-nakhon-airport-sno",
+    "iata": "SNO",
+    "icao": "VTUI",
+    "name": "Sakon Nakhon Airport",
+    "city": "Sakon Nakhon",
+    "country": "Thailand",
+    "countryCode": "TH",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 17.195100784301758,
+    "longitude": 104.11900329589844
+  },
+  {
     "slug": "st-paul-island-airport-snp",
     "iata": "SNP",
     "icao": "PASN",
@@ -42050,6 +43155,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -87.9711
   },
   {
+    "slug": "wichita-falls-municipal-airport-sheppard-air-force-base-sps",
+    "iata": "SPS",
+    "icao": "KSPS",
+    "name": "Wichita Falls Municipal Airport / Sheppard Air Force Base",
+    "city": "Wichita Falls",
+    "country": "United States",
+    "countryCode": "US",
+    "continent": "NA",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 33.9888,
+    "longitude": -98.491898
+  },
+  {
     "slug": "split-airport-spu",
     "iata": "SPU",
     "icao": "LDSP",
@@ -42076,6 +43195,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "large_airport",
     "latitude": 30.108179,
     "longitude": 30.895728
+  },
+  {
+    "slug": "san-pedro-airport-spy",
+    "iata": "SPY",
+    "icao": "DISP",
+    "name": "San Pedro Airport",
+    "city": "San Pedro",
+    "country": "Côte d’Ivoire",
+    "countryCode": "CI",
+    "continent": "AF",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 4.74672,
+    "longitude": -6.66082
   },
   {
     "slug": "shangrao-sanqingshan-airport-sqd",
@@ -44028,6 +45161,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -107.907997
   },
   {
+    "slug": "tezpur-airport-tez",
+    "iata": "TEZ",
+    "icao": "VETZ",
+    "name": "Tezpur Airport",
+    "city": "Tezpur",
+    "country": "India",
+    "countryCode": "IN",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 26.7091007232666,
+    "longitude": 92.78469848632812
+  },
+  {
     "slug": "tefe-airport-tff",
     "iata": "TFF",
     "icao": "SBTF",
@@ -44378,6 +45525,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 51.31340026855469
   },
   {
+    "slug": "sukhothai-airport-ths",
+    "iata": "THS",
+    "icao": "VTPO",
+    "name": "Sukhothai Airport",
+    "city": "Sukhothai",
+    "country": "Thailand",
+    "countryCode": "TH",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 17.238000869750977,
+    "longitude": 99.81819915771484
+  },
+  {
     "slug": "pituffik-space-base-thu",
     "iata": "THU",
     "icao": "BGTL",
@@ -44529,6 +45690,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "large_airport",
     "latitude": 13.631988,
     "longitude": 79.539869
+  },
+  {
+    "slug": "timaru-airport-tiu",
+    "iata": "TIU",
+    "icao": "NZTU",
+    "name": "Timaru Airport",
+    "city": "Timaru",
+    "country": "New Zealand",
+    "countryCode": "NZ",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -44.302799224853516,
+    "longitude": 171.22500610351562
   },
   {
     "slug": "tivat-airport-tiv",
@@ -44795,6 +45970,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 128.881356
   },
   {
+    "slug": "takapoto-airport-tkp",
+    "iata": "TKP",
+    "icao": "NTGT",
+    "name": "Takapoto Airport",
+    "city": "Takapoto",
+    "country": "French Polynesia",
+    "countryCode": "PF",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -14.709500312805176,
+    "longitude": -145.24600219726562
+  },
+  {
     "slug": "kigoma-airport-tkq",
     "iata": "TKQ",
     "icao": "HTKA",
@@ -44807,6 +45996,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "small_airport",
     "latitude": -4.8862,
     "longitude": 29.6709
+  },
+  {
+    "slug": "tokushima-awaodori-airport-jmsdf-tokushima-air-base-tks",
+    "iata": "TKS",
+    "icao": "RJOS",
+    "name": "Tokushima Awaodori Airport / JMSDF Tokushima Air Base",
+    "city": "Tokushima",
+    "country": "Japan",
+    "countryCode": "JP",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 34.132801,
+    "longitude": 134.606995
   },
   {
     "slug": "turku-airport-tku",
@@ -44835,6 +46038,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "small_airport",
     "latitude": -17.355226,
     "longitude": -138.44734
+  },
+  {
+    "slug": "takaroa-airport-tkx",
+    "iata": "TKX",
+    "icao": "NTKR",
+    "name": "Takaroa Airport",
+    "city": "Takaroa",
+    "country": "French Polynesia",
+    "countryCode": "PF",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -14.45580005645752,
+    "longitude": -145.02499389648438
   },
   {
     "slug": "teller-airport-tla",
@@ -45364,6 +46581,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "small_airport",
     "latitude": -62.191026,
     "longitude": -58.98669
+  },
+  {
+    "slug": "tainan-international-airport-tainan-air-base-tnn",
+    "iata": "TNN",
+    "icao": "RCNN",
+    "name": "Tainan International Airport / Tainan Air Base",
+    "city": "Tainan (Rende)",
+    "country": "Taiwan",
+    "countryCode": "TW",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "large_airport",
+    "latitude": 22.950399,
+    "longitude": 120.206001
   },
   {
     "slug": "ivato-airport-tnr",
@@ -46091,6 +47322,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": 0.809506,
     "longitude": -77.708099
+  },
+  {
+    "slug": "tubuai-airport-tub",
+    "iata": "TUB",
+    "icao": "NTAT",
+    "name": "Tubuai Airport",
+    "city": "Tubuai",
+    "country": "French Polynesia",
+    "countryCode": "PF",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -23.365400314331055,
+    "longitude": -149.5240020751953
   },
   {
     "slug": "teniente-benjamin-matienzo-airport-tuc",
@@ -47078,6 +48323,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": 50.066588,
     "longitude": 91.938273
+  },
+  {
+    "slug": "quilpie-airport-ulp",
+    "iata": "ULP",
+    "icao": "YQLP",
+    "name": "Quilpie Airport",
+    "city": "Quilpie",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -26.609176,
+    "longitude": 144.253746
   },
   {
     "slug": "gulu-airport-ulu",
@@ -49187,6 +50446,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 147.46832
   },
   {
+    "slug": "walgett-airport-wge",
+    "iata": "WGE",
+    "icao": "YWLG",
+    "name": "Walgett Airport",
+    "city": "Walgett",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -30.032801,
+    "longitude": 148.126007
+  },
+  {
     "slug": "shaoyang-wugang-airport-wgn",
     "iata": "WGN",
     "icao": "ZGSY",
@@ -49229,6 +50502,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 118.66687
   },
   {
+    "slug": "whakatane-airport-whk",
+    "iata": "WHK",
+    "icao": "NZWK",
+    "name": "Whakatane Airport",
+    "city": "Whakatane",
+    "country": "New Zealand",
+    "countryCode": "NZ",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -37.92060089111328,
+    "longitude": 176.91400146484375
+  },
+  {
     "slug": "wick-john-o-groats-airport-wic",
     "iata": "WIC",
     "icao": "EGPC",
@@ -49257,6 +50544,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 36.81480026245117
   },
   {
+    "slug": "winton-airport-win",
+    "iata": "WIN",
+    "icao": "YWTN",
+    "name": "Winton Airport",
+    "city": "Winton",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -22.36359977722168,
+    "longitude": 143.08599853515625
+  },
+  {
     "slug": "wajir-airport-wjr",
     "iata": "WJR",
     "icao": "HKWJ",
@@ -49269,6 +50570,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "medium_airport",
     "latitude": 1.73324,
     "longitude": 40.091599
+  },
+  {
+    "slug": "wonju-airport-hoengseong-air-base-k-38-k-46-wju",
+    "iata": "WJU",
+    "icao": "RKNW",
+    "name": "Wonju Airport / Hoengseong Air Base (K-38/K-46)",
+    "city": "Wonju",
+    "country": "South Korea",
+    "countryCode": "KR",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 37.437113,
+    "longitude": 127.960051
   },
   {
     "slug": "wanaka-airport-wka",
@@ -49797,6 +51112,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": 114.213723
   },
   {
+    "slug": "wiluna-airport-wun",
+    "iata": "WUN",
+    "icao": "YWLU",
+    "name": "Wiluna Airport",
+    "city": "Wiluna",
+    "country": "Australia",
+    "countryCode": "AU",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -26.629199981689453,
+    "longitude": 120.22100067138672
+  },
+  {
     "slug": "nanping-wuyishan-airport-wus",
     "iata": "WUS",
     "icao": "ZSWY",
@@ -50145,6 +51474,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "longitude": -101.468954
   },
   {
+    "slug": "manihi-airport-xmh",
+    "iata": "XMH",
+    "icao": "NTGI",
+    "name": "Manihi Airport",
+    "city": "Manihi",
+    "country": "French Polynesia",
+    "countryCode": "PF",
+    "continent": "OC",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": -14.436800003051758,
+    "longitude": -146.07000732421875
+  },
+  {
     "slug": "xiamen-gaoqi-international-airport-xmn",
     "iata": "XMN",
     "icao": "ZSAM",
@@ -50227,6 +51570,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "small_airport",
     "latitude": 55.749199,
     "longitude": -101.265999
+  },
+  {
+    "slug": "palmerola-international-airport-jose-enrique-soto-cano-air-base-xpl",
+    "iata": "XPL",
+    "icao": "MHPR",
+    "name": "Palmerola International Airport / José Enrique Soto Cano Air Base",
+    "city": "Palmerola",
+    "country": "Honduras",
+    "countryCode": "HN",
+    "continent": "NA",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 14.3824,
+    "longitude": -87.621201
   },
   {
     "slug": "quepos-managua-airport-xqp",
@@ -51174,6 +52531,20 @@ export const airportRegistry: AirportRegistryEntry[] = [
     "type": "small_airport",
     "latitude": 66.240658,
     "longitude": -128.647757
+  },
+  {
+    "slug": "yonago-kitaro-airport-jasdf-miho-air-base-ygj",
+    "iata": "YGJ",
+    "icao": "RJOH",
+    "name": "Yonago Kitaro Airport / JASDF Miho Air Base",
+    "city": "Yonago",
+    "country": "Japan",
+    "countryCode": "JP",
+    "continent": "AS",
+    "isEuropean": false,
+    "type": "medium_airport",
+    "latitude": 35.492199,
+    "longitude": 133.235992
   },
   {
     "slug": "la-grande-riviere-airport-ygl",
