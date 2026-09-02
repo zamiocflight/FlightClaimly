@@ -1,3 +1,4 @@
+import { getPriorityAirlineEntityBySlug } from "@/data/master/priorityAirlineEntities";
 import { getAirlineBySlug } from "@/data/seo/airlines";
 import { getOrCreateRouteByAirportIata } from "@/data/seo/routes";
 
@@ -48,7 +49,9 @@ export function validateFlightNumberSeed(
 export function resolveFlightNumberAirline(
   airlineSlug: string
 ) {
-  const airline = getAirlineBySlug(airlineSlug);
+  const airline =
+    getAirlineBySlug(airlineSlug) ??
+    getPriorityAirlineEntityBySlug(airlineSlug);
 
   if (!airline) {
     throw new Error(
