@@ -4,6 +4,31 @@ Date: **2026-09-02**
 
 > Recovery checkpoint for the Product / Growth workstream. Preserve the earlier Flight Number/global SEO checkpoint and all historical sprint documentation.
 
+## Status — LOCKED V1
+
+**Delay Reason Engine v1 is complete, verified and locked as of 2026-09-02.**
+
+Do not reopen or refactor this engine unless a concrete defect, legal-content update, new disruption category, or later AI/Claims integration requires it.
+
+Final verified state:
+
+- Delay Reason entities: **11**
+- relationship entries: **11**
+- claim-assessment profiles: **11**
+- `npm run audit:delay-reasons`: **PASS**
+- `npm run typecheck`: **PASS**
+- production build: **PASS**
+- static build after SSG conversion: **6,557 / 6,557 pages**
+- Delay Reason detail pages: **11 SSG pages**
+- production sitemap Delay Reason entries: **11**
+- representative production URLs return **HTTP 200**
+- Claim Assessment content verified live
+- current programmatic Delay Reason SEO publication remains **English-only**
+
+Final SSG commit:
+
+- `e5f9769` — `feat(delay-reasons): prerender delay reason detail pages`
+
 ## Objective
 
 Expand the Delay Reason Engine from a single substantive reason into a reusable disruption-knowledge layer that can serve:
@@ -108,9 +133,11 @@ New component:
 
 This turns the Delay Reason pages from generic legal explainers into visible outputs of the same investigation model intended for future Claims/AI use.
 
+Delay Reason detail pages were subsequently converted from dynamic on-demand rendering to **SSG** through `generateStaticParams`, using the controlled `delayReasonSeoLocales` publication surface. The current programmatic publication locale is `en` only.
+
 ## Integrity Audit — ADDED
 
-New command:
+Command:
 
 `npm run audit:delay-reasons`
 
@@ -126,11 +153,12 @@ The audit checks:
 - no relationship points to an unknown reason
 - no assessment profile points to an unknown reason
 
-Expected aligned state is currently:
+Verified aligned state:
 
 - Delay Reasons: **11**
 - EU261 relationships: **11**
 - claim-assessment profiles: **11**
+- result: **PASS**
 
 ## Legal / Product Design Principles
 
@@ -152,7 +180,7 @@ The assessment layer therefore separates **airline label**, **root cause**, **ca
 
 `src/data/delay-reasons/relationships.ts` registers all 11 entities against the existing EU261 authority/regulation relationship layer.
 
-The existing Delay Reason index automatically renders every entity from `delayReasons` and the existing sitemap automatically publishes them for the configured `delayReasonSeoLocales` surface.
+The Delay Reason index renders the entities from structured data and the sitemap publishes all 11 detail URLs for the configured SEO locale surface.
 
 Current controlled locale policy remains unchanged. Do not open additional programmatic locales merely because more English entities now exist.
 
@@ -171,26 +199,28 @@ Structured assessment implementation:
 - `dfe3e20` — `feat(delay-reasons): export assessment engine`
 - `4f4eb77` — `chore(delay-reasons): add engine integrity audit`
 - `dde9521` — `chore(delay-reasons): add audit command`
+- `e5f9769` — `feat(delay-reasons): prerender delay reason detail pages`
 
-## Verification State
+## Final Verification — COMPLETED
 
-Source implementation is now complete on remote `main`.
+Local/runtime verification completed on 2026-09-02:
 
-The next verification pass must establish:
+1. `npm run audit:delay-reasons` → **PASS**
+2. `npm run typecheck` → **PASS**
+3. first production build → **6,546 / 6,546** static pages, no errors
+4. sitemap contained **11** `/delay-reasons/` detail URLs
+5. production `/en/delay-reasons/bad-weather` → **HTTP 200**
+6. Claim Assessment heading verified in production HTML
+7. production `/en/delay-reasons/late-incoming-aircraft` → **HTTP 200**
+8. `Root-cause review required` verified in production HTML
+9. detail pages converted to SSG
+10. final production build → **6,557 / 6,557** pages
+11. build output shows `/[locale]/delay-reasons/[slug]` as **● SSG**, with 11 English paths
 
-1. `npm run audit:delay-reasons` passes
-2. TypeScript / Next production build is green
-3. Delay Reason hub renders all 11 entities
-4. representative new detail URLs return 200 in the allowed SEO locale
-5. representative unsupported programmatic locale remains blocked according to existing publication policy
-6. sitemap contains all 11 Delay Reason detail URLs in the allowed locale surface
-7. metadata/canonical/FAQ/Breadcrumb structured output remains valid
-8. the new Claim Assessment section renders correctly on representative pages
-
-Do not rerun FlightAware population as part of this verification.
+No FlightAware population was rerun.
 
 ## Recovery / Next Step
 
-If the session fails now, do **not** rebuild the Delay Reason architecture from scratch.
+If the session fails now, do **not** rebuild or re-verify Delay Reason Engine v1 from scratch. It is locked green.
 
-Resume by reading this checkpoint and then verify the current remote implementation. The next architectural evolution after green verification can connect these assessment profiles to actual claim intake / Claims Desk / AI Brain workflows, including FlightAware-assisted root-cause reconstruction and legal authority/case-law enrichment.
+The next Product / Growth Knowledge Engine workstream is the **Legal Authority / Passenger Rights Knowledge Engine**. Its purpose is to turn the currently thin authority registry into structured legal reasoning that Delay Reasons, routes, airlines, flight numbers, claim intake and the future AI Brain can reference.
