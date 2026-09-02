@@ -7,8 +7,10 @@ import Statistics from "@/components/seo/delay-reasons/Statistics";
 import Timeline from "@/components/seo/delay-reasons/Timeline";
 import FAQ from "@/components/seo/delay-reasons/FAQ";
 import RelatedKnowledge from "@/components/seo/delay-reasons/RelatedKnowledge";
+import ClaimAssessment from "@/components/seo/delay-reasons/ClaimAssessment";
 
 import type { DelayReason } from "@/data/delay-reasons/types";
+import { getDelayReasonAssessment } from "@/lib/delay-reasons/assessment";
 
 type DelayReasonKnowledgeTemplateProps = {
   delayReason: DelayReason;
@@ -17,6 +19,8 @@ type DelayReasonKnowledgeTemplateProps = {
 export default function DelayReasonKnowledgeTemplate({
   delayReason,
 }: DelayReasonKnowledgeTemplateProps) {
+  const assessment = getDelayReasonAssessment(delayReason.slug);
+
   return (
     <>
       <DelayReasonHero delayReason={delayReason} />
@@ -24,6 +28,8 @@ export default function DelayReasonKnowledgeTemplate({
       <DelayReasonOverview delayReason={delayReason} />
 
       <ExtraordinaryCircumstances delayReason={delayReason} />
+
+      <ClaimAssessment assessment={assessment} />
 
       <PassengerRights passengerRights={delayReason.passengerRights} />
 
