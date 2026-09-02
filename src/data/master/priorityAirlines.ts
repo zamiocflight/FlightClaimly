@@ -62,6 +62,10 @@ export const europeExpandedAirlines = priorityAirlines
   .filter((airline) => airline.region === "europe")
   .map((airline) => airline.iata);
 
+export const intercontinentalCoreAirlines = priorityAirlines
+  .filter((airline) => airline.region === "global")
+  .map((airline) => airline.iata);
+
 export const globalCoreAirlines = priorityAirlines.map((airline) => airline.iata);
 
 export function getPriorityAirlineByIata(iata: string): PriorityAirline | null {
