@@ -1,4 +1,5 @@
 import type { FlightNumber, FlightNumberSeed } from "./types";
+import { getPriorityAirlineEntityBySlug } from "@/data/master/priorityAirlineEntities";
 import { getAirlineBySlug } from "@/data/seo/airlines";
 
 export type FlightNumberPublicationDecision = {
@@ -17,7 +18,9 @@ export function evaluateFlightNumberSeedForPublication(
   const originIata = seed.originIata.trim().toUpperCase();
   const destinationIata = seed.destinationIata.trim().toUpperCase();
   const airlineSlug = seed.airline.trim();
-  const airline = airlineSlug ? getAirlineBySlug(airlineSlug) : undefined;
+  const airline = airlineSlug
+    ? getAirlineBySlug(airlineSlug) ?? getPriorityAirlineEntityBySlug(airlineSlug)
+    : undefined;
 
   if (!FLIGHT_NUMBER_PATTERN.test(flightNumber)) {
     reasons.push("invalid-flight-number");
