@@ -1,12 +1,14 @@
 import {
   europeExpandedAirlines,
   globalCoreAirlines,
+  intercontinentalCoreAirlines,
 } from "../src/data/master/priorityAirlines";
 
 export const populationProfiles = {
   nordics: ["SK", "DY"],
   "europe-core": ["SK", "DY", "FR", "LH", "U2", "AF", "KL", "BA"],
   "europe-expanded": europeExpandedAirlines,
+  "intercontinental-core": intercontinentalCoreAirlines,
   "global-core": globalCoreAirlines,
 } as const;
 
