@@ -1,18 +1,24 @@
 {
   "version": 1,
   "status": "success",
-  "startedAt": "2026-07-26T14:45:27.916Z",
-  "completedAt": "2026-07-26T14:45:29.079Z",
-  "durationMs": 1163,
+  "startedAt": "2026-09-01T10:20:00.606Z",
+  "completedAt": "2026-09-01T10:20:47.285Z",
+  "durationMs": 46679,
   "configuration": {
-    "profile": "nordics",
-    "startDate": "2026-07-26",
-    "endDate": "2026-07-27",
-    "maximumPagesPerAirline": 1,
-    "airlineCount": 2,
+    "profile": "europe-core",
+    "startDate": "2026-09-01",
+    "endDate": "2026-09-02",
+    "maximumPagesPerAirline": 5,
+    "airlineCount": 8,
     "airlines": [
       "SK",
-      "DY"
+      "DY",
+      "FR",
+      "LH",
+      "U2",
+      "AF",
+      "KL",
+      "BA"
     ]
   },
   "airlines": [
@@ -21,41 +27,114 @@
       "name": "SAS",
       "iata": "SK",
       "icao": "SAS",
-      "pagesFetched": 1,
-      "schedulesReturned": 15,
-      "validNormalizedSeeds": 15,
-      "rejectedSchedules": 0,
-      "duplicateFetchedSeeds": 0,
-      "uniqueFetchedSeeds": 15
+      "pagesFetched": 5,
+      "schedulesReturned": 75,
+      "validNormalizedSeeds": 74,
+      "rejectedSchedules": 1,
+      "duplicateFetchedSeeds": 2,
+      "uniqueFetchedSeeds": 72
     },
     {
       "slug": "norwegian",
       "name": "Norwegian",
       "iata": "DY",
       "icao": "NOZ",
-      "pagesFetched": 1,
-      "schedulesReturned": 15,
-      "validNormalizedSeeds": 15,
+      "pagesFetched": 5,
+      "schedulesReturned": 75,
+      "validNormalizedSeeds": 75,
+      "rejectedSchedules": 0,
+      "duplicateFetchedSeeds": 3,
+      "uniqueFetchedSeeds": 72
+    },
+    {
+      "slug": "ryanair",
+      "name": "Ryanair",
+      "iata": "FR",
+      "icao": "RYR",
+      "pagesFetched": 5,
+      "schedulesReturned": 75,
+      "validNormalizedSeeds": 75,
+      "rejectedSchedules": 0,
+      "duplicateFetchedSeeds": 20,
+      "uniqueFetchedSeeds": 55
+    },
+    {
+      "slug": "lufthansa",
+      "name": "Lufthansa",
+      "iata": "LH",
+      "icao": "DLH",
+      "pagesFetched": 5,
+      "schedulesReturned": 75,
+      "validNormalizedSeeds": 75,
+      "rejectedSchedules": 0,
+      "duplicateFetchedSeeds": 2,
+      "uniqueFetchedSeeds": 73
+    },
+    {
+      "slug": "easyjet",
+      "name": "easyJet",
+      "iata": "U2",
+      "icao": "EZY",
+      "pagesFetched": 5,
+      "schedulesReturned": 75,
+      "validNormalizedSeeds": 75,
+      "rejectedSchedules": 0,
+      "duplicateFetchedSeeds": 12,
+      "uniqueFetchedSeeds": 63
+    },
+    {
+      "slug": "air-france",
+      "name": "Air France",
+      "iata": "AF",
+      "icao": "AFR",
+      "pagesFetched": 5,
+      "schedulesReturned": 75,
+      "validNormalizedSeeds": 75,
+      "rejectedSchedules": 0,
+      "duplicateFetchedSeeds": 3,
+      "uniqueFetchedSeeds": 72
+    },
+    {
+      "slug": "klm",
+      "name": "KLM",
+      "iata": "KL",
+      "icao": "KLM",
+      "pagesFetched": 5,
+      "schedulesReturned": 75,
+      "validNormalizedSeeds": 75,
       "rejectedSchedules": 0,
       "duplicateFetchedSeeds": 0,
-      "uniqueFetchedSeeds": 15
+      "uniqueFetchedSeeds": 75
+    },
+    {
+      "slug": "british-airways",
+      "name": "British Airways",
+      "iata": "BA",
+      "icao": "BAW",
+      "pagesFetched": 5,
+      "schedulesReturned": 75,
+      "validNormalizedSeeds": 75,
+      "rejectedSchedules": 0,
+      "duplicateFetchedSeeds": 2,
+      "uniqueFetchedSeeds": 73
     }
   ],
   "totals": {
-    "existingSeedsBeforeMerge": 50,
-    "schedulesReturned": 30,
-    "validNormalizedSeeds": 30,
-    "rejectedSchedules": 0,
-    "duplicateFetchedSeeds": 0,
-    "uniqueFetchedSeeds": 30,
-    "seedsAdded": 0,
-    "seedsUpdated": 0,
-    "seedsUnchanged": 30,
-    "totalSeedsAfterMerge": 50
+    "existingSeedsBeforeMerge": 165,
+    "schedulesReturned": 600,
+    "validNormalizedSeeds": 599,
+    "rejectedSchedules": 1,
+    "duplicateFetchedSeeds": 44,
+    "uniqueFetchedSeeds": 555,
+    "seedsAdded": 436,
+    "seedsUpdated": 3,
+    "seedsUnchanged": 116,
+    "routeConflicts": 0,
+    "totalSeedsAfterMerge": 601
   },
   "output": {
-    "seedsFile": "src/data/master/flightNumberSeeds.ts",
-    "seedsFileWritten": false,
-    "reportFile": "reports/population/latest.json"
+    "seedsFile": "/Users/davidhedlund/flightclaimly/src/data/master/flightNumberSeeds.ts",
+    "seedsFileWritten": true,
+    "reportFile": "/Users/davidhedlund/flightclaimly/reports/population/latest.json"
   }
 }
