@@ -33,7 +33,7 @@ The following architecture already existed and remains in use:
 
 No parallel Delay Reason system was created.
 
-## Expansion Completed
+## Knowledge Expansion Completed
 
 The engine now contains **11 structured delay/disruption reason entities**:
 
@@ -60,68 +60,137 @@ Each entity carries the existing structured knowledge fields:
 - disruption/claim timeline
 - FAQ
 
+## Structured Claim Assessment Engine — COMPLETED
+
+A second structured layer now sits on top of the public knowledge entities:
+
+`src/lib/delay-reasons/assessment.ts`
+
+Each of the 11 Delay Reason entities now has a machine-readable assessment profile containing:
+
+- disruption category
+- baseline liability classification
+- whether root-cause reconstruction is required
+- assessment summary
+- evidence targets
+- questions to put to the airline
+- claimant/red-flag signals
+- recommended next investigation step
+
+Current baseline categories:
+
+- `airline-operational`
+- `external-event`
+- `mixed-or-root-cause`
+- `technical`
+
+Current liability baselines:
+
+- `usually-compensable`
+- `usually-extraordinary`
+- `fact-specific`
+
+The assessment resolver includes a safe fact-specific fallback for future Delay Reason slugs so an unknown reason is not silently treated as compensable or extraordinary.
+
+## Public Knowledge Page Integration — COMPLETED
+
+New component:
+
+`src/components/seo/delay-reasons/ClaimAssessment.tsx`
+
+`DelayReasonKnowledgeTemplate` now resolves the structured assessment profile for each Delay Reason and renders an investigation section containing:
+
+- baseline assessment
+- evidence to verify
+- questions for the airline
+- signals deserving closer review
+- next investigative step
+
+This turns the Delay Reason pages from generic legal explainers into visible outputs of the same investigation model intended for future Claims/AI use.
+
+## Integrity Audit — ADDED
+
+New command:
+
+`npm run audit:delay-reasons`
+
+Implementation:
+
+`scripts/audit-delay-reasons.ts`
+
+The audit checks:
+
+- duplicate Delay Reason slugs
+- every Delay Reason has a relationship entry
+- every Delay Reason has a structured assessment profile
+- no relationship points to an unknown reason
+- no assessment profile points to an unknown reason
+
+Expected aligned state is currently:
+
+- Delay Reasons: **11**
+- EU261 relationships: **11**
+- claim-assessment profiles: **11**
+
 ## Legal / Product Design Principles
 
-The expansion intentionally avoids treating airline disruption labels as conclusive legal answers.
+The engine intentionally avoids treating airline disruption labels as conclusive legal answers.
 
 Examples:
 
-- `late-incoming-aircraft` is treated as a propagation description that requires tracing the root cause.
-- `operational-reasons` is treated as a broad label that must be unpacked into the actual cause.
+- `late-incoming-aircraft` is a propagation description and requires tracing the root cause.
+- `operational-reasons` is too broad to determine liability and must be unpacked.
 - `bad-weather` and ATC restrictions can be extraordinary, but causal connection and reasonable measures remain relevant.
-- routine `crew-shortage` and ordinary technical failures are generally treated as airline operational matters rather than automatically extraordinary.
+- routine `crew-shortage` and ordinary technical failures are generally airline operational matters rather than automatically extraordinary.
 - an airline's own staff strike is distinguished from external third-party industrial action.
 - `hidden-manufacturing-defect` is intentionally separated from ordinary technical problems as a narrow exceptional category.
+- extraordinary circumstances do not automatically remove separate care, rerouting or reimbursement rights.
 
-The engine also distinguishes fixed EU261 compensation from care, rerouting and reimbursement rights; extraordinary circumstances do not automatically remove those separate rights.
+The assessment layer therefore separates **airline label**, **root cause**, **causation**, **reasonable measures**, and **passenger-rights outcome**.
 
-## Relationship Layer
+## Relationship / SEO Layer
 
-`src/data/delay-reasons/relationships.ts` now registers all 11 entities against the existing EU261 authority/regulation relationship layer.
+`src/data/delay-reasons/relationships.ts` registers all 11 entities against the existing EU261 authority/regulation relationship layer.
 
-This keeps the entities connected to the wider Knowledge Engine rather than leaving them as standalone articles.
+The existing Delay Reason index automatically renders every entity from `delayReasons` and the existing sitemap automatically publishes them for the configured `delayReasonSeoLocales` surface.
 
-## SEO Publication
-
-The existing Delay Reason index automatically renders every entity from `delayReasons`.
-
-The existing sitemap automatically publishes every Delay Reason entity for the configured `delayReasonSeoLocales` publication surface.
-
-Current programmatic SEO policy remains unchanged: Delay Reason publication follows the existing controlled locale policy. Do not open additional locales merely because more English entities now exist.
+Current controlled locale policy remains unchanged. Do not open additional programmatic locales merely because more English entities now exist.
 
 ## Git Checkpoint
 
-Implementation commits:
+Knowledge expansion:
 
 - `98fe059` — `feat(delay-reasons): expand disruption knowledge engine`
 - `b3fb3c6` — `feat(delay-reasons): map disruption relationships`
 
+Structured assessment implementation:
+
+- `01e8a92` — `feat(delay-reasons): add structured claim assessment engine`
+- `3d564a8` — `feat(delay-reasons): render structured claim assessment`
+- `d0d8764` — `feat(delay-reasons): integrate claim assessment into knowledge pages`
+- `dfe3e20` — `feat(delay-reasons): export assessment engine`
+- `4f4eb77` — `chore(delay-reasons): add engine integrity audit`
+- `dde9521` — `chore(delay-reasons): add audit command`
+
 ## Verification State
 
-Remote source implementation is complete.
+Source implementation is now complete on remote `main`.
 
-Before declaring the sprint fully closed, verify the final deployed state/build:
+The next verification pass must establish:
 
-1. TypeScript / Next production build green
-2. Delay Reason hub renders all 11 entities
-3. representative new detail URLs return 200 in the allowed SEO locale
-4. representative unsupported programmatic locale remains blocked according to the existing publication policy
-5. sitemap contains all 11 Delay Reason detail URLs in the allowed locale surface
-6. metadata/canonical/FAQ/Breadcrumb structured output remains valid
+1. `npm run audit:delay-reasons` passes
+2. TypeScript / Next production build is green
+3. Delay Reason hub renders all 11 entities
+4. representative new detail URLs return 200 in the allowed SEO locale
+5. representative unsupported programmatic locale remains blocked according to existing publication policy
+6. sitemap contains all 11 Delay Reason detail URLs in the allowed locale surface
+7. metadata/canonical/FAQ/Breadcrumb structured output remains valid
+8. the new Claim Assessment section renders correctly on representative pages
 
 Do not rerun FlightAware population as part of this verification.
 
-## Next Architecture Step
+## Recovery / Next Step
 
-After deployment verification, the next meaningful Delay Reason evolution should be toward a richer classification/evidence model for Claims/AI use, for example:
+If the session fails now, do **not** rebuild the Delay Reason architecture from scratch.
 
-- root-cause category
-- control domain (airline / airport / ATC / weather / security / third party)
-- default legal classification with conditionality
-- evidence to request from airline/customer
-- facts to verify externally
-- reasonable-measures questions
-- downstream/rotation propagation handling
-- legal authority/case-law references
-
-Do not add those fields casually until the current 11-entity public/knowledge expansion is verified green.
+Resume by reading this checkpoint and then verify the current remote implementation. The next architectural evolution after green verification can connect these assessment profiles to actual claim intake / Claims Desk / AI Brain workflows, including FlightAware-assisted root-cause reconstruction and legal authority/case-law enrichment.
