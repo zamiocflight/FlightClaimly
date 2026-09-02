@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import DelayReasonKnowledgeTemplate from "@/components/seo/delay-reasons/DelayReasonKnowledgeTemplate";
 import FAQSchema from "@/components/seo/FAQSchema";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import { delayReasons } from "@/data/delay-reasons/delayReasons";
 import { delayReasonSeoLocales } from "@/lib/seo/alternates";
 
 import {
@@ -17,16 +18,25 @@ type Props = {
   }>;
 };
 
+export function generateStaticParams() {
+  return delayReasonSeoLocales.flatMap((locale) =>
+    delayReasons.map((delayReason) => ({
+      locale,
+      slug: delayReason.slug,
+    }))
+  );
+}
+
 export async function generateMetadata({ params }: Props) {
   const { locale, slug } = await params;
 
   if (
-  !delayReasonSeoLocales.includes(
-    locale as (typeof delayReasonSeoLocales)[number]
-  )
-) {
-  return {};
-}
+    !delayReasonSeoLocales.includes(
+      locale as (typeof delayReasonSeoLocales)[number]
+    )
+  ) {
+    return {};
+  }
 
   const delayReason = resolveDelayReason({
     slug,
@@ -43,12 +53,12 @@ export default async function DelayReasonPage({ params }: Props) {
   const { locale, slug } = await params;
 
   if (
-  !delayReasonSeoLocales.includes(
-    locale as (typeof delayReasonSeoLocales)[number]
-  )
-) {
-  notFound();
-}
+    !delayReasonSeoLocales.includes(
+      locale as (typeof delayReasonSeoLocales)[number]
+    )
+  ) {
+    notFound();
+  }
 
   const delayReason = resolveDelayReason({
     slug,
@@ -59,31 +69,29 @@ export default async function DelayReasonPage({ params }: Props) {
   }
 
   return (
-<>
-  <FAQSchema items={delayReason.faq ?? []} />
+    <>
+      <FAQSchema items={delayReason.faq ?? []} />
 
-  <BreadcrumbSchema
-    items={[
-      {
-        name: "Home",
-        url: `https://www.flightclaimly.com/${locale}`,
-      },
-      {
-        name: "Delay reasons",
-        url: `https://www.flightclaimly.com/${locale}/delay-reasons`,
-      },
-      {
-        name: delayReason.title,
-        url: `https://www.flightclaimly.com/${locale}/delay-reasons/${slug}`,
-      },
-    ]}
-  />
+      <BreadcrumbSchema
+        items={[
+          {
+            name: "Home",
+            url: `https://www.flightclaimly.com/${locale}`,
+          },
+          {
+            name: "Delay reasons",
+            url: `https://www.flightclaimly.com/${locale}/delay-reasons`,
+          },
+          {
+            name: delayReason.title,
+            url: `https://www.flightclaimly.com/${locale}/delay-reasons/${slug}`,
+          },
+        ]}
+      />
 
-  <main className="container py-10">
-    <DelayReasonKnowledgeTemplate
-      delayReason={delayReason}
-    />
-  </main>
-</>
+      <main className="container py-10">
+        <DelayReasonKnowledgeTemplate delayReason={delayReason} />
+      </main>
+    </>
   );
 }
