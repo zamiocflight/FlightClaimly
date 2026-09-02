@@ -30,7 +30,6 @@ export const populationProfiles = {
     "EW",
     "HV",
     "BT",
-    "I2",
   ],
   "global-core": [
     "SK",
@@ -61,7 +60,6 @@ export const populationProfiles = {
     "EW",
     "HV",
     "BT",
-    "I2",
     "DL",
     "AA",
     "UA",
@@ -76,8 +74,6 @@ export const populationProfiles = {
     "CX",
     "KE",
     "BR",
-    "CI",
-    "HU",
   ],
 } as const;
 
