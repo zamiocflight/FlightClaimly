@@ -85,6 +85,20 @@ function getCountryName(countryCode: string): string {
   const displayNames = new Intl.DisplayNames(["en"], { type: "region" });
   return displayNames.of(countryCode) ?? countryCode;
 }
+function deriveCity(name: string, municipality?: string): string {
+  const explicitMunicipality = municipality?.trim() ?? "";
+  if (explicitMunicipality) return explicitMunicipality;
+
+  // Municipality is useful descriptive metadata, but it is not airport identity.
+  // Some otherwise valid scheduled commercial rows omit it. Derive a stable,
+  // human-readable fallback from the airport name instead of dropping the airport.
+  const derived = name
+    .replace(/\s+(?:international\s+)?airport(?:\s*\/.*)?$/i, "")
+    .replace(/\s+airfield$/i, "")
+    .trim();
+
+  return derived || name;
+}
 function hasCommercialAirportType(record: AirportCsvRow): boolean {
   return COMMERCIAL_AIRPORT_TYPES.has(record.type?.trim() ?? "");
 }
@@ -118,16 +132,16 @@ async function main(): Promise<void> {
     const iata = record.iata_code?.trim().toUpperCase() ?? "";
     if (!/^[A-Z]{3}$/.test(iata)) continue;
     const name = record.name?.trim() ?? "";
-    const city = record.municipality?.trim() ?? "";
     const countryCode = record.iso_country?.trim().toUpperCase() ?? "";
     const continent = record.continent?.trim().toUpperCase() ?? "";
     const type = record.type?.trim() ?? "";
-    if (!name || !city || !countryCode || !type) continue;
+    if (!name || !countryCode || !type) continue;
     if (shouldExcludeByName(name)) continue;
     const latitude = Number(record.latitude_deg);
     const longitude = Number(record.longitude_deg);
     if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) continue;
     const icao = record.icao_code?.trim().toUpperCase();
+    const city = deriveCity(name, record.municipality);
 
     airportsByIata.set(iata, {
       slug: `${createSlug(name)}-${iata.toLowerCase()}`,
