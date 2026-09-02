@@ -7,15 +7,15 @@ Last updated: **2026-09-02**
 ## Read Order After Session Loss
 
 1. `docs/CURRENT_SPRINT_LATEST.md` — this pointer
-2. `docs/checkpoints/2026-09-02-delay-reason-engine-expansion.md` — latest Product / Growth implementation checkpoint
-3. `docs/checkpoints/2026-09-02-flight-number-global-seo-google.md` — previous secured Flight Number/global SEO/Google checkpoint
+2. `docs/checkpoints/2026-09-02-delay-reason-engine-expansion.md` — locked Delay Reason Engine v1 checkpoint
+3. `docs/checkpoints/2026-09-02-flight-number-global-seo-google.md` — secured Flight Number/global SEO/Google checkpoint
 4. `docs/CURRENT_SPRINT.md` — full historical sprint record; preserve all older sections
 5. `docs/SYSTEM_PROCESS_MAP.md` — architecture/process map
 6. `docs/CLAIMS_DESK.md` only when working on Claims Desk matters
 
 ## Current Product / Growth State
 
-Status: **🟡 Delay Reason Engine implementation complete on remote main / verification next**
+Status: **🟢 Delay Reason Engine v1 locked / 🟡 Legal Authority & Passenger Rights Knowledge Engine next**
 
 ### Flight Number / Google baseline remains secured
 
@@ -23,72 +23,78 @@ Status: **🟡 Delay Reason Engine implementation complete on remote main / veri
 - final Flight Number entities: **2,841 publishable / 0 blocked / 0 duplicate identities**
 - airlines represented: **44**
 - Route paths: **3,141**
-- full production static build at that checkpoint: **6,546 / 6,546**
 - Google sitemap read successfully on 2026-09-02
 - Search Console discovered pages at that checkpoint: **6,326**
 - control URL `SK1415` passed Google Live Test and indexing was requested
 
 Do not repopulate FlightAware or rebuild the Flight Number architecture while Google is processing that surface.
 
-## Current Sprint — Delay Reason Engine
+## Delay Reason Engine v1 — LOCKED GREEN
 
-The Delay Reason knowledge layer has expanded from **1 to 11 structured disruption reasons**:
+The Delay Reason knowledge layer contains **11 structured disruption reasons**, **11 relationship entries** and **11 structured claim-assessment profiles**.
 
-- technical problems
-- bad weather
-- air traffic control restrictions
-- airline staff strike
-- crew shortage
-- late incoming aircraft
-- bird strike
-- airport closure
-- security issue
-- hidden manufacturing defect
-- operational reasons
+Final verification completed:
 
-All 11 are connected to the existing EU261 relationship layer and existing Delay Reason programmatic page/sitemap architecture.
+- `npm run audit:delay-reasons` → **PASS**
+- `npm run typecheck` → **PASS**
+- representative production Delay Reason URLs → **HTTP 200**
+- Claim Assessment content verified live
+- sitemap Delay Reason detail entries → **11**
+- Delay Reason detail pages converted to **SSG**
+- final production build → **6,557 / 6,557** pages
+- build output shows **11 English Delay Reason SSG detail paths**
 
-A new reusable structured claim-assessment layer now exists in:
+Final SSG commit:
 
-`src/lib/delay-reasons/assessment.ts`
+`e5f9769` — `feat(delay-reasons): prerender delay reason detail pages`
 
-For every reason it defines:
+Do not reopen Delay Reason Engine v1 without a concrete defect, new legal requirement, new disruption category, or later integration requirement.
 
-- category
-- baseline EU261 liability classification
-- root-cause requirement
-- evidence targets
-- airline questions
-- claimant/red-flag signals
-- recommended next investigation step
+## Current Sprint — Legal Authority / Passenger Rights Knowledge Engine
 
-The same assessment layer is now rendered on public Delay Reason knowledge pages through:
+This is the next Knowledge Engine layer.
 
-`src/components/seo/delay-reasons/ClaimAssessment.tsx`
+The repository already has an authority foundation:
 
-An integrity audit has been added:
+- `src/data/authority/registry.ts`
+- `src/data/authority/rules.ts`
+- `src/data/authority/relationships.ts`
+- `src/data/authority/shared/*`
 
-`npm run audit:delay-reasons`
+Current authority data is intentionally thin. It currently contains the EU261 regulation and European Commission interpretative guidelines, a simple `eu-to-eu` rule, and a few example relationships.
 
-Expected aligned source state:
+The next sprint should evolve this foundation into reusable structured legal knowledge for:
 
-- Delay Reasons: **11**
-- relationships: **11**
-- assessment profiles: **11**
+- claim eligibility
+- compensation thresholds
+- care and assistance
+- rerouting / reimbursement
+- missed connections
+- extraordinary circumstances
+- reasonable-measures analysis
+- burden of proof
+- departure/arrival jurisdiction rules
+- airline applicability
+- future UK261 and other rights regimes
+- legal authority / case-law references
+- Delay Reason assessments
+- Claims Desk reasoning
+- future AI Brain orchestration
+- public Passenger Rights knowledge surfaces where appropriate
+
+### Architectural rule
+
+Do not build a second legal system beside `src/data/authority`. Expand the existing authority layer and make other engines consume it.
+
+Desired direction:
+
+`Legal source -> structured authority/rules -> applicability resolver -> claim-rights assessment -> Delay Reason / Route / Airline / Flight Number / Claims / AI consumers`
+
+The legal engine must distinguish source-backed rules from editorial explanation and must not reduce nuanced legal questions to a single boolean where causation, evidence, reasonable measures or jurisdiction still require assessment.
 
 ## Exact Next Action
 
-Verify the implementation before marking the sprint green:
-
-1. run `npm run audit:delay-reasons`
-2. run TypeScript / production build verification
-3. confirm Delay Reason hub and representative new detail pages render correctly
-4. confirm the Claim Assessment section renders correctly
-5. verify allowed/blocked locale publication policy remains intact
-6. verify sitemap contains all intended Delay Reason URLs
-7. only then mark the Delay Reason Engine sprint completed
-
-Do **not** run FlightAware population for this verification.
+Inspect the complete existing authority/shared/lib usage and define the v1 data model before adding content. Preserve all current integrations and avoid a broad Claims Desk refactor during this Product / Growth sprint.
 
 ## Safety
 
@@ -98,6 +104,6 @@ Do **not** run FlightAware population for this verification.
 - Preserve historical sections in `docs/CURRENT_SPRINT.md`.
 - Keep Product / Growth work separate from Claims Desk/Reijo work.
 
-Latest detailed checkpoint:
+Latest detailed completed checkpoint:
 
 `docs/checkpoints/2026-09-02-delay-reason-engine-expansion.md`
