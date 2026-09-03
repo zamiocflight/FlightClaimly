@@ -7,7 +7,7 @@ Last updated: **2026-09-03**
 ## Read Order After Session Loss
 
 1. `docs/CURRENT_SPRINT_LATEST.md`
-2. `docs/engines/CLAIM_RIGHTS_ASSESSMENT_ENGINE.md` — **ACTIVE engine / verification contract**
+2. `docs/engines/CLAIM_RIGHTS_ASSESSMENT_ENGINE.md` — **LOCKED v1 / integration contract**
 3. `docs/engines/README.md` — engine ownership/documentation index
 4. `docs/checkpoints/2026-09-03-passenger-rights-legal-rules-v1-start.md` — locked EU261 Legal Rule Layer v1
 5. `docs/checkpoints/2026-09-02-delay-reason-engine-expansion.md` — locked Delay Reason Engine v1
@@ -15,11 +15,11 @@ Last updated: **2026-09-03**
 7. `docs/FLIGHTCLAIMLY_KNOWLEDGE_ENGINE.md` — Knowledge Engine family architecture
 8. `docs/SYSTEM_PROCESS_MAP.md` — complete platform/process map
 9. `docs/CURRENT_SPRINT.md` — historical record; preserve it
-10. `docs/CLAIMS_DESK.md` only for Claims Desk work
+10. `docs/CLAIMS_DESK.md` only for Claims Desk work; note local user modifications may exist and must be preserved
 
 ## Current Product / Growth State
 
-Status: **🟢 Delay Reason Engine v1 locked / 🟢 EU261 Legal Rule Layer v1 locked / 🟡 Claim Rights Assessment Engine IMPLEMENTED — verification ACTIVE**
+Status: **🟢 Delay Reason Engine v1 locked / 🟢 EU261 Legal Rule Layer v1 locked / 🟢 Claim Rights Assessment Engine v1 locked / 🟡 Claims Desk Assessment Integration NEXT**
 
 ## Secured baselines
 
@@ -52,42 +52,32 @@ Status: **🟢 Delay Reason Engine v1 locked / 🟢 EU261 Legal Rule Layer v1 lo
 - full build **6,557 / 6,557** at lock
 - developer contracts: `docs/engines/AUTHORITY_ENGINE.md`, `docs/engines/PASSENGER_RIGHTS_ENGINE.md`
 
-## ACTIVE — Claim Rights Assessment Engine v1
+### Claim Rights Assessment Engine v1
 
-The first reusable implementation has now been added on `main`.
-
-### Implementation paths
+Implementation:
 
 - `src/lib/claim-rights/types.ts`
 - `src/lib/claim-rights/normalize.ts`
 - `src/lib/claim-rights/assessment.ts`
 - `src/lib/claim-rights/index.ts`
 - `scripts/audit-claim-rights.ts`
-- package command: `npm run audit:claim-rights`
 
 Developer contract:
 
 `docs/engines/CLAIM_RIGHTS_ASSESSMENT_ENGINE.md`
 
-### Implemented flow
+Verified locally 2026-09-03:
 
-```text
-Claim / Precheck / Itinerary facts
-        ↓
-ClaimRightsAssessmentInput
-        ↓
-normalizeClaimRightsFacts()
-        ↓
-Passenger Rights Legal Rule Resolver
-        +
-Delay Reason Assessment
-        ↓
-Claim Rights Assessment
-        ↓
-future Claims Desk / letters / airline-reply analysis / AI Brain
-```
+- `npm run audit:claim-rights` — **PASS**, 4 scenarios
+- composition/unresolved-state/defence boundaries — **PASS**
+- `npm run typecheck` — **PASS**, no errors
+- `npm run build` — **PASS**
+- Next.js **15.5.7**
+- static generation **6,557 / 6,557**
 
-### Current output dimensions
+Engine status: **🟢 LOCKED v1**.
+
+### Locked assessment behaviour
 
 The engine intentionally does not return one simplistic `eligible` boolean. It exposes:
 
@@ -105,55 +95,76 @@ The engine intentionally does not return one simplistic `eligible` boolean. It e
 - legal-reference IDs
 - overall investigation/readiness state
 
-Current overall states:
+Missing facts remain unresolved. Asserted extraordinary circumstances trigger review, not automatic denial. Generic Delay Reason labels are not promoted into invented legal root causes. Legal source/rule ownership stays in Authority + Passenger Rights engines.
 
-- `insufficient-facts`
-- `investigation-required`
-- `ready-for-legal-review`
+## ACTIVE NEXT — Claims Desk Assessment Integration
 
-Current compensation states:
+The next product phase is to make the locked assessment useful on real transactional claims without changing the customer intake flow.
 
-- `not-established`
-- `potentially-entitled`
-- `defence-under-review`
+### Phase 1 target
 
-Article 7 EUR 250/400/600 calculation is deliberately not yet forced. It will be added only when entitlement + route distance/category + any Article 7(2) reduction can be resolved safely.
+```text
+Existing transactional Claim / itinerary
+        ↓
+Claim Rights adapter
+        ↓
+known structured facts + verified enrichment
+        ↓
+assessClaimRights()
+        ↓
+read-only Claims Desk assessment panel
+```
 
-### Safety behaviour already implemented
+The first Claims Desk consumer should show, where supported by facts:
 
-- missing facts remain unresolved rather than silently false
-- asserted extraordinary circumstances trigger review, not automatic rejection
-- extraordinary-circumstances review does not suppress care/rerouting/refund dimensions
-- generic Delay Reason labels are not promoted into invented legal root causes
-- legal source/rule ownership stays in Authority + Passenger Rights engines
-- no Claims Desk refactor has been performed
+- established flight/itinerary facts
+- EU261 applicability
+- disruption and Delay Reason/root-cause assessment
+- compensation potential/status
+- Article 8 rerouting/refund dimension
+- Article 9 care dimension
+- airline extraordinary-circumstances defence state
+- unresolved facts
+- missing evidence and investigation targets
+- assessment questions
+- supporting authority/legal-reference IDs
+- overall investigation/readiness status
 
-### Representative scenario audit
+### Investigation / evidence enrichment direction
 
-`scripts/audit-claim-rights.ts` asserts:
+The deterministic Claim Rights engine should **not** silently browse the public web. A separate research/evidence enrichment layer may later collect and analyze sources relevant to the actual disruption, including:
 
-1. EU departure + four-hour technical delay → EU261 applicability + potential compensation.
-2. Bird strike + extraordinary defence assertion → defence review, not automatic denial.
-3. Cancellation → care and rerouting/refund dimensions remain preserved.
-4. Missing geography → EU261 applicability is not confidently established.
+- flight operational data / FlightAware when justified
+- airline and airport operational statements
+- authority notices
+- weather/ATC/airport information where relevant
+- contemporaneous reputable reporting
+- official judgments and verified case law
+- airline replies and uploaded evidence
 
-## EXACT NEXT ACTION — VERIFY BEFORE LOCK
+That layer must preserve source/provenance and confidence. Only sufficiently verified facts/evidence should feed the deterministic assessment. This separation lets FlightClaimly perform much of the initial detective work while preventing a news article or model inference from silently becoming a legal fact.
 
-No more feature expansion before verification.
+### Future customer communication
 
-Run locally in this order, one command at a time:
+Do not default to a generic “we are reviewing and you may receive up to €600” message if the system has stronger verified information.
 
-1. `git pull`
-2. `npm run audit:claim-rights`
-3. `npm run audit:passenger-rights`
-4. `npm run typecheck`
-5. `npm run build`
+After internal validation, customer communication may summarize specific supported findings, for example:
 
-If all are green, update this file and `docs/engines/CLAIM_RIGHTS_ASSESSMENT_ENGINE.md` to **🟢 LOCKED v1** with exact counts/results.
+- what disruption/root cause FlightClaimly has identified
+- whether that circumstance normally strengthens or complicates the claim
+- what remains under investigation
+- why FlightClaimly is taking the case forward
 
-## After v1 lock
+Never present an unresolved allegation, news report or preliminary inference as established fact.
 
-The next design decision should be the first adapter from existing transactional claim/itinerary data into `ClaimRightsAssessmentInput`, followed by a controlled internal Claims Desk consumer. Do not expose automated legal conclusions to customers before that contract is stable.
+## Exact next engineering action
+
+1. Inspect the current Claims Desk detail implementation and transactional Claim/itinerary shape.
+2. Design the smallest adapter into `ClaimRightsAssessmentInput`.
+3. Keep the first integration read-only and internal.
+4. Do not modify locked legal rules merely to satisfy the UI.
+5. Preserve any unrelated local Claims/Reijo modifications.
+6. Verify the integration with targeted tests/typecheck/build before expanding into external research or customer messaging.
 
 ## Architecture Rules
 
@@ -163,6 +174,7 @@ The next design decision should be the first adapter from existing transactional
 - Applicability, entitlement, amount, care, rerouting/refund and defences remain separate dimensions.
 - Missing facts remain unresolved.
 - EU261 first; UK261/other regimes later through the same architecture.
+- Research/enrichment supplies evidence and facts; deterministic legal engines evaluate them.
 
 ## Safety
 
