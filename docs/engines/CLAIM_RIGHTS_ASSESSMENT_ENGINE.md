@@ -1,6 +1,6 @@
 # Claim Rights Assessment Engine
 
-**Status:** 🟡 IMPLEMENTED / awaiting local audit + typecheck + full build before lock.
+**Status:** 🟢 LOCKED v1 — verified locally 2026-09-03.
 
 ## Purpose
 
@@ -134,24 +134,41 @@ Evidence/questions = aggregated from both legal + Delay Reason engines
 
 Current: reusable internal API + audit scenarios.
 
+Next controlled consumer:
+
+- Claims Desk read-only assessment integration
+
 Later:
 
-- Claims Desk
 - claim triage
 - demand letters
 - airline-reply analysis
 - evidence-request generation
 - AI Brain orchestration
-- customer-facing explanations only after stronger verification and product approval
+- customer-facing evidence-based explanations after internal validation
 
 ## Scenario audit
 
-`scripts/audit-claim-rights.ts` currently asserts four representative boundaries:
+`scripts/audit-claim-rights.ts` asserts four representative boundaries:
 
 1. EU departure + 4-hour technical delay → EU261 applies and compensation remains potentially entitled.
 2. Bird strike + asserted extraordinary defence → defence review, never automatic rejection.
 3. Cancellation → care and rerouting/refund potential remain preserved.
 4. Missing geography → EU261 applicability is not confidently established.
+
+## v1 verification / lock evidence — 2026-09-03
+
+- `npm run audit:claim-rights` — **PASS**
+- scenarios: **4**
+- audit result: `PASS — composition, unresolved-state and defence boundaries behave as expected.`
+- `npm run typecheck` — **PASS** (`tsc --noEmit`, no errors)
+- `npm run build` — **PASS**
+- Next.js **15.5.7**
+- production compilation successful
+- type validity check successful
+- static generation **6,557 / 6,557**
+
+Claim Rights Assessment Engine v1 is therefore **LOCKED**. Reopen only for a concrete defect, verified legal update, new regime/rule requirement, or controlled integration need.
 
 ## Safety boundaries
 
@@ -162,12 +179,24 @@ Later:
 - Keep customer-specific data transactional; do not publish it into Knowledge Engine registries.
 - Do not treat Delay Reason editorial liability baselines as final legal decisions.
 
-## Remaining work before v1 lock
+## Next integration contract — Claims Desk
 
-- pull latest changes locally
-- `npm run audit:claim-rights`
-- `npm run audit:passenger-rights`
-- `npm run typecheck`
-- full `npm run build`
-- fix any issue found by those checks
-- then mark this engine 🟢 LOCKED and update `CURRENT_SPRINT_LATEST.md`
+The next product phase is **Claims Desk Assessment Integration**. The first implementation must remain internal/read-only and must adapt existing transactional Claim/itinerary data into `ClaimRightsAssessmentInput` rather than changing the locked legal engine to fit UI needs.
+
+Target internal flow:
+
+```text
+Transactional Claim
+    ↓
+Claim Rights adapter
+    ↓
+known structured facts + verified enrichment
+    ↓
+assessClaimRights()
+    ↓
+Claims Desk assessment panel
+```
+
+The panel should surface established facts, unresolved facts, legal applicability, potential rights, defence status, Delay Reason/root-cause investigation, evidence targets, authority/legal references and readiness. External factual/legal research (flight operations, airline statements, official decisions, case law, contemporaneous reporting) belongs in a later evidence/research enrichment layer feeding verified facts/evidence into the assessment; the deterministic legal engine itself must not silently browse the web or convert unverified articles into legal facts.
+
+A future customer communication layer may use the same verified assessment to explain **specific established circumstances** — for example the identified disruption/root cause and why it may support a claim — rather than sending every customer a generic “you may be entitled” message. Such communication must distinguish verified facts from matters still under investigation.
