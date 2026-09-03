@@ -1,76 +1,138 @@
 # Claim Rights Assessment Engine
 
-**Status:** NEXT / design contract before implementation.
+**Status:** 🟡 IMPLEMENTED / awaiting local audit + typecheck + full build before lock.
 
 ## Purpose
 
-Combine normalized claim/itinerary facts with existing aviation and legal engines into one reusable claim-level rights assessment. This is the layer that will answer **what can FlightClaimly currently conclude about this specific claim, what remains uncertain, what evidence is missing, and which authorities support the assessment?**
+Combine normalized claim/itinerary facts with existing aviation and legal engines into one reusable claim-level rights assessment. This layer answers **what FlightClaimly can currently conclude about a specific claim, what remains uncertain, what evidence is missing, and which authorities support the assessment.**
 
-It must consume existing engines rather than duplicate their logic.
+It consumes existing engines rather than duplicating their logic.
 
-## Target inputs
+## Implementation paths
 
-The smallest normalized fact contract should be derived from existing claim/precheck/itinerary models and should eventually provide enough information for:
+- `src/lib/claim-rights/types.ts` — normalized input/output contracts
+- `src/lib/claim-rights/normalize.ts` — maps claim-assessment input into Legal Rule facts
+- `src/lib/claim-rights/assessment.ts` — composes Legal Rule Resolver + Delay Reason assessment
+- `src/lib/claim-rights/index.ts` — public engine API
+- `scripts/audit-claim-rights.ts` — representative scenario assertions
+- `npm run audit:claim-rights` — local audit command
 
-- origin/destination/final destination
-- itinerary/connection structure
-- operating carrier where relevant
+The engine deliberately does **not** create a second transactional `Claim` model. Existing claim/precheck/itinerary data will be adapted into the normalized assessment contract at integration boundaries.
+
+## Current input contract
+
+`ClaimRightsAssessmentInput` accepts the minimum structured facts needed by current EU261 v1 rules:
+
+- departure/arrival EU261-territory status
+- operating-carrier Community-carrier status
 - disruption type
-- scheduled/actual timing and final-arrival delay
-- delay/cancellation reason and root-cause evidence
-- passenger/booking conditions required by legal rules
-- airline defence assertions
-- rerouting/refund/care facts
-- evidence availability
+- final-arrival delay minutes
+- multiple-cause flag
+- Delay Reason slug
+- airline extraordinary-circumstances assertion
+- explicit Article 8 / Article 9 engagement where already known
+- class-change flag
+- optional evidence labels
 
-Do not create a parallel customer Claim model just for this engine.
+Future adapters can derive these fields from Claim, itinerary, route and airport objects without changing the Legal Rule layer.
 
-## Upstream engines
+## Normalization boundary
 
 ```text
-Claim / Precheck / Itinerary facts
-  + Airport Engine
-  + Country Engine
-  + Route Engine
-  + Flight Number Engine (when available)
-  + Delay Reason Engine
-  + Authority Engine
-  + Passenger Rights Engine
+Claim / Precheck / Itinerary data
+        ↓
+ClaimRightsAssessmentInput
+        ↓
+normalizeClaimRightsFacts()
+        ↓
+LegalFacts
+        ↓
+Passenger Rights Legal Rule Resolver
 ```
 
-## Target output
+Normalization currently also translates Delay Reason slugs into the root-cause categories already used by verified legal rules where there is an exact mapping:
 
-A structured assessment should expose separate dimensions, not one `eligible: true/false` flag:
+- `technical-problems` → `technical-problem`
+- `hidden-manufacturing-defect` → same legal category
+- `bird-strike` → same legal category
+- `airline-staff-strike` → same legal category
 
-- applicable legal regime / unresolved applicability
-- matched, not-matched and unresolved legal rules
-- potential passenger rights
-- compensation entitlement status
-- compensation amount/band where determinable
-- care status
-- rerouting/reimbursement status
-- extraordinary-circumstances defence status
-- causation and reasonable-measures questions
-- evidence required / investigation targets
-- supporting authority IDs and legal-reference IDs
-- overall investigation/readiness status suitable for downstream consumers
+Generic labels such as `operational-reasons` or `late-incoming-aircraft` are intentionally **not** converted into a legal root cause. They remain investigation signals in Delay Reason Engine.
 
-## Target flow
+## Resolver composition
+
+`assessClaimRights(input)` evaluates all current Legal Rules and preserves three rule states:
+
+- `matched`
+- `unresolved`
+- `not-matched`
+
+The assessment then composes those rule results with the matching Delay Reason assessment profile. No legal rules are copied into this engine.
+
+## Output contract
+
+`ClaimRightsAssessment` exposes independent dimensions:
+
+- overall investigation status
+- EU261 applicability state
+- matched/unresolved/not-matched rules
+- potential passenger-right IDs
+- compensation status
+- potential care engagement
+- potential rerouting/refund engagement
+- extraordinary-circumstances defence review status
+- Delay Reason assessment profile
+- evidence targets
+- assessment questions
+- authority IDs
+- legal-reference IDs
+
+Current overall states:
+
+- `insufficient-facts`
+- `investigation-required`
+- `ready-for-legal-review`
+
+Current compensation states:
+
+- `not-established`
+- `potentially-entitled`
+- `defence-under-review`
+
+The engine does **not yet calculate EUR 250/400/600 automatically**. Article 7 amount calculation remains intentionally deferred until route distance/category, entitlement and any Article 7(2) reduction can be established safely.
+
+## Important derived behaviour
+
+Cancellation and involuntary denied boarding can derive Article 8/9 engagement for the current v1 resolver. Delay care remains fact-specific because Article 6 thresholds require distance/category and expected-departure-delay logic that is not yet encoded as deterministic conditions.
+
+An airline assertion of extraordinary circumstances never produces an automatic rejection. It changes compensation assessment to `defence-under-review` and retains causation/reasonable-measures/evidence questions.
+
+Likewise, extraordinary-circumstances review does not suppress care or rerouting/refund dimensions.
+
+## Example flow
 
 ```text
-raw claim data
-  → normalized assessment facts
-  → geography / itinerary resolution
-  → Delay Reason assessment
-  → Passenger Rights Legal Rule Resolver
-  → cross-rule claim reasoning
-  → Claim Rights Assessment
-  → Claims Desk / letters / airline replies / AI Brain
+CPH → LIS
+EU261 departure = true
+4h final arrival delay
+Delay Reason = technical-problems
+No extraordinary defence asserted
+        ↓
+EU261 scope rule matched
+Long-delay compensation doctrine matched
+Technical-problem doctrine matched
+Delay Reason profile composed
+        ↓
+EU261 = applies
+Compensation = potentially-entitled
+Amount = not yet calculated
+Investigation = required because root cause detail still matters
+Evidence/questions = aggregated from both legal + Delay Reason engines
 ```
 
 ## Consumers
 
-First: internal reusable assessment contract and audits/tests.
+Current: reusable internal API + audit scenarios.
 
 Later:
 
@@ -78,24 +140,34 @@ Later:
 - claim triage
 - demand letters
 - airline-reply analysis
-- evidence request generation
+- evidence-request generation
 - AI Brain orchestration
-- possibly customer-facing eligibility explanations after sufficient verification
+- customer-facing explanations only after stronger verification and product approval
+
+## Scenario audit
+
+`scripts/audit-claim-rights.ts` currently asserts four representative boundaries:
+
+1. EU departure + 4-hour technical delay → EU261 applies and compensation remains potentially entitled.
+2. Bird strike + asserted extraordinary defence → defence review, never automatic rejection.
+3. Cancellation → care and rerouting/refund potential remain preserved.
+4. Missing geography → EU261 applicability is not confidently established.
 
 ## Safety boundaries
 
 - Do not auto-send or expose legal conclusions to customers merely because a rule matched.
 - Preserve unresolved/fact-specific states.
-- Do not let an extraordinary-circumstances defence automatically suppress care/rerouting/refund rights.
+- Do not let extraordinary circumstances automatically suppress care/rerouting/refund rights.
 - Do not duplicate Authority/Passenger Rights rules inside Claims Desk code.
 - Keep customer-specific data transactional; do not publish it into Knowledge Engine registries.
+- Do not treat Delay Reason editorial liability baselines as final legal decisions.
 
-## Definition of Done for first implementation
+## Remaining work before v1 lock
 
-- existing claim/precheck/itinerary models inspected first;
-- normalized input/output contracts defined;
-- resolver composition implemented without duplicate legal logic;
-- representative scenario assertions/audit added;
-- missing facts remain unresolved;
-- integrity/typecheck/full build green;
-- this document and `CURRENT_SPRINT_LATEST.md` updated with actual implementation paths and lock state.
+- pull latest changes locally
+- `npm run audit:claim-rights`
+- `npm run audit:passenger-rights`
+- `npm run typecheck`
+- full `npm run build`
+- fix any issue found by those checks
+- then mark this engine 🟢 LOCKED and update `CURRENT_SPRINT_LATEST.md`
