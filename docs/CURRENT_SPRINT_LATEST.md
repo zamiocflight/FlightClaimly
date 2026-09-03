@@ -2,21 +2,21 @@
 
 Last updated: **2026-09-03**
 
-> This file is intentionally short. It exists so a new ChatGPT/browser/session can find the latest authoritative project state immediately without deleting or rewriting historical sprint documentation.
+> This file is intentionally short and authoritative. After session loss, read this before historical sprint documentation.
 
 ## Read Order After Session Loss
 
 1. `docs/CURRENT_SPRINT_LATEST.md` — this pointer
-2. `docs/checkpoints/2026-09-03-passenger-rights-legal-rules-v1-start.md` — **ACTIVE recovery checkpoint / exact next build step**
+2. `docs/checkpoints/2026-09-03-passenger-rights-legal-rules-v1-start.md` — **locked EU261 Legal Rule Layer v1 checkpoint**
 3. `docs/checkpoints/2026-09-02-delay-reason-engine-expansion.md` — locked Delay Reason Engine v1 checkpoint
 4. `docs/checkpoints/2026-09-02-flight-number-global-seo-google.md` — secured Flight Number/global SEO/Google checkpoint
-5. `docs/CURRENT_SPRINT.md` — full historical sprint record; preserve all older sections
-6. `docs/SYSTEM_PROCESS_MAP.md` — architecture/process map
+5. `docs/SYSTEM_PROCESS_MAP.md` — architecture/process map
+6. `docs/CURRENT_SPRINT.md` — historical sprint record; preserve it
 7. `docs/CLAIMS_DESK.md` only when working on Claims Desk matters
 
 ## Current Product / Growth State
 
-Status: **🟢 Delay Reason Engine v1 locked / 🟡 EU261 Legal Rule Layer v1 ACTIVE**
+Status: **🟢 Delay Reason Engine v1 locked / 🟢 EU261 Legal Rule Layer v1 locked / 🟡 Claim Rights Assessment integration NEXT**
 
 ### Flight Number / Google baseline remains secured
 
@@ -32,115 +32,135 @@ Do not repopulate FlightAware or rebuild the Flight Number architecture while Go
 
 ## Delay Reason Engine v1 — LOCKED GREEN
 
-The Delay Reason knowledge layer contains **11 structured disruption reasons**, **11 relationship entries** and **11 structured claim-assessment profiles**.
-
-Final verification completed:
-
-- `npm run audit:delay-reasons` → **PASS**
-- `npm run typecheck` → **PASS**
-- representative production Delay Reason URLs → **HTTP 200**
-- Claim Assessment content verified live
-- sitemap Delay Reason detail entries → **11**
-- Delay Reason detail pages converted to **SSG**
-- final production build → **6,557 / 6,557** pages
-- build output shows **11 English Delay Reason SSG detail paths**
+- **11** structured disruption reasons
+- **11** relationship entries
+- **11** claim-assessment profiles
+- `npm run audit:delay-reasons` → PASS
+- `npm run typecheck` → PASS at lock
+- production representative URLs → HTTP 200
+- Delay Reason detail pages → SSG
+- full build baseline → **6,557 / 6,557**
 
 Final SSG commit:
 
 `e5f9769` — `feat(delay-reasons): prerender delay reason detail pages`
 
-Do not reopen Delay Reason Engine v1 without a concrete defect, new legal requirement, new disruption category, or later integration requirement.
+Do not reopen without a concrete defect, new legal requirement/category, or integration requirement.
 
-## Current Sprint — EU261 Legal Rule Layer v1
+## EU261 Legal Rule Layer v1 — LOCKED GREEN
 
-The Passenger Rights / Legal Rules foundation is now present on `main`.
+The reusable Passenger Rights / Legal Rules layer is complete for v1.
 
-Created:
+Implemented architecture:
 
-- `src/data/passenger-rights/types.ts`
-- `src/data/passenger-rights/registry.ts`
-- `src/data/passenger-rights/rules.ts`
-- `src/data/passenger-rights/index.ts`
+`Flight / Route facts`
+→ `applicable legal regime`
+→ `structured EU261 rules`
+→ `passenger rights`
+→ `compensation / care / rerouting / reimbursement`
+→ `exceptions + causation + reasonable measures + evidence`
+→ `authority + legal references`
 
-Foundation commits:
+Core implementation includes:
 
-- `cf290fd` — `feat(passenger-rights): add v1 legal knowledge model`
-- `eee4aad` — `feat(passenger-rights): add v1 rights registry`
-- `8f9c3e3` — `feat(passenger-rights): add legal rules registry foundation`
-- `1ddbe08` — `feat(passenger-rights): expose v1 knowledge model`
+- Passenger Rights registry/model
+- **17** structured Legal Rules
+- **7** authority sources
+- **18** LegalReferences
+- EU261 Articles 3, 4, 5, 5(3), 6, 7, 8, 9, 10 and 14
+- verified CJEU doctrine layer for v1
+- Legal Rule Resolver with matched / not-matched / unresolved states
+- integrity audit across the legal graph
 
-The Passenger Rights registry currently defines five high-level EU261 rights: fixed compensation, care, rerouting, reimbursement and passenger-rights information.
+Key commits:
 
-The executable `legalRulesRegistry` is intentionally empty until substantive rules are verified against official legal sources.
+- `02fa034` — EU261 legal references v1
+- `6c80eb1` — Legal Rule semantics
+- `53da4da` — EU261 core rules
+- `0e0d30e` — verified CJEU authority sources
+- `a438406` — CJEU LegalReferences
+- `9437178` — CJEU doctrine rules
+- `d25e762` — Legal Rule Resolver
+- `f7aa11c` — resolver exports
+- `4ebfb27` — legal integrity audit
+- `3852dc9` — `audit:passenger-rights` package command
 
-The repository's existing Authority architecture remains the source-of-authority layer:
+### Final verification on 2026-09-03
 
-- `src/data/authority/registry.ts`
-- `src/data/authority/rules.ts`
-- `src/data/authority/relationships.ts`
-- `src/data/authority/shared/types.ts`
-- `src/lib/authority/*`
+`npm run audit:passenger-rights`:
 
-It already contains Regulation (EC) No 261/2004 and European Commission interpretative guidance, and its types already support court rulings and legal references.
+- Authorities: **7**
+- Legal references: **18**
+- Passenger rights: **5**
+- Legal rules: **17**
+- **PASS**
 
-### Architectural rule
+`npm run typecheck`:
 
-Do not build a second legal-source system beside `src/data/authority`. Expand the existing authority layer and make Passenger Rights / Legal Rules consume it.
+- **PASS**
 
-Desired direction:
+`npm run build`:
 
-`Legal source -> structured authority/rules -> applicability resolver -> claim-rights assessment -> Delay Reason / Route / Airline / Flight Number / Claims / AI consumers`
+- Next.js **15.5.7**
+- optimized production build compiled successfully
+- type validity passed
+- static generation **6,557 / 6,557**
+- build traces/page optimization completed
+- **PASS**
 
-The legal engine must distinguish source-backed rules from editorial explanation and must not reduce nuanced legal questions to a single boolean where causation, evidence, reasonable measures or jurisdiction still require assessment.
-
-## EXACT NEXT ACTION — DO THIS NOW
-
-Build **EU261 Legal Rule Layer v1**.
-
-Before encoding substantive legal conclusions, verify them against current official EU sources (EUR-Lex / European Commission / CURIA as appropriate).
-
-First v1 coverage should model:
-
-- Article 3 — scope / applicability
-- Article 4 — denied boarding where needed
-- Article 5 — cancellation
-- Article 5(3) — extraordinary circumstances defence
-- Article 6 — delay
-- Article 7 — compensation / distance bands
-- Article 8 — reimbursement / rerouting
-- Article 9 — care / assistance
-- Article 10 — upgrading / downgrading where appropriate
-- Article 14 — passenger-rights information
-
-Then attach verified case-law/legal references needed for arrival-delay compensation, final-destination/connecting-flight logic, technical defects, extraordinary circumstances, strikes, bird strikes, causation, reasonable measures and evidentiary burden.
-
-The rule layer must keep applicability, entitlement, compensation amount, care, rerouting/reimbursement, exceptions, causation, reasonable measures and burden/evidence as distinct reasoning dimensions.
-
-Full recovery-safe specification:
+Locked checkpoint:
 
 `docs/checkpoints/2026-09-03-passenger-rights-legal-rules-v1-start.md`
 
-## Definition of Done for EU261 Legal Rule Layer v1
+## EXACT NEXT PRODUCT / GROWTH ACTION
 
-- structured EU261 v1 rules are source-backed and traceable
-- relevant Passenger Rights entities are linked
-- authority and legal-reference integrity is auditable
-- duplicate/missing references are detected
-- legal uncertainty remains representable as fact-specific rather than forced boolean output
-- `npm run typecheck` passes
-- legal/passenger-right integrity audit passes
-- full `npm run build` passes
-- final commits and green verification are written back to the active checkpoint and this resume pointer
+Build the first **Claim Rights Assessment Engine** integration boundary.
+
+Purpose: combine existing structured facts and engines into one reusable claim-level legal assessment without embedding legal reasoning separately in Claims Desk or UI code.
+
+Target flow:
+
+`Claim / itinerary facts`
+→ `Route / jurisdiction facts`
+→ `Disruption + Delay Reason facts`
+→ `Legal Rule Resolver`
+→ `Claim Rights Assessment`
+→ later `Claims Desk / demand letters / airline-reply analysis / AI Brain`
+
+### First step before coding
+
+Inspect the existing claim, precheck and itinerary models and the current authority/resolver consumers. Define the smallest normalized input fact shape and output assessment shape. Reuse existing models where possible; do not create a duplicate claim model.
+
+The assessment should eventually be able to expose, without forcing unsupported conclusions:
+
+- applicable legal regime
+- matched / unresolved legal rules
+- potential passenger rights
+- potential compensation entitlement and amount/band
+- care rights
+- rerouting/reimbursement rights
+- extraordinary-circumstances defence status
+- causation/reasonable-measures questions
+- evidence still required
+- supporting authority / legal references
+- confidence or investigation status suitable for later AI/Claims Desk consumers
+
+Do **not** wire this directly into automated customer-facing legal decisions until the assessment contract and tests/audits are stable.
+
+## Architecture Rules
+
+- `src/data/authority` remains the source-of-authority layer; do not create a parallel legal-source system.
+- Keep source-backed legal facts separate from editorial explanation.
+- Keep applicability, entitlement, amount, care, rerouting/reimbursement and defences as distinct dimensions.
+- Missing facts must remain unresolved rather than silently becoming false.
+- Extraordinary circumstances never automatically suppress care/rerouting/reimbursement rights.
+- Claims Desk integration comes after the reusable assessment boundary is stable.
+- EU261 first; add UK261/other regimes later through the same architecture.
 
 ## Safety
 
-- Do not run `global-core:scale` for the already completed Flight Number population cohort.
-- No FlightAware calls are needed for EU261 Legal Rule Layer v1.
-- Do not run `git add .` while unrelated Claims/Reijo files are present locally.
-- Never use `git reset --hard`, `git clean`, or force-push as recovery steps.
+- Do not run `global-core:scale` or any unnecessary FlightAware population.
+- Preserve unrelated local Claims/Reijo work.
+- Do not use `git add .`, `git reset --hard`, `git clean`, or force push.
 - Preserve historical sections in `docs/CURRENT_SPRINT.md`.
 - Keep Product / Growth work separate from Claims Desk/Reijo work.
-
-Latest active checkpoint:
-
-`docs/checkpoints/2026-09-03-passenger-rights-legal-rules-v1-start.md`
