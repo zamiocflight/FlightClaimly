@@ -12,6 +12,17 @@ export type LegalOutcome =
 
 export type LegalBurden = "passenger" | "airline" | "shared";
 
+export type LegalRuleKind =
+  | "applicability"
+  | "entitlement"
+  | "amount"
+  | "care"
+  | "rerouting"
+  | "reimbursement"
+  | "defence"
+  | "information"
+  | "class-change";
+
 export interface PassengerRight {
   id: string;
   title: string;
@@ -39,6 +50,7 @@ export interface LegalRule {
   id: string;
   title: string;
   description: string;
+  kind: LegalRuleKind;
   jurisdiction: string;
   regulationId: string;
   passengerRightIds: string[];
@@ -50,6 +62,7 @@ export interface LegalRule {
   legalReferenceIds: string[];
   evidenceTargets: string[];
   assessmentQuestions: string[];
+  notes?: string[];
 }
 
 export interface PassengerRightsAssessment {
