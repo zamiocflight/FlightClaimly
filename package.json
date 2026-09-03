@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",
-    "@heroicons/react": "^2.2.9",
+    "@heroicons/react": "^2.2.0",
     "@sparticuz/chromium": "^149.0.0",
     "@supabase/supabase-js": "^2.76.1",
     "csv-parse": "^6.1.0",
