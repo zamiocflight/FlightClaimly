@@ -1,595 +1,160 @@
 # FLIGHTCLAIMLY KNOWLEDGE ENGINE
 
-> Version 1.0
->
-> This document defines the long-term architecture, philosophy and vision behind FlightClaimly's Knowledge Engine.
->
-> It is the single most important technical and strategic document in the entire project.
+> **Document type:** Overall Knowledge Engine architecture and philosophy  
+> **Last updated:** 2026-09-03  
+> **Detailed engine contracts:** `docs/engines/README.md`
 
----
+## Mission
 
-# Our Mission
+FlightClaimly does not start with pages. It starts with structured knowledge.
 
-FlightClaimly exists to become the world's most trusted source of knowledge about passenger rights.
+Entities, relationships, facts, sources and rules should exist before a page, FAQ, schema object, claim assessment or AI response is generated from them. The website is one consumer of the knowledge platform; Claims Desk, AI, support, SEO and future APIs are others.
 
-Not by publishing the most articles.
+The long-term goal is one reusable knowledge graph for passenger rights and aviation context rather than separate stores of duplicated page content.
 
-Not by generating the most pages.
+## Documentation hierarchy
 
-Not by writing the most words.
+This file explains the **whole Knowledge Engine family**. It is intentionally not the place for every internal implementation detail.
 
-But by building the world's most complete knowledge graph for passenger rights.
+- `docs/SYSTEM_PROCESS_MAP.md` — entire FlightClaimly system/process map, including transactional Claims Platform.
+- `docs/FLIGHTCLAIMLY_KNOWLEDGE_ENGINE.md` — this file; overall Knowledge Engine architecture/philosophy.
+- `docs/FLIGHTCLAIMLY_KNOWLEDGE_MODEL.md` — common Entity / Relationship / Template / Generator concepts.
+- `docs/engines/README.md` — engine index and documentation standard.
+- `docs/engines/*.md` — developer source-of-truth for each engine's purpose, inputs, outputs, files, consumers and boundaries.
+- `docs/CURRENT_SPRINT_LATEST.md` — current work/recovery pointer, not permanent engine documentation.
+- `docs/checkpoints/*` — historical verified lock states.
 
-Every airline.
+## Core principles
 
-Every airport.
+1. **Knowledge before content.** Pages render knowledge; they do not own domain truth.
+2. **One authoritative home per fact.** Never duplicate a fact simply because another component needs it.
+3. **Stable engine boundaries.** Each engine owns one domain and exposes reusable outputs to downstream consumers.
+4. **Resolvers own interpretation.** UI/page code should not recreate domain/business/legal resolution.
+5. **Source-backed law.** Legal sources live in Authority Engine; executable legal rules live in Passenger Rights Engine.
+6. **Uncertainty is data.** Missing facts must remain unresolved rather than silently becoming `false`.
+7. **Claims and public knowledge remain separated.** Raw customer-specific facts never flow directly into public Knowledge Engine registries.
+8. **Engines strengthen one another.** New entities/relationships should improve multiple surfaces rather than one isolated page.
 
-Every route.
+## Current engine graph
 
-Every country.
+```text
+Airport Engine ─────┐
+                    ├→ Route Engine ───────────────┐
+Country Engine ─────┘                              │
+                                                   ├→ Flight Number Engine
+Airline Engine ────────────────────────────────────┘
 
-Every regulation.
+Delay Reason Engine ───────────────────────────────┐
+                                                  │
+Authority Engine → Passenger Rights Engine ───────┼→ Claim Rights Assessment Engine
+                                                  │
+Claim / Precheck / Itinerary facts ───────────────┘
 
-Every disruption.
+Knowledge entities / relationships
+  → templates / metadata / schema / internal links
+  → public pages / sitemap / search
 
-Every passenger right.
+Claim Rights Assessment
+  → later Claims Desk / demand letters / airline-reply analysis / AI Brain
+```
 
-Every compensation rule.
+## Engine responsibilities
 
-Every relationship.
+### Airline Engine
 
-Everything we build starts from this knowledge.
+Owns structured airline knowledge and relationships. Public airline pages and downstream aviation engines consume it. It does not own claim-specific entitlement.
 
-The website is only one interface.
+Detailed contract: `docs/engines/AIRLINE_ENGINE.md`.
 
-Search engines are another.
+### Airport Engine
 
-AI is another.
+Owns canonical airport identity and richer airport knowledge. Canonical airport identity is a foundational validator for Route and Flight Number engines.
 
-Support is another.
+Detailed contract: `docs/engines/AIRPORT_ENGINE.md`.
 
-Future products are another.
+### Country Engine
 
-Everything comes from the same source of truth.
+Owns reusable country/geographic knowledge and relationships. Supplies context used by airports, routes and later legal applicability reasoning.
 
----
+Detailed contract: `docs/engines/COUNTRY_ENGINE.md`.
 
-# Our Philosophy
+### Route Engine
 
-We never create pages.
+Owns validated origin/destination airport-pair knowledge. Supplies route context to Flight Number, Authority, SEO and later claim assessment.
 
-We create knowledge.
+Detailed contract: `docs/engines/ROUTE_ENGINE.md`.
 
-Pages are generated from knowledge.
+### Flight Number Engine
 
-Videos are generated from knowledge.
+Owns the population → seed → validation → build → publication pipeline for specific carrier flight-number entities. Its locked expanded baseline contains 2,841 publishable entities across 44 airlines.
 
-FAQs are generated from knowledge.
+Detailed contract: `docs/engines/FLIGHT_NUMBER_ENGINE.md`.
 
-Schema is generated from knowledge.
+### Delay Reason Engine
 
-Metadata is generated from knowledge.
+Owns the disruption taxonomy and reason-specific investigation profiles. v1 is locked with 11 reasons, 11 relationships and 11 assessment profiles. It describes what must be investigated; it does not alone decide the legal outcome.
 
-Internal links are generated from knowledge.
+Detailed contract: `docs/engines/DELAY_REASON_ENGINE.md`.
 
-Everything originates from the same engine.
+### Authority Engine
 
----
+Owns verified official legal/authority sources and structured LegalReferences. It is the source-of-authority layer used by legal reasoning and knowledge surfaces.
 
-# The Long-Term Vision
+Detailed contract: `docs/engines/AUTHORITY_ENGINE.md`.
 
-Most competitors build websites.
+### Passenger Rights Engine
 
-Some competitors build blogs.
+Turns verified authority into structured PassengerRight and LegalRule objects and resolves them against known facts. EU261 Legal Rule Layer v1 is locked with 7 authorities, 18 legal references, 5 rights and 17 rules.
 
-A few competitors build programmatic SEO.
+Detailed contract: `docs/engines/PASSENGER_RIGHTS_ENGINE.md`.
 
-FlightClaimly builds a knowledge platform.
+### Claim Rights Assessment Engine
 
-The result happens to rank in Google.
+The next integration layer. It will combine claim/itinerary, aviation, disruption and legal-rule outputs into one claim-level structured assessment without duplicating rules inside Claims Desk/UI code.
 
-Google traffic is not the goal.
+Detailed contract/design: `docs/engines/CLAIM_RIGHTS_ASSESSMENT_ENGINE.md`.
 
-Knowledge is the goal.
+## Knowledge vs transactional claims
 
-Search traffic is merely one consequence.
+FlightClaimly has two related but distinct platform domains:
 
----
+```text
+Knowledge Platform
+  → canonical reusable entities/rules/sources
+  → SEO / public content / AI context
 
-# Our Competitive Advantage
+Claims Platform
+  → customer-specific claim state/evidence/communications/payout
+  → Claim Rights Assessment consumes normalized facts
+```
 
-AirHelp can write an article.
+Customer claims may eventually create anonymized operational findings, but those findings may enter reusable knowledge only after validation and removal of customer-specific information.
 
-Skycop can write an article.
+## Resolver pattern
 
-Anyone can write an article.
+When an engine needs interpretation rather than simple retrieval, expose a reusable resolver/domain API. Consumers should ask the responsible engine for an answer rather than reimplementing its logic.
 
-Almost nobody builds a structured knowledge graph.
+Examples now include Authority resolution and Passenger Rights Legal Rule resolution. The Claim Rights Assessment Engine will compose existing engine outputs rather than replacing them.
 
-That becomes our moat.
+## Publication model
 
-Every new piece of information improves the entire ecosystem.
+```text
+canonical/master data
+  → structured entities + relationships
+  → domain/knowledge resolvers
+  → SEO metadata / internal links / templates
+  → Next.js pages / SSG
+  → sitemap / search engines / users
+```
 
-Every new airline strengthens airport pages.
+Programmatic pages are outputs of structured knowledge. Creating a new URL family is not, by itself, a new engine.
 
-Every new airport strengthens route pages.
+## Engine maintenance rule
 
-Every new regulation strengthens compensation pages.
+Every significant reusable engine must have a file under `docs/engines/`. Update the relevant engine document when its public contract, core flow, ownership boundary, major dependency, audit or lock state changes. Do not churn these files for every small implementation edit.
 
-Every new relationship strengthens internal linking.
+Before modifying a locked engine, read its engine document and associated checkpoint first.
 
-The system grows exponentially.
+## Current direction
 
-Not linearly.
-
----
-
-# Core Principle
-
-Knowledge always exists before content.
-
-Never write content first.
-
-First define:
-
-Entity
-
-Relationships
-
-Facts
-
-Sources
-
-Only then generate content.
-
----
-
-# Source of Truth
-
-There must always be exactly one authoritative source for every fact.
-
-Never duplicate knowledge.
-
-Never duplicate data.
-
-Never duplicate relationships.
-
-Everything references a single source.
-
-# FlightClaimly Knowledge Engine
-
-Last Updated: 2026-07-08
-
----
-
-# Purpose
-
-The FlightClaimly Knowledge Engine is the foundation of the platform's organic SEO strategy.
-
-Instead of relying on a small number of landing pages, FlightClaimly builds reusable knowledge engines capable of generating thousands of highly relevant pages targeting specific passenger searches.
-
-Every engine is designed to be reusable and interconnected.
-
----
-
-# Completed Engines
-
-## Airline Engine
-
-Status:
-
-✅ COMPLETE
-
-The Airline Engine contains approximately 100+ airlines covering nearly the entire EU261 market.
-
-Coverage includes:
-
-- European network airlines
-- European low-cost airlines
-- Charter airlines
-- Regional airlines
-- UK airlines
-- Swiss airlines
-- ECAA airlines
-- Major international airlines
-
-Each airline contains:
-
-- Core airline metadata
-- SEO title
-- Meta description
-- Overview
-- Passenger rights
-- EU261 applicability
-- Compensation explanation
-- Statistics
-- Timeline
-- FAQ
-- Standard claim process
-- Common passenger issues
-
-The Airline Engine now acts as the primary airline data source across the platform.
-
----
-
----
-
-## Authority Engine
-
-Status:
-
-✅ COMPLETE (Version 1)
-
-Purpose:
-
-Provide reusable legal and official authority sources across the entire Knowledge Engine.
-
-Instead of embedding regulations, legal references and official guidance directly into knowledge objects, the Authority Engine centralizes all authority information into a reusable system.
-
-Current capabilities:
-
-- Central Authority Registry
-- Typed authority sources
-- Multiple authority sources per entity
-- Official source references
-- Reusable Authority Section
-- Knowledge Template integration
-
-The Authority Engine currently supports manual authority relationships between entities and official sources.
-
-Future evolution:
-
-Version 2 will introduce an Authority Rules Engine capable of attaching authority sources automatically based on reusable business rules such as jurisdiction, carrier type and regulatory applicability, while still supporting manual overrides where necessary.
-
-The Authority Engine is designed to become the legal foundation shared by every future knowledge engine, including:
-
-- Airline Engine
-- Airport Engine
-- Route Engine
-- Country Engine
-- Delay Reason Engine
-- Flight Number Engine
-
----
-
----
-
-# Authority Rules Engine
-
-## Status
-
-🟢 ACTIVE
-
-The Authority Rules Engine is the first reasoning engine inside FlightClaimly.
-
-Unlike previous engines that primarily retrieve structured knowledge, the Rules Engine can infer which official authorities apply based on contextual information.
-
-Example:
-
-Route
-
-↓
-
-Origin Country
-
-↓
-
-Destination Country
-
-↓
-
-Applicable Regulation
-
-↓
-
-Official Authority Sources
-
-The first implemented rule automatically identifies routes operating entirely within the European Union and attaches:
-
-- EU261
-- European Commission Guidelines
-
-without requiring explicit route mappings.
-
----
-
-## Philosophy
-
-Knowledge should not only be stored.
-
-Knowledge should be interpreted.
-
-The Authority Rules Engine represents the first step from static knowledge retrieval toward rule-based knowledge reasoning.
-
-Future engines—including Delay Reasons, Flight Numbers, Compensation Logic and Extraordinary Circumstances—will follow the same architectural philosophy.
-
-## Authority Resolver
-
-Authority resolution follows the Resolver Pattern.
-
-Instead of exposing multiple helper functions, every knowledge entity resolves legal authority through a single generic resolver.
-
-
-Current supported entity types:
-
-- Route
-- Airline
-- Airport
-- Country
-
-The generic design allows future engines to integrate without modifying the public API.
-
-Examples:
-
-- Delay Reason
-- Flight Number
-- Regulation
-- Case Law
-- Airport Procedure
-- Passenger Right
-
-The resolver determines authority by applying:
-
-1. Explicit authority relationships
-2. Entity-specific authority logic
-3. Rule engines
-4. Empty result
-
-### Resolver Pattern
-
-Every Knowledge Engine exposes a single public resolver.
-
-Pages never perform knowledge resolution directly.
-
-Instead, pages delegate all domain-specific resolution to the engine responsible for that domain.
-
-Current example:
-
-- `resolveAuthority<T>()`
-
-Planned examples:
-
-- `resolveDelayReason<T>()`
-- `resolveFlightNumber<T>()`
-
-This architecture centralizes business logic, provides a stable public API for every engine, and allows new entity types to be introduced without changing page implementations.
----
-
-# Upcoming Engines
-
-## Route Engine
-
-Status:
-
-🚧 Next Sprint
-
-Purpose:
-
-Generate dedicated landing pages for individual flight routes.
-
-Examples:
-
-- Copenhagen → Stockholm
-- London → Barcelona
-- Paris → New York
-- Frankfurt → Malaga
-
-Each route page will include:
-
-- Route overview
-- Passenger rights
-- Compensation amounts
-- Airlines operating the route
-- Related airports
-- Related countries
-- Internal linking
-- Claim CTA
-
-The Route Engine is expected to become the single largest organic traffic generator.
-
----
-
-## Airline × Airport Engine
-
-Purpose:
-
-Create pages such as:
-
-- SAS at Copenhagen Airport
-- Ryanair at Malaga Airport
-- Lufthansa at Frankfurt Airport
-
----
-
-## Airline × Country Engine
-
-Purpose:
-
-Create pages such as:
-
-- Ryanair in Spain
-- Turkish Airlines in Germany
-- Air France in Italy
-
----
-
-## Airport Engine
-
-Status:
-
-Foundation completed.
-
-Will continue expanding as Route Engine grows.
-
----
-
-## Airport × Airport Engine
-
-Purpose:
-
-Expand route relationships between airports and strengthen internal linking.
-
----
-
-## Delay Reason Engine
-
-Examples:
-
-- Technical problems
-- Weather delays
-- Crew shortages
-- Air traffic control
-- Missed connections
-- Denied boarding
-
----
-
-## Flight Number Engine
-
-Examples:
-
-- SK1427
-- BA811
-- LH803
-
-Each page explains passenger rights for specific flight numbers.
-
----
-
-## Live Content Engine
-
-Purpose:
-
-Support real-time SEO.
-
-Includes:
-
-- Flight disruption news
-- Airport disruptions
-- Airline incidents
-- Social media content
-- Seasonal travel updates
-
----
-
-# Internal Linking Strategy
-
-Every engine should strengthen the others.
-
-Example:
-
-Airline
-↔ Airport
-
-Airport
-↔ Route
-
-Route
-↔ Airline
-
-Country
-↔ Airport
-
-Airport
-↔ Delay Guide
-
-Flight Number
-↔ Airline
-
-This creates a scalable knowledge graph where every new page increases the value of existing pages.
-
----
-
-# Development Strategy
-
-Each engine is completed before starting the next.
-
-Priority order:
-
-1. Airline Engine ✅
-2. Route Engine
-3. Airline × Airport
-4. Airline × Country
-5. Airport × Airport
-6. Delay Reason Engine
-7. Flight Number Engine
-8. Live Content Engine
-
-This approach ensures every completed engine becomes a reusable building block for future SEO expansion.
-
----
-
-# Claims Intelligence Integration — 2026-08-24
-
-The Knowledge Engine and Claims Platform remain separate systems with separate responsibilities.
-
-However, real claims can become a future source of structured knowledge.
-
-## Principle
-
-Customer-specific facts must never be published or copied into the Knowledge Engine.
-
-Instead, resolved claims may produce anonymized and structured operational knowledge.
-
-Examples:
-
-- airline rejection categories
-- airline response times
-- extraordinary circumstance patterns
-- applicable limitation rules
-- ADR outcomes
-- court decisions
-- successful legal arguments
-- reimbursement categories
-- route-specific disruption patterns
-- authority requirements
-- jurisdiction-specific procedures
-
----
-
-## Future Architecture
-
-    Claims Platform
-    ↓
-    Anonymized Operational Findings
-    ↓
-    Claims Intelligence Layer
-    ↓
-    Validated Knowledge
-    ↓
-    Knowledge Engine
-    ↓
-    SEO / Content / Support / AI
-
-Raw customer cases must never directly become public knowledge.
-
-Only validated, anonymized and reusable findings may cross from Claims Operations into the Knowledge Engine.
-
----
-
-## Example
-
-A single historical TAP claim may reveal:
-
-- Portuguese limitation uncertainty
-- interaction between EU261 and the Montreal Convention
-- airline-specific handling practices
-- procedural authority requirements
-
-These findings should first remain within Claims Operations.
-
-If verified through authoritative sources or repeated case outcomes, they may later become reusable structured knowledge.
-
----
-
-## Strategic Goal
-
-The Knowledge Engine should eventually learn from FlightClaimly's operational claims experience without compromising customer privacy or source quality.
-
-This creates a long-term feedback loop:
-
-    Knowledge improves claims
-    ↓
-    Claims generate operational evidence
-    ↓
-    Validated evidence improves knowledge
+Delay Reason Engine v1 and EU261 Passenger Rights/Legal Rule Layer v1 are locked green. The next product/growth architecture step is the Claim Rights Assessment Engine, which will connect the aviation/disruption/legal engines to real normalized claim facts before Claims Desk or AI automation is expanded.
