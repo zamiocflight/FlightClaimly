@@ -7,16 +7,60 @@ Last updated: **2026-09-03**
 ## Read Order After Session Loss
 
 1. `docs/CURRENT_SPRINT_LATEST.md` — this pointer
-2. `docs/checkpoints/2026-09-03-passenger-rights-legal-rules-v1-start.md` — **locked EU261 Legal Rule Layer v1 checkpoint**
-3. `docs/checkpoints/2026-09-02-delay-reason-engine-expansion.md` — locked Delay Reason Engine v1 checkpoint
-4. `docs/checkpoints/2026-09-02-flight-number-global-seo-google.md` — secured Flight Number/global SEO/Google checkpoint
-5. `docs/SYSTEM_PROCESS_MAP.md` — architecture/process map
-6. `docs/CURRENT_SPRINT.md` — historical sprint record; preserve it
-7. `docs/CLAIMS_DESK.md` only when working on Claims Desk matters
+2. `docs/engines/README.md` — engine documentation index and ownership map
+3. `docs/engines/CLAIM_RIGHTS_ASSESSMENT_ENGINE.md` — **NEXT engine contract / exact integration target**
+4. `docs/checkpoints/2026-09-03-passenger-rights-legal-rules-v1-start.md` — locked EU261 Legal Rule Layer v1 checkpoint
+5. `docs/checkpoints/2026-09-02-delay-reason-engine-expansion.md` — locked Delay Reason Engine v1 checkpoint
+6. `docs/checkpoints/2026-09-02-flight-number-global-seo-google.md` — secured Flight Number/global SEO/Google checkpoint
+7. `docs/FLIGHTCLAIMLY_KNOWLEDGE_ENGINE.md` — overall Knowledge Engine architecture
+8. `docs/SYSTEM_PROCESS_MAP.md` — complete platform/process map
+9. `docs/CURRENT_SPRINT.md` — historical sprint record; preserve it
+10. `docs/CLAIMS_DESK.md` only when working on Claims Desk matters
 
 ## Current Product / Growth State
 
-Status: **🟢 Delay Reason Engine v1 locked / 🟢 EU261 Legal Rule Layer v1 locked / 🟡 Claim Rights Assessment integration NEXT**
+Status: **🟢 Delay Reason Engine v1 locked / 🟢 EU261 Legal Rule Layer v1 locked / 🟢 Engine documentation structure established / 🟡 Claim Rights Assessment Engine NEXT**
+
+## Engine documentation architecture — ESTABLISHED 2026-09-03
+
+Every significant reusable engine now has a developer-facing contract under `docs/engines/`.
+
+Current documents:
+
+- `AIRLINE_ENGINE.md`
+- `AIRPORT_ENGINE.md`
+- `COUNTRY_ENGINE.md`
+- `ROUTE_ENGINE.md`
+- `FLIGHT_NUMBER_ENGINE.md`
+- `DELAY_REASON_ENGINE.md`
+- `AUTHORITY_ENGINE.md`
+- `PASSENGER_RIGHTS_ENGINE.md`
+- `CLAIM_RIGHTS_ASSESSMENT_ENGINE.md`
+- `README.md` — index/documentation standard
+
+Documentation responsibilities are now explicit:
+
+```text
+SYSTEM_PROCESS_MAP.md
+  = entire FlightClaimly system/process map
+
+FLIGHTCLAIMLY_KNOWLEDGE_ENGINE.md
+  = overall Knowledge Engine family / philosophy / engine graph
+
+FLIGHTCLAIMLY_KNOWLEDGE_MODEL.md
+  = common entity / relationship / template model
+
+docs/engines/*.md
+  = detailed developer contract for each engine
+
+CURRENT_SPRINT_LATEST.md
+  = current recovery/work pointer only
+
+checkpoints/*
+  = historical verified lock states
+```
+
+Maintenance rule: update an engine document when its public contract, domain ownership, core flow, major dependency, audit or lock state changes. Do not churn engine docs for every small implementation edit.
 
 ### Flight Number / Google baseline remains secured
 
@@ -44,6 +88,8 @@ Do not repopulate FlightAware or rebuild the Flight Number architecture while Go
 Final SSG commit:
 
 `e5f9769` — `feat(delay-reasons): prerender delay reason detail pages`
+
+Developer contract: `docs/engines/DELAY_REASON_ENGINE.md`.
 
 Do not reopen without a concrete defect, new legal requirement/category, or integration requirement.
 
@@ -112,26 +158,33 @@ Locked checkpoint:
 
 `docs/checkpoints/2026-09-03-passenger-rights-legal-rules-v1-start.md`
 
+Developer contracts:
+
+- `docs/engines/AUTHORITY_ENGINE.md`
+- `docs/engines/PASSENGER_RIGHTS_ENGINE.md`
+
 ## EXACT NEXT PRODUCT / GROWTH ACTION
 
-Build the first **Claim Rights Assessment Engine** integration boundary.
+Build the first **Claim Rights Assessment Engine** integration boundary using the contract now documented in:
+
+`docs/engines/CLAIM_RIGHTS_ASSESSMENT_ENGINE.md`
 
 Purpose: combine existing structured facts and engines into one reusable claim-level legal assessment without embedding legal reasoning separately in Claims Desk or UI code.
 
 Target flow:
 
 `Claim / itinerary facts`
-→ `Route / jurisdiction facts`
+→ `Airport / Country / Route / Flight Number context`
 → `Disruption + Delay Reason facts`
-→ `Legal Rule Resolver`
+→ `Authority + Passenger Rights Legal Rule Resolver`
 → `Claim Rights Assessment`
 → later `Claims Desk / demand letters / airline-reply analysis / AI Brain`
 
 ### First step before coding
 
-Inspect the existing claim, precheck and itinerary models and the current authority/resolver consumers. Define the smallest normalized input fact shape and output assessment shape. Reuse existing models where possible; do not create a duplicate claim model.
+Inspect the existing claim, precheck and itinerary models and current resolver consumers. Define the smallest normalized input fact shape and output assessment shape. Reuse existing models where possible; do not create a duplicate claim model.
 
-The assessment should eventually be able to expose, without forcing unsupported conclusions:
+The assessment should eventually expose, without forcing unsupported conclusions:
 
 - applicable legal regime
 - matched / unresolved legal rules
@@ -143,12 +196,13 @@ The assessment should eventually be able to expose, without forcing unsupported 
 - causation/reasonable-measures questions
 - evidence still required
 - supporting authority / legal references
-- confidence or investigation status suitable for later AI/Claims Desk consumers
+- investigation/readiness status suitable for later AI/Claims Desk consumers
 
 Do **not** wire this directly into automated customer-facing legal decisions until the assessment contract and tests/audits are stable.
 
 ## Architecture Rules
 
+- Read the relevant `docs/engines/*.md` before modifying a reusable engine.
 - `src/data/authority` remains the source-of-authority layer; do not create a parallel legal-source system.
 - Keep source-backed legal facts separate from editorial explanation.
 - Keep applicability, entitlement, amount, care, rerouting/reimbursement and defences as distinct dimensions.
