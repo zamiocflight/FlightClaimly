@@ -29,6 +29,10 @@ const englishLabels = {
   claimProcessTitle: "How the claim process works",
   commonIssuesTitle: "Common {name} disruption types",
   faqTitle: "Frequently asked questions",
+  flightAirlineLinksTitle: "Flight airline",
+  flightRouteLinksTitle: "Flight route",
+  airportsLinksTitle: "Airports",
+  countriesLinksTitle: "Countries",
 } as const;
 
 const swedishLabels = {
@@ -60,6 +64,10 @@ const swedishLabels = {
   claimProcessTitle: "Så fungerar ersättningsprocessen",
   commonIssuesTitle: "Vanliga störningar för {name}",
   faqTitle: "Vanliga frågor",
+  flightAirlineLinksTitle: "Flygbolag för flygningen",
+  flightRouteLinksTitle: "Flygsträcka",
+  airportsLinksTitle: "Flygplatser",
+  countriesLinksTitle: "Länder",
 } as const;
 
 /**
