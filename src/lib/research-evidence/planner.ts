@@ -122,6 +122,53 @@ function preferCandidate(
   return existing;
 }
 
+function operatorQuestion(candidate: ResearchQuestion): string {
+  switch (candidate.factKey) {
+    case "departure-airport-eu261-territory":
+      return "Verify whether the departure airport falls within EU261 territory.";
+    case "arrival-airport-eu261-territory":
+      return "Verify whether the arrival airport falls within EU261 territory.";
+    case "operating-carrier-code":
+      return "Verify the operating carrier for the disrupted flight.";
+    case "operating-carrier-community-carrier":
+      return "Verify whether the operating carrier is a Community carrier for EU261 scope.";
+    case "disruption-type":
+      return "Verify whether the disruption was a delay, cancellation, or denied boarding.";
+    case "arrival-delay-minutes":
+      return "Verify the passenger's final arrival delay in minutes.";
+    case "departure-delay-minutes":
+      return "Verify the departure delay in minutes.";
+    case "delay-reason-slug":
+      return "Establish and verify the disruption's root cause.";
+    case "extraordinary-circumstances-claimed":
+      return "Verify whether the airline is relying on an extraordinary-circumstances defence.";
+    case "article8-engaged":
+      return "Verify the passenger's rerouting, reimbursement, or refund circumstances under Article 8.";
+    case "article9-engaged":
+      return "Verify the passenger's care needs and expenses under Article 9.";
+  }
+
+  switch (investigationBucket(candidate.kind)) {
+    case "eu261-scope":
+      return "Verify the remaining carrier and geography facts needed to establish EU261 scope.";
+    case "flight-operation":
+      return "Verify the remaining operational flight facts and timing records.";
+    case "cause-and-defence":
+      return "Investigate the disruption cause and test any airline defence against the available evidence.";
+    case "passenger-rights":
+      return "Verify the facts needed to assess the passenger's remaining EU261 rights.";
+    case "supporting-evidence":
+      return "Collect and verify the remaining supporting documents and evidence.";
+  }
+}
+
+function polishForOperator(candidate: ResearchQuestion): ResearchQuestion {
+  return {
+    ...candidate,
+    question: operatorQuestion(candidate),
+  };
+}
+
 export function createResearchPlan(
   input: ClaimRightsAssessmentInput,
   assessment: ClaimRightsAssessment,
@@ -140,8 +187,8 @@ export function createResearchPlan(
 
   const priorityOrder = { high: 0, medium: 1, low: 2 } as const;
   return {
-    questions: [...byIdentity.values()].sort(
-      (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority],
-    ),
+    questions: [...byIdentity.values()]
+      .map(polishForOperator)
+      .sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]),
   };
 }
