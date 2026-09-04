@@ -9,6 +9,21 @@ export {
   localizationRollout,
   resolveLocalizationPublicationStatus,
 } from "./policy";
+export { resolveKnowledgeLocalization } from "./resolver";
+export type {
+  CanonicalLocalizationInput,
+  ResolveKnowledgeLocalizationInput,
+} from "./resolver";
+export {
+  buildLocalizedLanguageAlternates,
+  buildLocalizedMetadata,
+  buildPublishedLocaleAlternates,
+  getPublishableLocalizedVariants,
+} from "./seo";
+export type {
+  BuildLocalizedMetadataInput,
+  LocalizedSeoVariant,
+} from "./seo";
 export type {
   KnowledgeLocalization,
   LocalizableKnowledgeEntityType,
