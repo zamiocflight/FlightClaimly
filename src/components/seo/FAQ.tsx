@@ -2,13 +2,17 @@ import type { FAQ as FAQItem } from "@/data/seo/shared/types";
 
 type FAQProps = {
   items: FAQItem[];
+  title?: string;
 };
 
-export default function FAQ({ items }: FAQProps) {
+export default function FAQ({
+  items,
+  title = "Frequently asked questions",
+}: FAQProps) {
   return (
     <div className="rounded-2xl border bg-white p-8 shadow-sm">
       <h2 className="text-2xl font-bold text-slate-900">
-        Frequently asked questions
+        {title}
       </h2>
 
       <div className="mt-8 space-y-6">
