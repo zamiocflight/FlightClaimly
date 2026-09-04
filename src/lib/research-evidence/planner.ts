@@ -82,13 +82,31 @@ function explicitMissingFacts(input: ClaimRightsAssessmentInput): ResearchQuesti
     }));
 }
 
+function investigationBucket(kind: ResearchQuestionKind): string {
+  switch (kind) {
+    case "carrier":
+    case "geography":
+      return "eu261-scope";
+    case "flight-operation":
+      return "flight-operation";
+    case "disruption-cause":
+    case "airline-defence":
+      return "cause-and-defence";
+    case "passenger-right":
+      return "passenger-rights";
+    case "document":
+    case "other":
+      return "supporting-evidence";
+  }
+}
+
 function genericIdentity(candidate: ResearchQuestion): string {
   if (candidate.factKey) return `fact:${candidate.factKey}`;
 
-  // Assessment questions and evidence targets often express the same investigation
-  // in slightly different legal language. For non-fact tasks, one task per kind is
-  // enough for v1; the deterministic assessment still retains every underlying gap.
-  return `investigation:${candidate.kind}`;
+  // The Legal Engine may expose many precise unresolved rules. The planner keeps
+  // those underlying gaps intact, but translates them into a much smaller set of
+  // operator-facing investigation buckets that can often be solved together.
+  return `investigation:${investigationBucket(candidate.kind)}`;
 }
 
 function preferCandidate(
@@ -99,7 +117,7 @@ function preferCandidate(
   if (existing.priority !== "high" && candidate.priority === "high") return candidate;
 
   // Prefer a concrete evidence target over a generic assessment question when both
-  // map to the same investigation bucket. It is more actionable for an operator.
+  // belong to the same operator task. It is more actionable for a claims handler.
   if (!existing.target && candidate.target) return candidate;
   return existing;
 }
