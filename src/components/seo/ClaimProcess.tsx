@@ -1,12 +1,16 @@
 type ClaimProcessProps = {
   steps: string[];
+  title?: string;
 };
 
-export default function ClaimProcess({ steps }: ClaimProcessProps) {
+export default function ClaimProcess({
+  steps,
+  title = "How the claim process works",
+}: ClaimProcessProps) {
   return (
     <div className="rounded-2xl border bg-white p-8 shadow-sm">
       <h2 className="text-2xl font-bold text-slate-900">
-        How the claim process works
+        {title}
       </h2>
 
       <ol className="mt-6 space-y-4">
