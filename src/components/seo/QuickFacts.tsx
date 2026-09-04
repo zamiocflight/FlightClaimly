@@ -1,15 +1,16 @@
 type QuickFactsProps = {
+  title?: string;
   facts: {
     label: string;
     value: string | number;
   }[];
 };
 
-export default function QuickFacts({ facts }: QuickFactsProps) {
+export default function QuickFacts({ title = "Quick facts", facts }: QuickFactsProps) {
   return (
     <section className="rounded-2xl border bg-white p-8 shadow-sm">
       <h2 className="text-2xl font-bold text-slate-900">
-        Quick facts
+        {title}
       </h2>
 
       <dl className="mt-6 divide-y">
