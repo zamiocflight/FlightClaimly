@@ -6,9 +6,14 @@ import {
   flightNumberAirlineGroups,
   getFlightNumberAirlineGroup,
 } from "@/lib/flight-numbers/catalog";
-import { flightNumberSeoLocales } from "@/lib/seo/alternates";
+import {
+  buildLanguageAlternates,
+  flightNumberSeoLocales,
+} from "@/lib/seo/alternates";
 
 const SITE_URL = "https://www.flightclaimly.com";
+
+type FlightNumberSeoLocale = (typeof flightNumberSeoLocales)[number];
 
 type PageProps = {
   params: Promise<{
@@ -16,6 +21,35 @@ type PageProps = {
     airlineSlug: string;
   }>;
 };
+
+const copy = {
+  en: {
+    metadataTitle: (airline: string) =>
+      `${airline} flight numbers | Compensation guides | FlightClaimly`,
+    metadataDescription: (airline: string) =>
+      `Browse ${airline} flight-number compensation guides and find route-specific passenger-rights information for delayed or cancelled flights.`,
+    back: "← All flight numbers",
+    eyebrow: (iata: string) => `${iata} flight numbers`,
+    title: (airline: string) => `${airline} flight-number compensation guides`,
+    intro: (count: string, airline: string) =>
+      `Browse ${count} published ${airline} flight-number guides. Each page connects the flight number with its route and relevant EU261 or UK261 passenger-rights coverage.`,
+    cta: "View compensation guide →",
+    numberLocale: "en",
+  },
+  sv: {
+    metadataTitle: (airline: string) =>
+      `${airline} flygnummer | Guider om flygersättning | FlightClaimly`,
+    metadataDescription: (airline: string) =>
+      `Utforska guider om flygersättning för ${airline} flygnummer och hitta sträckspecifik information om passagerarrättigheter vid försenade eller inställda flyg.`,
+    back: "← Alla flygnummer",
+    eyebrow: (iata: string) => `${iata} flygnummer`,
+    title: (airline: string) => `${airline} flygnummer och flygersättning`,
+    intro: (count: string, airline: string) =>
+      `Utforska ${count} publicerade guider för ${airline} flygnummer. Varje sida kopplar flygnumret till flygsträckan och de EU261- eller UK261-rättigheter som kan vara relevanta.`,
+    cta: "Visa ersättningsguide →",
+    numberLocale: "sv-SE",
+  },
+} as const;
 
 export function generateStaticParams() {
   return flightNumberAirlineGroups.flatMap((group) =>
@@ -29,24 +63,24 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, airlineSlug } = await params;
 
-  if (
-    !flightNumberSeoLocales.includes(
-      locale as (typeof flightNumberSeoLocales)[number]
-    )
-  ) {
+  if (!flightNumberSeoLocales.includes(locale as FlightNumberSeoLocale)) {
     return {};
   }
 
   const group = getFlightNumberAirlineGroup(airlineSlug);
   if (!group) return {};
 
-  const canonical = `${SITE_URL}/${locale}/flight-numbers/airline/${group.airlineSlug}`;
+  const seoLocale = locale as FlightNumberSeoLocale;
+  const localeCopy = copy[seoLocale];
+  const path = `flight-numbers/airline/${group.airlineSlug}`;
+  const canonical = `${SITE_URL}/${seoLocale}/${path}`;
 
   return {
-    title: `${group.airlineName} flight numbers | Compensation guides | FlightClaimly`,
-    description: `Browse ${group.airlineName} flight-number compensation guides and find route-specific passenger-rights information for delayed or cancelled flights.`,
+    title: localeCopy.metadataTitle(group.airlineName),
+    description: localeCopy.metadataDescription(group.airlineName),
     alternates: {
       canonical,
+      languages: buildLanguageAlternates(path, flightNumberSeoLocales),
     },
   };
 }
@@ -54,47 +88,44 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function AirlineFlightNumbersPage({ params }: PageProps) {
   const { locale, airlineSlug } = await params;
 
-  if (
-    !flightNumberSeoLocales.includes(
-      locale as (typeof flightNumberSeoLocales)[number]
-    )
-  ) {
+  if (!flightNumberSeoLocales.includes(locale as FlightNumberSeoLocale)) {
     notFound();
   }
 
   const group = getFlightNumberAirlineGroup(airlineSlug);
   if (!group) notFound();
 
+  const seoLocale = locale as FlightNumberSeoLocale;
+  const localeCopy = copy[seoLocale];
+  const count = group.flightNumbers.length.toLocaleString(localeCopy.numberLocale);
+
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-20">
       <section className="mx-auto max-w-5xl">
         <Link
-          href={`/${locale}/flight-numbers`}
+          href={`/${seoLocale}/flight-numbers`}
           className="text-sm font-semibold text-sky-700 hover:underline"
         >
-          ← All flight numbers
+          {localeCopy.back}
         </Link>
 
         <p className="mt-8 text-sm font-semibold uppercase tracking-widest text-emerald-600">
-          {group.airlineIata} flight numbers
+          {localeCopy.eyebrow(group.airlineIata)}
         </p>
 
         <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-950 md:text-5xl">
-          {group.airlineName} flight-number compensation guides
+          {localeCopy.title(group.airlineName)}
         </h1>
 
         <p className="mt-6 max-w-3xl text-lg text-slate-700">
-          Browse {group.flightNumbers.length.toLocaleString("en")} published
-          {" "}{group.airlineName} flight-number guides. Each page connects the
-          flight number with its route and relevant EU261 or UK261 passenger-rights
-          coverage.
+          {localeCopy.intro(count, group.airlineName)}
         </p>
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {group.flightNumbers.map((flightNumber) => (
             <Link
               key={flightNumber.slug}
-              href={`/${locale}/flight-numbers/${flightNumber.slug}`}
+              href={`/${seoLocale}/flight-numbers/${flightNumber.slug}`}
               className="rounded-2xl border bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
             >
               <h2 className="text-xl font-bold text-slate-950">
@@ -106,7 +137,7 @@ export default async function AirlineFlightNumbersPage({ params }: PageProps) {
               </p>
 
               <p className="mt-4 text-sm font-semibold text-sky-700">
-                View compensation guide →
+                {localeCopy.cta}
               </p>
             </Link>
           ))}
