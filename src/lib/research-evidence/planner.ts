@@ -33,8 +33,8 @@ function inferFactKey(text: string): ResearchFactKey | undefined {
   const value = text.toLowerCase();
   if (value.includes("arrival delay") || value.includes("final arrival") || value.includes("actual arrival")) return "arrival-delay-minutes";
   if (value.includes("departure delay") || value.includes("actual departure")) return "departure-delay-minutes";
-  if (value.includes("operating carrier") || value.includes("operating airline")) return "operating-carrier-code";
   if (value.includes("community carrier") || value.includes("eu carrier")) return "operating-carrier-community-carrier";
+  if (value.includes("operating carrier") || value.includes("operating airline")) return "operating-carrier-code";
   if (value.includes("disruption type") || value.includes("cancel") || value.includes("denied boarding")) return "disruption-type";
   if (value.includes("cause") || value.includes("reason for") || value.includes("root cause")) return "delay-reason-slug";
   if (value.includes("extraordinary")) return "extraordinary-circumstances-claimed";
@@ -82,6 +82,28 @@ function explicitMissingFacts(input: ClaimRightsAssessmentInput): ResearchQuesti
     }));
 }
 
+function genericIdentity(candidate: ResearchQuestion): string {
+  if (candidate.factKey) return `fact:${candidate.factKey}`;
+
+  // Assessment questions and evidence targets often express the same investigation
+  // in slightly different legal language. For non-fact tasks, one task per kind is
+  // enough for v1; the deterministic assessment still retains every underlying gap.
+  return `investigation:${candidate.kind}`;
+}
+
+function preferCandidate(
+  existing: ResearchQuestion | undefined,
+  candidate: ResearchQuestion,
+): ResearchQuestion {
+  if (!existing) return candidate;
+  if (existing.priority !== "high" && candidate.priority === "high") return candidate;
+
+  // Prefer a concrete evidence target over a generic assessment question when both
+  // map to the same investigation bucket. It is more actionable for an operator.
+  if (!existing.target && candidate.target) return candidate;
+  return existing;
+}
+
 export function createResearchPlan(
   input: ClaimRightsAssessmentInput,
   assessment: ClaimRightsAssessment,
@@ -94,11 +116,8 @@ export function createResearchPlan(
 
   const byIdentity = new Map<string, ResearchQuestion>();
   for (const candidate of candidates) {
-    const identity = candidate.factKey ? `fact:${candidate.factKey}` : `${candidate.kind}:${slug(candidate.question)}`;
-    const existing = byIdentity.get(identity);
-    if (!existing || (existing.priority !== "high" && candidate.priority === "high")) {
-      byIdentity.set(identity, candidate);
-    }
+    const identity = genericIdentity(candidate);
+    byIdentity.set(identity, preferCandidate(byIdentity.get(identity), candidate));
   }
 
   const priorityOrder = { high: 0, medium: 1, low: 2 } as const;
