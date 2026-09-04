@@ -1,14 +1,12 @@
 # Localization Engine
 
-Status: **ACTIVE — Wave 1 Swedish Flight Number cohort implemented and build-verified**
+Status: **ACTIVE — Wave 1 Swedish Flight Number Localization v1 LOCKED; deployment optimization next**
 
 Last updated: **2026-09-04**
 
 ## Purpose
 
-The Localization Engine reuses canonical Knowledge entities across markets without duplicating or mutating the underlying operational/legal facts.
-
-Localization is **not** mechanical translation. Each locale must use natural market terminology and search intent while preserving factual accuracy and legal meaning.
+The Localization Engine reuses canonical Knowledge entities across markets without duplicating or mutating underlying operational/legal facts. Localization is not mechanical translation: every locale uses market-specific search intent, terminology and copy while preserving factual accuracy and legal meaning.
 
 ```text
 Canonical Knowledge Entity
@@ -21,146 +19,134 @@ quality gates
         ↓
 canonical + hreflang + sitemap + internal links
         ↓
-SSG / indexability
+publishable SEO output
 ```
 
-## Core safety rule
+## Core safety / publication contract
 
-A locale being supported by application routing does **not** make its programmatic Knowledge pages publishable.
+Application routing support does not make a programmatic Knowledge locale publishable. Canonical fallback may render for runtime safety, but fallback remains `review-required` and non-publishable.
 
-Non-reviewed locale content may render as canonical fallback for internal/runtime safety, but fallback content must remain non-publishable and must never be treated as localized SEO content.
-
-## Publication contract
-
-Localization quality is gated independently across:
+Publication requires all independent quality gates to pass:
 
 - metadata review
 - terminology review
 - legal-meaning review
 - content review
 
-Only a localization explicitly marked publishable **and** passing every quality gate may become indexable/hreflang-visible.
-
-Canonical fallback remains `review-required`.
+Only explicitly publishable localization that passes every gate may become indexable/hreflang-visible.
 
 ## Rollout waves
 
 - Wave 1: Swedish, Danish, Finnish
 - Wave 2: German, Polish, Dutch
 - Wave 3: Spanish, French, Italian
-- Wave 4: additional European markets according to search demand, economics, legal coverage and operational readiness
+- Wave 4: additional European markets by search demand, economics, legal coverage and operational readiness
 
-Each locale is built from canonical facts independently. Do not translate one secondary locale from another secondary locale.
+Each locale is built independently from canonical facts. Never translate one secondary locale from another.
 
-## Current implementation — Swedish Flight Number cohort
+## Swedish Flight Number Localization v1 — LOCKED 2026-09-04
 
 Implemented on branch `seo-localization-engine-v1`.
 
-### Foundation
+### Locked surfaces
 
-- locale-neutral Knowledge contracts
-- locale registry
-- localization publication policy
-- resolver with canonical-fallback isolation
-- localized metadata + publishable-only hreflang helpers
-- Swedish reviewed Knowledge labels
-- Swedish Flight Number localization builder
-- localization architecture audit
+- Flight Number detail pages
+- Flight Number index
+- Flight Number airline-group pages
+- localized SEO title/description
+- Hero/H1/CTA
+- breadcrumbs
+- fact labels and yes/no values
+- `Snabbfakta`
+- Knowledge section headings
+- compensation and passenger-rights sections
+- timeline / claim process / common issues
+- FAQ presentation and FAQ schema input
+- internal-link section headings
+- canonical/hreflang metadata
+- controlled Swedish city exonyms
 
-### Swedish Flight Number page integration
+### Regulation-aware Swedish output
 
-The Flight Number detail page now resolves EN/SV content through the Localization Engine.
+Swedish Flight Number content is derived from canonical route/regulation facts and handles four profiles:
 
-Swedish coverage includes:
+- EU261-only: EUR 250 / 400 / up to 600
+- UK261-only: GBP 220 / 350 / up to 520
+- both: dual EUR/GBP values and EU261/UK261 wording
+- neither: no assumed fixed compensation; neutral passenger-rights and individual-assessment wording
 
-- localized SEO title and description
-- localized Hero/H1/CTA
-- localized breadcrumbs
-- localized fact labels and yes/no values
-- localized Knowledge section headings
-- localized compensation copy
-- localized passenger-rights copy
-- localized timeline
-- localized claim process
-- localized common issues
-- localized FAQ and FAQ schema input
-- localized internal-link section headings
-- localized canonical/hreflang metadata
+This prevents false EU261 assumptions on UK-only or non-covered routes.
 
-Shared SEO components were changed to accept locale-specific labels while preserving English defaults for existing entity types.
-
-### Index + airline group integration
-
-Because enabling `sv` for Flight Number SEO also exposes the Flight Number index and airline-group pages through sitemap/static generation, those pages were localized before Swedish indexability was enabled.
-
-This avoids publishing a Swedish detail cohort behind English surrounding navigation/copy.
-
-## Current publishable SEO locale state
-
-Flight Number detail/index/airline-group:
+## Current publishable Flight Number SEO locales
 
 - `en` — publishable
-- `sv` — publishable in current branch cohort
+- `sv` — publishable / LOCKED
 - `da` — not yet publishable
 - `fi` — not yet publishable
 
-Other programmatic Knowledge entity detail families (routes, airports, airlines, countries, delay reasons) remain on their existing controlled locale exposure. Do not infer Swedish detail readiness for those families from the Flight Number cohort.
+Other Knowledge entity detail families remain separately controlled. Swedish Flight Number lock does not imply Swedish route/airport/airline/country/delay-reason detail readiness.
 
-## Verification — 2026-09-04
+## Final Swedish verification
 
-Local verification after Swedish integration:
+Completed 2026-09-04:
 
+- representative EU-only rendered page — PASS
+- representative UK-only rendered page — PASS
+- representative both-regimes rendered page — PASS
+- representative neither-regime rendered page — PASS
+- Swedish Flight Number index — PASS
+- Swedish airline-group page — PASS
+- title/meta/canonical — PASS
+- hreflang EN + SV only on tested detail — PASS
+- sitemap EN + SV only on tested detail — PASS
 - `npm run audit:localization` — PASS
 - `npm run typecheck` — PASS
-- `npm run build` — PASS
+- final `npm run build` — PASS
 - Next.js 15.5.7
-- 9,442 / 9,442 static pages generated
+- **9,442 / 9,442 static pages generated**
 
-Flight Number detail generation visibly includes both EN and SV paths.
+Scale at lock:
 
-Expected scale change:
+- 2,841 canonical publishable Flight Numbers
+- 2,841 EN detail pages
+- 2,841 SV detail pages
+- 5,682 total Flight Number detail paths
+- 44 airline groups with EN/SV variants
+- total SSG: 6,557 pre-SV → 9,442 post-SV
 
-- 2,841 publishable canonical Flight Number entities
-- EN + SV detail cohort = 5,682 Flight Number detail paths
-- Flight Number airline groups also generate EN + SV variants
-- total production build increased from 6,557 to 9,442 static pages
+Authoritative lock checkpoint:
 
-The rest of Claims/Admin/API routes remained present in the successful production build.
+`docs/checkpoints/2026-09-04-seo-localization-wave1-sv-locked.md`
 
-## NOT YET LOCKED
+## Next before Danish — Build / Deployment Cost Optimization
 
-Swedish code/build verification is green, but Wave 1 SV is **not yet declared fully locked** until final rendered-output/SEO visual QA is completed.
+The next locale must not be activated before reviewing build/deployment scaling. The current full SSG model generates 9,442 pages and will grow materially with every locale.
 
-Do not start mass DA/FI publication before this QA.
+Review:
 
-## Exact next steps
+1. Vercel preview-build triggers and intermediate-commit waste
+2. `generateStaticParams` / `dynamicParams` behavior
+3. sitemap and publishable-locale coupling
+4. full SSG versus hybrid SSG + ISR/on-demand
+5. preservation of SEO HTML, metadata, canonical, hreflang and schema
+6. smallest safe optimization
+7. EN/SV regression verification
+8. deployment-strategy checkpoint
 
-1. inspect representative rendered Swedish Flight Number pages
-2. inspect page source/metadata for localized title, description, canonical and EN/SV hreflang
-3. inspect FAQ/schema output and internal links
-4. inspect Swedish Flight Number index and airline-group pages
-5. validate sitemap exposure is exactly EN + SV for the Flight Number cohort
-6. confirm no half-English Swedish page surfaces remain
-7. if green, create SV Wave 1 lock checkpoint
-8. then build Danish as its own market/SEO localization from canonical facts
-9. repeat for Finnish
+Do not adopt ISR blindly. Prove arbitrary valid slug rendering and SEO correctness first.
 
-Do not simply translate Swedish into Danish/Finnish.
+## Danish/Finnish rule
 
-## Branch / recovery state
+After deployment optimization is verified, build Danish directly from canonical facts using Danish search behavior/terminology. Keep DA non-publishable until its own gates, audit, rendered QA, metadata/hreflang/sitemap verification and checkpoint pass. Then repeat independently for FI.
 
-Current working branch at this checkpoint:
+## Branch / recovery
 
-`seo-localization-engine-v1`
+Branch: `seo-localization-engine-v1`
 
-Last known remote/local synced product commit before documentation update:
+Last product-code commit included in SV lock: `e7f38f3001fbfb358a311494e17578b85cc8d286`.
 
-`e1493a9`
+Known unrelated local Claims/Reijo files remain parked and must not be mixed into Localization work:
 
-Known unrelated local parked user work remains intentionally untouched:
-
-- modified `docs/CLAIMS_DESK.md`
-- modified `scripts/test-manual-claim.ts`
-- untracked `scripts/create-reijo-claim.ts`
-
-Never commit those files as part of Localization work without separately reviewing/sanitizing them.
+- `docs/CLAIMS_DESK.md`
+- `scripts/test-manual-claim.ts`
+- `scripts/create-reijo-claim.ts`
