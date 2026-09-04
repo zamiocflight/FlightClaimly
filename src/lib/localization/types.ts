@@ -49,6 +49,7 @@ export type LocalizedKnowledgeLabels = {
   heroEyebrow: string;
   heroTitle: string;
   heroCta: string;
+  quickFactsTitle: string;
   majorAirlinesFor: string;
   about: string;
   compensationAmountsTitle: string;
