@@ -2,6 +2,35 @@ import type { FlightNumber } from "@/data/flight-numbers/types";
 import { getAirportIdentityBySlug } from "@/lib/knowledge/airports";
 import type { KnowledgeLocalization } from "./types";
 
+const swedishCityNames: Record<string, string> = {
+  Algiers: "Alger",
+  Athens: "Aten",
+  Belgrade: "Belgrad",
+  Brussels: "Bryssel",
+  Bucharest: "Bukarest",
+  Cairo: "Kairo",
+  Cologne: "Köln",
+  Copenhagen: "Köpenhamn",
+  Florence: "Florens",
+  Geneva: "Genève",
+  Lisbon: "Lissabon",
+  Milan: "Milano",
+  Munich: "München",
+  Naples: "Neapel",
+  Prague: "Prag",
+  Rhodes: "Rhodos",
+  Rome: "Rom",
+  Seville: "Sevilla",
+  Venice: "Venedig",
+  Vienna: "Wien",
+  Warsaw: "Warszawa",
+  Zurich: "Zürich",
+};
+
+function swedishCityName(city: string): string {
+  return swedishCityNames[city] ?? city;
+}
+
 function regulationLabel(flightNumber: FlightNumber): string {
   if (flightNumber.eu261Eligible && flightNumber.uk261Eligible) return "EU261 eller UK261";
   if (flightNumber.eu261Eligible) return "EU261";
@@ -142,8 +171,8 @@ export function buildSwedishFlightNumberLocalization(
   const destination = getAirportIdentityBySlug(flightNumber.destinationAirportSlug);
   const originName = origin?.name ?? flightNumber.originAirportSlug;
   const destinationName = destination?.name ?? flightNumber.destinationAirportSlug;
-  const originCity = origin?.city ?? originName;
-  const destinationCity = destination?.city ?? destinationName;
+  const originCity = swedishCityName(origin?.city ?? originName);
+  const destinationCity = swedishCityName(destination?.city ?? destinationName);
   const regulation = regulationLabel(flightNumber);
 
   return {
