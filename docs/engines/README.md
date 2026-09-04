@@ -22,6 +22,7 @@ This directory documents how each engine works internally, what it owns, what it
 | Country Engine | `COUNTRY_ENGINE.md` | Country knowledge and geography/legal relationship context |
 | Route Engine | `ROUTE_ENGINE.md` | Airport-pair route entities and route knowledge |
 | Flight Number Engine | `FLIGHT_NUMBER_ENGINE.md` | Validated flight-number identity, route association and publication |
+| Localization Engine | `LOCALIZATION_ENGINE.md` | Locale-specific SEO/content presentation over canonical Knowledge, with publication quality gates |
 | Delay Reason Engine | `DELAY_REASON_ENGINE.md` | Disruption taxonomy and structured claim-assessment profiles |
 | Authority Engine | `AUTHORITY_ENGINE.md` | Verified regulations, guidance, court rulings and legal references |
 | Passenger Rights Engine | `PASSENGER_RIGHTS_ENGINE.md` | Executable legal rules, rights and legal-rule resolver |
@@ -49,4 +50,6 @@ Every engine document should answer the same questions:
 - Legal source data belongs in Authority Engine. Legal interpretation/rules belong in Passenger Rights Engine. Claim-specific conclusions belong in Claim Rights Assessment Engine.
 - Missing claim/legal facts must remain unresolved rather than silently becoming false.
 - Transactional customer data never becomes public Knowledge Engine data directly.
+- Canonical Knowledge facts remain locale-neutral; Localization Engine owns market-facing wording/indexability rather than forking those facts.
+- Application locale routing does not itself imply publishable localized Knowledge content.
 - Engine docs are living technical documentation and should be updated after meaningful architecture or contract changes, not every small code edit.
