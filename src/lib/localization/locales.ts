@@ -15,6 +15,9 @@ const englishLabels = {
   scheduleSnapshot: "Schedule snapshot",
   yes: "Yes",
   no: "No",
+  heroEyebrow: "EU261 / UK261 · No win, no fee",
+  heroTitle: "{name} flight compensation",
+  heroCta: "Check your {name} flight",
   majorAirlinesFor: "Major airlines for {name}",
   about: "About {name}",
   compensationAmountsTitle: "How much compensation can you receive?",
@@ -23,6 +26,9 @@ const englishLabels = {
   compensationRulesTitle: "When are you entitled to compensation?",
   compensationStatistics: "{name} compensation statistics",
   claimTimelineTitle: "What happens after you submit your claim?",
+  claimProcessTitle: "How the claim process works",
+  commonIssuesTitle: "Common {name} disruption types",
+  faqTitle: "Frequently asked questions",
 } as const;
 
 const swedishLabels = {
@@ -40,6 +46,9 @@ const swedishLabels = {
   scheduleSnapshot: "Tidtabellsuppgift",
   yes: "Ja",
   no: "Nej",
+  heroEyebrow: "EU261 / UK261 · Ingen ersättning, ingen avgift",
+  heroTitle: "Ersättning för {name}",
+  heroCta: "Kontrollera ditt {name}-flyg",
   majorAirlinesFor: "Större flygbolag för {name}",
   about: "Om {name}",
   compensationAmountsTitle: "Hur mycket ersättning kan du få?",
@@ -48,6 +57,9 @@ const swedishLabels = {
   compensationRulesTitle: "När kan du ha rätt till ersättning?",
   compensationStatistics: "Ersättningsfakta för {name}",
   claimTimelineTitle: "Vad händer efter att du skickat in ditt krav?",
+  claimProcessTitle: "Så fungerar ersättningsprocessen",
+  commonIssuesTitle: "Vanliga störningar för {name}",
+  faqTitle: "Vanliga frågor",
 } as const;
 
 /**
