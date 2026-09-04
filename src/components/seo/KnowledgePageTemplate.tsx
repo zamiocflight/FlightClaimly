@@ -92,7 +92,10 @@ export default function KnowledgePageTemplate({
       />
 
       <KnowledgeSection className="pt-12 pb-0">
-        <QuickFacts facts={facts} />
+        <QuickFacts
+          facts={facts}
+          title={labels?.quickFactsTitle}
+        />
       </KnowledgeSection>
 
       {entity.mainAirlines && entity.mainAirlines.length > 0 && (
