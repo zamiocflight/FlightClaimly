@@ -13,9 +13,7 @@ import type { FlightRoute } from "@/data/seo/routes";
 
 const PREVIEW_STATIC_SAMPLE_SIZE = 24;
 
-export const dynamic = "force-static";
 export const dynamicParams = true;
-export const revalidate = false;
 
 type Props = {
   params: Promise<{
