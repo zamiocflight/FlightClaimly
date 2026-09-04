@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { getClaimById } from "@/lib/claims";
 import {
-  assessClaimRights,
   claimToRightsAssessmentInput,
 } from "@/lib/claim-rights";
+import { assessClaimWithResearchEvidence } from "@/lib/research-evidence";
 
 function label(value: string) {
   return value.replaceAll("-", " ");
@@ -20,7 +20,12 @@ export default async function ClaimDetailPage({
   if (!claim) return <div className="p-6">Claim not found</div>;
 
   const assessmentInput = claimToRightsAssessmentInput(claim);
-  const assessment = assessClaimRights(assessmentInput);
+  const research = assessClaimWithResearchEvidence(assessmentInput);
+  const assessment = research.enrichedAssessment;
+  const researchQuestionById = new Map(research.plan.questions.map((item) => [item.id, item]));
+  const researchResolved = research.resolution.resolvedQuestionIds.length;
+  const researchConflicting = research.resolution.conflictingQuestionIds.length;
+  const researchOpen = research.resolution.unresolvedQuestionIds.length;
 
   const pax = (() => {
     if (Array.isArray(claim.pax)) return claim.pax;
@@ -68,7 +73,7 @@ export default async function ClaimDetailPage({
           <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3">
             <div className="font-semibold text-amber-900">Deeper investigation recommended</div>
             <p className="mt-1 text-sm text-amber-800">
-              The current structured claim does not establish every material fact. Review the unresolved facts and evidence targets below before relying on a final legal conclusion.
+              The current structured claim does not establish every material fact. Research / Evidence Engine has converted the gaps into an investigation plan below.
             </p>
           </div>
         )}
@@ -137,6 +142,80 @@ export default async function ClaimDetailPage({
             <p><strong>Legal references:</strong> {assessment.legalReferenceIds.join(", ") || "—"}</p>
           </div>
         </details>
+      </section>
+
+      <section className="rounded-xl border border-sky-200 bg-sky-50 p-5 space-y-5">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-sky-700">Internal investigation</p>
+            <h2 className="mt-1 text-xl font-semibold text-slate-900">Research &amp; Evidence</h2>
+            <p className="mt-1 text-sm text-slate-600">
+              Research Planner converts unresolved claim facts into traceable evidence questions. External providers are not connected in v1 yet.
+            </p>
+          </div>
+          <span className="rounded-full border border-sky-200 bg-white px-3 py-1 text-sm font-medium text-sky-800">
+            {researchResolved}/{research.plan.questions.length} resolved
+          </span>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-3">
+          <div className="rounded-lg border border-slate-200 bg-white p-4">
+            <div className="text-xs font-semibold uppercase text-slate-500">Resolved</div>
+            <div className="mt-1 text-xl font-semibold text-emerald-700">{researchResolved}</div>
+          </div>
+          <div className="rounded-lg border border-slate-200 bg-white p-4">
+            <div className="text-xs font-semibold uppercase text-slate-500">Open</div>
+            <div className="mt-1 text-xl font-semibold text-amber-700">{researchOpen}</div>
+          </div>
+          <div className="rounded-lg border border-slate-200 bg-white p-4">
+            <div className="text-xs font-semibold uppercase text-slate-500">Conflicting</div>
+            <div className="mt-1 text-xl font-semibold text-rose-700">{researchConflicting}</div>
+          </div>
+        </div>
+
+        <div>
+          <h3 className="font-semibold text-slate-900">Research plan</h3>
+          {research.plan.questions.length ? (
+            <div className="mt-3 space-y-3">
+              {research.plan.questions.map((item) => {
+                const isResolved = research.resolution.resolvedQuestionIds.includes(item.id);
+                const isConflicting = research.resolution.conflictingQuestionIds.includes(item.id);
+                const status = isConflicting ? "conflicting" : isResolved ? "resolved" : "open";
+                return (
+                  <div key={item.id} className="rounded-lg border border-slate-200 bg-white p-4">
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div>
+                        <div className="font-medium text-slate-900">{item.question}</div>
+                        <div className="mt-1 text-xs text-slate-500">
+                          {label(item.kind)}{item.factKey ? ` · ${label(item.factKey)}` : ""} · priority {item.priority}
+                        </div>
+                      </div>
+                      <span className="rounded-full border border-slate-200 px-2.5 py-1 text-xs font-semibold uppercase text-slate-600">
+                        {status}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ) : <p className="mt-2 text-sm text-slate-500">No research questions generated.</p>}
+        </div>
+
+        {research.evidence.length > 0 && (
+          <div>
+            <h3 className="font-semibold text-slate-900">Evidence chain</h3>
+            <div className="mt-3 space-y-3">
+              {research.evidence.map((item) => (
+                <div key={item.id} className="rounded-lg border border-slate-200 bg-white p-4 text-sm text-slate-700">
+                  <div className="font-medium text-slate-900">{item.normalizedFinding || item.rawFinding}</div>
+                  <div className="mt-2">Source: {item.sourceName} · {label(item.sourceType)}</div>
+                  <div>Confidence: {item.confidence} · Verification: {label(item.verificationStatus)}</div>
+                  <div className="mt-1 text-xs text-slate-500">Question: {researchQuestionById.get(item.questionId)?.question || item.questionId}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       <div>
