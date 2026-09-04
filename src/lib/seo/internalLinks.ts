@@ -118,11 +118,12 @@ const internalLinkConfigs = {
 export function getInternalLinkSections(
   entityType: keyof typeof internalLinkConfigs,
   slug: string,
-  locale: string
+  locale: string,
+  localizedTitles: Readonly<Record<string, string>> = {}
 ): InternalLinkSection[] {
   return internalLinkConfigs[entityType]
     .map((section) => ({
-      title: section.title,
+      title: localizedTitles[section.title] ?? section.title,
       items: getRelatedKnowledge(slug, locale, {
         allowedTypes: section.allowedTypes,
         limit: section.limit,
