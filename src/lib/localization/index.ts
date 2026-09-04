@@ -24,6 +24,7 @@ export type {
   BuildLocalizedMetadataInput,
   LocalizedSeoVariant,
 } from "./seo";
+export { buildSwedishFlightNumberLocalization } from "./flight-number-sv";
 export type {
   KnowledgeLocalization,
   LocalizableKnowledgeEntityType,
