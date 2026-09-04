@@ -25,6 +25,31 @@ const englishLabels = {
   claimTimelineTitle: "What happens after you submit your claim?",
 } as const;
 
+const swedishLabels = {
+  home: "Hem",
+  flightNumbers: "Flygnummer",
+  flightNumber: "Flygnummer",
+  airline: "Flygbolag",
+  icaoAirlineCode: "ICAO-kod för flygbolaget",
+  originAirport: "Avgångsflygplats",
+  destinationAirport: "Destinationsflygplats",
+  distanceCategory: "Distanskategori",
+  eu261Protection: "Skydd enligt EU261",
+  uk261Protection: "Skydd enligt UK261",
+  aircraft: "Flygplanstyp",
+  scheduleSnapshot: "Tidtabellsuppgift",
+  yes: "Ja",
+  no: "Nej",
+  majorAirlinesFor: "Större flygbolag för {name}",
+  about: "Om {name}",
+  compensationAmountsTitle: "Hur mycket ersättning kan du få?",
+  passengerRightsTitle: "Passagerarrättigheter enligt EU261",
+  officialSources: "Officiella källor",
+  compensationRulesTitle: "När kan du ha rätt till ersättning?",
+  compensationStatistics: "Ersättningsfakta för {name}",
+  claimTimelineTitle: "Vad händer efter att du skickat in ditt krav?",
+} as const;
+
 /**
  * Locale registry for the Localization Engine.
  *
@@ -32,9 +57,9 @@ const englishLabels = {
  * programmatic Knowledge pages are publishable. Publication is controlled
  * separately by the SEO locale rollout policy.
  *
- * v1 deliberately keeps English labels as canonical fallbacks for locales
- * whose terminology has not yet passed review. Those fallbacks must never be
- * treated as localized, indexable SEO content.
+ * Locales without reviewed terminology deliberately keep English labels as
+ * canonical fallbacks. Those fallbacks must never be treated as localized,
+ * indexable SEO content.
  */
 export const localeDefinitions: Record<SeoLocale, LocaleDefinition> = {
   en: {
@@ -49,7 +74,7 @@ export const localeDefinitions: Record<SeoLocale, LocaleDefinition> = {
     languageName: "Swedish",
     htmlLang: "sv",
     marketLabel: "Sweden",
-    labels: englishLabels,
+    labels: swedishLabels,
   },
   da: {
     locale: "da",
