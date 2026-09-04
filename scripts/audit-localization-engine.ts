@@ -136,7 +136,60 @@ assert.ok(swedishPilot.content?.timeline?.length);
 assert.equal(getLocaleDefinition("sv").labels.yes, "Ja");
 assert.equal(getLocaleDefinition("da").labels.yes, "Yes");
 
+const euOnly = publishableFlightNumbers.find(
+  (flight) => flight.eu261Eligible && !flight.uk261Eligible,
+);
+const ukOnly = publishableFlightNumbers.find(
+  (flight) => !flight.eu261Eligible && flight.uk261Eligible,
+);
+const both = publishableFlightNumbers.find(
+  (flight) => flight.eu261Eligible && flight.uk261Eligible,
+);
+const neither = publishableFlightNumbers.find(
+  (flight) => !flight.eu261Eligible && !flight.uk261Eligible,
+);
+
+assert.ok(euOnly, "Expected at least one EU261-only flight number.");
+assert.ok(ukOnly, "Expected at least one UK261-only flight number.");
+assert.ok(both, "Expected at least one EU261+UK261 flight number.");
+assert.ok(neither, "Expected at least one flight number outside both flags.");
+
+const euOnlyLocalization = buildSwedishFlightNumberLocalization(euOnly);
+const ukOnlyLocalization = buildSwedishFlightNumberLocalization(ukOnly);
+const bothLocalization = buildSwedishFlightNumberLocalization(both);
+const neitherLocalization = buildSwedishFlightNumberLocalization(neither);
+
+const euOnlyCompensation = JSON.stringify({
+  amounts: euOnlyLocalization.content?.compensationAmounts,
+  statistics: euOnlyLocalization.content?.statistics,
+});
+const ukOnlyCompensation = JSON.stringify({
+  amounts: ukOnlyLocalization.content?.compensationAmounts,
+  statistics: ukOnlyLocalization.content?.statistics,
+});
+const bothCompensation = JSON.stringify({
+  amounts: bothLocalization.content?.compensationAmounts,
+  statistics: bothLocalization.content?.statistics,
+});
+const neitherRightsCopy = JSON.stringify({
+  metadata: neitherLocalization.metadata,
+  passengerRights: neitherLocalization.content?.passengerRights,
+  amounts: neitherLocalization.content?.compensationAmounts,
+  statistics: neitherLocalization.content?.statistics,
+  claimProcess: neitherLocalization.content?.claimProcess,
+  faq: neitherLocalization.content?.faq,
+});
+
+assert.match(euOnlyCompensation, /€600/);
+assert.doesNotMatch(euOnlyCompensation, /£520/);
+assert.match(ukOnlyCompensation, /£520/);
+assert.doesNotMatch(ukOnlyCompensation, /€600/);
+assert.match(bothCompensation, /€600/);
+assert.match(bothCompensation, /£520/);
+assert.doesNotMatch(neitherRightsCopy, /€250|€400|€600|£220|£350|£520/);
+assert.match(neitherRightsCopy, /tillämpliga regler|vilket regelverk|regelverk som gäller/i);
+
 console.log("Localization Engine architecture audit");
 console.log(
-  "PASS — canonical fallback isolation, quality gates, publishable-only hreflang and the Swedish flight-number localization builder behave as expected.",
+  "PASS — canonical fallback isolation, quality gates, publishable-only hreflang, Swedish flight-number localization and EU261/UK261 compensation profiles behave as expected.",
 );
