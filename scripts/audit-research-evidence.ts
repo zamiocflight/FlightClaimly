@@ -126,6 +126,31 @@ assert(
   "Research layer must preserve Article 8 rerouting/refund assessment for cancellations",
 );
 
+const noisyAssessmentInput: ClaimRightsAssessmentInput = {
+  departureAirport: {},
+  arrivalAirport: {},
+  disruption: {},
+};
+const consolidated = assessClaimWithResearchEvidence(noisyAssessmentInput);
+const factKeys = consolidated.plan.questions
+  .map((item) => item.factKey)
+  .filter((value): value is NonNullable<typeof value> => Boolean(value));
+assert(
+  new Set(factKeys).size === factKeys.length,
+  "Planner must emit at most one investigation task per structured fact key",
+);
+const genericKinds = consolidated.plan.questions
+  .filter((item) => !item.factKey)
+  .map((item) => item.kind);
+assert(
+  new Set(genericKinds).size === genericKinds.length,
+  "Planner must consolidate semantically overlapping non-fact tasks by investigation kind",
+);
+assert(
+  consolidated.plan.questions.length <= 16,
+  `Planner quality guard: expected at most 16 actionable tasks, received ${consolidated.plan.questions.length}`,
+);
+
 console.log("Research / Evidence Engine audit");
-console.log("Scenarios: 5");
-console.log("PASS — planning, verified enrichment, unverified isolation, conflict safety and rights preservation behave as expected.");
+console.log("Scenarios: 6");
+console.log("PASS — planning, consolidation, verified enrichment, unverified isolation, conflict safety and rights preservation behave as expected.");
