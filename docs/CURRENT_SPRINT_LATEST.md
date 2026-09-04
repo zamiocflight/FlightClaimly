@@ -2,81 +2,46 @@
 
 Last updated: **2026-09-04**
 
-> Authoritative recovery pointer. Read this first after any session loss or crash.
+> **Authoritative crash-recovery pointer. Read this first after any session loss.**
 
-## Read Order After Session Loss
+## Read order after session loss
 
 1. `docs/CURRENT_SPRINT_LATEST.md`
-2. `docs/checkpoints/2026-09-04-research-evidence-engine-v1-locked.md`
-3. `docs/ROADMAP.md`
-4. `docs/engines/CLAIM_RIGHTS_ASSESSMENT_ENGINE.md` — locked v1 + integration contract
-5. `docs/engines/README.md`
-6. `docs/CLAIMS_DESK.md` — operating framework; preserve local user modifications
-7. `docs/checkpoints/2026-09-03-passenger-rights-legal-rules-v1-start.md`
-8. `docs/checkpoints/2026-09-02-delay-reason-engine-expansion.md`
-9. `docs/checkpoints/2026-09-02-flight-number-global-seo-google.md`
-10. `docs/FLIGHTCLAIMLY_KNOWLEDGE_ENGINE.md`
-11. `docs/SYSTEM_PROCESS_MAP.md`
-12. `docs/CURRENT_SPRINT.md` — historical record; preserve it
+2. `docs/checkpoints/2026-09-04-seo-localization-wave1-sv-build-verified.md`
+3. `docs/engines/LOCALIZATION_ENGINE.md`
+4. `docs/checkpoints/2026-09-04-research-evidence-engine-v1-locked.md`
+5. `docs/ROADMAP.md`
+6. `docs/engines/CLAIM_RIGHTS_ASSESSMENT_ENGINE.md`
+7. `docs/engines/README.md`
+8. `docs/CLAIMS_DESK.md` — preserve local user modifications
+9. `docs/FLIGHTCLAIMLY_KNOWLEDGE_ENGINE.md`
+10. `docs/SYSTEM_PROCESS_MAP.md`
+11. `docs/CURRENT_SPRINT.md` — historical record; preserve it
 
 ## Current state
-
-Status:
 
 - 🟢 Delay Reason Engine v1 — LOCKED
 - 🟢 EU261 Legal Rule Layer v1 — LOCKED
 - 🟢 Claim Rights Assessment Engine v1 — LOCKED
 - 🟢 Claims Desk Assessment Integration phase 1 — VERIFIED
 - 🟢 Research / Evidence Engine v1 foundation — LOCKED
-- 🔵 NEXT: SEO Internationalization / Localization Engine
+- 🟢 Localization architecture — IMPLEMENTED / AUDIT GREEN
+- 🟢 Swedish Flight Number cohort — TYPECHECK + FULL BUILD GREEN
+- 🔵 ACTIVE NEXT: final Swedish rendered-output / SEO QA
+- ⏭️ AFTER QA: lock SV Flight Number cohort, then build Danish independently, then Finnish
 - 🟡 PARALLEL: Content / Social Engine v1
 
-## Secured baselines
+## Secured pre-localization baseline
 
 ### Flight Number / Google
 
 - 2,841 publishable Flight Number entities
 - 44 represented airlines
 - 3,141 route paths
-- current production build generates 6,557 / 6,557 static pages
-- no FlightAware population required for current sprint
+- pre-localization production build: **6,557 / 6,557** static pages
+- no FlightAware population required for current localization sprint
 
-### Delay Reason Engine v1
-
-- 11 structured reasons / relationships / assessment profiles
-- audit/typecheck/build green at lock
-- public detail pages SSG
-
-### EU261 Legal Rule Layer v1
-
-- 7 authority sources
-- 18 legal references
-- 5 passenger rights
-- 17 legal rules
-- Legal Rule Resolver preserves matched / not-matched / unresolved
-- audit/typecheck/build green at lock
-
-### Claim Rights Assessment Engine v1
-
-- `npm run audit:claim-rights` — PASS, 4 scenarios at lock
-- typecheck/build green
-- deterministic legal assessment remains separated from external research
-- extraordinary-circumstances claims remain reviewable rather than automatic rejection
-- Article 8/9 remain independently assessable
-
-Status: **🟢 LOCKED v1**.
-
-## COMPLETED — Claims Desk Assessment Integration phase 1
-
-Claims Desk adapts the existing transactional claim conservatively into the locked Claim Rights Assessment contract.
-
-Key rule: missing transactional facts remain `undefined`; they are not inferred from dummy precheck data or compensation fields.
-
-The internal panel exposes readiness/investigation state, EU261 scope, compensation state, Article 8/9, Delay Reason when available, evidence targets, assessment questions and legal rule/reference information.
-
-Phase 1 was locally verified before the Research / Evidence work continued.
-
-## COMPLETED — Research / Evidence Engine v1 foundation
+## Research / Evidence Engine v1
 
 Status: **🟢 LOCKED 2026-09-04**.
 
@@ -84,7 +49,7 @@ Authoritative checkpoint:
 
 `docs/checkpoints/2026-09-04-research-evidence-engine-v1-locked.md`
 
-### Locked architecture
+Locked architecture:
 
 ```text
 Claim
@@ -112,86 +77,168 @@ deterministic Legal Engine rerun
 Updated Claim Rights Assessment
 ```
 
-### Implemented foundation
+External autonomous research providers are **not** yet production-connected. Future FlightAware/weather/ATC/airline/airport/OpenAI/case-law providers must enter through the locked provider → registry → verification → resolver path.
 
-- bounded Research Planner
-- operator-facing task consolidation and wording
-- provider contract/boundary
-- provider findings forced to `unverified` on ingestion
-- Evidence Registry with provenance and SHA-256 content fingerprinting
-- idempotent evidence persistence
-- Supabase evidence repository
-- Fact Resolver
-- safe Claim Rights enrichment
-- conflict isolation
-- append-only evidence verification review history
-- reviewer/method/time provenance
-- latest-review effective verification state
-- Supabase verification repository
-- Claims Desk persisted-evidence loading and Research/Evidence UI
+## ACTIVE — SEO Internationalization / Localization Engine
 
-### Supabase migrations already applied
+### Core principle
 
-Applied successfully in Supabase SQL Editor on 2026-09-04:
+Localization is **not mechanical translation**.
 
-- `supabase/migrations/20260904_claim_research_evidence.sql`
-- `supabase/migrations/20260904_claim_research_evidence_reviews.sql`
+Canonical Knowledge facts remain shared and locale-neutral. Each market gets its own search-intent/terminology/copy layer while factual and legal meaning stays invariant.
 
-Do not assume these are pending.
+Correct model:
 
-### Verification at lock
+```text
+Canonical facts → Swedish market intent/copy
+Canonical facts → Danish market intent/copy
+Canonical facts → Finnish market intent/copy
+```
 
-- `npm run audit:research-evidence` — PASS, 7 scenarios
-- `npm run audit:evidence-verification` — PASS
-- `npm run typecheck` — PASS
-- `npm run build` — PASS
-- Next.js 15.5.7
-- compiled successfully
-- 6,557 / 6,557 static pages generated
-- real `/admin/claims/[id]` visually verified with 14 actionable research tasks and Evidence Registry empty state
+Do **not** use:
 
-### Important boundary
+```text
+EN → SV → DA/FI
+```
 
-**The foundation is implemented; external autonomous research is not yet a production capability.**
+### Localization foundation implemented
 
-FlightAware research provider integration, weather/ATC retrieval, airline/airport retrieval, OpenAI research orchestration and automatic case-law retrieval are future provider integrations. They must use the locked provider → registry → verification → resolver path.
+Under `src/lib/localization/`:
 
-No external provider may self-certify a fact as legally verified.
+- locale-neutral localization contracts
+- locale registry
+- rollout/publication policy
+- canonical-fallback resolver
+- canonical fallback forced to non-publishable/review-required
+- quality gates for metadata / terminology / legal meaning / content
+- localized metadata helpers
+- publishable-only hreflang helpers
+- reviewed Swedish Knowledge labels
+- Swedish Flight Number localization builder
+- architecture audit command
 
-## ACTIVE NEXT — SEO Internationalization / Localization Engine
+### Swedish Flight Number cohort implemented end-to-end
 
-This is the next primary technical block.
+The following actual public surfaces are now integrated, not merely the locale registry:
 
-Goal: reuse canonical Knowledge entities across properly localized markets without duplicating the underlying knowledge model or mass-publishing low-quality mechanical translations.
+- Flight Number detail pages
+- Flight Number index page
+- Flight Number airline-group pages
+- Hero / H1 / CTA
+- breadcrumbs
+- fact labels and yes/no values
+- Knowledge section headings
+- compensation sections
+- passenger-rights sections
+- timeline
+- claim process
+- common issues
+- FAQ presentation/content path
+- localized internal-link section headings
+- localized metadata/canonical/hreflang
 
-### First target
+Shared SEO components accept localized labels while preserving English defaults for other entity families.
 
-Wave 1 pilot:
+### Important safety decision already completed
 
-- Swedish
-- Danish
-- Finnish
+`sv` was **not** enabled for Flight Number SEO until the surrounding shared/page/index surfaces had been localized.
 
-### Start sequence
+This avoids the old failure mode: thousands of nominally Swedish pages that are actually half-English.
 
-1. inspect the existing `next-intl` / locale routing architecture and canonical Knowledge entities
-2. map what is currently truly localized versus only route-localized
-3. define a canonical locale-content contract for programmatic Knowledge pages
-4. implement a bounded SV / DA / FI cohort
-5. validate terminology and legal meaning
-6. validate canonical + hreflang behavior
-7. validate localized internal links
-8. validate sitemap/indexability
-9. typecheck/build/visual QA
-10. expand only after quality is established
+### Current publishable Flight Number SEO locales
 
-Do not begin by generating tens of thousands of translations.
+- EN — publishable
+- SV — implemented/enabled cohort
+- DA — not yet publishable
+- FI — not yet publishable
 
-## PARALLEL — Content / Social Engine v1
+Do not infer Swedish readiness for route/airport/airline/country/delay-reason detail cohorts. Those remain separately controlled.
 
-Founder/expert time should focus on knowledge, point of view and recording. AI-assisted workflow and/or a trusted operator can increasingly handle editing, captions, formatting, distribution and analytics.
+## Verification completed — Swedish Flight Number cohort
 
-Initial model:
+### Localization architecture audit
+
+`npm run audit:localization`
+
+Result:
+
+**PASS — canonical fallback isolation, quality gates, publishable-only hreflang and Swedish Flight Number builder behave as expected.**
+
+### TypeScript
+
+`npm run typecheck`
+
+Result: **PASS**.
+
+### Full production build
+
+`npm run build`
+
+Environment: Next.js 15.5.7
+
+Result:
+
+- compile PASS
+- type validity PASS
+- page-data collection PASS
+- static generation PASS
+- **9,442 / 9,442 static pages generated**
+
+Build output explicitly included:
+
+- `/en/flight-numbers/a3101`
+- `/sv/flight-numbers/a3101`
+- +5,679 additional Flight Number detail paths
+- EN/SV Flight Number airline-group paths
+
+This is consistent with:
+
+- 2,841 canonical publishable Flight Numbers
+- 2,841 EN detail pages
+- 2,841 SV detail pages
+- **5,682 total Flight Number detail paths**
+
+Total SSG increased from **6,557 → 9,442**.
+
+Route detail pages remained EN-only, intentionally.
+
+Claims/Admin/API routes remained present in the successful build.
+
+## ACTIVE NEXT — final Swedish rendered-output / SEO QA
+
+Swedish code/build verification is green, but the cohort is **not yet declared LOCKED**.
+
+Before Danish/Finnish work, inspect real rendered Swedish output.
+
+Exact QA sequence:
+
+1. run the app locally in the normal verified environment
+2. inspect representative `/sv/flight-numbers/[slug]` pages
+3. confirm natural Swedish and no unintended English page chrome/content
+4. inspect rendered title + meta description
+5. inspect canonical URL
+6. inspect EN/SV hreflang only
+7. verify localized FAQ/schema path
+8. verify localized internal links and their intended targets
+9. inspect `/sv/flight-numbers`
+10. inspect representative `/sv/flight-numbers/airline/[airlineSlug]`
+11. inspect sitemap exposure for Flight Number cohort
+12. if green, create **SV Wave 1 LOCKED** checkpoint
+
+Only after SV lock:
+
+1. Danish localization from canonical facts using Danish search intent/terminology
+2. audit/typecheck/build/rendered QA
+3. Danish lock
+4. Finnish localization independently from canonical facts
+5. audit/typecheck/build/rendered QA
+6. Finnish lock
+
+Do not mass-enable new locales before each locale passes its own quality gates.
+
+## Parallel — Content / Social Engine v1
+
+Model remains:
 
 ```text
 Verified Knowledge / Research
@@ -204,6 +251,8 @@ Verified Knowledge / Research
 → analytics
 → iteration
 ```
+
+Founder time should stay focused on expertise, point of view and recording. Repetitive editing/resizing/subtitles/scheduling can be AI/operator-assisted.
 
 ## Later execution sequence
 
@@ -230,36 +279,52 @@ After/alongside Localization:
 - Conflicting evidence does not become a legal fact.
 - Deterministic legal engines evaluate sufficiently verified facts.
 - Customer-specific data remains transactional.
-- EU261 first; additional regimes later through the same architecture.
+- Canonical Knowledge facts are not forked per locale.
+- Localization quality gates control SEO publication.
+- Route support in app routing does not equal publishable Knowledge localization.
 
 ## Local parked work — DO NOT DISTURB
 
-Known unrelated local user work must remain untouched:
+Latest verified local status after the successful 9,442-page build:
 
-- modified `docs/CLAIMS_DESK.md`
-- modified `scripts/test-manual-claim.ts`
-- untracked `scripts/create-reijo-claim.ts`
+```text
+## seo-localization-engine-v1...origin/seo-localization-engine-v1
+ M docs/CLAIMS_DESK.md
+ M scripts/test-manual-claim.ts
+?? scripts/create-reijo-claim.ts
+```
+
+These are known unrelated Claims/Reijo changes.
 
 Rules:
 
-- do not commit the current `docs/CLAIMS_DESK.md` local modifications as-is
-- do not commit real customer PII from manual claim helper scripts
+- do not commit current `docs/CLAIMS_DESK.md` local modifications as part of Localization
+- do not commit real customer PII from helper scripts
 - do not use `git add .`
 - do not use `git reset --hard`
 - do not use `git clean`
 - do not force push
 
+## Branch / exact recovery position
+
+Working branch:
+
+`seo-localization-engine-v1`
+
+Last product-code commit locally verified before documentation updates:
+
+`e1493a9`
+
+Documentation recovery files added immediately after verification:
+
+- `docs/engines/LOCALIZATION_ENGINE.md`
+- `docs/checkpoints/2026-09-04-seo-localization-wave1-sv-build-verified.md`
+- this updated `docs/CURRENT_SPRINT_LATEST.md`
+
 ## Exact resume action
 
-If resuming immediately after this checkpoint:
+If resuming after a crash:
 
-**Start the SEO Internationalization / Localization Engine architecture audit on a clean dedicated branch after Research / Evidence Engine v1 is integrated according to the normal branch workflow.**
+**Do not rebuild the Localization Engine foundation. Do not rerun FlightAware. Do not start Danish.**
 
-Before changing localization code, inspect the current implementation. Do not assume locale routes equal genuinely localized Knowledge content.
-
-## Safety / recovery
-
-- Preserve `docs/CURRENT_SPRINT.md` as historical record.
-- Preserve unrelated local Claims/Reijo work.
-- Do not rerun FlightAware population unless a later task explicitly requires new data.
-- If state is uncertain after a crash, stop and read this file plus the 2026-09-04 Research/Evidence checkpoint before modifying code.
+Resume with final rendered Swedish Flight Number QA according to the checklist above. If that is green, lock the Swedish cohort and only then continue to Danish.
