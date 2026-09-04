@@ -23,6 +23,10 @@ import type { FlightNumber } from "@/data/flight-numbers/types";
 
 type FlightNumberSeoLocale = (typeof flightNumberSeoLocales)[number];
 
+const PREVIEW_STATIC_SAMPLE_SIZE = 24;
+
+export const dynamicParams = true;
+
 type PageProps = {
   params: Promise<{
     locale: string;
@@ -118,8 +122,16 @@ function getPageLabels(
   };
 }
 
+function getFlightNumbersForStaticBuild() {
+  if (process.env.VERCEL_ENV === "preview") {
+    return publishableFlightNumbers.slice(0, PREVIEW_STATIC_SAMPLE_SIZE);
+  }
+
+  return publishableFlightNumbers;
+}
+
 export function generateStaticParams() {
-  return publishableFlightNumbers.flatMap((flightNumber) =>
+  return getFlightNumbersForStaticBuild().flatMap((flightNumber) =>
     flightNumberSeoLocales.map((locale) => ({
       locale,
       slug: flightNumber.slug,

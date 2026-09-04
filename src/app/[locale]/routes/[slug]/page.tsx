@@ -11,7 +11,10 @@ import FAQSchema from "@/components/seo/FAQSchema";
 import { resolveAuthority } from "@/lib/authority/resolver";
 import type { FlightRoute } from "@/data/seo/routes";
 
+const PREVIEW_STATIC_SAMPLE_SIZE = 24;
+
 export const dynamic = "force-static";
+export const dynamicParams = true;
 export const revalidate = false;
 
 type Props = {
@@ -21,8 +24,16 @@ type Props = {
   }>;
 };
 
+function getRoutesForStaticBuild() {
+  if (process.env.VERCEL_ENV === "preview") {
+    return routes.slice(0, PREVIEW_STATIC_SAMPLE_SIZE);
+  }
+
+  return routes;
+}
+
 export function generateStaticParams() {
-  return routes.map((route) => ({
+  return getRoutesForStaticBuild().map((route) => ({
     locale: "en",
     slug: route.slug,
   }));
