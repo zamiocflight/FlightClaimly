@@ -9,6 +9,12 @@ export {
   InMemoryEvidenceRegistryRepository,
 } from "./repository";
 export { createSupabaseEvidenceRegistryRepository } from "./supabase-repository";
+export {
+  applyLatestEvidenceReviews,
+  createEvidenceReviewService,
+} from "./verification";
+export { InMemoryEvidenceReviewRepository } from "./verification-repository";
+export { createSupabaseEvidenceReviewRepository } from "./supabase-verification-repository";
 export type {
   ResearchEvidenceProvider,
   ResearchProviderFinding,
@@ -21,6 +27,14 @@ export type {
   CollectEvidenceRequest,
   EvidenceRegistry,
 } from "./registry";
+export type {
+  EvidenceReview,
+  EvidenceReviewerType,
+  EvidenceReviewMethod,
+  EvidenceReviewService,
+  RecordEvidenceReviewRequest,
+} from "./verification";
+export type { EvidenceReviewRepository } from "./verification-repository";
 export type {
   EvidenceConfidence,
   EvidenceSourceType,
