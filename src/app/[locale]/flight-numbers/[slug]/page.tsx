@@ -16,6 +16,7 @@ import {
   buildSwedishFlightNumberLocalization,
   getLocaleDefinition,
   resolveKnowledgeLocalization,
+  type LocalizedKnowledgeLabels,
   type LocalizedSeoVariant,
 } from "@/lib/localization";
 import type { FlightNumber } from "@/data/flight-numbers/types";
@@ -79,6 +80,44 @@ function buildFlightNumberVariants(
   }));
 }
 
+function getPageLabels(
+  flightNumber: FlightNumber,
+  locale: FlightNumberSeoLocale
+): LocalizedKnowledgeLabels {
+  const labels = getLocaleDefinition(locale).labels;
+  if (locale !== "sv") return labels;
+
+  if (flightNumber.eu261Eligible && flightNumber.uk261Eligible) {
+    return {
+      ...labels,
+      heroEyebrow: "EU261 / UK261 · Ingen ersättning, ingen avgift",
+      passengerRightsTitle: "Passagerarrättigheter enligt EU261 eller UK261",
+    };
+  }
+
+  if (flightNumber.eu261Eligible) {
+    return {
+      ...labels,
+      heroEyebrow: "EU261 · Ingen ersättning, ingen avgift",
+      passengerRightsTitle: "Passagerarrättigheter enligt EU261",
+    };
+  }
+
+  if (flightNumber.uk261Eligible) {
+    return {
+      ...labels,
+      heroEyebrow: "UK261 · Ingen ersättning, ingen avgift",
+      passengerRightsTitle: "Passagerarrättigheter enligt UK261",
+    };
+  }
+
+  return {
+    ...labels,
+    heroEyebrow: "Flygpassagerares rättigheter · Ingen ersättning, ingen avgift",
+    passengerRightsTitle: `Passagerarrättigheter för ${flightNumber.flightNumber}`,
+  };
+}
+
 export function generateStaticParams() {
   return publishableFlightNumbers.flatMap((flightNumber) =>
     flightNumberSeoLocales.map((locale) => ({
@@ -127,7 +166,7 @@ export default async function FlightNumberPage({ params }: PageProps) {
   const resolution = resolveFlightNumberLocalization(flightNumber, seoLocale);
   if (resolution.publicationStatus !== "publishable") notFound();
 
-  const labels = getLocaleDefinition(seoLocale).labels;
+  const labels = getPageLabels(flightNumber, seoLocale);
   const content = resolution.content;
 
   const knowledgeEntity = {
