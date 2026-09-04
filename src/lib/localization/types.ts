@@ -61,9 +61,23 @@ export type LocalizedKnowledgeContent = {
   overview?: string;
   passengerRights?: string;
   compensationIntro?: string;
+  compensationAmounts?: Array<{
+    label: string;
+    distance: string;
+    amount: string;
+  }>;
   compensationRules?: string;
   statisticsIntro?: string;
+  statistics?: Array<{
+    label: string;
+    value: string;
+    description: string;
+  }>;
   timelineIntro?: string;
+  timeline?: Array<{
+    title: string;
+    description: string;
+  }>;
   claimProcess?: string[];
   commonIssues?: string[];
   faq?: Array<{
