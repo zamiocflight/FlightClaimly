@@ -46,6 +46,9 @@ export type LocalizedKnowledgeLabels = {
   scheduleSnapshot: string;
   yes: string;
   no: string;
+  heroEyebrow: string;
+  heroTitle: string;
+  heroCta: string;
   majorAirlinesFor: string;
   about: string;
   compensationAmountsTitle: string;
@@ -54,6 +57,9 @@ export type LocalizedKnowledgeLabels = {
   compensationRulesTitle: string;
   compensationStatistics: string;
   claimTimelineTitle: string;
+  claimProcessTitle: string;
+  commonIssuesTitle: string;
+  faqTitle: string;
 };
 
 export type LocalizedKnowledgeContent = {
