@@ -60,6 +60,10 @@ export type LocalizedKnowledgeLabels = {
   claimProcessTitle: string;
   commonIssuesTitle: string;
   faqTitle: string;
+  flightAirlineLinksTitle: string;
+  flightRouteLinksTitle: string;
+  airportsLinksTitle: string;
+  countriesLinksTitle: string;
 };
 
 export type LocalizedKnowledgeContent = {
