@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 
+import { publishableFlightNumbers } from "../src/lib/flight-numbers/catalog";
 import {
   buildLocalizedLanguageAlternates,
+  buildSwedishFlightNumberLocalization,
+  getLocaleDefinition,
   isLocalizationPublishable,
   resolveKnowledgeLocalization,
   type KnowledgeLocalization,
@@ -120,7 +123,20 @@ assert.equal(
 assert.equal(alternates.da, undefined);
 assert.equal(alternates.fi, undefined);
 
+const pilotFlightNumber = publishableFlightNumbers[0];
+assert.ok(pilotFlightNumber, "Expected at least one publishable flight number.");
+
+const swedishPilot = buildSwedishFlightNumberLocalization(pilotFlightNumber);
+assert.equal(swedishPilot.locale, "sv");
+assert.equal(swedishPilot.status, "publishable");
+assert.equal(isLocalizationPublishable(swedishPilot), true);
+assert.match(swedishPilot.metadata.title, /flygersättning/i);
+assert.ok(swedishPilot.content?.faq?.length);
+assert.ok(swedishPilot.content?.timeline?.length);
+assert.equal(getLocaleDefinition("sv").labels.yes, "Ja");
+assert.equal(getLocaleDefinition("da").labels.yes, "Yes");
+
 console.log("Localization Engine architecture audit");
 console.log(
-  "PASS — canonical fallback isolation, quality gates and publishable-only hreflang behave as expected.",
+  "PASS — canonical fallback isolation, quality gates, publishable-only hreflang and the Swedish flight-number localization builder behave as expected.",
 );
