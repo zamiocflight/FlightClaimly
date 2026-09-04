@@ -26,6 +26,14 @@ const causeQuestion = initial.plan.questions.find(
 assert(arrivalQuestion, "Planner should ask for final arrival delay when it is missing");
 assert(causeQuestion, "Planner should ask for disruption cause when it is missing");
 assert(
+  arrivalQuestion.question === "Verify the passenger's final arrival delay in minutes.",
+  "Arrival-delay task should be phrased as a clear operator action",
+);
+assert(
+  causeQuestion.question === "Establish and verify the disruption's root cause.",
+  "Cause task should be phrased as a clear operator action",
+);
+assert(
   initial.enrichedInput.disruption.arrivalDelayMinutes === undefined,
   "Missing evidence must not invent an arrival delay",
 );
@@ -150,7 +158,11 @@ assert(
   consolidated.plan.questions.length <= 16,
   `Planner quality guard: expected at most 16 actionable tasks, received ${consolidated.plan.questions.length}`,
 );
+assert(
+  consolidated.plan.questions.every((item) => /^(Verify|Establish|Investigate|Collect)/.test(item.question)),
+  "Every operator-facing research task should begin with a clear action verb",
+);
 
 console.log("Research / Evidence Engine audit");
 console.log("Scenarios: 6");
-console.log("PASS — planning, consolidation, verified enrichment, unverified isolation, conflict safety and rights preservation behave as expected.");
+console.log("PASS — planning, consolidation, actionable wording, verified enrichment, unverified isolation, conflict safety and rights preservation behave as expected.");
