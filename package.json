@@ -28,6 +28,7 @@
     "audit:claim-rights": "tsx scripts/audit-claim-rights.ts",
     "audit:research-evidence": "tsx scripts/audit-research-evidence.ts",
     "audit:evidence-verification": "tsx scripts/audit-evidence-verification.ts",
+    "audit:localization": "tsx scripts/audit-localization-engine.ts",
     "build:airport-registry": "tsx scripts/generate-airport-registry.ts",
     "typecheck": "tsc --noEmit",
     "publish:flight-numbers": "npm run sanitize:flight-number-seeds && npm run build:flight-numbers && npm run audit:flight-numbers && npm run typecheck && npm run build",
