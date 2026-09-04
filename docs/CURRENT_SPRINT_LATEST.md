@@ -7,16 +7,17 @@ Last updated: **2026-09-04**
 ## Read order after session loss
 
 1. `docs/CURRENT_SPRINT_LATEST.md`
-2. `docs/checkpoints/2026-09-04-seo-localization-wave1-sv-locked.md`
-3. `docs/engines/LOCALIZATION_ENGINE.md`
-4. `docs/checkpoints/2026-09-04-research-evidence-engine-v1-locked.md`
-5. `docs/ROADMAP.md`
-6. `docs/engines/CLAIM_RIGHTS_ASSESSMENT_ENGINE.md`
-7. `docs/engines/README.md`
-8. `docs/CLAIMS_DESK.md` — preserve local user modifications
-9. `docs/FLIGHTCLAIMLY_KNOWLEDGE_ENGINE.md`
-10. `docs/SYSTEM_PROCESS_MAP.md`
-11. `docs/CURRENT_SPRINT.md` — historical record; preserve it
+2. `docs/checkpoints/2026-09-04-build-deployment-cost-optimization-locked.md`
+3. `docs/checkpoints/2026-09-04-seo-localization-wave1-sv-locked.md`
+4. `docs/engines/LOCALIZATION_ENGINE.md`
+5. `docs/checkpoints/2026-09-04-research-evidence-engine-v1-locked.md`
+6. `docs/ROADMAP.md`
+7. `docs/engines/CLAIM_RIGHTS_ASSESSMENT_ENGINE.md`
+8. `docs/engines/README.md`
+9. `docs/CLAIMS_DESK.md` — preserve local user modifications
+10. `docs/FLIGHTCLAIMLY_KNOWLEDGE_ENGINE.md`
+11. `docs/SYSTEM_PROCESS_MAP.md`
+12. `docs/CURRENT_SPRINT.md` — historical record; preserve it
 
 ## Current state
 
@@ -27,8 +28,9 @@ Last updated: **2026-09-04**
 - 🟢 Research / Evidence Engine v1 foundation — LOCKED
 - 🟢 Localization architecture — IMPLEMENTED / AUDIT GREEN
 - 🟢 **Swedish Flight Number Localization v1 — LOCKED 2026-09-04**
-- 🔵 **ACTIVE NEXT: Build / Deployment Cost Optimization before DK**
-- ⏭️ AFTER OPTIMIZATION: Danish Flight Number localization independently from canonical facts, then Finnish
+- 🟢 **Build / Deployment Cost Optimization — LOCKED 2026-09-04**
+- 🔵 **ACTIVE NEXT: Danish Flight Number Localization v1 from canonical facts**
+- ⏭️ AFTER DK: Finnish Flight Number localization independently from canonical facts
 - 🟡 PARALLEL: Content / Social Engine v1
 
 ## Secured SEO baseline
@@ -70,6 +72,26 @@ Final QA completed:
 
 Do not reopen SV v1 without a concrete bug, legal change or planned v2 localization pass.
 
+## Build / Deployment Cost Optimization — LOCKED
+
+Authoritative checkpoint:
+
+`docs/checkpoints/2026-09-04-build-deployment-cost-optimization-locked.md`
+
+Locked strategy:
+
+- production retains full SSG for publishable Flight Number and Route detail cohorts
+- Vercel Preview builds use deterministic samples of 24 Flight Number entities and 24 Routes
+- valid unsampled Flight Number and Route pages were verified to render on demand in Preview mode
+- Preview build generates **691 / 691** static pages versus the secured **9,442 / 9,442** production baseline
+- this is approximately **92.7% fewer prerendered pages** in Preview; it is not asserted as an identical billing/CPU reduction
+- Vercel Ignored Build Step is configured with `bash ignore-build-step.sh`
+- application-affecting changes return exit 1/build; docs/Markdown-only changes return exit 0/skip
+- final production-mode build remains **9,442 / 9,442** with 5,682 Flight Number detail paths and 3,141 Route detail paths
+- `npm run audit:localization` remains PASS
+
+Do not move production to ISR/on-demand without a separate evidence-backed architecture decision and equivalent SEO/runtime verification.
+
 ## Localization rule
 
 Localization is **not mechanical translation**. Canonical Knowledge facts remain shared and locale-neutral. Each market gets its own search-intent, terminology and copy layer while factual/legal meaning stays invariant.
@@ -93,34 +115,22 @@ Current publishable Flight Number SEO locales:
 
 Do not infer Swedish readiness for route/airport/airline/country/delay-reason detail cohorts. Those remain separately controlled.
 
-## ACTIVE NEXT — Build / Deployment Cost Optimization
+## ACTIVE NEXT — Danish Flight Number Localization v1
 
-This review happens **before DK** because the SV rollout increased full static generation from 6,557 to 9,442 pages and every additional locale would increase build work further.
+Build Danish independently from canonical facts using Danish market search intent, terminology and natural copy. Do not translate from Swedish.
 
-Required review sequence:
+Required sequence:
 
-1. inspect Vercel/Git preview-build trigger behavior and prevent waste from intermediate commits where safely possible
-2. inspect `generateStaticParams`, `dynamicParams`, revalidation/runtime behavior and current SSG assumptions
-3. inspect sitemap generation and confirm it remains publishable-locale driven
-4. evaluate full SSG versus hybrid SSG + ISR/on-demand for high-volume programmatic Knowledge pages
-5. preserve server-rendered SEO HTML, canonical, hreflang, schema and sitemap discoverability
-6. make the smallest safe optimization only if architecture evidence supports it
-7. verify EN/SV regression safety with audit/typecheck and targeted rendered/SEO checks; use a full build only at a meaningful checkpoint
-8. document/lock the deployment strategy before activating DK
-
-Do **not** switch blindly to ISR. First prove that arbitrary valid slugs can render safely outside full `generateStaticParams` enumeration and that metadata/schema/canonical/hreflang remain correct.
-
-## Then — Danish localization
-
-Only after deployment/build strategy is verified:
-
-1. build Danish from canonical facts using Danish search intent and terminology
-2. keep DA non-publishable until all quality gates pass
-3. audit/typecheck/rendered SEO QA
-4. verify canonical/hreflang/sitemap exposure
-5. perform one meaningful final build/checkpoint
-6. lock DK
-7. repeat independently for FI
+1. inspect canonical Flight Number facts and existing localization interfaces/quality gates
+2. define Danish market terminology, search-intent patterns and controlled city-name localization where appropriate
+3. implement Danish Flight Number detail/index/airline-group localization without changing canonical facts or locked Swedish behavior
+4. keep DA non-publishable until all quality gates pass
+5. verify all EU261-only, UK261-only, dual EU261+UK261 and neither regulation/display profiles
+6. verify metadata, hero/H1/CTA, breadcrumbs, fact labels, FAQ/schema and internal-link surfaces
+7. verify canonical/hreflang/sitemap exposure only after DA publication gates are green
+8. run localization audit/typecheck and representative rendered SEO QA
+9. use Preview build strategy during iteration; perform one meaningful final production build/checkpoint before locking DK
+10. lock Danish v1, then repeat independently for Finnish
 
 ## Research / Evidence Engine v1
 
@@ -163,10 +173,10 @@ Rules:
 
 Working branch: `seo-localization-engine-v1`
 
-Last product-code commit included in the SV lock: `e7f38f3001fbfb358a311494e17578b85cc8d286` (`fix: localize Swedish city exonyms in flight SEO`).
+Optimization implementation head before documentation lock: `66b2786938d3cd5ebb3064ee43cb4f446ef06c1f` (`fix: allow preview route fallback rendering`).
 
 ## Exact resume action
 
 If resuming after a crash:
 
-**SV Flight Number Localization v1 is LOCKED. Do not rebuild it. Do not rerun FlightAware. Do not start DK yet. Resume with Build / Deployment Cost Optimization, verify the deployment strategy, then begin Danish independently from canonical facts.**
+**SV Flight Number Localization v1 and Build / Deployment Cost Optimization are LOCKED. Do not rerun FlightAware. Begin Danish Flight Number Localization v1 independently from canonical facts, keep DA non-publishable until all quality gates pass, then lock DK before starting FI.**
