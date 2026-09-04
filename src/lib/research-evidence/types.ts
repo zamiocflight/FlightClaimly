@@ -61,9 +61,12 @@ export interface ResearchQuestion {
 export interface ResearchEvidence {
   id: string;
   questionId: string;
+  providerId?: string;
   sourceType: EvidenceSourceType;
   sourceName: string;
   sourceUrl?: string;
+  sourceRecordId?: string;
+  observedAt?: string;
   retrievedAt: string;
   rawFinding: string;
   normalizedFinding?: string;
@@ -71,6 +74,8 @@ export interface ResearchEvidence {
   factValue?: string | number | boolean;
   confidence: EvidenceConfidence;
   verificationStatus: EvidenceVerificationStatus;
+  contentHash?: string;
+  metadata?: Record<string, string | number | boolean | null>;
   notes?: string;
 }
 
