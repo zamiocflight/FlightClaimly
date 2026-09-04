@@ -102,10 +102,6 @@ function investigationBucket(kind: ResearchQuestionKind): string {
 
 function genericIdentity(candidate: ResearchQuestion): string {
   if (candidate.factKey) return `fact:${candidate.factKey}`;
-
-  // The Legal Engine may expose many precise unresolved rules. The planner keeps
-  // those underlying gaps intact, but translates them into a much smaller set of
-  // operator-facing investigation buckets that can often be solved together.
   return `investigation:${investigationBucket(candidate.kind)}`;
 }
 
@@ -115,9 +111,6 @@ function preferCandidate(
 ): ResearchQuestion {
   if (!existing) return candidate;
   if (existing.priority !== "high" && candidate.priority === "high") return candidate;
-
-  // Prefer a concrete evidence target over a generic assessment question when both
-  // belong to the same operator task. It is more actionable for a claims handler.
   if (!existing.target && candidate.target) return candidate;
   return existing;
 }
@@ -159,6 +152,8 @@ function operatorQuestion(candidate: ResearchQuestion): string {
       return "Verify the facts needed to assess the passenger's remaining EU261 rights.";
     case "supporting-evidence":
       return "Collect and verify the remaining supporting documents and evidence.";
+    default:
+      return "Collect and verify the remaining evidence needed for this investigation.";
   }
 }
 
