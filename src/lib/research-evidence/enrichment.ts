@@ -16,15 +16,15 @@ function accepted(fact: ResolvedResearchFact | undefined): fact is ResolvedResea
   );
 }
 
-function asBoolean(value: string | number | boolean): boolean | undefined {
+function asBoolean(value: string | number | boolean | undefined): boolean | undefined {
   return typeof value === "boolean" ? value : undefined;
 }
 
-function asNumber(value: string | number | boolean): number | undefined {
+function asNumber(value: string | number | boolean | undefined): number | undefined {
   return typeof value === "number" && Number.isFinite(value) ? value : undefined;
 }
 
-function asString(value: string | number | boolean): string | undefined {
+function asString(value: string | number | boolean | undefined): string | undefined {
   return typeof value === "string" ? value : undefined;
 }
 
