@@ -1,23 +1,24 @@
 # FlightClaimly — Latest Sprint / Resume Pointer
 
-Last updated: **2026-09-04**
+Last updated: **2026-09-05**
 
 > **Authoritative crash-recovery pointer. Read this first after any session loss.**
 
 ## Read order after session loss
 
 1. `docs/CURRENT_SPRINT_LATEST.md`
-2. `docs/checkpoints/2026-09-04-build-deployment-cost-optimization-locked.md`
-3. `docs/checkpoints/2026-09-04-seo-localization-wave1-sv-locked.md`
-4. `docs/engines/LOCALIZATION_ENGINE.md`
-5. `docs/checkpoints/2026-09-04-research-evidence-engine-v1-locked.md`
-6. `docs/ROADMAP.md`
-7. `docs/engines/CLAIM_RIGHTS_ASSESSMENT_ENGINE.md`
-8. `docs/engines/README.md`
-9. `docs/CLAIMS_DESK.md` — preserve local user modifications
-10. `docs/FLIGHTCLAIMLY_KNOWLEDGE_ENGINE.md`
-11. `docs/SYSTEM_PROCESS_MAP.md`
-12. `docs/CURRENT_SPRINT.md` — historical record; preserve it
+2. `docs/checkpoints/2026-09-05-seo-localization-da-implementation.md`
+3. `docs/checkpoints/2026-09-04-build-deployment-cost-optimization-locked.md`
+4. `docs/checkpoints/2026-09-04-seo-localization-wave1-sv-locked.md`
+5. `docs/engines/LOCALIZATION_ENGINE.md`
+6. `docs/checkpoints/2026-09-04-research-evidence-engine-v1-locked.md`
+7. `docs/ROADMAP.md`
+8. `docs/engines/CLAIM_RIGHTS_ASSESSMENT_ENGINE.md`
+9. `docs/engines/README.md`
+10. `docs/CLAIMS_DESK.md` — preserve local user modifications
+11. `docs/FLIGHTCLAIMLY_KNOWLEDGE_ENGINE.md`
+12. `docs/SYSTEM_PROCESS_MAP.md`
+13. `docs/CURRENT_SPRINT.md` — historical record; preserve it
 
 ## Current state
 
@@ -28,9 +29,11 @@ Last updated: **2026-09-04**
 - 🟢 Research / Evidence Engine v1 foundation — LOCKED
 - 🟢 Localization architecture — IMPLEMENTED / AUDIT GREEN
 - 🟢 **Swedish Flight Number Localization v1 — LOCKED 2026-09-04**
+- 🟢 **Danish Flight Number Localization v1 — LOCKED 2026-09-05**
 - 🟢 **Build / Deployment Cost Optimization — LOCKED 2026-09-04**
-- 🔵 **ACTIVE NEXT: Danish Flight Number Localization v1 from canonical facts**
-- ⏭️ AFTER DK: Finnish Flight Number localization independently from canonical facts
+- 🔵 **ACTIVE NEXT: Polish Flight Number Localization v1 from canonical facts**
+- ⏭️ AFTER PL: German Flight Number localization independently from canonical facts
+- ⏭️ THEN: Finnish, Dutch and further priority markets independently from canonical facts
 - 🟡 PARALLEL: Content / Social Engine v1
 
 ## Secured SEO baseline
@@ -40,7 +43,9 @@ Last updated: **2026-09-04**
 - 3,141 route paths
 - pre-SV production build: **6,557 / 6,557** static pages
 - post-SV production build: **9,442 / 9,442** static pages
-- Flight Number detail cohort: **5,682 paths = 2,841 EN + 2,841 SV**
+- post-DA production build: **12,327 / 12,327** static pages
+- Flight Number detail cohort: **8,523 paths = 2,841 EN + 2,841 SV + 2,841 DA**
+- Danish Flight Number sitemap cluster: **2,886 URLs = 2,841 detail + 44 airline-group + 1 index**
 - no FlightAware population required for current localization sprint
 
 ## Swedish Flight Number Localization v1 — LOCKED
@@ -72,6 +77,23 @@ Final QA completed:
 
 Do not reopen SV v1 without a concrete bug, legal change or planned v2 localization pass.
 
+## Danish Flight Number Localization v1 — LOCKED
+
+Authoritative checkpoint:
+
+`docs/checkpoints/2026-09-05-seo-localization-da-implementation.md`
+
+Danish Flight Number detail, index and airline-group localization is complete and locked. QA passed for the localization architecture audit, TypeScript validation, Preview build, all four regulation/display profiles, metadata/canonical/hreflang, Preview fallback, sitemap exposure and final production build.
+
+Locked production evidence:
+
+- Preview build: **759 / 759** static pages
+- Danish Flight Number sitemap cluster: **2,886** URLs
+- Flight Number detail cohort: **8,523 = 2,841 EN + 2,841 SV + 2,841 DA**
+- final production build: **12,327 / 12,327** static pages
+
+Do not reopen DA v1 without a concrete bug, legal change or planned v2 localization pass.
+
 ## Build / Deployment Cost Optimization — LOCKED
 
 Authoritative checkpoint:
@@ -83,11 +105,11 @@ Locked strategy:
 - production retains full SSG for publishable Flight Number and Route detail cohorts
 - Vercel Preview builds use deterministic samples of 24 Flight Number entities and 24 Routes
 - valid unsampled Flight Number and Route pages were verified to render on demand in Preview mode
-- Preview build generates **691 / 691** static pages versus the secured **9,442 / 9,442** production baseline
-- this is approximately **92.7% fewer prerendered pages** in Preview; it is not asserted as an identical billing/CPU reduction
+- Preview build generates **691 / 691** static pages versus the secured **9,442 / 9,442** production baseline before DA localization
+- this was approximately **92.7% fewer prerendered pages** in Preview at that secured baseline; it is not asserted as an identical billing/CPU reduction
 - Vercel Ignored Build Step is configured with `bash ignore-build-step.sh`
 - application-affecting changes return exit 1/build; docs/Markdown-only changes return exit 0/skip
-- final production-mode build remains **9,442 / 9,442** with 5,682 Flight Number detail paths and 3,141 Route detail paths
+- production remains full SSG; current post-DA production build is **12,327 / 12,327**
 - `npm run audit:localization` remains PASS
 
 Do not move production to ISR/on-demand without a separate evidence-backed architecture decision and equivalent SEO/runtime verification.
@@ -101,36 +123,33 @@ Correct model:
 ```text
 Canonical facts → Swedish market intent/copy
 Canonical facts → Danish market intent/copy
+Canonical facts → Polish market intent/copy
+Canonical facts → German market intent/copy
 Canonical facts → Finnish market intent/copy
+Canonical facts → Dutch market intent/copy
 ```
 
-Never use `EN → SV → DA/FI` or translate Danish/Finnish from Swedish.
+Never chain translations between locale layers. Every market is built independently from canonical facts.
 
 Current publishable Flight Number SEO locales:
 
 - EN — publishable
 - SV — publishable / LOCKED
-- DA — not yet publishable
+- DA — publishable / LOCKED
+- PL — not yet publishable
+- DE — not yet publishable
 - FI — not yet publishable
+- NL — not yet publishable
 
-Do not infer Swedish readiness for route/airport/airline/country/delay-reason detail cohorts. Those remain separately controlled.
+Do not infer readiness for route/airport/airline/country/delay-reason detail cohorts. Those remain separately controlled.
 
-## ACTIVE NEXT — Danish Flight Number Localization v1
+## ACTIVE NEXT — Polish Flight Number Localization v1
 
-Build Danish independently from canonical facts using Danish market search intent, terminology and natural copy. Do not translate from Swedish.
+Build Polish independently from canonical facts using Polish market search intent, aviation/passenger-rights terminology and natural copy. Do not translate from Swedish or Danish.
 
-Required sequence:
+Use the same locked quality model as SV/DA: canonical-fact isolation, locale quality gates, regulation-aware EU261/UK261 compensation presentation, representative rendered QA, metadata/canonical/hreflang, sitemap verification, Preview build during iteration and one meaningful final production build before lock.
 
-1. inspect canonical Flight Number facts and existing localization interfaces/quality gates
-2. define Danish market terminology, search-intent patterns and controlled city-name localization where appropriate
-3. implement Danish Flight Number detail/index/airline-group localization without changing canonical facts or locked Swedish behavior
-4. keep DA non-publishable until all quality gates pass
-5. verify all EU261-only, UK261-only, dual EU261+UK261 and neither regulation/display profiles
-6. verify metadata, hero/H1/CTA, breadcrumbs, fact labels, FAQ/schema and internal-link surfaces
-7. verify canonical/hreflang/sitemap exposure only after DA publication gates are green
-8. run localization audit/typecheck and representative rendered SEO QA
-9. use Preview build strategy during iteration; perform one meaningful final production build/checkpoint before locking DK
-10. lock Danish v1, then repeat independently for Finnish
+Planned localization order after PL: **German → Finnish → Dutch → further priority markets**.
 
 ## Research / Evidence Engine v1
 
@@ -173,10 +192,10 @@ Rules:
 
 Working branch: `seo-localization-engine-v1`
 
-Optimization implementation head before documentation lock: `66b2786938d3cd5ebb3064ee43cb4f446ef06c1f` (`fix: allow preview route fallback rendering`).
+Danish lock commit: `1a2c70948f69581e26892f9ac6624c8320933317` (`docs: lock Danish Flight Number localization v1`).
 
 ## Exact resume action
 
 If resuming after a crash:
 
-**SV Flight Number Localization v1 and Build / Deployment Cost Optimization are LOCKED. Do not rerun FlightAware. Begin Danish Flight Number Localization v1 independently from canonical facts, keep DA non-publishable until all quality gates pass, then lock DK before starting FI.**
+**SV and DA Flight Number Localization v1 are LOCKED. Build Polish Flight Number Localization v1 independently from canonical facts, keep PL non-publishable until all quality gates pass, then lock PL before starting German. Planned order after that: Finnish, Dutch, then further priority markets. Do not rerun FlightAware.**
