@@ -13,6 +13,10 @@ import MajorAirlines from "@/components/seo/MajorAirlines";
 import AuthoritySection from "@/components/authority/AuthoritySection";
 import type { AuthoritySource } from "@/data/authority/shared/types";
 import KnowledgeSection from "@/components/seo/KnowledgeSection";
+import {
+  interpolateLabel,
+  type LocalizedKnowledgeLabels,
+} from "@/lib/localization";
 
 type Fact = {
   label: string;
@@ -63,6 +67,7 @@ type KnowledgePageTemplateProps = {
   facts: Fact[];
   locale: string;
   authoritySources?: AuthoritySource[];
+  labels?: LocalizedKnowledgeLabels;
 };
 
 export default function KnowledgePageTemplate({
@@ -71,80 +76,120 @@ export default function KnowledgePageTemplate({
   facts,
   locale,
   authoritySources = [],
+  labels,
 }: KnowledgePageTemplateProps) {
+  const interpolate = (template: string) =>
+    interpolateLabel(template, { name: entity.name });
+
   return (
     <>
-      <Hero entity={entity} checkUrl={checkUrl} />
+      <Hero
+        entity={entity}
+        checkUrl={checkUrl}
+        eyebrow={labels?.heroEyebrow}
+        title={labels ? interpolate(labels.heroTitle) : undefined}
+        ctaLabel={labels ? interpolate(labels.heroCta) : undefined}
+      />
 
       <KnowledgeSection className="pt-12 pb-0">
-     <QuickFacts facts={facts} />
-     </KnowledgeSection>
+        <QuickFacts
+          facts={facts}
+          title={labels?.quickFactsTitle}
+        />
+      </KnowledgeSection>
 
       {entity.mainAirlines && entity.mainAirlines.length > 0 && (
         <MajorAirlines
-          title={`Major airlines for ${entity.name}`}
+          title={
+            labels
+              ? interpolate(labels.majorAirlinesFor)
+              : `Major airlines for ${entity.name}`
+          }
           airlineSlugs={entity.mainAirlines}
           locale={locale}
         />
       )}
 
       <KnowledgeSection>
-      <Overview title={`About ${entity.name}`} body={entity.overview} />
+        <Overview
+          title={labels ? interpolate(labels.about) : `About ${entity.name}`}
+          body={entity.overview}
+        />
       </KnowledgeSection>
 
-  <KnowledgeSection>
-  <CompensationAmounts
-    title="How much compensation can you receive?"
-    intro={entity.compensationIntro}
-    amounts={entity.compensationAmounts}
-  />
-</KnowledgeSection>
+      <KnowledgeSection>
+        <CompensationAmounts
+          title={
+            labels?.compensationAmountsTitle ??
+            "How much compensation can you receive?"
+          }
+          intro={entity.compensationIntro}
+          amounts={entity.compensationAmounts}
+        />
+      </KnowledgeSection>
 
-<KnowledgeSection>
-  <PassengerRights
-    title="Passenger rights under EU261"
-    body={entity.passengerRights}
-  />
-</KnowledgeSection>
+      <KnowledgeSection>
+        <PassengerRights
+          title={labels?.passengerRightsTitle ?? "Passenger rights under EU261"}
+          body={entity.passengerRights}
+        />
+      </KnowledgeSection>
 
-<AuthoritySection
-  title="Official sources"
-  sources={authoritySources}
-/>
+      <AuthoritySection
+        title={labels?.officialSources ?? "Official sources"}
+        sources={authoritySources}
+      />
 
-<KnowledgeSection>
-  <CompensationRules
-    title="When are you entitled to compensation?"
-    body={entity.compensationRules}
-  />
-</KnowledgeSection>
+      <KnowledgeSection>
+        <CompensationRules
+          title={
+            labels?.compensationRulesTitle ??
+            "When are you entitled to compensation?"
+          }
+          body={entity.compensationRules}
+        />
+      </KnowledgeSection>
 
-<KnowledgeSection>
-  <Statistics
-    title={`${entity.name} compensation statistics`}
-    intro={entity.statisticsIntro}
-    statistics={entity.statistics}
-  />
-</KnowledgeSection>
+      <KnowledgeSection>
+        <Statistics
+          title={
+            labels
+              ? interpolate(labels.compensationStatistics)
+              : `${entity.name} compensation statistics`
+          }
+          intro={entity.statisticsIntro}
+          statistics={entity.statistics}
+        />
+      </KnowledgeSection>
 
-<KnowledgeSection>
-  <Timeline
-    title="What happens after you submit your claim?"
-    intro={entity.timelineIntro}
-    steps={entity.timeline}
-  />
-</KnowledgeSection>
+      <KnowledgeSection>
+        <Timeline
+          title={
+            labels?.claimTimelineTitle ??
+            "What happens after you submit your claim?"
+          }
+          intro={entity.timelineIntro}
+          steps={entity.timeline}
+        />
+      </KnowledgeSection>
 
       <section className="px-6 py-16">
         <div className="mx-auto grid max-w-5xl gap-10 md:grid-cols-2">
-          <ClaimProcess steps={entity.claimProcess} />
-          <CommonIssues airlineName={entity.name} issues={entity.commonIssues} />
+          <ClaimProcess
+            steps={entity.claimProcess}
+            title={labels?.claimProcessTitle}
+          />
+          <CommonIssues
+            airlineName={entity.name}
+            issues={entity.commonIssues}
+            title={labels ? interpolate(labels.commonIssuesTitle) : undefined}
+          />
         </div>
       </section>
 
       <section className="px-6 pb-20">
         <div className="mx-auto max-w-5xl">
-          <FAQ items={entity.faq} />
+          <FAQ items={entity.faq} title={labels?.faqTitle} />
         </div>
       </section>
     </>

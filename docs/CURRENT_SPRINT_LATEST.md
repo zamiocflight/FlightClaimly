@@ -1,163 +1,230 @@
 # FlightClaimly — Latest Sprint / Resume Pointer
 
-Last updated: **2026-09-03**
+Last updated: **2026-09-05**
 
-> Authoritative recovery pointer. Read this before historical sprint documentation.
+> **Authoritative crash-recovery pointer. Read this first after any session loss.**
 
-## Read Order After Session Loss
+## Read order after session loss
 
 1. `docs/CURRENT_SPRINT_LATEST.md`
-2. `docs/engines/CLAIM_RIGHTS_ASSESSMENT_ENGINE.md` — locked v1 + integration contract
-3. `docs/engines/README.md`
-4. `docs/CLAIMS_DESK.md` for Claims Desk operating framework; preserve local user modifications
-5. `docs/checkpoints/2026-09-03-passenger-rights-legal-rules-v1-start.md`
-6. `docs/checkpoints/2026-09-02-delay-reason-engine-expansion.md`
-7. `docs/checkpoints/2026-09-02-flight-number-global-seo-google.md`
-8. `docs/FLIGHTCLAIMLY_KNOWLEDGE_ENGINE.md`
-9. `docs/SYSTEM_PROCESS_MAP.md`
-10. `docs/CURRENT_SPRINT.md` — historical record; preserve it
+2. `docs/checkpoints/2026-09-05-seo-localization-nl-locked.md`
+3. `docs/checkpoints/2026-09-05-seo-localization-fi-locked.md`
+4. `docs/checkpoints/2026-09-05-seo-localization-de-locked.md`
+5. `docs/checkpoints/2026-09-05-seo-localization-pl-locked.md`
+6. `docs/checkpoints/2026-09-05-seo-localization-da-implementation.md`
+7. `docs/checkpoints/2026-09-04-build-deployment-cost-optimization-locked.md`
+8. `docs/checkpoints/2026-09-04-seo-localization-wave1-sv-locked.md`
+9. `docs/engines/LOCALIZATION_ENGINE.md`
+10. `docs/checkpoints/2026-09-04-research-evidence-engine-v1-locked.md`
+11. `docs/ROADMAP.md`
+12. `docs/engines/CLAIM_RIGHTS_ASSESSMENT_ENGINE.md`
+13. `docs/engines/README.md`
+14. `docs/CLAIMS_DESK.md` — preserve local user modifications
+15. `docs/FLIGHTCLAIMLY_KNOWLEDGE_ENGINE.md`
+16. `docs/SYSTEM_PROCESS_MAP.md`
+17. `docs/CURRENT_SPRINT.md` — historical record; preserve it
 
 ## Current state
 
-Status: **🟢 Delay Reason Engine v1 locked / 🟢 EU261 Legal Rule Layer v1 locked / 🟢 Claim Rights Assessment Engine v1 locked / 🟡 Claims Desk Assessment Integration phase 1 IMPLEMENTED — awaiting local verification**
+- 🟢 Delay Reason Engine v1 — LOCKED
+- 🟢 EU261 Legal Rule Layer v1 — LOCKED
+- 🟢 Claim Rights Assessment Engine v1 — LOCKED
+- 🟢 Claims Desk Assessment Integration phase 1 — VERIFIED
+- 🟢 Research / Evidence Engine v1 foundation — LOCKED
+- 🟢 Localization architecture — IMPLEMENTED / AUDIT GREEN
+- 🟢 **Swedish Flight Number Localization v1 — LOCKED 2026-09-04**
+- 🟢 **Danish Flight Number Localization v1 — LOCKED 2026-09-05**
+- 🟢 **Polish Flight Number Localization v1 — LOCKED 2026-09-05**
+- 🟢 **German Flight Number Localization v1 — LOCKED 2026-09-05**
+- 🟢 **Finnish Flight Number Localization v1 — LOCKED 2026-09-05**
+- 🟢 **Dutch Flight Number Localization v1 — LOCKED 2026-09-05**
+- 🟢 **Flight Number Localization Wave 1 — COMPLETE / LOCKED**
+- 🟢 **Build / Deployment Cost Optimization — LOCKED 2026-09-04**
+- 🔵 **ACTIVE NEXT: Localization Wave 2 — Swedish coordinated Knowledge cohort package**
+- ⏭️ **THEN: DA → PL → DE → FI → NL Wave 2 market packages**
+- 🟡 PARALLEL: Content / Social Engine v1
 
-## Secured baselines
+## Secured SEO baseline
 
-### Flight Number / Google
-
-- checkpoint `643266e`
-- 2,841 publishable Flight Number entities
+- 2,841 publishable canonical Flight Number entities
 - 44 represented airlines
 - 3,141 route paths
-- no FlightAware population required for current sprint
+- pre-SV production build: **6,557 / 6,557** static pages
+- post-SV production build: **9,442 / 9,442** static pages
+- post-DA production build: **12,327 / 12,327** static pages
+- post-PL production build: **15,212 / 15,212** static pages
+- post-DE production build: **18,097 / 18,097** static pages
+- post-FI production build: **20,982 / 20,982** static pages
+- post-NL production build: **23,867 / 23,867** static pages
+- Flight Number detail cohort: **19,887 paths = 2,841 × 7 published SEO locales (EN + SV + DA + PL + DE + FI + NL)**
+- Flight Number airline-group cohort: **308 paths = 44 × 7 published SEO locales**
+- each localized Flight Number market sitemap cluster: **2,886 URLs = 2,841 detail + 44 airline-group + 1 index**
+- no FlightAware population required for current localization work
 
-### Delay Reason Engine v1
+## Flight Number Localization Wave 1 — COMPLETE / LOCKED
 
-- 11 structured reasons / relationships / assessment profiles
-- audit/typecheck/build green at lock
-- public detail pages SSG
-
-### EU261 Legal Rule Layer v1
-
-- 7 authority sources
-- 18 legal references
-- 5 passenger rights
-- 17 legal rules
-- Legal Rule Resolver preserves matched / not-matched / unresolved
-- audit/typecheck/build green at lock
-
-### Claim Rights Assessment Engine v1
-
-Verified locally 2026-09-03:
-
-- `npm run audit:claim-rights` — PASS, 4 scenarios
-- `npm run typecheck` — PASS
-- `npm run build` — PASS
-- Next.js 15.5.7
-- static generation 6,557 / 6,557
-
-Status: **🟢 LOCKED v1**.
-
-## ACTIVE — Claims Desk Assessment Integration phase 1
-
-Implemented on branch `claims-desk-assessment-integration` and awaiting local verification before merge/lock.
-
-### New adapter
-
-`src/lib/claim-rights/claim-adapter.ts`
-
-Purpose: conservatively adapt the existing transactional `Claim` into the locked `ClaimRightsAssessmentInput` contract.
-
-Current behavior:
-
-- derives departure/arrival IATA from the existing claim
-- resolves airport country from Airport Registry
-- derives EU261 territory only from an explicit EU261 country/territory allow-list
-- reads structured disruption facts from existing claim `segments` only when actually present
-- maps delayed/cancelled/denied disruption labels when found
-- reads structured arrival/departure delay minutes when found
-- reads a Delay Reason slug only when already stored
-- deliberately leaves missing facts `undefined` so the Legal Rule Resolver returns unresolved rather than inventing facts
-- does not use the existing dummy precheck as legal evidence
-- does not use `compensationAmount` as proof of entitlement
-
-Public export added through `src/lib/claim-rights/index.ts`.
-
-### Claims Desk consumer
-
-`src/app/admin/claims/[id]/page.tsx` now runs:
+Authoritative final Wave 1 checkpoint: `docs/checkpoints/2026-09-05-seo-localization-nl-locked.md`
 
 ```text
-getClaimById()
-    ↓
-claimToRightsAssessmentInput()
-    ↓
-assessClaimRights()
-    ↓
-internal read-only assessment panel
+SV LOCKED → DA LOCKED → PL LOCKED → DE LOCKED → FI LOCKED → NL LOCKED
 ```
 
-The panel currently exposes:
+Published Flight Number SEO locales:
 
-- overall investigation/readiness state
-- EU261 applicability
-- compensation status
-- Article 8 potential
-- Article 9 potential
-- Delay Reason assessment when available
-- evidence/investigation targets
-- questions to resolve
-- matched/unresolved/not-matched rule counts
-- passenger-right IDs
-- authority IDs
-- legal-reference IDs
+- EN — publishable
+- SV — publishable / LOCKED
+- DA — publishable / LOCKED
+- PL — publishable / LOCKED
+- DE — publishable / LOCKED
+- FI — publishable / LOCKED
+- NL — publishable / LOCKED
 
-If the structured claim is not ready for legal review, unresolved rules remain, or an extraordinary-circumstances defence requires review, the panel explicitly displays **Deeper investigation recommended**.
+Do not reopen any locked Flight Number v1 market without a concrete bug, legal/regulatory change, evidence of materially wrong local terminology/search intent, or an explicit planned v2 pass.
 
-This is intentional: deep external research is still a product/architecture decision, not an implemented autonomous research layer.
+## Dutch Flight Number Localization v1 — LOCKED
 
-## Research layer — NOT IMPLEMENTED
+Authoritative checkpoint: `docs/checkpoints/2026-09-05-seo-localization-nl-locked.md`
 
-Current design direction only:
+Locked evidence includes:
 
-- the Claims Desk may tell the operator that deeper investigation is needed
-- a later research/evidence enrichment layer may assist with FlightAware, airline/airport statements, weather/ATC material, reputable reporting, official judgments and case law
-- source/provenance/confidence must be retained
-- the deterministic legal engine must not silently browse the web or turn unverified material into legal facts
+- authoritative Dutch passenger-rights terminology research
+- canonical-fact isolation and quality gates — PASS
+- Localization Engine architecture audit — PASS
+- TypeScript — PASS
+- Preview build — **1,031 / 1,031**
+- EU-only `A3101` — PASS
+- UK-only `A33050` — PASS
+- EU+UK `A3632` — PASS
+- neither/unresolved `A31124` — PASS with no false fixed compensation amounts
+- rendered Dutch copy/headings and controlled city names — PASS
+- metadata/canonical/hreflang — PASS through `nl`
+- unsampled Preview fallback — HTTP **200**
+- Dutch Flight Number index — PASS
+- Dutch airline-group page — PASS
+- Dutch sitemap cluster — **2,886**
+- production build — **23,867 / 23,867**
+- Flight Number detail cohort — **19,887 = 2,841 × 7**
+- Flight Number airline-group cohort — **308 = 44 × 7**
 
-Do not describe autonomous deep research as a current production capability.
+Important QA lesson: Preview sitemap URLs use the runtime origin (`http://localhost:3000`). A grep against the production hostname can therefore return zero in Preview without indicating a sitemap defect.
 
-## Customer communication — NOT IMPLEMENTED
+## Previous Wave 1 checkpoints
 
-Potential later direction: use sufficiently verified claim-specific findings to explain what FlightClaimly has found and why the case is being pursued, while withholding unnecessary litigation strategy and avoiding information that encourages customers to bypass FlightClaimly.
+- Swedish: `docs/checkpoints/2026-09-04-seo-localization-wave1-sv-locked.md`
+- Danish: `docs/checkpoints/2026-09-05-seo-localization-da-implementation.md`
+- Polish: `docs/checkpoints/2026-09-05-seo-localization-pl-locked.md`
+- German: `docs/checkpoints/2026-09-05-seo-localization-de-locked.md`
+- Finnish: `docs/checkpoints/2026-09-05-seo-localization-fi-locked.md`
 
-No customer email change is part of phase 1.
+These remain authoritative for their market-specific implementation and QA histories.
 
-## Exact next action
+## Build / Deployment Cost Optimization — LOCKED
 
-Verify the branch locally before merge, one command at a time:
+Authoritative checkpoint: `docs/checkpoints/2026-09-04-build-deployment-cost-optimization-locked.md`
 
-1. pull/fetch and switch to the integration branch without disturbing unrelated local Claims/Reijo files
-2. `npm run audit:claim-rights`
-3. `npm run typecheck`
-4. `npm run build`
-5. inspect one real claim in `/admin/claims/[id]`
+Locked strategy:
 
-If green, merge the integration and create/update a checkpoint. Do not call phase 1 locked before verification.
+- production retains full SSG for publishable Flight Number and Route detail cohorts
+- Vercel Preview builds use deterministic samples of 24 Flight Number entities and 24 Routes
+- valid unsampled Flight Number and Route pages render on demand in Preview mode
+- Vercel Ignored Build Step is configured with `bash ignore-build-step.sh`
+- application-affecting changes build; docs/Markdown-only changes skip
+- production remains full SSG; current post-NL production build is **23,867 / 23,867**
+- localization architecture audit remains required
+
+Do not move production to ISR/on-demand without a separate evidence-backed architecture decision and equivalent SEO/runtime verification.
+
+## Localization rule
+
+Localization is **not mechanical translation**. Canonical Knowledge facts remain shared and locale-neutral. Every market gets an independent search-intent, terminology and copy layer while factual/legal meaning stays invariant.
+
+Never chain translations between locale layers.
+
+Flight Number Wave 1 is locked, but this does **not** infer readiness for Route/Airport/Airline/Country/Delay Reason detail cohorts. Those remain separately controlled by Wave 2.
+
+## ACTIVE NEXT — Localization Wave 2
+
+Wave 2 proceeds **market by market**, treating the following as one coordinated Knowledge cohort package per market:
+
+- Routes
+- Airports
+- Airlines
+- Countries
+- Delay Reasons
+
+Default locked market order:
+
+```text
+SV ACTIVE NEXT → DA → PL → DE → FI → NL
+```
+
+Start with Swedish unless an explicit evidence-backed planning decision changes priority.
+
+### Required Wave 2 method per market
+
+1. inspect current canonical cohort data and existing page architecture before changes
+2. research authoritative/local market terminology and actual search intent where needed
+3. build locale copy from canonical facts; never translate from another locale layer
+4. preserve canonical-fact isolation and legal/factual invariants
+5. validate localization quality gates / publication eligibility
+6. validate metadata and market search intent
+7. validate internal linking across the coordinated package
+8. validate canonical and publishable-only hreflang
+9. validate sitemap exposure and exact expected cohort arithmetic
+10. run architecture/type validation
+11. use optimized Preview build and representative rendered QA
+12. verify unsampled Preview behavior where relevant
+13. stop Preview before the final meaningful production build
+14. run one meaningful full production build after the market package is ready
+15. write an authoritative market lock checkpoint before moving to the next market
+
+Do not rerun FlightAware merely for localization.
+
+## Research / Evidence Engine v1
+
+Status: **🟢 LOCKED 2026-09-04**.
+
+External autonomous research providers are not yet production-connected. Future FlightAware/weather/ATC/airline/airport/OpenAI/case-law providers must enter through the locked provider → registry → verification → resolver path. Research and legal evaluation remain separate; missing/conflicting facts stay unresolved until sufficiently verified.
 
 ## Architecture rules
 
 - Claim Rights Assessment Engine v1 remains locked.
-- Claims Desk adapts into the engine contract; the engine is not bent around UI needs.
+- Research and legal evaluation remain separate layers.
 - Missing facts remain unresolved.
-- Research/enrichment supplies sourced evidence/facts; deterministic legal engines evaluate them.
+- External facts retain source/provenance and append-only verification history.
+- Provider confidence is not legal verification.
+- Canonical Knowledge facts are not forked per locale.
+- Localization quality gates control SEO publication.
+- App routing support does not equal publishable Knowledge localization.
 - Customer-specific data remains transactional.
-- EU261 first; UK261/other regimes later through the same architecture.
 
-## Safety
+## Local parked work — DO NOT DISTURB
 
-- Do not run `global-core:scale` or unnecessary FlightAware population.
-- Preserve unrelated local Claims/Reijo work.
-- Do not use `git add .`, `git reset --hard`, `git clean`, or force push.
-- Preserve `docs/CURRENT_SPRINT.md` history.
-- Do not overwrite local `docs/CLAIMS_DESK.md` modifications.
+Known unrelated Claims/Reijo local work remains intentionally outside Localization commits:
+
+```text
+ M docs/CLAIMS_DESK.md
+ M scripts/test-manual-claim.ts
+?? scripts/create-reijo-claim.ts
+```
+
+Rules:
+
+- do not commit current `docs/CLAIMS_DESK.md` local modifications as part of Localization
+- do not commit real customer PII from helper scripts
+- do not use `git add .`
+- do not use `git reset --hard`
+- do not use `git clean`
+- do not force push
+
+## Branch / recovery position
+
+Working branch: `seo-localization-engine-v1`
+
+Flight Number Localization Wave 1 is complete and locked. Dutch is the final Wave 1 checkpoint. Wave 2 is now active next.
+
+## Exact resume action
+
+If resuming after a crash:
+
+**Flight Number Localization Wave 1 is COMPLETE and LOCKED: SV, DA, PL, DE, FI and NL are all locked. Current production baseline is 23,867 / 23,867 static pages with 19,887 Flight Number detail paths and 308 Flight Number airline-group paths across seven published SEO locales. Begin Localization Wave 2 with the Swedish coordinated Knowledge cohort package: Routes + Airports + Airlines + Countries + Delay Reasons. Build from canonical facts, validate the complete market package before lock, and do not infer cohort readiness from Flight Number publication. Do not rerun FlightAware. Preserve parked Claims/Reijo local work.**

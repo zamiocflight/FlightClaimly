@@ -451,13 +451,13 @@ FlightClaimly will continue to develop Claims Operations and Acquisition/Knowled
 
 ## Immediate execution order
 
-### 1. Research / Evidence Engine v1 — NEXT
+### 1. Research / Evidence Engine v1 — 🟢 LOCKED 2026-09-04
 
-Purpose:
+The v1 foundation is complete and verified. See:
 
-Make Claim Rights Assessment materially more intelligent by resolving factual gaps through structured evidence enrichment while keeping the deterministic legal engine separated from external research.
+`docs/checkpoints/2026-09-04-research-evidence-engine-v1-locked.md`
 
-Target architecture:
+Implemented architecture:
 
 ```text
 Claim
@@ -466,34 +466,46 @@ Claim Rights Assessment
   ↓
 Unresolved factual/legal questions
   ↓
-Research / Evidence Engine
-  ├─ operational flight data
-  ├─ airline evidence
-  ├─ airport evidence
-  ├─ weather
-  ├─ ATC / industrial-action material
-  ├─ official authorities
-  ├─ customer-uploaded evidence
-  └─ verified legal sources
+Research Planner
   ↓
-Evidence + provenance + confidence
+Evidence Providers
+  ↓
+Evidence Registry / provenance / confidence
+  ↓
+Append-only verification history
+  ↓
+Fact Resolver
+  ↓
+verified / conflicting / unresolved facts
   ↓
 Deterministic Legal Engine
   ↓
 Updated Claim Rights Assessment
 ```
 
-Core principles:
+Locked principles:
 
 - research and legal evaluation remain separate layers
 - every externally obtained fact retains source/provenance
-- confidence/verification state is explicit
-- unverified web material must never silently become a legal fact
+- provider confidence is not legal verification
+- fresh provider output enters the registry as unverified
+- verification decisions retain append-only provenance
+- conflicting evidence never silently becomes a legal fact
 - missing facts remain unresolved when they cannot be established safely
-- only sufficiently verified facts are fed back into deterministic legal assessment
-- v1 should be deliberately bounded rather than attempting autonomous investigation of every possible claim scenario
+- only sufficiently verified facts feed deterministic legal assessment
 
-### 2. SEO Internationalization / Localization Engine — DIRECTLY AFTER RESEARCH v1
+The foundation does **not** mean FlightAware, weather/ATC, airline/airport retrieval, OpenAI research orchestration or automatic case-law providers are already connected. Those are future integrations into this locked architecture.
+
+Verification at lock:
+
+- Research/Evidence audit PASS, 7 scenarios
+- Evidence verification provenance audit PASS
+- TypeScript typecheck PASS
+- production build PASS
+- 6,557 / 6,557 static pages generated
+- Claims Desk runtime visually verified
+
+### 2. SEO Internationalization / Localization Engine — NEXT
 
 Priority: VERY HIGH.
 
@@ -652,13 +664,14 @@ FlightClaimly now runs three parallel lanes:
 
 ```text
 PRODUCT
-Research / Evidence Engine
+Research / Evidence Engine foundation 🟢 LOCKED
+→ provider integrations
 → Manual Claims
 → Claims Desk Intelligence
 → Submission / Escalation
 
 SEO
-Internationalization architecture
+Internationalization architecture ← NEXT
 → SV / DA / FI pilot
 → quality + indexation verification
 → DE / PL / NL
@@ -682,4 +695,4 @@ Knowledge → Customer Acquisition
 Claims → Customer Recovery
 ```
 
-The next phase is to make both sides compound each other.
+The next primary technical phase is Localization, while Content/Social can move in parallel.

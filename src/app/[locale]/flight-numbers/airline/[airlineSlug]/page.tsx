@@ -1,117 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
-import {
-  flightNumberAirlineGroups,
-  getFlightNumberAirlineGroup,
-} from "@/lib/flight-numbers/catalog";
-import { flightNumberSeoLocales } from "@/lib/seo/alternates";
-
-const SITE_URL = "https://www.flightclaimly.com";
-
-type PageProps = {
-  params: Promise<{
-    locale: string;
-    airlineSlug: string;
-  }>;
-};
-
-export function generateStaticParams() {
-  return flightNumberAirlineGroups.flatMap((group) =>
-    flightNumberSeoLocales.map((locale) => ({
-      locale,
-      airlineSlug: group.airlineSlug,
-    }))
-  );
-}
-
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { locale, airlineSlug } = await params;
-
-  if (
-    !flightNumberSeoLocales.includes(
-      locale as (typeof flightNumberSeoLocales)[number]
-    )
-  ) {
-    return {};
-  }
-
-  const group = getFlightNumberAirlineGroup(airlineSlug);
-  if (!group) return {};
-
-  const canonical = `${SITE_URL}/${locale}/flight-numbers/airline/${group.airlineSlug}`;
-
-  return {
-    title: `${group.airlineName} flight numbers | Compensation guides | FlightClaimly`,
-    description: `Browse ${group.airlineName} flight-number compensation guides and find route-specific passenger-rights information for delayed or cancelled flights.`,
-    alternates: {
-      canonical,
-    },
-  };
-}
-
-export default async function AirlineFlightNumbersPage({ params }: PageProps) {
-  const { locale, airlineSlug } = await params;
-
-  if (
-    !flightNumberSeoLocales.includes(
-      locale as (typeof flightNumberSeoLocales)[number]
-    )
-  ) {
-    notFound();
-  }
-
-  const group = getFlightNumberAirlineGroup(airlineSlug);
-  if (!group) notFound();
-
-  return (
-    <main className="min-h-screen bg-slate-50 px-6 py-20">
-      <section className="mx-auto max-w-5xl">
-        <Link
-          href={`/${locale}/flight-numbers`}
-          className="text-sm font-semibold text-sky-700 hover:underline"
-        >
-          ← All flight numbers
-        </Link>
-
-        <p className="mt-8 text-sm font-semibold uppercase tracking-widest text-emerald-600">
-          {group.airlineIata} flight numbers
-        </p>
-
-        <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-950 md:text-5xl">
-          {group.airlineName} flight-number compensation guides
-        </h1>
-
-        <p className="mt-6 max-w-3xl text-lg text-slate-700">
-          Browse {group.flightNumbers.length.toLocaleString("en")} published
-          {" "}{group.airlineName} flight-number guides. Each page connects the
-          flight number with its route and relevant EU261 or UK261 passenger-rights
-          coverage.
-        </p>
-
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {group.flightNumbers.map((flightNumber) => (
-            <Link
-              key={flightNumber.slug}
-              href={`/${locale}/flight-numbers/${flightNumber.slug}`}
-              className="rounded-2xl border bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-            >
-              <h2 className="text-xl font-bold text-slate-950">
-                {flightNumber.flightNumber}
-              </h2>
-
-              <p className="mt-2 text-sm text-slate-600">
-                {flightNumber.originCountry} → {flightNumber.destinationCountry}
-              </p>
-
-              <p className="mt-4 text-sm font-semibold text-sky-700">
-                View compensation guide →
-              </p>
-            </Link>
-          ))}
-        </div>
-      </section>
-    </main>
-  );
-}
+import { flightNumberAirlineGroups, getFlightNumberAirlineGroup } from "@/lib/flight-numbers/catalog";
+import { buildLanguageAlternates, flightNumberSeoLocales } from "@/lib/seo/alternates";
+const SITE_URL = "https://www.flightclaimly.com"; type FlightNumberSeoLocale = (typeof flightNumberSeoLocales)[number]; type PageProps = { params: Promise<{ locale: string; airlineSlug: string }> };
+const copy = {
+  en: { metadataTitle: (airline: string) => `${airline} flight numbers | Compensation guides | FlightClaimly`, metadataDescription: (airline: string) => `Browse ${airline} flight-number compensation guides and find route-specific passenger-rights information for delayed or cancelled flights.`, back: "← All flight numbers", eyebrow: (iata: string) => `${iata} flight numbers`, title: (airline: string) => `${airline} flight-number compensation guides`, intro: (count: string, airline: string) => `Browse ${count} published ${airline} flight-number guides. Each page connects the flight number with its route and relevant EU261 or UK261 passenger-rights coverage.`, cta: "View compensation guide →", numberLocale: "en" },
+  sv: { metadataTitle: (airline: string) => `${airline} flygnummer | Guider om flygersättning | FlightClaimly`, metadataDescription: (airline: string) => `Utforska guider om flygersättning för ${airline} flygnummer och hitta sträckspecifik information om passagerarrättigheter vid försenade eller inställda flyg.`, back: "← Alla flygnummer", eyebrow: (iata: string) => `${iata} flygnummer`, title: (airline: string) => `${airline} flygnummer och flygersättning`, intro: (count: string, airline: string) => `Utforska ${count} publicerade guider för ${airline} flygnummer. Varje sida kopplar flygnumret till flygsträckan och de EU261- eller UK261-rättigheter som kan vara relevanta.`, cta: "Visa ersättningsguide →", numberLocale: "sv-SE" },
+  da: { metadataTitle: (airline: string) => `${airline} flynumre | Guider om flykompensation | FlightClaimly`, metadataDescription: (airline: string) => `Se guider om flykompensation for ${airline}-flynumre og rutespecifik information om flypassagerers rettigheder ved forsinkede eller aflyste fly.`, back: "← Alle flynumre", eyebrow: (iata: string) => `${iata} flynumre`, title: (airline: string) => `${airline} flynumre og flykompensation`, intro: (count: string, airline: string) => `Se ${count} publicerede guider til ${airline}-flynumre. Hver side forbinder flynummeret med ruten og de EU261- eller UK261-rettigheder, der kan være relevante.`, cta: "Se kompensationsguide →", numberLocale: "da-DK" },
+  pl: { metadataTitle: (airline: string) => `${airline} numery lotów | Odszkodowanie za lot | FlightClaimly`, metadataDescription: (airline: string) => `Sprawdź numery lotów ${airline} oraz informacje o prawach pasażera i odszkodowaniu za opóźnione lub odwołane loty.`, back: "← Wszystkie numery lotów", eyebrow: (iata: string) => `${iata} · numery lotów`, title: (airline: string) => `${airline} — numery lotów i odszkodowanie`, intro: (count: string, airline: string) => `Przeglądaj ${count} opublikowanych stron dla numerów lotów ${airline}. Każda strona łączy numer lotu z trasą oraz informacjami o prawach pasażera wynikających z EU261 lub UK261.`, cta: "Sprawdź odszkodowanie →", numberLocale: "pl-PL" },
+  de: { metadataTitle: (airline: string) => `${airline} Flugnummern | Flugentschädigung | FlightClaimly`, metadataDescription: (airline: string) => `Finden Sie ${airline} Flugnummern sowie Informationen zu Fluggastrechten und Entschädigung bei verspäteten oder annullierten Flügen.`, back: "← Alle Flugnummern", eyebrow: (iata: string) => `${iata} · Flugnummern`, title: (airline: string) => `${airline} Flugnummern und Flugentschädigung`, intro: (count: string, airline: string) => `Durchsuchen Sie ${count} veröffentlichte Seiten zu ${airline} Flugnummern. Jede Seite verbindet die Flugnummer mit der Strecke und Informationen zu möglicherweise anwendbaren Fluggastrechten nach EU261 oder UK261.`, cta: "Entschädigung prüfen →", numberLocale: "de-DE" },
+  fi: { metadataTitle: (airline: string) => `${airline} lentonumerot | Lentokorvaus | FlightClaimly`, metadataDescription: (airline: string) => `Selaa ${airline}-lentonumeroita ja tarkista tiedot lentomatkustajien oikeuksista sekä korvauksista viivästyneiden tai peruutettujen lentojen yhteydessä.`, back: "← Kaikki lentonumerot", eyebrow: (iata: string) => `${iata} · lentonumerot`, title: (airline: string) => `${airline} lentonumerot ja lentokorvaukset`, intro: (count: string, airline: string) => `Selaa ${count} julkaistua ${airline}-lentonumerosivua. Jokainen sivu yhdistää lentonumeron reittiin ja tietoihin mahdollisesti sovellettavista EU261- tai UK261-lentomatkustajan oikeuksista.`, cta: "Tarkista korvaus →", numberLocale: "fi-FI" },
+  nl: { metadataTitle: (airline: string) => `${airline} vluchtnummers | Vluchtcompensatie | FlightClaimly`, metadataDescription: (airline: string) => `Bekijk ${airline}-vluchtnummers en informatie over passagiersrechten en compensatie bij vertraagde of geannuleerde vluchten.`, back: "← Alle vluchtnummers", eyebrow: (iata: string) => `${iata} · vluchtnummers`, title: (airline: string) => `${airline} vluchtnummers en vluchtcompensatie`, intro: (count: string, airline: string) => `Bekijk ${count} gepubliceerde pagina's voor ${airline}-vluchtnummers. Elke pagina koppelt het vluchtnummer aan de route en informatie over mogelijk toepasselijke passagiersrechten onder EU261 of UK261.`, cta: "Controleer compensatie →", numberLocale: "nl-NL" },
+} as const;
+export function generateStaticParams() { return flightNumberAirlineGroups.flatMap((group) => flightNumberSeoLocales.map((locale) => ({ locale, airlineSlug: group.airlineSlug }))); }
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> { const { locale, airlineSlug } = await params; if (!flightNumberSeoLocales.includes(locale as FlightNumberSeoLocale)) return {}; const group = getFlightNumberAirlineGroup(airlineSlug); if (!group) return {}; const seoLocale = locale as FlightNumberSeoLocale; const localeCopy = copy[seoLocale]; const path = `flight-numbers/airline/${group.airlineSlug}`; const canonical = `${SITE_URL}/${seoLocale}/${path}`; return { title: localeCopy.metadataTitle(group.airlineName), description: localeCopy.metadataDescription(group.airlineName), alternates: { canonical, languages: buildLanguageAlternates(path, flightNumberSeoLocales) } }; }
+export default async function AirlineFlightNumbersPage({ params }: PageProps) { const { locale, airlineSlug } = await params; if (!flightNumberSeoLocales.includes(locale as FlightNumberSeoLocale)) notFound(); const group = getFlightNumberAirlineGroup(airlineSlug); if (!group) notFound(); const seoLocale = locale as FlightNumberSeoLocale; const localeCopy = copy[seoLocale]; const count = group.flightNumbers.length.toLocaleString(localeCopy.numberLocale); return <main className="min-h-screen bg-slate-50 px-6 py-20"><section className="mx-auto max-w-5xl"><Link href={`/${seoLocale}/flight-numbers`} className="text-sm font-semibold text-sky-700 hover:underline">{localeCopy.back}</Link><p className="mt-8 text-sm font-semibold uppercase tracking-widest text-emerald-600">{localeCopy.eyebrow(group.airlineIata)}</p><h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-950 md:text-5xl">{localeCopy.title(group.airlineName)}</h1><p className="mt-6 max-w-3xl text-lg text-slate-700">{localeCopy.intro(count, group.airlineName)}</p><div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{group.flightNumbers.map((flightNumber) => <Link key={flightNumber.slug} href={`/${seoLocale}/flight-numbers/${flightNumber.slug}`} className="rounded-2xl border bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"><h2 className="text-xl font-bold text-slate-950">{flightNumber.flightNumber}</h2><p className="mt-2 text-sm text-slate-600">{flightNumber.originCountry} → {flightNumber.destinationCountry}</p><p className="mt-4 text-sm font-semibold text-sky-700">{localeCopy.cta}</p></Link>)}</div></section></main>; }
