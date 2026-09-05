@@ -5,7 +5,7 @@ export const airportSeoLocales = ["en"] as const;
 export const airlineSeoLocales = ["en"] as const;
 export const countrySeoLocales = ["en"] as const;
 export const delayReasonSeoLocales = ["en"] as const;
-export const flightNumberSeoLocales = ["en", "sv", "da"] as const;
+export const flightNumberSeoLocales = ["en", "sv", "da", "pl"] as const;
 
 const SITE_URL = "https://www.flightclaimly.com";
 
