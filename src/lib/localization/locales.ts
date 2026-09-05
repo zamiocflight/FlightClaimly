@@ -61,6 +61,16 @@ const finnishLabels = {
   claimProcessTitle: "Näin korvausprosessi etenee", commonIssuesTitle: "Lennon {name} yleiset häiriötilanteet", faqTitle: "Usein kysytyt kysymykset", flightAirlineLinksTitle: "Lentoyhtiö",
   flightRouteLinksTitle: "Lentoreitti", airportsLinksTitle: "Lentoasemat", countriesLinksTitle: "Maat",
 } as const;
+const dutchLabels = {
+  home: "Home", flightNumbers: "Vluchtnummers", flightNumber: "Vluchtnummer", airline: "Luchtvaartmaatschappij", icaoAirlineCode: "ICAO-code luchtvaartmaatschappij",
+  originAirport: "Luchthaven van vertrek", destinationAirport: "Luchthaven van bestemming", distanceCategory: "Afstandscategorie", eu261Protection: "Bescherming onder EU261",
+  uk261Protection: "Bescherming onder UK261", aircraft: "Vliegtuigtype", scheduleSnapshot: "Dienstregelingsinformatie", yes: "Ja", no: "Nee",
+  heroEyebrow: "EU261 / UK261 · Geen schadevergoeding, geen kosten", heroTitle: "Compensatie voor vlucht {name}", heroCta: "Controleer vlucht {name}", quickFactsTitle: "Belangrijkste gegevens",
+  majorAirlinesFor: "Belangrijke luchtvaartmaatschappijen voor {name}", about: "Over {name}", compensationAmountsTitle: "Hoeveel schadevergoeding kunt u krijgen?", passengerRightsTitle: "Passagiersrechten onder EU261",
+  officialSources: "Officiële bronnen", compensationRulesTitle: "Wanneer heeft u recht op schadevergoeding?", compensationStatistics: "Compensatiegegevens voor {name}", claimTimelineTitle: "Wat gebeurt er nadat u uw claim heeft ingediend?",
+  claimProcessTitle: "Zo werkt het claimproces", commonIssuesTitle: "Veelvoorkomende problemen met vlucht {name}", faqTitle: "Veelgestelde vragen", flightAirlineLinksTitle: "Luchtvaartmaatschappij",
+  flightRouteLinksTitle: "Vliegroute", airportsLinksTitle: "Luchthavens", countriesLinksTitle: "Landen",
+} as const;
 
 /** Locale registry. Routing support does not imply publishable localized SEO content. */
 export const localeDefinitions: Record<SeoLocale, LocaleDefinition> = {
@@ -70,7 +80,7 @@ export const localeDefinitions: Record<SeoLocale, LocaleDefinition> = {
   fi: { locale: "fi", languageName: "Finnish", htmlLang: "fi", marketLabel: "Finland", labels: finnishLabels },
   de: { locale: "de", languageName: "German", htmlLang: "de", marketLabel: "Germany", labels: germanLabels },
   pl: { locale: "pl", languageName: "Polish", htmlLang: "pl", marketLabel: "Poland", labels: polishLabels },
-  nl: { locale: "nl", languageName: "Dutch", htmlLang: "nl", marketLabel: "Netherlands", labels: englishLabels },
+  nl: { locale: "nl", languageName: "Dutch", htmlLang: "nl", marketLabel: "Netherlands", labels: dutchLabels },
 };
 export function getLocaleDefinition(locale: SeoLocale): LocaleDefinition { return localeDefinitions[locale]; }
 export function interpolateLabel(template: string, values: Record<string, string>): string { return Object.entries(values).reduce((result, [key, value]) => result.replaceAll(`{${key}}`, value), template); }
