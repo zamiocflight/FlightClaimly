@@ -1,0 +1,47 @@
+import type { FlightNumber } from "@/data/flight-numbers/types";
+import { getAirportIdentityBySlug } from "@/lib/knowledge/airports";
+import type { KnowledgeLocalization } from "./types";
+
+const germanCityNames: Record<string, string> = {
+  Athens: "Athen", Belgrade: "Belgrad", Brussels: "Brüssel", Bucharest: "Bukarest", Cairo: "Kairo", Cologne: "Köln", Copenhagen: "Kopenhagen", Florence: "Florenz", Lisbon: "Lissabon", Milan: "Mailand", Moscow: "Moskau", Munich: "München", Naples: "Neapel", Prague: "Prag", Rome: "Rom", Seville: "Sevilla", Thessaloniki: "Thessaloniki", Venice: "Venedig", Vienna: "Wien", Warsaw: "Warschau", Zurich: "Zürich",
+};
+function germanCityName(city: string): string { return germanCityNames[city] ?? city; }
+function regulationLabel(flight: FlightNumber): string {
+  if (flight.eu261Eligible && flight.uk261Eligible) return "EU261 oder UK261";
+  if (flight.eu261Eligible) return "EU261";
+  if (flight.uk261Eligible) return "UK261";
+  return "den jeweils anwendbaren Fluggastrechten";
+}
+function compensationAmounts(flight: FlightNumber) {
+  if (flight.eu261Eligible && flight.uk261Eligible) return [{ label: "Bis 1.500 km", distance: "Kurzstreckenflug", amount: "€250 / £220" }, { label: "1.500–3.500 km", distance: "Mittelstreckenflug", amount: "€400 / £350" }, { label: "Über 3.500 km", distance: "Langstreckenflug", amount: "bis zu €600 / £520" }];
+  if (flight.eu261Eligible) return [{ label: "Bis 1.500 km", distance: "Kurzstreckenflug", amount: "€250" }, { label: "1.500–3.500 km", distance: "Mittelstreckenflug", amount: "€400" }, { label: "Über 3.500 km", distance: "Langstreckenflug", amount: "bis zu €600" }];
+  if (flight.uk261Eligible) return [{ label: "Bis 1.500 km", distance: "Kurzstreckenflug", amount: "£220" }, { label: "1.500–3.500 km", distance: "Mittelstreckenflug", amount: "£350" }, { label: "Über 3.500 km", distance: "Langstreckenflug", amount: "bis zu £520" }];
+  return [{ label: "Ausgleichszahlung", distance: "Abhängig von den anwendbaren Vorschriften", amount: "Einzelfallabhängig" }];
+}
+function compensationStatistics(flight: FlightNumber) {
+  if (flight.eu261Eligible && flight.uk261Eligible) return [{ label: "Maximale Ausgleichszahlung", value: "€600 / £520", description: "Die höchsten regulären Ausgleichsbeträge nach EU261 beziehungsweise UK261." }, { label: "Verspätung am Endziel", value: "3 Std.+", description: "Ein Ausgleichsanspruch wegen Verspätung setzt grundsätzlich eine Ankunftsverspätung von mindestens drei Stunden voraus." }, { label: "Regelwerk", value: "EU261 / UK261", description: "Welches Regelwerk anwendbar ist, hängt unter anderem von der Flugstrecke und dem ausführenden Luftfahrtunternehmen ab." }];
+  if (flight.eu261Eligible) return [{ label: "Maximale Ausgleichszahlung", value: "€600", description: "Der höchste reguläre Ausgleichsbetrag pro Fluggast nach EU261." }, { label: "Verspätung am Endziel", value: "3 Std.+", description: "Ein Ausgleichsanspruch wegen Verspätung setzt grundsätzlich eine Ankunftsverspätung von mindestens drei Stunden voraus." }, { label: "Regelwerk", value: "EU261", description: "Der Flug kann unter die EU-Fluggastrechte fallen." }];
+  if (flight.uk261Eligible) return [{ label: "Maximale Ausgleichszahlung", value: "£520", description: "Der höchste reguläre Ausgleichsbetrag pro Fluggast nach UK261." }, { label: "Verspätung am Endziel", value: "3 Std.+", description: "Ein Ausgleichsanspruch wegen Verspätung setzt grundsätzlich eine Ankunftsverspätung von mindestens drei Stunden voraus." }, { label: "Regelwerk", value: "UK261", description: "Der Flug kann unter die britischen Fluggastrechte fallen." }];
+  return [{ label: "Ausgleichszahlung", value: "Einzelfallabhängig", description: "Anspruch und Höhe hängen von den Vorschriften ab, die auf den konkreten Flug anwendbar sind." }, { label: "Prüfung", value: "Individuell", description: "Abflugort, Endziel, ausführendes Luftfahrtunternehmen und Ursache der Flugstörung müssen geprüft werden." }, { label: "Regelwerk", value: "Zu prüfen", description: "Diese Seite unterstellt nicht automatisch, dass EU261 oder UK261 auf diesen Flug anwendbar ist." }];
+}
+export function buildGermanFlightNumberLocalization(flight: FlightNumber): KnowledgeLocalization {
+  const origin = getAirportIdentityBySlug(flight.originAirportSlug); const destination = getAirportIdentityBySlug(flight.destinationAirportSlug);
+  const originCity = germanCityName(origin?.city ?? origin?.name ?? flight.originAirportSlug); const destinationCity = germanCityName(destination?.city ?? destination?.name ?? flight.destinationAirportSlug); const regulation = regulationLabel(flight);
+  return {
+    entityType: "flight-number", entitySlug: flight.slug, locale: "de", source: "human", status: "publishable",
+    metadata: { title: `${flight.airlineName} ${flight.flightNumber} Flugentschädigung | FlightClaimly`, description: `Prüfen Sie Ihren Anspruch auf Entschädigung bei Verspätung oder Annullierung von ${flight.airlineName} Flug ${flight.flightNumber} auf der Strecke ${originCity}–${destinationCity} nach ${regulation}.` },
+    content: {
+      intro: `${flight.airlineName} Flug ${flight.flightNumber} ist eine reguläre Verbindung auf der Strecke ${originCity}–${destinationCity}.`,
+      overview: `Fluggäste auf ${flight.airlineName} Flug ${flight.flightNumber} zwischen ${originCity} und ${destinationCity} können bei Verspätung, Annullierung oder einer anderen erheblichen Flugstörung Anspruch auf eine Ausgleichszahlung haben.`,
+      passengerRights: flight.eu261Eligible || flight.uk261Eligible ? `Für Fluggäste von Flug ${flight.flightNumber} können bei Verspätung, Annullierung oder anderen Flugstörungen die Fluggastrechte nach ${regulation} gelten.` : `Die Rechte der Fluggäste von Flug ${flight.flightNumber} hängen unter anderem vom Abflugort, Endziel, ausführenden Luftfahrtunternehmen und der Ursache der Flugstörung ab.`,
+      compensationIntro: `Ob für Flug ${flight.flightNumber} ein Anspruch auf Ausgleichszahlung besteht, hängt unter anderem von der Flugstrecke, der Art der Störung, der Verspätung am Endziel und den anwendbaren Vorschriften ab.`, compensationAmounts: compensationAmounts(flight),
+      compensationRules: `Eine Ausgleichszahlung für Flug ${flight.flightNumber} kann zustehen, wenn die rechtlichen Voraussetzungen für die Strecke ${originCity}–${destinationCity} erfüllt sind und keine Ausnahme nach ${regulation} greift.`,
+      statisticsIntro: `Die folgenden Angaben fassen wichtige Fluggastrechte zusammen, die für Flug ${flight.flightNumber} relevant sein können.`, statistics: compensationStatistics(flight),
+      timelineIntro: `Nach Einreichung Ihres Anspruchs für Flug ${flight.flightNumber} begleitet FlightClaimly Sie durch die nächsten Schritte.`,
+      timeline: [{ title: "Anspruch einreichen", description: "Prüfen Sie Ihren Flug, geben Sie die Passagierdaten an und laden Sie die erforderlichen Unterlagen hoch." }, { title: "FlightClaimly prüft den Fall", description: "Wir prüfen die Angaben und bereiten den Anspruch vor, bevor wir das Luftfahrtunternehmen kontaktieren." }, { title: "Das Luftfahrtunternehmen antwortet", description: "Die Fluggesellschaft prüft den Anspruch und kann ihn anerkennen, ablehnen oder weitere Informationen anfordern." }, { title: "Sie erhalten Ihre Auszahlung", description: "Führt der Anspruch zu einer Ausgleichszahlung, unterstützt FlightClaimly beim Abschluss des Verfahrens." }],
+      claimProcess: ["Flugdaten prüfen und die Flugstörung beschreiben.", "Ermitteln, welche Fluggastrechte anwendbar sein können.", "Passagierdaten und Buchungsnummer angeben.", "Vollmacht erteilen, damit FlightClaimly den Anspruch bearbeiten kann.", "Relevante Unterlagen hochladen.", "FlightClaimly reicht den Anspruch ein und übernimmt die Kommunikation mit dem Luftfahrtunternehmen."],
+      commonIssues: ["Ankunft mehr als drei Stunden verspätet", "Flug annulliert", "Anschlussflug verpasst", "Nichtbeförderung", "Technische Probleme", "Betriebliche Störungen", "Fehlende Besatzung", "Streik", "Schlechte Wetterbedingungen"],
+      faq: [{ question: "Habe ich bei einem verspäteten Flug Anspruch auf Entschädigung?", answer: `Möglicherweise. Wenn Sie Ihr Endziel mindestens drei Stunden verspätet erreicht haben und die weiteren Voraussetzungen erfüllt sind, kann ein Anspruch auf Ausgleichszahlung nach ${regulation} bestehen.` }, { question: "Wie hoch ist die Entschädigung?", answer: flight.eu261Eligible || flight.uk261Eligible ? `Die Höhe hängt von der Flugstrecke, den Umständen der Störung und den auf Flug ${flight.flightNumber} anwendbaren Vorschriften ab.` : "Höhe und Voraussetzungen hängen von den Fluggastrechten ab, die auf den konkreten Flug anwendbar sind." }, { question: "Welche Unterlagen benötige ich?", answer: "Eine Buchungsbestätigung oder Bordkarte reicht in der Regel aus, um die Prüfung zu beginnen. In einzelnen Fällen können weitere Unterlagen erforderlich sein." }, { question: "Wie lange dauert das Verfahren?", answer: "Die Bearbeitungsdauer hängt vom Luftfahrtunternehmen und vom Einzelfall ab. Manche Ansprüche werden innerhalb weniger Wochen erledigt, streitige Fälle können mehrere Monate dauern." }, { question: "Muss ich im Voraus bezahlen?", answer: "Nein. FlightClaimly arbeitet nach dem Prinzip: keine erfolgreiche Entschädigung, keine Gebühr. Sie zahlen nur, wenn wir für Sie eine Entschädigung durchsetzen." }],
+    }, quality: { metadataReviewed: true, terminologyReviewed: true, legalMeaningReviewed: true, contentReviewed: true },
+  };
+}
