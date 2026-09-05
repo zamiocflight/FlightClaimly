@@ -9,61 +9,38 @@ import { getInternalLinkSections } from "@/lib/seo/internalLinks";
 import { resolveAuthority } from "@/lib/authority";
 import { getAirportIdentityBySlug } from "@/lib/knowledge/airports";
 import { flightNumberSeoLocales } from "@/lib/seo/alternates";
-import { buildDanishFlightNumberLocalization, buildLocalizedMetadata, buildPolishFlightNumberLocalization, buildSwedishFlightNumberLocalization, getLocaleDefinition, resolveKnowledgeLocalization, type LocalizedKnowledgeLabels, type LocalizedSeoVariant } from "@/lib/localization";
+import { buildDanishFlightNumberLocalization, buildGermanFlightNumberLocalization, buildLocalizedMetadata, buildPolishFlightNumberLocalization, buildSwedishFlightNumberLocalization, getLocaleDefinition, resolveKnowledgeLocalization, type LocalizedKnowledgeLabels, type LocalizedSeoVariant } from "@/lib/localization";
 import type { FlightNumber } from "@/data/flight-numbers/types";
 
 type FlightNumberSeoLocale = (typeof flightNumberSeoLocales)[number];
 const PREVIEW_STATIC_SAMPLE_SIZE = 24;
 export const dynamicParams = true;
 type PageProps = { params: Promise<{ locale: string; slug: string }> };
-
-function buildCanonicalLocalization(flightNumber: FlightNumber) {
-  return { entityType: "flight-number" as const, entitySlug: flightNumber.slug, metadata: { title: `${flightNumber.flightNumber} flight compensation | FlightClaimly`, description: flightNumber.description }, content: { intro: flightNumber.intro, overview: flightNumber.overview, passengerRights: flightNumber.passengerRights, compensationIntro: flightNumber.compensationIntro, compensationAmounts: flightNumber.compensationAmounts, compensationRules: flightNumber.compensationRules, statisticsIntro: flightNumber.statisticsIntro, statistics: flightNumber.statistics, timelineIntro: flightNumber.timelineIntro, timeline: flightNumber.timeline, claimProcess: flightNumber.claimProcess, commonIssues: flightNumber.commonIssues, faq: flightNumber.faq } };
-}
+function buildCanonicalLocalization(flightNumber: FlightNumber) { return { entityType: "flight-number" as const, entitySlug: flightNumber.slug, metadata: { title: `${flightNumber.flightNumber} flight compensation | FlightClaimly`, description: flightNumber.description }, content: { intro: flightNumber.intro, overview: flightNumber.overview, passengerRights: flightNumber.passengerRights, compensationIntro: flightNumber.compensationIntro, compensationAmounts: flightNumber.compensationAmounts, compensationRules: flightNumber.compensationRules, statisticsIntro: flightNumber.statisticsIntro, statistics: flightNumber.statistics, timelineIntro: flightNumber.timelineIntro, timeline: flightNumber.timeline, claimProcess: flightNumber.claimProcess, commonIssues: flightNumber.commonIssues, faq: flightNumber.faq } }; }
 function resolveFlightNumberLocalization(flightNumber: FlightNumber, locale: FlightNumberSeoLocale) {
-  return resolveKnowledgeLocalization({ canonical: buildCanonicalLocalization(flightNumber), locale, localization: locale === "sv" ? buildSwedishFlightNumberLocalization(flightNumber) : locale === "da" ? buildDanishFlightNumberLocalization(flightNumber) : locale === "pl" ? buildPolishFlightNumberLocalization(flightNumber) : undefined });
+  return resolveKnowledgeLocalization({ canonical: buildCanonicalLocalization(flightNumber), locale, localization: locale === "sv" ? buildSwedishFlightNumberLocalization(flightNumber) : locale === "da" ? buildDanishFlightNumberLocalization(flightNumber) : locale === "pl" ? buildPolishFlightNumberLocalization(flightNumber) : locale === "de" ? buildGermanFlightNumberLocalization(flightNumber) : undefined });
 }
-function buildFlightNumberVariants(flightNumber: FlightNumber): LocalizedSeoVariant[] {
-  return flightNumberSeoLocales.map((locale) => ({ locale, path: `flight-numbers/${flightNumber.slug}`, resolution: resolveFlightNumberLocalization(flightNumber, locale) }));
-}
+function buildFlightNumberVariants(flightNumber: FlightNumber): LocalizedSeoVariant[] { return flightNumberSeoLocales.map((locale) => ({ locale, path: `flight-numbers/${flightNumber.slug}`, resolution: resolveFlightNumberLocalization(flightNumber, locale) })); }
 function getPageLabels(flightNumber: FlightNumber, locale: FlightNumberSeoLocale): LocalizedKnowledgeLabels {
   const labels = getLocaleDefinition(locale).labels;
-  if (locale !== "sv" && locale !== "da" && locale !== "pl") return labels;
-  const noFee = locale === "sv" ? "Ingen ersättning, ingen avgift" : locale === "da" ? "Ingen kompensation, intet gebyr" : "Brak wygranej, brak opłaty";
-  const rights = locale === "sv" ? "Passagerarrättigheter" : locale === "da" ? "Flypassagerers rettigheder" : "Prawa pasażerów lotniczych";
-  const accordingTo = locale === "sv" ? "enligt" : locale === "da" ? "efter" : "zgodnie z";
-  const conjunction = locale === "pl" ? "lub" : "eller";
+  if (locale !== "sv" && locale !== "da" && locale !== "pl" && locale !== "de") return labels;
+  const noFee = locale === "sv" ? "Ingen ersättning, ingen avgift" : locale === "da" ? "Ingen kompensation, intet gebyr" : locale === "pl" ? "Brak wygranej, brak opłaty" : "Keine Entschädigung, keine Gebühr";
+  const rights = locale === "sv" ? "Passagerarrättigheter" : locale === "da" ? "Flypassagerers rettigheder" : locale === "pl" ? "Prawa pasażerów lotniczych" : "Fluggastrechte";
+  const accordingTo = locale === "sv" ? "enligt" : locale === "da" ? "efter" : locale === "pl" ? "zgodnie z" : "nach";
+  const conjunction = locale === "pl" ? "lub" : locale === "de" ? "oder" : "eller";
   if (flightNumber.eu261Eligible && flightNumber.uk261Eligible) return { ...labels, heroEyebrow: `EU261 / UK261 · ${noFee}`, passengerRightsTitle: `${rights} ${accordingTo} EU261 ${conjunction} UK261` };
   if (flightNumber.eu261Eligible) return { ...labels, heroEyebrow: `EU261 · ${noFee}`, passengerRightsTitle: `${rights} ${accordingTo} EU261` };
   if (flightNumber.uk261Eligible) return { ...labels, heroEyebrow: `UK261 · ${noFee}`, passengerRightsTitle: `${rights} ${accordingTo} UK261` };
-  return { ...labels, heroEyebrow: `${rights} · ${noFee}`, passengerRightsTitle: locale === "sv" ? `Passagerarrättigheter för ${flightNumber.flightNumber}` : locale === "da" ? `Flypassagerers rettigheder for ${flightNumber.flightNumber}` : `Prawa pasażerów lotu ${flightNumber.flightNumber}` };
+  return { ...labels, heroEyebrow: `${rights} · ${noFee}`, passengerRightsTitle: locale === "sv" ? `Passagerarrättigheter för ${flightNumber.flightNumber}` : locale === "da" ? `Flypassagerers rettigheder for ${flightNumber.flightNumber}` : locale === "pl" ? `Prawa pasażerów lotu ${flightNumber.flightNumber}` : `Fluggastrechte für Flug ${flightNumber.flightNumber}` };
 }
 function getFlightNumbersForStaticBuild() { if (process.env.VERCEL_ENV === "preview") return publishableFlightNumbers.slice(0, PREVIEW_STATIC_SAMPLE_SIZE); return publishableFlightNumbers; }
 export function generateStaticParams() { return getFlightNumbersForStaticBuild().flatMap((flightNumber) => flightNumberSeoLocales.map((locale) => ({ locale, slug: flightNumber.slug }))); }
-export async function generateMetadata({ params }: PageProps) {
-  const { locale, slug } = await params; if (!flightNumberSeoLocales.includes(locale as FlightNumberSeoLocale)) return {};
-  const flightNumber = getFlightNumberBySlug(slug); if (!flightNumber) return {};
-  const seoLocale = locale as FlightNumberSeoLocale; const resolution = resolveFlightNumberLocalization(flightNumber, seoLocale);
-  return buildLocalizedMetadata({ locale: seoLocale, path: `flight-numbers/${flightNumber.slug}`, resolution, variants: buildFlightNumberVariants(flightNumber) });
-}
+export async function generateMetadata({ params }: PageProps) { const { locale, slug } = await params; if (!flightNumberSeoLocales.includes(locale as FlightNumberSeoLocale)) return {}; const flightNumber = getFlightNumberBySlug(slug); if (!flightNumber) return {}; const seoLocale = locale as FlightNumberSeoLocale; const resolution = resolveFlightNumberLocalization(flightNumber, seoLocale); return buildLocalizedMetadata({ locale: seoLocale, path: `flight-numbers/${flightNumber.slug}`, resolution, variants: buildFlightNumberVariants(flightNumber) }); }
 export default async function FlightNumberPage({ params }: PageProps) {
-  const { locale, slug } = await params; if (!flightNumberSeoLocales.includes(locale as FlightNumberSeoLocale)) notFound();
-  const flightNumber = getFlightNumberBySlug(slug); if (!flightNumber) notFound();
-  const seoLocale = locale as FlightNumberSeoLocale; const resolution = resolveFlightNumberLocalization(flightNumber, seoLocale); if (resolution.publicationStatus !== "publishable") notFound();
-  const labels = getPageLabels(flightNumber, seoLocale); const content = resolution.content;
+  const { locale, slug } = await params; if (!flightNumberSeoLocales.includes(locale as FlightNumberSeoLocale)) notFound(); const flightNumber = getFlightNumberBySlug(slug); if (!flightNumber) notFound();
+  const seoLocale = locale as FlightNumberSeoLocale; const resolution = resolveFlightNumberLocalization(flightNumber, seoLocale); if (resolution.publicationStatus !== "publishable") notFound(); const labels = getPageLabels(flightNumber, seoLocale); const content = resolution.content;
   const knowledgeEntity = { ...flightNumber, name: flightNumber.flightNumber, intro: content?.intro ?? flightNumber.intro, overview: content?.overview ?? flightNumber.overview, passengerRights: content?.passengerRights ?? flightNumber.passengerRights, compensationIntro: content?.compensationIntro ?? flightNumber.compensationIntro, compensationAmounts: content?.compensationAmounts ?? flightNumber.compensationAmounts, compensationRules: content?.compensationRules ?? flightNumber.compensationRules, statisticsIntro: content?.statisticsIntro ?? flightNumber.statisticsIntro, statistics: content?.statistics ?? flightNumber.statistics, timelineIntro: content?.timelineIntro ?? flightNumber.timelineIntro, timeline: content?.timeline ?? flightNumber.timeline, claimProcess: content?.claimProcess ?? flightNumber.claimProcess, commonIssues: content?.commonIssues ?? flightNumber.commonIssues, faq: content?.faq ?? flightNumber.faq };
-  const originAirport = getAirportIdentityBySlug(flightNumber.originAirportSlug); const destinationAirport = getAirportIdentityBySlug(flightNumber.destinationAirportSlug);
-  const checkUrl = `/${seoLocale}/check/direct-or-layover`; const authoritySources = resolveAuthority({ entityType: "flight-number", slug: flightNumber.slug, entity: flightNumber });
+  const originAirport = getAirportIdentityBySlug(flightNumber.originAirportSlug); const destinationAirport = getAirportIdentityBySlug(flightNumber.destinationAirportSlug); const checkUrl = `/${seoLocale}/check/direct-or-layover`; const authoritySources = resolveAuthority({ entityType: "flight-number", slug: flightNumber.slug, entity: flightNumber });
   const internalLinkSections = getInternalLinkSections("flight-number", flightNumber.slug, seoLocale, { "Flight airline": labels.flightAirlineLinksTitle, "Flight route": labels.flightRouteLinksTitle, Airports: labels.airportsLinksTitle, Countries: labels.countriesLinksTitle });
-  return <main className="min-h-screen bg-slate-50">
-    <FAQSchema items={knowledgeEntity.faq} />
-    <BreadcrumbSchema items={[{ name: labels.home, url: `https://www.flightclaimly.com/${seoLocale}` }, { name: labels.flightNumbers, url: `https://www.flightclaimly.com/${seoLocale}/flight-numbers` }, { name: flightNumber.airlineName, url: `https://www.flightclaimly.com/${seoLocale}/flight-numbers/airline/${flightNumber.airline}` }, { name: flightNumber.flightNumber, url: `https://www.flightclaimly.com/${seoLocale}/flight-numbers/${flightNumber.slug}` }]} />
-    <KnowledgePageTemplate entity={knowledgeEntity} checkUrl={checkUrl} locale={seoLocale} authoritySources={authoritySources} labels={labels} facts={[
-      { label: labels.flightNumber, value: flightNumber.flightNumber }, { label: labels.airline, value: flightNumber.airlineIata }, { label: labels.icaoAirlineCode, value: flightNumber.airlineIcao },
-      { label: labels.originAirport, value: originAirport?.name ?? flightNumber.originAirportSlug }, { label: labels.destinationAirport, value: destinationAirport?.name ?? flightNumber.destinationAirportSlug }, { label: labels.distanceCategory, value: flightNumber.distanceBand },
-      { label: labels.eu261Protection, value: flightNumber.eu261Eligible ? labels.yes : labels.no }, { label: labels.uk261Protection, value: flightNumber.uk261Eligible ? labels.yes : labels.no },
-      ...(flightNumber.aircraft ? [{ label: labels.aircraft, value: flightNumber.aircraft }] : []), ...(flightNumber.schedule ? [{ label: labels.scheduleSnapshot, value: flightNumber.schedule }] : []),
-    ]} />
-    <InternalLinks sections={internalLinkSections} />
-  </main>;
+  return <main className="min-h-screen bg-slate-50"><FAQSchema items={knowledgeEntity.faq} /><BreadcrumbSchema items={[{ name: labels.home, url: `https://www.flightclaimly.com/${seoLocale}` }, { name: labels.flightNumbers, url: `https://www.flightclaimly.com/${seoLocale}/flight-numbers` }, { name: flightNumber.airlineName, url: `https://www.flightclaimly.com/${seoLocale}/flight-numbers/airline/${flightNumber.airline}` }, { name: flightNumber.flightNumber, url: `https://www.flightclaimly.com/${seoLocale}/flight-numbers/${flightNumber.slug}` }]} /><KnowledgePageTemplate entity={knowledgeEntity} checkUrl={checkUrl} locale={seoLocale} authoritySources={authoritySources} labels={labels} facts={[{ label: labels.flightNumber, value: flightNumber.flightNumber }, { label: labels.airline, value: flightNumber.airlineIata }, { label: labels.icaoAirlineCode, value: flightNumber.airlineIcao }, { label: labels.originAirport, value: originAirport?.name ?? flightNumber.originAirportSlug }, { label: labels.destinationAirport, value: destinationAirport?.name ?? flightNumber.destinationAirportSlug }, { label: labels.distanceCategory, value: flightNumber.distanceBand }, { label: labels.eu261Protection, value: flightNumber.eu261Eligible ? labels.yes : labels.no }, { label: labels.uk261Protection, value: flightNumber.uk261Eligible ? labels.yes : labels.no }, ...(flightNumber.aircraft ? [{ label: labels.aircraft, value: flightNumber.aircraft }] : []), ...(flightNumber.schedule ? [{ label: labels.scheduleSnapshot, value: flightNumber.schedule }] : [])]} /><InternalLinks sections={internalLinkSections} /></main>;
 }
