@@ -29,6 +29,7 @@ export { buildDanishFlightNumberLocalization } from "./flight-number-da";
 export { buildPolishFlightNumberLocalization } from "./flight-number-pl";
 export { buildGermanFlightNumberLocalization } from "./flight-number-de";
 export { buildFinnishFlightNumberLocalization } from "./flight-number-fi";
+export { buildDutchFlightNumberLocalization } from "./flight-number-nl";
 export type {
   KnowledgeLocalization,
   LocalizableKnowledgeEntityType,
