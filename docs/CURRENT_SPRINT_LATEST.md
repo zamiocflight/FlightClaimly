@@ -32,30 +32,56 @@ Last updated: **2026-09-05**
 - 🟢 Claims Desk Assessment Integration phase 1 — VERIFIED
 - 🟢 Research / Evidence Engine v1 foundation — LOCKED
 - 🟢 Localization architecture — IMPLEMENTED / AUDIT GREEN
-- 🟢 **Swedish Flight Number Localization v1 — LOCKED 2026-09-04**
-- 🟢 **Danish Flight Number Localization v1 — LOCKED 2026-09-05**
-- 🟢 **Polish Flight Number Localization v1 — LOCKED 2026-09-05**
-- 🟢 **German Flight Number Localization v1 — LOCKED 2026-09-05**
-- 🟢 **Finnish Flight Number Localization v1 — LOCKED 2026-09-05**
-- 🟢 **Dutch Flight Number Localization v1 — LOCKED 2026-09-05**
-- 🟢 **Flight Number Localization Wave 1 — COMPLETE / LOCKED**
-- 🟢 **Build / Deployment Cost Optimization — LOCKED 2026-09-04**
+- 🟢 **Flight Number Localization Wave 1 — COMPLETE / LOCKED / LIVE IN PRODUCTION 2026-09-05**
+- 🟢 **SV → DA → PL → DE → FI → NL Flight Number markets — LOCKED**
+- 🟢 **Production SEO launch verification — PASS 2026-09-05**
+- 🟡 **Google discovery/indexing handoff — IN PROGRESS**
 - 🔵 **ACTIVE NEXT: Localization Wave 2 — Swedish coordinated Knowledge cohort package**
 - ⏭️ **THEN: DA → PL → DE → FI → NL Wave 2 market packages**
 - 🟡 PARALLEL: Content / Social Engine v1
+
+## Production launch / Google handoff — 2026-09-05
+
+Wave 1 was promoted through PR #1 from `seo-localization-engine-v1` to `main` and successfully deployed by Vercel Production.
+
+Live verification completed after deployment:
+
+- representative Dutch detail URL `/nl/flight-numbers/a3101` changed from pre-release HTTP 404 to **HTTP 200**
+- `robots.txt` allows public crawling and disallows `/admin` and `/api`
+- `robots.txt` references `https://www.flightclaimly.com/sitemap.xml`
+- live `sitemap.xml` returns **HTTP 200** with `application/xml`
+- live Dutch Flight Number sitemap cluster count verified at **2,886 URLs**
+- representative Dutch detail canonical points to its exact NL URL
+- representative Dutch detail hreflang contains exactly the seven published SEO locales: EN, SV, DA, PL, DE, FI, NL
+- representative Dutch detail has no `noindex` / Googlebot meta blocker
+
+Google Search Console state at handoff:
+
+- existing sitemap registration is healthy / processed
+- Search Console still showed **6,336 discovered pages** and `Last read: 2026-09-04`, therefore it had not yet re-read the newly deployed 2026-09-05 sitemap at the time of verification
+- manual URL Inspection request accepted (green `Indexing requested`) for Dutch detail `/nl/flight-numbers/a3101`
+- manual hub indexing requests accepted for `/nl/flight-numbers`, `/sv/flight-numbers`, `/da/flight-numbers`, `/pl/flight-numbers`
+- manual request for `/de/flight-numbers` returned a temporary Search Console error (`Could not submit indexing request. Try again later.`) after several rapid requests
+- stop manual requests for now; retry DE and FI later rather than repeatedly submitting
+- do not manually submit thousands of detail URLs; sitemap discovery is the mass-discovery mechanism
+
+### Google follow-up
+
+On the next check, inspect the existing sitemap in Search Console. The first useful milestone is that `Last read` advances beyond 2026-09-04 and discovered-page counts begin reflecting the new sitemap. Do not interpret lack of immediate indexing as a production defect.
+
+If manual URL Inspection is available again, request the remaining strategic hubs only:
+
+1. `/de/flight-numbers`
+2. `/fi/flight-numbers`
+
+Then stop manual requests and let sitemap/crawl discovery proceed.
 
 ## Secured SEO baseline
 
 - 2,841 publishable canonical Flight Number entities
 - 44 represented airlines
 - 3,141 route paths
-- pre-SV production build: **6,557 / 6,557** static pages
-- post-SV production build: **9,442 / 9,442** static pages
-- post-DA production build: **12,327 / 12,327** static pages
-- post-PL production build: **15,212 / 15,212** static pages
-- post-DE production build: **18,097 / 18,097** static pages
-- post-FI production build: **20,982 / 20,982** static pages
-- post-NL production build: **23,867 / 23,867** static pages
+- production build after Wave 1: **23,867 / 23,867** static pages
 - Flight Number detail cohort: **19,887 paths = 2,841 × 7 published SEO locales (EN + SV + DA + PL + DE + FI + NL)**
 - Flight Number airline-group cohort: **308 paths = 44 × 7 published SEO locales**
 - each localized Flight Number market sitemap cluster: **2,886 URLs = 2,841 detail + 44 airline-group + 1 index**
@@ -66,57 +92,10 @@ Last updated: **2026-09-05**
 Authoritative final Wave 1 checkpoint: `docs/checkpoints/2026-09-05-seo-localization-nl-locked.md`
 
 ```text
-SV LOCKED → DA LOCKED → PL LOCKED → DE LOCKED → FI LOCKED → NL LOCKED
+SV LOCKED → DA LOCKED → PL LOCKED → DE LOCKED → FI LOCKED → NL LOCKED → PRODUCTION LIVE
 ```
 
-Published Flight Number SEO locales:
-
-- EN — publishable
-- SV — publishable / LOCKED
-- DA — publishable / LOCKED
-- PL — publishable / LOCKED
-- DE — publishable / LOCKED
-- FI — publishable / LOCKED
-- NL — publishable / LOCKED
-
 Do not reopen any locked Flight Number v1 market without a concrete bug, legal/regulatory change, evidence of materially wrong local terminology/search intent, or an explicit planned v2 pass.
-
-## Dutch Flight Number Localization v1 — LOCKED
-
-Authoritative checkpoint: `docs/checkpoints/2026-09-05-seo-localization-nl-locked.md`
-
-Locked evidence includes:
-
-- authoritative Dutch passenger-rights terminology research
-- canonical-fact isolation and quality gates — PASS
-- Localization Engine architecture audit — PASS
-- TypeScript — PASS
-- Preview build — **1,031 / 1,031**
-- EU-only `A3101` — PASS
-- UK-only `A33050` — PASS
-- EU+UK `A3632` — PASS
-- neither/unresolved `A31124` — PASS with no false fixed compensation amounts
-- rendered Dutch copy/headings and controlled city names — PASS
-- metadata/canonical/hreflang — PASS through `nl`
-- unsampled Preview fallback — HTTP **200**
-- Dutch Flight Number index — PASS
-- Dutch airline-group page — PASS
-- Dutch sitemap cluster — **2,886**
-- production build — **23,867 / 23,867**
-- Flight Number detail cohort — **19,887 = 2,841 × 7**
-- Flight Number airline-group cohort — **308 = 44 × 7**
-
-Important QA lesson: Preview sitemap URLs use the runtime origin (`http://localhost:3000`). A grep against the production hostname can therefore return zero in Preview without indicating a sitemap defect.
-
-## Previous Wave 1 checkpoints
-
-- Swedish: `docs/checkpoints/2026-09-04-seo-localization-wave1-sv-locked.md`
-- Danish: `docs/checkpoints/2026-09-05-seo-localization-da-implementation.md`
-- Polish: `docs/checkpoints/2026-09-05-seo-localization-pl-locked.md`
-- German: `docs/checkpoints/2026-09-05-seo-localization-de-locked.md`
-- Finnish: `docs/checkpoints/2026-09-05-seo-localization-fi-locked.md`
-
-These remain authoritative for their market-specific implementation and QA histories.
 
 ## Build / Deployment Cost Optimization — LOCKED
 
@@ -129,7 +108,7 @@ Locked strategy:
 - valid unsampled Flight Number and Route pages render on demand in Preview mode
 - Vercel Ignored Build Step is configured with `bash ignore-build-step.sh`
 - application-affecting changes build; docs/Markdown-only changes skip
-- production remains full SSG; current post-NL production build is **23,867 / 23,867**
+- production remains full SSG; current production baseline is **23,867 / 23,867**
 - localization architecture audit remains required
 
 Do not move production to ISR/on-demand without a separate evidence-backed architecture decision and equivalent SEO/runtime verification.
@@ -219,12 +198,12 @@ Rules:
 
 ## Branch / recovery position
 
-Working branch: `seo-localization-engine-v1`
+Wave 1 source branch: `seo-localization-engine-v1`.
 
-Flight Number Localization Wave 1 is complete and locked. Dutch is the final Wave 1 checkpoint. Wave 2 is now active next.
+Wave 1 is merged to `main` and live in Production. Do not continue new Wave 2 implementation on the completed Wave 1 branch without an explicit branch decision. Parked local Claims/Reijo work must remain untouched.
 
 ## Exact resume action
 
-If resuming after a crash:
+If resuming after a pause/crash:
 
-**Flight Number Localization Wave 1 is COMPLETE and LOCKED: SV, DA, PL, DE, FI and NL are all locked. Current production baseline is 23,867 / 23,867 static pages with 19,887 Flight Number detail paths and 308 Flight Number airline-group paths across seven published SEO locales. Begin Localization Wave 2 with the Swedish coordinated Knowledge cohort package: Routes + Airports + Airlines + Countries + Delay Reasons. Build from canonical facts, validate the complete market package before lock, and do not infer cohort readiness from Flight Number publication. Do not rerun FlightAware. Preserve parked Claims/Reijo local work.**
+**Flight Number Localization Wave 1 is COMPLETE, LOCKED, merged to main and LIVE in Production. Production SEO launch verification passed: representative NL detail is HTTP 200, robots/sitemap are healthy, NL sitemap cluster is 2,886, canonical/hreflang are correct, and no noindex blocker exists. Google Search Console had not yet re-read the 2026-09-05 sitemap at pause time; manual indexing was accepted for NL detail plus NL/SV/DA/PL hubs, while DE hit a temporary request error and FI was not attempted. Retry only DE/FI later, then rely on sitemap discovery. ACTIVE NEXT implementation is Localization Wave 2 starting with the Swedish coordinated package Routes + Airports + Airlines + Countries + Delay Reasons, then DA → PL → DE → FI → NL. Build from canonical facts, validate the complete market package before lock, do not rerun FlightAware, and preserve parked Claims/Reijo local work.**
