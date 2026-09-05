@@ -34,7 +34,9 @@ Last updated: **2026-09-05**
 - 🟢 **Polish Flight Number Localization v1 — LOCKED 2026-09-05**
 - 🟢 **Build / Deployment Cost Optimization — LOCKED 2026-09-04**
 - 🔵 **ACTIVE NEXT: German Flight Number Localization v1 from canonical facts**
-- ⏭️ AFTER DE: Finnish, Dutch and further priority markets independently from canonical facts
+- ⏭️ **THEN: Finnish Flight Number Localization v1**
+- ⏭️ **THEN: Dutch Flight Number Localization v1**
+- ⏭️ **THEN: Localization Wave 2 — market by market across Routes + Airports + Airlines + Countries + Delay Reasons**
 - 🟡 PARALLEL: Content / Social Engine v1
 
 ## Secured SEO baseline
@@ -148,6 +150,36 @@ Current publishable Flight Number SEO locales:
 
 Do not infer readiness for route/airport/airline/country/delay-reason detail cohorts. Those remain separately controlled.
 
+## LOCKED localization wave plan
+
+### Wave 1 — Flight Numbers
+
+Complete Flight Number Localization v1 market by market. Each locale is built independently from canonical facts and locked only after its full quality gate.
+
+Locked/current order:
+
+`SV LOCKED → DA LOCKED → PL LOCKED → DE NEXT → FI → NL`
+
+After Dutch Flight Number Localization v1 is locked, Wave 1 for the currently prioritized market set is complete.
+
+### Wave 2 — Knowledge cohorts
+
+After Wave 1, return to each market separately and localize the next Knowledge SEO package **as one market-level wave**:
+
+- Routes
+- Airports
+- Airlines
+- Countries
+- Delay Reasons
+
+Wave 2 market order begins again from the established markets, starting with Swedish, then Danish, Polish, German, Finnish and Dutch unless a later evidence-backed prioritization decision explicitly changes the order.
+
+For each Wave 2 market, treat the five cohorts as one coordinated localization package while retaining cohort-specific quality gates where needed. Validate market search intent, terminology, metadata, internal linking, canonical/hreflang, sitemap exposure, rendered pages and production behavior before locking that market's Wave 2 package and moving to the next market.
+
+Wave 2 must continue to obey canonical-fact isolation. Do not mechanically translate between locale layers and do not assume Flight Number publication automatically makes any other Knowledge cohort publishable.
+
+This Wave 1 → Wave 2 sequence is **LOCKED as the localization execution plan**. Change it only through an explicit planning decision, not opportunistically during implementation.
+
 ## ACTIVE NEXT — German Flight Number Localization v1
 
 Build German independently from canonical facts using German market search intent, aviation/passenger-rights terminology and natural German copy. Do not translate from Swedish, Danish or Polish.
@@ -156,7 +188,7 @@ Use the same locked quality model as SV/DA/PL: canonical-fact isolation, locale 
 
 Keep DE non-publishable until all quality gates pass.
 
-Planned localization order after DE: **Finnish → Dutch → further priority markets**.
+After DE: **Finnish Flight Number Localization v1 → Dutch Flight Number Localization v1 → Localization Wave 2**.
 
 ## Research / Evidence Engine v1
 
@@ -207,4 +239,4 @@ Polish lock checkpoint commit: `66d20dc95083e9bae851185b5efff7f61e190d3a` (`docs
 
 If resuming after a crash:
 
-**SV, DA and PL Flight Number Localization v1 are LOCKED. Start German Flight Number Localization v1 independently from canonical facts. Keep DE non-publishable until all quality gates pass. Then continue Finnish, Dutch and further priority markets. Do not rerun FlightAware.**
+**SV, DA and PL Flight Number Localization v1 are LOCKED. Continue Wave 1 with German, then Finnish, then Dutch Flight Number Localization v1, each independently from canonical facts and locked separately. After NL is locked, begin Wave 2 market by market across Routes + Airports + Airlines + Countries + Delay Reasons, starting again with Swedish unless an explicit planning decision changes priority. Do not rerun FlightAware.**
