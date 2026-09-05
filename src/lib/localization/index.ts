@@ -25,6 +25,7 @@ export type {
   LocalizedSeoVariant,
 } from "./seo";
 export { buildSwedishFlightNumberLocalization } from "./flight-number-sv";
+export { buildDanishFlightNumberLocalization } from "./flight-number-da";
 export type {
   KnowledgeLocalization,
   LocalizableKnowledgeEntityType,

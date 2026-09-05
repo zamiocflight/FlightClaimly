@@ -72,6 +72,42 @@ const swedishLabels = {
   countriesLinksTitle: "Länder",
 } as const;
 
+const danishLabels = {
+  home: "Forside",
+  flightNumbers: "Flynumre",
+  flightNumber: "Flynummer",
+  airline: "Flyselskab",
+  icaoAirlineCode: "Flyselskabets ICAO-kode",
+  originAirport: "Afgangslufthavn",
+  destinationAirport: "Destinationslufthavn",
+  distanceCategory: "Distancekategori",
+  eu261Protection: "Beskyttelse efter EU261",
+  uk261Protection: "Beskyttelse efter UK261",
+  aircraft: "Flytype",
+  scheduleSnapshot: "Køreplansoplysning",
+  yes: "Ja",
+  no: "Nej",
+  heroEyebrow: "EU261 / UK261 · Ingen kompensation, intet gebyr",
+  heroTitle: "Kompensation for {name}",
+  heroCta: "Tjek dit {name}-fly",
+  quickFactsTitle: "Hurtige fakta",
+  majorAirlinesFor: "Større flyselskaber for {name}",
+  about: "Om {name}",
+  compensationAmountsTitle: "Hvor meget kan du få i kompensation?",
+  passengerRightsTitle: "Flypassagerers rettigheder efter EU261",
+  officialSources: "Officielle kilder",
+  compensationRulesTitle: "Hvornår kan du have ret til kompensation?",
+  compensationStatistics: "Kompensationsfakta for {name}",
+  claimTimelineTitle: "Hvad sker der, efter du har indsendt dit krav?",
+  claimProcessTitle: "Sådan fungerer processen",
+  commonIssuesTitle: "Almindelige flyforstyrrelser for {name}",
+  faqTitle: "Ofte stillede spørgsmål",
+  flightAirlineLinksTitle: "Flyselskab for flyvningen",
+  flightRouteLinksTitle: "Flyrute",
+  airportsLinksTitle: "Lufthavne",
+  countriesLinksTitle: "Lande",
+} as const;
+
 /**
  * Locale registry for the Localization Engine.
  *
@@ -84,67 +120,19 @@ const swedishLabels = {
  * indexable SEO content.
  */
 export const localeDefinitions: Record<SeoLocale, LocaleDefinition> = {
-  en: {
-    locale: "en",
-    languageName: "English",
-    htmlLang: "en",
-    marketLabel: "English",
-    labels: englishLabels,
-  },
-  sv: {
-    locale: "sv",
-    languageName: "Swedish",
-    htmlLang: "sv",
-    marketLabel: "Sweden",
-    labels: swedishLabels,
-  },
-  da: {
-    locale: "da",
-    languageName: "Danish",
-    htmlLang: "da",
-    marketLabel: "Denmark",
-    labels: englishLabels,
-  },
-  fi: {
-    locale: "fi",
-    languageName: "Finnish",
-    htmlLang: "fi",
-    marketLabel: "Finland",
-    labels: englishLabels,
-  },
-  de: {
-    locale: "de",
-    languageName: "German",
-    htmlLang: "de",
-    marketLabel: "Germany",
-    labels: englishLabels,
-  },
-  pl: {
-    locale: "pl",
-    languageName: "Polish",
-    htmlLang: "pl",
-    marketLabel: "Poland",
-    labels: englishLabels,
-  },
-  nl: {
-    locale: "nl",
-    languageName: "Dutch",
-    htmlLang: "nl",
-    marketLabel: "Netherlands",
-    labels: englishLabels,
-  },
+  en: { locale: "en", languageName: "English", htmlLang: "en", marketLabel: "English", labels: englishLabels },
+  sv: { locale: "sv", languageName: "Swedish", htmlLang: "sv", marketLabel: "Sweden", labels: swedishLabels },
+  da: { locale: "da", languageName: "Danish", htmlLang: "da", marketLabel: "Denmark", labels: danishLabels },
+  fi: { locale: "fi", languageName: "Finnish", htmlLang: "fi", marketLabel: "Finland", labels: englishLabels },
+  de: { locale: "de", languageName: "German", htmlLang: "de", marketLabel: "Germany", labels: englishLabels },
+  pl: { locale: "pl", languageName: "Polish", htmlLang: "pl", marketLabel: "Poland", labels: englishLabels },
+  nl: { locale: "nl", languageName: "Dutch", htmlLang: "nl", marketLabel: "Netherlands", labels: englishLabels },
 };
 
 export function getLocaleDefinition(locale: SeoLocale): LocaleDefinition {
   return localeDefinitions[locale];
 }
 
-export function interpolateLabel(
-  template: string,
-  values: Record<string, string>,
-): string {
-  return Object.entries(values).reduce(
-    (result, [key, value]) => result.replaceAll(`{${key}}`, value),
-    template,
-  );
+export function interpolateLabel(template: string, values: Record<string, string>): string {
+  return Object.entries(values).reduce((result, [key, value]) => result.replaceAll(`{${key}}`, value), template);
 }
