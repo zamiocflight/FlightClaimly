@@ -11,7 +11,6 @@ const englishLabels = {
   commonIssuesTitle: "Common {name} disruption types", faqTitle: "Frequently asked questions", flightAirlineLinksTitle: "Flight airline", flightRouteLinksTitle: "Flight route",
   airportsLinksTitle: "Airports", countriesLinksTitle: "Countries",
 } as const;
-
 const swedishLabels = {
   home: "Hem", flightNumbers: "Flygnummer", flightNumber: "Flygnummer", airline: "Flygbolag", icaoAirlineCode: "ICAO-kod för flygbolaget",
   originAirport: "Avgångsflygplats", destinationAirport: "Destinationsflygplats", distanceCategory: "Distanskategori", eu261Protection: "Skydd enligt EU261",
@@ -22,7 +21,6 @@ const swedishLabels = {
   claimProcessTitle: "Så fungerar ersättningsprocessen", commonIssuesTitle: "Vanliga störningar för {name}", faqTitle: "Vanliga frågor", flightAirlineLinksTitle: "Flygbolag för flygningen",
   flightRouteLinksTitle: "Flygsträcka", airportsLinksTitle: "Flygplatser", countriesLinksTitle: "Länder",
 } as const;
-
 const danishLabels = {
   home: "Forside", flightNumbers: "Flynumre", flightNumber: "Flynummer", airline: "Flyselskab", icaoAirlineCode: "Flyselskabets ICAO-kode",
   originAirport: "Afgangslufthavn", destinationAirport: "Destinationslufthavn", distanceCategory: "Distancekategori", eu261Protection: "Beskyttelse efter EU261",
@@ -33,7 +31,6 @@ const danishLabels = {
   claimProcessTitle: "Sådan fungerer processen", commonIssuesTitle: "Almindelige flyforstyrrelser for {name}", faqTitle: "Ofte stillede spørgsmål", flightAirlineLinksTitle: "Flyselskab for flyvningen",
   flightRouteLinksTitle: "Flyrute", airportsLinksTitle: "Lufthavne", countriesLinksTitle: "Lande",
 } as const;
-
 const polishLabels = {
   home: "Strona główna", flightNumbers: "Numery lotów", flightNumber: "Numer lotu", airline: "Linia lotnicza", icaoAirlineCode: "Kod ICAO linii lotniczej",
   originAirport: "Lotnisko wylotu", destinationAirport: "Lotnisko docelowe", distanceCategory: "Kategoria odległości", eu261Protection: "Ochrona na podstawie EU261",
@@ -44,6 +41,16 @@ const polishLabels = {
   claimProcessTitle: "Jak przebiega proces dochodzenia roszczenia", commonIssuesTitle: "Najczęstsze zakłócenia lotu {name}", faqTitle: "Najczęściej zadawane pytania", flightAirlineLinksTitle: "Linia lotnicza",
   flightRouteLinksTitle: "Trasa lotu", airportsLinksTitle: "Lotniska", countriesLinksTitle: "Kraje",
 } as const;
+const germanLabels = {
+  home: "Startseite", flightNumbers: "Flugnummern", flightNumber: "Flugnummer", airline: "Fluggesellschaft", icaoAirlineCode: "ICAO-Code der Fluggesellschaft",
+  originAirport: "Abflughafen", destinationAirport: "Zielflughafen", distanceCategory: "Entfernungskategorie", eu261Protection: "Schutz nach EU261",
+  uk261Protection: "Schutz nach UK261", aircraft: "Flugzeugtyp", scheduleSnapshot: "Flugplanangabe", yes: "Ja", no: "Nein",
+  heroEyebrow: "EU261 / UK261 · Keine Entschädigung, keine Gebühr", heroTitle: "Entschädigung für Flug {name}", heroCta: "Flug {name} prüfen", quickFactsTitle: "Kurzüberblick",
+  majorAirlinesFor: "Wichtige Fluggesellschaften für {name}", about: "Über {name}", compensationAmountsTitle: "Wie hoch kann Ihre Entschädigung sein?", passengerRightsTitle: "Fluggastrechte nach EU261",
+  officialSources: "Offizielle Quellen", compensationRulesTitle: "Wann besteht Anspruch auf Entschädigung?", compensationStatistics: "Entschädigungsinformationen für {name}", claimTimelineTitle: "Was passiert nach Einreichung Ihres Anspruchs?",
+  claimProcessTitle: "So funktioniert das Anspruchsverfahren", commonIssuesTitle: "Häufige Flugstörungen bei {name}", faqTitle: "Häufig gestellte Fragen", flightAirlineLinksTitle: "Fluggesellschaft",
+  flightRouteLinksTitle: "Flugstrecke", airportsLinksTitle: "Flughäfen", countriesLinksTitle: "Länder",
+} as const;
 
 /** Locale registry. Routing support does not imply publishable localized SEO content. */
 export const localeDefinitions: Record<SeoLocale, LocaleDefinition> = {
@@ -51,12 +58,9 @@ export const localeDefinitions: Record<SeoLocale, LocaleDefinition> = {
   sv: { locale: "sv", languageName: "Swedish", htmlLang: "sv", marketLabel: "Sweden", labels: swedishLabels },
   da: { locale: "da", languageName: "Danish", htmlLang: "da", marketLabel: "Denmark", labels: danishLabels },
   fi: { locale: "fi", languageName: "Finnish", htmlLang: "fi", marketLabel: "Finland", labels: englishLabels },
-  de: { locale: "de", languageName: "German", htmlLang: "de", marketLabel: "Germany", labels: englishLabels },
+  de: { locale: "de", languageName: "German", htmlLang: "de", marketLabel: "Germany", labels: germanLabels },
   pl: { locale: "pl", languageName: "Polish", htmlLang: "pl", marketLabel: "Poland", labels: polishLabels },
   nl: { locale: "nl", languageName: "Dutch", htmlLang: "nl", marketLabel: "Netherlands", labels: englishLabels },
 };
-
 export function getLocaleDefinition(locale: SeoLocale): LocaleDefinition { return localeDefinitions[locale]; }
-export function interpolateLabel(template: string, values: Record<string, string>): string {
-  return Object.entries(values).reduce((result, [key, value]) => result.replaceAll(`{${key}}`, value), template);
-}
+export function interpolateLabel(template: string, values: Record<string, string>): string { return Object.entries(values).reduce((result, [key, value]) => result.replaceAll(`{${key}}`, value), template); }
