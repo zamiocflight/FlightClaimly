@@ -3,7 +3,7 @@ import { getAirportIdentityBySlug } from "@/lib/knowledge/airports";
 import type { KnowledgeLocalization } from "./types";
 
 const polishCityNames: Record<string, string> = {
-  Athens: "Ateny", Belgrade: "Belgrad", Brussels: "Bruksela", Bucharest: "Bukareszt", Cairo: "Kair", Cologne: "Kolonia", Copenhagen: "Kopenhaga", Florence: "Florencja", Lisbon: "Lizbona", Milan: "Mediolan", Munich: "Monachium", Naples: "Neapol", Prague: "Praga", Rome: "Rzym", Seville: "Sewilla", Venice: "Wenecja", Vienna: "Wiedeń", Warsaw: "Warszawa", Zurich: "Zurych",
+  Athens: "Ateny", Belgrade: "Belgrad", Brussels: "Bruksela", Bucharest: "Bukareszt", Cairo: "Kair", Cologne: "Kolonia", Copenhagen: "Kopenhaga", Florence: "Florencja", Lisbon: "Lizbona", Milan: "Mediolan", Munich: "Monachium", Naples: "Neapol", Prague: "Praga", Rome: "Rzym", Seville: "Sewilla", Thessaloniki: "Saloniki", Venice: "Wenecja", Vienna: "Wiedeń", Warsaw: "Warszawa", Zurich: "Zurych",
 };
 function polishCityName(city: string): string { return polishCityNames[city] ?? city; }
 function regulationLabel(flight: FlightNumber): string {
