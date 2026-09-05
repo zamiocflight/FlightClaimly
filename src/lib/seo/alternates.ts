@@ -5,7 +5,7 @@ export const airportSeoLocales = ["en"] as const;
 export const airlineSeoLocales = ["en"] as const;
 export const countrySeoLocales = ["en"] as const;
 export const delayReasonSeoLocales = ["en"] as const;
-export const flightNumberSeoLocales = ["en", "sv", "da", "pl", "de", "fi"] as const;
+export const flightNumberSeoLocales = ["en", "sv", "da", "pl", "de", "fi", "nl"] as const;
 
 const SITE_URL = "https://www.flightclaimly.com";
 export function buildLanguageAlternates(path = "", availableLocales: readonly string[] = locales) {
