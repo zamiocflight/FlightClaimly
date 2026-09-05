@@ -14,6 +14,7 @@ import { flightNumberSeoLocales } from "@/lib/seo/alternates";
 import {
   buildDanishFlightNumberLocalization,
   buildLocalizedMetadata,
+  buildPolishFlightNumberLocalization,
   buildSwedishFlightNumberLocalization,
   getLocaleDefinition,
   resolveKnowledgeLocalization,
@@ -23,11 +24,8 @@ import {
 import type { FlightNumber } from "@/data/flight-numbers/types";
 
 type FlightNumberSeoLocale = (typeof flightNumberSeoLocales)[number];
-
 const PREVIEW_STATIC_SAMPLE_SIZE = 24;
-
 export const dynamicParams = true;
-
 type PageProps = { params: Promise<{ locale: string; slug: string }> };
 
 function buildCanonicalLocalization(flightNumber: FlightNumber) {
@@ -36,64 +34,44 @@ function buildCanonicalLocalization(flightNumber: FlightNumber) {
     entitySlug: flightNumber.slug,
     metadata: { title: `${flightNumber.flightNumber} flight compensation | FlightClaimly`, description: flightNumber.description },
     content: {
-      intro: flightNumber.intro,
-      overview: flightNumber.overview,
-      passengerRights: flightNumber.passengerRights,
-      compensationIntro: flightNumber.compensationIntro,
-      compensationAmounts: flightNumber.compensationAmounts,
-      compensationRules: flightNumber.compensationRules,
-      statisticsIntro: flightNumber.statisticsIntro,
-      statistics: flightNumber.statistics,
-      timelineIntro: flightNumber.timelineIntro,
-      timeline: flightNumber.timeline,
-      claimProcess: flightNumber.claimProcess,
-      commonIssues: flightNumber.commonIssues,
-      faq: flightNumber.faq,
+      intro: flightNumber.intro, overview: flightNumber.overview, passengerRights: flightNumber.passengerRights,
+      compensationIntro: flightNumber.compensationIntro, compensationAmounts: flightNumber.compensationAmounts,
+      compensationRules: flightNumber.compensationRules, statisticsIntro: flightNumber.statisticsIntro,
+      statistics: flightNumber.statistics, timelineIntro: flightNumber.timelineIntro, timeline: flightNumber.timeline,
+      claimProcess: flightNumber.claimProcess, commonIssues: flightNumber.commonIssues, faq: flightNumber.faq,
     },
   };
 }
 
 function resolveFlightNumberLocalization(flightNumber: FlightNumber, locale: FlightNumberSeoLocale) {
   return resolveKnowledgeLocalization({
-    canonical: buildCanonicalLocalization(flightNumber),
-    locale,
-    localization:
-      locale === "sv"
-        ? buildSwedishFlightNumberLocalization(flightNumber)
-        : locale === "da"
-          ? buildDanishFlightNumberLocalization(flightNumber)
-          : undefined,
+    canonical: buildCanonicalLocalization(flightNumber), locale,
+    localization: locale === "sv" ? buildSwedishFlightNumberLocalization(flightNumber)
+      : locale === "da" ? buildDanishFlightNumberLocalization(flightNumber)
+      : locale === "pl" ? buildPolishFlightNumberLocalization(flightNumber)
+      : undefined,
   });
 }
 
 function buildFlightNumberVariants(flightNumber: FlightNumber): LocalizedSeoVariant[] {
-  return flightNumberSeoLocales.map((locale) => ({
-    locale,
-    path: `flight-numbers/${flightNumber.slug}`,
-    resolution: resolveFlightNumberLocalization(flightNumber, locale),
-  }));
+  return flightNumberSeoLocales.map((locale) => ({ locale, path: `flight-numbers/${flightNumber.slug}`, resolution: resolveFlightNumberLocalization(flightNumber, locale) }));
 }
 
 function getPageLabels(flightNumber: FlightNumber, locale: FlightNumberSeoLocale): LocalizedKnowledgeLabels {
   const labels = getLocaleDefinition(locale).labels;
-  if (locale !== "sv" && locale !== "da") return labels;
+  if (locale !== "sv" && locale !== "da" && locale !== "pl") return labels;
 
-  const noFee = locale === "sv" ? "Ingen ersättning, ingen avgift" : "Ingen kompensation, intet gebyr";
-  const rights = locale === "sv" ? "Passagerarrättigheter" : "Flypassagerers rettigheder";
+  const noFee = locale === "sv" ? "Ingen ersättning, ingen avgift" : locale === "da" ? "Ingen kompensation, intet gebyr" : "Brak wygranej, brak opłaty";
+  const rights = locale === "sv" ? "Passagerarrättigheter" : locale === "da" ? "Flypassagerers rettigheder" : "Prawa pasażerów lotniczych";
+  const accordingTo = locale === "sv" ? "enligt" : locale === "da" ? "efter" : "zgodnie z";
 
-  if (flightNumber.eu261Eligible && flightNumber.uk261Eligible) {
-    return { ...labels, heroEyebrow: `EU261 / UK261 · ${noFee}`, passengerRightsTitle: `${rights} efter EU261 eller UK261` };
-  }
-  if (flightNumber.eu261Eligible) {
-    return { ...labels, heroEyebrow: `EU261 · ${noFee}`, passengerRightsTitle: `${rights} efter EU261` };
-  }
-  if (flightNumber.uk261Eligible) {
-    return { ...labels, heroEyebrow: `UK261 · ${noFee}`, passengerRightsTitle: `${rights} efter UK261` };
-  }
+  if (flightNumber.eu261Eligible && flightNumber.uk261Eligible) return { ...labels, heroEyebrow: `EU261 / UK261 · ${noFee}`, passengerRightsTitle: `${rights} ${accordingTo} EU261 lub UK261` };
+  if (flightNumber.eu261Eligible) return { ...labels, heroEyebrow: `EU261 · ${noFee}`, passengerRightsTitle: `${rights} ${accordingTo} EU261` };
+  if (flightNumber.uk261Eligible) return { ...labels, heroEyebrow: `UK261 · ${noFee}`, passengerRightsTitle: `${rights} ${accordingTo} UK261` };
   return {
     ...labels,
-    heroEyebrow: locale === "sv" ? `Flygpassagerares rättigheter · ${noFee}` : `Flypassagerers rettigheder · ${noFee}`,
-    passengerRightsTitle: locale === "sv" ? `Passagerarrättigheter för ${flightNumber.flightNumber}` : `Flypassagerers rettigheder for ${flightNumber.flightNumber}`,
+    heroEyebrow: `${rights} · ${noFee}`,
+    passengerRightsTitle: locale === "sv" ? `Passagerarrättigheter för ${flightNumber.flightNumber}` : locale === "da" ? `Flypassagerers rettigheder for ${flightNumber.flightNumber}` : `Prawa pasażerów lotu ${flightNumber.flightNumber}`,
   };
 }
 
@@ -103,9 +81,7 @@ function getFlightNumbersForStaticBuild() {
 }
 
 export function generateStaticParams() {
-  return getFlightNumbersForStaticBuild().flatMap((flightNumber) =>
-    flightNumberSeoLocales.map((locale) => ({ locale, slug: flightNumber.slug }))
-  );
+  return getFlightNumbersForStaticBuild().flatMap((flightNumber) => flightNumberSeoLocales.map((locale) => ({ locale, slug: flightNumber.slug })));
 }
 
 export async function generateMetadata({ params }: PageProps) {
@@ -115,12 +91,7 @@ export async function generateMetadata({ params }: PageProps) {
   if (!flightNumber) return {};
   const seoLocale = locale as FlightNumberSeoLocale;
   const resolution = resolveFlightNumberLocalization(flightNumber, seoLocale);
-  return buildLocalizedMetadata({
-    locale: seoLocale,
-    path: `flight-numbers/${flightNumber.slug}`,
-    resolution,
-    variants: buildFlightNumberVariants(flightNumber),
-  });
+  return buildLocalizedMetadata({ locale: seoLocale, path: `flight-numbers/${flightNumber.slug}`, resolution, variants: buildFlightNumberVariants(flightNumber) });
 }
 
 export default async function FlightNumberPage({ params }: PageProps) {
@@ -135,20 +106,15 @@ export default async function FlightNumberPage({ params }: PageProps) {
   const labels = getPageLabels(flightNumber, seoLocale);
   const content = resolution.content;
   const knowledgeEntity = {
-    ...flightNumber,
-    name: flightNumber.flightNumber,
-    intro: content?.intro ?? flightNumber.intro,
-    overview: content?.overview ?? flightNumber.overview,
+    ...flightNumber, name: flightNumber.flightNumber,
+    intro: content?.intro ?? flightNumber.intro, overview: content?.overview ?? flightNumber.overview,
     passengerRights: content?.passengerRights ?? flightNumber.passengerRights,
     compensationIntro: content?.compensationIntro ?? flightNumber.compensationIntro,
     compensationAmounts: content?.compensationAmounts ?? flightNumber.compensationAmounts,
     compensationRules: content?.compensationRules ?? flightNumber.compensationRules,
-    statisticsIntro: content?.statisticsIntro ?? flightNumber.statisticsIntro,
-    statistics: content?.statistics ?? flightNumber.statistics,
-    timelineIntro: content?.timelineIntro ?? flightNumber.timelineIntro,
-    timeline: content?.timeline ?? flightNumber.timeline,
-    claimProcess: content?.claimProcess ?? flightNumber.claimProcess,
-    commonIssues: content?.commonIssues ?? flightNumber.commonIssues,
+    statisticsIntro: content?.statisticsIntro ?? flightNumber.statisticsIntro, statistics: content?.statistics ?? flightNumber.statistics,
+    timelineIntro: content?.timelineIntro ?? flightNumber.timelineIntro, timeline: content?.timeline ?? flightNumber.timeline,
+    claimProcess: content?.claimProcess ?? flightNumber.claimProcess, commonIssues: content?.commonIssues ?? flightNumber.commonIssues,
     faq: content?.faq ?? flightNumber.faq,
   };
 
@@ -157,10 +123,8 @@ export default async function FlightNumberPage({ params }: PageProps) {
   const checkUrl = `/${seoLocale}/check/direct-or-layover`;
   const authoritySources = resolveAuthority({ entityType: "flight-number", slug: flightNumber.slug, entity: flightNumber });
   const internalLinkSections = getInternalLinkSections("flight-number", flightNumber.slug, seoLocale, {
-    "Flight airline": labels.flightAirlineLinksTitle,
-    "Flight route": labels.flightRouteLinksTitle,
-    Airports: labels.airportsLinksTitle,
-    Countries: labels.countriesLinksTitle,
+    "Flight airline": labels.flightAirlineLinksTitle, "Flight route": labels.flightRouteLinksTitle,
+    Airports: labels.airportsLinksTitle, Countries: labels.countriesLinksTitle,
   });
 
   return (
@@ -173,20 +137,12 @@ export default async function FlightNumberPage({ params }: PageProps) {
         { name: flightNumber.flightNumber, url: `https://www.flightclaimly.com/${seoLocale}/flight-numbers/${flightNumber.slug}` },
       ]} />
       <KnowledgePageTemplate
-        entity={knowledgeEntity}
-        checkUrl={checkUrl}
-        locale={seoLocale}
-        authoritySources={authoritySources}
-        labels={labels}
+        entity={knowledgeEntity} checkUrl={checkUrl} locale={seoLocale} authoritySources={authoritySources} labels={labels}
         facts={[
-          { label: labels.flightNumber, value: flightNumber.flightNumber },
-          { label: labels.airline, value: flightNumber.airlineIata },
-          { label: labels.icaoAirlineCode, value: flightNumber.airlineIcao },
-          { label: labels.originAirport, value: originAirport?.name ?? flightNumber.originAirportSlug },
-          { label: labels.destinationAirport, value: destinationAirport?.name ?? flightNumber.destinationAirportSlug },
-          { label: labels.distanceCategory, value: flightNumber.distanceBand },
-          { label: labels.eu261Protection, value: flightNumber.eu261Eligible ? labels.yes : labels.no },
-          { label: labels.uk261Protection, value: flightNumber.uk261Eligible ? labels.yes : labels.no },
+          { label: labels.flightNumber, value: flightNumber.flightNumber }, { label: labels.airline, value: flightNumber.airlineIata },
+          { label: labels.icaoAirlineCode, value: flightNumber.airlineIcao }, { label: labels.originAirport, value: originAirport?.name ?? flightNumber.originAirportSlug },
+          { label: labels.destinationAirport, value: destinationAirport?.name ?? flightNumber.destinationAirportSlug }, { label: labels.distanceCategory, value: flightNumber.distanceBand },
+          { label: labels.eu261Protection, value: flightNumber.eu261Eligible ? labels.yes : labels.no }, { label: labels.uk261Protection, value: flightNumber.uk261Eligible ? labels.yes : labels.no },
           ...(flightNumber.aircraft ? [{ label: labels.aircraft, value: flightNumber.aircraft }] : []),
           ...(flightNumber.schedule ? [{ label: labels.scheduleSnapshot, value: flightNumber.schedule }] : []),
         ]}
