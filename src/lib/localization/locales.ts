@@ -51,13 +51,23 @@ const germanLabels = {
   claimProcessTitle: "So funktioniert das Anspruchsverfahren", commonIssuesTitle: "Häufige Flugstörungen bei {name}", faqTitle: "Häufig gestellte Fragen", flightAirlineLinksTitle: "Fluggesellschaft",
   flightRouteLinksTitle: "Flugstrecke", airportsLinksTitle: "Flughäfen", countriesLinksTitle: "Länder",
 } as const;
+const finnishLabels = {
+  home: "Etusivu", flightNumbers: "Lentonumerot", flightNumber: "Lentonumero", airline: "Lentoyhtiö", icaoAirlineCode: "Lentoyhtiön ICAO-koodi",
+  originAirport: "Lähtölentoasema", destinationAirport: "Määränpään lentoasema", distanceCategory: "Etäisyysluokka", eu261Protection: "EU261-suoja",
+  uk261Protection: "UK261-suoja", aircraft: "Lentokonetyyppi", scheduleSnapshot: "Aikataulutieto", yes: "Kyllä", no: "Ei",
+  heroEyebrow: "EU261 / UK261 · Ei korvausta, ei maksua", heroTitle: "Korvaus lennosta {name}", heroCta: "Tarkista lento {name}", quickFactsTitle: "Pikatiedot",
+  majorAirlinesFor: "Tärkeimmät lentoyhtiöt: {name}", about: "Tietoa: {name}", compensationAmountsTitle: "Kuinka paljon korvausta voit saada?", passengerRightsTitle: "Lentomatkustajien oikeudet EU261:n nojalla",
+  officialSources: "Viralliset lähteet", compensationRulesTitle: "Milloin sinulla voi olla oikeus korvaukseen?", compensationStatistics: "Korvaustiedot lennolle {name}", claimTimelineTitle: "Mitä tapahtuu korvausvaatimuksen lähettämisen jälkeen?",
+  claimProcessTitle: "Näin korvausprosessi etenee", commonIssuesTitle: "Lennon {name} yleiset häiriötilanteet", faqTitle: "Usein kysytyt kysymykset", flightAirlineLinksTitle: "Lentoyhtiö",
+  flightRouteLinksTitle: "Lentoreitti", airportsLinksTitle: "Lentoasemat", countriesLinksTitle: "Maat",
+} as const;
 
 /** Locale registry. Routing support does not imply publishable localized SEO content. */
 export const localeDefinitions: Record<SeoLocale, LocaleDefinition> = {
   en: { locale: "en", languageName: "English", htmlLang: "en", marketLabel: "English", labels: englishLabels },
   sv: { locale: "sv", languageName: "Swedish", htmlLang: "sv", marketLabel: "Sweden", labels: swedishLabels },
   da: { locale: "da", languageName: "Danish", htmlLang: "da", marketLabel: "Denmark", labels: danishLabels },
-  fi: { locale: "fi", languageName: "Finnish", htmlLang: "fi", marketLabel: "Finland", labels: englishLabels },
+  fi: { locale: "fi", languageName: "Finnish", htmlLang: "fi", marketLabel: "Finland", labels: finnishLabels },
   de: { locale: "de", languageName: "German", htmlLang: "de", marketLabel: "Germany", labels: germanLabels },
   pl: { locale: "pl", languageName: "Polish", htmlLang: "pl", marketLabel: "Poland", labels: polishLabels },
   nl: { locale: "nl", languageName: "Dutch", htmlLang: "nl", marketLabel: "Netherlands", labels: englishLabels },
