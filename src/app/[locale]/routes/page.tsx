@@ -1,80 +1,41 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
 import { routes } from "@/data/seo/routes";
-import {
-  buildLanguageAlternates,
-  routeSeoLocales,
-} from "@/lib/seo/alternates";
+import { buildLanguageAlternates, routeSeoLocales } from "@/lib/seo/alternates";
+import { swedishCityName } from "@/lib/localization/knowledge-sv";
 
 const SITE_URL = "https://www.flightclaimly.com";
-
-type Props = {
-  params: Promise<{
-    locale: string;
-  }>;
-};
+type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-
-  if (!routeSeoLocales.includes(locale as (typeof routeSeoLocales)[number])) {
-    return {};
-  }
-
+  if (!routeSeoLocales.includes(locale as (typeof routeSeoLocales)[number])) return {};
   const canonical = `${SITE_URL}/${locale}/routes`;
-
+  const sv = locale === "sv";
   return {
-    title: "Flight compensation routes | FlightClaimly",
-    description:
-      "Find flight compensation guides for popular European routes and check if your delayed or cancelled flight may qualify under EU261.",
-    alternates: {
-      canonical,
-      languages: buildLanguageAlternates("routes", routeSeoLocales),
-    },
+    title: sv ? "Flygersättning per flygsträcka | FlightClaimly" : "Flight compensation routes | FlightClaimly",
+    description: sv ? "Hitta guider om flygersättning för europeiska flygsträckor och kontrollera om ett försenat eller inställt flyg kan ge rätt till ersättning." : "Find flight compensation guides for popular European routes and check if your delayed or cancelled flight may qualify under EU261.",
+    alternates: { canonical, languages: buildLanguageAlternates("routes", routeSeoLocales) },
   };
 }
 
 export default async function RoutesPage({ params }: Props) {
   const { locale } = await params;
-
-  if (!routeSeoLocales.includes(locale as (typeof routeSeoLocales)[number])) {
-    notFound();
-  }
-
+  if (!routeSeoLocales.includes(locale as (typeof routeSeoLocales)[number])) notFound();
+  const sv = locale === "sv";
   return (
-    <main className="px-6 py-16">
-      <div className="mx-auto max-w-5xl">
-        <h1 className="text-4xl font-bold tracking-tight text-slate-950">
-          Flight compensation routes
-        </h1>
-
-        <p className="mt-4 max-w-3xl text-lg text-slate-600">
-          Explore flight compensation guides for popular routes and find out
-          whether your delayed, cancelled or disrupted flight may be covered by
-          EU261.
-        </p>
-
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
-          {routes.map((route) => (
-            <Link
-              key={route.slug}
-              href={`/${locale}/routes/${route.slug}`}
-              className="rounded-2xl border border-slate-200 p-5 transition hover:border-emerald-400 hover:shadow-sm"
-            >
-              <h2 className="text-xl font-semibold text-slate-950">
-                {route.origin.city} → {route.destination.city}
-              </h2>
-
-              <p className="mt-2 text-sm text-slate-600">
-                {route.origin.name} ({route.origin.iata}) to{" "}
-                {route.destination.name} ({route.destination.iata})
-              </p>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </main>
+    <main className="px-6 py-16"><div className="mx-auto max-w-5xl">
+      <h1 className="text-4xl font-bold tracking-tight text-slate-950">{sv ? "Flygersättning per flygsträcka" : "Flight compensation routes"}</h1>
+      <p className="mt-4 max-w-3xl text-lg text-slate-600">{sv ? "Utforska guider för olika flygsträckor och se när en försening, inställd flygning eller annan störning kan ge rätt till ersättning." : "Explore flight compensation guides for popular routes and find out whether your delayed, cancelled or disrupted flight may be covered by EU261."}</p>
+      <div className="mt-10 grid gap-4 md:grid-cols-2">{routes.map((route) => {
+        const origin = sv ? swedishCityName(route.origin.city) : route.origin.city;
+        const destination = sv ? swedishCityName(route.destination.city) : route.destination.city;
+        return <Link key={route.slug} href={`/${locale}/routes/${route.slug}`} className="rounded-2xl border border-slate-200 p-5 transition hover:border-emerald-400 hover:shadow-sm">
+          <h2 className="text-xl font-semibold text-slate-950">{origin} → {destination}</h2>
+          <p className="mt-2 text-sm text-slate-600">{route.origin.name} ({route.origin.iata}) {sv ? "till" : "to"} {route.destination.name} ({route.destination.iata})</p>
+        </Link>;
+      })}</div>
+    </div></main>
   );
 }
