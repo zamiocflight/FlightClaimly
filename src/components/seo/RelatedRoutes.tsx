@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { FlightRoute } from "@/data/seo/routes";
+import { swedishCityName } from "@/lib/localization/knowledge-sv";
 
 type RelatedRoutesProps = {
   title: string;
@@ -27,17 +28,21 @@ export default function RelatedRoutes({
           {routes.map((route) => (
             <Link
               key={route.slug}
-              href={`/en/routes/${route.slug}`}
+              href={`/${locale}/routes/${route.slug}`}
               className="rounded-2xl border border-slate-200 p-5 transition hover:border-emerald-400 hover:shadow-sm"
             >
-              <h3 className="text-lg font-semibold text-slate-950">
-                {route.origin.city} → {route.destination.city}
-              </h3>
+             <h3 className="text-lg font-semibold text-slate-950">
+  {locale === "sv" ? swedishCityName(route.origin.city) : route.origin.city} →{" "}
+  {locale === "sv"
+    ? swedishCityName(route.destination.city)
+    : route.destination.city}
+</h3>
 
-              <p className="mt-2 text-sm text-slate-600">
-                {route.origin.name} ({route.origin.iata}) to{" "}
-                {route.destination.name} ({route.destination.iata})
-              </p>
+<p className="mt-2 text-sm text-slate-600">
+  {route.origin.name} ({route.origin.iata}){" "}
+  {locale === "sv" ? "till" : "to"}{" "}
+  {route.destination.name} ({route.destination.iata})
+</p>
             </Link>
           ))}
         </div>

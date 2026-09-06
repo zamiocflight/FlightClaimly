@@ -11,45 +11,55 @@ import ClaimAssessment from "@/components/seo/delay-reasons/ClaimAssessment";
 
 import type { DelayReason } from "@/data/delay-reasons/types";
 import { getDelayReasonAssessment } from "@/lib/delay-reasons/assessment";
+import { localizeDelayReasonAssessmentSv } from "@/lib/localization/delay-reason-assessment-sv";
 
 type DelayReasonKnowledgeTemplateProps = {
   delayReason: DelayReason;
+  locale: string;
 };
 
 export default function DelayReasonKnowledgeTemplate({
   delayReason,
+  locale,
 }: DelayReasonKnowledgeTemplateProps) {
-  const assessment = getDelayReasonAssessment(delayReason.slug);
+  const canonicalAssessment = getDelayReasonAssessment(delayReason.slug);
+  const assessment =
+    locale === "sv"
+      ? localizeDelayReasonAssessmentSv(canonicalAssessment)
+      : canonicalAssessment;
 
   return (
     <>
       <DelayReasonHero delayReason={delayReason} />
 
-      <DelayReasonOverview delayReason={delayReason} />
+      <DelayReasonOverview delayReason={delayReason} locale={locale} />
 
-      <ExtraordinaryCircumstances delayReason={delayReason} />
+      <ExtraordinaryCircumstances delayReason={delayReason} locale={locale} />
 
-      <ClaimAssessment assessment={assessment} />
+      <ClaimAssessment assessment={assessment} locale={locale} />
 
-      <PassengerRights passengerRights={delayReason.passengerRights} />
+      <PassengerRights passengerRights={delayReason.passengerRights} locale={locale} />
 
       <CompensationRules
         compensationRules={delayReason.compensationRules}
+        locale={locale}
       />
 
       <Statistics
         statisticsIntro={delayReason.statisticsIntro}
         statistics={delayReason.statistics ?? []}
+        locale={locale}
       />
 
       <Timeline
         timelineIntro={delayReason.timelineIntro}
         timeline={delayReason.timeline ?? []}
+        locale={locale}
       />
 
-      <FAQ faq={delayReason.faq ?? []} />
+      <FAQ faq={delayReason.faq ?? []} locale={locale} />
 
-      <RelatedKnowledge delayReasonTitle={delayReason.title} />
+      <RelatedKnowledge delayReasonTitle={delayReason.title} locale={locale} />
     </>
   );
 }

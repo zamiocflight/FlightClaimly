@@ -60,15 +60,21 @@ const commonIssues = [
   "Nekad ombordstigning", "Tekniska eller operativa problem",
 ];
 
-function base(entityType: LocalizableKnowledgeEntityType, slug: string, title: string, description: string, content: KnowledgeLocalization["content"]): KnowledgeLocalization {
+function base(
+  entityType: LocalizableKnowledgeEntityType,
+  slug: string,
+  title: string,
+  description: string,
+  content: KnowledgeLocalization["content"],
+  displayName?: string,
+): KnowledgeLocalization {
   return {
-    entityType, entitySlug: slug, locale: "sv", source: "human", status: "publishable",
+    entityType, entitySlug: slug, displayName, locale: "sv", source: "human", status: "publishable",
     metadata: { title, description }, content,
     quality: { metadataReviewed: true, terminologyReviewed: true, legalMeaningReviewed: true, contentReviewed: true },
     updatedAt: "2026-09-06",
   };
 }
-
 export function buildSwedishRouteLocalization(route: FlightRoute): KnowledgeLocalization {
   const origin = swedishCityName(route.origin.city);
   const destination = swedishCityName(route.destination.city);
@@ -86,7 +92,7 @@ export function buildSwedishRouteLocalization(route: FlightRoute): KnowledgeLoca
       { question: "Hur mycket kan jag få i ersättning?", answer: "Enligt EU261 är standardnivåerna normalt €250, €400 eller €600 beroende på bland annat flygsträckans distans och de rättsliga villkoren." },
       { question: "Kostar det att kontrollera mitt flyg?", answer: "Nej. Du kan kontrollera ditt flyg och påbörja bedömningen utan någon förskottsavgift." },
     ],
-  });
+    }, `${origin} till ${destination}`);
 }
 
 export function buildSwedishAirportLocalization(airport: Airport): KnowledgeLocalization {
@@ -139,5 +145,5 @@ export function buildSwedishCountryLocalization(country: Country): KnowledgeLoca
       { question: "Är tre timmars försening alltid tillräckligt?", answer: "Nej. Tre timmars ankomstförsening är en viktig tröskel vid många EU261-förseningskrav, men även flygningens täckning och orsaken till störningen måste bedömas." },
       { question: "Hur mycket kan jag få?", answer: "När EU261 gäller är standardnivåerna normalt €250, €400 eller €600 beroende på bland annat distansen." },
     ],
-  });
+    }, name);
 }

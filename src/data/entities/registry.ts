@@ -70,17 +70,5 @@ export function getEntityHref(slug: string, locale: string) {
 
   if (!entity) return "#";
 
-  const englishOnlyEntityTypes: EntityType[] = [
-    "route",
-    "airport",
-    "airline",
-    "country",
-    "flight-number",
-  ];
-
-  const targetLocale = englishOnlyEntityTypes.includes(entity.type)
-    ? "en"
-    : locale;
-
-  return `/${targetLocale}/${entity.hrefBase}/${entity.slug}`;
+  return `/${locale}/${entity.hrefBase}/${entity.slug}`;
 }

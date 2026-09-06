@@ -5,15 +5,17 @@ import type { TimelineStep } from "@/data/seo/shared/types";
 type Props = {
   timelineIntro: string;
   timeline: TimelineStep[];
+  locale: string;
 };
 
 export default function Timeline({
   timelineIntro,
   timeline,
+  locale,
 }: Props) {
   return (
     <TimelineSection
-      title="Timeline"
+      title={locale === "sv" ? "Så bedöms ärendet" : "Timeline"}
       intro={timelineIntro}
       steps={timeline}
     />

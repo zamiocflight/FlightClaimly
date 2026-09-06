@@ -1,6 +1,7 @@
 import type { KnowledgeLocalization, LocalizedKnowledgeContent } from "./types";
 
 type KnowledgeEntity = {
+  name: string;
   title: string;
   description: string;
   intro: string;
@@ -26,6 +27,7 @@ export function applyKnowledgeLocalization<T extends KnowledgeEntity>(
   const content: LocalizedKnowledgeContent = localization.content ?? {};
   return {
     ...canonical,
+    name: localization.displayName ?? canonical.name,
     title: localization.metadata.title,
     description: localization.metadata.description,
     intro: content.intro ?? canonical.intro,

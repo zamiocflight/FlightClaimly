@@ -19,6 +19,13 @@ import {
   getEntityScore,
   getTraitScore,
 } from "@/lib/knowledge/relevance";
+import {
+  airlineSeoLocales,
+  airportSeoLocales,
+  countrySeoLocales,
+  flightNumberSeoLocales,
+  routeSeoLocales,
+} from "@/lib/seo/alternates";
 
 export type RelatedKnowledgeItem = {
   slug: string;
@@ -44,6 +51,27 @@ const typeLabels: Record<RelationshipType, string> = {
   law: "Law",
   article: "Guide",
 };
+
+function getPublishedTargetLocale(entityType: string, locale: string) {
+  const publishedLocales =
+    entityType === "route"
+      ? routeSeoLocales
+      : entityType === "airport"
+        ? airportSeoLocales
+        : entityType === "airline"
+          ? airlineSeoLocales
+          : entityType === "country"
+            ? countrySeoLocales
+            : entityType === "flight-number"
+              ? flightNumberSeoLocales
+              : null;
+
+  if (!publishedLocales) return locale;
+
+  return (publishedLocales as readonly string[]).includes(locale)
+    ? locale
+    : "en";
+}
 
 
 export function getRelationships(slug: string) {
@@ -96,7 +124,8 @@ export function getRelatedKnowledge(
 
       if (!relatedEntity) return null;
 
-      const href = getEntityHref(relationship.slug, locale);
+      const targetLocale = getPublishedTargetLocale(relatedEntity.type, locale);
+      const href = getEntityHref(relationship.slug, targetLocale);
 
       if (href === "#") return null;
 

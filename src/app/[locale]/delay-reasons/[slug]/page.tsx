@@ -43,7 +43,7 @@ export default async function DelayReasonPage({ params }: Props) {
         { name: delayReason.title, url: `https://www.flightclaimly.com/${locale}/delay-reasons/${slug}` },
       ]} />
       <main className="container py-10">
-        <DelayReasonKnowledgeTemplate delayReason={delayReason} />
+        <DelayReasonKnowledgeTemplate delayReason={delayReason} locale={locale} />
       </main>
     </>
   );

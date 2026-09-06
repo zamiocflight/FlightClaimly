@@ -2,17 +2,19 @@ import type { DelayReason } from "@/data/delay-reasons/types";
 
 type Props = {
   delayReason: DelayReason;
+  locale: string;
 };
 
 export default function ExtraordinaryCircumstances({
   delayReason,
+  locale,
 }: Props) {
   const isExtraordinary = delayReason.extraordinaryCircumstance;
 
   return (
     <section className="mt-12 rounded-xl border p-8">
       <h2 className="text-3xl font-semibold">
-        Extraordinary circumstance
+        {locale === "sv" ? "Extraordinär omständighet" : "Extraordinary circumstance"}
       </h2>
 
       <div className="mt-6 flex items-center gap-3">
@@ -24,8 +26,12 @@ export default function ExtraordinaryCircumstances({
 
         <span className="text-lg font-medium">
           {isExtraordinary
-            ? "Usually considered extraordinary"
-            : "Usually NOT considered extraordinary"}
+            ? locale === "sv"
+              ? "Kan normalt vara extraordinär"
+              : "Usually considered extraordinary"
+            : locale === "sv"
+              ? "Normalt inte extraordinär"
+              : "Usually NOT considered extraordinary"}
         </span>
       </div>
 

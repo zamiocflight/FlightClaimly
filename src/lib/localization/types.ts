@@ -107,6 +107,7 @@ export type LocalizationQuality = {
 export type KnowledgeLocalization = {
   entityType: LocalizableKnowledgeEntityType;
   entitySlug: string;
+  displayName?: string;
   locale: SeoLocale;
   source: LocalizationSource;
   status: LocalizationPublicationStatus;
