@@ -1,60 +1,41 @@
-# FLIGHTCLAIMLY – MASTER HANDOFF
+# FLIGHTCLAIMLY — MASTER HANDOFF
 
-Last updated: 2026-08-28
+Last updated: **2026-09-06**
 
 ## PURPOSE
 
-This file is the continuity handoff for ongoing FlightClaimly development.
+This is the continuity handoff for ongoing FlightClaimly development. A new ChatGPT session should treat this document, `docs/CURRENT_SPRINT_LATEST.md`, the latest relevant checkpoint and the actual GitHub branch/code as project state.
 
-The next ChatGPT conversation should treat this document as project state, not as a new project brief.
+Repository state beats conversational memory if they differ.
 
-User writes/executes code locally. ChatGPT acts as CTO / architect / CMO and should make concrete technical decisions.
+## WORKING STYLE
 
-Working style:
-- Swedish conversation.
-- Fast execution.
-- One clear checkpoint at a time.
-- Give exact file paths and exact code changes.
-- Terminal commands should be in separate copyable code blocks.
-- After code changes, normally run:
-  `npx tsc --noEmit`
-- User uses Mac + VS Code.
-- Do not slow the work down unnecessarily.
-- Avoid giant multiline shell blocks containing several `npx tsx -e` commands. This crashed/hung the VS Code integrated terminal PTY host twice.
-- Short shell blocks and individual commands are fine.
-- If repo access through GitHub integration is available, inspect the repo directly rather than unnecessarily asking the user to paste code.
-- Very large files can fail through the GitHub connector; targeted local commands are acceptable.
+- Swedish conversation
+- fast execution
+- inspect actual repo/code before instructing changes
+- one clear checkpoint at a time when local user action is required
+- exact file paths and exact code-change locations
+- state whether a file is new, fully replaced or partially edited
+- do not ask the user to reconstruct code that GitHub access can inspect directly
+- avoid giant multi-command shell blocks that can destabilize the VS Code integrated terminal
+- use GitHub tools directly where safe
+- never force-push
+- never use `git add .`
+- never destructive reset/clean unrelated work
 
----
+## COMPANY
 
-# COMPANY
+Company: FLIGHTCLAIMLY OÜ  
+Registered: Estonia, 2025-12-13  
+Website: flightclaimly.com  
+Launch: 2026-07-05  
+Founder: David Victor Hedlund, CEO & Founder  
+Business: EU261 / UK261 flight compensation claims  
+Standard customer pricing: 20% including VAT  
+Commercial model: No win, no fee
 
-Company:
-FLIGHTCLAIMLY OÜ
+Current public/product locales before PT/ES expansion:
 
-Registered:
-Estonia, 2025-12-13.
-
-Website:
-flightclaimly.com
-
-Launch:
-2026-07-05.
-
-Founder:
-David Victor Hedlund
-CEO & Founder.
-
-Business:
-EU261 / UK261 flight compensation claims.
-
-Customer pricing:
-20% including VAT.
-
-Commercial model:
-No win, no fee.
-
-Current languages:
 - sv
 - en
 - da
@@ -63,712 +44,290 @@ Current languages:
 - pl
 - fi
 
-Long-term goal:
-Build a highly automated flight compensation platform with strong organic SEO acquisition and scalable claims handling.
+Long-term goal: highly automated European flight-compensation platform with strong organic Knowledge/SEO acquisition, scalable claims handling and country-by-country growth.
 
----
+# CURRENT DEVELOPMENT STATE
 
-# CURRENT DEVELOPMENT SPRINT
+## Locked foundations
 
-We are in a roughly 20–30 hour SEO / data-integrity / programmatic-SEO sprint.
+- Delay Reason Engine v1 — LOCKED
+- EU261 Legal Rule Layer v1 — LOCKED
+- Claim Rights Assessment Engine v1 — LOCKED
+- Claims Desk Assessment Integration phase 1 — VERIFIED
+- Research / Evidence Engine v1 foundation — LOCKED
+- Build / Deployment Cost Optimization — LOCKED
+- Flight Number Localization Wave 1 — COMPLETE / LOCKED / RELEASED
 
-The current sub-sprint is:
+## Flight Number Wave 1 baseline
 
-SEO INTEGRITY + INDEXATION / PUBLICATION ARCHITECTURE.
+Published locales:
 
-This sub-sprint is approximately 65–75% complete.
+EN + SV + DA + PL + DE + FI + NL
 
-The broader 20–30 hour sprint is approximately 40–50% complete.
+Scale:
 
-Do NOT jump to unrelated SEO expansion before closing the current integrity/indexation section.
+- 2,841 canonical Flight Number entities
+- 44 represented airline groups
+- 19,887 detail paths = 2,841 × 7
+- 308 localized airline-group paths = 44 × 7
+- 2,886 Flight Number sitemap URLs per market
 
----
+Do not rerun FlightAware merely for localization and do not reopen locked Flight Number v1 without a concrete bug/legal change/planned v2.
 
-# SEO ENTITY STATE
+# LOCALIZATION WAVE 2
 
-Current audited entity counts:
+Wave 2 coordinated Knowledge cohorts:
 
-Airports: 98
-Airlines: 96
-Countries: 36
-Routes: 1,594
-Flight numbers: 50
+1. Routes
+2. Airports
+3. Airlines
+4. Countries
+5. Delay Reasons
 
-Latest main SEO audit:
+Market order:
 
-SEO DATA AUDIT
-==============
-Airports:       98
-Airlines:       96
-Countries:      36
-Routes:         1594
-Flight numbers: 50
+`SV LOCKED → DA NEXT → PL → DE → FI → NL`
 
-Errors:   0
-Warnings: 20
-Info:     0
+## Swedish Wave 2 — LOCKED
 
-The 20 remaining airline-copy warnings are raw heuristic warnings and have been classified by the smarter airline-copy quality gate as legitimate relationship / lexical references.
+Date: 2026-09-06
 
-Airline copy quality gate:
+Code lock commit:
 
-AIRLINE COPY QUALITY GATE
-=========================
-Allowed relationship matches: 38
-Ignored lexical matches:      5
-Unexpected findings:          0
+`93e965af7c7f429084a787cc01fe833f6f7e86bb`
 
-Airline copy quality gate passed.
+Commit message:
 
----
+`Lock Swedish SEO localization Wave 2`
 
-# ROUTE INTEGRITY
+Detailed authoritative checkpoint:
 
-Route uniqueness check:
+`docs/checkpoints/2026-09-06-seo-localization-wave2-sv-locked.md`
 
-Routes: 1594
-Unique route slugs: 1594
-Duplicate route slugs: []
+At Swedish lock, Wave 2 publication scope is exactly EN + SV.
 
-PASS.
+## What the Swedish foundation built
 
-Flight-number relationship check:
+SV was the heavy architecture/foundation market, not just a translation pass.
 
-Flight numbers: 50
-Missing route relationships: 0
+It established/generalized:
 
-PASS.
+- deterministic localization builders for Routes, Airports, Airlines, Countries and Delay Reasons
+- localized entity display names via optional `displayName` support
+- localized route/city/country presentation without forking canonical facts
+- publication-aware Knowledge/internal-link behavior
+- locale-preserving Related Routes links
+- localized Related Routes visible presentation
+- Delay Reason metadata localization
+- separate localized Delay Reason assessment presentation from canonical assessment/classification data
+- localized Delay Reason headings, labels, badges, investigative questions and extraordinary-circumstance presentation
+- localized BreadcrumbList output
+- localized FAQPage schema output
+- coherent Wave 2 locale gates/static params/hreflang/sitemap behavior
+- reusable QA/lock method for remaining markets
 
-All 50 flight-number entities point to valid route entities.
+### Key final SV implementation files
 
-Old URL-reference audit for:
+- `src/app/[locale]/delay-reasons/[slug]/page.tsx`
+- `src/components/seo/RelatedRoutes.tsx`
+- `src/components/seo/delay-reasons/ClaimAssessment.tsx`
+- `src/components/seo/delay-reasons/CompensationRules.tsx`
+- `src/components/seo/delay-reasons/DelayReasonKnowledgeTemplate.tsx`
+- `src/components/seo/delay-reasons/DelayReasonOverview.tsx`
+- `src/components/seo/delay-reasons/ExtraordinaryCircumstances.tsx`
+- `src/components/seo/delay-reasons/FAQ.tsx`
+- `src/components/seo/delay-reasons/PassengerRights.tsx`
+- `src/components/seo/delay-reasons/RelatedKnowledge.tsx`
+- `src/components/seo/delay-reasons/Statistics.tsx`
+- `src/components/seo/delay-reasons/Timeline.tsx`
+- `src/data/entities/registry.ts`
+- `src/lib/delay-reasons/metadata.ts`
+- `src/lib/localization/delay-reason-assessment-sv.ts`
+- `src/lib/localization/entity.ts`
+- `src/lib/localization/knowledge-sv.ts`
+- `src/lib/localization/types.ts`
+- `src/lib/seo/relationships.ts`
 
-/flight/
+## Swedish QA / lock result
 
-returned no results.
+Verified green:
 
-PASS.
+- Preview build: 1,296 / 1,296
+- typecheck
+- `git diff --check`
+- five Swedish Wave 2 hubs
+- representative Route/Airport/Airline/Country/Delay Reason rendering
+- dynamic/unsampled Swedish route HTTP 200
+- Swedish route/country display-name behavior
+- Delay Reason extraordinary=false presentation
+- Delay Reason extraordinary=true presentation
+- Swedish BreadcrumbList
+- Swedish FAQPage schema
+- DA Flight Number related-link fallback regression preserved
+- Wave 2 locale scope EN+SV only
+- sitemap expected 27,039 / actual 27,039
+- production build **27,249 / 27,249 static pages**
 
-Canonical flight-number path is:
+## Wave 2 entity inventory
 
-/{locale}/flight-numbers/{slug}
+Per locale:
 
-NOT:
+- Routes: 3,141
+- Airports: 98
+- Airlines: 96
+- Countries: 36
+- Delay Reasons: 11
+- Total: 3,382
 
-/{locale}/flight/{slug}
+At EN+SV:
 
----
+- 6,764 entity URLs
+- 10 cohort index URLs
+- 6,774 Wave 2 sitemap URLs
 
-# IMPORTANT SEO FIXES ALREADY COMPLETED
+# WORKTREE / GIT SAFETY — CRITICAL
 
-## Flight-number canonical URL
+Two Git worktrees are intentionally in use.
 
-Changed old:
+## Original worktree
 
-/flight/
+Folder:
 
-to:
+`flightclaimly`
 
-/flight-numbers/
+Purpose:
 
-Relevant files included:
+General/original worktree. It currently contains parked unrelated Claims/Reijo work.
 
-- src/app/sitemap.ts
-- src/lib/flight-numbers/metadata.ts
-- src/app/[locale]/flight-numbers/[slug]/page.tsx
+Last verified local status:
 
-No stale `/flight/` references were found in the latest grep audit.
+- `M docs/CLAIMS_DESK.md`
+- `M scripts/test-manual-claim.ts`
+- `?? scripts/create-reijo-claim.ts`
 
----
+Do not reset, clean, stage or modify those files as part of localization.
 
-## Sitemap false freshness signals
+## Wave 2 worktree
 
-Removed synthetic:
+Folder:
 
-lastModified: new Date()
+`flightclaimly-wave2-sv`
 
-from sitemap generation.
+Branch:
 
-We do NOT want Google to be told that thousands of static pages changed every deployment when they did not.
+`seo-localization-wave2-sv`
 
----
+This folder is NOT another project or fork. It is a separate Git worktree using the same FlightClaimly repository/history, created to isolate Wave 2 from parked Claims/Reijo edits.
 
-## Central hreflang helper
+**Continue Danish Wave 2 in this Wave 2 worktree lineage. Do not switch back to the original worktree merely because Swedish is locked.**
 
-File:
+Remote documentation commits may exist after the SV code-lock commit. Synchronize safely before making new local edits. Do not force-push.
 
-src/lib/seo/alternates.ts
+# NEXT EXACT DEVELOPMENT ACTION
 
-contains centralized language alternate generation.
+## Danish Wave 2
 
-Current locale source of truth includes:
+DA is next.
 
-sv
-en
-da
-de
-nl
-pl
-fi
+Use Swedish only as proof that the generic architecture works. Do not mechanically translate Swedish into Danish. Localize from canonical/base meaning and preserve canonical facts/legal meaning.
 
-The helper is:
+Expected sequence:
 
-buildLanguageAlternates(...)
+1. synchronize current Wave 2 branch safely
+2. inspect actual localization architecture/current code
+3. add/adapt Danish presentation for Routes, Airports, Airlines, Countries and Delay Reasons
+4. preserve canonical facts and canonical legal/classification values
+5. use market-native terminology/search intent
+6. verify visible display names and route/country naming
+7. verify Delay Reason assessment presentation and extraordinary labels
+8. verify metadata
+9. verify internal links / Related Routes
+10. verify BreadcrumbList + FAQ/schema
+11. extend Wave 2 locale publication gate to DA only when quality is ready
+12. verify canonical/hreflang/static params
+13. verify sitemap arithmetic
+14. run typecheck + diff check
+15. optimized Preview + representative and unsampled rendered QA
+16. stop Preview
+17. one meaningful production build
+18. checkpoint + lock DA
+19. continue PL → DE → FI → NL
 
----
+The remaining Wave 2 markets should be materially faster than SV because the generic plumbing, display-name support, publication-aware linking, Delay Reason localization separation and QA procedure now exist. Each market still needs real terminology/SEO/legal-meaning QA and a production lock gate.
 
-# SEO DATA REPAIR ALREADY COMPLETED
+# ARCHITECTURAL PRINCIPLES
 
-## Airports
+- canonical Knowledge facts are locale-neutral
+- localization changes presentation, not canonical fact identity
+- legal/classification values remain canonical across locales
+- localization is market-native adaptation, not translation chaining
+- quality gates control SEO publication
+- routing support does not equal publishable localization
+- relationship links must respect publication policy
+- research/evidence and legal evaluation remain separate
+- unresolved facts stay unresolved until sufficiently verified
+- customer-specific data remains transactional and must not leak into source-controlled generic helpers
+- build/deployment optimization remains locked unless deliberately re-evaluated
 
-Initial SEO airport set:
-80.
+# PORTUGAL + SPAIN AFTER CURRENT WAVE 2
 
-18 airports referenced by flight-number data were missing from the SEO airport layer but existed in the huge master airport registry.
+After SV/DA/PL/DE/FI/NL Wave 2 is complete:
 
-The 18 were:
+1. Portuguese first as a complete public/product locale
+2. Spanish second
+3. validate core site + claim journey in each new locale
+4. apply established Flight Number localization method
+5. apply coordinated Wave 2 Knowledge method
+6. validate canonical/hreflang/sitemap/build/rendering
+7. hand to Google primarily through sitemap plus a small representative set of strategic indexing requests
 
-AAL
-AYT
-BGO
-BOJ
-CHQ
-ORD
-PMO
-FLR
-GZP
-GDN
-GOT
-IST
-LAX
-PUY
-SVG
-TOS
-TRD
-IAD
+# PREMIUM UX / DESIGN / CONVERSION
 
-They were promoted into SEO airport entities.
+After/alongside expansion, perform a deliberate premium product-quality pass over desktop + mobile:
 
-Current airports:
-98.
+landing/search → lookup → eligibility → passenger details → documents → claim → confirmation.
 
-Master registry:
+Review hierarchy, typography/spacing, trust/authority, CTA clarity, progress/navigation, form friction/validation, states, reassurance/copy, responsive behavior, microinteractions, consistency, accessibility/performance and conversion instrumentation.
 
-src/data/master/airportRegistry.ts
+# GROWTH MODEL
 
-This file is extremely large (~97k lines).
+Build country-by-country TAM/SAM/SOM estimates and model 1%, 2%, 3% penetration. Track the complete funnel:
 
-Do not assume GitHub connector returning empty means the file is empty.
+traffic → started claim → submitted → valid/pursued → successful recovery → gross commission → CAC/payback.
 
----
+Do not treat all disrupted passengers as eligible and do not assume a 90% win rate across raw submissions. A 90%+ success aspiration only makes sense for screened/pursued claims.
 
-## Countries
+Priority future growth laboratories:
 
-Added missing country entities including:
+- Portugal
+- Spain
+- Poland
 
-Iceland
-Latvia
-Estonia
-Lithuania
-Luxembourg
-Albania
-Malta
-Slovenia
-North Macedonia
-Moldova
-Türkiye
-United States
+# CLAIMS OPERATIONS CONTEXT
 
-Current countries:
-36.
+Claims and localization are separate workstreams.
 
----
+Do not accidentally stage or modify parked Reijo/manual-claim work while continuing Wave 2.
 
-## Airlines
+Claims roadmap remains:
 
-Identity/reference problems were repaired.
+- Manual / Legacy Claim Engine
+- Claims Desk Workflow v2
+- Airline Submission Engine
+- Customer Communication Engine
+- Escalation Engine
+- Claims Intelligence
+- additional passenger-right regimes through deterministic rule architecture
 
-LOT references were normalized from:
+# CRASH-RECOVERY ORDER
 
-lot
+A new ChatGPT session should read in this order:
 
-to existing:
+1. `docs/CURRENT_SPRINT_LATEST.md`
+2. `docs/checkpoints/2026-09-06-seo-localization-wave2-sv-locked.md`
+3. `docs/ROADMAP.md`
+4. this file
+5. relevant architecture/engine files
+6. current GitHub branch/code/status
 
-lot-polish-airlines
-
-Active airline entities added:
-
-- SKY express
-- Bulgaria Air
-- Cyprus Airways
-- FLYONE
-- KM Malta Airlines
-
-Important airline conclusions:
-
-Air Malta is defunct and should NOT be treated as current.
-Current successor is KM Malta Airlines.
-
-Air Albania ceased/suspended operations in December 2025 and should NOT be treated as a current main airline.
-
-Current airlines:
-96.
-
----
-
-# AIRLINE COPY CONTAMINATION INCIDENT
-
-A serious content-quality bug was discovered:
-
-The Ryanair SEO entity accidentally contained SAS overview copy.
-
-That was fixed.
-
-A naive detector produced many false positives because valid airline-group relationships such as Lufthansa references were interpreted as contamination.
-
-A smarter quality gate was therefore created:
-
-scripts/diagnose-airline-copy.ts
-
-Current result:
-
-Allowed relationship matches: 38
-Ignored lexical matches: 5
-Unexpected findings: 0
-
-Do not mechanically rewrite legitimate airline group/relationship references just to force the primitive main audit warning count to zero.
-
----
-
-# ROUTE ENGINE
-
-Important files:
-
-src/data/seo/routes.ts
-src/lib/seo/routes.ts
-src/app/[locale]/routes/[slug]/page.tsx
-src/app/sitemap.ts
-
-Route data is generated programmatically.
-
-Current routes:
-1,594.
-
-Route data includes:
-
-- origin
-- destination
-- airlines
-- title
-- description
-- intro
-- overview
-- passengerRights
-- compensationIntro
-- compensationAmounts
-- compensationRules
-- statistics
-- timeline
-- claimProcess
-- commonIssues
-- faq
-
-The generated route content is currently ENGLISH.
-
-Examples of generated English content include:
-
-- FAQ questions
-- FAQ answers
-- statistics descriptions
-- timeline copy
-- compensation copy
-- metadata title/description
-
-This led to the important indexation issue below.
-
----
-
-# CURRENT INDEXATION ISSUE – THIS IS WHERE WORK STOPPED
-
-The route engine currently has 1,594 route entities.
-
-Before correction, sitemap generated them for ALL seven locales:
-
-1,594 × 7 = 11,158 route URLs.
-
-However, the actual programmatic route copy is English.
-
-This means URLs such as:
-
-/en/routes/...
-/sv/routes/...
-/da/routes/...
-/de/routes/...
-/nl/routes/...
-/pl/routes/...
-/fi/routes/...
-
-could effectively expose the same English route content under seven language prefixes.
-
-This is NOT the desired SEO architecture.
-
-Current architectural decision:
-
-ROUTE PROGRAMMATIC SEO SHOULD BE EN-ONLY FOR INDEXATION FOR NOW.
-
-This does NOT mean FlightClaimly is becoming English-only.
-
-It means:
-
-- Index genuine EN route content now.
-- Later enable SV/DA/DE/NL/PL/FI route indexation when genuine localized programmatic route content exists.
-- Do not manufacture seven times the index surface using duplicated English content.
-
-Expected current route index surface after EN-only policy:
-
-1,594 route entity pages
-
-rather than:
-
-11,158 duplicated/localized-prefix route pages.
-
----
-
-# IMPORTANT – IMPLEMENTATION WAS NOT YET COMPLETED
-
-We were in the middle of implementing centralized route locale policy.
-
-Planned addition in:
-
-src/lib/seo/alternates.ts
-
-was:
-
-export const routeSeoLocales = ["en"] as const;
-
-Then in:
-
-src/lib/seo/routes.ts
-
-the existing import:
-
-import { buildLanguageAlternates } from "@/lib/seo/alternates";
-
-should become:
-
-import {
-  buildLanguageAlternates,
-  routeSeoLocales,
-} from "@/lib/seo/alternates";
-
-And route hreflang:
-
-languages: buildLanguageAlternates(
-  `routes/${route.slug}`
-),
-
-should become:
-
-languages: buildLanguageAlternates(
-  `routes/${route.slug}`,
-  routeSeoLocales
-),
-
-Then in:
-
-src/app/sitemap.ts
-
-ADD this import:
-
-import { routeSeoLocales } from "@/lib/seo/alternates";
-
-Do NOT replace unrelated imports.
-
-Change:
-
-const routeEntries = locales.flatMap((locale) =>
-  flightRoutes.map((route) => getRouteSitemapEntry(route, locale, siteUrl))
-);
-
-to:
-
-const routeEntries = routeSeoLocales.flatMap((locale) =>
-  flightRoutes.map((route) => getRouteSitemapEntry(route, locale, siteUrl))
-);
-
-IMPORTANT:
-
-We deliberately STOPPED before changing route `generateStaticParams()`.
-
-Do NOT blindly apply an earlier suggestion that added `locale: "en"` inside the child route's generateStaticParams.
-
-Reason:
-
-[locale] is a parent segment and the parent layout already has its own generateStaticParams.
-
-We want to verify actual Next.js nested static-param behavior before modifying that part.
-
-First correct:
-
-- route SEO locale policy
-- route hreflang
-- sitemap
-
-Then run:
-
-npx tsc --noEmit
-
-Then verify actual route rendering/indexability behavior before blocking non-EN route rendering.
-
----
-
-# CURRENT SITEMAP STRUCTURE
-
-Static routes include:
-
-home
-routes
-delays
-cancellations
-rights
-faq
-about
-contact
-privacy
-terms
-
-Static routes are generated for all configured locales.
-
-Flight-number sitemap locales currently:
-
-sv
-en
-
-Flight-number pages are intentionally currently SV/EN.
-
-Routes previously used all locales, but this is being changed to EN-only indexation because route copy is English.
-
-Airports / airlines / countries have page engines but were NOT included in the currently inspected sitemap implementation.
-
-That should be reviewed later as part of the programmatic SEO publication strategy.
-
----
-
-# PAGE ENGINE LOCALES FOUND IN AUDIT
-
-Airports generate static entity params for:
-
-sv
-en
-
-Airlines:
-
-sv
-en
-
-Countries:
-
-sv
-en
-
-Flight numbers:
-
-sv
-en
-
-Routes differ structurally:
-their child generateStaticParams currently returns only route slugs and inherits locale handling through the parent structure.
-
-Parent:
-
-src/app/[locale]/layout.tsx
-
-has:
-
-dynamicParams = false
-
-and generateStaticParams for all configured locales.
-
-This is why route locale behavior needs explicit verification before changing nested static params.
-
----
-
-# SITEMAP COUNT CONTEXT
-
-Before EN-only route policy, approximate sitemap surface was:
-
-10 static routes × 7 locales = 70
-1,594 routes × 7 locales = 11,158
-50 flight numbers × 2 locales = 100
-
-Total:
-
-11,328 URLs
-
-After making route sitemap EN-only:
-
-70
-+ 1,594
-+ 100
-
-= approximately 1,764 sitemap URLs
-
-before adding any airport/airline/country entity pages to sitemap.
-
-This reduction is intentional index-quality control, not loss of market strategy.
-
----
-
-# CURRENT GIT STATE – LAST OBSERVED
-
-Last observed:
-
- M src/data/seo/airlines.ts
- M src/data/seo/airports.ts
- M src/data/seo/countries.ts
- M src/data/seo/routes.ts
- M src/lib/seo/alternates.ts
- M src/lib/seo/metadata.ts
-?? scripts/audit-seo-data.ts
-?? scripts/create-reijo-claim.ts
-?? scripts/diagnose-airline-copy.ts
-?? scripts/diagnose-airline-identities.ts
-?? scripts/diagnose-airport-registry-gaps.ts
-?? scripts/diagnose-seo-gaps.ts
-?? scripts/diagnose-seo-identities.ts
-
-Re-check git status before committing.
-
-Do NOT assume this list is still exact.
-
-`scripts/create-reijo-claim.ts` is real-claim/manual tooling and should NOT accidentally be included in an SEO commit merely because it is untracked.
-
----
-
-# DIAGNOSTIC SCRIPTS
-
-Useful scripts currently include:
-
-scripts/audit-seo-data.ts
-scripts/diagnose-airline-copy.ts
-scripts/diagnose-airline-identities.ts
-scripts/diagnose-airport-registry-gaps.ts
-scripts/diagnose-seo-gaps.ts
-scripts/diagnose-seo-identities.ts
-
-Decide which diagnostics should remain permanently and be committed.
-
----
-
-# NEXT EXACT DEVELOPMENT STEPS
-
-1. Finish centralized EN-only route indexation policy.
-
-2. Run:
-
-npx tsc --noEmit
-
-3. Verify actual Next.js route behavior for:
-   /en/routes/{slug}
-   /sv/routes/{slug}
-   and another non-EN locale.
-
-4. Ensure:
-   sitemap
-   canonical
-   hreflang
-   static params
-   actual renderability/indexability
-
-all express one coherent publication policy.
-
-5. Run final SEO integrity gates.
-
-6. Inspect git diff/status.
-
-7. Make a clean SEO integrity/indexation commit.
-
-8. Only then move on to the next SEO sprint section.
-
----
-
-# REMEMBERED NON-SEO TODO
-
-There is a remembered i18n backend TODO:
-
-src/app/api/claims/route.ts
-
-Previously its Lang union / allowed language array contained:
-
-sv
-en
-da
-de
-pl
-fi
-
-but NL may have been missing.
-
-Verify later whether:
-
-nl
-
-has already been added.
-
-Do not derail the current SEO sub-sprint for this unless convenient.
-
----
-
-# PASSENGER AUTHORITY SYSTEM – IMPORTANT PROJECT CONTEXT
-
-Supabase table:
-
-passenger_authorizations
-
-exists.
-
-Each adult passenger signs their own authority.
-
-Missing co-passenger email does not block claim creation.
-
-Passenger authority PDFs are stored separately, for example:
-
-claims/{claimId}/passenger-authorities/{passenger.id}.pdf
-
-They must NOT overwrite owner authority:
-
-claims/{claimId}/authority.pdf
-
-Production E2E has previously confirmed owner + co-passenger signed PDFs visible in admin.
-
-Authority/legal model:
-
-FlightClaimly receives broad authority from the beginning, potentially including judicial proceedings, external lawyers, appeals and enforcement.
-
-BUT:
-
-The authority is NOT advance acceptance of additional litigation/court/legal costs.
-
-If legal action is recommended:
-- explain additional fees/costs
-- obtain separate customer approval before proceeding
-
-A local court/counsel may still require a separate procedural POA.
-
----
-
-# BUSINESS PRIORITY AFTER THIS SEO SUB-SPRINT
-
-Immediately after closing the current SEO integrity/indexation section:
-
-Handle the first real external customer claim:
-
-Reijo Knuutinen
-and
-Cara-Maria Knuutinen
-
-against TAP Air Portugal.
-
-There is a separate REIJO_TAP_CASE.md handoff containing the case.
-
-Do NOT lose momentum by starting another unrelated SEO section before handling Reijo once the current SEO integrity/indexation sub-sprint is closed.
+Then continue Danish Wave 2 without asking the user to reconstruct the session.
