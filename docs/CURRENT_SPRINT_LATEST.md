@@ -2,7 +2,15 @@
 
 Last updated: **2026-09-06**
 
-> **Authoritative crash-recovery pointer. Read this first after any session loss.**
+> **Authoritative crash-recovery and new-chat pointer. Read this first after any session loss.**
+
+## New-chat startup protocol
+
+When a fresh ChatGPT window is opened, the user can write exactly:
+
+> **FlightClaimly: återuppta arbetet. Läs `docs/CURRENT_SPRINT_LATEST.md` först, därefter den senaste relevanta checkpointen och berörda engine/roadmap-filer. Inspektera aktuell GitHub-branch och faktisk kod innan du gör något. Plocka upp arbetet exakt där det står, fortsätt självständigt och skriv inte till mig förrän du faktiskt behöver min assistans.**
+
+The assistant must then use the connected GitHub repository `zamiocflight/FlightClaimly` as source of truth, inspect current branch/code/docs, and continue execution rather than asking the user to reconstruct prior context. Repository state beats conversational memory if they differ.
 
 ## Current state
 
@@ -46,7 +54,7 @@ Coordinated Swedish package:
 4. Countries
 5. Delay Reasons
 
-Implementation started 2026-09-06. Swedish deterministic localization builders, localized hubs/detail surfaces, Swedish internal-link headings, metadata/canonical/hreflang publication controls and the five cohort locale gates are being implemented together. Do not call SV locked until typecheck, architecture checks, sitemap arithmetic, Preview/rendered QA and a meaningful production build are green.
+Implementation started 2026-09-06. Swedish deterministic localization builders have been created for the coordinated Knowledge cohorts, and the route/airport/airline/country detail surfaces have been wired toward resolved Swedish localized entities, localized labels, metadata and breadcrumb/fact presentation. The branch is **mid-implementation, not locked**. The next session must inspect the actual branch diff/code before continuing, complete the remaining Delay Reason integration and any hub/internal-link/sitemap/locale-gate work, then validate the package end-to-end. Do not call SV locked until typecheck, architecture checks, sitemap arithmetic, Preview/rendered QA and a meaningful production build are green.
 
 ### Wave 2 market order
 
@@ -107,4 +115,4 @@ Search Console legacy duplicate/canonical, 404, redirect, discovered-not-indexed
 
 ## Exact resume action
 
-**Continue Wave 2 on `seo-localization-wave2-sv`: finish and validate Swedish Routes + Airports + Airlines + Countries + Delay Reasons as one package. Do not touch Claims/Reijo and do not rerun FlightAware. After SV locks, continue DA → PL → DE → FI → NL. After current Wave 2, Portuguese first and Spanish second become full product/site locales, followed by the same Flight Number + coordinated Knowledge localization method. Preserve the planned premium UX/design/conversion pass and country-by-country 1–3% growth model.**
+**Continue Wave 2 on `seo-localization-wave2-sv`. First inspect the branch's actual current diff/code because SV is mid-implementation. Finish Swedish Routes + Airports + Airlines + Countries + Delay Reasons as one coordinated package, including remaining Delay Reason integration, hubs/internal links, locale publication gates, canonical/hreflang and sitemap exposure. Then run type/architecture validation, optimized Preview with representative and unsampled rendered QA, stop Preview, run one meaningful production build, checkpoint and lock SV. Do not touch Claims/Reijo and do not rerun FlightAware. After SV locks, continue DA → PL → DE → FI → NL. After current Wave 2, Portuguese first and Spanish second become full product/site locales, followed by the same Flight Number + coordinated Knowledge localization method. Preserve the planned premium UX/design/conversion pass and country-by-country 1–3% growth model.**
