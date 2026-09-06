@@ -1,69 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
 import { countries } from "@/data/seo/countries";
-import {
-  buildLanguageAlternates,
-  countrySeoLocales,
-} from "@/lib/seo/alternates";
-
+import { buildLanguageAlternates, countrySeoLocales } from "@/lib/seo/alternates";
+import { buildSwedishCountryLocalization, swedishCountryName } from "@/lib/localization/knowledge-sv";
+import { applyKnowledgeLocalization } from "@/lib/localization/entity";
 const SITE_URL = "https://www.flightclaimly.com";
-
-type PageProps = {
-  params: Promise<{
-    locale: string;
-  }>;
-};
-
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { locale } = await params;
-
-  if (!countrySeoLocales.includes(locale as (typeof countrySeoLocales)[number])) {
-    return {};
-  }
-
-  const canonical = `${SITE_URL}/${locale}/countries`;
-
-  return {
-    title: "Flight compensation by country | FlightClaimly",
-    description:
-      "Explore country-specific flight compensation guides and passenger rights for delayed, cancelled and disrupted flights.",
-    alternates: {
-      canonical,
-      languages: buildLanguageAlternates("countries", countrySeoLocales),
-    },
-  };
-}
-
-export default async function CountriesPage({ params }: PageProps) {
-  const { locale } = await params;
-
-  if (!countrySeoLocales.includes(locale as (typeof countrySeoLocales)[number])) {
-    notFound();
-  }
-
-  return (
-    <main className="mx-auto max-w-6xl px-6 py-16">
-      <h1 className="mb-8 text-4xl font-bold">
-        Flight Compensation by Country
-      </h1>
-
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {countries.map((country) => (
-          <Link
-            key={country.slug}
-            href={`/${locale}/countries/${country.slug}`}
-            className="rounded-xl border bg-white p-6 shadow-sm transition hover:shadow-md"
-          >
-            <h2 className="text-xl font-semibold">{country.name}</h2>
-
-            <p className="mt-2 text-sm text-slate-600">
-              {country.description}
-            </p>
-          </Link>
-        ))}
-      </div>
-    </main>
-  );
-}
+type PageProps = { params: Promise<{ locale: string }> };
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> { const { locale } = await params; if (!countrySeoLocales.includes(locale as (typeof countrySeoLocales)[number])) return {}; const canonical = `${SITE_URL}/${locale}/countries`; const sv = locale === "sv"; return { title: sv ? "Flygersättning per land | FlightClaimly" : "Flight compensation by country | FlightClaimly", description: sv ? "Utforska landsspecifika guider om flygersättning och passagerarrättigheter vid försenade och inställda flyg." : "Explore country-specific flight compensation guides and passenger rights for delayed, cancelled and disrupted flights.", alternates: { canonical, languages: buildLanguageAlternates("countries", countrySeoLocales) } }; }
+export default async function CountriesPage({ params }: PageProps) { const { locale } = await params; if (!countrySeoLocales.includes(locale as (typeof countrySeoLocales)[number])) notFound(); const sv = locale === "sv"; return <main className="mx-auto max-w-6xl px-6 py-16"><h1 className="mb-4 text-4xl font-bold">{sv ? "Flygersättning per land" : "Flight Compensation by Country"}</h1><p className="mb-8 max-w-3xl text-lg text-slate-600">{sv ? "Välj land för att läsa om passagerarrättigheter och när ett försenat eller inställt flyg kan ge rätt till ersättning." : "Explore passenger rights and flight compensation by country."}</p><div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">{countries.map((country) => { const localized = sv ? applyKnowledgeLocalization(country, buildSwedishCountryLocalization(country)) : country; return <Link key={country.slug} href={`/${locale}/countries/${country.slug}`} className="rounded-xl border bg-white p-6 shadow-sm transition hover:shadow-md"><h2 className="text-xl font-semibold">{sv ? swedishCountryName(country.name) : country.name}</h2><p className="mt-2 text-sm text-slate-600">{localized.description}</p></Link>; })}</div></main>; }
