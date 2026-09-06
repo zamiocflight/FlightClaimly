@@ -1,133 +1,61 @@
 import type { RelationshipType } from "@/data/knowledge/relationships";
-import {
-  getRelatedKnowledge,
-  type RelatedKnowledgeItem,
-} from "@/lib/seo/relationships";
+import { getRelatedKnowledge, type RelatedKnowledgeItem } from "@/lib/seo/relationships";
 
-export type InternalLinkSection = {
-  title: string;
-  items: RelatedKnowledgeItem[];
-};
-
-type SectionConfig = {
-  title: string;
-  allowedTypes: RelationshipType[];
-  limit: number;
-};
+export type InternalLinkSection = { title: string; items: RelatedKnowledgeItem[] };
+type SectionConfig = { title: string; allowedTypes: RelationshipType[]; limit: number };
 
 const internalLinkConfigs = {
   route: [
-    {
-      title: "Airports on this route",
-      allowedTypes: ["airport"],
-      limit: 2,
-    },
-    {
-      title: "Airlines operating this route",
-      allowedTypes: ["airline"],
-      limit: 6,
-    },
-    {
-      title: "Countries connected by this route",
-      allowedTypes: ["country"],
-      limit: 2,
-    },
+    { title: "Airports on this route", allowedTypes: ["airport"], limit: 2 },
+    { title: "Airlines operating this route", allowedTypes: ["airline"], limit: 6 },
+    { title: "Countries connected by this route", allowedTypes: ["country"], limit: 2 },
   ],
-
   airport: [
-    {
-      title: "Airlines at this airport",
-      allowedTypes: ["airline"],
-      limit: 6,
-    },
-    {
-      title: "Popular routes from this airport",
-      allowedTypes: ["route"],
-      limit: 9,
-    },
-    {
-      title: "Country guide",
-      allowedTypes: ["country"],
-      limit: 1,
-    },
+    { title: "Airlines at this airport", allowedTypes: ["airline"], limit: 6 },
+    { title: "Popular routes from this airport", allowedTypes: ["route"], limit: 9 },
+    { title: "Country guide", allowedTypes: ["country"], limit: 1 },
   ],
-
   airline: [
-    {
-      title: "Airports served by this airline",
-      allowedTypes: ["airport"],
-      limit: 6,
-    },
-    {
-      title: "Routes operated by this airline",
-      allowedTypes: ["route"],
-      limit: 9,
-    },
-    {
-      title: "Airline country guide",
-      allowedTypes: ["country"],
-      limit: 3,
-    },
+    { title: "Airports served by this airline", allowedTypes: ["airport"], limit: 6 },
+    { title: "Routes operated by this airline", allowedTypes: ["route"], limit: 9 },
+    { title: "Airline country guide", allowedTypes: ["country"], limit: 3 },
   ],
-
   "flight-number": [
-    {
-      title: "Flight airline",
-      allowedTypes: ["airline"],
-      limit: 1,
-    },
-    {
-      title: "Flight route",
-      allowedTypes: ["route"],
-      limit: 1,
-    },
-    {
-      title: "Airports",
-      allowedTypes: ["airport"],
-      limit: 2,
-    },
-    {
-      title: "Countries",
-      allowedTypes: ["country"],
-      limit: 2,
-    },
+    { title: "Flight airline", allowedTypes: ["airline"], limit: 1 },
+    { title: "Flight route", allowedTypes: ["route"], limit: 1 },
+    { title: "Airports", allowedTypes: ["airport"], limit: 2 },
+    { title: "Countries", allowedTypes: ["country"], limit: 2 },
   ],
-
   country: [
-    {
-      title: "Airports in this country",
-      allowedTypes: ["airport"],
-      limit: 9,
-    },
-    {
-      title: "Airlines from this country",
-      allowedTypes: ["airline"],
-      limit: 6,
-    },
-    {
-      title: "Routes connected to this country",
-      allowedTypes: ["route"],
-      limit: 9,
-    },
+    { title: "Airports in this country", allowedTypes: ["airport"], limit: 9 },
+    { title: "Airlines from this country", allowedTypes: ["airline"], limit: 6 },
+    { title: "Routes connected to this country", allowedTypes: ["route"], limit: 9 },
   ],
-} satisfies Record<
-  "route" | "airport" | "airline" | "flight-number" | "country",
-  SectionConfig[]
->;
+} satisfies Record<"route" | "airport" | "airline" | "flight-number" | "country", SectionConfig[]>;
 
-export function getInternalLinkSections(
-  entityType: keyof typeof internalLinkConfigs,
-  slug: string,
-  locale: string,
-  localizedTitles: Readonly<Record<string, string>> = {}
-): InternalLinkSection[] {
-  return internalLinkConfigs[entityType]
-    .map((section) => ({
-      title: localizedTitles[section.title] ?? section.title,
-      items: getRelatedKnowledge(slug, locale, {
-        allowedTypes: section.allowedTypes,
-        limit: section.limit,
-      }),
-    }))
-    .filter((section) => section.items.length > 0);
+const swedishTitles: Record<string, string> = {
+  "Airports on this route": "Flygplatser på sträckan",
+  "Airlines operating this route": "Flygbolag som trafikerar sträckan",
+  "Countries connected by this route": "Länder som sträckan förbinder",
+  "Airlines at this airport": "Flygbolag på flygplatsen",
+  "Popular routes from this airport": "Flygsträckor från flygplatsen",
+  "Country guide": "Landguide",
+  "Airports served by this airline": "Flygplatser som trafikeras av flygbolaget",
+  "Routes operated by this airline": "Flygsträckor som trafikeras av flygbolaget",
+  "Airline country guide": "Flygbolagets landguide",
+  "Flight airline": "Flygbolag för flygningen",
+  "Flight route": "Flygsträcka",
+  Airports: "Flygplatser",
+  Countries: "Länder",
+  "Airports in this country": "Flygplatser i landet",
+  "Airlines from this country": "Flygbolag från landet",
+  "Routes connected to this country": "Flygsträckor med koppling till landet",
+};
+
+export function getInternalLinkSections(entityType: keyof typeof internalLinkConfigs, slug: string, locale: string, localizedTitles: Readonly<Record<string, string>> = {}): InternalLinkSection[] {
+  const localeTitles = locale === "sv" ? swedishTitles : {};
+  return internalLinkConfigs[entityType].map((section) => ({
+    title: localizedTitles[section.title] ?? localeTitles[section.title] ?? section.title,
+    items: getRelatedKnowledge(slug, locale, { allowedTypes: section.allowedTypes, limit: section.limit }),
+  })).filter((section) => section.items.length > 0);
 }
