@@ -2,60 +2,18 @@ import type { Metadata } from "next";
 import { buildLanguageAlternates } from "@/lib/seo/alternates";
 
 const SITE_URL = "https://www.flightclaimly.com";
+type MetadataEntity = { slug: string; name: string; description: string; title?: string; metadataTitle?: string };
+type BuildMetadataInput = { entity: MetadataEntity; locale: string; pathPrefix: string; availableLocales: readonly string[]; titleSuffix?: string };
 
-type MetadataEntity = {
-  slug: string;
-  name: string;
-  description: string;
-  title?: string;
-  metadataTitle?: string;
-};
-
-type BuildMetadataInput = {
-  entity: MetadataEntity;
-  locale: string;
-  pathPrefix: string;
-  availableLocales: readonly string[];
-  titleSuffix?: string;
-};
-
-export function buildMetadata({
-  entity,
-  locale,
-  pathPrefix,
-  availableLocales,
-  titleSuffix = "flight compensation",
-}: BuildMetadataInput): Metadata {
+export function buildMetadata({ entity, locale, pathPrefix, availableLocales, titleSuffix = "flight compensation" }: BuildMetadataInput): Metadata {
   const url = `${SITE_URL}/${locale}/${pathPrefix}/${entity.slug}`;
-
-  const title =
-    entity.metadataTitle ??
-    `${entity.title ?? `${entity.name} ${titleSuffix}`} | FlightClaimly`;
-
+  const candidate = entity.metadataTitle ?? entity.title ?? `${entity.name} ${titleSuffix}`;
+  const title = candidate.includes("| FlightClaimly") ? candidate : `${candidate} | FlightClaimly`;
   return {
     title,
     description: entity.description,
-    alternates: {
-      canonical: url,
-      languages: buildLanguageAlternates(
-  `${pathPrefix}/${entity.slug}`,
-  availableLocales
-),
-    },
-
-    twitter: {
-  card: "summary_large_image",
-  title,
-  description: entity.description,
-},
-
-   openGraph: {
-  title,
-  description: entity.description,
-  url,
-  siteName: "FlightClaimly",
-  locale,
-  type: "article",
-},
+    alternates: { canonical: url, languages: buildLanguageAlternates(`${pathPrefix}/${entity.slug}`, availableLocales) },
+    twitter: { card: "summary_large_image", title, description: entity.description },
+    openGraph: { title, description: entity.description, url, siteName: "FlightClaimly", locale, type: "article" },
   };
 }
