@@ -1,28 +1,8 @@
 # FlightClaimly — Latest Sprint / Resume Pointer
 
-Last updated: **2026-09-05**
+Last updated: **2026-09-06**
 
 > **Authoritative crash-recovery pointer. Read this first after any session loss.**
-
-## Read order after session loss
-
-1. `docs/CURRENT_SPRINT_LATEST.md`
-2. `docs/checkpoints/2026-09-05-seo-localization-nl-locked.md`
-3. `docs/checkpoints/2026-09-05-seo-localization-fi-locked.md`
-4. `docs/checkpoints/2026-09-05-seo-localization-de-locked.md`
-5. `docs/checkpoints/2026-09-05-seo-localization-pl-locked.md`
-6. `docs/checkpoints/2026-09-05-seo-localization-da-implementation.md`
-7. `docs/checkpoints/2026-09-04-build-deployment-cost-optimization-locked.md`
-8. `docs/checkpoints/2026-09-04-seo-localization-wave1-sv-locked.md`
-9. `docs/engines/LOCALIZATION_ENGINE.md`
-10. `docs/checkpoints/2026-09-04-research-evidence-engine-v1-locked.md`
-11. `docs/ROADMAP.md`
-12. `docs/engines/CLAIM_RIGHTS_ASSESSMENT_ENGINE.md`
-13. `docs/engines/README.md`
-14. `docs/CLAIMS_DESK.md` — preserve local user modifications
-15. `docs/FLIGHTCLAIMLY_KNOWLEDGE_ENGINE.md`
-16. `docs/SYSTEM_PROCESS_MAP.md`
-17. `docs/CURRENT_SPRINT.md` — historical record; preserve it
 
 ## Current state
 
@@ -31,179 +11,100 @@ Last updated: **2026-09-05**
 - 🟢 Claim Rights Assessment Engine v1 — LOCKED
 - 🟢 Claims Desk Assessment Integration phase 1 — VERIFIED
 - 🟢 Research / Evidence Engine v1 foundation — LOCKED
-- 🟢 Localization architecture — IMPLEMENTED / AUDIT GREEN
-- 🟢 **Flight Number Localization Wave 1 — COMPLETE / LOCKED / LIVE IN PRODUCTION 2026-09-05**
-- 🟢 **SV → DA → PL → DE → FI → NL Flight Number markets — LOCKED**
-- 🟢 **Production SEO launch verification — PASS 2026-09-05**
-- 🟡 **Google discovery/indexing handoff — IN PROGRESS**
-- 🔵 **ACTIVE NEXT: Localization Wave 2 — Swedish coordinated Knowledge cohort package**
-- ⏭️ **THEN: DA → PL → DE → FI → NL Wave 2 market packages**
-- 🟡 PARALLEL: Content / Social Engine v1
-
-## Production launch / Google handoff — 2026-09-05
-
-Wave 1 was promoted through PR #1 from `seo-localization-engine-v1` to `main` and successfully deployed by Vercel Production.
-
-Live verification completed after deployment:
-
-- representative Dutch detail URL `/nl/flight-numbers/a3101` changed from pre-release HTTP 404 to **HTTP 200**
-- `robots.txt` allows public crawling and disallows `/admin` and `/api`
-- `robots.txt` references `https://www.flightclaimly.com/sitemap.xml`
-- live `sitemap.xml` returns **HTTP 200** with `application/xml`
-- live Dutch Flight Number sitemap cluster count verified at **2,886 URLs**
-- representative Dutch detail canonical points to its exact NL URL
-- representative Dutch detail hreflang contains exactly the seven published SEO locales: EN, SV, DA, PL, DE, FI, NL
-- representative Dutch detail has no `noindex` / Googlebot meta blocker
-
-Google Search Console state at handoff:
-
-- existing sitemap registration is healthy / processed
-- Search Console still showed **6,336 discovered pages** and `Last read: 2026-09-04`, therefore it had not yet re-read the newly deployed 2026-09-05 sitemap at the time of verification
-- manual URL Inspection request accepted (green `Indexing requested`) for Dutch detail `/nl/flight-numbers/a3101`
-- manual hub indexing requests accepted for `/nl/flight-numbers`, `/sv/flight-numbers`, `/da/flight-numbers`, `/pl/flight-numbers`
-- manual request for `/de/flight-numbers` returned a temporary Search Console error (`Could not submit indexing request. Try again later.`) after several rapid requests
-- stop manual requests for now; retry DE and FI later rather than repeatedly submitting
-- do not manually submit thousands of detail URLs; sitemap discovery is the mass-discovery mechanism
-
-### Google follow-up
-
-On the next check, inspect the existing sitemap in Search Console. The first useful milestone is that `Last read` advances beyond 2026-09-04 and discovered-page counts begin reflecting the new sitemap. Do not interpret lack of immediate indexing as a production defect.
-
-If manual URL Inspection is available again, request the remaining strategic hubs only:
-
-1. `/de/flight-numbers`
-2. `/fi/flight-numbers`
-
-Then stop manual requests and let sitemap/crawl discovery proceed.
+- 🟢 Build / Deployment Cost Optimization — LOCKED
+- 🟢 Flight Number Localization Wave 1 — COMPLETE / LOCKED / RELEASED
+- 🟢 Wave 1 markets — SV → DA → PL → DE → FI → NL
+- 🟢 Production-scale Wave 1 baseline — 23,867 / 23,867 static pages
+- 🟢 Google Search Console strategic handoff — representative NL detail plus SV/DA/PL/DE/FI/NL hubs accepted; sitemap is the mass-discovery mechanism
+- 🔵 **ACTIVE: Localization Wave 2 — Swedish coordinated Knowledge package**
+- ⏭️ THEN: DA → PL → DE → FI → NL Wave 2 packages
+- ⏭️ AFTER CURRENT SIX-MARKET WAVE 2: add **Portuguese + Spanish** as full product/site locales, then run the same Flight Number Wave 1 + coordinated Knowledge Wave 2 method for PT and ES
+- ⏭️ PRODUCT: premium UX/design/conversion pass across public site + complete claim journey
+- 🟡 GROWTH: Portugal and Spain are priority expansion/acquisition laboratories; Poland is also a high-interest paid-acquisition market
 
 ## Secured SEO baseline
 
 - 2,841 publishable canonical Flight Number entities
 - 44 represented airlines
 - 3,141 route paths
-- production build after Wave 1: **23,867 / 23,867** static pages
-- Flight Number detail cohort: **19,887 paths = 2,841 × 7 published SEO locales (EN + SV + DA + PL + DE + FI + NL)**
-- Flight Number airline-group cohort: **308 paths = 44 × 7 published SEO locales**
-- each localized Flight Number market sitemap cluster: **2,886 URLs = 2,841 detail + 44 airline-group + 1 index**
-- no FlightAware population required for current localization work
+- post-NL production build: 23,867 / 23,867
+- Flight Number detail cohort: 19,887 = 2,841 × 7 published SEO locales
+- Flight Number airline-group cohort: 308 = 44 × 7 published SEO locales
+- each localized Flight Number market sitemap cluster: 2,886 URLs
+- published Flight Number locales: EN + SV + DA + PL + DE + FI + NL
+- no FlightAware population required for localization work
 
-## Flight Number Localization Wave 1 — COMPLETE / LOCKED
+## ACTIVE — Wave 2 SV
 
-Authoritative final Wave 1 checkpoint: `docs/checkpoints/2026-09-05-seo-localization-nl-locked.md`
+Working branch: `seo-localization-wave2-sv`, created fresh from current `main` on 2026-09-06.
 
-```text
-SV LOCKED → DA LOCKED → PL LOCKED → DE LOCKED → FI LOCKED → NL LOCKED → PRODUCTION LIVE
-```
+Coordinated Swedish package:
 
-Do not reopen any locked Flight Number v1 market without a concrete bug, legal/regulatory change, evidence of materially wrong local terminology/search intent, or an explicit planned v2 pass.
+1. Routes
+2. Airports
+3. Airlines
+4. Countries
+5. Delay Reasons
 
-## Build / Deployment Cost Optimization — LOCKED
+Implementation started 2026-09-06. Swedish deterministic localization builders, localized hubs/detail surfaces, Swedish internal-link headings, metadata/canonical/hreflang publication controls and the five cohort locale gates are being implemented together. Do not call SV locked until typecheck, architecture checks, sitemap arithmetic, Preview/rendered QA and a meaningful production build are green.
 
-Authoritative checkpoint: `docs/checkpoints/2026-09-04-build-deployment-cost-optimization-locked.md`
+### Wave 2 market order
 
-Locked strategy:
+`SV ACTIVE → DA → PL → DE → FI → NL`
 
-- production retains full SSG for publishable Flight Number and Route detail cohorts
-- Vercel Preview builds use deterministic samples of 24 Flight Number entities and 24 Routes
-- valid unsampled Flight Number and Route pages render on demand in Preview mode
-- Vercel Ignored Build Step is configured with `bash ignore-build-step.sh`
-- application-affecting changes build; docs/Markdown-only changes skip
-- production remains full SSG; current production baseline is **23,867 / 23,867**
-- localization architecture audit remains required
+Per market: inspect all five canonical cohorts; research terminology/search intent where needed; localize from canonical facts; preserve legal/factual invariants; validate quality gates, metadata, internal links, canonical/hreflang, sitemap arithmetic and types; run optimized Preview and representative + unsampled QA; stop Preview; run one meaningful production build; write checkpoint and lock.
 
-Do not move production to ISR/on-demand without a separate evidence-backed architecture decision and equivalent SEO/runtime verification.
+Do not rerun FlightAware merely for localization. Do not reopen locked Flight Number v1 without a concrete bug/legal change/planned v2.
 
-## Localization rule
+## NEXT EXPANSION — Portugal + Spain
 
-Localization is **not mechanical translation**. Canonical Knowledge facts remain shared and locale-neutral. Every market gets an independent search-intent, terminology and copy layer while factual/legal meaning stays invariant.
+After the current Wave 2 markets are complete, FlightClaimly's first new language expansion is explicitly:
 
-Never chain translations between locale layers.
+1. **Portuguese (PT)**
+2. **Spanish (ES)**
 
-Flight Number Wave 1 is locked, but this does **not** infer readiness for Route/Airport/Airline/Country/Delay Reason detail cohorts. Those remain separately controlled by Wave 2.
+Execution order for each new locale:
 
-## ACTIVE NEXT — Localization Wave 2
+1. add the language as a complete supported public/product locale, not SEO-only decoration
+2. validate the customer-facing claim journey and core site copy
+3. execute the Flight Number localization method established in Wave 1
+4. execute Routes + Airports + Airlines + Countries + Delay Reasons as the coordinated Wave 2 package
+5. validate canonical/hreflang/sitemap/build/rendering before publication
+6. hand the new market to Google through sitemap + a small representative set of strategic indexing requests
 
-Wave 2 proceeds **market by market**, treating the following as one coordinated Knowledge cohort package per market:
+Portugal is the first expansion market. Spain follows. This order is a deliberate growth decision, not a statement that Portugal has the larger absolute TAM.
 
-- Routes
-- Airports
-- Airlines
-- Countries
-- Delay Reasons
+## European growth model
 
-Default locked market order:
+After the technical localization foundation, build a country-by-country TAM/SAM/SOM model. Distinguish all disrupted passengers from passengers plausibly eligible for compensation. Model 1%, 2% and 3% penetration by market rather than assuming one Europe-wide share. Track submitted claims → valid/pursued claims → successful recoveries → gross commission and CAC.
 
-```text
-SV ACTIVE NEXT → DA → PL → DE → FI → NL
-```
+Do **not** assume a 90% win rate for all raw submissions. A long-term 90%+ success target is meaningful only for claims FlightClaimly has screened and chosen to pursue after eligibility/evidence review.
 
-Start with Swedish unless an explicit evidence-backed planning decision changes priority.
+Portugal + Spain are priority future paid-acquisition tests; Poland is also strategically interesting because the Polish locale already exists. Optimize paid growth against cost per valid/profitable claim, not clicks or raw leads.
 
-### Required Wave 2 method per market
+## Premium UX / Design / Conversion pass
 
-1. inspect current canonical cohort data and existing page architecture before changes
-2. research authoritative/local market terminology and actual search intent where needed
-3. build locale copy from canonical facts; never translate from another locale layer
-4. preserve canonical-fact isolation and legal/factual invariants
-5. validate localization quality gates / publication eligibility
-6. validate metadata and market search intent
-7. validate internal linking across the coordinated package
-8. validate canonical and publishable-only hreflang
-9. validate sitemap exposure and exact expected cohort arithmetic
-10. run architecture/type validation
-11. use optimized Preview build and representative rendered QA
-12. verify unsampled Preview behavior where relevant
-13. stop Preview before the final meaningful production build
-14. run one meaningful full production build after the market package is ready
-15. write an authoritative market lock checkpoint before moving to the next market
+After/alongside the post-Wave-2 expansion phase, perform a deliberate product-quality review rather than cosmetic patching. Review landing → lookup → eligibility → passenger details → documents → claim → confirmation on desktop and mobile.
 
-Do not rerun FlightAware merely for localization.
+Scope: premium visual hierarchy, typography/spacing, trust and authority, CTA clarity, claim-flow progress/navigation, form friction/validation, loading/error/empty/success states, copy/reassurance, responsive behavior, useful microinteractions, consistency between Knowledge pages and transactional flow, and analytics/conversion instrumentation.
 
-## Research / Evidence Engine v1
+The explicit goal is to re-evaluate older implementation with current capabilities and materially upscale FlightClaimly's perceived quality and conversion potential.
 
-Status: **🟢 LOCKED 2026-09-04**.
+## Later cleanup lanes
 
-External autonomous research providers are not yet production-connected. Future FlightAware/weather/ATC/airline/airport/OpenAI/case-law providers must enter through the locked provider → registry → verification → resolver path. Research and legal evaluation remain separate; missing/conflicting facts stay unresolved until sufficiently verified.
+Search Console legacy duplicate/canonical, 404, redirect, discovered-not-indexed and crawled-not-indexed cohorts remain a later audit lane after Google has processed the new footprint. GA4/internal/test/automated traffic hygiene is also later cleanup.
 
-## Architecture rules
+## Architecture / safety rules
 
-- Claim Rights Assessment Engine v1 remains locked.
-- Research and legal evaluation remain separate layers.
-- Missing facts remain unresolved.
-- External facts retain source/provenance and append-only verification history.
-- Provider confidence is not legal verification.
-- Canonical Knowledge facts are not forked per locale.
-- Localization quality gates control SEO publication.
-- App routing support does not equal publishable Knowledge localization.
-- Customer-specific data remains transactional.
-
-## Local parked work — DO NOT DISTURB
-
-Known unrelated Claims/Reijo local work remains intentionally outside Localization commits:
-
-```text
- M docs/CLAIMS_DESK.md
- M scripts/test-manual-claim.ts
-?? scripts/create-reijo-claim.ts
-```
-
-Rules:
-
-- do not commit current `docs/CLAIMS_DESK.md` local modifications as part of Localization
-- do not commit real customer PII from helper scripts
-- do not use `git add .`
-- do not use `git reset --hard`
-- do not use `git clean`
-- do not force push
-
-## Branch / recovery position
-
-Wave 1 source branch: `seo-localization-engine-v1`.
-
-Wave 1 is merged to `main` and live in Production. Do not continue new Wave 2 implementation on the completed Wave 1 branch without an explicit branch decision. Parked local Claims/Reijo work must remain untouched.
+- canonical Knowledge facts are never forked per locale
+- localization quality gates control SEO publication
+- app routing support does not equal publishable localization
+- research and legal evaluation remain separate
+- missing/conflicting facts remain unresolved until sufficiently verified
+- customer-specific data remains transactional
+- preserve unrelated local Claims/Reijo work; never commit real customer PII
+- no `git add .`, destructive reset/clean or force push
 
 ## Exact resume action
 
-If resuming after a pause/crash:
-
-**Flight Number Localization Wave 1 is COMPLETE, LOCKED, merged to main and LIVE in Production. Production SEO launch verification passed: representative NL detail is HTTP 200, robots/sitemap are healthy, NL sitemap cluster is 2,886, canonical/hreflang are correct, and no noindex blocker exists. Google Search Console had not yet re-read the 2026-09-05 sitemap at pause time; manual indexing was accepted for NL detail plus NL/SV/DA/PL hubs, while DE hit a temporary request error and FI was not attempted. Retry only DE/FI later, then rely on sitemap discovery. ACTIVE NEXT implementation is Localization Wave 2 starting with the Swedish coordinated package Routes + Airports + Airlines + Countries + Delay Reasons, then DA → PL → DE → FI → NL. Build from canonical facts, validate the complete market package before lock, do not rerun FlightAware, and preserve parked Claims/Reijo local work.**
+**Continue Wave 2 on `seo-localization-wave2-sv`: finish and validate Swedish Routes + Airports + Airlines + Countries + Delay Reasons as one package. Do not touch Claims/Reijo and do not rerun FlightAware. After SV locks, continue DA → PL → DE → FI → NL. After current Wave 2, Portuguese first and Spanish second become full product/site locales, followed by the same Flight Number + coordinated Knowledge localization method. Preserve the planned premium UX/design/conversion pass and country-by-country 1–3% growth model.**
