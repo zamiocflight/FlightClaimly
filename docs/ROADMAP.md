@@ -1,698 +1,201 @@
-Jag tycker faktiskt att idag är en milstolpe.
+# FlightClaimly — Product / SEO / Growth Roadmap
 
-Inte för att vi ska skriva tio inlägg.
+Last updated: **2026-09-06**
 
-Utan för att FlightClaimly nu byter fas.
-
-Jag skulle börja dokumentet ungefär så här.
-
----
-
-# FlightClaimly Content Engine v1.0
+> This file is the strategic roadmap. Exact crash recovery and current execution state live in `docs/CURRENT_SPRINT_LATEST.md`. Historical roadmap versions remain available in Git history and detailed lock checkpoints under `docs/checkpoints/`.
 
 ## Mission
 
-FlightClaimly ska bli Europas mest trovärdiga kunskapsplattform inom flygförseningar, inställda flyg och passagerares rättigheter.
+FlightClaimly should become a trusted European knowledge and claims platform for flight disruption and passenger rights.
 
-Vårt mål är inte att skapa "content".
-
-Vårt mål är att skapa den bästa informationen inom området.
-
-När människor söker, scrollar eller vill förstå sina rättigheter ska FlightClaimly vara det naturliga valet.
-
-Kunskapen ska sedan återanvändas på webbplatsen, bloggen, TikTok, Instagram, Facebook, LinkedIn och framtida kanaler.
-
-Vi bygger inte en marknadsföringsmaskin.
-
-Vi bygger en kunskapsmaskin.
-
----
-
-# Våra mål
-
-### Kort sikt (1–3 månader)
-
-* Publicera kontinuerligt.
-* Bygga förtroende.
-* Börja skapa organisk trafik.
-* Börja skapa igenkänning på sociala medier.
-* Få de första kunderna direkt från content.
-
----
-
-### Medellång sikt (3–12 månader)
-
-* Bli den mest kompletta informationskällan om EU261.
-* Äga Google inom våra viktigaste sökord.
-* Bygga en publik som återkommer.
-* Göra FlightClaimly till ett namn människor känner igen.
-
----
-
-### Lång sikt
-
-När någon tänker:
-
-> "Mitt flyg blev inställt."
-
-ska nästa tanke vara:
-
-> "Jag går till FlightClaimly."
-
-Inte bara för att göra ett claim.
-
-Utan för att de vet att där finns svaren.
-
----
-
-# Våra principer
-
-Vi ska aldrig:
-
-* överdriva
-* clickbaita
-* skrämma människor
-* skriva innehåll bara för Google
-
-Vi ska:
-
-* vara korrekta
-* vara tydliga
-* vara pedagogiska
-* vara snabba
-* vara intressanta
-
-Varje artikel, video eller inlägg ska ge mottagaren ett värde även om personen aldrig blir kund.
-
----
-
-# FlightClaimly Content Pyramid
-
-Allt börjar här:
-
-```text
-Knowledge
-```
-
-↓
-
-Det blir:
-
-```text
-Blogg
-```
-
-↓
-
-Sedan:
-
-```text
-TikTok
-
-Instagram
-
-Facebook
-
-LinkedIn
-
-Newsletter
-
-YouTube Shorts
-```
-
-Vi skapar alltså inte sex olika innehåll.
-
-Vi skapar en kunskap.
-
-Sedan distribuerar vi den.
-
----
-
-# Tonalitet
-
-FlightClaimly ska upplevas som:
-
-✔ Experter
-
-✔ Mänskliga
-
-✔ Hjälpsamma
-
-✔ Professionella
-
-✔ Moderna
-
-Inte:
-
-❌ Juridiskt torra
-
-❌ Säljiga
-
-❌ Alarmistiska
-
----
-
-# Idag
-
-Nu kommer den viktigaste delen.
-
-Jag hade **inte** börjat skriva bloggar.
-
-Jag hade **inte** öppnat Canva.
-
-Jag hade gjort detta:
-
-# STEG 1
-
-## Bygg innehållspelarna
-
-Vi bestämmer exakt vilka typer av innehåll FlightClaimly ska äga.
-
-Exempel:
-
-### Serie 1
-
-**Did you know?**
-
-Korta fakta.
-
----
-
-### Serie 2
-
-**Passenger Rights Explained**
-
-Förklaringar.
-
----
-
-### Serie 3
-
-**Airline Secrets**
-
-Sådant människor inte vet.
-
----
-
-### Serie 4
-
-**True Stories**
-
-Riktiga händelser.
-
----
-
-### Serie 5
-
-**Travel Tips**
-
-Inte bara claims.
-
-Bra resetips.
-
----
-
-### Serie 6
-
-**Myths**
-
-Vanliga missuppfattningar.
-
----
-
-### Serie 7
-
-**Behind the Scenes**
-
-Hur vi arbetar.
-
-Hur ett claim går till.
-
----
-
-### Serie 8
-
-**Can you claim?**
-
-Små scenarion.
-
----
-
-När dessa serier är definierade har vi ett ramverk. Då blir det mycket enklare att skapa innehåll konsekvent.
-
----
-
-# Sedan
-
-När serierna är satta går vi direkt till:
-
-## TikTok
-
-Jag tror vi kan ta fram de första 10 manusen redan idag.
-
-Inte filma.
-
-Inte redigera.
-
-Bara manus.
-
-Det är betydligt snabbare att iterera på text än på video.
-
----
-
-# Kvällen
-
-Där håller jag helt med dig.
-
-Kvällen är perfekt för:
-
-* förbättra FAQ
-* förbättra copy
-* lägga till lite mer auktoritet på startsidan
-* kanske visa "20% fee (VAT included)"
-* små UX-fixar
-* små designförbättringar
-
-Det blir ett lugnt sätt att avsluta dagen, medan den stora kreativa energin används nu på förmiddagen.
-
----
-
-## Min första konkreta uppgift till oss
-
-Jag vill faktiskt börja med något som kommer påverka **allt** vi gör framöver:
-
-**Vi ska definiera de 10–12 innehållsserier som FlightClaimly ska äga.**
-
-När de väl är definierade kommer det bli mycket enklare att producera TikToks, bloggar, karuseller och inlägg utan att varje gång börja från ett tomt blad. Jag tror det är den bästa investeringen vi kan göra den här morgonen.
-
-
----
-
-# Platform Roadmap Update — 2026-08-24
-
-FlightClaimly now has two parallel strategic tracks.
-
-# Track A — Acquisition & Knowledge
-
-Purpose:
-
-Generate demand, authority and organic customer acquisition.
-
-Includes:
-
-- Knowledge Engine
-- programmatic SEO
-- Flight Number Engine
-- Route Engine
-- Airport Engine
-- Airline Engine
-- Content Engine
-- social media
-- live disruption content
-- analytics and conversion optimization
-
-Near-term priorities:
-
-1. Continue publishing and growth work
-2. Complete remaining high-value Knowledge Engine population
-3. Expand programmatic search coverage
-4. Launch repeatable social content production
-5. Measure claims generated by each acquisition channel
-
----
-
-# Track B — Claims Operations
-
-Purpose:
-
-Turn inbound customers into successfully recovered compensation.
-
-Completed foundation:
-
-- standard claim flow
-- multi-passenger claims
-- primary authority
-- additional passenger authority
-- document uploads
-- admin claim view
-- transactional email
-- individual authority PDFs
-
-Next capabilities:
-
-## 1. Manual / Legacy Claim Onboarding
-
-Priority: HIGH
-
-Allow staff-approved claims to bypass automated flight/precheck steps while retaining:
-
-- proper claim record
-- secure customer authority
-- multi-passenger authority
-- document storage
-- admin visibility
-- normal claim lifecycle
-
-## 2. Claims Desk Workflow
-
-Standardize internal review:
-
-    Intake
-    ↓
-    Evidence
-    ↓
-    Itinerary
-    ↓
-    Applicable regulation
-    ↓
-    Eligibility
-    ↓
-    Compensation
-    ↓
-    Expenses
-    ↓
-    Limitation / jurisdiction
-    ↓
-    Authority
-    ↓
-    Airline demand
-    ↓
-    Response
-    ↓
-    Escalation
-    ↓
-    Recovery
-    ↓
-    Payout
-
-## 3. Airline Submission System
-
-Future capability:
-
-- claim demand templates
-- airline-specific submission method
-- evidence package
-- authority attachment
-- correspondence history
-- response deadlines
-- follow-up logic
-
-## 4. Escalation Engine
-
-Future capability:
-
-- ADR
-- NEB / regulatory route where applicable
-- legal review
-- litigation recommendation
-- customer approval of additional costs
-- external counsel handoff
-
-## 5. Claims Intelligence
-
-Long-term:
-
-Every resolved claim should improve FlightClaimly's knowledge.
-
-Examples:
-
-- airline rejection reasons
-- successful legal arguments
-- actual processing times
-- compensation recovery rates
-- extraordinary circumstance patterns
-- limitation outcomes
-- court / ADR precedent
-
-Claims operations and the Knowledge Engine should ultimately strengthen each other.
-
----
-
-# Strategic Principle
-
-FlightClaimly must become strong at both sides of the business:
-
-    Knowledge → Customer Acquisition
-    Claims → Customer Recovery
-
-Traffic without claims operations has limited value.
-
-Claims operations without acquisition do not scale.
-
-The platform should develop both in parallel.
-
----
-
-# Platform Roadmap Update — 2026-09-04
-
-This update adds the next execution sequence without replacing the historical roadmap above.
-
-FlightClaimly will continue to develop Claims Operations and Acquisition/Knowledge in parallel, but the immediate technical sequence is now explicit.
-
-## Immediate execution order
-
-### 1. Research / Evidence Engine v1 — 🟢 LOCKED 2026-09-04
-
-The v1 foundation is complete and verified. See:
-
-`docs/checkpoints/2026-09-04-research-evidence-engine-v1-locked.md`
-
-Implemented architecture:
-
-```text
-Claim
-  ↓
-Claim Rights Assessment
-  ↓
-Unresolved factual/legal questions
-  ↓
-Research Planner
-  ↓
-Evidence Providers
-  ↓
-Evidence Registry / provenance / confidence
-  ↓
-Append-only verification history
-  ↓
-Fact Resolver
-  ↓
-verified / conflicting / unresolved facts
-  ↓
-Deterministic Legal Engine
-  ↓
-Updated Claim Rights Assessment
-```
-
-Locked principles:
-
-- research and legal evaluation remain separate layers
-- every externally obtained fact retains source/provenance
-- provider confidence is not legal verification
-- fresh provider output enters the registry as unverified
-- verification decisions retain append-only provenance
-- conflicting evidence never silently becomes a legal fact
-- missing facts remain unresolved when they cannot be established safely
-- only sufficiently verified facts feed deterministic legal assessment
-
-The foundation does **not** mean FlightAware, weather/ATC, airline/airport retrieval, OpenAI research orchestration or automatic case-law providers are already connected. Those are future integrations into this locked architecture.
-
-Verification at lock:
-
-- Research/Evidence audit PASS, 7 scenarios
-- Evidence verification provenance audit PASS
-- TypeScript typecheck PASS
-- production build PASS
-- 6,557 / 6,557 static pages generated
-- Claims Desk runtime visually verified
-
-### 2. SEO Internationalization / Localization Engine — NEXT
-
-Priority: VERY HIGH.
-
-FlightClaimly already has a large programmatic Knowledge Engine footprint. The next major acquisition step is to reuse the same canonical knowledge entities across multiple properly localized markets.
-
-Target architecture:
-
-```text
-Canonical Knowledge Entity
-        ↓
-Locale Content Layer
-        ↓
-EN / SV / DA / FI / DE / PL / NL / ES / FR / IT / ...
-        ↓
-localized metadata
-localized copy
-localized terminology
-localized CTA
-hreflang
-canonical
-localized sitemap coverage
-localized internal links
-        ↓
-SSG
-```
-
-Localization is not simple translation.
-
-Each locale should use the terminology and search intent actually used in that market. Machine/AI generation may assist production, but public pages must preserve factual accuracy, legal meaning, natural language quality and search intent.
-
-Current reusable baseline includes approximately:
-
-- 2,841 publishable Flight Number entities
-- 3,141 route paths
-- airline entities
-- airport entities
-- country entities
-- delay-reason entities
-- other Knowledge Engine pages
-
-This allows the current ~6,000+ Knowledge URL footprint to expand into tens of thousands of localized search pages without duplicating the underlying canonical knowledge model.
-
-### Localization rollout waves
-
-Wave 1:
-
-- Swedish
-- Danish
-- Finnish
-
-Wave 2:
-
-- German
-- Polish
-- Dutch
-
-Wave 3:
-
-- Spanish
-- French
-- Italian
-
-Wave 4:
-
-- remaining high-value European markets based on search demand, claim economics, legal coverage and operational readiness
-
-English remains the canonical/base content layer unless a specific entity requires locale-native source material.
-
-Rollout must be controlled. Do not publish tens of thousands of low-quality mechanical AI translations at once.
-
-For each wave:
-
-1. localize a bounded entity/page cohort
-2. validate language and legal meaning
-3. validate canonical/hreflang behavior
-4. validate localized internal linking
-5. validate sitemap/indexability
-6. deploy
-7. monitor Google Search Console/indexation/quality
-8. expand only after the cohort is healthy
-
-### 3. Content / Social Engine v1 — RUN IN PARALLEL
-
-Social acquisition should begin while product and SEO engineering continue.
-
-FlightClaimly's content model remains:
-
-```text
-Verified Knowledge / Research
-        ↓
-Content idea
-        ↓
-Hook
-        ↓
-Script
-        ↓
-Founder recording / source footage
-        ↓
-Editing + captions + subtitles
-        ↓
-Platform-specific formatting
-        ↓
-TikTok / Instagram Reels / YouTube Shorts / Facebook
-        ↓
-Analytics
-        ↓
-Next content iteration
-```
-
-The objective is not to create separate content independently for every platform. One verified knowledge unit should be reusable across short-form video, social posts, carousels, longer explanations and future blog/newsletter formats.
-
-Founder time should be concentrated on expertise, authenticity, point of view and recording. Repetitive production work should increasingly be handled by AI-assisted workflows and/or a trusted Content/Social Operator.
-
-Initial operating target:
-
-- 30–45 minute founder recording sessions
-- approximately 5–10 usable raw short-form clips per session when scripts/hooks are prepared beforehand
-- centralized content calendar
-- reusable brand templates
-- platform-native captions and formatting
-- performance tracking tied, where possible, to site visits and claims
-
-### 4. Manual / Legacy Claim Engine
-
-Generalize the working manual-claim pattern demonstrated by the Reijo/TAP onboarding into a reusable internal workflow without committing customer-specific PII into source-controlled helper scripts.
-
-### 5. Claims Desk Workflow v2
-
-Turn evidence targets and unresolved questions into a living investigation workflow with resolved / unresolved / ruled-out states and clear next actions.
-
-### 6. Airline Submission Engine
-
-Structured demand generation, evidence packages, airline-specific submission methods, correspondence history, deadlines and follow-up logic.
-
-### 7. Customer Communication Engine
-
-Use sufficiently verified claim-specific findings to provide useful and trustworthy customer updates while avoiding premature legal conclusions and unnecessary exposure of internal litigation strategy.
-
-### 8. Escalation Engine
-
-ADR, NEB/regulatory routes, legal review, litigation recommendation, separate customer approval for additional financial exposure, external-counsel handoff and enforcement support.
-
-### 9. Claims Intelligence
-
-Every resolved claim should improve future assessments, operational playbooks and the Knowledge Engine through structured outcomes such as rejection reasons, successful arguments, processing times, evidence patterns and escalation results.
-
-### 10. Additional passenger-right regimes
-
-EU261 remains first. UK261 and other regimes should be added through the same deterministic authority → legal rule → claim assessment architecture rather than parallel ad-hoc logic.
-
----
-
-# Current strategic operating model
-
-FlightClaimly now runs three parallel lanes:
-
-```text
-PRODUCT
-Research / Evidence Engine foundation 🟢 LOCKED
-→ provider integrations
-→ Manual Claims
-→ Claims Desk Intelligence
-→ Submission / Escalation
-
-SEO
-Internationalization architecture ← NEXT
-→ SV / DA / FI pilot
-→ quality + indexation verification
-→ DE / PL / NL
-→ ES / FR / IT
-→ further European markets
-
-GROWTH
-Content pillars
-→ scripts
-→ founder recording
-→ AI/operator production
-→ distribution
-→ analytics
-→ iteration
-```
-
-The strategic rule remains unchanged:
+The operating model is:
 
 ```text
 Knowledge → Customer Acquisition
 Claims → Customer Recovery
+Resolved Claims → Better Intelligence → Better Knowledge
 ```
 
-The next primary technical phase is Localization, while Content/Social can move in parallel.
+We build authoritative reusable knowledge, distribute it through search/content, convert eligible passengers through a high-trust claim experience, and feed structured operational learning back into the platform.
+
+## Strategic lanes
+
+### 1. SEO / Knowledge Acquisition
+
+Programmatic Knowledge Engine + Localization Engine + internal linking + search monitoring.
+
+### 2. Product / Claims Operations
+
+Eligibility, evidence, research, claim handling, airline submission, customer communication, escalation and payout operations.
+
+### 3. Growth / Content
+
+Verified Knowledge reused across social, short-form video, articles/newsletter and future channels, measured against qualified traffic and claims.
+
+---
+
+# CURRENT EXECUTION SEQUENCE
+
+## Phase A — Research / Evidence foundation — 🟢 LOCKED
+
+Research/Evidence Engine v1 foundation is locked. External provider integrations remain future work through the provider → registry → verification → resolver architecture. Research does not silently become legal fact.
+
+Authoritative checkpoint:
+
+`docs/checkpoints/2026-09-04-research-evidence-engine-v1-locked.md`
+
+## Phase B — Flight Number Localization Wave 1 — 🟢 COMPLETE / LOCKED / RELEASED
+
+Markets completed:
+
+```text
+SV → DA → PL → DE → FI → NL
+```
+
+English remains the base published locale.
+
+Final scale:
+
+- 2,841 canonical publishable Flight Numbers
+- 19,887 Flight Number detail paths across seven published locales
+- 44 airline groups / 308 localized airline-group paths
+- 2,886 Flight Number sitemap URLs per localized market
+- 23,867 / 23,867 static pages in final full production build
+
+Google Search Console handoff has begun: sitemap submitted/resubmitted and representative strategic indexing requests accepted, including later-successful DE and FI requests. Large-scale discovery now belongs to normal Google sitemap/crawl processing.
+
+Authoritative handoff checkpoint:
+
+`docs/checkpoints/2026-09-06-wave1-google-handoff-wave2-resume.md`
+
+## Phase C — Localization Wave 2 — 🔵 ACTIVE NEXT
+
+Wave 2 localizes the remaining major Knowledge cohorts. Work **market by market**, treating these as one coordinated package:
+
+- Routes
+- Airports
+- Airlines
+- Countries
+- Delay Reasons
+
+Locked market order:
+
+```text
+SV → DA → PL → DE → FI → NL
+```
+
+For each market: inspect canonical architecture, establish local terminology/search intent, localize from canonical facts, enforce quality gates, verify internal links/canonical/hreflang/sitemap, run type/architecture validation, Preview QA, unsampled QA where relevant, one meaningful final production build, then write a market lock checkpoint.
+
+Do not rerun FlightAware merely for localization. Do not infer these cohorts are publishable because Flight Numbers are publishable.
+
+## Phase D — Premium UX / Design / Conversion pass — ⏭️ AFTER WAVE 2
+
+After Wave 2, perform a deliberate end-to-end product polish and conversion review. This phase is now explicitly on the roadmap and must not be lost.
+
+Review desktop + mobile from first landing/search entry through completed claim:
+
+- premium visual hierarchy, typography and spacing
+- trust/authority presentation
+- CTA clarity
+- claim-flow progress/navigation
+- form friction and validation
+- loading/error/empty/success states
+- reassurance and copy clarity
+- responsive behavior
+- useful microinteractions
+- consistency between Knowledge/SEO pages and claim flow
+- performance/accessibility guardrails
+- analytics and conversion instrumentation
+
+Goal: make FlightClaimly look and feel more premium, credible and mature while improving conversion — not cosmetic redesign for its own sake.
+
+## Phase E — Search Console / Analytics quality cleanup
+
+Do this after Google has had reasonable time to process the new release, unless a concrete production-critical SEO defect appears sooner.
+
+Search Console audit includes legacy cohorts such as duplicate/canonical issues, 404s, redirects, discovered-not-indexed and crawled-not-indexed. Always sample current live URLs before changing code because Search Console reports can lag.
+
+Analytics hygiene includes separating internal/admin/development/automated test traffic where practical. A 2026-08-24 GA4 spike was concentrated around claim-flow/admin URLs and should not be treated as organic growth without contrary evidence.
+
+---
+
+# Claims Operations roadmap
+
+## Manual / Legacy Claim Engine
+
+Generalize staff-approved/manual onboarding without storing customer PII in source-controlled helper scripts.
+
+## Claims Desk Workflow v2
+
+Turn unresolved evidence questions into a living investigation workflow with resolved / unresolved / ruled-out states and explicit next actions.
+
+## Airline Submission Engine
+
+Structured demands, evidence packages, airline-specific submission channels, authority attachments, correspondence history, deadlines and follow-up logic.
+
+## Customer Communication Engine
+
+Use sufficiently verified claim-specific findings for trustworthy customer updates without exposing premature legal conclusions or unnecessary internal strategy.
+
+## Escalation Engine
+
+ADR, NEB/regulatory routes, legal review, litigation recommendation, customer approval for additional exposure, external-counsel handoff and enforcement support.
+
+## Claims Intelligence
+
+Resolved claims should improve future assessments and playbooks through structured outcomes: rejection reasons, successful arguments, processing times, evidence patterns, compensation/recovery results and escalation outcomes.
+
+## Additional passenger-right regimes
+
+Add further regimes through the deterministic authority → legal rule → claim assessment architecture, not ad-hoc parallel logic.
+
+---
+
+# Content / Social roadmap
+
+FlightClaimly content should begin with verified Knowledge, not disconnected channel-specific posting:
+
+```text
+Verified Knowledge / Research
+        ↓
+Idea / Hook / Script
+        ↓
+Founder expertise / recording
+        ↓
+Production / editing / formatting
+        ↓
+TikTok / Instagram / YouTube / Facebook / LinkedIn / articles
+        ↓
+Analytics
+        ↓
+Iteration
+```
+
+Content should be accurate, clear, useful, modern and human — not alarmist, clickbait-driven or written only for Google.
+
+Founder time should concentrate on expertise, judgment, authenticity and recording; repetitive production should increasingly be systematized.
+
+---
+
+# Locked architectural principles
+
+- canonical Knowledge facts remain locale-neutral
+- localization is market-native adaptation, not translation chaining
+- legal/factual meaning must remain invariant across locales
+- quality gates control publication
+- routing support does not equal SEO publication
+- research and legal evaluation remain separate
+- provider confidence is not legal verification
+- missing/conflicting facts remain unresolved until sufficiently verified
+- production build/deployment optimization remains locked unless separately re-evaluated
+- customer-specific data remains transactional and must not leak into source-controlled helpers
+
+# Immediate pointer
+
+**Now:** begin Swedish Localization Wave 2 for Routes + Airports + Airlines + Countries + Delay Reasons.
+
+**Then:** DA → PL → DE → FI → NL.
+
+**After Wave 2:** premium UX/design/conversion pass.
+
+**Later:** Search Console legacy cleanup + analytics hygiene, while Claims Operations and Content/Growth continue on their own roadmap lanes.
