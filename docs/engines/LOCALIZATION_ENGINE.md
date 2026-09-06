@@ -1,8 +1,8 @@
 # Localization Engine
 
-Status: **ACTIVE — Wave 1 Swedish Flight Number Localization v1 LOCKED; deployment optimization next**
+Status: **ACTIVE — Flight Number Wave 1 LOCKED/RELEASED; coordinated Knowledge Wave 2 NEXT**
 
-Last updated: **2026-09-04**
+Last updated: **2026-09-06**
 
 ## Purpose
 
@@ -24,126 +24,116 @@ publishable SEO output
 
 ## Core safety / publication contract
 
-Application routing support does not make a programmatic Knowledge locale publishable. Canonical fallback may render for runtime safety, but fallback remains `review-required` and non-publishable.
+Application routing support does not make a programmatic Knowledge locale publishable. Canonical fallback may render for runtime safety, but fallback remains review-required and non-publishable.
 
-Publication requires all independent quality gates to pass:
-
-- metadata review
-- terminology review
-- legal-meaning review
-- content review
-
-Only explicitly publishable localization that passes every gate may become indexable/hreflang-visible.
-
-## Rollout waves
-
-- Wave 1: Swedish, Danish, Finnish
-- Wave 2: German, Polish, Dutch
-- Wave 3: Spanish, French, Italian
-- Wave 4: additional European markets by search demand, economics, legal coverage and operational readiness
+Publication requires independent quality gates for metadata, terminology, legal meaning and content. Only explicitly publishable localization that passes every required gate may become indexable/hreflang-visible.
 
 Each locale is built independently from canonical facts. Never translate one secondary locale from another.
 
-## Swedish Flight Number Localization v1 — LOCKED 2026-09-04
+## Flight Number Localization Wave 1 — COMPLETE / LOCKED / RELEASED
 
-Implemented on branch `seo-localization-engine-v1`.
+Locked market order and completion:
 
-### Locked surfaces
+```text
+SV → DA → PL → DE → FI → NL
+```
 
-- Flight Number detail pages
-- Flight Number index
-- Flight Number airline-group pages
-- localized SEO title/description
-- Hero/H1/CTA
-- breadcrumbs
-- fact labels and yes/no values
-- `Snabbfakta`
-- Knowledge section headings
-- compensation and passenger-rights sections
-- timeline / claim process / common issues
-- FAQ presentation and FAQ schema input
-- internal-link section headings
-- canonical/hreflang metadata
-- controlled Swedish city exonyms
+Published Flight Number SEO locales are now:
 
-### Regulation-aware Swedish output
+- EN
+- SV
+- DA
+- PL
+- DE
+- FI
+- NL
 
-Swedish Flight Number content is derived from canonical route/regulation facts and handles four profiles:
-
-- EU261-only: EUR 250 / 400 / up to 600
-- UK261-only: GBP 220 / 350 / up to 520
-- both: dual EUR/GBP values and EU261/UK261 wording
-- neither: no assumed fixed compensation; neutral passenger-rights and individual-assessment wording
-
-This prevents false EU261 assumptions on UK-only or non-covered routes.
-
-## Current publishable Flight Number SEO locales
-
-- `en` — publishable
-- `sv` — publishable / LOCKED
-- `da` — not yet publishable
-- `fi` — not yet publishable
-
-Other Knowledge entity detail families remain separately controlled. Swedish Flight Number lock does not imply Swedish route/airport/airline/country/delay-reason detail readiness.
-
-## Final Swedish verification
-
-Completed 2026-09-04:
-
-- representative EU-only rendered page — PASS
-- representative UK-only rendered page — PASS
-- representative both-regimes rendered page — PASS
-- representative neither-regime rendered page — PASS
-- Swedish Flight Number index — PASS
-- Swedish airline-group page — PASS
-- title/meta/canonical — PASS
-- hreflang EN + SV only on tested detail — PASS
-- sitemap EN + SV only on tested detail — PASS
-- `npm run audit:localization` — PASS
-- `npm run typecheck` — PASS
-- final `npm run build` — PASS
-- Next.js 15.5.7
-- **9,442 / 9,442 static pages generated**
-
-Scale at lock:
+Final locked scale:
 
 - 2,841 canonical publishable Flight Numbers
-- 2,841 EN detail pages
-- 2,841 SV detail pages
-- 5,682 total Flight Number detail paths
-- 44 airline groups with EN/SV variants
-- total SSG: 6,557 pre-SV → 9,442 post-SV
+- 19,887 Flight Number detail paths = 2,841 × 7
+- 44 represented airlines
+- 308 Flight Number airline-group paths = 44 × 7
+- 2,886 sitemap URLs per localized Flight Number market
+- final full production build: 23,867 / 23,867 static pages
 
-Authoritative lock checkpoint:
+The final Wave 1 market checkpoint is `docs/checkpoints/2026-09-05-seo-localization-nl-locked.md`.
 
-`docs/checkpoints/2026-09-04-seo-localization-wave1-sv-locked.md`
+The Google handoff/resume checkpoint is `docs/checkpoints/2026-09-06-wave1-google-handoff-wave2-resume.md`.
 
-## Next before Danish — Build / Deployment Cost Optimization
+Do not reopen locked Flight Number v1 markets without a concrete defect, legal/regulatory change, evidence of materially wrong terminology/search intent, or an explicit v2 plan.
 
-The next locale must not be activated before reviewing build/deployment scaling. The current full SSG model generates 9,442 pages and will grow materially with every locale.
+## Google handoff
 
-Review:
+After production verification, the sitemap was submitted/resubmitted in Google Search Console and representative strategic URLs/hubs were manually requested for indexing. German initially encountered a transient request failure and later succeeded; Finnish also succeeded.
 
-1. Vercel preview-build triggers and intermediate-commit waste
-2. `generateStaticParams` / `dynamicParams` behavior
-3. sitemap and publishable-locale coupling
-4. full SSG versus hybrid SSG + ISR/on-demand
-5. preservation of SEO HTML, metadata, canonical, hreflang and schema
-6. smallest safe optimization
-7. EN/SV regression verification
-8. deployment-strategy checkpoint
+Normal large-scale discovery must now happen through sitemap/crawling. Do not manually request indexing for thousands of programmatic pages and do not block Wave 2 while waiting for full indexation/ranking.
 
-Do not adopt ISR blindly. Prove arbitrary valid slug rendering and SEO correctness first.
+Legacy Search Console duplicate/canonical/404/redirect/discovered-not-indexed/crawled-not-indexed cohorts are a later audit lane and must be checked against current production before code changes because Search Console can lag.
 
-## Danish/Finnish rule
+## ACTIVE — Localization Wave 2
 
-After deployment optimization is verified, build Danish directly from canonical facts using Danish search behavior/terminology. Keep DA non-publishable until its own gates, audit, rendered QA, metadata/hreflang/sitemap verification and checkpoint pass. Then repeat independently for FI.
+Wave 2 extends localization beyond Flight Numbers. It is organized **market by market**, with five Knowledge families treated as one coordinated package per market:
+
+- Routes
+- Airports
+- Airlines
+- Countries
+- Delay Reasons
+
+Execution order:
+
+```text
+SV ACTIVE NEXT → DA → PL → DE → FI → NL
+```
+
+Flight Number publication does not imply readiness for any of these five cohorts.
+
+### Required Wave 2 method
+
+For each market:
+
+1. inspect canonical data and current page architecture for all five cohorts
+2. establish market terminology/search intent from authoritative/local evidence where needed
+3. build localized content directly from canonical facts
+4. preserve legal/factual invariants and canonical-fact isolation
+5. enforce publication quality gates
+6. verify metadata/search intent
+7. verify internal linking across all five localized families
+8. verify canonical + publishable-only hreflang
+9. verify sitemap exposure and exact expected arithmetic
+10. run localization architecture audit and TypeScript validation
+11. run optimized Preview and representative rendered QA
+12. test unsampled Preview rendering where relevant
+13. stop Preview before final production build
+14. run one meaningful full production build
+15. write a market lock checkpoint before advancing
+
+Do not rerun FlightAware merely for localization.
+
+## Build/deployment strategy remains locked
+
+Production retains full SSG for publishable programmatic cohorts. Preview uses the previously locked deterministic sampling/on-demand strategy to control build cost. Vercel docs-only skip behavior remains in force.
+
+Do not move production to ISR/on-demand without a separate evidence-backed architecture decision and equivalent SEO/runtime verification.
+
+## Planned phase after Wave 2
+
+After Wave 2, run a dedicated premium UX/design/conversion review across the public website and complete claim journey, desktop + mobile. Keep this separate from localization unless a real blocker requires overlap.
+
+The review should cover visual hierarchy, typography, spacing, trust signals, CTAs, form/progress UX, validation, loading/error/success states, responsive behavior, useful microinteractions, copy reassurance, Knowledge-to-claim consistency and conversion instrumentation.
+
+## Later monitoring/cleanup
+
+- Google Search Console index-quality cleanup after the new release has had time to process
+- analytics hygiene for internal/admin/automated test traffic
+- ongoing indexation/ranking monitoring by cohort and market
 
 ## Branch / recovery
 
-Branch: `seo-localization-engine-v1`
+Working branch: `seo-localization-engine-v1`.
 
-Last product-code commit included in SV lock: `e7f38f3001fbfb358a311494e17578b85cc8d286`.
+Authoritative immediate recovery pointer: `docs/CURRENT_SPRINT_LATEST.md`.
 
 Known unrelated local Claims/Reijo files remain parked and must not be mixed into Localization work:
 
