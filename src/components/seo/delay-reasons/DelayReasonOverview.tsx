@@ -12,7 +12,7 @@ export default function DelayReasonOverview({
   return (
     <section className="mt-12 space-y-4">
       <h2 className="text-3xl font-semibold">
-        {locale === "sv" ? "Översikt" : "Overview"}
+        {locale === "sv" ? "Översikt" : locale === "da" ? "Overblik" : "Overview"}
       </h2>
 
       <p className="text-muted-foreground leading-8">
