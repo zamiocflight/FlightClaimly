@@ -60,7 +60,7 @@ Coordinated cohorts:
 
 Market order now:
 
-`SV LOCKED → DA LOCKED → PL NEXT → DE → FI → NL`
+`SV LOCKED → DA LOCKED → PL LOCKED → DE NEXT → FI → NL`
 
 ## Swedish Wave 2 — LOCKED 2026-09-06
 
@@ -86,20 +86,34 @@ Checkpoint:
 
 DA reuses the SV foundation and publishes Wave 2 exactly in EN + SV + DA.
 
-DA lock gates were all green:
+## Polish Wave 2 — LOCKED 2026-09-07
+
+Code lock:
+
+`205ead3d0b62a930e6141dfce71fc84af5e016c5`
+
+Checkpoint:
+
+`docs/checkpoints/2026-09-07-seo-localization-wave2-pl-locked.md`
+
+PL reuses the SV+DA foundation and publishes Wave 2 exactly in EN + SV + DA + PL.
+
+PL lock gates were all green:
 
 - `npm run typecheck`
 - `git diff --check`
-- Preview build: **1,561 / 1,561**
-- production build: **30,631 / 30,631**
-- sitemap expected/actual: **30,426 / 30,426**
+- Preview build: **1,826 / 1,826**
+- production build: **34,013 / 34,013**
+- sitemap expected/actual: **33,813 / 33,813**
 - rendered Route/Airport/Airline/Country/Delay Reason QA
-- five DA hubs
+- five PL hubs
+- corrected Polish city exonyms including `Kopenhaga` and `Sztokholm`
 - reverse route HTTP 200
 - extraordinary=true and extraordinary=false Delay Reason QA
 - BreadcrumbList + FAQPage presence
-- canonical/hreflang exactly EN+SV+DA
-- DA Flight Number regression preserved
+- canonical/hreflang exactly EN+SV+DA+PL
+- PL Flight Number regression preserved using runtime-publishable `/pl/flight-numbers/a3101` → HTTP 200
+- final local `git status --short` clean
 
 Wave 2 entity inventory per locale remains:
 
@@ -124,28 +138,28 @@ Wave 2 worktree remains:
 
 `flightclaimly-wave2-sv`
 
-Current locked DA branch:
+Current locked PL branch:
 
-`seo-localization-wave2-da`
+`seo-localization-wave2-pl`
 
-Do not create additional worktrees for PL/DE/FI/NL. Continue the existing Wave 2 lineage and synchronize documentation-only commits safely before branching. Never force-push.
+Do not create additional worktrees for DE/FI/NL. Continue the existing Wave 2 lineage and synchronize documentation-only commits safely before branching. Never force-push.
 
-# NEXT EXACT DEVELOPMENT ACTION — POLISH WAVE 2
+# NEXT EXACT DEVELOPMENT ACTION — GERMAN WAVE 2
 
-1. synchronize the existing Wave 2 worktree with the latest DA lock/docs commits
-2. branch from the locked DA lineage for PL
+1. synchronize the existing Wave 2 worktree with the latest PL lock/docs commits
+2. branch from the locked PL lineage for DE
 3. inspect actual current architecture before edits
-4. add/adapt Polish presentation for Routes, Airports, Airlines, Countries and Delay Reasons
+4. add/adapt German presentation for Routes, Airports, Airlines, Countries and Delay Reasons
 5. preserve canonical facts and canonical legal/classification values
-6. localize from canonical/base meaning, not Swedish/Danish wording
+6. localize from canonical/base meaning, not Swedish/Danish/Polish wording
 7. verify visible display names, metadata, internal links, Related Routes, breadcrumbs/schema and Delay Reason assessment presentation
-8. extend Wave 2 publication gate to PL only when quality is ready
+8. extend Wave 2 publication gate to DE only when quality is ready
 9. verify canonical/hreflang/static params and sitemap arithmetic
 10. typecheck + diff check
 11. optimized Preview + representative rendered QA
 12. one meaningful production build
-13. checkpoint + lock PL
-14. continue DE → FI → NL
+13. checkpoint + lock DE
+14. continue FI → NL
 
 # ARCHITECTURAL PRINCIPLES
 
@@ -175,10 +189,10 @@ Claims and localization remain separate workstreams. Do not accidentally stage o
 A new ChatGPT session should read:
 
 1. `docs/CURRENT_SPRINT_LATEST.md`
-2. `docs/checkpoints/2026-09-07-seo-localization-wave2-da-locked.md`
+2. `docs/checkpoints/2026-09-07-seo-localization-wave2-pl-locked.md`
 3. `docs/ROADMAP.md`
 4. this file
 5. relevant architecture/engine files
 6. current GitHub branch/code/status
 
-Then continue Polish Wave 2 without asking the user to reconstruct the session.
+Then continue German Wave 2 without asking the user to reconstruct the session.
