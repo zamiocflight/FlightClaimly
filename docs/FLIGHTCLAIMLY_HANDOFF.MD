@@ -1,6 +1,6 @@
 # FLIGHTCLAIMLY — MASTER HANDOFF
 
-Last updated: **2026-09-06**
+Last updated: **2026-09-07**
 
 ## PURPOSE
 
@@ -16,8 +16,6 @@ Repository state beats conversational memory if they differ.
 - one clear checkpoint at a time when local user action is required
 - exact file paths and exact code-change locations
 - state whether a file is new, fully replaced or partially edited
-- do not ask the user to reconstruct code that GitHub access can inspect directly
-- avoid giant multi-command shell blocks that can destabilize the VS Code integrated terminal
 - use GitHub tools directly where safe
 - never force-push
 - never use `git add .`
@@ -34,21 +32,11 @@ Business: EU261 / UK261 flight compensation claims
 Standard customer pricing: 20% including VAT  
 Commercial model: No win, no fee
 
-Current public/product locales before PT/ES expansion:
-
-- sv
-- en
-- da
-- de
-- nl
-- pl
-- fi
-
-Long-term goal: highly automated European flight-compensation platform with strong organic Knowledge/SEO acquisition, scalable claims handling and country-by-country growth.
+Current public/product locales before PT/ES expansion: SV, EN, DA, DE, NL, PL, FI.
 
 # CURRENT DEVELOPMENT STATE
 
-## Locked foundations
+Locked foundations:
 
 - Delay Reason Engine v1 — LOCKED
 - EU261 Legal Rule Layer v1 — LOCKED
@@ -58,25 +46,11 @@ Long-term goal: highly automated European flight-compensation platform with stro
 - Build / Deployment Cost Optimization — LOCKED
 - Flight Number Localization Wave 1 — COMPLETE / LOCKED / RELEASED
 
-## Flight Number Wave 1 baseline
-
-Published locales:
-
-EN + SV + DA + PL + DE + FI + NL
-
-Scale:
-
-- 2,841 canonical Flight Number entities
-- 44 represented airline groups
-- 19,887 detail paths = 2,841 × 7
-- 308 localized airline-group paths = 44 × 7
-- 2,886 Flight Number sitemap URLs per market
-
-Do not rerun FlightAware merely for localization and do not reopen locked Flight Number v1 without a concrete bug/legal change/planned v2.
+Flight Number Wave 1 remains published in EN + SV + DA + PL + DE + FI + NL with 2,841 canonical Flight Numbers, 44 represented airline groups, 19,887 detail paths and 308 localized airline-group paths. Do not rerun FlightAware or reopen Wave 1 without a concrete reason.
 
 # LOCALIZATION WAVE 2
 
-Wave 2 coordinated Knowledge cohorts:
+Coordinated cohorts:
 
 1. Routes
 2. Airports
@@ -84,176 +58,94 @@ Wave 2 coordinated Knowledge cohorts:
 4. Countries
 5. Delay Reasons
 
-Market order:
+Market order now:
 
-`SV LOCKED → DA NEXT → PL → DE → FI → NL`
+`SV LOCKED → DA LOCKED → PL NEXT → DE → FI → NL`
 
-## Swedish Wave 2 — LOCKED
+## Swedish Wave 2 — LOCKED 2026-09-06
 
-Date: 2026-09-06
-
-Code lock commit:
+Code lock:
 
 `93e965af7c7f429084a787cc01fe833f6f7e86bb`
 
-Commit message:
-
-`Lock Swedish SEO localization Wave 2`
-
-Detailed authoritative checkpoint:
+Checkpoint:
 
 `docs/checkpoints/2026-09-06-seo-localization-wave2-sv-locked.md`
 
-At Swedish lock, Wave 2 publication scope is exactly EN + SV.
+SV established the reusable architecture: deterministic localization builders, optional localized display names without canonical-data forks, publication-aware links, localized route/city/country presentation, Delay Reason localization/assessment separation, localized structured data, publication gates and the reusable QA/build/sitemap lock procedure.
 
-## What the Swedish foundation built
+## Danish Wave 2 — LOCKED 2026-09-07
 
-SV was the heavy architecture/foundation market, not just a translation pass.
+Code lock:
 
-It established/generalized:
+`558ee8e8d6a848fd9226247eb42ea191b73a8b79`
 
-- deterministic localization builders for Routes, Airports, Airlines, Countries and Delay Reasons
-- localized entity display names via optional `displayName` support
-- localized route/city/country presentation without forking canonical facts
-- publication-aware Knowledge/internal-link behavior
-- locale-preserving Related Routes links
-- localized Related Routes visible presentation
-- Delay Reason metadata localization
-- separate localized Delay Reason assessment presentation from canonical assessment/classification data
-- localized Delay Reason headings, labels, badges, investigative questions and extraordinary-circumstance presentation
-- localized BreadcrumbList output
-- localized FAQPage schema output
-- coherent Wave 2 locale gates/static params/hreflang/sitemap behavior
-- reusable QA/lock method for remaining markets
+Checkpoint:
 
-### Key final SV implementation files
+`docs/checkpoints/2026-09-07-seo-localization-wave2-da-locked.md`
 
-- `src/app/[locale]/delay-reasons/[slug]/page.tsx`
-- `src/components/seo/RelatedRoutes.tsx`
-- `src/components/seo/delay-reasons/ClaimAssessment.tsx`
-- `src/components/seo/delay-reasons/CompensationRules.tsx`
-- `src/components/seo/delay-reasons/DelayReasonKnowledgeTemplate.tsx`
-- `src/components/seo/delay-reasons/DelayReasonOverview.tsx`
-- `src/components/seo/delay-reasons/ExtraordinaryCircumstances.tsx`
-- `src/components/seo/delay-reasons/FAQ.tsx`
-- `src/components/seo/delay-reasons/PassengerRights.tsx`
-- `src/components/seo/delay-reasons/RelatedKnowledge.tsx`
-- `src/components/seo/delay-reasons/Statistics.tsx`
-- `src/components/seo/delay-reasons/Timeline.tsx`
-- `src/data/entities/registry.ts`
-- `src/lib/delay-reasons/metadata.ts`
-- `src/lib/localization/delay-reason-assessment-sv.ts`
-- `src/lib/localization/entity.ts`
-- `src/lib/localization/knowledge-sv.ts`
-- `src/lib/localization/types.ts`
-- `src/lib/seo/relationships.ts`
+DA reuses the SV foundation and publishes Wave 2 exactly in EN + SV + DA.
 
-## Swedish QA / lock result
+DA lock gates were all green:
 
-Verified green:
-
-- Preview build: 1,296 / 1,296
-- typecheck
+- `npm run typecheck`
 - `git diff --check`
-- five Swedish Wave 2 hubs
-- representative Route/Airport/Airline/Country/Delay Reason rendering
-- dynamic/unsampled Swedish route HTTP 200
-- Swedish route/country display-name behavior
-- Delay Reason extraordinary=false presentation
-- Delay Reason extraordinary=true presentation
-- Swedish BreadcrumbList
-- Swedish FAQPage schema
-- DA Flight Number related-link fallback regression preserved
-- Wave 2 locale scope EN+SV only
-- sitemap expected 27,039 / actual 27,039
-- production build **27,249 / 27,249 static pages**
+- Preview build: **1,561 / 1,561**
+- production build: **30,631 / 30,631**
+- sitemap expected/actual: **30,426 / 30,426**
+- rendered Route/Airport/Airline/Country/Delay Reason QA
+- five DA hubs
+- reverse route HTTP 200
+- extraordinary=true and extraordinary=false Delay Reason QA
+- BreadcrumbList + FAQPage presence
+- canonical/hreflang exactly EN+SV+DA
+- DA Flight Number regression preserved
 
-## Wave 2 entity inventory
+Wave 2 entity inventory per locale remains:
 
-Per locale:
+- Routes 3,141
+- Airports 98
+- Airlines 96
+- Countries 36
+- Delay Reasons 11
+- total 3,382 entity URLs + 5 cohort indexes = 3,387 sitemap URLs per added Wave 2 market
 
-- Routes: 3,141
-- Airports: 98
-- Airlines: 96
-- Countries: 36
-- Delay Reasons: 11
-- Total: 3,382
+# WORKTREE / GIT SAFETY
 
-At EN+SV:
-
-- 6,764 entity URLs
-- 10 cohort index URLs
-- 6,774 Wave 2 sitemap URLs
-
-# WORKTREE / GIT SAFETY — CRITICAL
-
-Two Git worktrees are intentionally in use.
-
-## Original worktree
-
-Folder:
-
-`flightclaimly`
-
-Purpose:
-
-General/original worktree. It currently contains parked unrelated Claims/Reijo work.
-
-Last verified local status:
+Original worktree `flightclaimly` contains parked unrelated Claims/Reijo work last verified as:
 
 - `M docs/CLAIMS_DESK.md`
 - `M scripts/test-manual-claim.ts`
 - `?? scripts/create-reijo-claim.ts`
 
-Do not reset, clean, stage or modify those files as part of localization.
+Do not touch/reset/clean/stage those files from localization work.
 
-## Wave 2 worktree
-
-Folder:
+Wave 2 worktree remains:
 
 `flightclaimly-wave2-sv`
 
-Branch:
+Current locked DA branch:
 
-`seo-localization-wave2-sv`
+`seo-localization-wave2-da`
 
-This folder is NOT another project or fork. It is a separate Git worktree using the same FlightClaimly repository/history, created to isolate Wave 2 from parked Claims/Reijo edits.
+Do not create additional worktrees for PL/DE/FI/NL. Continue the existing Wave 2 lineage and synchronize documentation-only commits safely before branching. Never force-push.
 
-**Continue Danish Wave 2 in this Wave 2 worktree lineage. Do not switch back to the original worktree merely because Swedish is locked.**
+# NEXT EXACT DEVELOPMENT ACTION — POLISH WAVE 2
 
-Remote documentation commits may exist after the SV code-lock commit. Synchronize safely before making new local edits. Do not force-push.
-
-# NEXT EXACT DEVELOPMENT ACTION
-
-## Danish Wave 2
-
-DA is next.
-
-Use Swedish only as proof that the generic architecture works. Do not mechanically translate Swedish into Danish. Localize from canonical/base meaning and preserve canonical facts/legal meaning.
-
-Expected sequence:
-
-1. synchronize current Wave 2 branch safely
-2. inspect actual localization architecture/current code
-3. add/adapt Danish presentation for Routes, Airports, Airlines, Countries and Delay Reasons
-4. preserve canonical facts and canonical legal/classification values
-5. use market-native terminology/search intent
-6. verify visible display names and route/country naming
-7. verify Delay Reason assessment presentation and extraordinary labels
-8. verify metadata
-9. verify internal links / Related Routes
-10. verify BreadcrumbList + FAQ/schema
-11. extend Wave 2 locale publication gate to DA only when quality is ready
-12. verify canonical/hreflang/static params
-13. verify sitemap arithmetic
-14. run typecheck + diff check
-15. optimized Preview + representative and unsampled rendered QA
-16. stop Preview
-17. one meaningful production build
-18. checkpoint + lock DA
-19. continue PL → DE → FI → NL
-
-The remaining Wave 2 markets should be materially faster than SV because the generic plumbing, display-name support, publication-aware linking, Delay Reason localization separation and QA procedure now exist. Each market still needs real terminology/SEO/legal-meaning QA and a production lock gate.
+1. synchronize the existing Wave 2 worktree with the latest DA lock/docs commits
+2. branch from the locked DA lineage for PL
+3. inspect actual current architecture before edits
+4. add/adapt Polish presentation for Routes, Airports, Airlines, Countries and Delay Reasons
+5. preserve canonical facts and canonical legal/classification values
+6. localize from canonical/base meaning, not Swedish/Danish wording
+7. verify visible display names, metadata, internal links, Related Routes, breadcrumbs/schema and Delay Reason assessment presentation
+8. extend Wave 2 publication gate to PL only when quality is ready
+9. verify canonical/hreflang/static params and sitemap arithmetic
+10. typecheck + diff check
+11. optimized Preview + representative rendered QA
+12. one meaningful production build
+13. checkpoint + lock PL
+14. continue DE → FI → NL
 
 # ARCHITECTURAL PRINCIPLES
 
@@ -267,67 +159,26 @@ The remaining Wave 2 markets should be materially faster than SV because the gen
 - research/evidence and legal evaluation remain separate
 - unresolved facts stay unresolved until sufficiently verified
 - customer-specific data remains transactional and must not leak into source-controlled generic helpers
-- build/deployment optimization remains locked unless deliberately re-evaluated
 
-# PORTUGAL + SPAIN AFTER CURRENT WAVE 2
+# AFTER CURRENT WAVE 2
 
-After SV/DA/PL/DE/FI/NL Wave 2 is complete:
+Portuguese first as a complete public/product locale, Spanish second. Then apply established Flight Number + coordinated Knowledge localization methods, validate canonical/hreflang/sitemap/build/rendering, and use sitemap as the primary scaling mechanism.
 
-1. Portuguese first as a complete public/product locale
-2. Spanish second
-3. validate core site + claim journey in each new locale
-4. apply established Flight Number localization method
-5. apply coordinated Wave 2 Knowledge method
-6. validate canonical/hreflang/sitemap/build/rendering
-7. hand to Google primarily through sitemap plus a small representative set of strategic indexing requests
-
-# PREMIUM UX / DESIGN / CONVERSION
-
-After/alongside expansion, perform a deliberate premium product-quality pass over desktop + mobile:
-
-landing/search → lookup → eligibility → passenger details → documents → claim → confirmation.
-
-Review hierarchy, typography/spacing, trust/authority, CTA clarity, progress/navigation, form friction/validation, states, reassurance/copy, responsive behavior, microinteractions, consistency, accessibility/performance and conversion instrumentation.
-
-# GROWTH MODEL
-
-Build country-by-country TAM/SAM/SOM estimates and model 1%, 2%, 3% penetration. Track the complete funnel:
-
-traffic → started claim → submitted → valid/pursued → successful recovery → gross commission → CAC/payback.
-
-Do not treat all disrupted passengers as eligible and do not assume a 90% win rate across raw submissions. A 90%+ success aspiration only makes sense for screened/pursued claims.
-
-Priority future growth laboratories:
-
-- Portugal
-- Spain
-- Poland
+Premium UX/design/conversion uplift and the European market opportunity/acquisition model remain subsequent strategic tracks.
 
 # CLAIMS OPERATIONS CONTEXT
 
-Claims and localization are separate workstreams.
-
-Do not accidentally stage or modify parked Reijo/manual-claim work while continuing Wave 2.
-
-Claims roadmap remains:
-
-- Manual / Legacy Claim Engine
-- Claims Desk Workflow v2
-- Airline Submission Engine
-- Customer Communication Engine
-- Escalation Engine
-- Claims Intelligence
-- additional passenger-right regimes through deterministic rule architecture
+Claims and localization remain separate workstreams. Do not accidentally stage or modify parked Reijo/manual-claim work.
 
 # CRASH-RECOVERY ORDER
 
-A new ChatGPT session should read in this order:
+A new ChatGPT session should read:
 
 1. `docs/CURRENT_SPRINT_LATEST.md`
-2. `docs/checkpoints/2026-09-06-seo-localization-wave2-sv-locked.md`
+2. `docs/checkpoints/2026-09-07-seo-localization-wave2-da-locked.md`
 3. `docs/ROADMAP.md`
 4. this file
 5. relevant architecture/engine files
 6. current GitHub branch/code/status
 
-Then continue Danish Wave 2 without asking the user to reconstruct the session.
+Then continue Polish Wave 2 without asking the user to reconstruct the session.
