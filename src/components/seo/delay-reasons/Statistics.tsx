@@ -15,7 +15,7 @@ export default function Statistics({
 }: Props) {
   return (
     <StatisticsSection
-      title={locale === "sv" ? "Fakta" : "Statistics"}
+      title={locale === "sv" ? "Fakta" : locale === "da" ? "Fakta" : "Statistics"}
       intro={statisticsIntro}
       statistics={statistics}
     />
