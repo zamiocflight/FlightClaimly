@@ -10,7 +10,7 @@ export default function RelatedKnowledge({
   return (
     <section className="mt-12 space-y-4">
       <h2 className="text-3xl font-semibold">
-        {locale === "sv" ? "Relaterad kunskap" : "Related knowledge"}
+        {locale === "sv" ? "Relaterad kunskap" : locale === "da" ? "Relateret viden" : "Related knowledge"}
       </h2>
 
       <p className="leading-8 text-muted-foreground">
@@ -18,6 +18,11 @@ export default function RelatedKnowledge({
           <>
             Läs mer om {delayReasonTitle.toLowerCase()}, passagerarrättigheter och
             flygersättning enligt EU261.
+          </>
+        ) : locale === "da" ? (
+          <>
+            Læs mere om {delayReasonTitle.toLowerCase()}, passagerrettigheder og
+            flykompensation efter EU261.
           </>
         ) : (
           <>
