@@ -22,16 +22,22 @@ export default function ClaimAssessment({ assessment, locale }: Props) {
           "usually-extraordinary": "Kan ofta vara extraordinär",
           "fact-specific": "Grundorsaken måste granskas",
         }[assessment.liabilityBaseline]
-      : baselineLabel[assessment.liabilityBaseline];
+      : locale === "da"
+        ? {
+            "usually-compensable": "Kompensation er ofte stadig mulig",
+            "usually-extraordinary": "Kan ofte være ekstraordinær",
+            "fact-specific": "Grundårsagen skal undersøges",
+          }[assessment.liabilityBaseline]
+        : baselineLabel[assessment.liabilityBaseline];
   return (
     <section className="mt-12 rounded-2xl border bg-white p-8 shadow-sm">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="text-sm font-semibold uppercase tracking-widest text-emerald-600">
-            {locale === "sv" ? "FlightClaimlys kravbedömning" : "FlightClaimly claim assessment"}
+            {locale === "sv" ? "FlightClaimlys kravbedömning" : locale === "da" ? "FlightClaimlys kravvurdering" : "FlightClaimly claim assessment"}
           </p>
           <h2 className="mt-2 text-3xl font-semibold text-slate-950">
-            {locale === "sv" ? "Vad behöver utredas?" : "What should be investigated?"}
+            {locale === "sv" ? "Vad behöver utredas?" : locale === "da" ? "Hvad skal undersøges?" : "What should be investigated?"}
           </h2>
         </div>
 
@@ -40,35 +46,27 @@ export default function ClaimAssessment({ assessment, locale }: Props) {
         </div>
       </div>
 
-      <p className="mt-6 max-w-4xl leading-8 text-slate-700">
-        {assessment.summary}
-      </p>
+      <p className="mt-6 max-w-4xl leading-8 text-slate-700">{assessment.summary}</p>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-2">
         <div>
           <h3 className="text-xl font-semibold text-slate-950">
-            {locale === "sv" ? "Underlag att verifiera" : "Evidence to verify"}
+            {locale === "sv" ? "Underlag att verifiera" : locale === "da" ? "Dokumentation der skal verificeres" : "Evidence to verify"}
           </h3>
           <ul className="mt-4 space-y-3 text-slate-700">
             {assessment.evidenceTargets.map((item) => (
-              <li key={item} className="flex gap-3">
-                <span aria-hidden="true">•</span>
-                <span>{item}</span>
-              </li>
+              <li key={item} className="flex gap-3"><span aria-hidden="true">•</span><span>{item}</span></li>
             ))}
           </ul>
         </div>
 
         <div>
           <h3 className="text-xl font-semibold text-slate-950">
-            {locale === "sv" ? "Frågor till flygbolaget" : "Questions for the airline"}
+            {locale === "sv" ? "Frågor till flygbolaget" : locale === "da" ? "Spørgsmål til flyselskabet" : "Questions for the airline"}
           </h3>
           <ul className="mt-4 space-y-3 text-slate-700">
             {assessment.airlineQuestions.map((item) => (
-              <li key={item} className="flex gap-3">
-                <span aria-hidden="true">•</span>
-                <span>{item}</span>
-              </li>
+              <li key={item} className="flex gap-3"><span aria-hidden="true">•</span><span>{item}</span></li>
             ))}
           </ul>
         </div>
@@ -76,19 +74,16 @@ export default function ClaimAssessment({ assessment, locale }: Props) {
 
       <div className="mt-8 rounded-xl bg-slate-50 p-6">
         <h3 className="text-lg font-semibold text-slate-950">
-          {locale === "sv" ? "Signaler som bör granskas närmare" : "Signals that deserve a closer look"}
+          {locale === "sv" ? "Signaler som bör granskas närmare" : locale === "da" ? "Signaler der bør undersøges nærmere" : "Signals that deserve a closer look"}
         </h3>
         <ul className="mt-4 space-y-2 text-slate-700">
           {assessment.claimantSignals.map((item) => (
-            <li key={item} className="flex gap-3">
-              <span aria-hidden="true">•</span>
-              <span>{item}</span>
-            </li>
+            <li key={item} className="flex gap-3"><span aria-hidden="true">•</span><span>{item}</span></li>
           ))}
         </ul>
 
         <p className="mt-5 font-medium text-slate-900">
-          {locale === "sv" ? "Nästa steg:" : "Next step:"} {assessment.nextStep}
+          {locale === "sv" ? "Nästa steg:" : locale === "da" ? "Næste skridt:" : "Next step:"} {assessment.nextStep}
         </p>
       </div>
     </section>
