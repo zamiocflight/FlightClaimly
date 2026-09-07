@@ -16,7 +16,7 @@ export function buildDelayReasonMetadata(
     },
     locale,
     pathPrefix: "delay-reasons",
-    titleSuffix: locale === "sv" ? "flygersättning" : "flight compensation",
+    titleSuffix: locale === "sv" ? "flygersättning" : locale === "da" ? "flykompensation" : "flight compensation",
     availableLocales: delayReasonSeoLocales,
   });
 }
