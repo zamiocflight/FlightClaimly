@@ -12,6 +12,7 @@ import type { FlightRoute } from "@/data/seo/routes";
 import { routeSeoLocales } from "@/lib/seo/alternates";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { buildSwedishRouteLocalization, swedishCityName, swedishCountryName } from "@/lib/localization/knowledge-sv";
+import { buildDanishRouteLocalization, danishCityName, danishCountryName } from "@/lib/localization/knowledge-da";
 import { applyKnowledgeLocalization } from "@/lib/localization/entity";
 import { getLocaleDefinition } from "@/lib/localization/locales";
 
@@ -31,7 +32,21 @@ export function generateStaticParams() {
 }
 
 function localizeRoute(route: FlightRoute, locale: string) {
-  return locale === "sv" ? applyKnowledgeLocalization(route, buildSwedishRouteLocalization(route)) : route;
+  if (locale === "sv") return applyKnowledgeLocalization(route, buildSwedishRouteLocalization(route));
+  if (locale === "da") return applyKnowledgeLocalization(route, buildDanishRouteLocalization(route));
+  return route;
+}
+
+function cityName(value: string, locale: string) {
+  if (locale === "sv") return swedishCityName(value);
+  if (locale === "da") return danishCityName(value);
+  return value;
+}
+
+function countryName(value: string, locale: string) {
+  if (locale === "sv") return swedishCountryName(value);
+  if (locale === "da") return danishCountryName(value);
+  return value;
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -50,10 +65,10 @@ export default async function RoutePage({ params }: Props) {
 
   const localizedRoute = localizeRoute(route, locale);
   const labels = getLocaleDefinition(locale as (typeof routeSeoLocales)[number]).labels;
-  const originCity = locale === "sv" ? swedishCityName(route.origin.city) : route.origin.city;
-  const destinationCity = locale === "sv" ? swedishCityName(route.destination.city) : route.destination.city;
-  const originCountry = locale === "sv" ? swedishCountryName(route.origin.country) : route.origin.country;
-  const destinationCountry = locale === "sv" ? swedishCountryName(route.destination.country) : route.destination.country;
+  const originCity = cityName(route.origin.city, locale);
+  const destinationCity = cityName(route.destination.city, locale);
+  const originCountry = countryName(route.origin.country, locale);
+  const destinationCountry = countryName(route.destination.country, locale);
 
   const authoritySources = resolveAuthority<FlightRoute>({ entityType: "route", slug: route.slug, entity: route });
   const facts = locale === "sv"
@@ -63,18 +78,25 @@ export default async function RoutePage({ params }: Props) {
         { label: "Destinationsflygplats", value: `${route.destination.name} (${route.destination.iata})` },
         { label: "Länder", value: `${originCountry} → ${destinationCountry}` },
       ]
-    : [
-        { label: "Route", value: `${route.origin.city} → ${route.destination.city}` },
-        { label: "Origin airport", value: `${route.origin.name} (${route.origin.iata})` },
-        { label: "Destination airport", value: `${route.destination.name} (${route.destination.iata})` },
-        { label: "Countries", value: `${route.origin.country} → ${route.destination.country}` },
-      ];
+    : locale === "da"
+      ? [
+          { label: "Rute", value: `${originCity} → ${destinationCity}` },
+          { label: "Afgangslufthavn", value: `${route.origin.name} (${route.origin.iata})` },
+          { label: "Destinationslufthavn", value: `${route.destination.name} (${route.destination.iata})` },
+          { label: "Lande", value: `${originCountry} → ${destinationCountry}` },
+        ]
+      : [
+          { label: "Route", value: `${route.origin.city} → ${route.destination.city}` },
+          { label: "Origin airport", value: `${route.origin.name} (${route.origin.iata})` },
+          { label: "Destination airport", value: `${route.destination.name} (${route.destination.iata})` },
+          { label: "Countries", value: `${route.origin.country} → ${route.destination.country}` },
+        ];
 
   const relatedRoutes = getRelatedRoutes(route);
   const internalLinkSections = getInternalLinkSections("route", route.slug, locale);
   const breadcrumbItems = [
     { name: labels.home, url: `https://www.flightclaimly.com/${locale}` },
-    { name: locale === "sv" ? "Flygsträckor" : "Routes", url: `https://www.flightclaimly.com/${locale}/routes` },
+    { name: locale === "sv" ? "Flygsträckor" : locale === "da" ? "Flyruter" : "Routes", url: `https://www.flightclaimly.com/${locale}/routes` },
     { name: `${originCity}–${destinationCity}`, url: `https://www.flightclaimly.com/${locale}/routes/${route.slug}` },
   ];
 
@@ -84,7 +106,7 @@ export default async function RoutePage({ params }: Props) {
       <FAQSchema items={localizedRoute.faq} />
       <KnowledgePageTemplate entity={localizedRoute} checkUrl={`/${locale}/check`} facts={facts} locale={locale} authoritySources={authoritySources} labels={labels} />
       <InternalLinks sections={internalLinkSections} />
-      <RelatedRoutes title={locale === "sv" ? `Fler flygsträckor från ${originCity}` : `More routes from ${route.origin.city}`} routes={relatedRoutes} locale={locale} />
+      <RelatedRoutes title={locale === "sv" ? `Fler flygsträckor från ${originCity}` : locale === "da" ? `Flere flyruter fra ${originCity}` : `More routes from ${route.origin.city}`} routes={relatedRoutes} locale={locale} />
     </>
   );
 }
