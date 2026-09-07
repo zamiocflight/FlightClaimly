@@ -10,7 +10,7 @@ Last updated: **2026-09-07**
 
 When a fresh ChatGPT window is opened, the user can write exactly:
 
-> **FlightClaimly: återuppta arbetet. Läs `docs/CURRENT_SPRINT_LATEST.md` först, därefter `docs/checkpoints/2026-09-07-seo-localization-wave2-da-locked.md`, `docs/ROADMAP.md` och berörda engine/architecture-filer. Inspektera aktuell GitHub-branch och faktisk kod innan du gör något. Plocka upp arbetet exakt där det står, fortsätt självständigt och skriv inte till mig förrän du faktiskt behöver min assistans.**
+> **FlightClaimly: återuppta arbetet. Läs `docs/CURRENT_SPRINT_LATEST.md` först, därefter `docs/checkpoints/2026-09-07-seo-localization-wave2-pl-locked.md`, `docs/ROADMAP.md` och berörda engine/architecture-filer. Inspektera aktuell GitHub-branch och faktisk kod innan du gör något. Plocka upp arbetet exakt där det står, fortsätt självständigt och skriv inte till mig förrän du faktiskt behöver min assistans.**
 
 The assistant must use the connected GitHub repository `zamiocflight/FlightClaimly` as source of truth and inspect branch/code/docs directly rather than asking the user to reconstruct prior context.
 
@@ -26,8 +26,9 @@ The assistant must use the connected GitHub repository `zamiocflight/FlightClaim
 - 🟢 Wave 1 markets — SV → DA → PL → DE → FI → NL
 - 🟢 **Localization Wave 2 — Swedish package COMPLETE / LOCKED**
 - 🟢 **Localization Wave 2 — Danish package COMPLETE / LOCKED**
-- 🔵 **NEXT ACTIVE MARKET: Polish (PL)**
-- ⏭️ THEN: DE → FI → NL Wave 2 packages
+- 🟢 **Localization Wave 2 — Polish package COMPLETE / LOCKED**
+- 🔵 **NEXT ACTIVE MARKET: German (DE)**
+- ⏭️ THEN: FI → NL Wave 2 packages
 - ⏭️ AFTER CURRENT SIX-MARKET WAVE 2: Portuguese first, Spanish second as full product/site locales, followed by Flight Number + coordinated Knowledge localization
 - ⏭️ PRODUCT: premium UX/design/conversion pass across public site + complete claim journey
 - 🟡 GROWTH: Portugal and Spain are priority expansion/acquisition laboratories; Poland remains strategically interesting for paid acquisition
@@ -35,8 +36,6 @@ The assistant must use the connected GitHub repository `zamiocflight/FlightClaim
 # Wave 2 locks — authoritative result
 
 ## Swedish
-
-Swedish Wave 2 was locked on 2026-09-06.
 
 Code lock:
 
@@ -48,8 +47,6 @@ Checkpoint:
 
 ## Danish
 
-Danish Wave 2 was locked on 2026-09-07.
-
 Code lock:
 
 `558ee8e8d6a848fd9226247eb42ea191b73a8b79`
@@ -58,26 +55,40 @@ Checkpoint:
 
 `docs/checkpoints/2026-09-07-seo-localization-wave2-da-locked.md`
 
-DA reuses the Swedish Wave 2 architecture and extends publication scope from EN+SV to exactly EN+SV+DA for Routes, Airports, Airlines, Countries and Delay Reasons.
+## Polish
 
-# Danish lock verification
+Polish Wave 2 was locked on 2026-09-07.
+
+Code lock:
+
+`205ead3d0b62a930e6141dfce71fc84af5e016c5`
+
+Checkpoint:
+
+`docs/checkpoints/2026-09-07-seo-localization-wave2-pl-locked.md`
+
+PL reuses the Swedish + Danish architecture and extends Wave 2 publication scope to exactly EN+SV+DA+PL for Routes, Airports, Airlines, Countries and Delay Reasons.
+
+# Polish lock verification
 
 Green gates:
 
 - `npm run typecheck`
 - `git diff --check`
-- Preview build: **1,561 / 1,561**
-- Production build: **30,631 / 30,631 static pages generated**
+- Preview build: **1,826 / 1,826**
+- Production build: **34,013 / 34,013 static pages generated**
+- final Polish city-exonym correction verified by rendered QA
 - representative rendered QA across all five Wave 2 cohorts
-- reverse Stockholm→Copenhagen DA route returned HTTP 200 with Danish metadata/H1
+- reverse Stockholm→Copenhagen PL route returned HTTP 200
 - extraordinary=false and extraordinary=true Delay Reason QA
-- DA BreadcrumbList and FAQPage structured-data presence
-- canonical/hreflang confirmed exactly EN + SV + DA for Wave 2
-- no PL/DE/FI/NL Wave 2 hreflang leakage
-- existing DA Flight Number Wave 1 regression preserved
-- sitemap expected **30,426** / actual **30,426** / difference 0
+- PL BreadcrumbList and FAQPage structured-data presence
+- canonical/hreflang confirmed exactly EN + SV + DA + PL for Wave 2
+- no DE/FI/NL Wave 2 hreflang leakage
+- existing PL Flight Number Wave 1 regression preserved with runtime-publishable `/pl/flight-numbers/a3101` returning HTTP 200
+- sitemap expected **33,813** / actual **33,813** / difference 0
+- final local `git status --short` clean
 
-# Secured SEO baseline after DA lock
+# Secured SEO baseline after PL lock
 
 Canonical/scale data:
 
@@ -89,7 +100,7 @@ Canonical/scale data:
 - Countries: 36
 - Delay Reasons: 11
 - Flight Number published locales: EN + SV + DA + PL + DE + FI + NL
-- Wave 2 published locales after DA lock: **EN + SV + DA**
+- Wave 2 published locales after PL lock: **EN + SV + DA + PL**
 - no FlightAware population required for localization work
 
 Wave 2 entity count per locale:
@@ -104,11 +115,11 @@ Each additional Wave 2 locale adds:
 
 # Reusable Wave 2 architecture
 
-The SV foundation plus DA implementation now prove the reusable per-market pattern:
+The SV foundation plus DA + PL implementations now prove the reusable per-market pattern:
 
 - deterministic localization builders
 - localized entity `displayName` support without forking canonical facts
-- localized route/city/country presentation
+- localized route/city/country presentation including market-native exonyms where appropriate
 - publication-aware Knowledge/internal-link behavior
 - locale-preserving Related Routes presentation
 - localized Delay Reason metadata and assessment presentation
@@ -143,36 +154,36 @@ Folder:
 
 `flightclaimly-wave2-sv`
 
-Current DA lock branch:
+Current PL lock branch:
 
-`seo-localization-wave2-da`
+`seo-localization-wave2-pl`
 
 This is the same FlightClaimly repository/history in a dedicated Git worktree. Do not create more worktrees for the remaining Wave 2 markets.
 
-If documentation commits were made remotely after the DA code lock, synchronize safely before new local edits. Never force-push.
+If documentation commits were made remotely after the PL code lock, synchronize safely before new local edits. Never force-push.
 
-# NEXT — Wave 2 Polish
+# NEXT — Wave 2 German
 
 Market order now:
 
-`SV LOCKED → DA LOCKED → PL NEXT → DE → FI → NL`
+`SV LOCKED → DA LOCKED → PL LOCKED → DE NEXT → FI → NL`
 
-Exact PL sequence:
+Exact DE sequence:
 
-1. synchronize the Wave 2 worktree with the latest DA documentation-only commits
-2. branch from the locked DA lineage for Polish Wave 2
+1. synchronize the Wave 2 worktree with the latest PL documentation-only commits
+2. branch from the locked PL lineage for German Wave 2
 3. inspect actual current architecture before edits
-4. create/adapt Polish localization presentation for Routes, Airports, Airlines, Countries and Delay Reasons
+4. create/adapt German localization presentation for Routes, Airports, Airlines, Countries and Delay Reasons
 5. preserve canonical facts and legal/classification meaning
-6. localize from canonical/base meaning, not from Swedish or Danish wording
+6. localize from canonical/base meaning, not from Swedish/Danish/Polish wording
 7. verify display names, metadata, internal links, breadcrumbs, FAQ/schema and Delay Reason assessment presentation
-8. extend Wave 2 publication scope to PL only when PL quality is ready
+8. extend Wave 2 publication scope to DE only when DE quality is ready
 9. verify canonical/hreflang/static params/sitemap arithmetic
 10. run typecheck + diff check
 11. run optimized Preview with representative rendered QA
 12. run one meaningful production build
-13. write PL checkpoint and lock
-14. continue DE → FI → NL
+13. write DE checkpoint and lock
+14. continue FI → NL
 
 # Portugal + Spain after current Wave 2
 
@@ -218,8 +229,8 @@ Do not assume 90% win rate across raw submissions. A 90%+ long-term success targ
 - no force push
 - no FlightAware rerun merely for localization
 - do not reopen locked Flight Number Wave 1 without a concrete bug/legal change/planned v2
-- do not reopen SV or DA Wave 2 without a concrete bug, SEO defect, legal issue or localization regression
+- do not reopen SV, DA or PL Wave 2 without a concrete bug, SEO defect, legal issue or localization regression
 
 # Exact resume action
 
-**Continue Localization Wave 2 with Polish from the locked Danish lineage in the existing `flightclaimly-wave2-sv` worktree. First synchronize the remote documentation-only lock commits. Treat SV + DA as immutable reusable foundations. Then localize/validate PL across Routes + Airports + Airlines + Countries + Delay Reasons, keep publication gated until QA is green, run Preview + one meaningful production build, checkpoint/lock PL, and continue DE → FI → NL. Do not touch parked Claims/Reijo work and do not rerun FlightAware.**
+**Continue Localization Wave 2 with German from the locked Polish lineage in the existing `flightclaimly-wave2-sv` worktree. First synchronize the remote PL documentation-only lock commits. Treat SV + DA + PL as immutable reusable foundations. Then localize/validate DE across Routes + Airports + Airlines + Countries + Delay Reasons, keep publication gated until QA is green, run Preview + one meaningful production build, checkpoint/lock DE, and continue FI → NL. Do not touch parked Claims/Reijo work and do not rerun FlightAware.**
