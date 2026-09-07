@@ -12,6 +12,7 @@ import ClaimAssessment from "@/components/seo/delay-reasons/ClaimAssessment";
 import type { DelayReason } from "@/data/delay-reasons/types";
 import { getDelayReasonAssessment } from "@/lib/delay-reasons/assessment";
 import { localizeDelayReasonAssessmentSv } from "@/lib/localization/delay-reason-assessment-sv";
+import { localizeDelayReasonAssessmentDa } from "@/lib/localization/delay-reason-assessment-da";
 
 type DelayReasonKnowledgeTemplateProps = {
   delayReason: DelayReason;
@@ -26,39 +27,21 @@ export default function DelayReasonKnowledgeTemplate({
   const assessment =
     locale === "sv"
       ? localizeDelayReasonAssessmentSv(canonicalAssessment)
-      : canonicalAssessment;
+      : locale === "da"
+        ? localizeDelayReasonAssessmentDa(canonicalAssessment)
+        : canonicalAssessment;
 
   return (
     <>
       <DelayReasonHero delayReason={delayReason} />
-
       <DelayReasonOverview delayReason={delayReason} locale={locale} />
-
       <ExtraordinaryCircumstances delayReason={delayReason} locale={locale} />
-
       <ClaimAssessment assessment={assessment} locale={locale} />
-
       <PassengerRights passengerRights={delayReason.passengerRights} locale={locale} />
-
-      <CompensationRules
-        compensationRules={delayReason.compensationRules}
-        locale={locale}
-      />
-
-      <Statistics
-        statisticsIntro={delayReason.statisticsIntro}
-        statistics={delayReason.statistics ?? []}
-        locale={locale}
-      />
-
-      <Timeline
-        timelineIntro={delayReason.timelineIntro}
-        timeline={delayReason.timeline ?? []}
-        locale={locale}
-      />
-
+      <CompensationRules compensationRules={delayReason.compensationRules} locale={locale} />
+      <Statistics statisticsIntro={delayReason.statisticsIntro} statistics={delayReason.statistics ?? []} locale={locale} />
+      <Timeline timelineIntro={delayReason.timelineIntro} timeline={delayReason.timeline ?? []} locale={locale} />
       <FAQ faq={delayReason.faq ?? []} locale={locale} />
-
       <RelatedKnowledge delayReasonTitle={delayReason.title} locale={locale} />
     </>
   );
