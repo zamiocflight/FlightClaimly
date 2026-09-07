@@ -6,6 +6,7 @@ import { delayReasons } from "@/data/delay-reasons/delayReasons";
 import { delayReasonSeoLocales } from "@/lib/seo/alternates";
 import { buildDelayReasonMetadata, resolveDelayReason } from "@/lib/delay-reasons";
 import { buildSwedishDelayReason } from "@/lib/localization/delay-reason-sv";
+import { buildDanishDelayReason } from "@/lib/localization/delay-reason-da";
 import { getLocaleDefinition } from "@/lib/localization/locales";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
@@ -15,7 +16,9 @@ export function generateStaticParams() {
 }
 
 function localize(delayReason: NonNullable<ReturnType<typeof resolveDelayReason>>, locale: string) {
-  return locale === "sv" ? buildSwedishDelayReason(delayReason) : delayReason;
+  if (locale === "sv") return buildSwedishDelayReason(delayReason);
+  if (locale === "da") return buildDanishDelayReason(delayReason);
+  return delayReason;
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -39,7 +42,7 @@ export default async function DelayReasonPage({ params }: Props) {
       <FAQSchema items={delayReason.faq ?? []} />
       <BreadcrumbSchema items={[
         { name: labels.home, url: `https://www.flightclaimly.com/${locale}` },
-        { name: locale === "sv" ? "Orsaker till flygstörningar" : "Delay reasons", url: `https://www.flightclaimly.com/${locale}/delay-reasons` },
+        { name: locale === "sv" ? "Orsaker till flygstörningar" : locale === "da" ? "Årsager til flyforstyrrelser" : "Delay reasons", url: `https://www.flightclaimly.com/${locale}/delay-reasons` },
         { name: delayReason.title, url: `https://www.flightclaimly.com/${locale}/delay-reasons/${slug}` },
       ]} />
       <main className="container py-10">
