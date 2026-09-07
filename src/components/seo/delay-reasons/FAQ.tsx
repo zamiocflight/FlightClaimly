@@ -11,7 +11,7 @@ export default function FAQ({ faq, locale }: Props) {
   return (
     <FAQSection
       items={faq}
-      title={locale === "sv" ? "Vanliga frågor" : "Frequently asked questions"}
+      title={locale === "sv" ? "Vanliga frågor" : locale === "da" ? "Ofte stillede spørgsmål" : "Frequently asked questions"}
     />
   );
 }
