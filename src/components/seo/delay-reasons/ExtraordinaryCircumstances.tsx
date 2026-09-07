@@ -14,7 +14,7 @@ export default function ExtraordinaryCircumstances({
   return (
     <section className="mt-12 rounded-xl border p-8">
       <h2 className="text-3xl font-semibold">
-        {locale === "sv" ? "Extraordinär omständighet" : "Extraordinary circumstance"}
+        {locale === "sv" ? "Extraordinär omständighet" : locale === "da" ? "Ekstraordinær omstændighed" : "Extraordinary circumstance"}
       </h2>
 
       <div className="mt-6 flex items-center gap-3">
@@ -28,10 +28,14 @@ export default function ExtraordinaryCircumstances({
           {isExtraordinary
             ? locale === "sv"
               ? "Kan normalt vara extraordinär"
-              : "Usually considered extraordinary"
+              : locale === "da"
+                ? "Kan normalt være ekstraordinær"
+                : "Usually considered extraordinary"
             : locale === "sv"
               ? "Normalt inte extraordinär"
-              : "Usually NOT considered extraordinary"}
+              : locale === "da"
+                ? "Normalt ikke ekstraordinær"
+                : "Usually NOT considered extraordinary"}
         </span>
       </div>
 
