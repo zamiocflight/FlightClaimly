@@ -51,7 +51,7 @@ Wave 2 localizes the remaining major Knowledge cohorts as one coordinated packag
 
 ### Market status
 
-`SV LOCKED → DA LOCKED → PL NEXT → DE → FI → NL`
+`SV LOCKED → DA LOCKED → PL LOCKED → DE NEXT → FI → NL`
 
 ### Swedish foundation — 🟢 LOCKED 2026-09-06
 
@@ -81,24 +81,42 @@ Detailed checkpoint:
 
 `docs/checkpoints/2026-09-07-seo-localization-wave2-da-locked.md`
 
-DA reused the Swedish architecture and extended Wave 2 publication scope to exactly **EN + SV + DA** for Routes, Airports, Airlines, Countries and Delay Reasons.
+DA reused the Swedish architecture and extended Wave 2 publication scope to exactly **EN + SV + DA**.
 
-DA lock verification included:
+DA lock verification included typecheck/diff green, Preview **1,561 / 1,561**, production **30,631 / 30,631**, sitemap **30,426 / 30,426**, representative rendered QA, canonical/hreflang, structured-data and Flight Number regression checks.
+
+### Polish — 🟢 LOCKED 2026-09-07
+
+Polish Wave 2 is complete and locked.
+
+Code lock commit:
+
+`205ead3d0b62a930e6141dfce71fc84af5e016c5`
+
+Detailed checkpoint:
+
+`docs/checkpoints/2026-09-07-seo-localization-wave2-pl-locked.md`
+
+PL reused the locked SV+DA architecture and extended Wave 2 publication scope to exactly **EN + SV + DA + PL**.
+
+PL lock verification included:
 
 - typecheck + diff check green
-- Preview **1,561 / 1,561**
-- production **30,631 / 30,631** static pages
-- sitemap expected/actual **30,426 / 30,426**
-- rendered QA across all five cohorts and five DA hubs
+- Preview **1,826 / 1,826**
+- production **34,013 / 34,013** static pages
+- sitemap expected/actual **33,813 / 33,813**
+- rendered QA across all five cohorts and five PL hubs
+- corrected market-native Polish city exonyms, including Kopenhaga / Sztokholm
 - reverse-route HTTP 200
 - extraordinary=true and extraordinary=false Delay Reason QA
 - BreadcrumbList + FAQPage presence
-- canonical/hreflang exactly EN+SV+DA
-- DA Flight Number Wave 1 regression preserved
+- canonical/hreflang exactly EN+SV+DA+PL
+- PL Flight Number Wave 1 regression preserved via runtime-publishable `/pl/flight-numbers/a3101`
+- final local working tree clean
 
-### Polish — NEXT
+### German — NEXT
 
-PL should reuse the locked SV+DA foundation, not recreate it.
+DE should reuse the locked SV+DA+PL foundation, not recreate it.
 
 Per-market execution remains:
 
@@ -112,11 +130,11 @@ Per-market execution remains:
 8. one meaningful production build
 9. checkpoint + lock
 
-The remaining markets should be materially faster because the generic plumbing and two complete market implementations now exist, but each still requires real language/SEO/legal-meaning QA and a production lock gate.
+The remaining markets should be faster because the generic plumbing and three complete market implementations now exist, but each still requires real language/SEO/legal-meaning QA and a production lock gate.
 
 ### Worktree execution rule
 
-Continue Wave 2 in the existing dedicated worktree `flightclaimly-wave2-sv`. Current locked DA branch is `seo-localization-wave2-da`. Do not create additional worktrees. The original `flightclaimly` worktree continues to hold unrelated parked Claims/Reijo changes.
+Continue Wave 2 in the existing dedicated worktree `flightclaimly-wave2-sv`. Current locked PL branch is `seo-localization-wave2-pl`. Do not create additional worktrees. The original `flightclaimly` worktree continues to hold unrelated parked Claims/Reijo changes.
 
 Do not force-push. Do not stage/reset/clean unrelated Claims/Reijo files.
 
@@ -217,8 +235,8 @@ Content must be accurate, useful, modern and human, not written only for Google.
 
 # Immediate pointer
 
-**Now:** Polish Wave 2 from the locked Swedish + Danish foundation.  
-**Then:** DE → FI → NL.  
+**Now:** German Wave 2 from the locked Swedish + Danish + Polish foundation.  
+**Then:** FI → NL.  
 **Next expansion:** Portuguese first, Spanish second; full product locale first, then Flight Number + coordinated Knowledge localization.  
 **Product:** premium UX/design/conversion uplift.  
 **Growth:** European 1–3% market model + Portugal/Spain/Poland acquisition experiments.  
