@@ -15,7 +15,7 @@ export default function Timeline({
 }: Props) {
   return (
     <TimelineSection
-      title={locale === "sv" ? "Så bedöms ärendet" : "Timeline"}
+      title={locale === "sv" ? "Så bedöms ärendet" : locale === "da" ? "Sådan vurderes sagen" : "Timeline"}
       intro={timelineIntro}
       steps={timeline}
     />
