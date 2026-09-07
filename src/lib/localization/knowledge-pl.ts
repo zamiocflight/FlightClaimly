@@ -5,11 +5,18 @@ import type { FlightRoute } from "@/data/seo/routes";
 import type { KnowledgeLocalization, LocalizableKnowledgeEntityType } from "./types";
 
 const cityNames: Record<string, string> = {
-  Athens: "Ateny", Belgrade: "Belgrad", Brussels: "Bruksela", Bucharest: "Bukareszt",
-  Cairo: "Kair", Cologne: "Kolonia", Copenhagen: "Kopenhaga", Florence: "Florencja",
-  Geneva: "Genewa", Lisbon: "Lizbona", Milan: "Mediolan", Munich: "Monachium",
-  Naples: "Neapol", Prague: "Praga", Rome: "Rzym", Seville: "Sewilla",
-  Venice: "Wenecja", Vienna: "Wiedeń", Warsaw: "Warszawa", Zurich: "Zurych",
+  Athens: "Ateny", Basel: "Bazylea", Belgrade: "Belgrad", Bologna: "Bolonia",
+  Bremen: "Brema", Brussels: "Bruksela", Bucharest: "Bukareszt", Cairo: "Kair",
+  Catania: "Katania", Chișinău: "Kiszyniów", Cologne: "Kolonia", Copenhagen: "Kopenhaga",
+  Dresden: "Drezno", Dubrovnik: "Dubrownik", Edinburgh: "Edynburg", Florence: "Florencja",
+  Geneva: "Genewa", Hannover: "Hanower", Istanbul: "Stambuł", Leipzig: "Lipsk",
+  Lisbon: "Lizbona", Ljubljana: "Lublana", Luxembourg: "Luksemburg", Madrid: "Madryt",
+  Marseille: "Marsylia", Milan: "Mediolan", Munich: "Monachium", Naples: "Neapol",
+  Nice: "Nicea", Nuremberg: "Norymberga", Paris: "Paryż", Paphos: "Pafos",
+  Pisa: "Piza", Prague: "Praga", Riga: "Ryga", Rome: "Rzym",
+  Seville: "Sewilla", Stockholm: "Sztokholm", Thessaloniki: "Saloniki", Turin: "Turyn",
+  Valencia: "Walencja", Venice: "Wenecja", Vienna: "Wiedeń", Vilnius: "Wilno",
+  Warsaw: "Warszawa", Washington: "Waszyngton", Zagreb: "Zagrzeb", Zurich: "Zurych",
 };
 const countryNames: Record<string, string> = {
   Austria: "Austria", Belgium: "Belgia", Croatia: "Chorwacja", Cyprus: "Cypr",
