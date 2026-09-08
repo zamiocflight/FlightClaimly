@@ -14,6 +14,7 @@ import { getDelayReasonAssessment } from "@/lib/delay-reasons/assessment";
 import { localizeDelayReasonAssessmentSv } from "@/lib/localization/delay-reason-assessment-sv";
 import { localizeDelayReasonAssessmentDa } from "@/lib/localization/delay-reason-assessment-da";
 import { localizeDelayReasonAssessmentPl } from "@/lib/localization/delay-reason-assessment-pl";
+import { localizeDelayReasonAssessmentDe } from "@/lib/localization/delay-reason-assessment-de";
 
 type DelayReasonKnowledgeTemplateProps = { delayReason: DelayReason; locale: string };
 
@@ -22,6 +23,7 @@ export default function DelayReasonKnowledgeTemplate({ delayReason, locale }: De
   const assessment = locale === "sv" ? localizeDelayReasonAssessmentSv(canonicalAssessment)
     : locale === "da" ? localizeDelayReasonAssessmentDa(canonicalAssessment)
     : locale === "pl" ? localizeDelayReasonAssessmentPl(canonicalAssessment)
+    : locale === "de" ? localizeDelayReasonAssessmentDe(canonicalAssessment)
     : canonicalAssessment;
 
   return <>
