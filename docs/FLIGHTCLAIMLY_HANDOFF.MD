@@ -1,38 +1,36 @@
 # FLIGHTCLAIMLY — MASTER HANDOFF
 
-Last updated: **2026-09-07**
+Last updated: **2026-09-09**
 
 ## PURPOSE
 
-This is the continuity handoff for ongoing FlightClaimly development. A new ChatGPT session should treat this document, `docs/CURRENT_SPRINT_LATEST.md`, the latest relevant checkpoint and the actual GitHub branch/code as project state.
+This is the continuity handoff for ongoing FlightClaimly development. A new ChatGPT session should treat `docs/CURRENT_SPRINT_LATEST.md`, the latest relevant checkpoint, this handoff and the actual GitHub branch/code as project state.
 
 Repository state beats conversational memory if they differ.
 
 ## WORKING STYLE
 
 - Swedish conversation
-- fast execution
+- fast autonomous execution
 - inspect actual repo/code before instructing changes
-- one clear checkpoint at a time when local user action is required
-- exact file paths and exact code-change locations
-- state whether a file is new, fully replaced or partially edited
-- use GitHub tools directly where safe
+- use connected GitHub directly where safe
+- only interrupt the user when local assistance is genuinely required
+- when local action is required, always state **Terminal 1** or **Terminal 2** and give one exact command at a time
+- for code changes, state whether a file is new, fully replaced or partially edited and give exact anchors/locations
 - never force-push
 - never use `git add .`
 - never destructive reset/clean unrelated work
 
-## COMPANY
+## COMPANY / PRODUCT
 
 Company: FLIGHTCLAIMLY OÜ  
-Registered: Estonia, 2025-12-13  
-Website: flightclaimly.com  
-Launch: 2026-07-05  
-Founder: David Victor Hedlund, CEO & Founder  
 Business: EU261 / UK261 flight compensation claims  
 Standard customer pricing: 20% including VAT  
 Commercial model: No win, no fee
 
-Current public/product locales before PT/ES expansion: SV, EN, DA, DE, NL, PL, FI.
+Current supported/localized footprint after Spanish lock:
+
+`EN + SV + DA + PL + DE + FI + NL + ES`
 
 # CURRENT DEVELOPMENT STATE
 
@@ -44,122 +42,124 @@ Locked foundations:
 - Claims Desk Assessment Integration phase 1 — VERIFIED
 - Research / Evidence Engine v1 foundation — LOCKED
 - Build / Deployment Cost Optimization — LOCKED
-- Flight Number Localization Wave 1 — COMPLETE / LOCKED / RELEASED
+- Flight Number localization architecture — LOCKED for completed locales
 
-Flight Number Wave 1 remains published in EN + SV + DA + PL + DE + FI + NL with 2,841 canonical Flight Numbers, 44 represented airline groups, 19,887 detail paths and 308 localized airline-group paths. Do not rerun FlightAware or reopen Wave 1 without a concrete reason.
+# LOCALIZATION STATUS
 
-# LOCALIZATION WAVE 2
+Completed/locked sequence:
 
-Coordinated cohorts:
+`SV → DA → PL → DE → FI → NL → ES`
 
-1. Routes
-2. Airports
-3. Airlines
-4. Countries
-5. Delay Reasons
+Spanish (`es`) was locked on **2026-09-09**.
 
-Market order now:
+Authoritative ES checkpoint:
 
-`SV LOCKED → DA LOCKED → PL LOCKED → DE NEXT → FI → NL`
+`docs/checkpoints/2026-09-09-seo-localization-wave2-es-locked.md`
 
-## Swedish Wave 2 — LOCKED 2026-09-06
+ES code lock recorded there: `d3afd97`.
 
-Code lock:
+Do not reopen ES or earlier locked locales absent a concrete bug, SEO regression, legal correction or localization defect.
 
-`93e965af7c7f429084a787cc01fe833f6f7e86bb`
+## ES lock evidence
 
-Checkpoint:
+- typecheck passed
+- final build after middleware fix/message catalog: **50,463 / 50,463**
+- sitemap: **50,256 total / 6,281 ES**
+- all six Spanish SEO hubs returned 200
+- representative Route/Airport/Airline/Country/Delay Reason/Flight Number details returned 200
+- Spanish claim journey tested through final thanks step
+- `messages/es.json` runtime copy confirmed, not fallback
+- Flight Number self-canonical + eight-locale hreflang confirmed
+- BreadcrumbList + FAQPage confirmed
+- technical-problems classification preserved false
+- bad-weather classification preserved true
+- diff check green
+- lock working tree clean
 
-`docs/checkpoints/2026-09-06-seo-localization-wave2-sv-locked.md`
+## Current scale across eight locales
 
-SV established the reusable architecture: deterministic localization builders, optional localized display names without canonical-data forks, publication-aware links, localized route/city/country presentation, Delay Reason localization/assessment separation, localized structured data, publication gates and the reusable QA/build/sitemap lock procedure.
+- Routes: 3,141 canonical / 25,128 localized detail paths
+- Airports: 98 / 784
+- Airlines: 96 / 768
+- Countries: 36 / 288
+- Delay Reasons: 11 / 88
+- Flight Numbers: 2,841 / 22,728
+- Flight Number airline groups: 44 / 352 pages
 
-## Danish Wave 2 — LOCKED 2026-09-07
+No FlightAware rerun is required.
 
-Code lock:
+# IMPORTANT ES RUNTIME FIX
 
-`558ee8e8d6a848fd9226247eb42ea191b73a8b79`
+During Spanish runtime QA, `/es/...` initially redirected incorrectly through `/sv/es/...` because `src/middleware.ts` had a hardcoded locale list that omitted `es`, despite routing already supporting Spanish.
 
-Checkpoint:
+The middleware registration was fixed by adding `es` to both locale collections. Post-fix Spanish hubs/details returned HTTP 200. Treat this as a concrete lesson for future locale launches: adding a locale to routing alone is insufficient; middleware/runtime registration must also be verified.
 
-`docs/checkpoints/2026-09-07-seo-localization-wave2-da-locked.md`
+# ACTIVE NEXT PHASE — PREMIUM UX / UPSCALE
 
-DA reuses the SV foundation and publishes Wave 2 exactly in EN + SV + DA.
+Premium UX/design/conversion work is now next, **before FR/IT/PT localization**.
 
-## Polish Wave 2 — LOCKED 2026-09-07
+The purpose is to make the current product feel like a premium, trustworthy European claims/fintech service and to improve conversion without damaging the SEO/i18n/legal foundation.
 
-Code lock:
+Audit actual code first. Do not redesign from assumptions.
 
-`205ead3d0b62a930e6141dfce71fc84af5e016c5`
+Review:
 
-Checkpoint:
+- home/landing above the fold
+- header and desktop/mobile navigation
+- eligibility checker and complete claim journey
+- Knowledge/SEO pages as conversion surfaces
+- trust, authority and fee presentation
+- CTA hierarchy
+- forms/progress/validation
+- loading/error/empty/success states
+- mobile friction
+- typography/spacing/hierarchy
+- useful microinteractions
+- accessibility/performance
+- analytics/conversion instrumentation
 
-`docs/checkpoints/2026-09-07-seo-localization-wave2-pl-locked.md`
+Preserve:
 
-PL reuses the SV+DA foundation and publishes Wave 2 exactly in EN + SV + DA + PL.
+- canonical/hreflang and sitemap architecture
+- structured data
+- SEO semantics
+- i18n architecture
+- locked localized/legal meaning
+- 20% incl. VAT and no-win-no-fee economics
+- claim-flow/data integrity
+- performance/accessibility
 
-PL lock gates were all green:
+The premium phase should end with QA and a dedicated checkpoint before new locale expansion.
 
-- `npm run typecheck`
-- `git diff --check`
-- Preview build: **1,826 / 1,826**
-- production build: **34,013 / 34,013**
-- sitemap expected/actual: **33,813 / 33,813**
-- rendered Route/Airport/Airline/Country/Delay Reason QA
-- five PL hubs
-- corrected Polish city exonyms including `Kopenhaga` and `Sztokholm`
-- reverse route HTTP 200
-- extraordinary=true and extraordinary=false Delay Reason QA
-- BreadcrumbList + FAQPage presence
-- canonical/hreflang exactly EN+SV+DA+PL
-- PL Flight Number regression preserved using runtime-publishable `/pl/flight-numbers/a3101` → HTTP 200
-- final local `git status --short` clean
+# NEXT MARKET ORDER AFTER PREMIUM
 
-Wave 2 entity inventory per locale remains:
+`FR → IT → PT`
 
-- Routes 3,141
-- Airports 98
-- Airlines 96
-- Countries 36
-- Delay Reasons 11
-- total 3,382 entity URLs + 5 cohort indexes = 3,387 sitemap URLs per added Wave 2 market
+Each new locale must be a complete package: public/product copy + claim journey + Flight Numbers + Routes + Airports + Airlines + Countries + Delay Reasons + metadata/internal links/schema/canonical/hreflang/sitemap/build/render QA + checkpoint/lock.
 
 # WORKTREE / GIT SAFETY
 
-Original worktree `flightclaimly` contains parked unrelated Claims/Reijo work last verified as:
+Original worktree:
+
+`flightclaimly`
+
+Contains parked unrelated Claims/Reijo work last recorded as:
 
 - `M docs/CLAIMS_DESK.md`
 - `M scripts/test-manual-claim.ts`
 - `?? scripts/create-reijo-claim.ts`
 
-Do not touch/reset/clean/stage those files from localization work.
+Do not touch/reset/clean/stage those files from this workstream.
 
-Wave 2 worktree remains:
+Active localization/premium worktree:
 
 `flightclaimly-wave2-sv`
 
-Current locked PL branch:
+Current branch at ES lock:
 
-`seo-localization-wave2-pl`
+`seo-localization-wave2-es`
 
-Do not create additional worktrees for DE/FI/NL. Continue the existing Wave 2 lineage and synchronize documentation-only commits safely before branching. Never force-push.
-
-# NEXT EXACT DEVELOPMENT ACTION — GERMAN WAVE 2
-
-1. synchronize the existing Wave 2 worktree with the latest PL lock/docs commits
-2. branch from the locked PL lineage for DE
-3. inspect actual current architecture before edits
-4. add/adapt German presentation for Routes, Airports, Airlines, Countries and Delay Reasons
-5. preserve canonical facts and canonical legal/classification values
-6. localize from canonical/base meaning, not Swedish/Danish/Polish wording
-7. verify visible display names, metadata, internal links, Related Routes, breadcrumbs/schema and Delay Reason assessment presentation
-8. extend Wave 2 publication gate to DE only when quality is ready
-9. verify canonical/hreflang/static params and sitemap arithmetic
-10. typecheck + diff check
-11. optimized Preview + representative rendered QA
-12. one meaningful production build
-13. checkpoint + lock DE
-14. continue FI → NL
+Do not create additional worktrees without a concrete reason. Never force-push.
 
 # ARCHITECTURAL PRINCIPLES
 
@@ -168,31 +168,26 @@ Do not create additional worktrees for DE/FI/NL. Continue the existing Wave 2 li
 - legal/classification values remain canonical across locales
 - localization is market-native adaptation, not translation chaining
 - quality gates control SEO publication
-- routing support does not equal publishable localization
-- relationship links must respect publication policy
+- routing support does not equal publishable/runtime-complete localization
+- relationship links respect publication policy
 - research/evidence and legal evaluation remain separate
 - unresolved facts stay unresolved until sufficiently verified
-- customer-specific data remains transactional and must not leak into source-controlled generic helpers
-
-# AFTER CURRENT WAVE 2
-
-Portuguese first as a complete public/product locale, Spanish second. Then apply established Flight Number + coordinated Knowledge localization methods, validate canonical/hreflang/sitemap/build/rendering, and use sitemap as the primary scaling mechanism.
-
-Premium UX/design/conversion uplift and the European market opportunity/acquisition model remain subsequent strategic tracks.
+- customer-specific data remains transactional and out of source-controlled generic helpers
+- locked locale work remains immutable absent a concrete regression
 
 # CLAIMS OPERATIONS CONTEXT
 
-Claims and localization remain separate workstreams. Do not accidentally stage or modify parked Reijo/manual-claim work.
+Claims and localization/premium product work remain separate workstreams. Do not accidentally stage or modify parked Reijo/manual-claim work.
 
 # CRASH-RECOVERY ORDER
 
 A new ChatGPT session should read:
 
 1. `docs/CURRENT_SPRINT_LATEST.md`
-2. `docs/checkpoints/2026-09-07-seo-localization-wave2-pl-locked.md`
+2. `docs/checkpoints/2026-09-09-seo-localization-wave2-es-locked.md`
 3. `docs/ROADMAP.md`
 4. this file
-5. relevant architecture/engine files
+5. relevant architecture/engine/UI files
 6. current GitHub branch/code/status
 
-Then continue German Wave 2 without asking the user to reconstruct the session.
+Then resume the **premium UX/upscale audit from actual current code**, not German/Finnish/Dutch/Portuguese localization. After premium implementation is validated/checkpointed, continue **FR → IT → PT**.
