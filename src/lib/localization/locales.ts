@@ -71,6 +71,16 @@ const dutchLabels = {
   claimProcessTitle: "Zo werkt het claimproces", commonIssuesTitle: "Veelvoorkomende problemen met vlucht {name}", faqTitle: "Veelgestelde vragen", flightAirlineLinksTitle: "Luchtvaartmaatschappij",
   flightRouteLinksTitle: "Vliegroute", airportsLinksTitle: "Luchthavens", countriesLinksTitle: "Landen",
 } as const;
+const spanishLabels = {
+  home: "Inicio", flightNumbers: "Números de vuelo", flightNumber: "Número de vuelo", airline: "Aerolínea", icaoAirlineCode: "Código ICAO de la aerolínea",
+  originAirport: "Aeropuerto de origen", destinationAirport: "Aeropuerto de destino", distanceCategory: "Categoría de distancia", eu261Protection: "Protección EU261",
+  uk261Protection: "Protección UK261", aircraft: "Tipo de avión", scheduleSnapshot: "Información de horario", yes: "Sí", no: "No",
+  heroEyebrow: "EU261 / UK261 · Sin compensación, sin comisión", heroTitle: "Compensación por el vuelo {name}", heroCta: "Comprueba el vuelo {name}", quickFactsTitle: "Datos clave",
+  majorAirlinesFor: "Principales aerolíneas para {name}", about: "Sobre {name}", compensationAmountsTitle: "¿Cuánta compensación puedes recibir?", passengerRightsTitle: "Derechos de los pasajeros según EU261",
+  officialSources: "Fuentes oficiales", compensationRulesTitle: "¿Cuándo tienes derecho a compensación?", compensationStatistics: "Datos de compensación para {name}", claimTimelineTitle: "¿Qué ocurre después de presentar tu reclamación?",
+  claimProcessTitle: "Cómo funciona el proceso de reclamación", commonIssuesTitle: "Incidencias habituales en {name}", faqTitle: "Preguntas frecuentes", flightAirlineLinksTitle: "Aerolínea del vuelo",
+  flightRouteLinksTitle: "Ruta del vuelo", airportsLinksTitle: "Aeropuertos", countriesLinksTitle: "Países",
+} as const;
 
 /** Locale registry. Routing support does not imply publishable localized SEO content. */
 export const localeDefinitions: Record<SeoLocale, LocaleDefinition> = {
@@ -81,6 +91,7 @@ export const localeDefinitions: Record<SeoLocale, LocaleDefinition> = {
   de: { locale: "de", languageName: "German", htmlLang: "de", marketLabel: "Germany", labels: germanLabels },
   pl: { locale: "pl", languageName: "Polish", htmlLang: "pl", marketLabel: "Poland", labels: polishLabels },
   nl: { locale: "nl", languageName: "Dutch", htmlLang: "nl", marketLabel: "Netherlands", labels: dutchLabels },
+  es: { locale: "es", languageName: "Spanish", htmlLang: "es", marketLabel: "Spain", labels: spanishLabels },
 };
 export function getLocaleDefinition(locale: SeoLocale): LocaleDefinition { return localeDefinitions[locale]; }
 export function interpolateLabel(template: string, values: Record<string, string>): string { return Object.entries(values).reduce((result, [key, value]) => result.replaceAll(`{${key}}`, value), template); }
