@@ -33,183 +33,68 @@ button,
 
 /* =========================================================
    Desktop header guardrails
-   Keep the FlightClaimly wordmark intact while long locales
-   use the available navigation space instead of shrinking it.
+   Keep the full FlightClaimly wordmark and normal readable
+   controls on every locale. Long languages use tighter spacing,
+   never smaller text or a reduced tracking button.
    ========================================================= */
 
-header:has(.fc-desktop-navwrap) > a:first-of-type {
-  flex-shrink: 0;
+header:has(.fc-desktop-navwrap) {
+  column-gap: 18px;
 }
 
+header:has(.fc-desktop-navwrap) > a:first-of-type,
 header:has(.fc-desktop-navwrap) > a:first-of-type img {
   flex-shrink: 0;
 }
 
-.fc-desktop-nav,
-.fc-track-btn {
-  white-space: nowrap;
-}
-
-/* =========================================================
-   DE-only layout polish (påverkar bara /de eftersom html[lang="de"])
-   ========================================================= */
-
-html[lang="de"] .fc-desktop-navwrap {
-  /* ✅ låter nav + knappar ligga stabilt utan att trycka ut allt */
-  gap: 16px; /* motsvarar ungefär Tailwind gap-4 */
-}
-
-html[lang="de"] .fc-desktop-nav {
-  /* ✅ gör menyn mer kompakt för tyska (längre ord) */
-  gap: 26px; /* mindre än gap-8 */
-  font-size: 14px; /* lite mindre än 15px */
-  white-space: nowrap; /* undvik “ful” radbrytning i rubrikerna */
-}
-
-html[lang="de"] .fc-track-btn {
-  /* ✅ gör Track-knappen mindre i DE */
-  padding: 8px 12px;
-  font-size: 13px;
-}
-
-html[lang="de"] .fc-track-btn svg {
-  /* ✅ ikonen lite mindre så knappen ser tight ut */
-  width: 18px;
-  height: 18px;
-}
-/* =========================================================
-   FI-only header/nav polish (påverkar endast finska /fi)
-   Orsak: längre labels -> wrapping + ful spacing
-   ========================================================= */
-
-html[lang="fi"] .fc-desktop-navwrap {
-  gap: 14px; /* lite tajtare så allt får plats på en rad */
-}
-
-html[lang="fi"] .fc-desktop-nav {
-  gap: 18px;
-  font-size: 14px;
-  white-space: nowrap; /* stoppar radbrytning i top-nav */
-}
-
-html[lang="fi"] .fc-track-btn {
-  padding: 0.45rem 0.75rem;
-  font-size: 13px;
-}
-
-html[lang="fi"] .fc-track-btn svg {
-  width: 16px;
-  height: 16px;
-}
-
-/* =========================================================
-   ES responsive header policy
-   Keep the complete Spanish desktop navigation, language
-   switcher and claim-tracking action visible on one line.
-   ========================================================= */
-
-html[lang="es"] header:has(.fc-desktop-navwrap) {
-  column-gap: 12px;
-}
-
-html[lang="es"] header:has(.fc-desktop-navwrap) > a:first-of-type {
-  flex: 0 0 auto;
-}
-
-html[lang="es"] header:has(.fc-desktop-navwrap) > a:first-of-type img {
-  height: 36px;
-  width: auto;
-}
-
-html[lang="es"] .fc-desktop-navwrap {
-  gap: 6px;
+.fc-desktop-navwrap {
+  gap: 16px;
   flex: 0 1 auto;
   min-width: 0;
 }
 
-html[lang="es"] .fc-desktop-nav {
-  gap: 7px;
-  font-size: 11px;
+.fc-desktop-nav {
+  gap: 18px;
+  font-size: 14px;
   white-space: nowrap;
 }
 
-html[lang="es"] .fc-track-btn {
-  gap: 4px;
-  padding: 6px 7px;
-  font-size: 11px;
+.fc-track-btn {
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  white-space: nowrap;
   flex-shrink: 0;
 }
 
-html[lang="es"] .fc-track-btn svg {
-  width: 15px;
-  height: 15px;
+.fc-track-btn svg {
+  width: 20px;
+  height: 20px;
 }
 
-html[lang="es"] .fc-desktop-navwrap > div {
+.fc-desktop-navwrap > div,
+.fc-desktop-navwrap > div > button {
   flex-shrink: 0;
 }
 
-html[lang="es"] .fc-desktop-navwrap > div > button {
-  gap: 4px;
-  font-size: 11px;
+/* Slightly tighter spacing only for languages with longer labels.
+   Readability remains identical to every other locale. */
+html[lang="de"] .fc-desktop-nav,
+html[lang="fi"] .fc-desktop-nav,
+html[lang="es"] .fc-desktop-nav {
+  gap: 14px;
 }
 
-/* Only expand the Spanish desktop header when there is genuinely
-   enough horizontal room for logo + 7 labels + language + tracking. */
-@media (min-width: 1600px) {
-  html[lang="es"] header:has(.fc-desktop-navwrap) {
-    column-gap: 16px;
-  }
-
-  html[lang="es"] header:has(.fc-desktop-navwrap) > a:first-of-type img {
-    height: 40px;
-  }
-
-  html[lang="es"] .fc-desktop-navwrap {
-    gap: 8px;
-  }
-
-  html[lang="es"] .fc-desktop-nav {
-    gap: 10px;
-    font-size: 12px;
-  }
-
-  html[lang="es"] .fc-track-btn {
-    gap: 6px;
-    padding: 7px 9px;
-    font-size: 12px;
-  }
-
-  html[lang="es"] .fc-desktop-navwrap > div > button {
-    gap: 6px;
-    font-size: 12px;
-  }
+html[lang="de"] .fc-desktop-navwrap,
+html[lang="fi"] .fc-desktop-navwrap,
+html[lang="es"] .fc-desktop-navwrap {
+  gap: 12px;
 }
 
-@media (min-width: 1800px) {
-  html[lang="es"] header:has(.fc-desktop-navwrap) > a:first-of-type img {
-    height: 44px;
-  }
-
-  html[lang="es"] .fc-desktop-navwrap {
-    gap: 12px;
-  }
-
-  html[lang="es"] .fc-desktop-nav {
-    gap: 16px;
-    font-size: 13px;
-  }
-
-  html[lang="es"] .fc-track-btn {
-    gap: 7px;
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-
-  html[lang="es"] .fc-desktop-navwrap > div > button {
-    gap: 8px;
-    font-size: 13px;
-  }
+html[lang="de"] header:has(.fc-desktop-navwrap),
+html[lang="fi"] header:has(.fc-desktop-navwrap),
+html[lang="es"] header:has(.fc-desktop-navwrap) {
+  column-gap: 14px;
 }
 
 /* Self-hosted flags (production-safe) */
