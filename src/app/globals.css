@@ -109,7 +109,7 @@ html[lang="fi"] .fc-track-btn svg {
    ========================================================= */
 
 html[lang="es"] header:has(.fc-desktop-navwrap) {
-  column-gap: 16px;
+  column-gap: 12px;
 }
 
 html[lang="es"] header:has(.fc-desktop-navwrap) > a:first-of-type {
@@ -122,20 +122,20 @@ html[lang="es"] header:has(.fc-desktop-navwrap) > a:first-of-type img {
 }
 
 html[lang="es"] .fc-desktop-navwrap {
-  gap: 7px;
+  gap: 6px;
   flex: 0 1 auto;
   min-width: 0;
 }
 
 html[lang="es"] .fc-desktop-nav {
-  gap: 8px;
+  gap: 7px;
   font-size: 11px;
   white-space: nowrap;
 }
 
 html[lang="es"] .fc-track-btn {
-  gap: 5px;
-  padding: 6px 8px;
+  gap: 4px;
+  padding: 6px 7px;
   font-size: 11px;
   flex-shrink: 0;
 }
@@ -150,11 +150,17 @@ html[lang="es"] .fc-desktop-navwrap > div {
 }
 
 html[lang="es"] .fc-desktop-navwrap > div > button {
-  gap: 5px;
+  gap: 4px;
   font-size: 11px;
 }
 
-@media (min-width: 1450px) {
+/* Only expand the Spanish desktop header when there is genuinely
+   enough horizontal room for logo + 7 labels + language + tracking. */
+@media (min-width: 1600px) {
+  html[lang="es"] header:has(.fc-desktop-navwrap) {
+    column-gap: 16px;
+  }
+
   html[lang="es"] header:has(.fc-desktop-navwrap) > a:first-of-type img {
     height: 40px;
   }
@@ -180,7 +186,7 @@ html[lang="es"] .fc-desktop-navwrap > div > button {
   }
 }
 
-@media (min-width: 1700px) {
+@media (min-width: 1800px) {
   html[lang="es"] header:has(.fc-desktop-navwrap) > a:first-of-type img {
     height: 44px;
   }
