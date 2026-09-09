@@ -1,8 +1,8 @@
 # FlightClaimly — Product / SEO / Growth Roadmap
 
-Last updated: **2026-09-07**
+Last updated: **2026-09-09**
 
-> Strategic roadmap. Exact crash recovery/current execution lives in `docs/CURRENT_SPRINT_LATEST.md`. Historical versions remain in Git history/checkpoints.
+> Strategic roadmap. Exact crash recovery/current execution lives in `docs/CURRENT_SPRINT_LATEST.md`. Historical detail remains in Git history and locale checkpoints.
 
 ## Mission
 
@@ -24,161 +24,125 @@ FlightClaimly should become a trusted European knowledge and claims platform for
 
 Research/Evidence Engine v1 foundation is locked. External integrations must use provider → registry → verification → resolver. Research does not silently become legal fact.
 
-## Phase B — Flight Number Localization Wave 1 — 🟢 COMPLETE / LOCKED / RELEASED
+## Phase B — Flight Number / Knowledge localization foundation — 🟢 LOCKED THROUGH ES
 
-Markets: `SV → DA → PL → DE → FI → NL`, with English as base.
+The reusable localization architecture is established and validated across:
 
-Final locked scale:
+`EN + SV + DA + PL + DE + FI + NL + ES`
 
-- 2,841 canonical Flight Numbers
-- 19,887 Flight Number detail paths across seven published locales
-- 44 airline groups / 308 localized group paths
-- 2,886 Flight Number sitemap URLs per market
+Current canonical scale:
 
-Google handoff: sitemap is the scaling mechanism; use only representative strategic indexing requests, not thousands of manual submissions.
+- Flight Numbers: **2,841**
+- Flight Number airline groups: **44**
+- Routes: **3,141**
+- Airports: **98**
+- Airlines: **96**
+- Countries: **36**
+- Delay Reasons: **11**
 
-Do not rerun FlightAware or reopen Wave 1 merely for Wave 2 localization.
+Eight-locale localized detail scale after ES lock:
 
-## Phase C — Localization Wave 2 — 🔵 ACTIVE
+- Routes: **25,128**
+- Airports: **784**
+- Airlines: **768**
+- Countries: **288**
+- Delay Reasons: **88**
+- Flight Numbers: **22,728**
+- Flight Number airline groups: **352**
 
-Wave 2 localizes the remaining major Knowledge cohorts as one coordinated package per market:
+Do not rerun FlightAware or reopen locked localization merely to continue product work.
 
-- Routes
-- Airports
-- Airlines
-- Countries
-- Delay Reasons
+## Phase C — Localization Wave 2 — 🟢 COMPLETE THROUGH SPANISH
 
-### Market status
+Market status:
 
-`SV LOCKED → DA LOCKED → PL LOCKED → DE NEXT → FI → NL`
+`SV LOCKED → DA LOCKED → PL LOCKED → DE LOCKED → FI LOCKED → NL LOCKED → ES LOCKED`
 
-### Swedish foundation — 🟢 LOCKED 2026-09-06
+Spanish lock date: **2026-09-09**.
 
-Swedish Wave 2 is complete and locked.
+Spanish checkpoint:
 
-Code lock commit:
+`docs/checkpoints/2026-09-09-seo-localization-wave2-es-locked.md`
 
-`93e965af7c7f429084a787cc01fe833f6f7e86bb`
+ES lock verification includes:
 
-Detailed checkpoint:
+- typecheck green
+- final production build **50,463 / 50,463**
+- sitemap **50,256** total URLs / **6,281** Spanish URLs
+- hubs + representative detail runtime QA
+- full tested Spanish claim journey through thanks
+- actual Spanish message catalog runtime confirmation
+- canonical/hreflang across all eight locales
+- BreadcrumbList + FAQPage
+- canonical Delay Reason classifications preserved
+- diff check green
+- clean lock working tree
 
-`docs/checkpoints/2026-09-06-seo-localization-wave2-sv-locked.md`
+Locked locales are immutable unless a concrete bug, SEO regression, legal correction or localization defect is found.
 
-SV established the reusable Wave 2 foundation: deterministic localization builders, localized entity display names, publication-aware internal linking, Delay Reason localization separation, localized structured data, coherent locale publication gates and the reusable QA/build/sitemap lock procedure.
+## Phase D — Premium UX / Design / Conversion uplift — 🔵 ACTIVE NEXT
 
-SV lock verification included Preview **1,296 / 1,296**, production **27,249 / 27,249**, sitemap **27,039 / 27,039**, rendered QA across all cohorts, canonical/hreflang and structured-data checks.
+This phase happens **before FR/IT/PT expansion** so the next languages inherit the improved product rather than multiplying older UX debt.
 
-### Danish — 🟢 LOCKED 2026-09-07
+First perform an audit of the actual implementation, then make deliberate changes.
 
-Danish Wave 2 is complete and locked.
-
-Code lock commit:
-
-`558ee8e8d6a848fd9226247eb42ea191b73a8b79`
-
-Detailed checkpoint:
-
-`docs/checkpoints/2026-09-07-seo-localization-wave2-da-locked.md`
-
-DA reused the Swedish architecture and extended Wave 2 publication scope to exactly **EN + SV + DA**.
-
-DA lock verification included typecheck/diff green, Preview **1,561 / 1,561**, production **30,631 / 30,631**, sitemap **30,426 / 30,426**, representative rendered QA, canonical/hreflang, structured-data and Flight Number regression checks.
-
-### Polish — 🟢 LOCKED 2026-09-07
-
-Polish Wave 2 is complete and locked.
-
-Code lock commit:
-
-`205ead3d0b62a930e6141dfce71fc84af5e016c5`
-
-Detailed checkpoint:
-
-`docs/checkpoints/2026-09-07-seo-localization-wave2-pl-locked.md`
-
-PL reused the locked SV+DA architecture and extended Wave 2 publication scope to exactly **EN + SV + DA + PL**.
-
-PL lock verification included:
-
-- typecheck + diff check green
-- Preview **1,826 / 1,826**
-- production **34,013 / 34,013** static pages
-- sitemap expected/actual **33,813 / 33,813**
-- rendered QA across all five cohorts and five PL hubs
-- corrected market-native Polish city exonyms, including Kopenhaga / Sztokholm
-- reverse-route HTTP 200
-- extraordinary=true and extraordinary=false Delay Reason QA
-- BreadcrumbList + FAQPage presence
-- canonical/hreflang exactly EN+SV+DA+PL
-- PL Flight Number Wave 1 regression preserved via runtime-publishable `/pl/flight-numbers/a3101`
-- final local working tree clean
-
-### German — NEXT
-
-DE should reuse the locked SV+DA+PL foundation, not recreate it.
-
-Per-market execution remains:
-
-1. localize from canonical/base meaning, never translation-chain from another locale
-2. preserve canonical facts and legal/classification meaning
-3. validate market-native terminology and SEO presentation
-4. keep publication gated until locale quality is ready
-5. validate metadata, display names, internal links, breadcrumbs/schema, canonical/hreflang and sitemap arithmetic
-6. typecheck + diff check
-7. optimized Preview + representative rendered QA
-8. one meaningful production build
-9. checkpoint + lock
-
-The remaining markets should be faster because the generic plumbing and three complete market implementations now exist, but each still requires real language/SEO/legal-meaning QA and a production lock gate.
-
-### Worktree execution rule
-
-Continue Wave 2 in the existing dedicated worktree `flightclaimly-wave2-sv`. Current locked PL branch is `seo-localization-wave2-pl`. Do not create additional worktrees. The original `flightclaimly` worktree continues to hold unrelated parked Claims/Reijo changes.
-
-Do not force-push. Do not stage/reset/clean unrelated Claims/Reijo files.
-
-## Phase D — Portuguese + Spanish market expansion — ⏭️ AFTER CURRENT WAVE 2
-
-First new language markets are explicitly:
-
-1. **Portuguese — first**
-2. **Spanish — second**
-
-For each market:
-
-1. add the language as a complete supported product/public-site locale
-2. validate the customer-facing claim journey and core site copy
-3. execute the Flight Number localization method established in Wave 1
-4. execute Routes + Airports + Airlines + Countries + Delay Reasons as the coordinated Wave 2 package
-5. validate canonical/hreflang/sitemap/build/rendering before publication
-6. hand the market to Google through sitemap plus only a small representative set of strategic indexing requests
-
-Portugal-first is a deliberate launch/growth choice, not a statement that Portugal has the larger absolute TAM.
-
-## Phase E — Premium UX / Design / Conversion uplift
-
-Perform a deliberate re-evaluation of the older public site and complete claim journey with current implementation capability. This is intended to be a material upscale, not cosmetic patching.
-
-Review desktop + mobile:
+Review desktop + mobile across:
 
 landing/search entry → lookup → eligibility → passenger details → documents → claim → confirmation.
 
+Also review Knowledge/SEO landing pages as acquisition-to-claim conversion surfaces.
+
 Scope:
 
-- premium visual hierarchy
-- typography/spacing
-- trust/authority
-- CTA clarity
+- premium European claims/fintech visual hierarchy
+- typography and spacing system
+- trust and authority presentation
+- 20% incl. VAT / no-win-no-fee clarity
+- EU261 credibility without legal clutter
+- CTA hierarchy
 - progress/navigation
-- form friction/validation
+- form friction and validation
 - loading/error/empty/success states
-- reassurance/copy
-- responsive behavior
+- reassurance/copy hierarchy
+- responsive/mobile behavior
 - useful microinteractions
-- consistency between Knowledge pages and transactional flow
-- performance/accessibility
+- consistency between Knowledge and transactional surfaces
+- accessibility and performance
 - conversion instrumentation
+
+Non-negotiable preservation gates:
+
+- SEO semantics/indexation architecture
+- canonical/hreflang behavior
+- structured data
+- i18n architecture
+- locked legal/factual meaning
+- claim-flow behavior and data integrity
+- accessibility/performance
+
+The premium phase must end with its own QA/checkpoint before language expansion resumes.
+
+## Phase E — New market expansion — ⏭️ FR → IT → PT
+
+Current expansion order:
+
+1. **French (FR)**
+2. **Italian (IT)**
+3. **Portuguese (PT)**
+
+For each market:
+
+1. add a complete supported product/public-site locale
+2. validate the complete customer-facing claim journey
+3. apply the established Flight Number localization method
+4. apply Routes + Airports + Airlines + Countries + Delay Reasons as a coordinated package
+5. preserve canonical facts and legal/classification meaning
+6. validate market-native terminology and SEO presentation
+7. validate metadata, internal links, breadcrumbs/schema, canonical/hreflang and sitemap arithmetic
+8. typecheck/build/render QA
+9. checkpoint and lock before moving to the next market
+
+Use sitemap as the mass-discovery mechanism; manual indexing requests should remain representative and strategic.
 
 ## Phase F — European market opportunity + paid acquisition
 
@@ -186,21 +150,13 @@ Build a country-by-country TAM/SAM/SOM model using the best available evidence. 
 
 Model **1%, 2%, 3% penetration** per market and translate into claims/day, pursued claims, successful recoveries, compensation volume and FlightClaimly gross commission.
 
-Treat a 90%+ win rate as an aspirational success rate for screened/pursued claims, not for every raw submission.
+Treat a 90%+ win rate as an aspirational success rate for screened/pursued claims, not every raw submission.
 
-Priority paid-acquisition laboratories currently:
-
-- Portugal
-- Spain
-- Poland
-
-Optimize acquisition against **cost per valid/profitable claim**, not CPC, clicks or raw leads. Measure the full funnel: traffic → started claim → submitted → valid/pursued → successful recovery → commission → CAC/payback.
-
-Additional European language/market expansion (FR/IT/RO/CZ/HU/GR etc.) should be prioritized from the opportunity model rather than language population alone.
+Optimize acquisition against **cost per valid/profitable claim**, not CPC, clicks or raw leads. Measure traffic → started claim → submitted → valid/pursued → successful recovery → commission → CAC/payback.
 
 ## Phase G — Search Console / Analytics quality cleanup
 
-After Google has had reasonable time to process the new footprint, audit legacy duplicate/canonical issues, 404s, redirects, discovered-not-indexed and crawled-not-indexed. Sample current live URLs before changing code because Search Console can lag.
+After Google has had reasonable time to process the enlarged footprint, audit legacy duplicate/canonical issues, 404s, redirects, discovered-not-indexed and crawled-not-indexed. Sample live URLs before changing code because Search Console can lag.
 
 Improve analytics hygiene so internal/admin/development/automated traffic does not distort acquisition and conversion reporting.
 
@@ -232,12 +188,11 @@ Content must be accurate, useful, modern and human, not written only for Google.
 - customer-specific data remains transactional and never leaks into source-controlled helpers
 - no FlightAware rerun merely for localization
 - locked locale work is not reopened without a concrete bug/legal/SEO reason
+- no destructive Git recovery, force push or broad staging
 
 # Immediate pointer
 
-**Now:** German Wave 2 from the locked Swedish + Danish + Polish foundation.  
-**Then:** FI → NL.  
-**Next expansion:** Portuguese first, Spanish second; full product locale first, then Flight Number + coordinated Knowledge localization.  
-**Product:** premium UX/design/conversion uplift.  
-**Growth:** European 1–3% market model + Portugal/Spain/Poland acquisition experiments.  
+**Now:** premium UX/upscale audit from the actual current code, then premium implementation and QA/checkpoint.  
+**Then:** FR → IT → PT complete localization packages.  
+**Growth:** European 1–3% market model and acquisition experiments.  
 **Later:** Search Console legacy cleanup + analytics hygiene while Claims Operations and Content/Growth continue.
