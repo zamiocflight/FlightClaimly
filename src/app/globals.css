@@ -103,29 +103,83 @@ html[lang="fi"] .fc-track-btn svg {
 }
 
 /* =========================================================
-   ES desktop header/nav polish
-   Spanish labels are substantially longer. Preserve the full
-   wordmark and keep every navigation item on a single line.
+   ES responsive header policy
+   - Long Spanish labels always stay on one line.
+   - At true desktop widths we use a compact, balanced header.
+   - Below 1400px Spanish falls back to the existing mobile
+     actions instead of shrinking/cropping important controls.
    ========================================================= */
 
 html[lang="es"] .fc-desktop-navwrap {
-  gap: 12px;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 html[lang="es"] .fc-desktop-nav {
-  gap: 16px;
-  font-size: 13px;
+  gap: 11px;
+  font-size: 12px;
   white-space: nowrap;
 }
 
+html[lang="es"] header:has(.fc-desktop-navwrap) > a:first-of-type img {
+  height: 40px;
+  width: auto;
+}
+
 html[lang="es"] .fc-track-btn {
-  padding: 8px 12px;
-  font-size: 13px;
+  gap: 6px;
+  padding: 7px 10px;
+  font-size: 12px;
 }
 
 html[lang="es"] .fc-track-btn svg {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
+}
+
+html[lang="es"] .fc-desktop-navwrap > div > button {
+  gap: 6px;
+  font-size: 12px;
+}
+
+@media (min-width: 1600px) {
+  html[lang="es"] .fc-desktop-navwrap {
+    gap: 12px;
+  }
+
+  html[lang="es"] .fc-desktop-nav {
+    gap: 16px;
+    font-size: 13px;
+  }
+
+  html[lang="es"] header:has(.fc-desktop-navwrap) > a:first-of-type img {
+    height: 44px;
+  }
+
+  html[lang="es"] .fc-track-btn {
+    gap: 7px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  html[lang="es"] .fc-desktop-navwrap > div > button {
+    gap: 8px;
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1399px) {
+  html[lang="es"] .fc-desktop-navwrap {
+    display: none !important;
+  }
+
+  html[lang="es"] header:has(.fc-desktop-navwrap) > div[class~="md:hidden"] {
+    display: flex !important;
+  }
+
+  html[lang="es"] header:has(.fc-desktop-navwrap) > a:first-of-type img {
+    height: 44px;
+  }
 }
 
 /* Self-hosted flags (production-safe) */
