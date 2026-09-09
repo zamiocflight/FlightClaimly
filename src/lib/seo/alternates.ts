@@ -1,10 +1,10 @@
 import { locales } from "@/i18n/routing";
 
-export const routeSeoLocales = ["en", "sv", "da", "pl", "de", "fi", "nl"] as const;
-export const airportSeoLocales = ["en", "sv", "da", "pl", "de", "fi", "nl"] as const;
-export const airlineSeoLocales = ["en", "sv", "da", "pl", "de", "fi", "nl"] as const;
-export const countrySeoLocales = ["en", "sv", "da", "pl", "de", "fi", "nl"] as const;
-export const delayReasonSeoLocales = ["en", "sv", "da", "pl", "de", "fi", "nl"] as const;
+export const routeSeoLocales = ["en", "sv", "da", "pl", "de", "fi", "nl", "es"] as const;
+export const airportSeoLocales = ["en", "sv", "da", "pl", "de", "fi", "nl", "es"] as const;
+export const airlineSeoLocales = ["en", "sv", "da", "pl", "de", "fi", "nl", "es"] as const;
+export const countrySeoLocales = ["en", "sv", "da", "pl", "de", "fi", "nl", "es"] as const;
+export const delayReasonSeoLocales = ["en", "sv", "da", "pl", "de", "fi", "nl", "es"] as const;
 export const flightNumberSeoLocales = ["en", "sv", "da", "pl", "de", "fi", "nl"] as const;
 
 const SITE_URL = "https://www.flightclaimly.com";
