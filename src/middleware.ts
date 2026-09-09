@@ -54,12 +54,6 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  const firstPathSegment = pathname.split("/")[1];
-
-  if (SUPPORTED_LOCALES.has(firstPathSegment)) {
-    return NextResponse.next();
-  }
-
   // Tillåt admin-auth API
   if (pathname === "/api/admin/login" || pathname === "/api/admin/logout") {
     return NextResponse.next();
@@ -70,11 +64,19 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // Skippa locale-routing för tracking (utan intl)
+  // Skippa locale för tracking (utan intl)
   // - "/track/..."
   // - "/{locale}/track/..." (oavsett locale-sträng)
   if (pathname.startsWith("/track") || pathname.match(/^\/[^/]+\/track(\/|$)/)) {
     return NextResponse.next();
+  }
+
+  const firstPathSegment = pathname.split("/")[1];
+
+  // Viktigt: redan lokaliserade routes måste fortfarande gå genom
+  // next-intl middleware så request-locale/header sätts korrekt.
+  if (SUPPORTED_LOCALES.has(firstPathSegment)) {
+    return intlMiddleware(req);
   }
 
   // Skippa locale för vissa publika routes (admin-skydd körs längre ner)
