@@ -8,7 +8,7 @@ import type {
 export const localizationRollout = {
   canonical: ["en"],
   wave1: ["sv", "da", "fi"],
-  wave2: ["de", "pl", "nl"],
+  wave2: ["de", "pl", "nl", "es"],
 } as const satisfies Record<string, readonly SeoLocale[]>;
 
 export function isLocalizationQualityComplete(
