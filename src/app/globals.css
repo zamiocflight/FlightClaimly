@@ -30,6 +30,26 @@ button,
 [data-clickable="true"] {
   cursor: pointer;
 }
+
+/* =========================================================
+   Desktop header guardrails
+   Keep the FlightClaimly wordmark intact while long locales
+   use the available navigation space instead of shrinking it.
+   ========================================================= */
+
+header:has(.fc-desktop-navwrap) > a:first-of-type {
+  flex-shrink: 0;
+}
+
+header:has(.fc-desktop-navwrap) > a:first-of-type img {
+  flex-shrink: 0;
+}
+
+.fc-desktop-nav,
+.fc-track-btn {
+  white-space: nowrap;
+}
+
 /* =========================================================
    DE-only layout polish (påverkar bara /de eftersom html[lang="de"])
    ========================================================= */
@@ -81,6 +101,33 @@ html[lang="fi"] .fc-track-btn svg {
   width: 16px;
   height: 16px;
 }
+
+/* =========================================================
+   ES desktop header/nav polish
+   Spanish labels are substantially longer. Preserve the full
+   wordmark and keep every navigation item on a single line.
+   ========================================================= */
+
+html[lang="es"] .fc-desktop-navwrap {
+  gap: 12px;
+}
+
+html[lang="es"] .fc-desktop-nav {
+  gap: 16px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+html[lang="es"] .fc-track-btn {
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+html[lang="es"] .fc-track-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
 /* Self-hosted flags (production-safe) */
 .fc-flag {
   width: 18px;
