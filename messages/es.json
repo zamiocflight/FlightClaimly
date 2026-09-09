@@ -1,0 +1,1446 @@
+{
+  "errors": {
+    "sendFailed": "No se ha podido enviar ahora. Inténtalo de nuevo.",
+    "noClaimId": "El servidor no ha devuelto ningún ID de reclamación.",
+    "network": "Error de red. Inténtalo de nuevo.",
+    "invalidFlightNumber": "Introduce un número de vuelo válido (p. ej., SK123)."
+  },
+  "header": {
+    "language": {
+      "label": "ES ▾",
+      "aria": "Cambiar idioma"
+    }
+  },
+  "mobileNav": {
+    "title": "Menú",
+    "openAria": "Abrir menú",
+    "openSr": "Abrir menú",
+    "closeAria": "Cerrar menú"
+  },
+  "nav": {
+    "compensation": "Obtener compensación",
+    "delays": "Retrasos de vuelos",
+    "cancellations": "Cancelaciones de vuelos",
+    "rights": "Tus derechos",
+    "faq": "Preguntas frecuentes",
+    "about": "Sobre nosotros",
+    "contact": "Contacto",
+    "track": "Seguir reclamación",
+    "langLabel": "Idioma"
+  },
+  "track": {
+    "button": "Seguir reclamación",
+    "title": "Sigue tu reclamación",
+    "description": "Introduce la dirección de correo electrónico que utilizaste al presentar tu reclamación. Si encontramos una coincidencia, te enviaremos un enlace seguro de seguimiento.",
+    "closeAria": "Cerrar",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "tu@ejemplo.com",
+    "cancel": "Cancelar",
+    "resend": "¿No lo has recibido? Enviar de nuevo",
+    "send": "Enviar enlace",
+    "sending": "Enviando…",
+    "messages": {
+      "success": "Si encontramos una reclamación asociada a este correo, te enviaremos un enlace seguro de seguimiento en unos minutos.",
+      "errorGeneric": "No hemos podido enviar el enlace ahora. Inténtalo de nuevo dentro de un momento.",
+      "errorTechnical": "Error técnico. Inténtalo de nuevo dentro de un momento."
+    }
+  },
+  "sections": {
+    "readMore": "Más información"
+  },
+  "how": {
+    "badge": "Cómo funciona",
+    "title": "3 pasos sencillos para conseguir tu compensación",
+    "desc": {
+      "before": "Lo hacemos sencillo: tú envías los datos de tu vuelo, nosotros tratamos con la aerolínea y tú recibes la compensación conforme a los",
+      "link": "derechos de los pasajeros de EU261",
+      "after": "."
+    },
+    "stepLabel": "Paso {n}",
+    "steps": {
+      "1": {
+        "title": "Envía los datos de tu vuelo",
+        "body": "Introduce el número de vuelo, la fecha y la ruta. Hacemos una comprobación inicial rápida y confirmamos si tu caso puede cumplir los requisitos de EU261."
+      },
+      "2": {
+        "title": "Nosotros gestionamos la reclamación",
+        "body": "Añade tus datos y documentos. Contactamos con la aerolínea, gestionamos el procedimiento formal y te mantenemos informado por correo electrónico y en la página de tu reclamación."
+      },
+      "3": {
+        "title": "Recibe tu dinero",
+        "body": "Cuando la aerolínea pague, te transferimos la compensación descontando nuestra comisión. Si no hay resultado, no cobramos. Siempre recibirás un resumen claro del pago."
+      }
+    }
+  },
+  "trustRow": {
+    "eu261": "Derechos de los pasajeros EU261",
+    "lowFee": "Sin costes ocultos",
+    "gdpr": "Tratamiento seguro de datos"
+  },
+  "why": {
+    "title": "¿Por qué elegir FlightClaimly?",
+    "cards": {
+      "peace": {
+        "badge": "Tranquilidad",
+        "title": "Nosotros tratamos con la aerolínea; tú te despreocupas",
+        "body": "Nos encargamos de toda la comunicación con la aerolínea por ti. Sin interminables cadenas de correos ni laberintos legales: solo actualizaciones claras para que puedas centrarte en tu vida y en tu próximo viaje."
+      },
+      "fee": {
+        "badge": "Comisión baja",
+        "title": "Te quedas con más que con otros competidores",
+        "body": "Nuestra comisión está entre las más bajas de los países nórdicos. Muchos competidores cobran más o esconden costes en la letra pequeña. Nosotros lo dejamos claro para que conserves una mayor parte de tu compensación."
+      },
+      "smart": {
+        "badge": "Inteligente y justo",
+        "title": "Automatizado cuando es posible; ayuda legal cuando hace falta",
+        "body": "Usamos tecnología inteligente para agilizar los casos sencillos. Si se necesita ayuda legal, adelantamos el coste y solo lo descontamos si ganamos. Nunca pagas de tu bolsillo y siempre conoces las condiciones de antemano."
+      }
+    }
+  },
+  "footer": {
+    "pitch": "Ayudamos a los pasajeros a obtener la compensación que les corresponde según EU261, sin costes por adelantado, sin cargos ocultos y sin complicaciones legales.",
+    "badges": {
+      "lowFee": "Si no ganamos, no cobramos — comisión baja",
+      "eu": "EU261 / UK261",
+      "gdpr": "Tratamiento conforme al RGPD"
+    },
+    "columns": {
+      "services": "Servicios",
+      "company": "Sobre FlightClaimly"
+    },
+    "links": {
+      "rightsLabel": "Tus derechos (EU261)",
+      "terms": "Términos",
+      "privacy": "Privacidad"
+    },
+    "bottom": {
+      "copyright": "© {year} FlightClaimly. Todos los derechos reservados.",
+      "disclaimer": "FlightClaimly es un servicio independiente y no está afiliado a las aerolíneas. Actuamos en tu nombre como pasajero."
+    }
+  },
+  "hero": {
+    "badges": {
+      "eu": "EU261 / UK261",
+      "fee": "COMISIÓN BAJA",
+      "noWinNoFee": "SI NO GANAMOS, NO COBRAMOS"
+    },
+    "title": "Consigue hasta 600 € de compensación por vuelos retrasados o cancelados, sin complicaciones.",
+    "titleLine1": "Consigue hasta 600 € de compensación",
+    "titleLine2": "por vuelos retrasados o cancelados",
+    "fromLabel": "Aeropuerto de salida",
+    "fromPlaceholder": "Aeropuerto de salida",
+    "toLabel": "Aeropuerto de destino final",
+    "toPlaceholder": "Aeropuerto de destino final",
+    "subtitle": {
+      "beforeDelayed": "Comprueba si tu",
+      "delayedLink": "vuelo retrasado",
+      "between": "o",
+      "cancelledLink": "vuelo cancelado",
+      "afterCancelled": "da derecho a compensación según",
+      "eu261Link": "EU261",
+      "afterEu261": ". Nosotros gestionamos tu reclamación con la aerolínea; solo pagas si cobras."
+    },
+    "cta": "Comprobar mi vuelo ahora",
+    "searchCta": "Comprobar compensación",
+    "trust": {
+      "beforeLink": "Tarda unos 2 minutos. No pagas nada salvo que recibas compensación —",
+      "link": "más información sobre nuestra comisión.",
+      "afterLink": ""
+    }
+  },
+  "precheck": {
+    "steps": {
+      "step1": "Comprueba tu vuelo",
+      "step2": "Introduce tus datos"
+    },
+    "quick": {
+      "title": "Comprobación rápida de elegibilidad",
+      "descBeforeLink": "Introduce los datos de tu vuelo y estimaremos rápidamente si puedes tener derecho a compensación según",
+      "eu261Link": "EU261",
+      "descAfterLink": ".",
+      "labels": {
+        "flightNumber": "Número de vuelo",
+        "date": "Fecha",
+        "from": "Desde",
+        "to": "Hasta",
+        "connectionTitle": "Conexión",
+        "direct": "Vuelo directo",
+        "withConnection": "Con escala"
+      },
+      "placeholders": {
+        "flightNumber": "p. ej., SK1420",
+        "from": "CPH",
+        "to": "ARN",
+        "connection": "p. ej., FRA, DOH o París CDG"
+      },
+      "actions": {
+        "remove": "Eliminar",
+        "addAirport": "+ Añadir otro aeropuerto"
+      },
+      "submit": {
+        "default": "Comprobar mi vuelo",
+        "checking": "Comprobando…"
+      },
+      "result": {
+        "eligible": "Según los datos históricos disponibles, parece que tu vuelo llegó con más de 3 horas de retraso. Puedes tener derecho a compensación.",
+        "notConfirmed": "No hemos podido confirmar con los datos disponibles un retraso superior a 3 horas. Aun así, puedes continuar; los registros de la aerolínea pueden ser distintos."
+      }
+    },
+    "details": {
+      "goodNewsStrong": "¡Buenas noticias!",
+      "goodNewsText": "Parece que tu vuelo puede dar derecho a compensación según EU261. Introduce tus datos y nosotros nos encargamos del resto.",
+      "title": "Tus datos",
+      "labels": {
+        "fullName": "Nombre completo",
+        "email": "Correo electrónico",
+        "phone": "Número de teléfono",
+        "bookingNumber": "Referencia de reserva"
+      },
+      "placeholders": {
+        "fullName": "Tu nombre",
+        "email": "tu@email.com",
+        "phone": "+34 612 345 678",
+        "bookingNumber": "ABC123"
+      },
+      "submit": {
+        "default": "Enviar mi reclamación",
+        "sending": "Enviando tu reclamación…"
+      },
+      "consent": {
+        "before": "Al enviar, aceptas nuestros",
+        "terms": "Términos",
+        "and": "y",
+        "privacy": "Política de privacidad",
+        "after": "."
+      },
+      "trust": {
+        "gdpr": "Preparado para RGPD",
+        "noWinNoFee": "Si no ganamos, no cobramos",
+        "fastHandling": "Tramitación rápida"
+      }
+    }
+  },
+  "faq": {
+    "meta": {
+      "title": "Preguntas frecuentes sobre compensación por vuelos | FlightClaimly",
+      "description": "Respuestas a preguntas habituales sobre EU261, retrasos, cancelaciones, importes de compensación y cómo FlightClaimly te ayuda a reclamar lo que te corresponde."
+    },
+    "badge": "Preguntas frecuentes",
+    "title": "Preguntas frecuentes sobre compensación por vuelos",
+    "intro": "Aquí hemos reunido respuestas a las preguntas más habituales sobre la compensación por vuelos retrasados o cancelados y sobre cómo funciona FlightClaimly.",
+    "jsonld": {
+      "eligibilityAnswer": "Como regla general, puedes tener derecho a compensación si llegaste a tu destino final con más de tres horas de retraso, tu vuelo fue cancelado con poca antelación, se te denegó el embarque pese a tener un billete válido y el viaje salió de la UE o fue operado por una aerolínea de la UE.",
+      "securityAnswer": "Sí. Solo utilizamos tus datos para gestionar tu caso y cumplir nuestras obligaciones legales. Encontrarás más información en nuestra política de privacidad."
+    },
+    "items": {
+      "eu261": {
+        "q": "¿Qué es la compensación por vuelo según EU261?",
+        "a": "EU261 es un reglamento de la UE que reconoce a los pasajeros el derecho a una compensación económica cuando los vuelos sufren retrasos importantes, son cancelados o se deniega el embarque, siempre que se cumplan determinadas condiciones. El importe depende de factores como la distancia del vuelo."
+      },
+      "eligibility": {
+        "q": "¿Cuándo tengo derecho a compensación?",
+        "lead": "Como regla general, puedes tener derecho a compensación si:",
+        "bullets": [
+          "llegaste a tu destino final con más de 3 horas de retraso",
+          "tu vuelo fue cancelado con poca antelación",
+          "se te denegó el embarque pese a tener un billete válido",
+          "el viaje salió de un país de la UE o fue operado por una aerolínea de la UE"
+        ]
+      },
+      "amount": {
+        "q": "¿Cuánto dinero puedo recibir?",
+        "lead": "La compensación según EU261 suele estar entre",
+        "highlight": "250 € y 600 € por persona",
+        "tail": ", dependiendo de la distancia del vuelo y del tipo de viaje.",
+        "a": "La compensación según EU261 suele estar entre 250 € y 600 € por persona, dependiendo de la distancia del vuelo y del tipo de viaje."
+      },
+      "perPerson": {
+        "q": "¿La compensación es por persona o por reserva?",
+        "a": "La compensación se paga por pasajero, no por reserva. Si viajas en grupo, el importe total puede ser considerable."
+      },
+      "timeLimit": {
+        "q": "¿Hasta cuánto tiempo atrás puedo reclamar una compensación?",
+        "a": "Depende de las normas del país que sean aplicables, pero en muchos casos puedes reclamar una compensación varios años después de la fecha del viaje."
+      },
+      "cause": {
+        "q": "¿Importa cuál fue la causa del retraso?",
+        "a": "Sí. La aerolínea puede quedar exenta de pagar compensación si la incidencia fue causada por las llamadas «circunstancias extraordinarias»."
+      },
+      "businessModel": {
+        "q": "¿Cómo gana dinero FlightClaimly?",
+        "lead": "Trabajamos con un modelo de",
+        "highlight": "si no ganamos, no cobramos",
+        "a": "FlightClaimly trabaja con un modelo de si no ganamos, no cobramos. Presentar un caso no cuesta nada y solo cobramos un porcentaje de la compensación que realmente recibes."
+      },
+      "process": {
+        "q": "¿Cómo funciona el proceso en la práctica?",
+        "lead": "En resumen:",
+        "steps": [
+          "introduces los datos de tu vuelo y tu información personal",
+          "evaluamos el caso y contactamos con la aerolínea",
+          "gestionamos respuestas, objeciones y cualquier documentación adicional",
+          "si ganamos, recibes tu compensación"
+        ]
+      },
+      "timing": {
+        "q": "¿Cuánto se tarda en obtener una respuesta?",
+        "a": "Algunos casos se resuelven en pocas semanas, mientras que otros pueden tardar más."
+      },
+      "documents": {
+        "q": "¿Qué documentos necesito?",
+        "lead": "Los más importantes son:",
+        "list": [
+          "confirmación de reserva",
+          "tarjeta de embarque",
+          "comunicaciones de la aerolínea"
+        ]
+      },
+      "security": {
+        "q": "¿Mis datos están seguros con vosotros?",
+        "lead": "Sí. Solo utilizamos tus datos para gestionar tu caso. Encontrarás más información en nuestra",
+        "linkText": "política de privacidad"
+      },
+      "contact": {
+        "q": "No encuentro la respuesta, ¿qué hago?",
+        "lead": "Escríbenos a"
+      }
+    },
+    "footer": {
+      "lead": "¿Quieres saber si tu vuelo puede dar derecho a compensación?",
+      "cta": "Comprobar mi vuelo"
+    }
+  },
+  "cancellations": {
+    "meta": {
+      "title": "Vuelo cancelado — compensación según EU261 | FlightClaimly",
+      "description": "¿Vuelo cancelado? Descubre cuándo puedes tener derecho a entre 250 € y 600 € según EU261, la diferencia entre transporte alternativo y reembolso y cómo FlightClaimly gestiona tu reclamación con la aerolínea."
+    },
+    "badge": "Vuelos cancelados",
+    "title": "Vuelo cancelado — tus derechos a compensación según EU261",
+    "intro": "Cuando se cancela un vuelo, todo el viaje se ve afectado: a veces con un transporte alternativo, otras con unas vacaciones arruinadas o reuniones perdidas. EU261 te reconoce importantes derechos en caso de cancelación. Aquí explicamos lo esencial y cómo puede ayudarte FlightClaimly.",
+    "sections": {
+      "whenIsCancelled": {
+        "title": "¿Cuándo se considera que un vuelo está cancelado?",
+        "p1": "Un vuelo se considera cancelado cuando el vuelo original no se opera y los pasajeros:",
+        "list": [
+          "son reubicados en otro vuelo, o",
+          "reciben un reembolso en lugar de viajar"
+        ],
+        "note": "Los cambios importantes de horario también pueden considerarse en la práctica una cancelación. Te ayudaremos a evaluarlo cuando presentes tu reclamación."
+      },
+      "whenMoney": {
+        "title": "¿Cuándo puedes recibir una compensación económica?",
+        "p1": "Puedes tener derecho a compensación según EU261 si:",
+        "list": [
+          "el vuelo se cancela con poca antelación (normalmente menos de 14 días antes de la salida)",
+          "el transporte alternativo hace que llegues considerablemente más tarde de lo previsto",
+          "la aerolínea es responsable de la causa de la cancelación"
+        ],
+        "note": "Las reglas exactas dependen de cuándo fuiste informado y de qué alternativa de viaje se te ofreció. FlightClaimly te ayuda a determinar qué se aplica a tu caso."
+      },
+      "amount": {
+        "title": "¿Cuánta compensación puedes recibir?",
+        "p1": "El importe depende de la distancia del vuelo y de cuánto se vea afectado tu viaje. Entre los importes fijos habituales según EU261 están:",
+        "list": [
+          "hasta 250 € para vuelos más cortos (aprox. 0–1.500 km)",
+          "hasta 400 € para vuelos de media distancia dentro de la UE o de hasta 3.500 km",
+          "hasta 600 € para vuelos internacionales de larga distancia"
+        ],
+        "note": "Los importes pueden reducirse si la aerolínea ofrece un transporte alternativo que te lleva al destino con un retraso reducido. Lo analizamos por ti cuando presentas tu reclamación."
+      },
+      "rerouteOrRefund": {
+        "title": "Transporte alternativo o reembolso: tú eliges",
+        "p1": "Cuando se cancela un vuelo, normalmente tienes derecho a elegir entre:",
+        "list": [
+          "un transporte alternativo en un vuelo posterior lo antes posible, o",
+          "el reembolso del precio del billete correspondiente al tramo que no pudiste realizar"
+        ],
+        "p2": "En algunas situaciones también puedes tener derecho al reembolso de gastos adicionales, por ejemplo hotel o transporte, si te ves obligado a permanecer más tiempo en el destino."
+      },
+      "extraordinary": {
+        "title": "¿Cuándo puede la aerolínea negarse a pagar compensación?",
+        "p1": "La aerolínea puede quedar exenta de pagar compensación si la cancelación fue causada por «circunstancias extraordinarias», por ejemplo:",
+        "list": [
+          "condiciones meteorológicas severas o catástrofes naturales",
+          "amenazas de seguridad o cierre del espacio aéreo",
+          "huelgas que la aerolínea no puede controlar"
+        ],
+        "p2": {
+          "before": "Los problemas técnicos, la falta de personal o los problemas internos de la aerolínea a menudo",
+          "strong": "no",
+          "after": "se consideran circunstancias extraordinarias. Muchas denegaciones son incorrectas y podemos ayudarte a impugnarlas."
+        }
+      },
+      "examples": {
+        "title": "Ejemplos: cuándo puedes tener derecho a compensación",
+        "list": [
+          "Te informan 3 días antes de la salida de que tu vuelo ha sido cancelado y el transporte alternativo ofrecido hace que llegues muchas horas más tarde: puede corresponder una compensación.",
+          "La aerolínea cancela tu vuelo de la tarde por un problema técnico y te cambia al día siguiente: puedes tener derecho tanto a compensación como a hotel.",
+          "Tu vuelo se cancela el mismo día sin una explicación clara y tienes que comprar un nuevo billete con otra aerolínea: también puede dar derecho a compensación."
+        ]
+      },
+      "links": {
+        "title": "¿Quieres profundizar en las normas?",
+        "p1": {
+          "before": "En la página",
+          "linkText": "Tus derechos",
+          "after": "encontrarás una visión general más amplia de EU261 y de las situaciones cubiertas."
+        },
+        "p2": {
+          "before": "También puedes consultar nuestras",
+          "linkText": "Preguntas frecuentes",
+          "after": "con respuestas breves a las dudas más habituales."
+        }
+      }
+    },
+    "footer": {
+      "lead": "¿Han cancelado tu vuelo? Comprueba si puedes tener derecho a hasta 600 €; solo tarda un minuto.",
+      "cta": "Comprobar mi vuelo"
+    }
+  },
+  "contact": {
+    "meta": {
+      "title": "Contacta con FlightClaimly | Soporte y consultas",
+      "description": "Contacta con FlightClaimly si tienes preguntas sobre tu caso, EU261 o cómo funciona el proceso. Te responderemos lo antes posible."
+    },
+    "badge": "Contacto",
+    "title": "Contacta con FlightClaimly",
+    "intro": "¿Tienes preguntas sobre una reclamación, las normas EU261 o cómo funciona el proceso? Puedes ponerte en contacto con nosotros cuando quieras. Responderemos lo antes posible.",
+    "email": {
+      "title": "Correo electrónico",
+      "lead": "La forma más sencilla de contactarnos es por correo electrónico:",
+      "note": "Te responderemos lo antes posible. En periodos de mucha actividad, el tiempo de respuesta puede ser algo mayor."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "before": "Muchas preguntas ya están respondidas en nuestras ",
+      "link": "Preguntas frecuentes",
+      "after": ", donde encontrarás respuestas claras sobre la compensación, el proceso y distintas situaciones."
+    },
+    "rights": {
+      "title": "Tus derechos",
+      "lead": "¿Quieres saber más sobre tus derechos según EU261? Visita:",
+      "link": "Tus derechos"
+    },
+    "case": {
+      "title": "¿Tienes una reclamación en curso?",
+      "p1": "Puedes consultar el estado en cualquier momento mediante el enlace que recibiste por correo electrónico al presentar tu reclamación.",
+      "before": "¿Has perdido el enlace? No pasa nada. Escríbenos a",
+      "after": "y te lo enviaremos de nuevo."
+    },
+    "footer": {
+      "lead": "¿Quieres comprobar si tu vuelo da derecho a compensación? Solo tarda un minuto.",
+      "cta": "Comprobar mi vuelo"
+    }
+  },
+  "compensation": {
+    "meta": {
+      "title": "Importes de compensación EU261 – 250 €, 400 € y 600 € | FlightClaimly",
+      "description": "Consulta qué importe de compensación EU261/UK261 puede corresponderte: 250 €, 400 € o 600 € por persona, según la distancia y el retraso."
+    },
+    "badge": "Importes de compensación",
+    "title": "Importes de compensación EU261 – 250 €, 400 € y 600 €",
+    "intro": "El Reglamento (CE) n.º 261/2004 («EU261») establece importes fijos de compensación cuando tu vuelo sufre un retraso importante, se cancela o se te deniega el embarque.",
+    "sections": {
+      "overview": {
+        "title": "Resumen rápido: ¿cuánto puedes recibir?",
+        "p1": {
+          "before": "La compensación según EU261 suele estar entre ",
+          "highlight": "250 € y 600 € por persona",
+          "after": ". El importe depende principalmente de:"
+        },
+        "list": [
+          "la distancia del vuelo",
+          "si el vuelo es dentro de la UE o internacional",
+          "el retraso o la incidencia sufridos"
+        ],
+        "note": "El precio del billete no influye: dos pasajeros del mismo vuelo suelen recibir el mismo importe de compensación."
+      },
+      "table": {
+        "title": "Importes de compensación EU261",
+        "intro": "El importe depende principalmente de la distancia del vuelo y del tipo de incidencia. La tabla siguiente ofrece una visión general.",
+        "head": {
+          "distance": "Distancia",
+          "type": "Cuándo se aplica",
+          "amount": "Compensación"
+        },
+        "rows": [
+          {
+            "distance": "Hasta 1.500 km",
+            "type": "Retraso ≥ 3 horas / vuelo cancelado",
+            "amount": "250 €"
+          },
+          {
+            "distance": "1.500–3.500 km",
+            "type": "Retraso ≥ 3 horas / vuelo cancelado",
+            "amount": "400 €"
+          },
+          {
+            "distance": "Más de 3.500 km (dentro de la UE)",
+            "type": "Retraso ≥ 3 horas / vuelo cancelado",
+            "amount": "400 €"
+          },
+          {
+            "distance": "Más de 3.500 km (fuera de la UE)",
+            "type": "Retraso ≥ 3 horas / vuelo cancelado",
+            "amount": "600 €"
+          }
+        ],
+        "note": "Te ayudamos a determinar si tu caso cumple los requisitos para recibir compensación."
+      },
+      "reduction": {
+        "title": "¿Cuándo puede reducirse la compensación?",
+        "p1": "Si te cambian de vuelo y llegas cerca de la hora de llegada original, en algunos casos la compensación puede reducirse un 50 %.",
+        "list": [
+          "Distancias cortas: retraso de llegada reducido",
+          "Distancias medias: retraso de llegada moderado",
+          "Distancias largas: retraso de llegada limitado"
+        ],
+        "note": "La evaluación se basa siempre en la hora real de llegada y en las actuaciones de la aerolínea."
+      },
+      "types": {
+        "title": "¿Qué incidencias están cubiertas?",
+        "p1": "EU261 puede darte derecho a compensación en casos como:",
+        "list": [
+          "Retrasos (a menudo ≥ 3 horas a la llegada)",
+          "Vuelos cancelados",
+          "Denegación de embarque (overbooking)"
+        ],
+        "note": {
+          "before": "Lee más sobre tus derechos en la página ",
+          "link": "Tus derechos"
+        }
+      },
+      "examples": {
+        "title": "Ejemplos",
+        "list": [
+          "El vuelo llega con 3 h 20 min de retraso → puede dar derecho a compensación.",
+          "El vuelo se cancela el día de la salida → puede dar derecho a compensación y a un transporte alternativo.",
+          "Se te deniega el embarque por overbooking → puede dar derecho a compensación."
+        ],
+        "note": "La elegibilidad depende de la causa de la incidencia."
+      },
+      "myths": {
+        "title": "Ideas equivocadas habituales",
+        "list": [
+          "Solo se aplica si el billete se compró directamente a la aerolínea.",
+          "Debes reclamar inmediatamente en el aeropuerto.",
+          "Todos los retrasos dan derecho a compensación."
+        ],
+        "note": "Te ayudamos a evaluar si tu caso cumple los requisitos."
+      }
+    },
+    "footer": {
+      "lead": "¿Quieres saber qué importe de compensación podría aplicarse a tu viaje?",
+      "cta": "Comprobar mi vuelo"
+    }
+  },
+  "delays": {
+    "meta": {
+      "title": "Vuelo retrasado – compensación según EU261 | FlightClaimly",
+      "description": "¿Vuelo retrasado? Descubre cuándo puedes tener derecho a una compensación de entre 250 € y 600 € según EU261/UK261, qué se considera un retraso importante y cómo FlightClaimly te ayuda a reclamar."
+    },
+    "badge": "Retrasos de vuelos",
+    "title": "Vuelo retrasado — cómo obtener compensación según EU261",
+    "intro": "Un vuelo retrasado puede arruinar planes, conexiones y vacaciones. EU261 te reconoce importantes derechos como pasajero y, en muchos casos, puedes tener derecho a compensación si llegas tarde. Aquí tienes lo esencial.",
+    "sections": {
+      "when": {
+        "title": "¿Cuándo se considera importante un retraso?",
+        "p1": {
+          "before": "Según EU261, lo que importa principalmente es la",
+          "highlight": "hora de llegada",
+          "after": ". Puedes tener derecho a compensación cuando:"
+        },
+        "list": [
+          "llegas 3 horas o más después de la hora prevista",
+          "pierdes conexiones y llegas a tu destino final con un retraso considerable",
+          "esperas durante mucho tiempo sin recibir una asistencia razonable de la aerolínea"
+        ],
+        "note": "Los retrasos más cortos normalmente no dan derecho a compensación, aunque sí pueden darte derecho a comidas, bebidas o transporte alternativo. Te ayudamos a evaluar qué se aplica a tu caso."
+      },
+      "amount": {
+        "title": "¿Cuánto puedes recibir por un retraso?",
+        "p1": "Los importes de compensación por retrasos importantes son similares a los de las cancelaciones y dependen de la distancia del vuelo:",
+        "list": [
+          "hasta 250 € para vuelos más cortos (aprox. 0–1.500 km)",
+          "hasta 400 € para vuelos de media distancia dentro de la UE o de hasta 3.500 km",
+          "hasta 600 € para vuelos internacionales de larga distancia"
+        ],
+        "note": "En algunos casos, los importes pueden reducirse si la aerolínea te cambia de vuelo y aun así llegas con un retraso relativamente pequeño. Nosotros lo calculamos por ti."
+      },
+      "care": {
+        "title": "Tus derechos mientras esperas",
+        "p1": "Además de la compensación económica, los retrasos más largos pueden darte derecho a:",
+        "list": [
+          "comidas y refrescos en una cantidad razonable",
+          "dos llamadas telefónicas o mensajes gratuitos",
+          "alojamiento en hotel si tienes que pasar la noche",
+          "transporte entre el aeropuerto y el hotel",
+          "un nuevo vuelo posterior o, en algunos casos, el reembolso"
+        ],
+        "note": "Guarda siempre los recibos: a menudo puedes reclamar posteriormente el reembolso de gastos necesarios si la aerolínea no te prestó asistencia en el aeropuerto."
+      },
+      "exceptions": {
+        "title": "¿Cuándo puede la aerolínea evitar pagar compensación?",
+        "p1": "En algunas situaciones, la aerolínea puede alegar «circunstancias extraordinarias» y denegar la compensación, por ejemplo:",
+        "list": [
+          "condiciones meteorológicas severas o catástrofes naturales",
+          "cierre de aeropuertos o restricciones del espacio aéreo",
+          "amenazas de seguridad o hechos fuera del control de la aerolínea"
+        ],
+        "p2": {
+          "before": "Los fallos técnicos, la falta de personal o los errores de planificación normalmente",
+          "highlight": "no",
+          "after": "son motivos válidos para denegar una compensación. A muchos pasajeros se les rechaza inicialmente; ahí es donde podemos ayudarte a escalar el caso."
+        }
+      },
+      "examples": {
+        "title": "Ejemplos: cuándo puedes tener derecho a compensación",
+        "list": [
+          "Tu vuelo de Estocolmo a Barcelona aterriza con 3 horas y 45 minutos de retraso: puedes tener derecho a compensación.",
+          "Pierdes una conexión de larga distancia debido a un retraso en el primer tramo y llegas a tu destino final con más de 3 horas de retraso: todo el viaje puede estar cubierto.",
+          "El vuelo se retrasa 4 horas por un fallo técnico: a menudo puede dar derecho a compensación."
+        ]
+      },
+      "links": {
+        "title": "¿Quieres saber más sobre las normas?",
+        "rights": {
+          "before": "En la página",
+          "link": "Tus derechos",
+          "after": "encontrarás una visión general más amplia de EU261 y de lo que se aplica a cancelaciones, overbooking y otras situaciones."
+        },
+        "faq": {
+          "before": "También puedes consultar nuestras",
+          "link": "Preguntas frecuentes",
+          "after": "para ver respuestas breves a las dudas más habituales."
+        }
+      }
+    },
+    "footer": {
+      "lead": "¿Has sufrido un retraso? Comprueba si puedes tener derecho a compensación; solo tarda un minuto.",
+      "cta": "Comprobar mi vuelo"
+    }
+  },
+  "rights": {
+    "meta": {
+      "title": "EU261 — tus derechos como pasajero | FlightClaimly",
+      "description": "Conoce tus derechos según EU261/UK261 para vuelos retrasados, cancelados o con overbooking. Descubre cuándo puedes tener derecho a entre 250 € y 600 € y cómo FlightClaimly te ayuda a cobrar."
+    },
+    "badge": "Tus derechos",
+    "title": "Tus derechos como pasajero según EU261",
+    "intro": "El Reglamento (CE) n.º 261/2004 («EU261») te reconoce importantes derechos como pasajero aéreo en caso de retrasos, cancelaciones o denegación de embarque. Aquí explicamos lo esencial y cómo FlightClaimly puede ayudarte a obtener la compensación que te corresponde.",
+    "whenApplies": {
+      "title": "¿Cuándo se aplica EU261?",
+      "intro": "EU261 se aplica en las siguientes situaciones:",
+      "bullets": [
+        "el vuelo sale de un país de la UE/EEE o del Reino Unido",
+        "el vuelo llega a la UE/EEE/Reino Unido con una aerolínea con sede en la UE",
+        "tienes una reserva confirmada y has facturado a tiempo"
+      ],
+      "note": "Algunos vuelos de conexión e itinerarios con escalas también pueden estar cubiertos, dependiendo de cómo esté emitido tu billete. Te ayudamos a evaluarlo."
+    },
+    "covered": {
+      "title": "¿Qué situaciones están cubiertas?",
+      "lead": "Puedes tener derecho a compensación si:",
+      "bullets": [
+        "tu vuelo llega con un retraso importante (a menudo 3 horas o más)",
+        "tu vuelo se cancela con poca antelación",
+        "se te deniega el embarque por overbooking"
+      ],
+      "after": "Además de la compensación, puedes tener derecho a comidas, bebidas, alojamiento en hotel y transporte alternativo, según la duración de la incidencia y tu viaje."
+    },
+    "amounts": {
+      "title": "¿Cuánta compensación puedes recibir?",
+      "intro": "La compensación depende principalmente de la distancia del vuelo y de cuánto se vio afectado tu viaje. Los importes habituales según EU261 son:",
+      "bullets": [
+        "hasta 250 € para vuelos cortos (aprox. 0–1.500 km)",
+        "hasta 400 € para vuelos de media distancia dentro de la UE o de hasta 3.500 km",
+        "hasta 600 € para vuelos internacionales de larga distancia"
+      ],
+      "note": "El importe exacto puede variar según la ruta, la duración del retraso y cualquier transporte alternativo ofrecido. FlightClaimly te ayuda a calcular el importe correcto para tu viaje."
+    },
+    "exceptions": {
+      "title": "¿Cuándo no tienes derecho a compensación?",
+      "intro": "La aerolínea puede quedar exenta de pagar compensación si el retraso o la cancelación fue causado por las llamadas «circunstancias extraordinarias», por ejemplo:",
+      "bullets": [
+        "condiciones meteorológicas severas o catástrofes naturales",
+        "riesgos de seguridad o cierre del espacio aéreo",
+        "huelgas fuera del control de la aerolínea (p. ej., personal del aeropuerto o control aéreo)"
+      ],
+      "afterBeforeStrong": "Los problemas técnicos o los fallos de planificación a menudo ",
+      "afterStrong": "no",
+      "afterTail": " se consideran circunstancias extraordinarias. Muchas denegaciones de las aerolíneas son incorrectas y podemos ayudarte a recurrirlas."
+    },
+    "save": {
+      "title": "¿Qué debes conservar?",
+      "intro": "Para tramitar una reclamación, resulta útil disponer de:",
+      "bullets": [
+        "confirmación de reserva o billete (preferiblemente en PDF o imagen)",
+        "tarjeta de embarque si llegaste a facturar",
+        "recibos de comidas, hotel o transporte",
+        "una breve descripción de lo ocurrido (horas, mensajes de la aerolínea)"
+      ],
+      "note": "Puedes subirlo todo al crear un caso con nosotros; te ayudaremos a organizarlo."
+    },
+    "links": {
+      "title": "¿Quieres saber más sobre situaciones concretas?",
+      "lead": "Lee más sobre:",
+      "delaysText": "Retrasos de vuelos",
+      "delaysAfter": " — qué se aplica a los retrasos prolongados.",
+      "cancellationsText": "Cancelaciones de vuelos",
+      "cancellationsAfter": " — tus derechos cuando se cancela un vuelo.",
+      "faqText": "Preguntas frecuentes",
+      "faqAfter": " — respuestas breves a las dudas más habituales."
+    },
+    "footer": {
+      "lead": "¿Crees que tu vuelo está cubierto por EU261? Comprueba ahora si puedes tener derecho a compensación; solo tarda un minuto.",
+      "cta": "Comprobar si tengo derecho a compensación"
+    }
+  },
+  "terms": {
+    "meta": {
+      "title": "Términos del servicio | FlightClaimly",
+      "description": "Consulta los términos del servicio de FlightClaimly, incluido cómo funciona el servicio, las comisiones, los pagos, la responsabilidad y los datos de contacto."
+    },
+    "badge": "Términos",
+    "title": "Términos de uso de FlightClaimly",
+    "intro": "Estos términos describen cómo funciona FlightClaimly y los derechos y obligaciones aplicables cuando utilizas nuestro servicio para reclamar compensaciones por vuelos.",
+    "sections": {
+      "service": {
+        "title": "1. Sobre el servicio",
+        "text": "FlightClaimly es un servicio que ayuda a los pasajeros aéreos a investigar y reclamar compensaciones según EU261 y normativas similares. Actuamos como tu representante ante la aerolínea.",
+        "note": "Al presentar un caso a través de nuestro sitio web, aceptas estos términos."
+      },
+      "usage": {
+        "title": "2. Uso del servicio",
+        "intro": "Te comprometes a:",
+        "bullets": [
+          "facilitar información exacta y completa sobre tu vuelo",
+          "no presentar reclamaciones que sepas que son incorrectas o engañosas",
+          "informarnos si ya has contratado a otra parte para la misma reclamación"
+        ],
+        "note": "Nos reservamos el derecho a dejar de gestionar un caso si la información facilitada es incorrecta o si no se cumplen las condiciones para una reclamación válida."
+      },
+      "power": {
+        "title": "3. Representación y poder de representación",
+        "text": "Para tramitar tu reclamación, puede ser necesario que actuemos como tu representante ante la aerolínea. Al utilizar el servicio, nos autorizas a contactar con la aerolínea en tu nombre.",
+        "note": "En algunos casos, podemos pedirte que firmes un poder o mandato independiente, por ejemplo si el caso necesita ser escalado."
+      },
+      "fees": {
+        "title": "4. Comisiones y compensación",
+        "lead": "FlightClaimly trabaja con un modelo de",
+        "highlight": "si no ganamos, no cobramos",
+        "bullets": [
+          "presentar una reclamación no tiene coste",
+          "solo cobramos una comisión si conseguimos recuperar una compensación para ti",
+          "nuestra comisión estándar es del 20 % IVA incluido sobre la compensación que recuperemos para ti",
+          "si es necesario iniciar acciones legales, pueden aplicarse comisiones o costes adicionales"
+        ],
+        "note": "Antes de iniciar procedimientos legales que impliquen comisiones o costes adicionales a tu cargo, te explicaremos las condiciones aplicables y solicitaremos tu aprobación por separado. La autorización que otorgas a FlightClaimly no constituye por sí sola una aceptación anticipada de dichas comisiones o costes adicionales."
+      },
+      "payout": {
+        "title": "5. Pago a tu favor",
+        "intro": "Cuando la aerolínea haya abonado la compensación, el pago puede hacerse:",
+        "bullets": [
+          "directamente a FlightClaimly, tras lo cual te transferiremos tu parte, o",
+          "directamente a ti, descontándose nuestra comisión conforme a un acuerdo separado"
+        ],
+        "note": "Nuestro objetivo es procesar los pagos lo antes posible una vez recibida e identificada la compensación."
+      },
+      "liability": {
+        "title": "6. Responsabilidad y limitaciones",
+        "text1": "No podemos garantizar que una reclamación termine en compensación. Cada caso se evalúa en función de la información disponible y de la normativa aplicable.",
+        "text2": "FlightClaimly no responde por daños indirectos, como lucro cesante, y nuestra responsabilidad se limita generalmente a la comisión pagada por el servicio."
+      },
+      "privacy": {
+        "title": "7. Datos personales y privacidad",
+        "text": "Tratamos los datos personales de conformidad con la legislación aplicable en materia de protección de datos. Encontrarás más información en nuestra",
+        "link": "política de privacidad"
+      },
+      "changes": {
+        "title": "8. Cambios en los términos",
+        "text": "Podemos actualizar estos términos cuando sea necesario. La versión más reciente está siempre disponible en nuestro sitio web."
+      },
+      "contact": {
+        "title": "9. Contacto",
+        "text": "Si tienes alguna pregunta sobre estos términos, puedes contactarnos en"
+      }
+    },
+    "footer": "Al utilizar FlightClaimly, confirmas que has leído y comprendido estos términos."
+  },
+  "privacy": {
+    "meta": {
+      "title": "Política de privacidad | FlightClaimly",
+      "description": "Descubre cómo FlightClaimly trata los datos personales, qué datos recopilamos, por qué los recopilamos y cuáles son tus derechos según el RGPD."
+    },
+    "badge": "Privacidad",
+    "title": "Política de privacidad de FlightClaimly",
+    "intro": "Tu privacidad es importante para nosotros. En esta página explicamos qué datos recopilamos, por qué los recopilamos, cómo se utilizan y qué derechos tienes.",
+    "controller": {
+      "title": "Responsable del tratamiento",
+      "body": "FlightClaimly («nosotros») es el responsable del tratamiento de los datos personales relacionados con nuestro servicio de compensación por vuelos."
+    },
+    "dataCollected": {
+      "title": "¿Qué datos recopilamos?",
+      "intro": "Cuando utilizas nuestro servicio, podemos tratar las siguientes categorías de datos personales:",
+      "items": [
+        "datos de contacto (nombre, correo electrónico, número de teléfono)",
+        "información de la reserva (referencia de reserva, número de vuelo, fechas, rutas)",
+        "billetes y tarjetas de embarque (documentos, PDF, imágenes)",
+        "información sobre retrasos, cancelaciones u otras incidencias",
+        "comunicaciones contigo (correos electrónicos, mensajes)",
+        "datos técnicos (dirección IP, dispositivo, navegador) cuando sean necesarios para la seguridad y el funcionamiento"
+      ]
+    },
+    "purpose": {
+      "title": "¿Por qué tratamos tus datos?",
+      "intro": "Tratamos tus datos personales para:",
+      "items": [
+        "evaluar si tienes derecho a compensación según EU261",
+        "crear y gestionar tu reclamación con la aerolínea",
+        "comunicarnos contigo sobre el estado de tu caso",
+        "gestionar los pagos cuando se concede una compensación",
+        "cumplir obligaciones legales (p. ej., contabilidad)",
+        "mejorar y proteger nuestro servicio"
+      ]
+    },
+    "legalBasis": {
+      "title": "Base jurídica del tratamiento",
+      "intro": "El tratamiento de tus datos personales se basa principalmente en:",
+      "items": [
+        "<strong>Contrato</strong> – cuando tratamos datos para gestionar tu reclamación frente a la aerolínea",
+        "<strong>Obligación legal</strong> – cuando debemos conservar datos conforme a la legislación aplicable",
+        "<strong>Interés legítimo</strong> – datos técnicos limitados utilizados para garantizar la seguridad y el funcionamiento"
+      ]
+    },
+    "retention": {
+      "title": "¿Durante cuánto tiempo conservamos tus datos?",
+      "intro": "Conservamos tus datos durante el tiempo necesario para:",
+      "items": [
+        "gestionar y cerrar tu reclamación",
+        "gestionar posibles quejas o disputas relacionadas con el caso",
+        "cumplir obligaciones legales"
+      ],
+      "note": "Cuando los datos dejan de ser necesarios, se eliminan de forma segura o se anonimizan."
+    },
+    "sharing": {
+      "title": "¿Con quién compartimos tus datos?",
+      "intro": "Solo compartimos tus datos con las partes necesarias para prestar el servicio, como:",
+      "items": [
+        "aerolíneas y sus representantes",
+        "colaboradores o representantes legales relacionados con tu caso",
+        "proveedores de servicios informáticos (alojamiento, correo electrónico) con los acuerdos adecuados"
+      ],
+      "note": "No vendemos tus datos personales a terceros."
+    },
+    "rights": {
+      "title": "Tus derechos",
+      "intro": "Como interesado, tienes derecho a:",
+      "items": [
+        "solicitar acceso a los datos personales que tratamos sobre ti",
+        "solicitar la rectificación de datos inexactos o incompletos",
+        "solicitar la supresión de datos cuando ya no sean necesarios",
+        "oponerte a determinados tratamientos o solicitar su limitación",
+        "solicitar la portabilidad de los datos en determinados casos"
+      ],
+      "contactBefore": "Si deseas ejercer alguno de estos derechos, contacta con nosotros en"
+    },
+    "complaints": {
+      "title": "Reclamaciones",
+      "body": "Si consideras que tratamos tus datos personales infringiendo la legislación aplicable en materia de protección de datos, tienes derecho a presentar una reclamación ante la autoridad de control competente."
+    },
+    "changes": {
+      "title": "Cambios en esta política",
+      "body": "Podemos actualizar esta política de privacidad ocasionalmente. La versión más reciente se publica siempre en esta página."
+    },
+    "footer": {
+      "before": "Si tienes preguntas sobre cómo tratamos tus datos personales, contacta con nosotros en"
+    }
+  },
+  "thanks": {
+    "brandTagline": "Nosotros tratamos con la aerolínea; tú evitas las complicaciones.",
+    "backHome": "← Volver al inicio",
+    "header": {
+      "badge": "FLIGHTCLAIMLY • TU RECLAMACIÓN ESTÁ REGISTRADA",
+      "title": "¡Gracias! Hemos recibido tu reclamación.",
+      "claimId": "ID de reclamación",
+      "intro": "El siguiente paso es confirmar tu autorización y subir en esta página la documentación justificativa. Cuando lo hayas hecho, empezaremos a gestionar tu caso de inmediato y contactaremos con la aerolínea en tu nombre."
+    },
+    "precheck": {
+      "badge": "Evaluación preliminar",
+      "eligibleTitle": "Buenas noticias: parece que puedes tener derecho a compensación.",
+      "eligibleFallback": "Evaluación preliminar: el vuelo puede cumplir los requisitos para recibir compensación según EU261.",
+      "eligibleNote": "No es una garantía, pero sí una indicación inicial sólida. Cuando confirmes la autorización y subas los documentos, empezaremos a reclamar frente a la aerolínea.",
+      "unclearTitle": "No está claro: lo revisaremos manualmente.",
+      "unclearFallback": "Envía la documentación justificativa y revisaremos tu caso manualmente.",
+      "amountPrefix": "Importe estimado:"
+    },
+    "upload": {
+      "title": "Subir documentos",
+      "intro": "La autorización nos permite tramitar la reclamación frente a la aerolínea. Sube también tu tarjeta de embarque, la confirmación de reserva y los recibos si tuviste gastos adicionales.",
+      "list": [
+        "Autorización digital (LoA) — obligatoria",
+        "Tarjeta de embarque o billete electrónico",
+        "Confirmación de reserva",
+        "Recibos de gastos adicionales (si procede)"
+      ]
+    },
+    "loa": {
+      "title": "Autorización digital (LoA)",
+      "description": "Al introducir tu nombre y marcar la casilla, autorizas a FlightClaimly a representarte ante la aerolínea en este caso.",
+      "viewText": "Ver texto de autorización",
+      "nameLabel": "Nombre completo (firma)",
+      "namePlaceholder": "Tu nombre completo",
+      "consent": "Autorizo a FlightClaimly (Letter of Authorization) a representarme ante la aerolínea en este caso.",
+      "error": "Introduce tu nombre y marca la casilla para que la autorización sea válida."
+    },
+    "attachments": {
+      "title": "Documentos adicionales (opcional)",
+      "description": "Puedes subir tarjetas de embarque, confirmaciones de reserva y recibos. Se pueden subir varios archivos a la vez.",
+      "choose": "Seleccionar archivos",
+      "types": "PDF, JPG, PNG, HEIC. Algunos archivos cada vez."
+    },
+    "actions": {
+      "submit": "Confirmar autorización y subir",
+      "submitting": "Procesando…",
+      "later": "Si es necesario, siempre podrás añadir más documentos más adelante poniéndote en contacto con nosotros."
+    },
+    "success": {
+      "title": "¡Autorización confirmada!",
+      "text": "Gracias. Empezaremos a gestionar tu reclamación de inmediato. Recibirás correos electrónicos cuando cambie el estado y podrás seguir todo mediante tu enlace de seguimiento."
+    },
+    "errors": {
+      "missingId": "No hemos podido encontrar el ID de tu reclamación. Vuelve a la página de inicio y envía el formulario de nuevo.",
+      "generic": "❌ No hemos podido completar este paso. Inténtalo de nuevo."
+    },
+    "security": {
+      "badge": "Transferencia segura de archivos",
+      "text": "Tus archivos se almacenan cifrados y se utilizan únicamente para gestionar tu reclamación. Solo se comparten con la aerolínea y, si es necesario, con colaboradores legales relacionados con este caso concreto.",
+      "independentTitle": "Servicio independiente",
+      "independentText": "FlightClaimly es un servicio independiente y no está afiliado a ninguna aerolínea. Actuamos siempre en tu nombre como pasajero."
+    },
+    "loaText": {
+      "title": "Autorización — FlightClaimly",
+      "intro": "Por la presente autorizo a FlightClaimly a representarme en asuntos relacionados con la compensación por vuelos según el Reglamento (CE) n.º 261/2004.",
+      "bullets": [
+        "Comunicarse con la aerolínea en mi nombre.",
+        "Presentar reclamaciones y realizar el seguimiento del caso.",
+        "Recibir respuestas y decisiones de la aerolínea.",
+        "Colaborar con socios legales si fuera necesario para este caso."
+      ],
+      "note": "La autorización se aplica únicamente a este caso concreto y puede revocarse por escrito en cualquier momento."
+    },
+    "loading": "Cargando página…",
+    "home": "Volver al inicio"
+  },
+  "about": {
+    "meta": {
+      "title": "Sobre FlightClaimly | Reclama compensación por vuelos sin complicaciones",
+      "description": "Descubre cómo FlightClaimly te ayuda a reclamar compensación EU261 desde el inicio hasta el pago: rápido, seguro y transparente."
+    },
+    "badge": "Sobre nosotros",
+    "title": "Te ayudamos a obtener compensación cuando algo sale mal con tu vuelo",
+    "intro": "FlightClaimly es un servicio con sede en la UE que facilita reclamar compensaciones a las aerolíneas según EU261. El objetivo es sencillo: conseguirte el dinero que te corresponde sin complicaciones, estrés ni fricción legal.",
+    "why": {
+      "title": "Por qué existe FlightClaimly",
+      "p1": "Cada año, grandes cantidades de compensaciones por vuelos nunca llegan a los pasajeros. Muchas personas no tienen tiempo, desconocen las normas o reciben una primera negativa y se rinden.",
+      "p2": "FlightClaimly se creó para hacer el proceso lo más sencillo posible: tú introduces los datos del vuelo y subes la reserva; nosotros nos encargamos del resto y reclamamos frente a la aerolínea por ti."
+    },
+    "how": {
+      "title": "Cómo funciona",
+      "steps": [
+        "Envías los datos de tu vuelo y explicas lo ocurrido.",
+        "Evaluamos tu caso conforme a las normas EU261.",
+        "Tramitamos la reclamación ante la aerolínea en tu nombre.",
+        "Solo pagas si cobras."
+      ],
+      "note": "Todo se gestiona digitalmente: rápido, seguro y transparente."
+    },
+    "model": {
+      "title": "Nuestro modelo: sencillo y transparente",
+      "p1": "Creemos en un principio sencillo:",
+      "p1Strong": "si no ganamos, no cobramos",
+      "p1b": " Eso significa que solo ganamos dinero cuando tú también.",
+      "bullets": [
+        "crear un caso es gratis",
+        "solo cobramos si recibes compensación",
+        "nuestra comisión queda clara antes de que apruebes nada"
+      ],
+      "note": "Sin compensación de la aerolínea = sin coste para ti."
+    },
+    "trust": {
+      "title": "Claridad y tranquilidad",
+      "p1": "Siempre debes saber en qué punto está tu caso. Por eso puedes seguir el proceso y ver:",
+      "bullets": [
+        "cuándo recibimos tu caso",
+        "cuándo lo revisamos",
+        "cuándo se envía a la aerolínea",
+        "cuándo se paga la compensación"
+      ],
+      "p2": "También recibirás correos con actualizaciones del estado, para que no tengas que perseguir al soporte ni iniciar sesión en portales innecesarios."
+    },
+    "independent": {
+      "title": "Independientes y de tu lado",
+      "p1": "FlightClaimly trabaja conforme a los derechos de los pasajeros de la UE (EU261/2004) y es independiente de las aerolíneas. Nuestro único trabajo es representarte y asegurarnos de que las normas se apliquen en la práctica, no solo sobre el papel.",
+      "p2": "Nos encargamos de la burocracia de la aerolínea para que tú puedas centrarte en tu viaje, no en formularios ni letra pequeña."
+    },
+    "footer": {
+      "cta": "¿Tu vuelo ha sufrido una incidencia? Comprueba si tienes derecho a compensación; solo tarda un minuto.",
+      "primary": "Obtener compensación",
+      "secondary": "Contacto y colaboraciones"
+    },
+    "email": {
+      "footer": {
+        "disclaimer": {
+          "title": "Confidencialidad",
+          "p1": "Este correo electrónico y cualquier archivo adjunto están destinados únicamente al destinatario indicado. Si has recibido este mensaje por error, responde para informarnos y después elimínalo.",
+          "p2": "Tratamos datos personales para gestionar tu caso. Consulta más información en nuestra Política de privacidad y nuestros Términos."
+        },
+        "links": {
+          "privacy": "Política de privacidad",
+          "terms": "Términos"
+        },
+        "errors": {
+          "required": "Completa todos los campos obligatorios.",
+          "invalidFlightNumber": "Introduce un número de vuelo válido (p. ej., SK123).",
+          "network": "Algo ha salido mal. Inténtalo de nuevo.",
+          "noResult": "No hemos podido verificar este vuelo, pero aun así puedes presentar tu reclamación."
+        }
+      }
+    }
+  },
+  "homeEligibility": {
+    "badge": "COMPENSACIÓN EU261",
+    "title": "¿Tu vuelo puede dar derecho a compensación?",
+    "description": "Los derechos de los pasajeros de la UE pueden darte derecho a compensación cuando un vuelo sufre un retraso importante, se cancela o se te deniega el embarque. El importe puede depender de la ruta, la distancia y las circunstancias.",
+    "bands": {
+      "short": {
+        "distance": "HASTA 1.500 KM",
+        "title": "Vuelos cortos",
+        "body": "Hasta 250 € por pasajero para vuelos elegibles de 1.500 km o menos."
+      },
+      "medium": {
+        "distance": "VUELOS DE MEDIA Y LARGA DISTANCIA EN LA UE",
+        "title": "Vuelos de media distancia",
+        "body": "Hasta 400 € por pasajero para vuelos elegibles dentro de la UE de más de 1.500 km y determinados vuelos de entre 1.500 y 3.500 km."
+      },
+      "long": {
+        "distance": "DETERMINADOS VUELOS DE MÁS DE 3.500 KM",
+        "title": "Vuelos de larga distancia",
+        "body": "Hasta 600 € por pasajero para vuelos elegibles de más de 3.500 km cuando sea aplicable el tramo de compensación de 600 €."
+      }
+    },
+    "reasons": {
+      "delay": "Llegada con 3+ horas de retraso",
+      "cancellation": "Vuelo cancelado",
+      "deniedBoarding": "Denegación de embarque"
+    },
+    "disclaimer": "La compensación no es automática. La elegibilidad depende de las circunstancias de la incidencia, la ruta y las normas aplicables sobre derechos de los pasajeros. Las circunstancias extraordinarias pueden afectar al derecho a compensación.",
+    "cta": "Comprobar mi vuelo"
+  },
+  "homeFee": {
+    "badge": "PRECIOS CLAROS",
+    "title": "Una única comisión sencilla. Más compensación se queda contigo.",
+    "description": "Nuestra comisión estándar es del 20 % IVA incluido. No pagas nada por adelantado y no cobramos comisión de servicio si no recuperamos una compensación para ti.",
+    "points": {
+      "noUpfront": "Sin costes por adelantado",
+      "onlyIfPaid": "Si no ganamos, no cobramos",
+      "vatIncluded": "20 % IVA incl."
+    },
+    "termsLink": "Ver nuestros términos",
+    "exampleLabel": "Ejemplo",
+    "compensation": "Compensación recuperada",
+    "fee": "Comisión de FlightClaimly",
+    "youKeep": "Tú recibes",
+    "exampleNote": "Si se recuperan 600 €, nuestra comisión estándar es de 120 € y tú recibes 480 €."
+  },
+  "homeBrandStory": {
+    "badge": "NOSOTROS GESTIONAMOS LA RECLAMACIÓN",
+    "title": "Nosotros tratamos con la aerolínea. Tú sigues con tu vida.",
+    "description": "Una incidencia de vuelo ya es bastante estresante. Nos encargamos del proceso de reclamación, la comunicación y el seguimiento con la aerolínea, mientras te mantenemos informado desde el inicio hasta el pago.",
+    "points": {
+      "airline": "Nosotros tratamos con la aerolínea",
+      "updates": "Actualizaciones claras del caso",
+      "payout": "Sigues el caso desde el inicio hasta el pago"
+    },
+    "cta": "Por qué FlightClaimly",
+    "imageAlt": "Ala de avión sobre las nubes al atardecer"
+  },
+  "homeExplore": {
+    "badge": "EXPLORA TUS DERECHOS DE VUELO",
+    "title": "Conoce qué se aplica a tu viaje.",
+    "description": "Las normas sobre incidencias de vuelo pueden ser confusas. Explora la situación que te afecta y conoce tus derechos antes de presentar una reclamación.",
+    "cards": {
+      "delays": {
+        "title": "Vuelo retrasado",
+        "description": "Descubre cuándo un retraso puede dar derecho a compensación y qué normas se aplican."
+      },
+      "cancellations": {
+        "title": "Vuelo cancelado",
+        "description": "Conoce tus derechos cuando una aerolínea cancela tu vuelo."
+      },
+      "rights": {
+        "title": "Derechos de los pasajeros",
+        "description": "Explora los derechos de los pasajeros según EU261, las reglas de compensación y cuándo deben pagar las aerolíneas."
+      },
+      "explore": {
+        "title": "Explorar aerolíneas y aeropuertos",
+        "description": "Encuentra información sobre derechos de los pasajeros relacionada con aerolíneas, aeropuertos y tu viaje."
+      }
+    }
+  },
+  "check": {
+    "itinerary": {
+      "intro": "De acuerdo. Solo necesito algunos datos del vuelo para comprobar si puedes tener derecho a compensación.",
+      "airline": "Aerolínea",
+      "airlinePlaceholder": "p. ej., British Airways",
+      "clearAirline": "Borrar aerolínea",
+      "flightNumber": "Número de vuelo",
+      "date": "Fecha del vuelo",
+      "continueHint": "Completa la aerolínea, el número de vuelo y la fecha de cada tramo para continuar.",
+      "missedConnection": {
+        "title": "¿Perdiste un vuelo de conexión?",
+        "yes": "Sí",
+        "no": "No"
+      },
+      "whatHappened": {
+        "title": "¿Qué ocurrió?",
+        "disruption": {
+          "delayed": "Mi vuelo se retrasó",
+          "cancelled": "Mi vuelo fue cancelado",
+          "denied": "Se me denegó el embarque"
+        },
+        "whichFlight": {
+          "delayed": "¿Qué vuelo se retrasó?",
+          "cancelled": "¿Qué vuelo fue cancelado?",
+          "denied": "¿En qué vuelo se te denegó el embarque?"
+        },
+        "destinationFallback": "tu destino",
+        "arrivalQuestion": "¿Con cuántas horas de retraso llegaste a {destination}?",
+        "outcome": {
+          "gte3": "3 horas o más",
+          "lt3": "Menos de 3 horas",
+          "never": "Nunca llegué"
+        },
+        "cancelNotice": {
+          "title": "¿Cuántos días antes de la salida te informaron del cambio de vuelo?",
+          "lt14": "Menos de 14 días",
+          "gte14": "14 días o más"
+        },
+        "volunteer": {
+          "title": "¿Te ofreciste voluntariamente a ceder tu asiento a cambio de otros beneficios de la aerolínea?",
+          "yes": "Sí",
+          "no": "No"
+        }
+      },
+      "missedConnectionHours": {
+        "title": "¿Cuánto duró el retraso en tu conexión?",
+        "label": "Selecciona la duración del retraso",
+        "placeholder": "Selecciona la duración del retraso",
+        "neverArrived": "Nunca llegué",
+        "options": {
+          "0-1": "0–1 horas",
+          "1-2": "1–2 horas",
+          "2-3": "2–3 horas",
+          "3-4": "3–4 horas",
+          "4-5": "4–5 horas",
+          "5-6": "5–6 horas",
+          "6-7": "6–7 horas",
+          "7-8": "7–8 horas",
+          "8-9": "8–9 horas",
+          "9plus": "9+ horas"
+        }
+      }
+    },
+    "itineraryNotice": {
+      "before": "Facilita los datos de tu",
+      "originalFlight": "vuelo original",
+      "after": "(no de un vuelo reubicado o de sustitución)."
+    },
+    "thanks": {
+      "title": "Tu reclamación se ha enviado",
+      "description": "Tu documento de autorización se ha firmado correctamente y tu reclamación se está preparando para enviarla a la aerolínea.",
+      "claimId": "ID de reclamación",
+      "track": "Seguir tu reclamación",
+      "emailNotice": "También hemos enviado el enlace de seguimiento a tu correo electrónico.",
+      "reassurance": "FlightClaimly revisará ahora tu caso y lo enviará a la aerolínea. Te avisaremos en cuanto haya novedades."
+    },
+    "finish": {
+      "finalizing": "Finalizando tu reclamación…",
+      "errors": {
+        "missingClaimId": "Falta el ID de reclamación.",
+        "finalizeFailed": "Algo ha salido mal al finalizar tu reclamación."
+      }
+    },
+    "additional": {
+      "title": "¿Tuviste gastos adicionales?",
+      "intro1": "Si tu vuelo se retrasó, puedes tener derecho al reembolso de comidas, hotel o transporte.",
+      "intro2": {
+        "before": "Sube los recibos para ayudarnos a ",
+        "highlight": "recuperar aún más dinero",
+        "after": " para ti."
+      },
+      "attachedFiles": "Archivos adjuntos",
+      "totalSize": "{size} en total",
+      "remove": "Eliminar",
+      "removeFile": "Eliminar archivo",
+      "skip": "Omitir por ahora",
+      "tip": "Consejo: subir recibos puede aumentar el importe que recuperemos para ti.",
+      "dropzone": {
+        "dragDrop": "Arrastra y suelta archivos aquí",
+        "or": "o",
+        "browse": "Seleccionar archivos",
+        "fileLimits": "PDF, JPG, PNG • Máx. {perFile} MB por archivo • Máx. {total} MB en total"
+      },
+      "errors": {
+        "missingClaim": "Falta la referencia de la reclamación. Vuelve atrás e inténtalo de nuevo.",
+        "uploadFailed": "La carga ha fallado. Inténtalo de nuevo o déjalo para más tarde y te pediremos los documentos si son necesarios.",
+        "unsupportedFormat": "\"{file}\" no tiene un formato compatible. Sube un PDF, JPG o PNG.",
+        "fileTooLarge": "\"{file}\" es demasiado grande. Máx. {max} MB por archivo.",
+        "totalTooLarge": "El total de archivos es demasiado grande. Máx. {max} MB en total."
+      }
+    },
+    "uploadsId": {
+      "title": "Ahora necesitamos tu documento de identidad o pasaporte. Es muy importante para tu caso frente a la aerolínea.",
+      "privacyNotice": "Tu documento solo se utilizará para tramitar la reclamación y se eliminará en un plazo de 30 días desde la finalización del caso.",
+      "uploadPromptBefore": "Sube tu",
+      "idOrPassport": "documento de identidad o pasaporte",
+      "attachedFiles": "Archivos adjuntos",
+      "totalSize": "{size} en total",
+      "remove": "Eliminar",
+      "removeFile": "Eliminar archivo",
+      "highWarning": "Algunas aerolíneas suelen exigir verificar la identidad antes de tramitar reclamaciones de terceros. Subir tu documento ahora reduce posibles retrasos más adelante.",
+      "mediumWarning": "Facilitar tu documento ahora puede agilizar la tramitación si la aerolínea solicita una verificación.",
+      "dropzone": {
+        "dragDrop": "Arrastra y suelta archivos aquí",
+        "takePhoto": "Haz una foto de tu documento de identidad o pasaporte",
+        "or": "o",
+        "camera": "Usa la cámara del teléfono para subir rápidamente tu pasaporte o documento de identidad",
+        "browse": "Seleccionar archivos",
+        "uploadPhoto": "Subir o hacer una foto",
+        "fileLimits": "PDF, JPG, PNG • Máx. {perFile} MB por archivo • Máx. {total} MB en total"
+      },
+      "errors": {
+        "missingClaim": "Falta la referencia de la reclamación. Vuelve atrás e inténtalo de nuevo.",
+        "uploadFailed": "La carga ha fallado. Inténtalo de nuevo.",
+        "unsupportedFormat": "\"{file}\" no tiene un formato compatible. Sube un PDF, JPG o PNG.",
+        "fileTooLarge": "\"{file}\" es demasiado grande. Máx. {max} MB por archivo.",
+        "totalTooLarge": "El total de archivos es demasiado grande. Máx. {max} MB en total."
+      }
+    },
+    "uploads": {
+      "title": "Subir documentos",
+      "attachedFiles": "Archivos adjuntos",
+      "totalSize": "{size} en total",
+      "remove": "Eliminar",
+      "removeFile": "Eliminar archivo",
+      "description": {
+        "before": "Subir tu",
+        "boardingPass": "tarjeta de embarque",
+        "middle": ", confirmación de reserva o recibos puede ayudarnos a ",
+        "faster": "tramitar tu reclamación más rápido",
+        "expenses": "Si tuviste gastos adicionales (hotel, comidas, transporte), los recibos pueden ayudarnos a ",
+        "moreMoney": "recuperar aún más dinero",
+        "after": " para ti."
+      },
+      "dropzone": {
+        "dragDrop": "Arrastra y suelta archivos aquí",
+        "takePhoto": "Haz una foto de tu tarjeta de embarque o de los recibos",
+        "or": "o",
+        "camera": "Usa la cámara del teléfono para subir rápidamente tu documento",
+        "browse": "Seleccionar archivos",
+        "uploadPhoto": "Subir o hacer una foto",
+        "fileLimits": "PDF, JPG, PNG • Máx. {perFile} MB por archivo • Máx. {total} MB en total"
+      },
+      "errors": {
+        "missingClaim": "Falta la referencia de la reclamación. Vuelve atrás e inténtalo de nuevo.",
+        "uploadFailed": "La carga ha fallado. Inténtalo de nuevo o déjalo para más tarde y te pediremos los documentos si son necesarios.",
+        "unsupportedFormat": "\"{file}\" no tiene un formato compatible. Sube un PDF, JPG o PNG.",
+        "fileTooLarge": "\"{file}\" es demasiado grande. Máx. {max} MB por archivo.",
+        "totalTooLarge": "El total de archivos es demasiado grande. Máx. {max} MB en total."
+      }
+    },
+    "authorization": {
+      "claimCreationError": "Algo ha salido mal al crear la reclamación.",
+      "amountFallback": "hasta 600 €",
+      "titleBefore": "¡Buenas noticias! Parece que tienes derecho a",
+      "titleAfterAmount": "por persona según EU261.",
+      "titleSecondLine": "Firma a continuación y recibe el dinero que te corresponde.",
+      "signaturePlaceholder": "Haz clic y firma aquí",
+      "clearSignature": "Borrar firma",
+      "important": "Importante",
+      "signatureGuidance": "Tu firma debe parecerse lo máximo posible a la de tu documento de identidad.",
+      "feeTitle": "Sí: si no ganamos, no cobramos. Solo pagas un 20 % IVA incluido si tenemos éxito.",
+      "feeSubtitle": "La comisión se descuenta de tu compensación. Si fuera necesario iniciar acciones legales, pueden aplicarse comisiones o costes adicionales. Te explicaremos las condiciones aplicables y pediremos tu aprobación antes de continuar.",
+      "legal": {
+        "before": "Al firmar, aceptas nuestros",
+        "terms": "Términos y condiciones",
+        "and": "y",
+        "priceList": "Lista de precios",
+        "middle": ", y nos autorizas a utilizar tu firma en el",
+        "authorityDocument": "Documento de autorización"
+      }
+    },
+    "bookingReference": {
+      "title": "¿Cuál es tu referencia de reserva?",
+      "placeholder": "p. ej., DS27K3 o YLEHPW",
+      "helpTitle": "¿Cómo encuentro mi referencia de reserva?",
+      "helpText1": "La referencia de reserva (PNR) suele aparecer en el correo de confirmación de la aerolínea o agencia de viajes. Normalmente tiene entre 5 y 8 caracteres (letras y números).",
+      "helpText2": "También puede aparecer en tu tarjeta de embarque o en la app de la aerolínea.",
+      "examples": "Ejemplos"
+    },
+    "passengerDetails": {
+      "title": "Tus datos de contacto",
+      "claimOwner": "Titular de la reclamación",
+      "address": "Dirección",
+      "addressPlaceholder": "Calle y número",
+      "address2": "Dirección, línea 2",
+      "address2Placeholder": "Piso, puerta, etc.",
+      "city": "Ciudad",
+      "postalCode": "Código postal",
+      "state": "Provincia / región",
+      "statePlaceholder": "Provincia / región",
+      "country": "País",
+      "countryPlaceholder": "Empieza a escribir el país...",
+      "clearCountry": "Borrar país",
+      "phone": "Número de teléfono",
+      "optional": "(opcional)"
+    },
+    "passengers": {
+      "title": "Otros pasajeros",
+      "info": "Los pasajeros que viajaban contigo también pueden tener derecho a compensación.",
+      "travelingWithOthers": "Viajaba con otras personas",
+      "travelingAlone": "Viajaba solo/a",
+      "potentialCompensation": "Compensación potencial",
+      "manualReview": "Revisión manual",
+      "totalForOnePassenger": "Total para {count} pasajero",
+      "totalForPassengers": "Total para {count} pasajeros",
+      "perPassenger": "Por pasajero",
+      "passengerNumber": "Pasajero {number}",
+      "remove": "Eliminar",
+      "under18": "Esta persona es menor de 18 años",
+      "firstName": "Nombre",
+      "lastName": "Apellidos",
+      "email": "Correo electrónico",
+      "optional": "(opcional)",
+      "addPassenger": "+ Añadir pasajero"
+    },
+    "claimOwner": {
+      "title": "¿Quién debe recibir la compensación?",
+      "subtitle": "Solo falta un paso para reclamar tu compensación",
+      "firstNameLabel": "Nombre",
+      "firstNamePlaceholder": "Nombre",
+      "firstNameHint": "Debe coincidir con tu documento de identidad",
+      "lastNameLabel": "Apellidos",
+      "lastNamePlaceholder": "Apellidos",
+      "lastNameHint": "Introduce todos tus apellidos exactamente como aparecen en tu documento de identidad o pasaporte.",
+      "emailLabel": "Correo electrónico",
+      "emailSubtitle": "Aquí te enviaremos las actualizaciones de la reclamación y el pago",
+      "emailHint": "Usaremos tu correo electrónico para mantenerte informado sobre tu reclamación.",
+      "legal": {
+        "before": "Al continuar, aceptas nuestros",
+        "terms": "Términos y condiciones",
+        "and": "y",
+        "privacy": "Política de privacidad"
+      }
+    },
+    "verify": {
+      "loading": "Comprobando el estado del vuelo…",
+      "verifyFailed": "No hemos podido verificar este vuelo. Vuelve atrás y comprueba los datos.",
+      "eligibleTitle": "Buenas noticias: tu vuelo cumple los requisitos para recibir compensación.",
+      "notEligibleTitle": "No cumple los requisitos para recibir compensación según EU/UK 261.",
+      "notEligibleExplanation": "Parece que tu vuelo no llegó con al menos 3 horas de retraso. Por tanto, no podemos continuar con una reclamación de compensación según EU/UK 261.",
+      "airlineFallback": "Aerolínea",
+      "flight": "Vuelo",
+      "flightDetails": "Datos del vuelo",
+      "badgeEligible": "ELEGIBLE",
+      "badgeNotEligible": "NO ELEGIBLE",
+      "potentialCompensation": "Compensación potencial",
+      "compensation": "Compensación",
+      "entitled": "Tienes derecho a compensación según la legislación de la UE",
+      "manualReview": "Este caso puede requerir una revisión manual",
+      "perPassenger": "por pasajero",
+      "scheduledArrivalTime": "Hora prevista de llegada",
+      "actualArrivalTime": "Hora real de llegada",
+      "flightDistance": "Distancia del vuelo",
+      "totalDelay": "Retraso total",
+      "confirmTitle": "Confirma los datos de tu vuelo",
+      "confirmYes": "Sí, este es mi vuelo",
+      "confirmNo": "No, hay algo incorrecto",
+      "correctDetails": "Vuelve atrás y corrige los datos del vuelo antes de continuar.",
+      "delay": {
+        "noSignificantDelay": "No se ha detectado un retraso significativo",
+        "arrivedOneMinuteEarly": "Llegó 1 minuto antes",
+        "arrivedMinutesEarly": "Llegó {minutes} minutos antes",
+        "arrivedOnTime": "Llegó puntual",
+        "minutes": "{minutes} minutos",
+        "hours": "{hours} horas",
+        "hoursMinutes": "{hours} horas {minutes} minutos"
+      }
+    },
+    "direct": {
+      "departureDateTitle": "¿Cuál era la fecha prevista de salida?",
+      "dateLabel": "Fecha",
+      "airlineTitle": "¿Con qué aerolínea volaste?",
+      "airlineLabel": "Aerolínea",
+      "airlinePlaceholder": "p. ej., British Airways",
+      "clearAirline": "Borrar aerolínea",
+      "flightListTitle": "A continuación, selecciona tu vuelo de la lista:",
+      "scheduledTime": "Hora prevista",
+      "flightNumber": "Número de vuelo",
+      "loadingFlights": "Cargando vuelos disponibles…",
+      "noFlightsFound": "No hemos encontrado vuelos para esta ruta. Aun así, puedes continuar manualmente.",
+      "manualEnterDetails": "Introducir los datos del vuelo manualmente",
+      "manualCantFind": "No encuentro mi vuelo",
+      "manualFlightNumberLabel": "Introduce tu número de vuelo",
+      "manualFlightNumberPlaceholder": "p. ej., SK2814",
+      "errors": {
+        "searchFailed": "La búsqueda de vuelos ha fallado",
+        "loadFailed": "No hemos podido cargar los vuelos. Aun así, puedes continuar manualmente."
+      }
+    },
+    "directOrLayover": {
+      "title": "¿Era un vuelo directo?",
+      "routeTitle": "¿Cuál fue tu ruta?",
+      "fromLabel": "Aeropuerto de salida",
+      "toLabel": "Destino final",
+      "airportOrCity": "Aeropuerto o ciudad",
+      "direct": "Vuelo directo",
+      "layovers": "Con escalas",
+      "connectionTitle": "¿Dónde hiciste conexión?",
+      "cityOrAirport": "Nombre de ciudad o aeropuerto",
+      "airportPlaceholder": "p. ej., Londres o LHR",
+      "removeLayover": "Eliminar escala",
+      "addAirport": "+ Añadir otro aeropuerto",
+      "connectionRequired": "Añade al menos un aeropuerto de conexión para continuar."
+    },
+    "layout": {
+      "progress": "Progreso de tu reclamación",
+      "back": "Atrás",
+      "continue": "Continuar",
+      "processing": "Procesando...",
+      "steps": {
+        "eligibility": "Elegibilidad",
+        "passengerDetails": "Datos de pasajeros",
+        "documents": "Documentos",
+        "finish": "Finalizar"
+      },
+      "footer": {
+        "help": "Ayuda",
+        "terms": "Términos y condiciones",
+        "privacy": "Privacidad"
+      }
+    }
+  },
+  "login": {
+    "title": "Acceso de administrador",
+    "passwordLabel": "Contraseña",
+    "passwordPlaceholder": "••••••••",
+    "submit": "Iniciar sesión",
+    "loading": "Iniciando sesión…",
+    "errors": {
+      "invalidPassword": "Contraseña incorrecta",
+      "generic": "No se ha podido iniciar sesión"
+    }
+  }
+}
