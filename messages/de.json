@@ -1390,14 +1390,17 @@
   "description": "Nach den EU-Fluggastrechten können Sie Anspruch auf Entschädigung haben, wenn Ihr Flug erheblich verspätet oder annulliert wurde oder Ihnen die Beförderung verweigert wurde. Die Höhe kann von Strecke, Entfernung und den Umständen abhängen.",
   "bands": {
     "short": {
+      "distance": "BIS 1.500 KM",
       "title": "Kürzere Flüge",
       "body": "Bis zu 250 € pro Passagier für anspruchsberechtigte Flüge über 1.500 km oder weniger."
     },
     "medium": {
+      "distance": "MITTEL- UND LANGSTRECKENFLÜGE IN DER EU",
       "title": "Mittelstreckenflüge",
       "body": "Bis zu 400 € pro Passagier für anspruchsberechtigte Flüge innerhalb der EU über 1.500 km sowie bestimmte andere Flüge zwischen 1.500 und 3.500 km."
     },
     "long": {
+      "distance": "BESTIMMTE FLÜGE ÜBER 3.500 KM",
       "title": "Langstreckenflüge",
       "body": "Bis zu 600 € pro Passagier für anspruchsberechtigte Flüge über 3.500 km, sofern die Entschädigungsstufe von 600 € gilt."
     }

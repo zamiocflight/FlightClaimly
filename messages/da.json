@@ -1373,14 +1373,17 @@
   "description": "EU's passagerrettigheder kan give dig ret til kompensation, hvis din flyvning er væsentligt forsinket, aflyst, eller hvis du bliver nægtet boarding. Beløbet kan afhænge af ruten, afstanden og omstændighederne.",
   "bands": {
     "short": {
+      "distance": "OP TIL 1.500 KM",
       "title": "Kortere flyvninger",
       "body": "Op til €250 pr. passager for berettigede flyvninger på 1.500 km eller mindre."
     },
     "medium": {
+      "distance": "MELLEMLANGE OG LÆNGERE EU-FLYVNINGER",
       "title": "Mellemlange flyvninger",
       "body": "Op til €400 pr. passager for berettigede flyvninger inden for EU på over 1.500 km og visse andre flyvninger mellem 1.500 og 3.500 km."
     },
     "long": {
+      "distance": "VISSE FLYVNINGER OVER 3.500 KM",
       "title": "Langdistanceflyvninger",
       "body": "Op til €600 pr. passager for berettigede flyvninger på over 3.500 km, hvor kompensationsniveauet på €600 gælder."
     }
