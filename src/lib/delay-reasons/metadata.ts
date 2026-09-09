@@ -3,5 +3,5 @@ import type { DelayReason } from "@/data/delay-reasons/types";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { delayReasonSeoLocales } from "@/lib/seo/alternates";
 export function buildDelayReasonMetadata(delayReason: DelayReason, locale: string): Metadata {
-  return buildMetadata({ entity: { slug: delayReason.slug, name: delayReason.title, description: delayReason.description }, locale, pathPrefix: "delay-reasons", titleSuffix: locale === "sv" ? "flygersättning" : locale === "da" ? "flykompensation" : locale === "pl" ? "odszkodowanie za lot" : locale === "de" ? "Flugentschädigung" : "flight compensation", availableLocales: delayReasonSeoLocales });
+  return buildMetadata({ entity: { slug: delayReason.slug, name: delayReason.title, description: delayReason.description }, locale, pathPrefix: "delay-reasons", titleSuffix: locale === "sv" ? "flygersättning" : locale === "da" ? "flykompensation" : locale === "pl" ? "odszkodowanie za lot" : locale === "de" ? "Flugentschädigung" : locale === "fi" ? "lentokorvaus" : "flight compensation", availableLocales: delayReasonSeoLocales });
 }
