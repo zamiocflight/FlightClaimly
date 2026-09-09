@@ -191,3 +191,42 @@ A new ChatGPT session should read:
 6. current GitHub branch/code/status
 
 Then resume the **premium UX/upscale audit from actual current code**, not German/Finnish/Dutch/Portuguese localization. After premium implementation is validated/checkpointed, continue **FR → IT → PT**.
+
+## 2026-09-09 — LOCALIZED HEADER + I18N RUNTIME RECOVERY
+
+Concrete regressions discovered after the Spanish Wave 2 lock were repaired on branch `fix/localized-desktop-header`.
+
+### next-intl / HTML locale bug
+- Localized routes such as `/es` and `/fi` rendered localized page content but root `<html lang>` incorrectly remained `sv`.
+- Root cause: `src/middleware.ts` returned `NextResponse.next()` for already-localized paths before `next-intl` middleware could set `x-next-intl-locale`.
+- Supported localized product routes now pass through the intl middleware.
+- Runtime verification confirmed `/es` => `<html lang="es">` and `/fi` => `<html lang="fi">`.
+
+### Message-catalog structural repair
+- `messages/fi.json` and `messages/pl.json` contained misplaced/duplicate top-level structures.
+- Missing `homeEligibility.bands.*.distance` keys were restored where required.
+- DA, DE, FI and PL were surgically repaired without whole-file reserialization.
+- Final recursive EN structure parity:
+  - DA: MISSING 0 / EXTRA 0
+  - DE: MISSING 0 / EXTRA 0
+  - ES: MISSING 0 / EXTRA 0
+  - FI: MISSING 0 / EXTRA 0
+  - NL: MISSING 0 / EXTRA 0
+  - PL: MISSING 0 / EXTRA 0
+  - SV: MISSING 0 / EXTRA 0
+- Locale repair commit: `99ade82`.
+
+### Localized desktop header
+- Full FlightClaimly wordmark is protected from shrinking.
+- Tracking CTA remains normal/readable size: 14px text, normal padding and 20px icon.
+- General desktop nav remains 14px.
+- DE/FI use tighter spacing only.
+- ES uses a targeted 13px nav with tighter spacing so the complete seven-link navigation, language selector and full-size tracking CTA fit at the tested desktop width.
+- A temporary ES desktop hamburger fallback was tested and rejected; normal desktop navigation was restored.
+- Final ES localhost visual QA confirmed the complete header fits without clipping and without shrinking the logo or tracking button.
+- Header hero/background structure was not redesigned as part of this regression fix.
+
+### Verification / deployment state
+- `npm run typecheck` green during final repair cycle.
+- Final visual QA passed locally for ES; other tested locales were visually healthy.
+- These regression repairs are NOT yet recorded as production-deployed. Resume by checking git status/diff, running final QA/build, committing/pushing the remaining header CSS change, then deploy deliberately.

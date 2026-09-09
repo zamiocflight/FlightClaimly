@@ -311,7 +311,16 @@ async function handleQuickCheck(e: FormEvent) {
 {/* Desktop: meny + språk + Följ ärende */}
 <div className="hidden md:flex items-center gap-6 fc-desktop-navwrap">
   {/* ✅ fc-desktop-nav = hook för DE-only CSS (påverkar inte andra språk) */}
-<nav className="flex items-center gap-8 text-[14px] font-semibold text-white/75 fc-desktop-nav whitespace-nowrap">
+<nav
+  className="flex items-center font-semibold text-white/75 fc-desktop-nav whitespace-nowrap"
+  style={
+    locale === 'es'
+      ? { fontSize: '13px', gap: '9px' }
+      : locale === 'de' || locale === 'fi'
+        ? { fontSize: '14px', gap: '14px' }
+        : { fontSize: '15px', gap: '18px' }
+  }
+>
     <a href="#how" className="hover:text-white transition-colors">
       {t('nav.compensation')}
     </a>

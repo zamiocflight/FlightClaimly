@@ -55,7 +55,7 @@ header:has(.fc-desktop-navwrap) > a:first-of-type img {
 
 .fc-desktop-nav {
   gap: 18px;
-  font-size: 14px;
+  font-size: 15px;
   white-space: nowrap;
 }
 
@@ -77,24 +77,36 @@ header:has(.fc-desktop-navwrap) > a:first-of-type img {
   flex-shrink: 0;
 }
 
-/* Slightly tighter spacing only for languages with longer labels.
-   Readability remains identical to every other locale. */
+/* Slightly tighter spacing for longer labels.
+   DE/FI keep normal text size; ES is one step tighter to fit desktop
+   without shrinking the logo or tracking button. */
 html[lang="de"] .fc-desktop-nav,
-html[lang="fi"] .fc-desktop-nav,
-html[lang="es"] .fc-desktop-nav {
+html[lang="fi"] .fc-desktop-nav {
   gap: 14px;
+  font-size: 14px;
 }
 
 html[lang="de"] .fc-desktop-navwrap,
-html[lang="fi"] .fc-desktop-navwrap,
-html[lang="es"] .fc-desktop-navwrap {
+html[lang="fi"] .fc-desktop-navwrap {
   gap: 12px;
 }
 
 html[lang="de"] header:has(.fc-desktop-navwrap),
-html[lang="fi"] header:has(.fc-desktop-navwrap),
-html[lang="es"] header:has(.fc-desktop-navwrap) {
+html[lang="fi"] header:has(.fc-desktop-navwrap) {
   column-gap: 14px;
+}
+
+html[lang="es"] .fc-desktop-nav {
+  gap: 9px;
+  font-size: 13px;
+}
+
+html[lang="es"] .fc-desktop-navwrap {
+  gap: 8px;
+}
+
+html[lang="es"] header:has(.fc-desktop-navwrap) {
+  column-gap: 10px;
 }
 
 /* Self-hosted flags (production-safe) */
