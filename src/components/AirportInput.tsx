@@ -167,8 +167,12 @@ function getFlag(countryCode?: string) {
 
   className="
   absolute right-[-6px] top-1/2 -translate-y-1/2
-  w-6 h-6 flex items-center justify-center
-  rounded-full bg-slate-200 text-slate-600 text-xs
+  w-7 h-7 flex items-center justify-center
+  rounded-full bg-transparent
+  text-slate-400 text-[16px] font-light leading-none
+  transition-colors duration-150
+  hover:bg-slate-100 hover:text-slate-700
+  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300
 "
   >
     ×

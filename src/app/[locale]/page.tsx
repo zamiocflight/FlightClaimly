@@ -554,181 +554,149 @@ async function handleQuickCheck(e: FormEvent) {
         )}
 
         {/* Hero */}
-<section className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-12 sm:pt-14 md:pt-18 pb-16 md:pb-24 space-y-10">{/* Hero Card – Step A */}
-<div className="relative">
-<div
-  className="
-    relative
-    mx-auto max-w-5xl
-    rounded-3xl
-    bg-gradient-to-br
-  bg-gradient-to-b
-from-[#0A1120]   /* matchar header */
-via-[#0C1830]
-to-[#061028]     /* djupare botten */
-    shadow-[0_30px_110px_rgba(15,60,120,0.28)]
-    px-6 py-16
-    sm:px-12 sm:py-24
-    overflow-visible
-  "
->
+        <section className="relative z-10 mx-auto max-w-6xl px-4 pb-16 pt-10 sm:px-6 sm:pt-12 md:pb-28 md:pt-16">
+          <div className="relative mx-auto max-w-5xl">
+            <div className="pointer-events-none absolute -inset-x-10 -inset-y-8 -z-10 rounded-[40px] bg-slate-900/[0.06] blur-3xl" />
 
-<div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(60%_40%_at_0%_0%,rgba(10,17,32,0.6)_0%,transparent_60%)]" />
-<div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-b from-white/2 via-transparent to-black/40" />
-<div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-white/10" />
-<div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(80%_60%_at_50%_30%,rgba(255,255,255,0.05)_0%,transparent_60%)]" />
+            <div className="relative overflow-visible rounded-[28px] border border-white/[0.10] bg-[#071126] px-6 py-14 shadow-[0_24px_70px_rgba(7,17,38,0.22)] sm:px-12 sm:py-20">
+              <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[28px]">
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                <div className="absolute -right-24 -top-32 h-80 w-80 rounded-full bg-[#22E3A5]/[0.055] blur-3xl" />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/[0.025] to-transparent" />
+              </div>
 
+              <div className="relative">
+                {/* Trust line */}
+                <div className="mb-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-[10px] font-semibold uppercase tracking-[0.20em] text-[#2DFF9C] sm:text-[11px]">
+                  <span>EU261/UK261</span>
+                  <span className="h-1 w-1 rounded-full bg-white/25" />
+                  <span>NO WIN, NO FEE</span>
+                  <span className="h-1 w-1 rounded-full bg-white/25" />
+                  <span>1 MINUTE FREE CHECK</span>
+                </div>
 
+                {/* Headline */}
+                <h1 className="max-w-4xl tracking-[-0.035em] text-white">
+                  <span className="block text-[31px] font-bold leading-[1.08] sm:text-[39px] md:text-[47px]">
+                    {t("hero.titleLine1")}
+                  </span>
+                  <span className="mt-1.5 block text-[29px] font-semibold leading-[1.1] text-white/78 sm:text-[36px] md:text-[43px]">
+                    {t("hero.titleLine2")}
+                  </span>
+                </h1>
 
-    {/* Trust badges */}
-<div className="mb-4 flex flex-wrap items-center gap-3 text-[11px] font-semibold tracking-[0.18em] text-[#2DFF9C]/90">
-      <span>EU261/UK261</span>
-      <span>•</span>
-      <span>NO WIN, NO FEE</span>
-      <span>•</span>
-      <span>1 MINUTE FREE CHECK</span>
-    </div>
+                <p className="mt-5 max-w-2xl text-[14px] leading-6 text-white/58 sm:text-[15px]">
+                  {t('hero.subtitle.beforeDelayed')}{' '}
+                  <span className="font-medium text-white/72">
+                    {t('hero.subtitle.delayedLink')}
+                  </span>{' '}
+                  {t('hero.subtitle.between')}{' '}
+                  <span className="font-medium text-white/72">
+                    {t('hero.subtitle.cancelledLink')}
+                  </span>{' '}
+                  {t('hero.subtitle.afterCancelled')}{' '}
+                  <span className="font-medium text-white/72">
+                    {t('hero.subtitle.eu261Link')}
+                  </span>
+                  {t('hero.subtitle.afterEu261')}
+                </p>
 
-    {/* Headline */}
-<h1 className="max-w-4xl font-black tracking-tight text-white/85">
-      <span className="block text-[30px] sm:text-[36px] md:text-[44px] leading-tight">
-        {t("hero.titleLine1")}
-      </span>
-<span className="mt-1 block text-[28px] sm:text-[34px] md:text-[42px] leading-tight text-white/80">
-        {t("hero.titleLine2")}
-      </span>
-    </h1>
-<p className="mt-2 max-w-3xl text-sm leading-relaxed text-white/70">
-  {t('hero.subtitle.beforeDelayed')}{' '}
-  <span className="font-medium">
-    {t('hero.subtitle.delayedLink')}
-  </span>{' '}
-  {t('hero.subtitle.between')}{' '}
-  <span className="font-medium">
-    {t('hero.subtitle.cancelledLink')}
-  </span>{' '}
-  {t('hero.subtitle.afterCancelled')}{' '}
-  <span className="font-medium">
-    {t('hero.subtitle.eu261Link')}
-  </span>
-  {t('hero.subtitle.afterEu261')}
-</p>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
 
-    {/* Unified Inputs + CTA (AirHelp-style) */}
-<form
-  onSubmit={(e) => {
-    e.preventDefault();
-    
-console.log("FROM:", form.from, "TO:", form.to);
+                    if (!form.from || !form.to) {
+                      return;
+                    }
 
-    if (!form.from || !form.to) {
-      return;
-    }
+                    const params = new URLSearchParams({
+                      from: form.from,
+                      to: form.to,
+                    });
 
-    const params = new URLSearchParams({
-      from: form.from,
-      to: form.to,
-    });
+                    window.location.href = `/${locale}/check?${params.toString()}`;
+                  }}
+                  className="mt-9 sm:mt-10"
+                >
+                  {/* Mobile */}
+                  <div className="sm:hidden overflow-visible rounded-[18px] border border-white/70 bg-white shadow-[0_16px_45px_rgba(0,0,0,0.18)]">
+                    <div className="px-4 py-3.5">
+                      <AirportInput
+                        label={t("hero.fromLabel")}
+                        placeholder={t("hero.fromPlaceholder")}
+                        value={form.from}
+                        onSelect={(iata) => setForm({ ...form, from: iata })}
+                        variant="unstyled"
+                      />
+                    </div>
 
-    window.location.href = `/${locale}/check?${params.toString()}`;
-  }}
-  className="mt-10"
->
+                    <div className="mx-4 h-px bg-slate-200" />
 
- <div className="mt-10">
+                    <div className="px-4 py-3.5">
+                      <AirportInput
+                        label={t("hero.toLabel")}
+                        placeholder={t("hero.toPlaceholder")}
+                        value={form.to}
+                        onSelect={(iata) => setForm({ ...form, to: iata })}
+                        variant="unstyled"
+                      />
+                    </div>
 
-  {/* Mobile */}
-  <div className="sm:hidden rounded-2xl bg-white/90 backdrop-blur-sm shadow-[0_20px_60px_rgba(15,23,42,0.18)] overflow-visible">
+                    <div className="p-2.5 pt-1">
+                      <button
+                        type="submit"
+                        disabled={!form.from || !form.to}
+                        className={`w-full rounded-[12px] px-6 py-3.5 text-base font-semibold transition duration-150 ${
+                          form.from && form.to
+                            ? "bg-[#22E3A5] text-[#071126] shadow-[0_7px_20px_rgba(34,227,165,0.30)] hover:bg-[#2DFFB0] hover:shadow-[0_0_0_5px_rgba(34,227,165,0.13),0_9px_24px_rgba(34,227,165,0.28)]"
+                            : "bg-[#22E3A5]/35 text-slate-500 shadow-none"
+                        } active:scale-[0.985]`}
+                      >
+                        {t("hero.cta")}
+                      </button>
+                    </div>
+                  </div>
 
-    <div className="px-4 py-3">
-      <AirportInput
-        label={t("hero.fromLabel")}
-placeholder={t("hero.fromPlaceholder")}
-        value={form.from}
-        onSelect={(iata) => setForm({ ...form, from: iata })}
-        variant="unstyled"
-      />
-    </div>
+                  {/* Desktop */}
+                  <div className="hidden overflow-visible rounded-[18px] border border-white/70 bg-white shadow-[0_16px_45px_rgba(0,0,0,0.18)] sm:flex sm:items-stretch">
+                    <div className="flex-1 px-5 py-4">
+                      <AirportInput
+                        label={t("hero.fromLabel")}
+                        placeholder={t("hero.fromPlaceholder")}
+                        value={form.from}
+                        onSelect={(iata) => setForm({ ...form, from: iata })}
+                        variant="unstyled"
+                      />
+                    </div>
 
-    <div className="px-4 py-3">
-      <AirportInput
-        label={t("hero.toLabel")}
-placeholder={t("hero.toPlaceholder")}
-        value={form.to}
-        onSelect={(iata) => setForm({ ...form, to: iata })}
-        variant="unstyled"
-      />
-    </div>
+                    <div className="my-3.5 w-px bg-slate-200" />
 
-    <div className="p-2 pt-0">
-<button
-  type="submit"
-  disabled={!form.from || !form.to}
-  className={`
-    w-full
-    px-6
-    py-3
-    rounded-xl
-    text-base
-    font-semibold
-    transition-all duration-150
+                    <div className="flex-1 px-5 py-4">
+                      <AirportInput
+                        label={t("hero.toLabel")}
+                        placeholder={t("hero.toPlaceholder")}
+                        value={form.to}
+                        onSelect={(iata) => setForm({ ...form, to: iata })}
+                        variant="unstyled"
+                      />
+                    </div>
 
-    ${form.from && form.to
-      ? "bg-[#22E3A5] text-slate-900 shadow-[0_6px_18px_rgba(16,185,129,0.28)]"
-      : "bg-[#22E3A5]/40 text-slate-500 shadow-none"
-    }
-
-    active:scale-[0.97]
-    active:bg-[#1FD39A]
-  `}
->
-  {t("hero.cta")}
-</button>
-    </div>
-  </div>
-
-  {/* Desktop */}
-  <div className="hidden sm:flex items-stretch rounded-2xl bg-white/90 backdrop-blur-sm shadow-[0_20px_60px_rgba(15,23,42,0.18)] overflow-visible">
-
-    <div className="flex-1 px-5 py-4">
-      <AirportInput
-        label={t("hero.fromLabel")}
-placeholder={t("hero.fromPlaceholder")}
-        value={form.from}
-        onSelect={(iata) => setForm({ ...form, from: iata })}
-        variant="unstyled"
-      />
-    </div>
-
-    <div className="w-px bg-gradient-to-b from-white/90 via-white/60 to-white/90 my-3" />
-
-    <div className="flex-1 px-5 py-4">
-      <AirportInput
-        label={t("hero.toLabel")}
-placeholder={t("hero.toPlaceholder")}
-        value={form.to}
-        onSelect={(iata) => setForm({ ...form, to: iata })}
-        variant="unstyled"
-      />
-    </div>
-
-    <button
-      type="submit"
-      className="m-2 px-8 rounded-xl bg-[#22E3A5] text-slate-900 text-base font-semibold shadow-[0_6px_18px_rgba(16,185,129,0.28)] transition hover:shadow-[0_0_0_6px_rgba(34,227,165,0.14)] hover:bg-[#1FD39A] active:scale-[0.98] whitespace-nowrap"
-    >
-      {t("hero.cta")}
-    </button>
-  </div>
-
-</div>
-
-</form>
-
-
-  </div>
-</div>
-
-
+                    <button
+                      type="submit"
+                      disabled={!form.from || !form.to}
+                      className={`m-2.5 min-w-[180px] whitespace-nowrap rounded-[12px] px-7 text-base font-semibold transition duration-150 ${
+                        form.from && form.to
+                          ? "bg-[#22E3A5] text-[#071126] shadow-[0_7px_20px_rgba(34,227,165,0.30)] hover:bg-[#2DFFB0] hover:shadow-[0_0_0_5px_rgba(34,227,165,0.13),0_9px_24px_rgba(34,227,165,0.28)]"
+                          : "bg-[#22E3A5]/40 text-slate-500 shadow-none"
+                      } active:scale-[0.985]`}
+                    >
+                      {t("hero.cta")}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </section>
 
 
