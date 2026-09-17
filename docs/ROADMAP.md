@@ -1,8 +1,8 @@
 # FlightClaimly — Product / SEO / Growth Roadmap
 
-Last updated: **2026-09-09**
+Last updated: **2026-09-17**
 
-> Strategic roadmap. Exact crash recovery/current execution lives in `docs/CURRENT_SPRINT_LATEST.md`. Historical detail remains in Git history and locale checkpoints.
+> Strategic roadmap. Exact crash recovery/current execution lives in `docs/CURRENT_SPRINT_LATEST.md`. Master continuity lives in `docs/FLIGHTCLAIMLY_HANDOFF.MD`.
 
 ## Mission
 
@@ -10,13 +10,14 @@ FlightClaimly should become a trusted European knowledge and claims platform for
 
 `Knowledge → Customer Acquisition`  
 `Claims → Customer Recovery`  
-`Resolved Claims → Better Intelligence → Better Knowledge`
+`Resolved Claims → Better Intelligence → Better Knowledge/Growth`
 
 ## Strategic lanes
 
-1. **SEO / Knowledge Acquisition** — Knowledge Engine, Localization Engine, internal linking, search monitoring.
+1. **SEO / Knowledge Acquisition** — Knowledge Engine, localization, internal linking, indexation/search monitoring.
 2. **Product / Claims Operations** — eligibility, evidence, research, handling, airline submission, communication, escalation, payout.
-3. **Growth / Content** — paid acquisition, verified content/social, conversion analytics and market expansion.
+3. **Growth / Content / Paid Acquisition** — organic social, creatives, UGC, paid media, landing experiments, conversion analytics, retargeting and creator partnerships.
+4. **Premium Product / Conversion** — deliberate UX improvements driven by brand quality and increasingly by actual funnel data.
 
 # CURRENT EXECUTION SEQUENCE
 
@@ -26,11 +27,11 @@ Research/Evidence Engine v1 foundation is locked. External integrations must use
 
 ## Phase B — Flight Number / Knowledge localization foundation — 🟢 LOCKED THROUGH ES
 
-The reusable localization architecture is established and validated across:
+Reusable localization architecture is established and validated across:
 
 `EN + SV + DA + PL + DE + FI + NL + ES`
 
-Current canonical scale:
+Canonical scale:
 
 - Flight Numbers: **2,841**
 - Flight Number airline groups: **44**
@@ -40,7 +41,7 @@ Current canonical scale:
 - Countries: **36**
 - Delay Reasons: **11**
 
-Eight-locale localized detail scale after ES lock:
+Eight-locale localized detail scale:
 
 - Routes: **25,128**
 - Airports: **784**
@@ -50,7 +51,9 @@ Eight-locale localized detail scale after ES lock:
 - Flight Numbers: **22,728**
 - Flight Number airline groups: **352**
 
-Do not rerun FlightAware or reopen locked localization merely to continue product work.
+The architecture is valuable because canonical facts remain locale-neutral while localized presentation, relationships/internal linking, metadata, canonical/hreflang and structured data scale coherently. It is not intended to be thin translation spam.
+
+Do not rerun FlightAware or reopen locked localization merely to continue product/growth work.
 
 ## Phase C — Localization Wave 2 — 🟢 COMPLETE THROUGH SPANISH
 
@@ -60,17 +63,17 @@ Market status:
 
 Spanish lock date: **2026-09-09**.
 
-Spanish checkpoint:
+Checkpoint:
 
 `docs/checkpoints/2026-09-09-seo-localization-wave2-es-locked.md`
 
-ES lock verification includes:
+Lock verification includes:
 
 - typecheck green
-- final production build **50,463 / 50,463**
-- sitemap **50,256** total URLs / **6,281** Spanish URLs
-- hubs + representative detail runtime QA
-- full tested Spanish claim journey through thanks
+- production build **50,463 / 50,463**
+- sitemap **50,256 total URLs / 6,281 Spanish URLs**
+- hubs + representative details runtime QA
+- full Spanish claim journey through thanks
 - actual Spanish message catalog runtime confirmation
 - canonical/hreflang across all eight locales
 - BreadcrumbList + FAQPage
@@ -78,103 +81,173 @@ ES lock verification includes:
 - diff check green
 - clean lock working tree
 
-Locked locales are immutable unless a concrete bug, SEO regression, legal correction or localization defect is found.
+### Current SEO phase — 🟡 INDEXATION / COMPOUNDING
 
-## Phase D — Premium UX / Design / Conversion uplift — 🔵 ACTIVE NEXT
+The large eight-locale footprint is now waiting for Google to discover/crawl/index it over time. Do not interpret non-instant indexation as failure and do not churn the architecture without evidence.
 
-This phase happens **before FR/IT/PT expansion** so the next languages inherit the improved product rather than multiplying older UX debt.
+SEO runs in the background while Growth becomes active. Later Search Console/indexation work should sample live URLs and diagnose actual discovered-not-indexed, crawled-not-indexed, canonical, redirect and 404 patterns before code changes.
 
-First perform an audit of the actual implementation, then make deliberate changes.
+## Phase D — Premium UX / Design / Conversion uplift — 🟢 FIRST PASS COMPLETE, ITERATION CONTINUES
 
-Review desktop + mobile across:
+Premium Pass 1 is implemented and visually approved for the main home sections. The hero/header/airport-entry baseline was also materially upgraded and approved.
 
-landing/search entry → lookup → eligibility → passenger details → documents → claim → confirmation.
+Approved checkpoint:
 
-Also review Knowledge/SEO landing pages as acquisition-to-claim conversion surfaces.
+**`4645d1f` — `refine premium hero and stabilize Spanish header`**
 
-Scope:
+Approved surfaces include:
 
-- premium European claims/fintech visual hierarchy
-- typography and spacing system
-- trust and authority presentation
-- 20% incl. VAT / no-win-no-fee clarity
-- EU261 credibility without legal clutter
-- CTA hierarchy
-- progress/navigation
-- form friction and validation
-- loading/error/empty/success states
-- reassurance/copy hierarchy
-- responsive/mobile behavior
-- useful microinteractions
-- consistency between Knowledge and transactional surfaces
-- accessibility and performance
-- conversion instrumentation
+- Eligibility
+- Fee
+- Brand Story
+- Explore
+- hero elevation/trust/input/CTA treatment
+- AirportInput clear-control polish
+- localized desktop header stability
 
-Non-negotiable preservation gates:
+Preserve the approved clean homepage as the **control**. Further premium work is allowed, but it should increasingly be driven by a concrete brand/conversion hypothesis rather than endless cosmetic churn.
 
-- SEO semantics/indexation architecture
-- canonical/hreflang behavior
-- structured data
-- i18n architecture
-- locked legal/factual meaning
-- claim-flow behavior and data integrity
-- accessibility/performance
+A cinematic/emotional airport/traveler concept is promising as a **separate social/campaign landing challenger**, not an automatic replacement of the clean homepage.
 
-The premium phase must end with its own QA/checkpoint before language expansion resumes.
+Desired brand mix:
 
-## Phase E — New market expansion — ⏭️ FR → IT → PT
+`confidence + authority + speed + hope + joy + travel desire + positive payoff`
 
-Current expansion order:
+## Phase E — Growth Lab / Traction — 🔵 ACTIVE PRIMARY BUSINESS PHASE
 
-1. **French (FR)**
-2. **Italian (IT)**
-3. **Portuguese (PT)**
+The founder has explicitly decided to push hard on growth. The product is strong enough to meet real users. The immediate job is to create acquisition loops and learn from real behavior.
 
-For each market:
+### Organic / creator stack
 
-1. add a complete supported product/public-site locale
-2. validate the complete customer-facing claim journey
-3. apply the established Flight Number localization method
-4. apply Routes + Airports + Airlines + Countries + Delay Reasons as a coordinated package
-5. preserve canonical facts and legal/classification meaning
-6. validate market-native terminology and SEO presentation
-7. validate metadata, internal links, breadcrumbs/schema, canonical/hreflang and sitemap arithmetic
+- organic social media
+- TikTok/Reels native short-form
+- UGC
+- AI-UGC
+- Fiverr human UGC creators
+- Billo creators
+- direct outreach to relevant influencers the founder already follows
+- later creator/affiliate/CPA/hybrid structures where economics support them
+
+### Paid stack
+
+- Meta paid acquisition
+- TikTok paid acquisition
+- retargeting after sufficient traffic
+- roughly **€1,000 initial paid-media test budget** treated as a laboratory, not a scale budget
+
+### Short-form creative rule
+
+Default non-talking-head TikTok/Reels creative: **~7–8 seconds**.
+
+`instant hook → disruption/opportunity → up to €600 → FlightClaimly/action`
+
+Longer creative is acceptable when a real/UGC/talking-head person carries retention and needs time to explain.
+
+Initial creative set should be roughly **6–10 genuinely different hooks/concepts**, not dozens of blind variations.
+
+### Creative sourcing tests
+
+- **Creatify** — AI-UGC velocity
+- **Arcads** — compare realism/value against Creatify
+- **Fiverr** — prioritize true UGC creators who script/film/edit/deliver, not merely editors, unless raw footage already exists
+- **Billo** — human creator marketplace
+- **direct influencers** — authentic content + possible distribution
+
+Paid usage rights/whitelisting/territory/duration must be explicit where relevant.
+
+### Measurement gate
+
+Before meaningful spend, track at minimum:
+
+`landing page view → airport interaction → route completed → check clicked → claim started → claim completed`
+
+Carry source/campaign/ad/UTM context.
+
+As volume grows, optimize toward:
+
+`valid/profitable claim → pursued → recovered → commission → CAC/payback`
+
+Not CPC, impressions or raw clicks.
+
+### Landing experiment
+
+- approved clean homepage = **Control**
+- dedicated emotional/cinematic social landing = **Challenger**
+- same claim engine/backend
+- measure downstream conversion by source/landing
+
+Potential later funnel experiment:
+
+- current route-first entry
+- versus disruption-first (`Delayed / Cancelled / Other`)
+
+Do not copy competitor funnels blindly; instrument and test.
+
+## Phase F — Claims Operations — 🟦 PARALLEL ACTIVE
+
+Real cases are being worked while Growth ramps. The founder has recently spent several days deep in three active cases, including LOT/David, TAP/Reijo and Vanessa.
+
+Claims Operations roadmap remains:
+
+- Manual / Legacy Claim Engine
+- Claims Desk Workflow v2
+- Airline Submission Engine
+- Customer Communication Engine
+- Escalation Engine
+- Claims Intelligence from resolved outcomes
+- additional passenger-right regimes through deterministic legal architecture
+
+Case-specific facts must come from Claims docs/evidence, not from this strategic roadmap.
+
+## Phase G — New market expansion — ⏭️ FR → IT → PT
+
+Planned order remains:
+
+1. French
+2. Italian
+3. Portuguese
+
+But this is no longer an automatic immediate next action. Existing eight-locale SEO needs time to index and Growth now has a strong business case for priority. Reassess timing deliberately.
+
+When a new locale is started, it remains a complete package:
+
+1. public/product locale
+2. complete claim journey
+3. Flight Number localization
+4. Routes + Airports + Airlines + Countries + Delay Reasons
+5. canonical facts/legal meaning preserved
+6. market-native terminology/SEO
+7. metadata/internal links/schema/canonical/hreflang/sitemap
 8. typecheck/build/render QA
-9. checkpoint and lock before moving to the next market
+9. checkpoint and lock
 
-Use sitemap as the mass-discovery mechanism; manual indexing requests should remain representative and strategic.
+## Phase H — Search Console / Analytics quality cleanup
 
-## Phase F — European market opportunity + paid acquisition
+After Google has had reasonable processing time:
 
-Build a country-by-country TAM/SAM/SOM model using the best available evidence. Never confuse all delayed/disrupted passengers with compensation-eligible passengers.
+- indexation sampling
+- discovered-not-indexed / crawled-not-indexed
+- legacy duplicate/canonical issues
+- 404s / redirects
+- analytics hygiene
+- internal/admin/dev/automated traffic exclusion where appropriate
 
-Model **1%, 2%, 3% penetration** per market and translate into claims/day, pursued claims, successful recoveries, compensation volume and FlightClaimly gross commission.
+Never “fix” Search Console lag from stale reports without checking representative live URLs.
 
-Treat a 90%+ win rate as an aspirational success rate for screened/pursued claims, not every raw submission.
+# GROWTH FLYWHEEL
 
-Optimize acquisition against **cost per valid/profitable claim**, not CPC, clicks or raw leads. Measure traffic → started claim → submitted → valid/pursued → successful recovery → commission → CAC/payback.
+The intended FlightClaimly system is:
 
-## Phase G — Search Console / Analytics quality cleanup
-
-After Google has had reasonable time to process the enlarged footprint, audit legacy duplicate/canonical issues, 404s, redirects, discovered-not-indexed and crawled-not-indexed. Sample live URLs before changing code because Search Console can lag.
-
-Improve analytics hygiene so internal/admin/development/automated traffic does not distort acquisition and conversion reporting.
-
-# Claims Operations roadmap
-
-- **Manual / Legacy Claim Engine** — generalized staff-approved onboarding without customer PII in source-controlled helpers.
-- **Claims Desk Workflow v2** — living investigation workflow for evidence and unresolved questions.
-- **Airline Submission Engine** — structured demands, evidence packages, airline-specific channels, authority, correspondence, deadlines/follow-up.
-- **Customer Communication Engine** — verified claim-specific updates without premature conclusions.
-- **Escalation Engine** — ADR, NEB/regulatory, legal review, litigation/counsel handoff and enforcement support.
-- **Claims Intelligence** — resolved outcomes improve future evidence patterns, arguments, processing times and recovery playbooks.
-- **Additional passenger-right regimes** — through deterministic authority/legal-rule/assessment architecture, not ad-hoc parallel logic.
-
-# Content / Social roadmap
-
-Verified Knowledge → idea/hook/script → founder expertise/recording → production → channels → analytics → iteration.
-
-Content must be accurate, useful, modern and human, not written only for Google.
+**programmatic SEO indexes and compounds**  
+**+ organic social creates repeated awareness**  
+**+ 7–8s native creatives create attention**  
+**+ AI-UGC cheaply explores hooks**  
+**+ human UGC/influencers add authenticity and distribution**  
+**+ paid Meta/TikTok buys controlled learning**  
+**+ retargeting recaptures warmed traffic**  
+**+ conversion instrumentation reveals what actually works**  
+**+ real claims improve operational intelligence**  
+**→ more valid claims → more recoveries/data → stronger content/product/acquisition**
 
 # Locked architectural principles
 
@@ -185,14 +258,15 @@ Content must be accurate, useful, modern and human, not written only for Google.
 - research and legal evaluation remain separate
 - missing/conflicting facts remain unresolved until sufficiently verified
 - production build/deployment optimization remains locked unless separately re-evaluated
-- customer-specific data remains transactional and never leaks into source-controlled helpers
-- no FlightAware rerun merely for localization
+- customer-specific data remains transactional and never leaks into generic source-controlled helpers
+- no FlightAware rerun merely for localization/growth
 - locked locale work is not reopened without a concrete bug/legal/SEO reason
 - no destructive Git recovery, force push or broad staging
 
 # Immediate pointer
 
-**Now:** premium UX/upscale audit from the actual current code, then premium implementation and QA/checkpoint.  
-**Then:** FR → IT → PT complete localization packages.  
-**Growth:** European 1–3% market model and acquisition experiments.  
-**Later:** Search Console legacy cleanup + analytics hygiene while Claims Operations and Content/Growth continue.
+**Now:** Growth Lab — tracking, initial creatives, AI/human UGC sourcing, organic SoMe, Meta/TikTok tests, influencer outreach planning and social-landing challenger.  
+**In parallel:** three real Claims Operations cases.  
+**Background:** allow the eight-locale SEO footprint to index/compound; monitor rather than churn.  
+**Product:** preserve approved Premium Pass/control, then make further UX changes from concrete hypotheses/data.  
+**Later:** FR → IT → PT when business priority supports it; Search Console/indexation cleanup after sufficient processing time.
