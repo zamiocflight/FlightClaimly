@@ -16,51 +16,80 @@ function airlineCode(value: string) {
   return AIRLINE_CODE_MAP[code] || code;
 }
 
-function timeOnly(value?: string | null) {
-  if (!value) return "—";
-  const d = new Date(value);
-  if (Number.isNaN(d.getTime())) return "—";
-  return d.toLocaleTimeString("en-GB", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  });
-}
+type OagFlight = {
+  carrier?: {
+    iata?: string;
+    icao?: string;
+  };
+  flightNumber?: number | string;
+  serviceSuffix?: string;
+  departure?: {
+    airport?: {
+      iata?: string;
+      icao?: string;
+    };
+    date?: {
+      local?: string;
+      utc?: string;
+    };
+    time?: {
+      local?: string;
+      utc?: string;
+    };
+  };
+  arrival?: {
+    airport?: {
+      iata?: string;
+      icao?: string;
+    };
+    date?: {
+      local?: string;
+      utc?: string;
+    };
+    time?: {
+      local?: string;
+      utc?: string;
+    };
+  };
+  scheduleInstanceKey?: string;
+  statusKey?: string;
+  segmentInfo?: {
+    numberOfStops?: number;
+  };
+};
 
-async function fetchSchedules({
+async function fetchOagFlights({
   apiKey,
-  startDate,
-  endDate,
+  date,
   from,
   to,
   airline,
 }: {
   apiKey: string;
-  startDate: string;
-  endDate: string;
+  date: string;
   from: string;
   to: string;
   airline?: string;
 }) {
   const params = new URLSearchParams({
-    origin: from,
-    destination: to,
-    include_codeshares: "false",
-    include_regional: "true",
-    max_pages: "1",
+    DepartureDateTime: date,
+    DepartureAirport: from,
+    ArrivalAirport: to,
+    FlightType: "Scheduled",
+    CodeType: "IATA",
+    version: "v2",
+    Limit: "10",
   });
 
   if (airline) {
-    params.set("airline", airline);
+    params.set("CarrierCode", airline);
   }
 
   const res = await fetch(
-    `https://aeroapi.flightaware.com/aeroapi/schedules/${encodeURIComponent(
-      startDate
-    )}/${encodeURIComponent(endDate)}?${params.toString()}`,
+    `https://api.oag.com/flight-instances/?${params.toString()}`,
     {
       headers: {
-        "x-apikey": apiKey,
+        "Subscription-Key": apiKey,
         Accept: "application/json",
       },
       cache: "no-store",
@@ -69,20 +98,45 @@ async function fetchSchedules({
 
   if (!res.ok) {
     const text = await res.text();
-    console.error("FlightAware schedules error", res.status, text);
+    console.error("OAG flight search error", res.status, text);
     throw new Error("Flight search failed");
   }
 
   const data = await res.json();
-  return data.scheduled || data.schedules || data.flights || [];
+  const flights = (data.data || []) as OagFlight[];
+
+  if (!data.paging?.next) {
+    return flights;
+  }
+
+  const nextRes = await fetch(data.paging.next, {
+    headers: {
+      "Subscription-Key": apiKey,
+      Accept: "application/json",
+    },
+    cache: "no-store",
+  });
+
+  if (!nextRes.ok) {
+    const text = await nextRes.text();
+    console.error("OAG flight search pagination error", nextRes.status, text);
+    return flights;
+  }
+
+  const nextData = await nextRes.json();
+
+  return [
+    ...flights,
+    ...((nextData.data || []) as OagFlight[]),
+  ];
 }
 
 export async function GET(req: Request) {
-  const apiKey = process.env.FLIGHTAWARE_API_KEY;
+  const apiKey = process.env.OAG_FLIGHT_INFO_API_KEY;
 
   if (!apiKey) {
     return NextResponse.json(
-      { error: "Missing FlightAware API key" },
+      { error: "Missing OAG Flight Info API key" },
       { status: 500 }
     );
   }
@@ -100,59 +154,54 @@ export async function GET(req: Request) {
     );
   }
 
-  const startDate = date;
-  const nextDay = new Date(`${date}T00:00:00Z`);
-  nextDay.setUTCDate(nextDay.getUTCDate() + 1);
-  const endDate = nextDay.toISOString().slice(0, 10);
-
-  let schedules: any[] = [];
+  let flights: OagFlight[] = [];
 
   try {
     if (airline === "NORWEGIAN") {
       const [dy, d8] = await Promise.all([
-        fetchSchedules({ apiKey, startDate, endDate, from, to, airline: "DY" }),
-        fetchSchedules({ apiKey, startDate, endDate, from, to, airline: "D8" }),
+        fetchOagFlights({ apiKey, date, from, to, airline: "DY" }),
+        fetchOagFlights({ apiKey, date, from, to, airline: "D8" }),
       ]);
 
-      schedules = [...dy, ...d8];
+      flights = [...dy, ...d8];
     } else {
-      schedules = await fetchSchedules({
+      flights = await fetchOagFlights({
         apiKey,
-        startDate,
-        endDate,
+        date,
         from,
         to,
         airline: airline || undefined,
       });
     }
   } catch {
-    return NextResponse.json({ error: "Flight search failed" }, { status: 502 });
+    return NextResponse.json(
+      { error: "Flight search failed" },
+      { status: 502 }
+    );
   }
 
-  const items = schedules.map((f: any, idx: number) => {
-    const ident =
-      f.ident ||
-      f.flight_number ||
-      (f.airline && f.flight_number ? `${f.airline}${f.flight_number}` : null) ||
-      "Unknown";
+  const items = flights
+    .filter((flight) => (flight.segmentInfo?.numberOfStops ?? 0) === 0)
+    .map((flight, idx) => {
+      const carrier = flight.carrier?.iata || "";
+      const number = flight.flightNumber ?? "";
+      const suffix = flight.serviceSuffix || "";
+      const flightNumber = `${carrier}${number}${suffix}`;
 
-    return {
-      id: f.fa_flight_id || f.id || ident || String(idx),
-      flightNumber: String(ident).replace(/^SAS/, "SK"),
-      depTime: timeOnly(
-        f.scheduled_out ||
-          f.scheduled_off ||
-          f.scheduled_departure_time ||
-          f.departure_time
-      ),
-      arrTime: timeOnly(
-        f.scheduled_in ||
-          f.scheduled_on ||
-          f.scheduled_arrival_time ||
-          f.arrival_time
-      ),
-    };
-  });
+      return {
+        id:
+          flight.scheduleInstanceKey ||
+          flight.statusKey ||
+          flightNumber ||
+          String(idx),
+        flightNumber,
+        depTime: flight.departure?.time?.local || "—",
+        arrTime: flight.arrival?.time?.local || "—",
+      };
+    })
+    .filter((flight) => flight.flightNumber);
+
+  items.sort((a, b) => a.depTime.localeCompare(b.depTime));
 
   return NextResponse.json({ flights: items });
 }

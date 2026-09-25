@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { verifyFlightFlightAware } from "@/lib/flight/providers/flightaware";
+import { verifyFlightOag } from "@/lib/flight/providers/oag";
 import { calculateGreatCircleDistanceKm } from "@/lib/aviation/distance";
 
 type Leg = {
@@ -58,7 +58,7 @@ export async function POST(req: Request) {
     input.flightNumber;
 
 if (hasDirect) {
-  const result = await verifyFlightFlightAware({
+  const result = await verifyFlightOag({
     from: input.from,
     to: input.to,
     date: input.date,
