@@ -247,6 +247,10 @@ export default async function FeesPage({ params }: { params: Promise<{ locale: s
             <p className="mt-4 max-w-4xl text-xs leading-5 text-slate-500">
               {t.checked}
             </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href="/compare/refly" className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-bold text-slate-800 hover:border-emerald-400">FlightClaimly vs ReFly →</Link>
+              <Link href="/compare/airhelp" className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-bold text-slate-800 hover:border-emerald-400">FlightClaimly vs AirHelp →</Link>
+            </div>
           </div>
         </section>
 
