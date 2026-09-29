@@ -152,8 +152,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
+  const feesEntries: MetadataRoute.Sitemap = [
+    {
+      url: `${siteUrl}/en/fees`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+  ];
+
   return [
     ...staticEntries,
+    ...feesEntries,
     ...routeIndexEntries,
     ...routeEntries,
     ...airportIndexEntries,
