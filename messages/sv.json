@@ -3,370 +3,363 @@
     "sendFailed": "Kunde inte skicka, försök igen.",
     "noClaimId": "Inget ärende-ID i svar.",
     "network": "Nätverksfel. Försök igen.",
-      "invalidFlightNumber": "Ange ett giltigt flightnummer (t.ex. SK123)."
+    "invalidFlightNumber": "Ange ett giltigt flightnummer (t.ex. SK123)."
   },
-
-"check": {
+  "check": {
     "itinerary": {
-    "intro": "Okej, jag behöver bara några flyguppgifter för att kunna kontrollera om du har rätt till ersättning.",
-    "airline": "Flygbolag",
-    "airlinePlaceholder": "t.ex. British Airways",
-    "clearAirline": "Rensa flygbolag",
-    "flightNumber": "Flightnummer",
-    "date": "Flygdatum",
-    "continueHint": "Fyll i flygbolag, flightnummer och datum för varje delsträcka för att fortsätta.",
-    "missedConnection": {
-      "title": "Missade du ett anslutningsflyg?",
-      "yes": "Ja",
-      "no": "Nej"
-    },
-    "whatHappened": {
-      "title": "Vad hände?",
-      "disruption": {
-        "delayed": "Mitt flyg var försenat",
-        "cancelled": "Mitt flyg blev inställt",
-        "denied": "Jag nekades ombordstigning"
-      },
-      "whichFlight": {
-        "delayed": "Vilket flyg var försenat?",
-        "cancelled": "Vilket flyg blev inställt?",
-        "denied": "Vilket flyg nekades du ombordstigning på?"
-      },
-      "destinationFallback": "din slutdestination",
-      "arrivalQuestion": "Hur många timmar sent kom du fram till {destination}?",
-      "outcome": {
-        "gte3": "3 timmar eller mer",
-        "lt3": "Mindre än 3 timmar",
-        "never": "Kom aldrig fram"
-      },
-      "cancelNotice": {
-        "title": "Hur många dagar före avgång fick du information om ändringen?",
-        "lt14": "Mindre än 14 dagar",
-        "gte14": "14 dagar eller mer"
-      },
-      "volunteer": {
-        "title": "Gav du frivilligt upp din plats i utbyte mot andra förmåner från flygbolaget?",
+      "intro": "Okej, jag behöver bara några flyguppgifter för att kunna kontrollera om du har rätt till ersättning.",
+      "airline": "Flygbolag",
+      "airlinePlaceholder": "t.ex. British Airways",
+      "clearAirline": "Rensa flygbolag",
+      "flightNumber": "Flightnummer",
+      "date": "Flygdatum",
+      "continueHint": "Fyll i flygbolag, flightnummer och datum för varje delsträcka för att fortsätta.",
+      "missedConnection": {
+        "title": "Missade du ett anslutningsflyg?",
         "yes": "Ja",
         "no": "Nej"
+      },
+      "whatHappened": {
+        "title": "Vad hände?",
+        "disruption": {
+          "delayed": "Mitt flyg var försenat",
+          "cancelled": "Mitt flyg blev inställt",
+          "denied": "Jag nekades ombordstigning"
+        },
+        "whichFlight": {
+          "delayed": "Vilket flyg var försenat?",
+          "cancelled": "Vilket flyg blev inställt?",
+          "denied": "Vilket flyg nekades du ombordstigning på?"
+        },
+        "destinationFallback": "din slutdestination",
+        "arrivalQuestion": "Hur många timmar sent kom du fram till {destination}?",
+        "outcome": {
+          "gte3": "3 timmar eller mer",
+          "lt3": "Mindre än 3 timmar",
+          "never": "Kom aldrig fram"
+        },
+        "cancelNotice": {
+          "title": "Hur många dagar före avgång fick du information om ändringen?",
+          "lt14": "Mindre än 14 dagar",
+          "gte14": "14 dagar eller mer"
+        },
+        "volunteer": {
+          "title": "Gav du frivilligt upp din plats i utbyte mot andra förmåner från flygbolaget?",
+          "yes": "Ja",
+          "no": "Nej"
+        }
+      },
+      "missedConnectionHours": {
+        "title": "Hur lång blev förseningen vid din anslutning?",
+        "label": "Välj förseningens längd",
+        "placeholder": "Välj förseningens längd",
+        "neverArrived": "Jag kom aldrig fram",
+        "options": {
+          "0-1": "0–1 timmar",
+          "1-2": "1–2 timmar",
+          "2-3": "2–3 timmar",
+          "3-4": "3–4 timmar",
+          "4-5": "4–5 timmar",
+          "5-6": "5–6 timmar",
+          "6-7": "6–7 timmar",
+          "7-8": "7–8 timmar",
+          "8-9": "8–9 timmar",
+          "9plus": "9+ timmar"
+        }
       }
     },
-    "missedConnectionHours": {
-      "title": "Hur lång blev förseningen vid din anslutning?",
-      "label": "Välj förseningens längd",
-      "placeholder": "Välj förseningens längd",
-      "neverArrived": "Jag kom aldrig fram",
-      "options": {
-        "0-1": "0–1 timmar",
-        "1-2": "1–2 timmar",
-        "2-3": "2–3 timmar",
-        "3-4": "3–4 timmar",
-        "4-5": "4–5 timmar",
-        "5-6": "5–6 timmar",
-        "6-7": "6–7 timmar",
-        "7-8": "7–8 timmar",
-        "8-9": "8–9 timmar",
-        "9plus": "9+ timmar"
+    "itineraryNotice": {
+      "before": "Ange uppgifter för din",
+      "originalFlight": "ursprungliga flygresa",
+      "after": "inte en ombokad eller ersättande resa."
+    },
+    "thanks": {
+      "title": "Ditt ärende har skickats in",
+      "description": "Din fullmakt har signerats och ditt ärende förbereds nu för att skickas till flygbolaget.",
+      "claimId": "Ärende-ID",
+      "track": "Följ ditt ärende",
+      "emailNotice": "Vi har även skickat spårningslänken till din e-postadress.",
+      "reassurance": "FlightClaimly granskar nu ditt ärende och skickar det vidare till flygbolaget. Du får en uppdatering så snart något händer."
+    },
+    "finish": {
+      "finalizing": "Slutför ditt ärende…",
+      "errors": {
+        "missingClaimId": "Saknar ärende-ID.",
+        "finalizeFailed": "Något gick fel när ditt ärende skulle slutföras."
+      }
+    },
+    "additional": {
+      "title": "Har du haft några extra kostnader?",
+      "intro1": "Om ditt flyg var försenat kan du ha rätt till ersättning för mat, hotell eller transport.",
+      "intro2": {
+        "before": "Ladda upp kvitton så kan vi hjälpa dig att ",
+        "highlight": "få tillbaka ännu mer pengar",
+        "after": "."
+      },
+      "attachedFiles": "Bifogade filer",
+      "totalSize": "{size} totalt",
+      "remove": "Ta bort",
+      "removeFile": "Ta bort fil",
+      "skip": "Hoppa över",
+      "tip": "Tips: uppladdade kvitton kan öka din ersättning.",
+      "dropzone": {
+        "dragDrop": "Dra och släpp filer här",
+        "or": "eller",
+        "browse": "Välj filer",
+        "fileLimits": "PDF, JPG, PNG • Max {perFile} MB per fil • Max {total} MB totalt"
+      },
+      "errors": {
+        "missingClaim": "Saknar ärendereferens. Gå tillbaka och försök igen.",
+        "uploadFailed": "Uppladdningen misslyckades. Försök igen eller hoppa över så begär vi dokument senare vid behov.",
+        "unsupportedFormat": "\"{file}\" är inte ett stödd filformat. Ladda upp PDF, JPG eller PNG.",
+        "fileTooLarge": "\"{file}\" är för stor. Max {max} MB per fil.",
+        "totalTooLarge": "Den totala uppladdningen är för stor. Max {max} MB totalt."
+      }
+    },
+    "uploadsId": {
+      "title": "Nu behöver vi ditt ID eller pass. Detta är viktigt för ditt ärende hos flygbolaget.",
+      "privacyNotice": "Ditt dokument används endast för att behandla ärendet och raderas inom 30 dagar efter att ärendet är avslutat.",
+      "uploadPromptBefore": "Ladda upp ditt",
+      "idOrPassport": "ID eller pass",
+      "attachedFiles": "Bifogade filer",
+      "totalSize": "{size} totalt",
+      "remove": "Ta bort",
+      "removeFile": "Ta bort fil",
+      "highWarning": "Vissa flygbolag kräver ofta identitetsverifiering innan de hanterar tredjepartsärenden. Om du laddar upp ditt ID nu kan det minska förseningar senare.",
+      "mediumWarning": "Att ladda upp ID nu kan hjälpa till att snabba upp handläggningen om flygbolaget begär verifiering.",
+      "dropzone": {
+        "dragDrop": "Dra och släpp filer här",
+        "takePhoto": "Ta ett foto av ditt ID eller pass",
+        "or": "eller",
+        "camera": "Använd mobilkameran för att snabbt ladda upp ditt pass eller ID",
+        "browse": "Välj filer",
+        "uploadPhoto": "Ladda upp eller ta foto",
+        "fileLimits": "PDF, JPG, PNG • Max {perFile} MB per fil • Max {total} MB totalt"
+      },
+      "errors": {
+        "missingClaim": "Saknar ärendereferens. Gå tillbaka och försök igen.",
+        "uploadFailed": "Uppladdningen misslyckades. Försök igen.",
+        "unsupportedFormat": "\"{file}\" är inte ett stödd filformat. Ladda upp PDF, JPG eller PNG.",
+        "fileTooLarge": "\"{file}\" är för stor. Max {max} MB per fil.",
+        "totalTooLarge": "Den totala uppladdningen är för stor. Max {max} MB totalt."
+      }
+    },
+    "uploads": {
+      "title": "Ladda upp dokument",
+      "attachedFiles": "Bifogade filer",
+      "totalSize": "{size} totalt",
+      "remove": "Ta bort",
+      "removeFile": "Ta bort fil",
+      "description": {
+        "before": "Att ladda upp ditt",
+        "boardingPass": "boardingkort",
+        "middle": ", bokningsbekräftelse eller kvitton kan hjälpa oss att ",
+        "faster": "behandla ditt ärende snabbare",
+        "expenses": "Om du haft extra kostnader (hotell, mat eller transport) kan kvitton hjälpa oss att ",
+        "moreMoney": "återkräva ännu mer pengar",
+        "after": " åt dig."
+      },
+      "dropzone": {
+        "dragDrop": "Dra och släpp filer här",
+        "takePhoto": "Ta ett foto av ditt boardingkort eller dina kvitton",
+        "or": "eller",
+        "camera": "Använd mobilkameran för att snabbt ladda upp dokument",
+        "browse": "Välj filer",
+        "uploadPhoto": "Ladda upp eller ta foto",
+        "fileLimits": "PDF, JPG, PNG • Max {perFile} MB per fil • Max {total} MB totalt"
+      },
+      "errors": {
+        "missingClaim": "Saknar ärendereferens. Gå tillbaka och försök igen.",
+        "uploadFailed": "Uppladdningen misslyckades. Försök igen eller hoppa över så begär vi dokument senare vid behov.",
+        "unsupportedFormat": "\"{file}\" är inte ett stödd filformat. Ladda upp PDF, JPG eller PNG.",
+        "fileTooLarge": "\"{file}\" är för stor. Max {max} MB per fil.",
+        "totalTooLarge": "Den totala uppladdningen är för stor. Max {max} MB totalt."
+      }
+    },
+    "authorization": {
+      "claimCreationError": "Något gick fel när ärendet skulle skapas.",
+      "amountFallback": "upp till €600",
+      "titleBefore": "Goda nyheter! Det ser ut som att du har rätt till",
+      "titleAfterAmount": "per person enligt EU261.",
+      "titleSecondLine": "Signera nedan för att ta emot ersättningen du har rätt till.",
+      "signaturePlaceholder": "Klicka och signera här",
+      "clearSignature": "Rensa signatur",
+      "important": "Viktigt",
+      "signatureGuidance": "Din signatur ska likna signaturen på ditt ID.",
+      "feeTitle": "Ja – no win, no fee. Du betalar bara 20% inkl. moms om vi lyckas.",
+      "feeSubtitle": "Avgiften dras från din ersättning.",
+      "legal": {
+        "before": "Genom att signera godkänner du våra",
+        "terms": "villkor",
+        "and": "och",
+        "priceList": "prislista",
+        "middle": "och ger oss tillstånd att använda din signatur på",
+        "authorityDocument": "fullmakten"
+      }
+    },
+    "bookingReference": {
+      "title": "Vad är din bokningsreferens?",
+      "placeholder": "t.ex. DS27K3 eller YLEHPW",
+      "helpTitle": "Hur hittar jag min bokningsreferens?",
+      "helpText1": "Din bokningsreferens (PNR) finns vanligtvis i bokningsbekräftelsen från flygbolaget eller resebyrån. Den är oftast 5–8 tecken lång och består av bokstäver och siffror.",
+      "helpText2": "Den kan också finnas på ditt boardingkort eller i flygbolagets app.",
+      "examples": "Exempel"
+    },
+    "passengerDetails": {
+      "title": "Dina kontaktuppgifter",
+      "claimOwner": "Anspråksägare",
+      "address": "Adress",
+      "addressPlaceholder": "Gata och nummer",
+      "address2": "Adressrad 2",
+      "address2Placeholder": "Lägenhet, våning, etc.",
+      "city": "Stad",
+      "postalCode": "Postnummer",
+      "state": "Delstat/Län",
+      "statePlaceholder": "Delstat / Region",
+      "country": "Land",
+      "countryPlaceholder": "Börja skriva land...",
+      "clearCountry": "Rensa land",
+      "phone": "Telefonnummer",
+      "optional": "(valfritt)"
+    },
+    "passengers": {
+      "title": "Andra passagerare",
+      "info": "Passagerare du reste med kan också ha rätt till ersättning.",
+      "travelingWithOthers": "Jag reste med andra",
+      "travelingAlone": "Jag reste ensam",
+      "potentialCompensation": "Möjlig ersättning",
+      "manualReview": "Manuell granskning",
+      "totalForOnePassenger": "Totalt för {count} passagerare",
+      "totalForPassengers": "Totalt för {count} passagerare",
+      "perPassenger": "Per passagerare",
+      "passengerNumber": "Passagerare {number}",
+      "remove": "Ta bort",
+      "under18": "Den här personen är under 18 år",
+      "firstName": "Förnamn",
+      "lastName": "Efternamn",
+      "email": "E-post",
+      "optional": "(valfritt)",
+      "addPassenger": "+ Lägg till passagerare"
+    },
+    "claimOwner": {
+      "title": "Vem ska få ersättningen?",
+      "subtitle": "Du är bara ett steg från att skicka in ditt ersättningsärende",
+      "firstNameLabel": "Förnamn",
+      "firstNamePlaceholder": "Förnamn",
+      "firstNameHint": "Måste matcha ditt ID",
+      "lastNameLabel": "Efternamn",
+      "lastNamePlaceholder": "Efternamn",
+      "lastNameHint": "Ange hela ditt efternamn exakt som det står på ditt ID eller pass.",
+      "emailLabel": "E-post",
+      "emailSubtitle": "Vi skickar uppdateringar och utbetalningsinformation hit",
+      "emailHint": "Vi använder din e-post för att hålla dig uppdaterad om ditt ärende.",
+      "legal": {
+        "before": "Genom att fortsätta godkänner du våra",
+        "terms": "villkor",
+        "and": "och",
+        "privacy": "integritetspolicy"
+      }
+    },
+    "verify": {
+      "loading": "Kontrollerar flygstatus…",
+      "verifyFailed": "Vi kunde inte verifiera flyget. Gå tillbaka och kontrollera dina uppgifter.",
+      "eligibleTitle": "Goda nyheter – ditt flyg kan ge rätt till ersättning.",
+      "notEligibleTitle": "Inte ersättningsberättigad enligt EU/UK 261.",
+      "notEligibleExplanation": "Ditt flyg verkar inte vara minst 3 timmar försenat vid ankomst. Därför kan vi inte gå vidare med ett ersättningsärende enligt EU/UK 261.",
+      "airlineFallback": "Flygbolag",
+      "flight": "Flyg",
+      "flightDetails": "Flyguppgifter",
+      "badgeEligible": "ERSÄTTNINGSBERÄTTIGAD",
+      "badgeNotEligible": "INTE ERSÄTTNINGSBERÄTTIGAD",
+      "potentialCompensation": "Möjlig ersättning",
+      "compensation": "Ersättning",
+      "entitled": "Du kan ha rätt till ersättning enligt EU-lagstiftning",
+      "manualReview": "Detta ärende kan behöva granskas manuellt",
+      "perPassenger": "per passagerare",
+      "scheduledArrivalTime": "Planerad ankomsttid",
+      "actualArrivalTime": "Faktisk ankomsttid",
+      "flightDistance": "Flygdistans",
+      "totalDelay": "Total försening",
+      "confirmTitle": "Bekräfta dina flyguppgifter",
+      "confirmYes": "Ja, detta är mitt flyg",
+      "confirmNo": "Nej, något är fel",
+      "correctDetails": "Gå tillbaka och korrigera dina flyguppgifter innan du fortsätter.",
+      "delay": {
+        "noSignificantDelay": "Ingen betydande försening upptäckt",
+        "arrivedOneMinuteEarly": "Ankom 1 minut tidigt",
+        "arrivedMinutesEarly": "Ankom {minutes} minuter tidigt",
+        "arrivedOnTime": "Ankom i tid",
+        "minutes": "{minutes} minuter",
+        "hours": "{hours} timmar",
+        "hoursMinutes": "{hours} timmar {minutes} minuter"
+      }
+    },
+    "direct": {
+      "departureDateTitle": "Vilket datum skulle ditt flyg avgå?",
+      "dateLabel": "Datum",
+      "airlineTitle": "Vilket flygbolag flög du med?",
+      "airlineLabel": "Flygbolag",
+      "airlinePlaceholder": "t.ex. British Airways",
+      "clearAirline": "Rensa flygbolag",
+      "flightListTitle": "Välj ditt flyg från listan nedan:",
+      "scheduledTime": "Planerad tid",
+      "flightNumber": "Flightnummer",
+      "loadingFlights": "Laddar tillgängliga flyg…",
+      "noFlightsFound": "Inga flyg hittades för den här rutten. Du kan fortfarande fortsätta manuellt.",
+      "manualEnterDetails": "Ange flyguppgifter manuellt",
+      "manualCantFind": "Jag hittar inte mitt flyg",
+      "manualFlightNumberLabel": "Ange ditt flightnummer",
+      "manualFlightNumberPlaceholder": "t.ex. SK2814",
+      "errors": {
+        "searchFailed": "Flygsökningen misslyckades",
+        "loadFailed": "Vi kunde inte ladda flygen. Du kan fortfarande fortsätta manuellt."
+      }
+    },
+    "directOrLayover": {
+      "title": "Var detta ett direktflyg?",
+      "routeTitle": "Vart flög du?",
+      "fromLabel": "Avreseflygplats",
+      "toLabel": "Slutdestination",
+      "airportOrCity": "Flygplats eller stad",
+      "direct": "Direktflyg",
+      "layovers": "Med mellanlandningar",
+      "connectionTitle": "Var hade du din anslutning?",
+      "cityOrAirport": "Stad eller flygplats",
+      "airportPlaceholder": "t.ex. London eller LHR",
+      "removeLayover": "Ta bort mellanlandning",
+      "addAirport": "+ Lägg till ytterligare en flygplats",
+      "connectionRequired": "Lägg till minst en anslutningsflygplats för att fortsätta."
+    },
+    "layout": {
+      "progress": "Ditt ärendes status",
+      "back": "Tillbaka",
+      "continue": "Fortsätt",
+      "processing": "Behandlar...",
+      "steps": {
+        "eligibility": "Kontroll",
+        "passengerDetails": "Passageraruppgifter",
+        "documents": "Dokument",
+        "finish": "Slutför"
+      },
+      "footer": {
+        "help": "Hjälp",
+        "terms": "Villkor",
+        "privacy": "Integritetspolicy"
       }
     }
   },
-  "itineraryNotice": {
-  "before": "Ange uppgifter för din",
-  "originalFlight": "ursprungliga flygresa",
-  "after": "inte en ombokad eller ersättande resa."
-},
-  "thanks": {
-  "title": "Ditt ärende har skickats in",
-  "description": "Din fullmakt har signerats och ditt ärende förbereds nu för att skickas till flygbolaget.",
-  "claimId": "Ärende-ID",
-  "track": "Följ ditt ärende",
-  "emailNotice": "Vi har även skickat spårningslänken till din e-postadress.",
-  "reassurance": "FlightClaimly granskar nu ditt ärende och skickar det vidare till flygbolaget. Du får en uppdatering så snart något händer."
-},
-  "finish": {
-  "finalizing": "Slutför ditt ärende…",
-  "errors": {
-    "missingClaimId": "Saknar ärende-ID.",
-    "finalizeFailed": "Något gick fel när ditt ärende skulle slutföras."
-  }
-},
-  "additional": {
-  "title": "Har du haft några extra kostnader?",
-  "intro1": "Om ditt flyg var försenat kan du ha rätt till ersättning för mat, hotell eller transport.",
-  "intro2": {
-    "before": "Ladda upp kvitton så kan vi hjälpa dig att ",
-    "highlight": "få tillbaka ännu mer pengar",
-    "after": "."
-  },
-  "attachedFiles": "Bifogade filer",
-  "totalSize": "{size} totalt",
-  "remove": "Ta bort",
-  "removeFile": "Ta bort fil",
-  "skip": "Hoppa över",
-  "tip": "Tips: uppladdade kvitton kan öka din ersättning.",
-  "dropzone": {
-    "dragDrop": "Dra och släpp filer här",
-    "or": "eller",
-    "browse": "Välj filer",
-    "fileLimits": "PDF, JPG, PNG • Max {perFile} MB per fil • Max {total} MB totalt"
-  },
-  "errors": {
-    "missingClaim": "Saknar ärendereferens. Gå tillbaka och försök igen.",
-    "uploadFailed": "Uppladdningen misslyckades. Försök igen eller hoppa över så begär vi dokument senare vid behov.",
-    "unsupportedFormat": "\"{file}\" är inte ett stödd filformat. Ladda upp PDF, JPG eller PNG.",
-    "fileTooLarge": "\"{file}\" är för stor. Max {max} MB per fil.",
-    "totalTooLarge": "Den totala uppladdningen är för stor. Max {max} MB totalt."
-  }
-},
-  "uploadsId": {
-  "title": "Nu behöver vi ditt ID eller pass. Detta är viktigt för ditt ärende hos flygbolaget.",
-  "privacyNotice": "Ditt dokument används endast för att behandla ärendet och raderas inom 30 dagar efter att ärendet är avslutat.",
-  "uploadPromptBefore": "Ladda upp ditt",
-  "idOrPassport": "ID eller pass",
-  "attachedFiles": "Bifogade filer",
-  "totalSize": "{size} totalt",
-  "remove": "Ta bort",
-  "removeFile": "Ta bort fil",
-  "highWarning": "Vissa flygbolag kräver ofta identitetsverifiering innan de hanterar tredjepartsärenden. Om du laddar upp ditt ID nu kan det minska förseningar senare.",
-  "mediumWarning": "Att ladda upp ID nu kan hjälpa till att snabba upp handläggningen om flygbolaget begär verifiering.",
-  "dropzone": {
-    "dragDrop": "Dra och släpp filer här",
-    "takePhoto": "Ta ett foto av ditt ID eller pass",
-    "or": "eller",
-    "camera": "Använd mobilkameran för att snabbt ladda upp ditt pass eller ID",
-    "browse": "Välj filer",
-    "uploadPhoto": "Ladda upp eller ta foto",
-    "fileLimits": "PDF, JPG, PNG • Max {perFile} MB per fil • Max {total} MB totalt"
-  },
-  "errors": {
-    "missingClaim": "Saknar ärendereferens. Gå tillbaka och försök igen.",
-    "uploadFailed": "Uppladdningen misslyckades. Försök igen.",
-    "unsupportedFormat": "\"{file}\" är inte ett stödd filformat. Ladda upp PDF, JPG eller PNG.",
-    "fileTooLarge": "\"{file}\" är för stor. Max {max} MB per fil.",
-    "totalTooLarge": "Den totala uppladdningen är för stor. Max {max} MB totalt."
-  }
-},
-  "uploads": {
-  "title": "Ladda upp dokument",
-  "attachedFiles": "Bifogade filer",
-  "totalSize": "{size} totalt",
-  "remove": "Ta bort",
-  "removeFile": "Ta bort fil",
-  "description": {
-    "before": "Att ladda upp ditt",
-    "boardingPass": "boardingkort",
-    "middle": ", bokningsbekräftelse eller kvitton kan hjälpa oss att ",
-    "faster": "behandla ditt ärende snabbare",
-    "expenses": "Om du haft extra kostnader (hotell, mat eller transport) kan kvitton hjälpa oss att ",
-    "moreMoney": "återkräva ännu mer pengar",
-    "after": " åt dig."
-  },
-  "dropzone": {
-    "dragDrop": "Dra och släpp filer här",
-    "takePhoto": "Ta ett foto av ditt boardingkort eller dina kvitton",
-    "or": "eller",
-    "camera": "Använd mobilkameran för att snabbt ladda upp dokument",
-    "browse": "Välj filer",
-    "uploadPhoto": "Ladda upp eller ta foto",
-    "fileLimits": "PDF, JPG, PNG • Max {perFile} MB per fil • Max {total} MB totalt"
-  },
-  "errors": {
-    "missingClaim": "Saknar ärendereferens. Gå tillbaka och försök igen.",
-    "uploadFailed": "Uppladdningen misslyckades. Försök igen eller hoppa över så begär vi dokument senare vid behov.",
-    "unsupportedFormat": "\"{file}\" är inte ett stödd filformat. Ladda upp PDF, JPG eller PNG.",
-    "fileTooLarge": "\"{file}\" är för stor. Max {max} MB per fil.",
-    "totalTooLarge": "Den totala uppladdningen är för stor. Max {max} MB totalt."
-  }
-},
-  "authorization": {
-  "claimCreationError": "Något gick fel när ärendet skulle skapas.",
-  "amountFallback": "upp till €600",
-  "titleBefore": "Goda nyheter! Det ser ut som att du har rätt till",
-  "titleAfterAmount": "per person enligt EU261.",
-  "titleSecondLine": "Signera nedan för att ta emot ersättningen du har rätt till.",
-  "signaturePlaceholder": "Klicka och signera här",
-  "clearSignature": "Rensa signatur",
-  "important": "Viktigt",
-  "signatureGuidance": "Din signatur ska likna signaturen på ditt ID.",
-  "feeTitle": "Ja – no win, no fee. Du betalar bara 20% inkl. moms om vi lyckas.",
-  "feeSubtitle": "Avgiften dras från din ersättning.",
-  "legal": {
-    "before": "Genom att signera godkänner du våra",
-    "terms": "villkor",
-    "and": "och",
-    "priceList": "prislista",
-    "middle": "och ger oss tillstånd att använda din signatur på",
-    "authorityDocument": "fullmakten"
-  }
-},
-  "bookingReference": {
-  "title": "Vad är din bokningsreferens?",
-  "placeholder": "t.ex. DS27K3 eller YLEHPW",
-  "helpTitle": "Hur hittar jag min bokningsreferens?",
-  "helpText1": "Din bokningsreferens (PNR) finns vanligtvis i bokningsbekräftelsen från flygbolaget eller resebyrån. Den är oftast 5–8 tecken lång och består av bokstäver och siffror.",
-  "helpText2": "Den kan också finnas på ditt boardingkort eller i flygbolagets app.",
-  "examples": "Exempel"
-},
-  "passengerDetails": {
-  "title": "Dina kontaktuppgifter",
-  "claimOwner": "Anspråksägare",
-  "address": "Adress",
-  "addressPlaceholder": "Gata och nummer",
-  "address2": "Adressrad 2",
-  "address2Placeholder": "Lägenhet, våning, etc.",
-  "city": "Stad",
-  "postalCode": "Postnummer",
-  "state": "Delstat/Län",
-  "statePlaceholder": "Delstat / Region",
-  "country": "Land",
-  "countryPlaceholder": "Börja skriva land...",
-  "clearCountry": "Rensa land",
-  "phone": "Telefonnummer",
-  "optional": "(valfritt)"
-},
-  "passengers": {
-  "title": "Andra passagerare",
-  "info": "Passagerare du reste med kan också ha rätt till ersättning.",
-  "travelingWithOthers": "Jag reste med andra",
-  "travelingAlone": "Jag reste ensam",
-  "potentialCompensation": "Möjlig ersättning",
-  "manualReview": "Manuell granskning",
-  "totalForOnePassenger": "Totalt för {count} passagerare",
-  "totalForPassengers": "Totalt för {count} passagerare",
-  "perPassenger": "Per passagerare",
-  "passengerNumber": "Passagerare {number}",
-  "remove": "Ta bort",
-  "under18": "Den här personen är under 18 år",
-  "firstName": "Förnamn",
-  "lastName": "Efternamn",
-  "email": "E-post",
-  "optional": "(valfritt)",
-  "addPassenger": "+ Lägg till passagerare"
-},
-  "claimOwner": {
-  "title": "Vem ska få ersättningen?",
-  "subtitle": "Du är bara ett steg från att skicka in ditt ersättningsärende",
-  "firstNameLabel": "Förnamn",
-  "firstNamePlaceholder": "Förnamn",
-  "firstNameHint": "Måste matcha ditt ID",
-  "lastNameLabel": "Efternamn",
-  "lastNamePlaceholder": "Efternamn",
-  "lastNameHint": "Ange hela ditt efternamn exakt som det står på ditt ID eller pass.",
-  "emailLabel": "E-post",
-  "emailSubtitle": "Vi skickar uppdateringar och utbetalningsinformation hit",
-  "emailHint": "Vi använder din e-post för att hålla dig uppdaterad om ditt ärende.",
-  "legal": {
-    "before": "Genom att fortsätta godkänner du våra",
-    "terms": "villkor",
-    "and": "och",
-    "privacy": "integritetspolicy"
-  }
-},
-  "verify": {
-  "loading": "Kontrollerar flygstatus…",
-  "verifyFailed": "Vi kunde inte verifiera flyget. Gå tillbaka och kontrollera dina uppgifter.",
-  "eligibleTitle": "Goda nyheter – ditt flyg kan ge rätt till ersättning.",
-  "notEligibleTitle": "Inte ersättningsberättigad enligt EU/UK 261.",
-  "notEligibleExplanation": "Ditt flyg verkar inte vara minst 3 timmar försenat vid ankomst. Därför kan vi inte gå vidare med ett ersättningsärende enligt EU/UK 261.",
-  "airlineFallback": "Flygbolag",
-  "flight": "Flyg",
-  "flightDetails": "Flyguppgifter",
-  "badgeEligible": "ERSÄTTNINGSBERÄTTIGAD",
-  "badgeNotEligible": "INTE ERSÄTTNINGSBERÄTTIGAD",
-  "potentialCompensation": "Möjlig ersättning",
-  "compensation": "Ersättning",
-  "entitled": "Du kan ha rätt till ersättning enligt EU-lagstiftning",
-  "manualReview": "Detta ärende kan behöva granskas manuellt",
-  "perPassenger": "per passagerare",
-  "scheduledArrivalTime": "Planerad ankomsttid",
-  "actualArrivalTime": "Faktisk ankomsttid",
-  "flightDistance": "Flygdistans",
-  "totalDelay": "Total försening",
-  "confirmTitle": "Bekräfta dina flyguppgifter",
-  "confirmYes": "Ja, detta är mitt flyg",
-  "confirmNo": "Nej, något är fel",
-  "correctDetails": "Gå tillbaka och korrigera dina flyguppgifter innan du fortsätter.",
-  "delay": {
-    "noSignificantDelay": "Ingen betydande försening upptäckt",
-    "arrivedOneMinuteEarly": "Ankom 1 minut tidigt",
-    "arrivedMinutesEarly": "Ankom {minutes} minuter tidigt",
-    "arrivedOnTime": "Ankom i tid",
-    "minutes": "{minutes} minuter",
-    "hours": "{hours} timmar",
-    "hoursMinutes": "{hours} timmar {minutes} minuter"
-  }
-},
-  "direct": {
-  "departureDateTitle": "Vilket datum skulle ditt flyg avgå?",
-  "dateLabel": "Datum",
-  "airlineTitle": "Vilket flygbolag flög du med?",
-  "airlineLabel": "Flygbolag",
-  "airlinePlaceholder": "t.ex. British Airways",
-  "clearAirline": "Rensa flygbolag",
-  "flightListTitle": "Välj ditt flyg från listan nedan:",
-  "scheduledTime": "Planerad tid",
-  "flightNumber": "Flightnummer",
-  "loadingFlights": "Laddar tillgängliga flyg…",
-  "noFlightsFound": "Inga flyg hittades för den här rutten. Du kan fortfarande fortsätta manuellt.",
-  "manualEnterDetails": "Ange flyguppgifter manuellt",
-  "manualCantFind": "Jag hittar inte mitt flyg",
-  "manualFlightNumberLabel": "Ange ditt flightnummer",
-  "manualFlightNumberPlaceholder": "t.ex. SK2814",
-  "errors": {
-    "searchFailed": "Flygsökningen misslyckades",
-    "loadFailed": "Vi kunde inte ladda flygen. Du kan fortfarande fortsätta manuellt."
-  }
-},
-  "directOrLayover": {
-    "title": "Var detta ett direktflyg?",
-    "routeTitle": "Vart flög du?",
-    "fromLabel": "Avreseflygplats",
-    "toLabel": "Slutdestination",
-    "airportOrCity": "Flygplats eller stad",
-    "direct": "Direktflyg",
-    "layovers": "Med mellanlandningar",
-    "connectionTitle": "Var hade du din anslutning?",
-    "cityOrAirport": "Stad eller flygplats",
-    "airportPlaceholder": "t.ex. London eller LHR",
-    "removeLayover": "Ta bort mellanlandning",
-    "addAirport": "+ Lägg till ytterligare en flygplats",
-    "connectionRequired": "Lägg till minst en anslutningsflygplats för att fortsätta."
-  },
-
-"layout": {
-  "progress": "Ditt ärendes status",
-  "back": "Tillbaka",
-  "continue": "Fortsätt",
-  "processing": "Behandlar...",
-
-  "steps": {
-    "eligibility": "Kontroll",
-    "passengerDetails": "Passageraruppgifter",
-    "documents": "Dokument",
-    "finish": "Slutför"
-  },
-
-  "footer": {
-    "help": "Hjälp",
-    "terms": "Villkor",
-    "privacy": "Integritetspolicy"
-  }
-}
-},
-
   "header": {
     "language": {
       "label": "SV ▾",
       "aria": "Byt språk"
     }
   },
-
   "mobileNav": {
     "title": "Meny",
     "openAria": "Öppna meny",
     "openSr": "Öppna meny",
     "closeAria": "Stäng meny"
   },
-
   "nav": {
     "compensation": "Få kompensation",
     "delays": "Flygförseningar",
@@ -378,7 +371,6 @@
     "track": "Följ ärende",
     "langLabel": "Språk"
   },
-
   "track": {
     "button": "Följ ärende",
     "title": "Följ ditt ärende",
@@ -396,11 +388,9 @@
       "errorTechnical": "Tekniskt fel – försök igen om en stund."
     }
   },
-
   "sections": {
     "readMore": "Läs mer"
   },
-
   "how": {
     "badge": "Så funkar det",
     "title": "Dina 3 enkla steg till kompensation",
@@ -425,13 +415,11 @@
       }
     }
   },
-
   "trustRow": {
     "eu261": "EU261–rättigheter",
     "lowFee": "No win, no fee – låg avgift",
     "gdpr": "GDPR-säker hantering"
   },
-
   "why": {
     "title": "Varför välja FlightClaimly?",
     "cards": {
@@ -452,7 +440,6 @@
       }
     }
   },
-
   "footer": {
     "pitch": "Vi hjälper resenärer att få den ersättning de har rätt till enligt EU261 – utan förskottskostnader.",
     "badges": {
@@ -474,39 +461,37 @@
       "disclaimer": "FlightClaimly är en fristående aktör och inte affilierad med flygbolagen."
     }
   },
-
-"hero": {
-  "badges": {
-    "eu": "EU261 / UK261",
-    "fee": "LÅG AVGIFT",
-    "noWinNoFee": "INGEN ERSÄTTNING, INGEN AVGIFT"
+  "hero": {
+    "badges": {
+      "eu": "EU261 / UK261",
+      "fee": "LÅG AVGIFT",
+      "noWinNoFee": "INGEN ERSÄTTNING, INGEN AVGIFT"
+    },
+    "title": "Få upp till €600 i ersättning för försenade eller inställda flyg – utan krångel.",
+    "titleLine1": "Få upp till €600 i ersättning",
+    "titleLine2": "för försenade eller inställda flyg!",
+    "fromLabel": "Avreseflygplats",
+    "fromPlaceholder": "Avreseflygplats",
+    "toLabel": "Slutdestination",
+    "toPlaceholder": "Slutdestination",
+    "subtitle": {
+      "beforeDelayed": "Kontrollera om ditt",
+      "delayedLink": "försenade flyg",
+      "between": "eller",
+      "cancelledLink": "inställda flyg",
+      "afterCancelled": "ger rätt till ersättning enligt",
+      "eu261Link": "EU261",
+      "afterEu261": ". Vi hanterar ditt ärende med flygbolaget – du betalar bara om du får ersättning."
+    },
+    "cta": "Kontrollera mitt flyg nu",
+    "searchCta": "Kontrollera ersättning",
+    "trust": {
+      "beforeLink": "Tar ungefär 2 minuter. Ingen betalning om du inte får ersättning –",
+      "link": "läs mer om vår avgift.",
+      "afterLink": ""
+    }
   },
-  "title": "Få upp till €600 i ersättning för försenade eller inställda flyg – utan krångel.",
-  "titleLine1": "Få upp till €600 i ersättning",
-  "titleLine2": "för försenade eller inställda flyg!",
-  "fromLabel": "Avreseflygplats",
-  "fromPlaceholder": "Avreseflygplats",
-  "toLabel": "Slutdestination",
-  "toPlaceholder": "Slutdestination",
-  "subtitle": {
-    "beforeDelayed": "Kontrollera om ditt",
-    "delayedLink": "försenade flyg",
-    "between": "eller",
-    "cancelledLink": "inställda flyg",
-    "afterCancelled": "ger rätt till ersättning enligt",
-    "eu261Link": "EU261",
-    "afterEu261": ". Vi hanterar ditt ärende med flygbolaget – du betalar bara om du får ersättning."
-  },
-  "cta": "Kontrollera mitt flyg nu",
-  "searchCta": "Kontrollera ersättning",
-  "trust": {
-    "beforeLink": "Tar ungefär 2 minuter. Ingen betalning om du inte får ersättning –",
-    "link": "läs mer om vår avgift.",
-    "afterLink": ""
-  }
-},
-
-    "precheck": {
+  "precheck": {
     "steps": {
       "step1": "Kolla ditt flyg",
       "step2": "Fyll i dina uppgifter"
@@ -540,9 +525,9 @@
         "checking": "Kontrollerar…"
       },
       "result": {
-  "eligible": "Baserat på historisk flygdata verkar ditt flyg ha varit försenat mer än 3 timmar. Du kan ha rätt till ersättning.",
-  "notConfirmed": "Vi kunde inte bekräfta en försening över 3 timmar med tillgänglig data. Du kan ändå gå vidare – flygbolagets uppgifter kan skilja sig."
-}
+        "eligible": "Baserat på historisk flygdata verkar ditt flyg ha varit försenat mer än 3 timmar. Du kan ha rätt till ersättning.",
+        "notConfirmed": "Vi kunde inte bekräfta en försening över 3 timmar med tillgänglig data. Du kan ändå gå vidare – flygbolagets uppgifter kan skilja sig."
+      }
     },
     "details": {
       "goodNewsStrong": "Bra nyheter!",
@@ -578,12 +563,11 @@
       }
     }
   },
-
   "faq": {
-      "meta": {
-    "title": "Vanliga frågor om flygkompensation | FlightClaimly",
-    "description": "Svar på vanliga frågor om EU261, flygförseningar, inställda flyg, ersättning och hur FlightClaimly hjälper dig att få rätt kompensation."
-  },
+    "meta": {
+      "title": "Vanliga frågor om flygkompensation | FlightClaimly",
+      "description": "Svar på vanliga frågor om EU261, flygförseningar, inställda flyg, ersättning och hur FlightClaimly hjälper dig att få rätt kompensation."
+    },
     "badge": "FAQ",
     "title": "Vanliga frågor om flygkompensation",
     "intro": "Här har vi samlat svar på de vanligaste frågorna om ersättning vid försenade eller inställda flyg och hur FlightClaimly fungerar.",
@@ -606,12 +590,12 @@
           "resan utgick från ett EU-land eller opererades av ett EU-flygbolag"
         ]
       },
-    "amount": {
-  "q": "Hur mycket pengar kan jag få?",
-  "lead": "Ersättningen enligt EU261 ligger normalt mellan",
-  "highlight": "250 € och 600 € per person",
-  "tail": ", beroende på flygsträckans längd och resans typ.",
-  "a": "Ersättningen enligt EU261 ligger normalt mellan 250 € och 600 € per person, beroende på flygsträckans längd och resans typ."
+      "amount": {
+        "q": "Hur mycket pengar kan jag få?",
+        "lead": "Ersättningen enligt EU261 ligger normalt mellan",
+        "highlight": "250 € och 600 € per person",
+        "tail": ", beroende på flygsträckans längd och resans typ.",
+        "a": "Ersättningen enligt EU261 ligger normalt mellan 250 € och 600 € per person, beroende på flygsträckans längd och resans typ."
       },
       "perPerson": {
         "q": "Gäller ersättningen per person eller per bokning?",
@@ -670,848 +654,794 @@
     }
   },
   "cancellations": {
-  "meta": {
-    "title": "Inställt flyg – ersättning enligt EU261 | FlightClaimly",
-    "description": "Inställt flyg? Lär dig när du har rätt till 250–600 € i ersättning enligt EU261, skillnaden mellan ombokning och återbetalning och hur FlightClaimly driver ditt krav mot flygbolaget."
-  },
-  "badge": "Inställda flyg",
-  "title": "Inställt flyg – dina rättigheter till ersättning enligt EU261",
-  "intro": "När ett flyg ställs in påverkas hela resan – ibland med ombokningar, ibland med förstörd semester eller förlorade möten. EU261 ger dig starka rättigheter vid inställda flyg. Här går vi igenom grunderna och hur FlightClaimly kan hjälpa dig.",
-  "sections": {
-    "whenIsCancelled": {
-      "title": "När räknas ett flyg som inställt?",
-      "p1": "Ett flyg anses inställt när det ursprungliga flyget inte genomförs och passagerarna antingen:",
-      "list": [
-        "bokas om till ett annat flyg, eller",
-        "får biljettpriset återbetalat istället för att resa"
-      ],
-      "note": "Även stora schemaändringar kan i praktiken räknas som inställning – det hjälper vi dig att bedöma när du skickar in ditt ärende."
-    },
-    "whenMoney": {
-      "title": "När kan du få ekonomisk ersättning?",
-      "p1": "Du kan ha rätt till kompensation enligt EU261 om:",
-      "list": [
-        "flyget ställs in med kort varsel (vanligtvis mindre än 14 dagar innan avgång)",
-        "ombokningen gör att du når fram betydligt senare än planerat",
-        "flygbolaget är ansvarigt för orsaken till inställningen"
-      ],
-      "note": "Exakta regler beror på när du informerades om inställningen och vilken alternativ resa som erbjöds. FlightClaimly hjälper dig räkna ut vad som gäller i ditt fall."
-    },
-    "amount": {
-      "title": "Hur mycket kan du få i ersättning?",
-      "p1": "Ersättningens storlek beror på flygsträckans längd och hur mycket din resa påverkas. Vanliga schablonbelopp enligt EU261 är:",
-      "list": [
-        "upp till 250 € för kortare flyg (ca 0–1 500 km)",
-        "upp till 400 € för medellånga flyg inom EU eller upp till 3 500 km",
-        "upp till 600 € för längre internationella flyg"
-      ],
-      "note": "Beloppen kan justeras om flygbolaget erbjuder en ombokning som gör att du ändå kommer fram med relativt liten försening. Vi analyserar detta åt dig när du skickar in ditt ärende."
-    },
-    "rerouteOrRefund": {
-      "title": "Ombokning eller återbetalning – du har rätt att välja",
-      "p1": "När ett flyg ställs in har du oftast rätt att välja mellan:",
-      "list": [
-        "ombokning till ett senare flyg, så snart som möjligt, eller",
-        "återbetalning av biljettpriset för den sträckan du inte kunnat resa"
-      ],
-      "p2": "I vissa situationer kan du också ha rätt till ersättning för extra kostnader, till exempel hotell eller transport, om du tvingas stanna längre på resmålet."
-    },
-    "extraordinary": {
-      "title": "När kan flygbolaget neka kompensation?",
-      "p1": "Flygbolaget kan slippa betala kompensation om inställningen beror på \"extraordinära omständigheter\", till exempel:",
-      "list": [
-        "allvarligt oväder eller naturkatastrofer",
-        "säkerhetshot eller luftrumsstängningar",
-        "strejker som flygbolaget inte kan kontrollera"
-      ],
-      "p2": {
-        "before": "Tekniska fel, personalbrist eller interna problem hos flygbolaget räknas däremot ofta",
-        "strong": "inte",
-        "after": "som extraordinära omständigheter. Många avslag är felaktiga – där kan vi hjälpa dig att gå vidare."
-      }
-    },
-    "examples": {
-      "title": "Exempel: när du kan ha rätt till ersättning",
-      "list": [
-        "Du får besked 3 dagar innan avgång att ditt flyg är inställt, och erbjuds en ombokning där du anländer många timmar senare – ersättning kan bli aktuell.",
-        "Flygbolaget ställer in ditt kvällsflyg på grund av tekniskt fel och bokar om dig till nästa dag – du kan ha rätt både till kompensation och hotell.",
-        "Ditt flyg ställs in samma dag utan tydlig förklaring och du tvingas köpa en ny biljett med annat bolag – även detta kan vara ersättningsgrundande."
-      ]
-    },
-    "links": {
-      "title": "Vill du fördjupa dig i reglerna?",
-      "p1": {
-        "before": "På sidan",
-        "linkText": "Dina rättigheter",
-        "after": "hittar du en bredare genomgång av EU261 och vilka situationer som omfattas."
-      },
-      "p2": {
-        "before": "Du kan också läsa vår",
-        "linkText": "FAQ",
-        "after": "med korta svar på vanliga frågor."
-      }
-    }
-  },
-  "footer": {
-    "lead": "Har ditt flyg ställts in? Kolla om du kan få upp till 6 000 kr i ersättning – det tar bara någon minut.",
-    "cta": "Kolla mitt flyg"
-  }
-},
-"contact": {
     "meta": {
-  "title": "Kontakta FlightClaimly | Support och frågor",
-  "description": "Kontakta FlightClaimly för frågor om ditt ärende, EU261, eller hur processen fungerar. Vi svarar så snabbt vi kan."
-},
-  "badge": "Kontakt",
-  "title": "Kontakta FlightClaimly",
-  "intro": "Har du frågor om ett ärende, om EU261-reglerna eller om hur processen fungerar? Du är alltid välkommen att höra av dig. Vi svarar så snabbt vi kan.",
-  "email": {
-    "title": "E-post",
-    "lead": "Du når oss enklast via mail:",
-    "note": "Vi återkommer så fort vi kan. Under hög belastning kan svarstiden vara något längre."
-  },
-  "faq": {
-    "title": "Vanliga frågor",
-    "before": "Många frågor finns redan besvarade i vår ",
-    "link": "FAQ",
-    "after": ". Där hittar du korta och tydliga svar om ersättning, process och vad som gäller i olika situationer."
-  },
-  "rights": {
-    "title": "Dina rättigheter",
-    "lead": "Vill du läsa mer om vad du har rätt till enligt EU261? Besök:",
-    "link": "Dina rättigheter"
-  },
-  "case": {
-    "title": "Har du ett pågående ärende?",
-    "p1": "Du kan följa statusen när som helst via länken du fick i mail när du skapade ärendet.",
-    "before": "Har du tappat bort länken? Ingen fara – skriv till oss på",
-    "after": "så skickar vi den igen."
-  },
-  "footer": {
-    "lead": "Vill du kolla om ditt flyg ger rätt till ersättning? Det tar bara någon minut.",
-    "cta": "Kolla mitt flyg"
-  }
-},
-
-"compensation": {
-  "meta": {
-    "title": "Ersättningsbelopp enligt EU261 – 250, 400 och 600 € | FlightClaimly",
-    "description": "Se vilka ersättningsbelopp du kan få enligt EU261/UK261 – 250, 400 eller 600 € per person beroende på flygsträcka och försening."
-  },
-  "badge": "Ersättningsbelopp",
-  "title": "Ersättningsbelopp enligt EU261 – 250, 400 och 600 €",
-  "intro": "EU-förordning 261/2004 (”EU261”) ger rätt till fasta ersättningsnivåer när ditt flyg är kraftigt försenat, inställt eller vid nekad ombordstigning.",
-  "sections": {
-    "overview": {
-      "title": "Snabb överblick – hur mycket kan du få?",
-      "p1": {
-        "before": "Ersättningen enligt EU261 ligger normalt mellan ",
-        "highlight": "250 € och 600 € per person",
-        "after": ". Beloppet beror i huvudsak på:"
-      },
-      "list": [
-        "hur lång flygsträckan är",
-        "om flyget är inom EU eller internationellt",
-        "hur mycket försening eller påverkan du drabbats av"
-      ],
-      "note": "Det spelar alltså mindre roll vad biljetten kostade – två passagerare på samma flyg får normalt samma ersättningsbelopp."
+      "title": "Inställt flyg – ersättning enligt EU261 | FlightClaimly",
+      "description": "Inställt flyg? Lär dig när du har rätt till 250–600 € i ersättning enligt EU261, skillnaden mellan ombokning och återbetalning och hur FlightClaimly driver ditt krav mot flygbolaget."
     },
-
-    "table": {
-      "title": "Ersättningsnivåer enligt EU261",
-      "intro": "Beloppen beror främst på flygsträcka och typ av störning. Tabellen nedan ger en översikt.",
-      "head": {
-        "distance": "Distans",
-        "type": "När gäller",
-        "amount": "Ersättning"
+    "badge": "Inställda flyg",
+    "title": "Inställt flyg – dina rättigheter till ersättning enligt EU261",
+    "intro": "När ett flyg ställs in påverkas hela resan – ibland med ombokningar, ibland med förstörd semester eller förlorade möten. EU261 ger dig starka rättigheter vid inställda flyg. Här går vi igenom grunderna och hur FlightClaimly kan hjälpa dig.",
+    "sections": {
+      "whenIsCancelled": {
+        "title": "När räknas ett flyg som inställt?",
+        "p1": "Ett flyg anses inställt när det ursprungliga flyget inte genomförs och passagerarna antingen:",
+        "list": [
+          "bokas om till ett annat flyg, eller",
+          "får biljettpriset återbetalat istället för att resa"
+        ],
+        "note": "Även stora schemaändringar kan i praktiken räknas som inställning – det hjälper vi dig att bedöma när du skickar in ditt ärende."
       },
-      "rows": [
-        {
-          "distance": "Upp till 1 500 km",
-          "type": "Försening ≥ 3 timmar / inställt flyg",
-          "amount": "250 €"
-        },
-        {
-          "distance": "1 500–3 500 km",
-          "type": "Försening ≥ 3 timmar / inställt flyg",
-          "amount": "400 €"
-        },
-        {
-          "distance": "Över 3 500 km (inom EU)",
-          "type": "Försening ≥ 3 timmar / inställt flyg",
-          "amount": "400 €"
-        },
-        {
-          "distance": "Över 3 500 km (utanför EU)",
-          "type": "Försening ≥ 3 timmar / inställt flyg",
-          "amount": "600 €"
+      "whenMoney": {
+        "title": "När kan du få ekonomisk ersättning?",
+        "p1": "Du kan ha rätt till kompensation enligt EU261 om:",
+        "list": [
+          "flyget ställs in med kort varsel (vanligtvis mindre än 14 dagar innan avgång)",
+          "ombokningen gör att du når fram betydligt senare än planerat",
+          "flygbolaget är ansvarigt för orsaken till inställningen"
+        ],
+        "note": "Exakta regler beror på när du informerades om inställningen och vilken alternativ resa som erbjöds. FlightClaimly hjälper dig räkna ut vad som gäller i ditt fall."
+      },
+      "amount": {
+        "title": "Hur mycket kan du få i ersättning?",
+        "p1": "Ersättningens storlek beror på flygsträckans längd och hur mycket din resa påverkas. Vanliga schablonbelopp enligt EU261 är:",
+        "list": [
+          "upp till 250 € för kortare flyg (ca 0–1 500 km)",
+          "upp till 400 € för medellånga flyg inom EU eller upp till 3 500 km",
+          "upp till 600 € för längre internationella flyg"
+        ],
+        "note": "Beloppen kan justeras om flygbolaget erbjuder en ombokning som gör att du ändå kommer fram med relativt liten försening. Vi analyserar detta åt dig när du skickar in ditt ärende."
+      },
+      "rerouteOrRefund": {
+        "title": "Ombokning eller återbetalning – du har rätt att välja",
+        "p1": "När ett flyg ställs in har du oftast rätt att välja mellan:",
+        "list": [
+          "ombokning till ett senare flyg, så snart som möjligt, eller",
+          "återbetalning av biljettpriset för den sträckan du inte kunnat resa"
+        ],
+        "p2": "I vissa situationer kan du också ha rätt till ersättning för extra kostnader, till exempel hotell eller transport, om du tvingas stanna längre på resmålet."
+      },
+      "extraordinary": {
+        "title": "När kan flygbolaget neka kompensation?",
+        "p1": "Flygbolaget kan slippa betala kompensation om inställningen beror på \"extraordinära omständigheter\", till exempel:",
+        "list": [
+          "allvarligt oväder eller naturkatastrofer",
+          "säkerhetshot eller luftrumsstängningar",
+          "strejker som flygbolaget inte kan kontrollera"
+        ],
+        "p2": {
+          "before": "Tekniska fel, personalbrist eller interna problem hos flygbolaget räknas däremot ofta",
+          "strong": "inte",
+          "after": "som extraordinära omständigheter. Många avslag är felaktiga – där kan vi hjälpa dig att gå vidare."
         }
-      ],
-      "note": "Vi hjälper dig att avgöra om ditt case är ersättningsberättigat."
-    },
-
-    "reduction": {
-      "title": "När kan ersättningen reduceras?",
-      "p1": "Vid ombokning som gör att du anländer nära den ursprungliga ankomsttiden kan ersättningen i vissa fall halveras.",
-      "list": [
-        "Kortare distanser: liten försening vid ankomst",
-        "Medeldistanser: måttlig försening vid ankomst",
-        "Långdistanser: begränsad försening vid ankomst"
-      ],
-      "note": "Bedömningen baseras alltid på faktisk ankomsttid och flygbolagets åtgärder."
-    },
-
-    "types": {
-      "title": "Vilka störningar omfattas?",
-      "p1": "EU261 kan ge rätt till ersättning vid bland annat:",
-      "list": [
-        "Förseningar (ofta ≥ 3 timmar vid ankomst)",
-        "Inställda flyg",
-        "Nekad ombordstigning (överbokning)"
-      ],
-      "note": {
-        "before": "Läs mer om dina rättigheter på sidan ",
-        "link": "Dina rättigheter"
-      }
-    },
-
-    "examples": {
-      "title": "Exempel",
-      "list": [
-        "Flyget landar 3h 20m sent → kan ge rätt till ersättning.",
-        "Flyget ställs in samma dag → kan ge rätt till ersättning och ombokning.",
-        "Du nekas ombordstigning på grund av överbokning → kan ge rätt till ersättning."
-      ],
-      "note": "Rätten till ersättning påverkas av orsaken till störningen."
-    },
-
-    "myths": {
-      "title": "Vanliga missförstånd",
-      "list": [
-        "Det gäller bara om biljetten köpts direkt från flygbolaget.",
-        "Man måste klaga direkt på flygplatsen.",
-        "Alla förseningar ger rätt till ersättning."
-      ],
-      "note": "Vi hjälper dig att avgöra om ditt case är ersättningsberättigat."
-    }
-  },
-  "footer": {
-    "lead": "Vill du se vilket ersättningsbelopp som kan gälla för just din resa?",
-    "cta": "Kolla mitt flyg"
-  }
-},
-"delays": {
-  "meta": {
-    "title": "Försenat flyg – ersättning enligt EU261 | FlightClaimly",
-    "description": "Försenat flyg? Se när du har rätt till 250–600 € i ersättning enligt EU261/UK261, vad som räknas som kraftig försening och hur FlightClaimly hjälper dig att driva kravet."
-  },
-  "badge": "Flygförseningar",
-  "title": "Försenat flyg – så får du ersättning enligt EU261",
-  "intro": "Ett försenat flyg kan förstöra planer, anslutningar och semestrar. EU261 ger dig som passagerare starka rättigheter – i många fall har du rätt till ersättning när du anländer sent. Här förklarar vi grunderna.",
-  "sections": {
-    "when": {
-      "title": "När räknas ett flyg som kraftigt försenat?",
-      "p1": {
-        "before": "För EU261 är det framför allt",
-        "highlight": "ankomsttiden",
-        "after": "som spelar roll. Du kan ha rätt till kompensation när du:"
       },
-      "list": [
-        "ankommer 3 timmar eller mer efter planerad tid",
-        "missar anslutningar och når slutdestinationen kraftigt försenad",
-        "tvingas vänta länge utan rimlig hjälp från flygbolaget"
-      ],
-      "note": "Mindre förseningar ger oftast ingen kompensation, men kan ändå ge rätt till mat, dryck eller ombokning. Vi hjälper dig att bedöma vad som gäller för just ditt fall."
-    },
-    "amount": {
-      "title": "Hur mycket kan du få vid försening?",
-      "p1": "Ersättningsnivåerna vid kraftiga förseningar liknar dem vid inställda flyg och beror på flygsträckans längd:",
-      "list": [
-        "upp till 250 € för kortare flyg (ca 0–1 500 km)",
-        "upp till 400 € för medellånga flyg inom EU eller upp till 3 500 km",
-        "upp till 600 € för längre internationella flyg"
-      ],
-      "note": "I vissa fall kan beloppen minskas om flygbolaget erbjuder ombokning som gör att du ändå kommer fram med relativt liten försening. Det är sådant vi räknar på åt dig."
-    },
-    "care": {
-      "title": "Dina rättigheter under tiden du väntar",
-      "p1": "Utöver ekonomisk kompensation kan du vid längre förseningar ha rätt till:",
-      "list": [
-        "mat och dryck i rimlig omfattning",
-        "två gratis telefonsamtal eller meddelanden",
-        "hotellövernattning om du måste stanna över natten",
-        "transport mellan flygplats och hotell",
-        "ombokning till en senare avgång, eller återbetalning i vissa fall"
-      ],
-      "note": "Spara alltid kvitton – du kan ofta kräva ersättning för nödvändiga utlägg i efterhand om flygbolaget inte hjälpt dig på plats."
-    },
-    "exceptions": {
-      "title": "När kan flygbolaget slippa betala kompensation?",
-      "p1": "Vid vissa situationer kan flygbolaget hänvisa till ”extraordinära omständigheter” och neka ersättning, till exempel:",
-      "list": [
-        "allvarligt oväder eller naturkatastrofer",
-        "stängda flygplatser eller luftrumsrestriktioner",
-        "säkerhetshot eller händelser utanför flygbolagets kontroll"
-      ],
-      "p2": {
-        "before": "Tekniska fel, brist på personal eller planeringsmissar är däremot oftast",
-        "highlight": "inte",
-        "after": "giltiga skäl för att neka kompensation. Många passagerare får nej första gången – där kan vi hjälpa dig att gå vidare."
-      }
-    },
-    "examples": {
-      "title": "Exempel: när du kan ha rätt till ersättning",
-      "list": [
-        "Ditt flyg från Stockholm till Barcelona landar 3 timmar och 45 minuter senare än planerat – du kan ha rätt till kompensation.",
-        "Du missar ditt långflyg efter en försening på första sträckan, och når slutdestinationen mer än 3 timmar sent – hela resan kan omfattas.",
-        "Flyget är 4 timmar försenat på grund av ett tekniskt fel – ofta ersättningsgrundande."
-      ]
-    },
-    "links": {
-      "title": "Vill du läsa mer om reglerna?",
-      "rights": {
-        "before": "På sidan",
-        "link": "Dina rättigheter",
-        "after": "hittar du en bredare genomgång av EU261 och vad som gäller vid inställda flyg, överbokning och andra situationer."
+      "examples": {
+        "title": "Exempel: när du kan ha rätt till ersättning",
+        "list": [
+          "Du får besked 3 dagar innan avgång att ditt flyg är inställt, och erbjuds en ombokning där du anländer många timmar senare – ersättning kan bli aktuell.",
+          "Flygbolaget ställer in ditt kvällsflyg på grund av tekniskt fel och bokar om dig till nästa dag – du kan ha rätt både till kompensation och hotell.",
+          "Ditt flyg ställs in samma dag utan tydlig förklaring och du tvingas köpa en ny biljett med annat bolag – även detta kan vara ersättningsgrundande."
+        ]
       },
-      "faq": {
-        "before": "Du kan också kika i vår",
-        "link": "FAQ",
-        "after": "där vi svarar kort på vanliga frågor."
+      "links": {
+        "title": "Vill du fördjupa dig i reglerna?",
+        "p1": {
+          "before": "På sidan",
+          "linkText": "Dina rättigheter",
+          "after": "hittar du en bredare genomgång av EU261 och vilka situationer som omfattas."
+        },
+        "p2": {
+          "before": "Du kan också läsa vår",
+          "linkText": "FAQ",
+          "after": "med korta svar på vanliga frågor."
+        }
       }
+    },
+    "footer": {
+      "lead": "Har ditt flyg ställts in? Kolla om du kan få upp till 6 000 kr i ersättning – det tar bara någon minut.",
+      "cta": "Kolla mitt flyg"
     }
   },
-  "footer": {
-    "lead": "Har du varit med om ett försenat flyg? Kolla om du kan få upp till 6 000 kr i ersättning – det tar bara någon minut.",
-    "cta": "Kolla mitt flyg"
-  }
-},
-"login": {
-  "title": "Admin login",
-  "passwordLabel": "Lösenord",
-  "passwordPlaceholder": "••••••••",
-  "submit": "Logga in",
-  "loading": "Loggar in…",
-  "errors": {
-    "invalidPassword": "Fel lösenord",
-    "generic": "Kunde inte logga in"
-  }
-},
-"privacy": {
+  "contact": {
     "meta": {
-  "title": "Integritetspolicy | FlightClaimly",
-  "description": "Läs hur FlightClaimly behandlar personuppgifter, vilka uppgifter vi samlar in, syftet med behandlingen och dina rättigheter enligt GDPR."
-},
-  "badge": "Integritet",
-  "title": "Integritetspolicy för FlightClaimly",
-  "intro": "Din integritet är viktig för oss. På denna sida förklarar vi vilka uppgifter vi samlar in, varför vi gör det, hur vi använder dem och vilka rättigheter du har.",
-
-  "controller": {
-    "title": "Personuppgiftsansvarig",
-    "body": "FlightClaimly (”vi”, ”oss”) är personuppgiftsansvarig för behandling av personuppgifter i samband med vår tjänst för flygkompensation."
-  },
-
-  "dataCollected": {
-    "title": "Vilka uppgifter samlar vi in?",
-    "intro": "När du använder vår tjänst kan vi komma att behandla följande typer av personuppgifter:",
-    "items": [
-      "kontaktuppgifter (namn, e-post, telefonnummer)",
-      "bokningsinformation (bokningsnummer, flygnummer, datum, rutter)",
-      "biljetter och boardingkort (dokument, PDF:er, bilder)",
-      "uppgifter om försening, inställning eller annan störning",
-      "kommunikation med dig (e-post, meddelanden)",
-      "teknisk information (IP-adress, enhet, webbläsare) i den mån det behövs för säkerhet och drift"
-    ]
-  },
-
-  "purpose": {
-    "title": "Varför behandlar vi dina uppgifter?",
-    "intro": "Vi behandlar dina personuppgifter för att kunna:",
-    "items": [
-      "bedöma om du har rätt till kompensation enligt EU261",
-      "skapa och hantera ditt ärende mot flygbolaget",
-      "kommunicera med dig om status i ärendet",
-      "hantera utbetalningar när ersättning beviljas",
-      "uppfylla rättsliga skyldigheter (t.ex. bokföring)",
-      "förbättra och säkra vår tjänst"
-    ]
-  },
-
-  "legalBasis": {
-    "title": "Rättslig grund för behandling",
-    "intro": "Behandlingen av dina personuppgifter baseras främst på:",
-    "items": [
-      "<strong>Avtal</strong> – för att kunna driva ditt krav mot flygbolaget",
-      "<strong>Rättslig förpliktelse</strong> – t.ex. bokföringsregler",
-      "<strong>Berättigat intresse</strong> – säkerhet och drift"
-    ]
-  },
-
-  "retention": {
-    "title": "Hur länge sparar vi dina uppgifter?",
-    "intro": "Vi sparar dina uppgifter så länge det behövs för att:",
-    "items": [
-      "hantera och avsluta ditt ärende",
-      "hantera eventuella klagomål eller tvister",
-      "uppfylla rättsliga skyldigheter"
-    ],
-    "note": "När uppgifterna inte längre behövs raderar eller anonymiserar vi dem på ett säkert sätt."
-  },
-
-  "sharing": {
-    "title": "Med vem delar vi dina uppgifter?",
-    "intro": "Vi delar endast dina uppgifter med parter som behövs för att kunna leverera tjänsten:",
-    "items": [
-      "flygbolag och deras representanter",
-      "juridiska ombud eller samarbetspartners",
-      "IT-leverantörer (hosting, e-post)"
-    ],
-    "note": "Vi säljer inte dina personuppgifter vidare till tredje part."
-  },
-
-  "rights": {
-    "title": "Dina rättigheter",
-    "intro": "Som registrerad har du rätt att:",
-    "items": [
-      "begära utdrag över vilka uppgifter vi behandlar",
-      "begära rättelse av felaktiga uppgifter",
-      "begära radering när uppgifter inte längre behövs",
-      "invända mot eller begränsa behandling",
-      "begära dataportabilitet i vissa fall"
-    ],
-    "contactBefore": "Vill du utöva någon av dessa rättigheter? Kontakta oss via"
-  },
-
-  "complaints": {
-    "title": "Klagomål",
-    "body": "Om du anser att vi behandlar dina uppgifter i strid med gällande regler kan du lämna klagomål till relevant dataskyddsmyndighet."
-  },
-
-  "changes": {
-    "title": "Ändringar i denna policy",
-    "body": "Vi kan komma att uppdatera denna integritetspolicy vid behov. Den senaste versionen finns alltid publicerad här."
-  },
-
-  "footer": {
-    "before": "Har du frågor om hur vi hanterar dina personuppgifter? Hör av dig på"
-  }
-},
-
-"rights": {
-  "meta": {
-    "title": "EU261 – dina rättigheter som flygpassagerare | FlightClaimly",
-    "description": "Lär dig dina rättigheter enligt EU261/UK261 vid försenade, inställda och överbokade flyg. Se när du har rätt till 250–600 € i ersättning och hur FlightClaimly hjälper dig få ut pengarna."
-  },
-  "badge": "Dina rättigheter",
-  "title": "Dina rättigheter som flygpassagerare enligt EU261",
-  "intro": "EU-förordning 261/2004 (\"EU261\") ger dig som flygpassagerare starka rättigheter vid försenade, inställda eller överbokade flyg. Här förklarar vi grunderna – och hur FlightClaimly kan hjälpa dig få den ersättning du har rätt till.",
-
-  "whenApplies": {
-    "title": "När gäller EU261?",
-    "intro": "EU261 gäller i följande situationer:",
-    "bullets": [
-      "flyget avgår från ett land inom EU/EES eller Storbritannien",
-      "flyget anländer till EU/EES/Storbritannien med ett EU-baserat flygbolag",
-      "du har en bekräftad bokning och kom i tid till incheckningen"
-    ],
-    "note": "Även vissa anslutande flyg och resor med mellanlandningar kan omfattas, beroende på hur biljetten är bokad. Det hjälper vi dig att bedöma."
-  },
-
-  "covered": {
-    "title": "Vilka situationer omfattas?",
-    "lead": "Du kan ha rätt till kompensation om:",
-    "bullets": [
-      "ditt flyg är kraftigt försenat vid ankomst (ofta 3 timmar eller mer)",
-      "ditt flyg ställs in med kort varsel",
-      "du nekas ombordstigning på grund av överbokning"
-    ],
-    "after": "Utöver ekonomisk kompensation kan du ha rätt till mat, dryck, hotell och ombokning beroende på hur länge du drabbas och hur lång din resa är."
-  },
-
-  "amounts": {
-    "title": "Hur mycket kan du få i ersättning?",
-    "intro": "Ersättningen beror främst på flygsträckans längd och hur mycket din resa påverkats. Vanliga schablonbelopp enligt EU261 är:",
-    "bullets": [
-      "upp till 250 € för kortare flyg (ca 0–1 500 km)",
-      "upp till 400 € för medellånga flyg inom EU eller upp till 3 500 km",
-      "upp till 600 € för längre internationella flyg"
-    ],
-    "note": "Det exakta beloppet kan variera beroende på rutt, förseningens längd och erbjuden ombokning. FlightClaimly hjälper dig räkna ut rätt nivå för just din resa."
-  },
-
-  "exceptions": {
-    "title": "När har du inte rätt till kompensation?",
-    "intro": "Flygbolaget kan slippa betala kompensation om förseningen eller inställningen beror på så kallade \"extraordinära omständigheter\", till exempel:",
-    "bullets": [
-      "allvarligt oväder eller naturkatastrofer",
-      "säkerhetsrisker eller luftrumsstängningar",
-      "strejker utanför flygbolagets kontroll (t.ex. flygplatspersonal eller flygledare)"
-    ],
-    "afterBeforeStrong": "Tekniska problem eller brister i planering räknas ofta ",
-    "afterStrong": "inte",
-    "afterTail": " som extraordinära omständigheter. Många avslag från flygbolag är felaktiga – där kan vi hjälpa dig att överklaga."
-  },
-
-  "save": {
-    "title": "Vad behöver du spara?",
-    "intro": "För att driva ett ärende är det bra om du har:",
-    "bullets": [
-      "bokningsbekräftelse eller biljett (gärna som PDF eller bild)",
-      "boardingkort om du hann checka in",
-      "eventuella kvitton på mat, hotell eller transport",
-      "kort beskrivning av vad som hände (tider, besked från flygbolaget)"
-    ],
-    "note": "Du kan ladda upp allt direkt när du skapar ett ärende hos oss – vi hjälper dig att sortera."
-  },
-
-  "links": {
-    "title": "Vill du veta mer om specifika situationer?",
-    "lead": "Läs mer om:",
-    "delaysText": "Försenade flyg",
-    "delaysAfter": " – vad som gäller vid långa förseningar.",
-    "cancellationsText": "Inställda flyg",
-    "cancellationsAfter": " – dina rättigheter när flyget ställs in.",
-    "faqText": "Vanliga frågor",
-    "faqAfter": " – korta svar på det flest undrar."
-  },
-
-  "footer": {
-    "lead": "Tror du att ditt flyg omfattas av EU261? Kolla direkt om du har rätt till ersättning – det tar bara någon minut.",
-    "cta": "Kolla om jag har rätt till ersättning"
-  }
-},
-
-"terms": {
-    "meta": {
-  "title": "Användarvillkor | FlightClaimly",
-  "description": "Läs användarvillkoren för FlightClaimly, inklusive hur tjänsten fungerar, avgifter, utbetalningar, ansvar och kontaktvägar."
-},
-  "badge": "Villkor",
-  "title": "Användarvillkor för FlightClaimly",
-  "intro": "Dessa villkor beskriver hur FlightClaimly fungerar och vilka rättigheter och skyldigheter som gäller när du använder vår tjänst för att driva krav på flygkompensation.",
-
-  "sections": {
-    "service": {
-      "title": "1. Om tjänsten",
-      "text": "FlightClaimly är en tjänst som hjälper flygpassagerare att utreda och driva krav på kompensation enligt EU261 och liknande regelverk. Vi agerar som ombud för dig gentemot flygbolaget.",
-      "note": "Genom att skicka in ett ärende via vår webbplats godkänner du dessa villkor."
+      "title": "Kontakta FlightClaimly | Support och frågor",
+      "description": "Kontakta FlightClaimly för frågor om ditt ärende, EU261, eller hur processen fungerar. Vi svarar så snabbt vi kan."
     },
-
-    "usage": {
-      "title": "2. Din användning av tjänsten",
-      "intro": "Du förbinder dig att:",
-      "bullets": [
-        "lämna korrekta och fullständiga uppgifter om ditt flyg",
-        "inte skapa ärenden som du vet är felaktiga eller missvisande",
-        "informera oss om du redan anlitat någon annan för samma krav"
-      ],
-      "note": "Vi förbehåller oss rätten att avbryta hanteringen av ett ärende om vi bedömer att uppgifterna är felaktiga eller om förutsättningarna för krav saknas."
+    "badge": "Kontakt",
+    "title": "Kontakta FlightClaimly",
+    "intro": "Har du frågor om ett ärende, om EU261-reglerna eller om hur processen fungerar? Du är alltid välkommen att höra av dig. Vi svarar så snabbt vi kan.",
+    "email": {
+      "title": "E-post",
+      "lead": "Du når oss enklast via mail:",
+      "note": "Vi återkommer så fort vi kan. Under hög belastning kan svarstiden vara något längre."
     },
-
-    "power": {
-      "title": "3. Ombud och fullmakt",
-      "text": "För att kunna driva ditt krav behöver vi ibland agera som ombud gentemot flygbolaget. Genom att använda tjänsten godkänner du att vi kontaktar flygbolaget i ditt namn och företräder dina intressen i samband med ärendet.",
-      "note": "I vissa fall kan vi be dig signera en separat fullmakt eller ett särskilt uppdragsavtal, till exempel om ärendet behöver eskaleras."
-    },
-
-    "fees": {
-  "title": "4. Avgifter och ersättning",
-  "lead": "FlightClaimly arbetar enligt principen",
-  "highlight": "no win, no fee",
-  "bullets": [
-    "det kostar ingenting att skicka in ett ärende",
-    "vi tar bara betalt om vi lyckas få ersättning från flygbolaget",
-    "vår standardavgift är 20 % inklusive moms av den ersättning vi återvinner åt dig",
-    "om rättsliga åtgärder blir nödvändiga kan ytterligare avgifter eller kostnader tillkomma"
-  ],
-  "note": "Innan vi inleder rättsliga åtgärder som innebär ytterligare avgifter eller kostnader för dig informerar vi dig om de tillämpliga villkoren och inhämtar ditt separata godkännande. Fullmakten du lämnar till FlightClaimly innebär inte i sig att du på förhand accepterar sådana ytterligare avgifter eller kostnader."
-   },
-
-    "payout": {
-      "title": "5. Utbetalning till dig",
-      "intro": "När flygbolaget betalat ut kompensation kan utbetalning ske antingen:",
-      "bullets": [
-        "direkt till FlightClaimly, varefter vi vidarebefordrar din del till dig, eller",
-        "direkt till dig, efter avdrag för vår avgift enligt separat överenskommelse"
-      ],
-      "note": "Vi strävar efter att genomföra utbetalningar så snart som möjligt efter att ersättningen mottagits och identifierats."
-    },
-
-    "liability": {
-      "title": "6. Ansvar och begränsningar",
-      "text1": "Vi kan inte garantera att ett krav leder till ersättning. Bedömningen görs alltid utifrån tillgänglig information och gällande regelverk.",
-      "text2": "FlightClaimly ansvarar inte för indirekta skador, såsom utebliven vinst eller följdkostnader, utan vårt ansvar är i normalfallet begränsat till den avgift du betalat för tjänsten."
-    },
-
-    "privacy": {
-      "title": "7. Personuppgifter och integritet",
-      "text": "Vi behandlar personuppgifter i enlighet med gällande dataskyddslagstiftning. Mer information om hur vi hanterar dina uppgifter finns i vår",
-      "link": "integritetspolicy"
-    },
-
-    "changes": {
-      "title": "8. Ändringar av villkoren",
-      "text": "Vi kan komma att uppdatera dessa villkor vid behov. Den senaste versionen finns alltid på vår webbplats."
-    },
-
-    "contact": {
-      "title": "9. Kontakt",
-      "text": "Har du frågor om dessa villkor är du välkommen att kontakta oss på"
-    }
-  },
-
-  "footer": "Genom att använda FlightClaimly bekräftar du att du har läst och förstått dessa villkor."
-},
-"thanks": {
-  "brandTagline": "Vi driver ditt ärende mot flygbolaget – du slipper bråket.",
-  "backHome": "← Till startsidan",
-
-  "header": {
-    "badge": "FLIGHTCLAIMLY • DITT ÄRENDE ÄR REGISTRERAT",
-    "title": "Tack! Vi har mottagit ditt ärende.",
-    "claimId": "Ärende-ID",
-    "intro": "Nästa steg är att du bekräftar fullmakt och laddar upp underlag här på sidan. När det är klart börjar vi handlägga ärendet direkt och kontaktar flygbolaget för din räkning."
-  },
-
-  "precheck": {
-    "badge": "Preliminär bedömning",
-    "eligibleTitle": "Bra nyheter – du ser ut att ha rätt till ersättning.",
-    "eligibleFallback": "Preliminär bedömning: flyget kan vara ersättningsberättigat enligt EU261.",
-    "eligibleNote": "Det här är ingen garanti, men ett starkt första besked. När du har bekräftat fullmakt och laddat upp bilagor börjar vi driva kravet mot flygbolaget.",
-    "unclearTitle": "Oklart – vi granskar manuellt.",
-    "unclearFallback": "Skicka gärna in underlag så går vi igenom ditt ärende manuellt.",
-    "amountPrefix": "Indikation:"
-  },
-
-  "upload": {
-    "title": "Ladda upp underlag",
-    "intro": "Fullmakten ger oss rätt att driva ärendet mot flygbolaget. Lägg också gärna till boardingkort, bokningsbekräftelse och kvitton om du haft extra kostnader.",
-    "list": [
-      "Digital fullmakt (LoA) – obligatorisk",
-      "Boardingkort eller e-biljett",
-      "Bokningsbekräftelse",
-      "Kvitton för extra kostnader (om du haft det)"
-    ]
-  },
-
-  "loa": {
-    "title": "Digital fullmakt (LoA)",
-    "description": "Genom att fylla i ditt namn och kryssa i rutan ger du FlightClaimly rätt att företräda dig mot flygbolaget i detta ärende.",
-    "viewText": "Visa fullmaktstext",
-    "nameLabel": "Fullständigt namn (signatur)",
-    "namePlaceholder": "Ditt fullständiga namn",
-    "consent": "Jag ger FlightClaimly fullmakt (Letter of Authorization) att företräda mig gentemot flygbolaget i detta ärende.",
-    "error": "Fyll i ditt namn och kryssa i rutan för att fullmakten ska vara giltig."
-  },
-
-  "attachments": {
-    "title": "Övriga bilagor (valfritt)",
-    "description": "Lägg gärna till boardingkort, bokningsbekräftelse och kvitton. Du kan ladda upp flera filer samtidigt.",
-    "choose": "Välj filer",
-    "types": "PDF, JPG, PNG, HEIC. Max några få filer åt gången."
-  },
-
-  "actions": {
-    "submit": "Bekräfta fullmakt och ladda upp",
-    "submitting": "Bearbetar…",
-    "later": "Du kan alltid komplettera med fler bilagor senare genom att kontakta oss om det behövs."
-  },
-
-  "success": {
-    "title": "Fullmakt bekräftad!",
-    "text": "Tack – vi börjar handlägga ditt ärende direkt. Du får mejl när status uppdateras och kan följa allt via din spårningslänk."
-  },
-
-  "errors": {
-    "missingId": "Kunde inte hitta ditt ärende-ID. Gå tillbaka till startsidan och skicka in formuläret igen.",
-    "generic": "❌ Kunde inte slutföra steget. Försök igen."
-  },
-
-  "security": {
-    "badge": "Säker filöverföring",
-    "text": "Dina filer lagras krypterat och används endast för att hantera ditt ärende. Vi delar dem inte med någon annan än flygbolaget och eventuellt juridiskt ombud kopplat till just detta ärende.",
-    "independentTitle": "Oberoende aktör",
-    "independentText": "FlightClaimly är en fristående aktör och inte affilierad med något flygbolag. Vi arbetar alltid på uppdrag av dig som resenär."
-  },
-
-  "loaText": {
-    "title": "Fullmakt – FlightClaimly",
-    "intro": "Jag ger härmed FlightClaimly rätt att företräda mig i ärendet om flygkompensation enligt EU-förordning 261/2004.",
-    "bullets": [
-      "Kommunicera med flygbolaget i mitt namn.",
-      "Skicka in krav och följa upp ärendet.",
-      "Ta emot svar och beslut från flygbolaget.",
-      "Samarbeta med juridiskt ombud om det behövs för detta ärende."
-    ],
-    "note": "Fullmakten gäller endast detta specifika ärende och kan när som helst återkallas skriftligen."
-  },
-
-  "loading": "Laddar sidan…",
-  "home": "Till startsidan"
-},
-
-"about": {
-     "meta": {
-    "title": "Om FlightClaimly | Flygkompensation utan krångel",
-    "description": "Läs om FlightClaimly och hur vi hjälper dig att driva ditt EU261-ärende från start till utbetalning — snabbt, tryggt och transparent."
-  },
-  "badge": "Om oss",
-  "title": "Vi hjälper dig få ersättning när flyget strulat",
-  "intro": "FlightClaimly är en EU-baserad tjänst som gör det enkelt att kräva ersättning från flygbolag enligt EU261. Målet är att du ska få de pengar du har rätt till – utan krångel, stress eller juridiska hinder.",
-
-  "why": {
-    "title": "Varför finns FlightClaimly?",
-    "p1": "Varje år går stora summor i flygkompensation aldrig till passagerarna. Många orkar inte, vet inte hur reglerna fungerar eller får nej första gången och ger upp.",
-    "p2": "FlightClaimly skapades för att göra processen så enkel som möjligt: du fyller i ditt flyg, laddar upp din bokning – vi sköter resten och driver ärendet mot flygbolaget åt dig."
-  },
-
-  "how": {
-    "title": "Så fungerar tjänsten",
-    "steps": [
-      "Du fyller i dina flygdetaljer och vad som hänt.",
-      "Vi analyserar ärendet utifrån EU261-regelverket.",
-      "Vi driver kravet mot flygbolaget åt dig.",
-      "Du betalar först när du får ersättning."
-    ],
-    "note": "Allt sköts digitalt – snabbt, tryggt och transparent."
-  },
-
-  "model": {
-    "title": "Vår modell – enkel och transparent",
-    "p1": "Vi tror på en enkel princip:",
-    "p1Strong": "no win, no fee",
-    "p1b": " Det betyder att vi bara tjänar pengar när du gör det.",
-    "bullets": [
-      "det kostar ingenting att skapa ett ärende",
-      "vi tar bara betalt om du faktiskt får ersättning",
-      "vår avgift är tydlig och framgår innan du godkänner"
-    ],
-    "note": "Ingen ersättning från flygbolaget = inga kostnader till FlightClaimly."
-  },
-
-  "trust": {
-    "title": "Fokus på tydlighet och trygghet",
-    "p1": "Vi vill att du alltid ska veta var ditt ärende står. Därför kan du följa processen via vår spårningssida, där du ser:",
-    "bullets": [
-      "när vi mottagit ditt ärende",
-      "när vi granskar det",
-      "när det skickats till flygbolaget",
-      "när ersättning betalats ut"
-    ],
-    "p2": "Du får dessutom mail när statusen uppdateras, så att du slipper jaga kundtjänst eller logga in i onödiga portaler."
-  },
-
-  "independent": {
-    "title": "Oberoende och på din sida",
-    "p1": "FlightClaimly arbetar helt enligt EU:s passagerarrättigheter (EU261/2004) och är oberoende från flygbolagen. Vårt enda uppdrag är att företräda dig som passagerare och se till att reglerna följs i praktiken – inte bara på papper.",
-    "p2": "Vi tar striden mot flygbolag och byråkrati så att du kan fokusera på din resa, inte på paragrafer och formulär."
-  },
-
-  "footer": {
-    "cta": "Har ditt flyg drabbats? Kolla om du har rätt till ersättning – det tar bara någon minut.",
-    "primary": "Få kompensation",
-    "secondary": "Kontakt & samarbeten"
-  },
-  "email": {
-  "footer": {
-    "disclaimer": {
-      "title": "Konfidentialitet",
-      "p1": "Detta e-postmeddelande och eventuella bilagor är avsedda enbart för angiven mottagare. Om du har fått meddelandet av misstag ber vi dig att svara på e-postmeddelandet och därefter radera det.",
-      "p2": "Vi behandlar personuppgifter i samband med handläggningen av ditt ärende. Läs mer i vår integritetspolicy och våra villkor."
-    },
-    "links": {
-      "privacy": "Integritetspolicy",
-      "terms": "Villkor"
-    },
-    "errors": {
-  "required": "Fyll i alla obligatoriska fält.",
-  "invalidFlightNumber": "Ange ett giltigt flightnummer (t.ex. SK123).",
-  "network": "Något gick fel. Försök igen.",
-  "noResult": "Vi kunde inte verifiera flyget, men du kan ändå skicka in ärendet."
-}
-  }
-}
-},
-"homeEligibility": {
-  "badge": "EU261-ERSÄTTNING",
-  "title": "Kan ditt flyg ge rätt till ersättning?",
-  "description": "EU:s passagerarrättigheter kan ge dig rätt till ersättning om ditt flyg är kraftigt försenat, inställt eller om du nekas ombordstigning. Beloppet kan bero på rutten, avståndet och omständigheterna.",
-  "bands": {
-  "short": {
-    "distance": "UPP TILL 1 500 KM",
-    "title": "Kortare flygningar",
-    "body": "Upp till €250 per passagerare för berättigade flygningar på 1 500 km eller mindre."
-  },
-  "medium": {
-    "distance": "MEDELLÅNGA OCH LÄNGRE EU-FLYG",
-    "title": "Medellånga flygningar",
-    "body": "Upp till €400 per passagerare för berättigade flygningar inom EU över 1 500 km och vissa andra flygningar mellan 1 500 och 3 500 km."
-  },
-  "long": {
-    "distance": "VISSA FLYG ÖVER 3 500 KM",
-    "title": "Långdistansflygningar",
-    "body": "Upp till €600 per passagerare för berättigade flygningar över 3 500 km där ersättningsnivån på €600 gäller."
-  }
-},
-  "reasons": {
-    "delay": "Ankomst försenad med 3+ timmar",
-    "cancellation": "Flyget inställt",
-    "deniedBoarding": "Nekad ombordstigning"
-  },
-  "disclaimer": "Ersättning är inte automatisk. Din rätt till ersättning beror på omständigheterna kring störningen, rutten och vilka passagerarrättigheter som gäller. Extraordinära omständigheter kan påverka rätten till ersättning.",
-  "cta": "Kontrollera mitt flyg"
-},
-"homeFee": {
-  "badge": "TYDLIG PRISSÄTTNING",
-  "title": "En enkel avgift. Mer av ersättningen stannar hos dig.",
-  "description": "Vår standardavgift är 20 % inklusive moms. Du betalar ingenting i förskott och ingen serviceavgift om vi inte lyckas få ersättning åt dig.",
-  "points": {
-    "noUpfront": "Ingen kostnad i förskott",
-    "onlyIfPaid": "Ingen ersättning, ingen avgift",
-    "vatIncluded": "20 % inkl. moms"
-  },
-  "termsLink": "Se våra villkor",
-  "exampleLabel": "Exempel",
-  "compensation": "Ersättning vi får ut",
-  "fee": "FlightClaimlys avgift",
-  "youKeep": "Du behåller",
-  "exampleNote": "Om vi får ut €600 är vår standardavgift €120 och du behåller €480."
-},
-"homeBrandStory": {
-  "badge": "VI HANTERAR ÄRENDET",
-  "title": "Vi tar hand om flygbolaget. Du går vidare med ditt liv.",
-  "description": "En flygstörning är stressig nog. Vi tar hand om ersättningsärendet, kommunikationen och uppföljningen med flygbolaget — samtidigt som vi håller dig informerad från start till utbetalning.",
-  "points": {
-    "airline": "Vi sköter kontakten med flygbolaget",
-    "updates": "Tydliga uppdateringar om ditt ärende",
-    "payout": "Följ ärendet från start till utbetalning"
-  },
-  "cta": "Varför FlightClaimly",
-  "imageAlt": "Flygplansvinge ovanför molnen i solnedgång"
-},
-"homeExplore": {
-  "badge": "UTFORSKA DINA FLYGRÄTTIGHETER",
-  "title": "Ta reda på vad som gäller för din resa.",
-  "description": "Reglerna vid flygstörningar kan vara svåra att förstå. Utforska vad som gäller för just din situation och förstå dina rättigheter innan du gör ett ersättningsanspråk.",
-  "cards": {
-    "delays": {
-      "title": "Försenat flyg",
-      "description": "Se när en flygförsening kan ge rätt till ersättning och vilka regler som gäller."
-    },
-    "cancellations": {
-      "title": "Inställt flyg",
-      "description": "Förstå dina rättigheter när ett flygbolag ställer in ditt flyg."
+    "faq": {
+      "title": "Vanliga frågor",
+      "before": "Många frågor finns redan besvarade i vår ",
+      "link": "FAQ",
+      "after": ". Där hittar du korta och tydliga svar om ersättning, process och vad som gäller i olika situationer."
     },
     "rights": {
-      "title": "Passagerarrättigheter",
-      "description": "Utforska EU261, reglerna för flygersättning och när flygbolag är skyldiga att betala."
+      "title": "Dina rättigheter",
+      "lead": "Vill du läsa mer om vad du har rätt till enligt EU261? Besök:",
+      "link": "Dina rättigheter"
     },
-    "explore": {
-      "title": "Utforska flygbolag & flygplatser",
-      "description": "Hitta information om passagerarrättigheter kopplad till flygbolag, flygplatser och din resa."
+    "case": {
+      "title": "Har du ett pågående ärende?",
+      "p1": "Du kan följa statusen när som helst via länken du fick i mail när du skapade ärendet.",
+      "before": "Har du tappat bort länken? Ingen fara – skriv till oss på",
+      "after": "så skickar vi den igen."
+    },
+    "footer": {
+      "lead": "Vill du kolla om ditt flyg ger rätt till ersättning? Det tar bara någon minut.",
+      "cta": "Kolla mitt flyg"
+    }
+  },
+  "compensation": {
+    "meta": {
+      "title": "Ersättningsbelopp enligt EU261 – 250, 400 och 600 € | FlightClaimly",
+      "description": "Se vilka ersättningsbelopp du kan få enligt EU261/UK261 – 250, 400 eller 600 € per person beroende på flygsträcka och försening."
+    },
+    "badge": "Ersättningsbelopp",
+    "title": "Ersättningsbelopp enligt EU261 – 250, 400 och 600 €",
+    "intro": "EU-förordning 261/2004 (”EU261”) ger rätt till fasta ersättningsnivåer när ditt flyg är kraftigt försenat, inställt eller vid nekad ombordstigning.",
+    "sections": {
+      "overview": {
+        "title": "Snabb överblick – hur mycket kan du få?",
+        "p1": {
+          "before": "Ersättningen enligt EU261 ligger normalt mellan ",
+          "highlight": "250 € och 600 € per person",
+          "after": ". Beloppet beror i huvudsak på:"
+        },
+        "list": [
+          "hur lång flygsträckan är",
+          "om flyget är inom EU eller internationellt",
+          "hur mycket försening eller påverkan du drabbats av"
+        ],
+        "note": "Det spelar alltså mindre roll vad biljetten kostade – två passagerare på samma flyg får normalt samma ersättningsbelopp."
+      },
+      "table": {
+        "title": "Ersättningsnivåer enligt EU261",
+        "intro": "Beloppen beror främst på flygsträcka och typ av störning. Tabellen nedan ger en översikt.",
+        "head": {
+          "distance": "Distans",
+          "type": "När gäller",
+          "amount": "Ersättning"
+        },
+        "rows": [
+          {
+            "distance": "Upp till 1 500 km",
+            "type": "Försening ≥ 3 timmar / inställt flyg",
+            "amount": "250 €"
+          },
+          {
+            "distance": "1 500–3 500 km",
+            "type": "Försening ≥ 3 timmar / inställt flyg",
+            "amount": "400 €"
+          },
+          {
+            "distance": "Över 3 500 km (inom EU)",
+            "type": "Försening ≥ 3 timmar / inställt flyg",
+            "amount": "400 €"
+          },
+          {
+            "distance": "Över 3 500 km (utanför EU)",
+            "type": "Försening ≥ 3 timmar / inställt flyg",
+            "amount": "600 €"
+          }
+        ],
+        "note": "Vi hjälper dig att avgöra om ditt case är ersättningsberättigat."
+      },
+      "reduction": {
+        "title": "När kan ersättningen reduceras?",
+        "p1": "Vid ombokning som gör att du anländer nära den ursprungliga ankomsttiden kan ersättningen i vissa fall halveras.",
+        "list": [
+          "Kortare distanser: liten försening vid ankomst",
+          "Medeldistanser: måttlig försening vid ankomst",
+          "Långdistanser: begränsad försening vid ankomst"
+        ],
+        "note": "Bedömningen baseras alltid på faktisk ankomsttid och flygbolagets åtgärder."
+      },
+      "types": {
+        "title": "Vilka störningar omfattas?",
+        "p1": "EU261 kan ge rätt till ersättning vid bland annat:",
+        "list": [
+          "Förseningar (ofta ≥ 3 timmar vid ankomst)",
+          "Inställda flyg",
+          "Nekad ombordstigning (överbokning)"
+        ],
+        "note": {
+          "before": "Läs mer om dina rättigheter på sidan ",
+          "link": "Dina rättigheter"
+        }
+      },
+      "examples": {
+        "title": "Exempel",
+        "list": [
+          "Flyget landar 3h 20m sent → kan ge rätt till ersättning.",
+          "Flyget ställs in samma dag → kan ge rätt till ersättning och ombokning.",
+          "Du nekas ombordstigning på grund av överbokning → kan ge rätt till ersättning."
+        ],
+        "note": "Rätten till ersättning påverkas av orsaken till störningen."
+      },
+      "myths": {
+        "title": "Vanliga missförstånd",
+        "list": [
+          "Det gäller bara om biljetten köpts direkt från flygbolaget.",
+          "Man måste klaga direkt på flygplatsen.",
+          "Alla förseningar ger rätt till ersättning."
+        ],
+        "note": "Vi hjälper dig att avgöra om ditt case är ersättningsberättigat."
+      }
+    },
+    "footer": {
+      "lead": "Vill du se vilket ersättningsbelopp som kan gälla för just din resa?",
+      "cta": "Kolla mitt flyg"
+    }
+  },
+  "delays": {
+    "meta": {
+      "title": "Försenat flyg – ersättning enligt EU261 | FlightClaimly",
+      "description": "Försenat flyg? Se när du har rätt till 250–600 € i ersättning enligt EU261/UK261, vad som räknas som kraftig försening och hur FlightClaimly hjälper dig att driva kravet."
+    },
+    "badge": "Flygförseningar",
+    "title": "Försenat flyg – så får du ersättning enligt EU261",
+    "intro": "Ett försenat flyg kan förstöra planer, anslutningar och semestrar. EU261 ger dig som passagerare starka rättigheter – i många fall har du rätt till ersättning när du anländer sent. Här förklarar vi grunderna.",
+    "sections": {
+      "when": {
+        "title": "När räknas ett flyg som kraftigt försenat?",
+        "p1": {
+          "before": "För EU261 är det framför allt",
+          "highlight": "ankomsttiden",
+          "after": "som spelar roll. Du kan ha rätt till kompensation när du:"
+        },
+        "list": [
+          "ankommer 3 timmar eller mer efter planerad tid",
+          "missar anslutningar och når slutdestinationen kraftigt försenad",
+          "tvingas vänta länge utan rimlig hjälp från flygbolaget"
+        ],
+        "note": "Mindre förseningar ger oftast ingen kompensation, men kan ändå ge rätt till mat, dryck eller ombokning. Vi hjälper dig att bedöma vad som gäller för just ditt fall."
+      },
+      "amount": {
+        "title": "Hur mycket kan du få vid försening?",
+        "p1": "Ersättningsnivåerna vid kraftiga förseningar liknar dem vid inställda flyg och beror på flygsträckans längd:",
+        "list": [
+          "upp till 250 € för kortare flyg (ca 0–1 500 km)",
+          "upp till 400 € för medellånga flyg inom EU eller upp till 3 500 km",
+          "upp till 600 € för längre internationella flyg"
+        ],
+        "note": "I vissa fall kan beloppen minskas om flygbolaget erbjuder ombokning som gör att du ändå kommer fram med relativt liten försening. Det är sådant vi räknar på åt dig."
+      },
+      "care": {
+        "title": "Dina rättigheter under tiden du väntar",
+        "p1": "Utöver ekonomisk kompensation kan du vid längre förseningar ha rätt till:",
+        "list": [
+          "mat och dryck i rimlig omfattning",
+          "två gratis telefonsamtal eller meddelanden",
+          "hotellövernattning om du måste stanna över natten",
+          "transport mellan flygplats och hotell",
+          "ombokning till en senare avgång, eller återbetalning i vissa fall"
+        ],
+        "note": "Spara alltid kvitton – du kan ofta kräva ersättning för nödvändiga utlägg i efterhand om flygbolaget inte hjälpt dig på plats."
+      },
+      "exceptions": {
+        "title": "När kan flygbolaget slippa betala kompensation?",
+        "p1": "Vid vissa situationer kan flygbolaget hänvisa till ”extraordinära omständigheter” och neka ersättning, till exempel:",
+        "list": [
+          "allvarligt oväder eller naturkatastrofer",
+          "stängda flygplatser eller luftrumsrestriktioner",
+          "säkerhetshot eller händelser utanför flygbolagets kontroll"
+        ],
+        "p2": {
+          "before": "Tekniska fel, brist på personal eller planeringsmissar är däremot oftast",
+          "highlight": "inte",
+          "after": "giltiga skäl för att neka kompensation. Många passagerare får nej första gången – där kan vi hjälpa dig att gå vidare."
+        }
+      },
+      "examples": {
+        "title": "Exempel: när du kan ha rätt till ersättning",
+        "list": [
+          "Ditt flyg från Stockholm till Barcelona landar 3 timmar och 45 minuter senare än planerat – du kan ha rätt till kompensation.",
+          "Du missar ditt långflyg efter en försening på första sträckan, och når slutdestinationen mer än 3 timmar sent – hela resan kan omfattas.",
+          "Flyget är 4 timmar försenat på grund av ett tekniskt fel – ofta ersättningsgrundande."
+        ]
+      },
+      "links": {
+        "title": "Vill du läsa mer om reglerna?",
+        "rights": {
+          "before": "På sidan",
+          "link": "Dina rättigheter",
+          "after": "hittar du en bredare genomgång av EU261 och vad som gäller vid inställda flyg, överbokning och andra situationer."
+        },
+        "faq": {
+          "before": "Du kan också kika i vår",
+          "link": "FAQ",
+          "after": "där vi svarar kort på vanliga frågor."
+        }
+      }
+    },
+    "footer": {
+      "lead": "Har du varit med om ett försenat flyg? Kolla om du kan få upp till 6 000 kr i ersättning – det tar bara någon minut.",
+      "cta": "Kolla mitt flyg"
+    }
+  },
+  "login": {
+    "title": "Admin login",
+    "passwordLabel": "Lösenord",
+    "passwordPlaceholder": "••••••••",
+    "submit": "Logga in",
+    "loading": "Loggar in…",
+    "errors": {
+      "invalidPassword": "Fel lösenord",
+      "generic": "Kunde inte logga in"
+    }
+  },
+  "privacy": {
+    "meta": {
+      "title": "Integritetspolicy | FlightClaimly",
+      "description": "Läs hur FlightClaimly behandlar personuppgifter, vilka uppgifter vi samlar in, syftet med behandlingen och dina rättigheter enligt GDPR."
+    },
+    "badge": "Integritet",
+    "title": "Integritetspolicy för FlightClaimly",
+    "intro": "Din integritet är viktig för oss. På denna sida förklarar vi vilka uppgifter vi samlar in, varför vi gör det, hur vi använder dem och vilka rättigheter du har.",
+    "controller": {
+      "title": "Personuppgiftsansvarig",
+      "body": "FlightClaimly (”vi”, ”oss”) är personuppgiftsansvarig för behandling av personuppgifter i samband med vår tjänst för flygkompensation."
+    },
+    "dataCollected": {
+      "title": "Vilka uppgifter samlar vi in?",
+      "intro": "När du använder vår tjänst kan vi komma att behandla följande typer av personuppgifter:",
+      "items": [
+        "kontaktuppgifter (namn, e-post, telefonnummer)",
+        "bokningsinformation (bokningsnummer, flygnummer, datum, rutter)",
+        "biljetter och boardingkort (dokument, PDF:er, bilder)",
+        "uppgifter om försening, inställning eller annan störning",
+        "kommunikation med dig (e-post, meddelanden)",
+        "teknisk information (IP-adress, enhet, webbläsare) i den mån det behövs för säkerhet och drift"
+      ]
+    },
+    "purpose": {
+      "title": "Varför behandlar vi dina uppgifter?",
+      "intro": "Vi behandlar dina personuppgifter för att kunna:",
+      "items": [
+        "bedöma om du har rätt till kompensation enligt EU261",
+        "skapa och hantera ditt ärende mot flygbolaget",
+        "kommunicera med dig om status i ärendet",
+        "hantera utbetalningar när ersättning beviljas",
+        "uppfylla rättsliga skyldigheter (t.ex. bokföring)",
+        "förbättra och säkra vår tjänst"
+      ]
+    },
+    "legalBasis": {
+      "title": "Rättslig grund för behandling",
+      "intro": "Behandlingen av dina personuppgifter baseras främst på:",
+      "items": [
+        "<strong>Avtal</strong> – för att kunna driva ditt krav mot flygbolaget",
+        "<strong>Rättslig förpliktelse</strong> – t.ex. bokföringsregler",
+        "<strong>Berättigat intresse</strong> – säkerhet och drift"
+      ]
+    },
+    "retention": {
+      "title": "Hur länge sparar vi dina uppgifter?",
+      "intro": "Vi sparar dina uppgifter så länge det behövs för att:",
+      "items": [
+        "hantera och avsluta ditt ärende",
+        "hantera eventuella klagomål eller tvister",
+        "uppfylla rättsliga skyldigheter"
+      ],
+      "note": "När uppgifterna inte längre behövs raderar eller anonymiserar vi dem på ett säkert sätt."
+    },
+    "sharing": {
+      "title": "Med vem delar vi dina uppgifter?",
+      "intro": "Vi delar endast dina uppgifter med parter som behövs för att kunna leverera tjänsten:",
+      "items": [
+        "flygbolag och deras representanter",
+        "juridiska ombud eller samarbetspartners",
+        "IT-leverantörer (hosting, e-post)"
+      ],
+      "note": "Vi säljer inte dina personuppgifter vidare till tredje part."
+    },
+    "rights": {
+      "title": "Dina rättigheter",
+      "intro": "Som registrerad har du rätt att:",
+      "items": [
+        "begära utdrag över vilka uppgifter vi behandlar",
+        "begära rättelse av felaktiga uppgifter",
+        "begära radering när uppgifter inte längre behövs",
+        "invända mot eller begränsa behandling",
+        "begära dataportabilitet i vissa fall"
+      ],
+      "contactBefore": "Vill du utöva någon av dessa rättigheter? Kontakta oss via"
+    },
+    "complaints": {
+      "title": "Klagomål",
+      "body": "Om du anser att vi behandlar dina uppgifter i strid med gällande regler kan du lämna klagomål till relevant dataskyddsmyndighet."
+    },
+    "changes": {
+      "title": "Ändringar i denna policy",
+      "body": "Vi kan komma att uppdatera denna integritetspolicy vid behov. Den senaste versionen finns alltid publicerad här."
+    },
+    "footer": {
+      "before": "Har du frågor om hur vi hanterar dina personuppgifter? Hör av dig på"
+    }
+  },
+  "rights": {
+    "meta": {
+      "title": "EU261 – dina rättigheter som flygpassagerare | FlightClaimly",
+      "description": "Lär dig dina rättigheter enligt EU261/UK261 vid försenade, inställda och överbokade flyg. Se när du har rätt till 250–600 € i ersättning och hur FlightClaimly hjälper dig få ut pengarna."
+    },
+    "badge": "Dina rättigheter",
+    "title": "Dina rättigheter som flygpassagerare enligt EU261",
+    "intro": "EU-förordning 261/2004 (\"EU261\") ger dig som flygpassagerare starka rättigheter vid försenade, inställda eller överbokade flyg. Här förklarar vi grunderna – och hur FlightClaimly kan hjälpa dig få den ersättning du har rätt till.",
+    "whenApplies": {
+      "title": "När gäller EU261?",
+      "intro": "EU261 gäller i följande situationer:",
+      "bullets": [
+        "flyget avgår från ett land inom EU/EES eller Storbritannien",
+        "flyget anländer till EU/EES/Storbritannien med ett EU-baserat flygbolag",
+        "du har en bekräftad bokning och kom i tid till incheckningen"
+      ],
+      "note": "Även vissa anslutande flyg och resor med mellanlandningar kan omfattas, beroende på hur biljetten är bokad. Det hjälper vi dig att bedöma."
+    },
+    "covered": {
+      "title": "Vilka situationer omfattas?",
+      "lead": "Du kan ha rätt till kompensation om:",
+      "bullets": [
+        "ditt flyg är kraftigt försenat vid ankomst (ofta 3 timmar eller mer)",
+        "ditt flyg ställs in med kort varsel",
+        "du nekas ombordstigning på grund av överbokning"
+      ],
+      "after": "Utöver ekonomisk kompensation kan du ha rätt till mat, dryck, hotell och ombokning beroende på hur länge du drabbas och hur lång din resa är."
+    },
+    "amounts": {
+      "title": "Hur mycket kan du få i ersättning?",
+      "intro": "Ersättningen beror främst på flygsträckans längd och hur mycket din resa påverkats. Vanliga schablonbelopp enligt EU261 är:",
+      "bullets": [
+        "upp till 250 € för kortare flyg (ca 0–1 500 km)",
+        "upp till 400 € för medellånga flyg inom EU eller upp till 3 500 km",
+        "upp till 600 € för längre internationella flyg"
+      ],
+      "note": "Det exakta beloppet kan variera beroende på rutt, förseningens längd och erbjuden ombokning. FlightClaimly hjälper dig räkna ut rätt nivå för just din resa."
+    },
+    "exceptions": {
+      "title": "När har du inte rätt till kompensation?",
+      "intro": "Flygbolaget kan slippa betala kompensation om förseningen eller inställningen beror på så kallade \"extraordinära omständigheter\", till exempel:",
+      "bullets": [
+        "allvarligt oväder eller naturkatastrofer",
+        "säkerhetsrisker eller luftrumsstängningar",
+        "strejker utanför flygbolagets kontroll (t.ex. flygplatspersonal eller flygledare)"
+      ],
+      "afterBeforeStrong": "Tekniska problem eller brister i planering räknas ofta ",
+      "afterStrong": "inte",
+      "afterTail": " som extraordinära omständigheter. Många avslag från flygbolag är felaktiga – där kan vi hjälpa dig att överklaga."
+    },
+    "save": {
+      "title": "Vad behöver du spara?",
+      "intro": "För att driva ett ärende är det bra om du har:",
+      "bullets": [
+        "bokningsbekräftelse eller biljett (gärna som PDF eller bild)",
+        "boardingkort om du hann checka in",
+        "eventuella kvitton på mat, hotell eller transport",
+        "kort beskrivning av vad som hände (tider, besked från flygbolaget)"
+      ],
+      "note": "Du kan ladda upp allt direkt när du skapar ett ärende hos oss – vi hjälper dig att sortera."
+    },
+    "links": {
+      "title": "Vill du veta mer om specifika situationer?",
+      "lead": "Läs mer om:",
+      "delaysText": "Försenade flyg",
+      "delaysAfter": " – vad som gäller vid långa förseningar.",
+      "cancellationsText": "Inställda flyg",
+      "cancellationsAfter": " – dina rättigheter när flyget ställs in.",
+      "faqText": "Vanliga frågor",
+      "faqAfter": " – korta svar på det flest undrar."
+    },
+    "footer": {
+      "lead": "Tror du att ditt flyg omfattas av EU261? Kolla direkt om du har rätt till ersättning – det tar bara någon minut.",
+      "cta": "Kolla om jag har rätt till ersättning"
+    }
+  },
+  "terms": {
+    "meta": {
+      "title": "Användarvillkor | FlightClaimly",
+      "description": "Läs användarvillkoren för FlightClaimly, inklusive hur tjänsten fungerar, avgifter, utbetalningar, ansvar och kontaktvägar."
+    },
+    "badge": "Villkor",
+    "title": "Användarvillkor för FlightClaimly",
+    "intro": "Dessa villkor beskriver hur FlightClaimly fungerar och vilka rättigheter och skyldigheter som gäller när du använder vår tjänst för att driva krav på flygkompensation.",
+    "sections": {
+      "service": {
+        "title": "1. Om tjänsten",
+        "text": "FlightClaimly är en tjänst som hjälper flygpassagerare att utreda och driva krav på kompensation enligt EU261 och liknande regelverk. Vi agerar som ombud för dig gentemot flygbolaget.",
+        "note": "Genom att skicka in ett ärende via vår webbplats godkänner du dessa villkor."
+      },
+      "usage": {
+        "title": "2. Din användning av tjänsten",
+        "intro": "Du förbinder dig att:",
+        "bullets": [
+          "lämna korrekta och fullständiga uppgifter om ditt flyg",
+          "inte skapa ärenden som du vet är felaktiga eller missvisande",
+          "informera oss om du redan anlitat någon annan för samma krav"
+        ],
+        "note": "Vi förbehåller oss rätten att avbryta hanteringen av ett ärende om vi bedömer att uppgifterna är felaktiga eller om förutsättningarna för krav saknas."
+      },
+      "power": {
+        "title": "3. Ombud och fullmakt",
+        "text": "För att kunna driva ditt krav behöver vi ibland agera som ombud gentemot flygbolaget. Genom att använda tjänsten godkänner du att vi kontaktar flygbolaget i ditt namn och företräder dina intressen i samband med ärendet.",
+        "note": "I vissa fall kan vi be dig signera en separat fullmakt eller ett särskilt uppdragsavtal, till exempel om ärendet behöver eskaleras."
+      },
+      "fees": {
+        "title": "4. Avgifter och ersättning",
+        "lead": "FlightClaimly arbetar enligt principen",
+        "highlight": "no win, no fee",
+        "bullets": [
+          "det kostar ingenting att skicka in ett ärende",
+          "vi tar bara betalt om vi lyckas få ersättning från flygbolaget",
+          "vår standardavgift är 20 % inklusive moms av den ersättning vi återvinner åt dig",
+          "om rättsliga åtgärder blir nödvändiga kan ytterligare avgifter eller kostnader tillkomma"
+        ],
+        "note": "Innan vi inleder rättsliga åtgärder som innebär ytterligare avgifter eller kostnader för dig informerar vi dig om de tillämpliga villkoren och inhämtar ditt separata godkännande. Fullmakten du lämnar till FlightClaimly innebär inte i sig att du på förhand accepterar sådana ytterligare avgifter eller kostnader."
+      },
+      "payout": {
+        "title": "5. Utbetalning till dig",
+        "intro": "När flygbolaget betalat ut kompensation kan utbetalning ske antingen:",
+        "bullets": [
+          "direkt till FlightClaimly, varefter vi vidarebefordrar din del till dig, eller",
+          "direkt till dig, efter avdrag för vår avgift enligt separat överenskommelse"
+        ],
+        "note": "Vi strävar efter att genomföra utbetalningar så snart som möjligt efter att ersättningen mottagits och identifierats."
+      },
+      "liability": {
+        "title": "6. Ansvar och begränsningar",
+        "text1": "Vi kan inte garantera att ett krav leder till ersättning. Bedömningen görs alltid utifrån tillgänglig information och gällande regelverk.",
+        "text2": "FlightClaimly ansvarar inte för indirekta skador, såsom utebliven vinst eller följdkostnader, utan vårt ansvar är i normalfallet begränsat till den avgift du betalat för tjänsten."
+      },
+      "privacy": {
+        "title": "7. Personuppgifter och integritet",
+        "text": "Vi behandlar personuppgifter i enlighet med gällande dataskyddslagstiftning. Mer information om hur vi hanterar dina uppgifter finns i vår",
+        "link": "integritetspolicy"
+      },
+      "changes": {
+        "title": "8. Ändringar av villkoren",
+        "text": "Vi kan komma att uppdatera dessa villkor vid behov. Den senaste versionen finns alltid på vår webbplats."
+      },
+      "contact": {
+        "title": "9. Kontakt",
+        "text": "Har du frågor om dessa villkor är du välkommen att kontakta oss på"
+      }
+    },
+    "footer": "Genom att använda FlightClaimly bekräftar du att du har läst och förstått dessa villkor."
+  },
+  "thanks": {
+    "brandTagline": "Vi driver ditt ärende mot flygbolaget – du slipper bråket.",
+    "backHome": "← Till startsidan",
+    "header": {
+      "badge": "FLIGHTCLAIMLY • DITT ÄRENDE ÄR REGISTRERAT",
+      "title": "Tack! Vi har mottagit ditt ärende.",
+      "claimId": "Ärende-ID",
+      "intro": "Nästa steg är att du bekräftar fullmakt och laddar upp underlag här på sidan. När det är klart börjar vi handlägga ärendet direkt och kontaktar flygbolaget för din räkning."
+    },
+    "precheck": {
+      "badge": "Preliminär bedömning",
+      "eligibleTitle": "Bra nyheter – du ser ut att ha rätt till ersättning.",
+      "eligibleFallback": "Preliminär bedömning: flyget kan vara ersättningsberättigat enligt EU261.",
+      "eligibleNote": "Det här är ingen garanti, men ett starkt första besked. När du har bekräftat fullmakt och laddat upp bilagor börjar vi driva kravet mot flygbolaget.",
+      "unclearTitle": "Oklart – vi granskar manuellt.",
+      "unclearFallback": "Skicka gärna in underlag så går vi igenom ditt ärende manuellt.",
+      "amountPrefix": "Indikation:"
+    },
+    "upload": {
+      "title": "Ladda upp underlag",
+      "intro": "Fullmakten ger oss rätt att driva ärendet mot flygbolaget. Lägg också gärna till boardingkort, bokningsbekräftelse och kvitton om du haft extra kostnader.",
+      "list": [
+        "Digital fullmakt (LoA) – obligatorisk",
+        "Boardingkort eller e-biljett",
+        "Bokningsbekräftelse",
+        "Kvitton för extra kostnader (om du haft det)"
+      ]
+    },
+    "loa": {
+      "title": "Digital fullmakt (LoA)",
+      "description": "Genom att fylla i ditt namn och kryssa i rutan ger du FlightClaimly rätt att företräda dig mot flygbolaget i detta ärende.",
+      "viewText": "Visa fullmaktstext",
+      "nameLabel": "Fullständigt namn (signatur)",
+      "namePlaceholder": "Ditt fullständiga namn",
+      "consent": "Jag ger FlightClaimly fullmakt (Letter of Authorization) att företräda mig gentemot flygbolaget i detta ärende.",
+      "error": "Fyll i ditt namn och kryssa i rutan för att fullmakten ska vara giltig."
+    },
+    "attachments": {
+      "title": "Övriga bilagor (valfritt)",
+      "description": "Lägg gärna till boardingkort, bokningsbekräftelse och kvitton. Du kan ladda upp flera filer samtidigt.",
+      "choose": "Välj filer",
+      "types": "PDF, JPG, PNG, HEIC. Max några få filer åt gången."
+    },
+    "actions": {
+      "submit": "Bekräfta fullmakt och ladda upp",
+      "submitting": "Bearbetar…",
+      "later": "Du kan alltid komplettera med fler bilagor senare genom att kontakta oss om det behövs."
+    },
+    "success": {
+      "title": "Fullmakt bekräftad!",
+      "text": "Tack – vi börjar handlägga ditt ärende direkt. Du får mejl när status uppdateras och kan följa allt via din spårningslänk."
+    },
+    "errors": {
+      "missingId": "Kunde inte hitta ditt ärende-ID. Gå tillbaka till startsidan och skicka in formuläret igen.",
+      "generic": "❌ Kunde inte slutföra steget. Försök igen."
+    },
+    "security": {
+      "badge": "Säker filöverföring",
+      "text": "Dina filer lagras krypterat och används endast för att hantera ditt ärende. Vi delar dem inte med någon annan än flygbolaget och eventuellt juridiskt ombud kopplat till just detta ärende.",
+      "independentTitle": "Oberoende aktör",
+      "independentText": "FlightClaimly är en fristående aktör och inte affilierad med något flygbolag. Vi arbetar alltid på uppdrag av dig som resenär."
+    },
+    "loaText": {
+      "title": "Fullmakt – FlightClaimly",
+      "intro": "Jag ger härmed FlightClaimly rätt att företräda mig i ärendet om flygkompensation enligt EU-förordning 261/2004.",
+      "bullets": [
+        "Kommunicera med flygbolaget i mitt namn.",
+        "Skicka in krav och följa upp ärendet.",
+        "Ta emot svar och beslut från flygbolaget.",
+        "Samarbeta med juridiskt ombud om det behövs för detta ärende."
+      ],
+      "note": "Fullmakten gäller endast detta specifika ärende och kan när som helst återkallas skriftligen."
+    },
+    "loading": "Laddar sidan…",
+    "home": "Till startsidan"
+  },
+  "about": {
+    "meta": {
+      "title": "Om FlightClaimly | Flygkompensation utan krångel",
+      "description": "Läs om FlightClaimly och hur vi hjälper dig att driva ditt EU261-ärende från start till utbetalning — snabbt, tryggt och transparent."
+    },
+    "badge": "Om oss",
+    "title": "Vi hjälper dig få ersättning när flyget strulat",
+    "intro": "FlightClaimly är en EU-baserad tjänst som gör det enkelt att kräva ersättning från flygbolag enligt EU261. Målet är att du ska få de pengar du har rätt till – utan krångel, stress eller juridiska hinder.",
+    "why": {
+      "title": "Varför finns FlightClaimly?",
+      "p1": "Varje år går stora summor i flygkompensation aldrig till passagerarna. Många orkar inte, vet inte hur reglerna fungerar eller får nej första gången och ger upp.",
+      "p2": "FlightClaimly skapades för att göra processen så enkel som möjligt: du fyller i ditt flyg, laddar upp din bokning – vi sköter resten och driver ärendet mot flygbolaget åt dig."
+    },
+    "how": {
+      "title": "Så fungerar tjänsten",
+      "steps": [
+        "Du fyller i dina flygdetaljer och vad som hänt.",
+        "Vi analyserar ärendet utifrån EU261-regelverket.",
+        "Vi driver kravet mot flygbolaget åt dig.",
+        "Du betalar först när du får ersättning."
+      ],
+      "note": "Allt sköts digitalt – snabbt, tryggt och transparent."
+    },
+    "model": {
+      "title": "Vår modell – enkel och transparent",
+      "p1": "Vi tror på en enkel princip:",
+      "p1Strong": "no win, no fee",
+      "p1b": " Det betyder att vi bara tjänar pengar när du gör det.",
+      "bullets": [
+        "det kostar ingenting att skapa ett ärende",
+        "vi tar bara betalt om du faktiskt får ersättning",
+        "vår avgift är tydlig och framgår innan du godkänner"
+      ],
+      "note": "Ingen ersättning från flygbolaget = inga kostnader till FlightClaimly."
+    },
+    "trust": {
+      "title": "Fokus på tydlighet och trygghet",
+      "p1": "Vi vill att du alltid ska veta var ditt ärende står. Därför kan du följa processen via vår spårningssida, där du ser:",
+      "bullets": [
+        "när vi mottagit ditt ärende",
+        "när vi granskar det",
+        "när det skickats till flygbolaget",
+        "när ersättning betalats ut"
+      ],
+      "p2": "Du får dessutom mail när statusen uppdateras, så att du slipper jaga kundtjänst eller logga in i onödiga portaler."
+    },
+    "independent": {
+      "title": "Oberoende och på din sida",
+      "p1": "FlightClaimly arbetar helt enligt EU:s passagerarrättigheter (EU261/2004) och är oberoende från flygbolagen. Vårt enda uppdrag är att företräda dig som passagerare och se till att reglerna följs i praktiken – inte bara på papper.",
+      "p2": "Vi tar striden mot flygbolag och byråkrati så att du kan fokusera på din resa, inte på paragrafer och formulär."
+    },
+    "footer": {
+      "cta": "Har ditt flyg drabbats? Kolla om du har rätt till ersättning – det tar bara någon minut.",
+      "primary": "Få kompensation",
+      "secondary": "Kontakt & samarbeten"
+    },
+    "email": {
+      "footer": {
+        "disclaimer": {
+          "title": "Konfidentialitet",
+          "p1": "Detta e-postmeddelande och eventuella bilagor är avsedda enbart för angiven mottagare. Om du har fått meddelandet av misstag ber vi dig att svara på e-postmeddelandet och därefter radera det.",
+          "p2": "Vi behandlar personuppgifter i samband med handläggningen av ditt ärende. Läs mer i vår integritetspolicy och våra villkor."
+        },
+        "links": {
+          "privacy": "Integritetspolicy",
+          "terms": "Villkor"
+        },
+        "errors": {
+          "required": "Fyll i alla obligatoriska fält.",
+          "invalidFlightNumber": "Ange ett giltigt flightnummer (t.ex. SK123).",
+          "network": "Något gick fel. Försök igen.",
+          "noResult": "Vi kunde inte verifiera flyget, men du kan ändå skicka in ärendet."
+        }
+      }
+    }
+  },
+  "homeEligibility": {
+    "badge": "EU261-ERSÄTTNING",
+    "title": "Kan ditt flyg ge rätt till ersättning?",
+    "description": "EU:s passagerarrättigheter kan ge dig rätt till ersättning om ditt flyg är kraftigt försenat, inställt eller om du nekas ombordstigning. Beloppet kan bero på rutten, avståndet och omständigheterna.",
+    "bands": {
+      "short": {
+        "distance": "UPP TILL 1 500 KM",
+        "title": "Kortare flygningar",
+        "body": "Upp till €250 per passagerare för berättigade flygningar på 1 500 km eller mindre."
+      },
+      "medium": {
+        "distance": "MEDELLÅNGA OCH LÄNGRE EU-FLYG",
+        "title": "Medellånga flygningar",
+        "body": "Upp till €400 per passagerare för berättigade flygningar inom EU över 1 500 km och vissa andra flygningar mellan 1 500 och 3 500 km."
+      },
+      "long": {
+        "distance": "VISSA FLYG ÖVER 3 500 KM",
+        "title": "Långdistansflygningar",
+        "body": "Upp till €600 per passagerare för berättigade flygningar över 3 500 km där ersättningsnivån på €600 gäller."
+      }
+    },
+    "reasons": {
+      "delay": "Ankomst försenad med 3+ timmar",
+      "cancellation": "Flyget inställt",
+      "deniedBoarding": "Nekad ombordstigning"
+    },
+    "disclaimer": "Ersättning är inte automatisk. Din rätt till ersättning beror på omständigheterna kring störningen, rutten och vilka passagerarrättigheter som gäller. Extraordinära omständigheter kan påverka rätten till ersättning.",
+    "cta": "Kontrollera mitt flyg"
+  },
+  "homeFee": {
+    "badge": "TYDLIG PRISSÄTTNING",
+    "title": "En enkel avgift. Mer av ersättningen stannar hos dig.",
+    "description": "Vår standardavgift är 20 % inklusive moms. Du betalar ingenting i förskott och ingen serviceavgift om vi inte lyckas få ersättning åt dig.",
+    "points": {
+      "noUpfront": "Ingen kostnad i förskott",
+      "onlyIfPaid": "Ingen ersättning, ingen avgift",
+      "vatIncluded": "20 % inkl. moms"
+    },
+    "termsLink": "Se våra villkor",
+    "exampleLabel": "Exempel",
+    "compensation": "Ersättning vi får ut",
+    "fee": "FlightClaimlys avgift",
+    "youKeep": "Du behåller",
+    "exampleNote": "Om vi får ut €600 är vår standardavgift €120 och du behåller €480.",
+    "pricingLink": "Se fullständig prissättning och jämförelse"
+  },
+  "homeBrandStory": {
+    "badge": "VI HANTERAR ÄRENDET",
+    "title": "Vi tar hand om flygbolaget. Du går vidare med ditt liv.",
+    "description": "En flygstörning är stressig nog. Vi tar hand om ersättningsärendet, kommunikationen och uppföljningen med flygbolaget — samtidigt som vi håller dig informerad från start till utbetalning.",
+    "points": {
+      "airline": "Vi sköter kontakten med flygbolaget",
+      "updates": "Tydliga uppdateringar om ditt ärende",
+      "payout": "Följ ärendet från start till utbetalning"
+    },
+    "cta": "Varför FlightClaimly",
+    "imageAlt": "Flygplansvinge ovanför molnen i solnedgång"
+  },
+  "homeExplore": {
+    "badge": "UTFORSKA DINA FLYGRÄTTIGHETER",
+    "title": "Ta reda på vad som gäller för din resa.",
+    "description": "Reglerna vid flygstörningar kan vara svåra att förstå. Utforska vad som gäller för just din situation och förstå dina rättigheter innan du gör ett ersättningsanspråk.",
+    "cards": {
+      "delays": {
+        "title": "Försenat flyg",
+        "description": "Se när en flygförsening kan ge rätt till ersättning och vilka regler som gäller."
+      },
+      "cancellations": {
+        "title": "Inställt flyg",
+        "description": "Förstå dina rättigheter när ett flygbolag ställer in ditt flyg."
+      },
+      "rights": {
+        "title": "Passagerarrättigheter",
+        "description": "Utforska EU261, reglerna för flygersättning och när flygbolag är skyldiga att betala."
+      },
+      "explore": {
+        "title": "Utforska flygbolag & flygplatser",
+        "description": "Hitta information om passagerarrättigheter kopplad till flygbolag, flygplatser och din resa."
+      }
     }
   }
 }
-
-}
-
