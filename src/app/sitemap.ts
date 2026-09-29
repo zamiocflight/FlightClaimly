@@ -42,6 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "cancellations", changeFrequency: "weekly", priority: 0.9 },
     { path: "rights", changeFrequency: "weekly", priority: 0.9 },
     { path: "faq", changeFrequency: "monthly", priority: 0.7 },
+    { path: "fees", changeFrequency: "monthly", priority: 0.8 },
     { path: "about", changeFrequency: "monthly", priority: 0.6 },
     { path: "contact", changeFrequency: "monthly", priority: 0.6 },
     { path: "privacy", changeFrequency: "yearly", priority: 0.3 },
@@ -152,17 +153,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
-  const feesEntries: MetadataRoute.Sitemap = [
-    {
-      url: `${siteUrl}/en/fees`,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-  ];
-
   return [
     ...staticEntries,
-    ...feesEntries,
     ...routeIndexEntries,
     ...routeEntries,
     ...airportIndexEntries,

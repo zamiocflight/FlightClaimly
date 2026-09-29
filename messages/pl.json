@@ -5,398 +5,389 @@
     "network": "Błąd sieci. Spróbuj ponownie.",
     "invalidFlightNumber": "Wpisz prawidłowy numer lotu (np. SK123)."
   },
- 
   "check": {
-  "itinerary": {
-    "intro": "Dobrze, potrzebuję jeszcze kilku informacji o locie, aby sprawdzić, czy przysługuje Ci odszkodowanie.",
-    "airline": "Linia lotnicza",
-    "airlinePlaceholder": "np. British Airways",
-    "clearAirline": "Wyczyść linię lotniczą",
-    "flightNumber": "Numer lotu",
-    "date": "Data lotu",
-    "continueHint": "Aby kontynuować, uzupełnij linię lotniczą, numer lotu i datę dla każdego odcinka podróży.",
-    "missedConnection": {
-      "title": "Czy przegapiłeś lot przesiadkowy?",
-      "yes": "Tak",
-      "no": "Nie"
+    "itinerary": {
+      "intro": "Dobrze, potrzebuję jeszcze kilku informacji o locie, aby sprawdzić, czy przysługuje Ci odszkodowanie.",
+      "airline": "Linia lotnicza",
+      "airlinePlaceholder": "np. British Airways",
+      "clearAirline": "Wyczyść linię lotniczą",
+      "flightNumber": "Numer lotu",
+      "date": "Data lotu",
+      "continueHint": "Aby kontynuować, uzupełnij linię lotniczą, numer lotu i datę dla każdego odcinka podróży.",
+      "missedConnection": {
+        "title": "Czy przegapiłeś lot przesiadkowy?",
+        "yes": "Tak",
+        "no": "Nie"
+      },
+      "whatHappened": {
+        "title": "Co się wydarzyło?",
+        "disruption": {
+          "delayed": "Mój lot był opóźniony",
+          "cancelled": "Mój lot został odwołany",
+          "denied": "Odmówiono mi wejścia na pokład"
+        },
+        "whichFlight": {
+          "delayed": "Który lot był opóźniony?",
+          "cancelled": "Który lot został odwołany?",
+          "denied": "Na który lot odmówiono Ci wejścia na pokład?"
+        },
+        "destinationFallback": "miejsca docelowego",
+        "arrivalQuestion": "Z jakim opóźnieniem dotarłeś do {destination}?",
+        "outcome": {
+          "gte3": "3 godziny lub więcej",
+          "lt3": "Mniej niż 3 godziny",
+          "never": "Nie dotarłem na miejsce"
+        },
+        "cancelNotice": {
+          "title": "Ile dni przed odlotem poinformowano Cię o zmianie lotu?",
+          "lt14": "Mniej niż 14 dni",
+          "gte14": "14 dni lub więcej"
+        },
+        "volunteer": {
+          "title": "Czy dobrowolnie zrezygnowałeś z miejsca w zamian za inne korzyści zaoferowane przez linię lotniczą?",
+          "yes": "Tak",
+          "no": "Nie"
+        }
+      },
+      "missedConnectionHours": {
+        "title": "Jak długie było opóźnienie na lotnisku przesiadkowym?",
+        "label": "Wybierz długość opóźnienia",
+        "placeholder": "Wybierz długość opóźnienia",
+        "neverArrived": "Nigdy nie dotarłem na miejsce",
+        "options": {
+          "0-1": "0–1 godz.",
+          "1-2": "1–2 godz.",
+          "2-3": "2–3 godz.",
+          "3-4": "3–4 godz.",
+          "4-5": "4–5 godz.",
+          "5-6": "5–6 godz.",
+          "6-7": "6–7 godz.",
+          "7-8": "7–8 godz.",
+          "8-9": "8–9 godz.",
+          "9plus": "Ponad 9 godz."
+        }
+      }
     },
-    "whatHappened": {
-  "title": "Co się wydarzyło?",
-  "disruption": {
-    "delayed": "Mój lot był opóźniony",
-    "cancelled": "Mój lot został odwołany",
-    "denied": "Odmówiono mi wejścia na pokład"
+    "itineraryNotice": {
+      "before": "Podaj dane swojego",
+      "originalFlight": "pierwotnego lotu",
+      "after": "(nie lotu zastępczego ani przebukowanego)."
+    },
+    "thanks": {
+      "title": "Twoje roszczenie zostało przesłane",
+      "description": "Dokument upoważnienia został pomyślnie podpisany, a Twoje roszczenie jest teraz przygotowywane do przesłania do linii lotniczej.",
+      "claimId": "ID roszczenia",
+      "track": "Śledź swoje roszczenie",
+      "emailNotice": "Wysłaliśmy również link do śledzenia na Twój adres e-mail.",
+      "reassurance": "FlightClaimly przeanalizuje teraz Twoją sprawę i prześle roszczenie do linii lotniczej. O wszelkich aktualizacjach będziemy Cię informować na bieżąco."
+    },
+    "finish": {
+      "finalizing": "Finalizowanie Twojego roszczenia…",
+      "errors": {
+        "missingClaimId": "Brak identyfikatora roszczenia.",
+        "finalizeFailed": "Wystąpił błąd podczas finalizowania Twojego roszczenia."
+      }
+    },
+    "additional": {
+      "title": "Czy poniosłeś dodatkowe koszty?",
+      "intro1": "Jeśli Twój lot był opóźniony, możesz mieć prawo do zwrotu kosztów posiłków, hotelu lub transportu.",
+      "intro2": {
+        "before": "Prześlij rachunki, aby pomóc nam ",
+        "highlight": "odzyskać dla Ciebie jeszcze więcej pieniędzy",
+        "after": "."
+      },
+      "attachedFiles": "Załączone pliki",
+      "totalSize": "Łącznie {size}",
+      "remove": "Usuń",
+      "removeFile": "Usuń plik",
+      "skip": "Pomiń na razie",
+      "tip": "Wskazówka: przesłanie rachunków może zwiększyć kwotę zwrotu.",
+      "dropzone": {
+        "dragDrop": "Przeciągnij i upuść pliki tutaj",
+        "or": "lub",
+        "browse": "Wybierz pliki",
+        "fileLimits": "PDF, JPG, PNG • Maks. {perFile} MB na plik • Maks. {total} MB łącznie"
+      },
+      "errors": {
+        "missingClaim": "Brakuje identyfikatora roszczenia. Wróć i spróbuj ponownie.",
+        "uploadFailed": "Przesyłanie nie powiodło się. Spróbuj ponownie lub pomiń ten krok na razie — w razie potrzeby poprosimy o dokumenty później.",
+        "unsupportedFormat": "\"{file}\" ma nieobsługiwany format. Prześlij plik PDF, JPG lub PNG.",
+        "fileTooLarge": "\"{file}\" jest zbyt duży. Maksymalny rozmiar to {max} MB na plik.",
+        "totalTooLarge": "Łączny rozmiar przesyłanych plików jest zbyt duży. Maksymalnie {max} MB."
+      }
+    },
+    "uploadsId": {
+      "title": "Teraz potrzebujemy Twojego dowodu osobistego lub paszportu. Jest to bardzo ważne dla Twojej sprawy wobec linii lotniczej.",
+      "privacyNotice": "Dokument zostanie wykorzystany wyłącznie do obsługi roszczenia i usunięty w ciągu 30 dni od zakończenia sprawy.",
+      "uploadPromptBefore": "Prześlij swój",
+      "idOrPassport": "dowód osobisty lub paszport",
+      "attachedFiles": "Załączone pliki",
+      "totalSize": "Łącznie {size}",
+      "remove": "Usuń",
+      "removeFile": "Usuń plik",
+      "highWarning": "Niektóre linie lotnicze często wymagają potwierdzenia tożsamości przed rozpatrzeniem roszczeń składanych przez osoby trzecie. Przesłanie dokumentu tożsamości teraz może zapobiec późniejszym opóźnieniom.",
+      "mediumWarning": "Przesłanie dokumentu tożsamości teraz może przyspieszyć proces, jeśli linia lotnicza poprosi o weryfikację.",
+      "dropzone": {
+        "dragDrop": "Przeciągnij i upuść pliki tutaj",
+        "takePhoto": "Zrób zdjęcie dowodu osobistego lub paszportu",
+        "or": "lub",
+        "camera": "Użyj aparatu w telefonie, aby szybko przesłać paszport lub dowód osobisty",
+        "browse": "Wybierz pliki",
+        "uploadPhoto": "Prześlij lub zrób zdjęcie",
+        "fileLimits": "PDF, JPG, PNG • Maks. {perFile} MB na plik • Maks. {total} MB łącznie"
+      },
+      "errors": {
+        "missingClaim": "Brakuje identyfikatora roszczenia. Wróć i spróbuj ponownie.",
+        "uploadFailed": "Przesyłanie nie powiodło się. Spróbuj ponownie.",
+        "unsupportedFormat": "\"{file}\" ma nieobsługiwany format. Prześlij plik PDF, JPG lub PNG.",
+        "fileTooLarge": "\"{file}\" jest zbyt duży. Maksymalny rozmiar to {max} MB na plik.",
+        "totalTooLarge": "Łączny rozmiar przesyłanych plików jest zbyt duży. Maksymalnie {max} MB."
+      }
+    },
+    "uploads": {
+      "title": "Prześlij dokumenty",
+      "attachedFiles": "Załączone pliki",
+      "totalSize": "Łącznie {size}",
+      "remove": "Usuń",
+      "removeFile": "Usuń plik",
+      "description": {
+        "before": "Przesłanie",
+        "boardingPass": "karty pokładowej",
+        "middle": ", potwierdzenia rezerwacji lub rachunków może pomóc nam ",
+        "faster": "szybciej rozpatrzyć Twoje roszczenie",
+        "expenses": "Jeśli poniosłeś dodatkowe koszty (hotel, posiłki, transport), rachunki mogą pomóc nam ",
+        "moreMoney": "odzyskać dla Ciebie jeszcze więcej pieniędzy",
+        "after": "."
+      },
+      "dropzone": {
+        "dragDrop": "Przeciągnij i upuść pliki tutaj",
+        "takePhoto": "Zrób zdjęcie karty pokładowej lub rachunków",
+        "or": "lub",
+        "camera": "Użyj aparatu w telefonie, aby szybko przesłać dokument",
+        "browse": "Wybierz pliki",
+        "uploadPhoto": "Prześlij lub zrób zdjęcie",
+        "fileLimits": "PDF, JPG, PNG • Maks. {perFile} MB na plik • Maks. {total} MB łącznie"
+      },
+      "errors": {
+        "missingClaim": "Brakuje identyfikatora roszczenia. Wróć i spróbuj ponownie.",
+        "uploadFailed": "Przesyłanie nie powiodło się. Spróbuj ponownie lub pomiń ten krok na razie — w razie potrzeby poprosimy o dokumenty później.",
+        "unsupportedFormat": "\"{file}\" ma nieobsługiwany format. Prześlij plik PDF, JPG lub PNG.",
+        "fileTooLarge": "\"{file}\" jest zbyt duży. Maksymalny rozmiar to {max} MB na plik.",
+        "totalTooLarge": "Łączny rozmiar przesyłanych plików jest zbyt duży. Maksymalnie {max} MB."
+      }
+    },
+    "authorization": {
+      "claimCreationError": "Podczas tworzenia roszczenia wystąpił błąd.",
+      "amountFallback": "do 600 €",
+      "titleBefore": "Dobra wiadomość! Wygląda na to, że przysługuje Ci",
+      "titleAfterAmount": "na osobę zgodnie z rozporządzeniem EU261.",
+      "titleSecondLine": "Podpisz się poniżej i otrzymaj należne Ci pieniądze.",
+      "signaturePlaceholder": "Kliknij tutaj i podpisz się",
+      "clearSignature": "Wyczyść podpis",
+      "important": "Ważne",
+      "signatureGuidance": "Twój podpis powinien możliwie dokładnie odpowiadać podpisowi na dokumencie tożsamości.",
+      "feeTitle": "Tak — brak wygranej, brak opłaty. Płacisz tylko 20% z VAT, jeśli odniesiemy sukces.",
+      "feeSubtitle": "Opłata zostanie potrącona z Twojego odszkodowania.",
+      "legal": {
+        "before": "Składając podpis, akceptujesz nasze",
+        "terms": "Warunki korzystania z usługi",
+        "and": "oraz",
+        "priceList": "Cennik",
+        "middle": "i upoważniasz nas do wykorzystania Twojego podpisu na",
+        "authorityDocument": "Dokumencie pełnomocnictwa"
+      }
+    },
+    "bookingReference": {
+      "title": "Jaki jest Twój numer rezerwacji?",
+      "placeholder": "np. DS27K3 lub YLEHPW",
+      "helpTitle": "Gdzie znajdę numer rezerwacji?",
+      "helpText1": "Numer rezerwacji (PNR) zazwyczaj znajduje się w wiadomości e-mail z potwierdzeniem rezerwacji od linii lotniczej lub biura podróży. Zwykle składa się z 5–8 znaków (liter i cyfr).",
+      "helpText2": "Może być również widoczny na karcie pokładowej lub w aplikacji linii lotniczej.",
+      "examples": "Przykłady"
+    },
+    "passengerDetails": {
+      "title": "Twoje dane kontaktowe",
+      "claimOwner": "Właściciel roszczenia",
+      "address": "Adres",
+      "addressPlaceholder": "Ulica i numer",
+      "address2": "Dodatkowa linia adresu",
+      "address2Placeholder": "Numer mieszkania, lokalu itp.",
+      "city": "Miejscowość",
+      "postalCode": "Kod pocztowy",
+      "state": "Województwo / region",
+      "statePlaceholder": "Województwo / region",
+      "country": "Kraj",
+      "countryPlaceholder": "Zacznij wpisywać nazwę kraju...",
+      "clearCountry": "Wyczyść kraj",
+      "phone": "Numer telefonu",
+      "optional": "(opcjonalnie)"
+    },
+    "passengers": {
+      "title": "Inni pasażerowie",
+      "info": "Pasażerowie, z którymi podróżowałeś, również mogą mieć prawo do odszkodowania.",
+      "travelingWithOthers": "Podróżowałem z innymi osobami",
+      "travelingAlone": "Podróżowałem sam",
+      "potentialCompensation": "Możliwe odszkodowanie",
+      "manualReview": "Ręczna weryfikacja",
+      "totalForOnePassenger": "Łącznie dla {count} pasażera",
+      "totalForPassengers": "Łącznie dla {count} pasażerów",
+      "perPassenger": "Na pasażera",
+      "passengerNumber": "Pasażer {number}",
+      "remove": "Usuń",
+      "under18": "Ta osoba ma mniej niż 18 lat",
+      "firstName": "Imię",
+      "lastName": "Nazwisko",
+      "email": "E-mail",
+      "optional": "(opcjonalnie)",
+      "addPassenger": "+ Dodaj pasażera"
+    },
+    "claimOwner": {
+      "title": "Kto powinien otrzymać odszkodowanie?",
+      "subtitle": "Dzieli Cię już tylko jeden krok od zgłoszenia roszczenia o odszkodowanie",
+      "firstNameLabel": "Imię",
+      "firstNamePlaceholder": "Imię",
+      "firstNameHint": "Musi być zgodne z dokumentem tożsamości",
+      "lastNameLabel": "Nazwisko",
+      "lastNamePlaceholder": "Nazwisko",
+      "lastNameHint": "Wpisz wszystkie nazwiska dokładnie tak, jak widnieją w dowodzie osobistym lub paszporcie.",
+      "emailLabel": "E-mail",
+      "emailSubtitle": "Na ten adres wyślemy aktualizacje dotyczące roszczenia i wypłaty",
+      "emailHint": "Użyjemy Twojego adresu e-mail, aby informować Cię o postępach w sprawie.",
+      "legal": {
+        "before": "Kontynuując, akceptujesz nasze",
+        "terms": "Warunki korzystania z usługi",
+        "and": "oraz",
+        "privacy": "Politykę prywatności"
+      }
+    },
+    "verify": {
+      "loading": "Sprawdzanie statusu lotu…",
+      "verifyFailed": "Nie udało się zweryfikować tego lotu. Wróć i sprawdź wprowadzone dane.",
+      "eligibleTitle": "Dobra wiadomość — Twój lot kwalifikuje się do odszkodowania.",
+      "notEligibleTitle": "Brak prawa do odszkodowania zgodnie z EU/UK 261.",
+      "notEligibleExplanation": "Wygląda na to, że opóźnienie po przylocie było krótsze niż 3 godziny. W związku z tym nie możemy kontynuować roszczenia o odszkodowanie na podstawie EU/UK 261.",
+      "airlineFallback": "Linia lotnicza",
+      "flight": "Lot",
+      "flightDetails": "Szczegóły lotu",
+      "badgeEligible": "KWALIFIKUJE SIĘ",
+      "badgeNotEligible": "NIE KWALIFIKUJE SIĘ",
+      "potentialCompensation": "Możliwe odszkodowanie",
+      "compensation": "Odszkodowanie",
+      "entitled": "Przysługuje Ci odszkodowanie zgodnie z prawem UE",
+      "manualReview": "Ta sprawa może wymagać ręcznej weryfikacji",
+      "perPassenger": "na pasażera",
+      "scheduledArrivalTime": "Planowana godzina przylotu",
+      "actualArrivalTime": "Rzeczywista godzina przylotu",
+      "flightDistance": "Długość trasy",
+      "totalDelay": "Łączne opóźnienie",
+      "confirmTitle": "Potwierdź dane swojego lotu",
+      "confirmYes": "Tak, to mój lot",
+      "confirmNo": "Nie, coś się nie zgadza",
+      "correctDetails": "Wróć i popraw dane lotu przed kontynuowaniem.",
+      "delay": {
+        "noSignificantDelay": "Nie wykryto znaczącego opóźnienia",
+        "arrivedOneMinuteEarly": "Przylot 1 minutę wcześniej",
+        "arrivedMinutesEarly": "Przylot {minutes} minut wcześniej",
+        "arrivedOnTime": "Przylot punktualnie",
+        "minutes": "{minutes} minut",
+        "hours": "{hours} godzin",
+        "hoursMinutes": "{hours} godzin {minutes} minut"
+      }
+    },
+    "direct": {
+      "departureDateTitle": "Jaka była planowana data odlotu?",
+      "dateLabel": "Data",
+      "airlineTitle": "Którą linią lotniczą leciałeś?",
+      "airlineLabel": "Linia lotnicza",
+      "airlinePlaceholder": "np. British Airways",
+      "clearAirline": "Wyczyść linię lotniczą",
+      "flightListTitle": "Teraz wybierz swój lot z poniższej listy:",
+      "scheduledTime": "Planowana godzina",
+      "flightNumber": "Numer lotu",
+      "loadingFlights": "Ładowanie dostępnych lotów…",
+      "noFlightsFound": "Nie znaleziono lotów dla tej trasy. Nadal możesz kontynuować, wpisując dane ręcznie.",
+      "manualEnterDetails": "Wprowadź dane lotu ręcznie",
+      "manualCantFind": "Nie mogę znaleźć mojego lotu",
+      "manualFlightNumberLabel": "Wpisz numer swojego lotu",
+      "manualFlightNumberPlaceholder": "np. SK2814",
+      "errors": {
+        "searchFailed": "Wyszukiwanie lotów nie powiodło się",
+        "loadFailed": "Nie udało się załadować listy lotów. Nadal możesz kontynuować, wpisując dane ręcznie."
+      }
+    },
+    "directOrLayover": {
+      "title": "Czy był to lot bezpośredni?",
+      "routeTitle": "Dokąd leciałeś?",
+      "fromLabel": "Lotnisko wylotu",
+      "toLabel": "Miejsce docelowe",
+      "airportOrCity": "Lotnisko lub miasto",
+      "direct": "Lot bezpośredni",
+      "layovers": "Z przesiadkami",
+      "connectionTitle": "Gdzie miałeś przesiadkę?",
+      "cityOrAirport": "Nazwa miasta lub lotniska",
+      "airportPlaceholder": "np. London lub LHR",
+      "removeLayover": "Usuń przesiadkę",
+      "addAirport": "+ Dodaj kolejne lotnisko",
+      "connectionRequired": "Dodaj co najmniej jedno lotnisko przesiadkowe, aby kontynuować."
+    },
+    "layout": {
+      "progress": "Postęp Twojego roszczenia",
+      "back": "Wstecz",
+      "continue": "Kontynuuj",
+      "processing": "Przetwarzanie...",
+      "steps": {
+        "eligibility": "Uprawnienie",
+        "passengerDetails": "Dane pasażera",
+        "documents": "Dokumenty",
+        "finish": "Zakończenie"
+      },
+      "footer": {
+        "help": "Pomoc",
+        "terms": "Warunki korzystania",
+        "privacy": "Prywatność"
+      }
+    }
   },
-  "whichFlight": {
-    "delayed": "Który lot był opóźniony?",
-    "cancelled": "Który lot został odwołany?",
-    "denied": "Na który lot odmówiono Ci wejścia na pokład?"
+  "header": {
+    "language": {
+      "label": "PL ▾",
+      "aria": "Zmień język"
+    }
   },
-  "destinationFallback": "miejsca docelowego",
-  "arrivalQuestion": "Z jakim opóźnieniem dotarłeś do {destination}?",
-  "outcome": {
-    "gte3": "3 godziny lub więcej",
-    "lt3": "Mniej niż 3 godziny",
-    "never": "Nie dotarłem na miejsce"
+  "mobileNav": {
+    "title": "Menu",
+    "openAria": "Otwórz menu",
+    "openSr": "Otwórz menu",
+    "closeAria": "Zamknij menu"
   },
-  "cancelNotice": {
-    "title": "Ile dni przed odlotem poinformowano Cię o zmianie lotu?",
-    "lt14": "Mniej niż 14 dni",
-    "gte14": "14 dni lub więcej"
+  "nav": {
+    "compensation": "Uzyskaj odszkodowanie",
+    "delays": "Opóźnienia lotów",
+    "cancellations": "Odwołane loty",
+    "rights": "Twoje prawa",
+    "faq": "FAQ",
+    "about": "O nas",
+    "contact": "Kontakt",
+    "track": "Śledź roszczenie",
+    "langLabel": "Język"
   },
-  "volunteer": {
-    "title": "Czy dobrowolnie zrezygnowałeś z miejsca w zamian za inne korzyści zaoferowane przez linię lotniczą?",
-    "yes": "Tak",
-    "no": "Nie"
-  }
-},
- "missedConnectionHours": {
-  "title": "Jak długie było opóźnienie na lotnisku przesiadkowym?",
-  "label": "Wybierz długość opóźnienia",
-  "placeholder": "Wybierz długość opóźnienia",
-  "neverArrived": "Nigdy nie dotarłem na miejsce",
-  "options": {
-    "0-1": "0–1 godz.",
-    "1-2": "1–2 godz.",
-    "2-3": "2–3 godz.",
-    "3-4": "3–4 godz.",
-    "4-5": "4–5 godz.",
-    "5-6": "5–6 godz.",
-    "6-7": "6–7 godz.",
-    "7-8": "7–8 godz.",
-    "8-9": "8–9 godz.",
-    "9plus": "Ponad 9 godz."
-  }
-}
-},
-"itineraryNotice": {
-  "before": "Podaj dane swojego",
-  "originalFlight": "pierwotnego lotu",
-  "after": "(nie lotu zastępczego ani przebukowanego)."
-},
-"thanks": {
-  "title": "Twoje roszczenie zostało przesłane",
-  "description": "Dokument upoważnienia został pomyślnie podpisany, a Twoje roszczenie jest teraz przygotowywane do przesłania do linii lotniczej.",
-  "claimId": "ID roszczenia",
-  "track": "Śledź swoje roszczenie",
-  "emailNotice": "Wysłaliśmy również link do śledzenia na Twój adres e-mail.",
-  "reassurance": "FlightClaimly przeanalizuje teraz Twoją sprawę i prześle roszczenie do linii lotniczej. O wszelkich aktualizacjach będziemy Cię informować na bieżąco."
-},
-"finish": {
-  "finalizing": "Finalizowanie Twojego roszczenia…",
-  "errors": {
-    "missingClaimId": "Brak identyfikatora roszczenia.",
-    "finalizeFailed": "Wystąpił błąd podczas finalizowania Twojego roszczenia."
-  }
-},
-"additional": {
-  "title": "Czy poniosłeś dodatkowe koszty?",
-  "intro1": "Jeśli Twój lot był opóźniony, możesz mieć prawo do zwrotu kosztów posiłków, hotelu lub transportu.",
-  "intro2": {
-    "before": "Prześlij rachunki, aby pomóc nam ",
-    "highlight": "odzyskać dla Ciebie jeszcze więcej pieniędzy",
-    "after": "."
+  "track": {
+    "button": "Śledź roszczenie",
+    "title": "Śledź swoje roszczenie",
+    "description": "Wpisz adres e-mail użyty podczas składania roszczenia. Jeśli znajdziemy zgodną sprawę, wyślemy Ci bezpieczny link do śledzenia.",
+    "closeAria": "Zamknij",
+    "emailLabel": "Adres e-mail",
+    "emailPlaceholder": "ty@przyklad.pl",
+    "cancel": "Anuluj",
+    "resend": "Nie otrzymałeś? Wyślij ponownie",
+    "send": "Wyślij link",
+    "sending": "Wysyłanie…",
+    "messages": {
+      "success": "Jeśli znajdziemy roszczenie powiązane z tym adresem e-mail, w ciągu kilku minut wyślemy bezpieczny link do śledzenia.",
+      "errorGeneric": "Nie udało się teraz wysłać linku. Spróbuj ponownie za chwilę.",
+      "errorTechnical": "Błąd techniczny — spróbuj ponownie za chwilę."
+    }
   },
-  "attachedFiles": "Załączone pliki",
-  "totalSize": "Łącznie {size}",
-  "remove": "Usuń",
-  "removeFile": "Usuń plik",
-  "skip": "Pomiń na razie",
-  "tip": "Wskazówka: przesłanie rachunków może zwiększyć kwotę zwrotu.",
-  "dropzone": {
-    "dragDrop": "Przeciągnij i upuść pliki tutaj",
-    "or": "lub",
-    "browse": "Wybierz pliki",
-    "fileLimits": "PDF, JPG, PNG • Maks. {perFile} MB na plik • Maks. {total} MB łącznie"
-  },
-  "errors": {
-    "missingClaim": "Brakuje identyfikatora roszczenia. Wróć i spróbuj ponownie.",
-    "uploadFailed": "Przesyłanie nie powiodło się. Spróbuj ponownie lub pomiń ten krok na razie — w razie potrzeby poprosimy o dokumenty później.",
-    "unsupportedFormat": "\"{file}\" ma nieobsługiwany format. Prześlij plik PDF, JPG lub PNG.",
-    "fileTooLarge": "\"{file}\" jest zbyt duży. Maksymalny rozmiar to {max} MB na plik.",
-    "totalTooLarge": "Łączny rozmiar przesyłanych plików jest zbyt duży. Maksymalnie {max} MB."
-  }
-},
-"uploadsId": {
-  "title": "Teraz potrzebujemy Twojego dowodu osobistego lub paszportu. Jest to bardzo ważne dla Twojej sprawy wobec linii lotniczej.",
-  "privacyNotice": "Dokument zostanie wykorzystany wyłącznie do obsługi roszczenia i usunięty w ciągu 30 dni od zakończenia sprawy.",
-  "uploadPromptBefore": "Prześlij swój",
-  "idOrPassport": "dowód osobisty lub paszport",
-  "attachedFiles": "Załączone pliki",
-  "totalSize": "Łącznie {size}",
-  "remove": "Usuń",
-  "removeFile": "Usuń plik",
-  "highWarning": "Niektóre linie lotnicze często wymagają potwierdzenia tożsamości przed rozpatrzeniem roszczeń składanych przez osoby trzecie. Przesłanie dokumentu tożsamości teraz może zapobiec późniejszym opóźnieniom.",
-  "mediumWarning": "Przesłanie dokumentu tożsamości teraz może przyspieszyć proces, jeśli linia lotnicza poprosi o weryfikację.",
-  "dropzone": {
-    "dragDrop": "Przeciągnij i upuść pliki tutaj",
-    "takePhoto": "Zrób zdjęcie dowodu osobistego lub paszportu",
-    "or": "lub",
-    "camera": "Użyj aparatu w telefonie, aby szybko przesłać paszport lub dowód osobisty",
-    "browse": "Wybierz pliki",
-    "uploadPhoto": "Prześlij lub zrób zdjęcie",
-    "fileLimits": "PDF, JPG, PNG • Maks. {perFile} MB na plik • Maks. {total} MB łącznie"
-  },
-  "errors": {
-    "missingClaim": "Brakuje identyfikatora roszczenia. Wróć i spróbuj ponownie.",
-    "uploadFailed": "Przesyłanie nie powiodło się. Spróbuj ponownie.",
-    "unsupportedFormat": "\"{file}\" ma nieobsługiwany format. Prześlij plik PDF, JPG lub PNG.",
-    "fileTooLarge": "\"{file}\" jest zbyt duży. Maksymalny rozmiar to {max} MB na plik.",
-    "totalTooLarge": "Łączny rozmiar przesyłanych plików jest zbyt duży. Maksymalnie {max} MB."
-  }
-},
-"uploads": {
-  "title": "Prześlij dokumenty",
-  "attachedFiles": "Załączone pliki",
-  "totalSize": "Łącznie {size}",
-  "remove": "Usuń",
-  "removeFile": "Usuń plik",
-  "description": {
-    "before": "Przesłanie",
-    "boardingPass": "karty pokładowej",
-    "middle": ", potwierdzenia rezerwacji lub rachunków może pomóc nam ",
-    "faster": "szybciej rozpatrzyć Twoje roszczenie",
-    "expenses": "Jeśli poniosłeś dodatkowe koszty (hotel, posiłki, transport), rachunki mogą pomóc nam ",
-    "moreMoney": "odzyskać dla Ciebie jeszcze więcej pieniędzy",
-    "after": "."
-  },
-  "dropzone": {
-    "dragDrop": "Przeciągnij i upuść pliki tutaj",
-    "takePhoto": "Zrób zdjęcie karty pokładowej lub rachunków",
-    "or": "lub",
-    "camera": "Użyj aparatu w telefonie, aby szybko przesłać dokument",
-    "browse": "Wybierz pliki",
-    "uploadPhoto": "Prześlij lub zrób zdjęcie",
-    "fileLimits": "PDF, JPG, PNG • Maks. {perFile} MB na plik • Maks. {total} MB łącznie"
-  },
-  "errors": {
-    "missingClaim": "Brakuje identyfikatora roszczenia. Wróć i spróbuj ponownie.",
-    "uploadFailed": "Przesyłanie nie powiodło się. Spróbuj ponownie lub pomiń ten krok na razie — w razie potrzeby poprosimy o dokumenty później.",
-    "unsupportedFormat": "\"{file}\" ma nieobsługiwany format. Prześlij plik PDF, JPG lub PNG.",
-    "fileTooLarge": "\"{file}\" jest zbyt duży. Maksymalny rozmiar to {max} MB na plik.",
-    "totalTooLarge": "Łączny rozmiar przesyłanych plików jest zbyt duży. Maksymalnie {max} MB."
-  }
-},
-"authorization": {
-  "claimCreationError": "Podczas tworzenia roszczenia wystąpił błąd.",
-  "amountFallback": "do 600 €",
-  "titleBefore": "Dobra wiadomość! Wygląda na to, że przysługuje Ci",
-  "titleAfterAmount": "na osobę zgodnie z rozporządzeniem EU261.",
-  "titleSecondLine": "Podpisz się poniżej i otrzymaj należne Ci pieniądze.",
-  "signaturePlaceholder": "Kliknij tutaj i podpisz się",
-  "clearSignature": "Wyczyść podpis",
-  "important": "Ważne",
-  "signatureGuidance": "Twój podpis powinien możliwie dokładnie odpowiadać podpisowi na dokumencie tożsamości.",
-  "feeTitle": "Tak — brak wygranej, brak opłaty. Płacisz tylko 20% z VAT, jeśli odniesiemy sukces.",
-  "feeSubtitle": "Opłata zostanie potrącona z Twojego odszkodowania.",
-  "legal": {
-    "before": "Składając podpis, akceptujesz nasze",
-    "terms": "Warunki korzystania z usługi",
-    "and": "oraz",
-    "priceList": "Cennik",
-    "middle": "i upoważniasz nas do wykorzystania Twojego podpisu na",
-    "authorityDocument": "Dokumencie pełnomocnictwa"
-  }
-},
-"bookingReference": {
-  "title": "Jaki jest Twój numer rezerwacji?",
-  "placeholder": "np. DS27K3 lub YLEHPW",
-  "helpTitle": "Gdzie znajdę numer rezerwacji?",
-  "helpText1": "Numer rezerwacji (PNR) zazwyczaj znajduje się w wiadomości e-mail z potwierdzeniem rezerwacji od linii lotniczej lub biura podróży. Zwykle składa się z 5–8 znaków (liter i cyfr).",
-  "helpText2": "Może być również widoczny na karcie pokładowej lub w aplikacji linii lotniczej.",
-  "examples": "Przykłady"
-},
-"passengerDetails": {
-  "title": "Twoje dane kontaktowe",
-  "claimOwner": "Właściciel roszczenia",
-  "address": "Adres",
-  "addressPlaceholder": "Ulica i numer",
-  "address2": "Dodatkowa linia adresu",
-  "address2Placeholder": "Numer mieszkania, lokalu itp.",
-  "city": "Miejscowość",
-  "postalCode": "Kod pocztowy",
-  "state": "Województwo / region",
-  "statePlaceholder": "Województwo / region",
-  "country": "Kraj",
-  "countryPlaceholder": "Zacznij wpisywać nazwę kraju...",
-  "clearCountry": "Wyczyść kraj",
-  "phone": "Numer telefonu",
-  "optional": "(opcjonalnie)"
-},
-"passengers": {
-  "title": "Inni pasażerowie",
-  "info": "Pasażerowie, z którymi podróżowałeś, również mogą mieć prawo do odszkodowania.",
-  "travelingWithOthers": "Podróżowałem z innymi osobami",
-  "travelingAlone": "Podróżowałem sam",
-  "potentialCompensation": "Możliwe odszkodowanie",
-  "manualReview": "Ręczna weryfikacja",
-  "totalForOnePassenger": "Łącznie dla {count} pasażera",
-  "totalForPassengers": "Łącznie dla {count} pasażerów",
-  "perPassenger": "Na pasażera",
-  "passengerNumber": "Pasażer {number}",
-  "remove": "Usuń",
-  "under18": "Ta osoba ma mniej niż 18 lat",
-  "firstName": "Imię",
-  "lastName": "Nazwisko",
-  "email": "E-mail",
-  "optional": "(opcjonalnie)",
-  "addPassenger": "+ Dodaj pasażera"
-},
-"claimOwner": {
-  "title": "Kto powinien otrzymać odszkodowanie?",
-  "subtitle": "Dzieli Cię już tylko jeden krok od zgłoszenia roszczenia o odszkodowanie",
-  "firstNameLabel": "Imię",
-  "firstNamePlaceholder": "Imię",
-  "firstNameHint": "Musi być zgodne z dokumentem tożsamości",
-  "lastNameLabel": "Nazwisko",
-  "lastNamePlaceholder": "Nazwisko",
-  "lastNameHint": "Wpisz wszystkie nazwiska dokładnie tak, jak widnieją w dowodzie osobistym lub paszporcie.",
-  "emailLabel": "E-mail",
-  "emailSubtitle": "Na ten adres wyślemy aktualizacje dotyczące roszczenia i wypłaty",
-  "emailHint": "Użyjemy Twojego adresu e-mail, aby informować Cię o postępach w sprawie.",
-  "legal": {
-    "before": "Kontynuując, akceptujesz nasze",
-    "terms": "Warunki korzystania z usługi",
-    "and": "oraz",
-    "privacy": "Politykę prywatności"
-  }
-},
-"verify": {
-  "loading": "Sprawdzanie statusu lotu…",
-  "verifyFailed": "Nie udało się zweryfikować tego lotu. Wróć i sprawdź wprowadzone dane.",
-  "eligibleTitle": "Dobra wiadomość — Twój lot kwalifikuje się do odszkodowania.",
-  "notEligibleTitle": "Brak prawa do odszkodowania zgodnie z EU/UK 261.",
-  "notEligibleExplanation": "Wygląda na to, że opóźnienie po przylocie było krótsze niż 3 godziny. W związku z tym nie możemy kontynuować roszczenia o odszkodowanie na podstawie EU/UK 261.",
-  "airlineFallback": "Linia lotnicza",
-  "flight": "Lot",
-  "flightDetails": "Szczegóły lotu",
-  "badgeEligible": "KWALIFIKUJE SIĘ",
-  "badgeNotEligible": "NIE KWALIFIKUJE SIĘ",
-  "potentialCompensation": "Możliwe odszkodowanie",
-  "compensation": "Odszkodowanie",
-  "entitled": "Przysługuje Ci odszkodowanie zgodnie z prawem UE",
-  "manualReview": "Ta sprawa może wymagać ręcznej weryfikacji",
-  "perPassenger": "na pasażera",
-  "scheduledArrivalTime": "Planowana godzina przylotu",
-  "actualArrivalTime": "Rzeczywista godzina przylotu",
-  "flightDistance": "Długość trasy",
-  "totalDelay": "Łączne opóźnienie",
-  "confirmTitle": "Potwierdź dane swojego lotu",
-  "confirmYes": "Tak, to mój lot",
-  "confirmNo": "Nie, coś się nie zgadza",
-  "correctDetails": "Wróć i popraw dane lotu przed kontynuowaniem.",
-  "delay": {
-    "noSignificantDelay": "Nie wykryto znaczącego opóźnienia",
-    "arrivedOneMinuteEarly": "Przylot 1 minutę wcześniej",
-    "arrivedMinutesEarly": "Przylot {minutes} minut wcześniej",
-    "arrivedOnTime": "Przylot punktualnie",
-    "minutes": "{minutes} minut",
-    "hours": "{hours} godzin",
-    "hoursMinutes": "{hours} godzin {minutes} minut"
-  }
-},
-"direct": {
-  "departureDateTitle": "Jaka była planowana data odlotu?",
-  "dateLabel": "Data",
-  "airlineTitle": "Którą linią lotniczą leciałeś?",
-  "airlineLabel": "Linia lotnicza",
-  "airlinePlaceholder": "np. British Airways",
-  "clearAirline": "Wyczyść linię lotniczą",
-  "flightListTitle": "Teraz wybierz swój lot z poniższej listy:",
-  "scheduledTime": "Planowana godzina",
-  "flightNumber": "Numer lotu",
-  "loadingFlights": "Ładowanie dostępnych lotów…",
-  "noFlightsFound": "Nie znaleziono lotów dla tej trasy. Nadal możesz kontynuować, wpisując dane ręcznie.",
-  "manualEnterDetails": "Wprowadź dane lotu ręcznie",
-  "manualCantFind": "Nie mogę znaleźć mojego lotu",
-  "manualFlightNumberLabel": "Wpisz numer swojego lotu",
-  "manualFlightNumberPlaceholder": "np. SK2814",
-  "errors": {
-    "searchFailed": "Wyszukiwanie lotów nie powiodło się",
-    "loadFailed": "Nie udało się załadować listy lotów. Nadal możesz kontynuować, wpisując dane ręcznie."
-  }
-},
-"directOrLayover": {
-  "title": "Czy był to lot bezpośredni?",
-  "routeTitle": "Dokąd leciałeś?",
-  "fromLabel": "Lotnisko wylotu",
-  "toLabel": "Miejsce docelowe",
-  "airportOrCity": "Lotnisko lub miasto",
-  "direct": "Lot bezpośredni",
-  "layovers": "Z przesiadkami",
-  "connectionTitle": "Gdzie miałeś przesiadkę?",
-  "cityOrAirport": "Nazwa miasta lub lotniska",
-  "airportPlaceholder": "np. London lub LHR",
-  "removeLayover": "Usuń przesiadkę",
-  "addAirport": "+ Dodaj kolejne lotnisko",
-  "connectionRequired": "Dodaj co najmniej jedno lotnisko przesiadkowe, aby kontynuować."
-},
-
-"layout": {
-  "progress": "Postęp Twojego roszczenia",
-  "back": "Wstecz",
-  "continue": "Kontynuuj",
-  "processing": "Przetwarzanie...",
-
-  "steps": {
-    "eligibility": "Uprawnienie",
-    "passengerDetails": "Dane pasażera",
-    "documents": "Dokumenty",
-    "finish": "Zakończenie"
-  },
-
-  "footer": {
-    "help": "Pomoc",
-    "terms": "Warunki korzystania",
-    "privacy": "Prywatność"
-  }
-}
-},
-
-"header": {
-  "language": {
-    "label": "PL ▾",
-    "aria": "Zmień język"
-  }
-},
-
-"mobileNav": {
-  "title": "Menu",
-  "openAria": "Otwórz menu",
-  "openSr": "Otwórz menu",
-  "closeAria": "Zamknij menu"
-},
-
-"nav": {
-  "compensation": "Uzyskaj odszkodowanie",
-  "delays": "Opóźnienia lotów",
-  "cancellations": "Odwołane loty",
-  "rights": "Twoje prawa",
-  "faq": "FAQ",
-  "about": "O nas",
-  "contact": "Kontakt",
-  "track": "Śledź roszczenie",
-  "langLabel": "Język"
-},
-
-"track": {
-  "button": "Śledź roszczenie",
-  "title": "Śledź swoje roszczenie",
-  "description": "Wpisz adres e-mail użyty podczas składania roszczenia. Jeśli znajdziemy zgodną sprawę, wyślemy Ci bezpieczny link do śledzenia.",
-  "closeAria": "Zamknij",
-  "emailLabel": "Adres e-mail",
-  "emailPlaceholder": "ty@przyklad.pl",
-  "cancel": "Anuluj",
-  "resend": "Nie otrzymałeś? Wyślij ponownie",
-  "send": "Wyślij link",
-  "sending": "Wysyłanie…",
-  "messages": {
-    "success": "Jeśli znajdziemy roszczenie powiązane z tym adresem e-mail, w ciągu kilku minut wyślemy bezpieczny link do śledzenia.",
-    "errorGeneric": "Nie udało się teraz wysłać linku. Spróbuj ponownie za chwilę.",
-    "errorTechnical": "Błąd techniczny — spróbuj ponownie za chwilę."
-  }
-},
-
   "sections": {
     "readMore": "Czytaj więcej"
   },
@@ -493,12 +484,12 @@
       "afterLink": ""
     },
     "titleLine1": "Otrzymaj do 600 € odszkodowania",
-"titleLine2": "za opóźnione lub odwołane loty!",
-"fromLabel": "Lotnisko wylotu",
-"fromPlaceholder": "Lotnisko wylotu",
-"toLabel": "Lotnisko docelowe",
-"toPlaceholder": "Lotnisko docelowe",
-"searchCta": "Sprawdź odszkodowanie"
+    "titleLine2": "za opóźnione lub odwołane loty!",
+    "fromLabel": "Lotnisko wylotu",
+    "fromPlaceholder": "Lotnisko wylotu",
+    "toLabel": "Lotnisko docelowe",
+    "toPlaceholder": "Lotnisko docelowe",
+    "searchCta": "Sprawdź odszkodowanie"
   },
   "precheck": {
     "steps": {
@@ -1371,87 +1362,85 @@
       }
     }
   },
-  
-     
-    "homeEligibility": {
-  "badge": "ODSZKODOWANIE EU261",
-  "title": "Czy Twój lot może kwalifikować się do odszkodowania?",
-  "description": "Zgodnie z prawami pasażerów w UE możesz mieć prawo do odszkodowania, jeśli Twój lot był znacznie opóźniony, został odwołany lub odmówiono Ci wejścia na pokład. Wysokość odszkodowania może zależeć od trasy, odległości i okoliczności.",
-  "bands": {
-    "short": {
-  "distance": "DO 1 500 KM",
-  "title": "Krótsze loty",
-  "body": "Do €250 na pasażera w przypadku kwalifikujących się lotów o długości do 1 500 km."
-},
-"medium": {
-  "distance": "ŚREDNIE I DŁUŻSZE LOTY W UE",
-  "title": "Loty średniodystansowe",
-  "body": "Do €400 na pasażera w przypadku kwalifikujących się lotów wewnątrz UE powyżej 1 500 km oraz niektórych innych lotów o długości od 1 500 do 3 500 km."
-},
-"long": {
-  "distance": "WYBRANE LOTY POWYŻEJ 3 500 KM",
-  "title": "Loty długodystansowe",
-  "body": "Do €600 na pasażera w przypadku kwalifikujących się lotów powyżej 3 500 km, do których ma zastosowanie stawka odszkodowania w wysokości €600."
-}
-  },
-  "reasons": {
-    "delay": "Przylot opóźniony o 3+ godziny",
-    "cancellation": "Lot odwołany",
-    "deniedBoarding": "Odmowa wejścia na pokład"
-  },
-  "disclaimer": "Odszkodowanie nie jest przyznawane automatycznie. Prawo do odszkodowania zależy od okoliczności zakłócenia lotu, trasy oraz obowiązujących przepisów dotyczących praw pasażerów. Nadzwyczajne okoliczności mogą mieć wpływ na prawo do odszkodowania.",
-  "cta": "Sprawdź mój lot"
-},
-"homeFee": {
-  "badge": "JASNE CENY",
-  "title": "Jedna prosta opłata. Więcej odszkodowania zostaje dla Ciebie.",
-  "description": "Nasza standardowa opłata za usługę wynosi 20% z VAT. Nie płacisz nic z góry ani żadnej opłaty za usługę, jeśli nie uzyskamy dla Ciebie odszkodowania.",
-  "points": {
-    "noUpfront": "Brak opłat z góry",
-    "onlyIfPaid": "Brak wygranej, brak opłaty",
-    "vatIncluded": "20% z VAT"
-  },
-  "termsLink": "Zobacz nasze warunki",
-  "exampleLabel": "Przykład",
-  "compensation": "Uzyskane odszkodowanie",
-  "fee": "Opłata FlightClaimly",
-  "youKeep": "Dla Ciebie",
-  "exampleNote": "Jeśli uzyskamy €600 odszkodowania, nasza standardowa opłata wyniesie €120, a dla Ciebie pozostanie €480."
-},
-"homeBrandStory": {
-  "badge": "MY ZAJMUJEMY SIĘ ROSZCZENIEM",
-  "title": "My zajmujemy się linią lotniczą. Ty zajmujesz się swoim życiem.",
-  "description": "Zakłócenie lotu jest wystarczająco stresujące. Zajmujemy się procesem dochodzenia odszkodowania, kontaktem i dalszą komunikacją z linią lotniczą — a Ty jesteś na bieżąco od początku sprawy aż do wypłaty.",
-  "points": {
-    "airline": "My kontaktujemy się z linią lotniczą",
-    "updates": "Jasne informacje o statusie sprawy",
-    "payout": "Śledzisz sprawę od początku aż do wypłaty"
-  },
-  "cta": "Dlaczego FlightClaimly",
-  "imageAlt": "Skrzydło samolotu nad chmurami o zachodzie słońca"
-},
-"homeExplore": {
-  "badge": "POZNAJ PRAWA PASAŻERA",
-  "title": "Sprawdź, jakie prawa dotyczą Twojej podróży.",
-  "description": "Przepisy dotyczące zakłóceń lotów mogą być skomplikowane. Sprawdź sytuację, która dotyczy Ciebie, i poznaj swoje prawa przed złożeniem wniosku o odszkodowanie.",
-  "cards": {
-    "delays": {
-      "title": "Opóźniony lot",
-      "description": "Sprawdź, kiedy opóźnienie lotu może kwalifikować się do odszkodowania i jakie przepisy mają zastosowanie."
+  "homeEligibility": {
+    "badge": "ODSZKODOWANIE EU261",
+    "title": "Czy Twój lot może kwalifikować się do odszkodowania?",
+    "description": "Zgodnie z prawami pasażerów w UE możesz mieć prawo do odszkodowania, jeśli Twój lot był znacznie opóźniony, został odwołany lub odmówiono Ci wejścia na pokład. Wysokość odszkodowania może zależeć od trasy, odległości i okoliczności.",
+    "bands": {
+      "short": {
+        "distance": "DO 1 500 KM",
+        "title": "Krótsze loty",
+        "body": "Do €250 na pasażera w przypadku kwalifikujących się lotów o długości do 1 500 km."
+      },
+      "medium": {
+        "distance": "ŚREDNIE I DŁUŻSZE LOTY W UE",
+        "title": "Loty średniodystansowe",
+        "body": "Do €400 na pasażera w przypadku kwalifikujących się lotów wewnątrz UE powyżej 1 500 km oraz niektórych innych lotów o długości od 1 500 do 3 500 km."
+      },
+      "long": {
+        "distance": "WYBRANE LOTY POWYŻEJ 3 500 KM",
+        "title": "Loty długodystansowe",
+        "body": "Do €600 na pasażera w przypadku kwalifikujących się lotów powyżej 3 500 km, do których ma zastosowanie stawka odszkodowania w wysokości €600."
+      }
     },
-    "cancellations": {
-      "title": "Odwołany lot",
-      "description": "Poznaj swoje prawa, gdy linia lotnicza odwołuje Twój lot."
+    "reasons": {
+      "delay": "Przylot opóźniony o 3+ godziny",
+      "cancellation": "Lot odwołany",
+      "deniedBoarding": "Odmowa wejścia na pokład"
     },
-    "rights": {
-      "title": "Prawa pasażera",
-      "description": "Poznaj prawa pasażerów wynikające z EU261, zasady dotyczące odszkodowań oraz sytuacje, w których linie lotnicze muszą wypłacić odszkodowanie."
+    "disclaimer": "Odszkodowanie nie jest przyznawane automatycznie. Prawo do odszkodowania zależy od okoliczności zakłócenia lotu, trasy oraz obowiązujących przepisów dotyczących praw pasażerów. Nadzwyczajne okoliczności mogą mieć wpływ na prawo do odszkodowania.",
+    "cta": "Sprawdź mój lot"
+  },
+  "homeFee": {
+    "badge": "JASNE CENY",
+    "title": "Jedna prosta opłata. Więcej odszkodowania zostaje dla Ciebie.",
+    "description": "Nasza standardowa opłata za usługę wynosi 20% z VAT. Nie płacisz nic z góry ani żadnej opłaty za usługę, jeśli nie uzyskamy dla Ciebie odszkodowania.",
+    "points": {
+      "noUpfront": "Brak opłat z góry",
+      "onlyIfPaid": "Brak wygranej, brak opłaty",
+      "vatIncluded": "20% z VAT"
     },
-    "explore": {
-      "title": "Poznaj linie lotnicze i lotniska",
-      "description": "Znajdź informacje o prawach pasażera związane z liniami lotniczymi, lotniskami i Twoją podróżą."
+    "termsLink": "Zobacz nasze warunki",
+    "exampleLabel": "Przykład",
+    "compensation": "Uzyskane odszkodowanie",
+    "fee": "Opłata FlightClaimly",
+    "youKeep": "Dla Ciebie",
+    "exampleNote": "Jeśli uzyskamy €600 odszkodowania, nasza standardowa opłata wyniesie €120, a dla Ciebie pozostanie €480.",
+    "pricingLink": "Zobacz pełny cennik i porównanie"
+  },
+  "homeBrandStory": {
+    "badge": "MY ZAJMUJEMY SIĘ ROSZCZENIEM",
+    "title": "My zajmujemy się linią lotniczą. Ty zajmujesz się swoim życiem.",
+    "description": "Zakłócenie lotu jest wystarczająco stresujące. Zajmujemy się procesem dochodzenia odszkodowania, kontaktem i dalszą komunikacją z linią lotniczą — a Ty jesteś na bieżąco od początku sprawy aż do wypłaty.",
+    "points": {
+      "airline": "My kontaktujemy się z linią lotniczą",
+      "updates": "Jasne informacje o statusie sprawy",
+      "payout": "Śledzisz sprawę od początku aż do wypłaty"
+    },
+    "cta": "Dlaczego FlightClaimly",
+    "imageAlt": "Skrzydło samolotu nad chmurami o zachodzie słońca"
+  },
+  "homeExplore": {
+    "badge": "POZNAJ PRAWA PASAŻERA",
+    "title": "Sprawdź, jakie prawa dotyczą Twojej podróży.",
+    "description": "Przepisy dotyczące zakłóceń lotów mogą być skomplikowane. Sprawdź sytuację, która dotyczy Ciebie, i poznaj swoje prawa przed złożeniem wniosku o odszkodowanie.",
+    "cards": {
+      "delays": {
+        "title": "Opóźniony lot",
+        "description": "Sprawdź, kiedy opóźnienie lotu może kwalifikować się do odszkodowania i jakie przepisy mają zastosowanie."
+      },
+      "cancellations": {
+        "title": "Odwołany lot",
+        "description": "Poznaj swoje prawa, gdy linia lotnicza odwołuje Twój lot."
+      },
+      "rights": {
+        "title": "Prawa pasażera",
+        "description": "Poznaj prawa pasażerów wynikające z EU261, zasady dotyczące odszkodowań oraz sytuacje, w których linie lotnicze muszą wypłacić odszkodowanie."
+      },
+      "explore": {
+        "title": "Poznaj linie lotnicze i lotniska",
+        "description": "Znajdź informacje o prawach pasażera związane z liniami lotniczymi, lotniskami i Twoją podróżą."
+      }
     }
   }
 }
-  }
-

@@ -1052,7 +1052,8 @@
     "compensation": "Compensación recuperada",
     "fee": "Comisión de FlightClaimly",
     "youKeep": "Tú recibes",
-    "exampleNote": "Si se recuperan 600 €, nuestra comisión estándar es de 120 € y tú recibes 480 €."
+    "exampleNote": "Si se recuperan 600 €, nuestra comisión estándar es de 120 € y tú recibes 480 €.",
+    "pricingLink": "Ver precios y comparación"
   },
   "homeBrandStory": {
     "badge": "NOSOTROS GESTIONAMOS LA RECLAMACIÓN",
