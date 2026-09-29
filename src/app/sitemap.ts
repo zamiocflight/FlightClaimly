@@ -64,6 +64,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   );
 
+  const comparisonEntries = [
+    {
+      url: `${siteUrl}/en/compare/refly`,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
+  ];
+
   const routeIndexEntries = routeSeoLocales.map((locale) => ({
     url: `${siteUrl}/${locale}/routes`,
     changeFrequency: "weekly" as const,
@@ -155,6 +163,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticEntries,
+    ...comparisonEntries,
     ...routeIndexEntries,
     ...routeEntries,
     ...airportIndexEntries,
