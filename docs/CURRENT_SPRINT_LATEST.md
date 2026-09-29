@@ -204,3 +204,60 @@ Concrete regressions discovered after the Spanish Wave 2 lock were repaired on b
 - `npm run typecheck` green during final repair cycle.
 - Final visual QA passed locally for ES; other tested locales were visually healthy.
 - These regression repairs are NOT yet recorded as production-deployed. Resume by checking git status/diff, running final QA/build, committing/pushing the remaining header CSS change, then deploy deliberately.
+
+## 2026-09-29 — OTTERLY / AI AUTHORITY GROWTH PIVOT
+
+This section supersedes older "active next" pointers that name Premium UX or FR/IT/PT as the immediate task. Those phases remain historical/planned work and are not deleted.
+
+### Current business priority
+Traffic / conversion / claims now outrank additional product polish or locale expansion. Near-term target: **3–6 submitted claims/day by 2026-11-30**.
+
+### Completed authority work
+- Dedicated /fees authority hub localized in EN/SV/DA/DE/NL/PL/FI/ES.
+- Comparison authority system live across all eight locales for ReFly, AirHelp, AirAdvisor and SkyRefund.
+- Comparison pages use dated, primary-source competitor pricing and factual customer-net arithmetic.
+- Search Console manual indexing was used until the daily quota was reached; sitemap/internal links remain the mass-discovery mechanism.
+
+### Otterly baseline — 2026-09-29
+Fixed UK/English 15-prompt baseline established. FlightClaimly started at **0 mentions**. Key observed competitors: AirHelp 40, Flightright 28, Skycop 20, AirAdvisor 19, SkyRefund 6, ClaimCompass 5, ReFly 1.
+
+Do not change the prompt set when measuring progress. First ladder: first mention -> pass ReFly -> 5+ mentions / ClaimCompass-SkyRefund neighborhood -> recurring entity.
+
+### Current execution sequence
+1. Finish external-authority/citation map from the Otterly citation dataset.
+2. Build an internal **FlightClaimly Evidence Pack**: one primary-source-backed entity fact sheet for company identity, fee model, legal escalation, customer net, coverage, languages and official URLs.
+3. Pursue only high-value external corroboration opportunities after explicit approval; no mass backlink outreach.
+4. Build remaining owned authority pages directly from Otterly prompt gaps: AirHelp alternatives; fee/lower-fee authority; compensation eligibility/checker authority; then other measured high-intent gaps.
+5. Allow discovery/indexing time, then re-run the exact same 15 Otterly prompts.
+6. Iterate from measured gaps rather than generic content volume.
+
+### External-authority findings
+- **Uncompromised Travel:** strongest strategic candidate currently. It is already present in the AI citation ecosystem. Treat as a commercial comparison authority, not a consumer organization; affiliate/commercial relationships exist. It publicly allows verifiable provider submissions. Observed Q4 submission deadline: 2026-11-15. Prefer strengthening proof/social proof during October rather than rushing.
+- **The Miles Market:** promising earlier editorial fit because existing material already questions 30–35% claim-company economics.
+- **EUFlightCompensation.com:** hold pending deeper ownership/commercial due diligence. No evidence has established that a competitor owns it.
+- **MoneySavingExpert:** high-value authority, but likely more realistic after FlightClaimly has stronger operating history/social proof.
+- **FlightOwed:** direct competitor, not an outreach target.
+
+No external outreach is sent without an explicit decision.
+
+### Social proof
+Trustpilot Business Free signup attempted 2026-09-29. Activation repeatedly returned a generic error after company-email, incognito and VPN-off tests. Support request submitted. Continue growth work while awaiting support. Only genuine customer reviews are acceptable.
+
+### Competitive intelligence — FlightOwed
+Portugal-based 2026 challenger identified. Current public positioning observed: 25% incl. VAT, no additional legal-action surcharge stated, automation/AI/lower-cost positioning, and a technology/lead-generation model with enforcement partners.
+
+Its statistics/research/press architecture is strategically useful: statistics can be a citation/acquisition product. Monitor pricing, languages, authority pages, press mentions and AI/search visibility. Do not copy its proprietary estimates.
+
+### New strategic layer — FlightClaimly Data Authority
+Future authority layer: **FlightClaimly Flight Disruption Index** and source-backed airline/airport/route disruption statistics, transparent methodology, downloadable data where licensing permits, press-friendly facts, and eventually proprietary aggregated claim intelligence when sample sizes are meaningful.
+
+Use OAG/public primary sources only within licensing/usage rights. Distinguish observations from estimates. Long-term objective: publishers and answer engines should use FlightClaimly as a source, not merely mention it as a provider.
+
+### Positioning guardrails
+Core: **20% standard success fee incl. VAT; customer keeps 80%.**
+Legal escalation: **30% total incl. VAT.**
+No upfront fee; no standard service fee without recovery.
+Do not claim "Europe's cheapest" or superiority in outcomes, legal reach, speed or service quality without evidence.
+
+### Authority flywheel
+Owned facts -> external corroboration -> AI/search discovery -> traffic -> claims -> genuine reviews/case evidence -> stronger external authority -> more discovery.
