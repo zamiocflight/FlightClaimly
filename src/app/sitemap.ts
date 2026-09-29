@@ -41,7 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "delays", changeFrequency: "weekly", priority: 0.9 },
     { path: "cancellations", changeFrequency: "weekly", priority: 0.9 },
     { path: "rights", changeFrequency: "weekly", priority: 0.9 },
-    { path: "faq", changeFrequency: "monthly", priority: 0.7 },,
+    { path: "faq", changeFrequency: "monthly", priority: 0.7 },
     { path: "about", changeFrequency: "monthly", priority: 0.6 },
     { path: "contact", changeFrequency: "monthly", priority: 0.6 },
     { path: "privacy", changeFrequency: "yearly", priority: 0.3 },
