@@ -64,13 +64,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   );
 
-  const comparisonEntries = [
-    {
-      url: `${siteUrl}/en/compare/refly`,
+  const comparisonEntries = locales.flatMap((locale) =>
+    ["refly", "airhelp"].map((competitor) => ({
+      url: `${siteUrl}/${locale}/compare/${competitor}`,
       changeFrequency: "monthly" as const,
       priority: 0.8,
-    },
-  ];
+    })),
+  );
 
   const routeIndexEntries = routeSeoLocales.map((locale) => ({
     url: `${siteUrl}/${locale}/routes`,
