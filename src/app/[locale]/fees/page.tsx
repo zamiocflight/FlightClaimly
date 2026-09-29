@@ -61,7 +61,7 @@ export default function FeesPage() {
     },
     {
       q: "What if legal action is needed?",
-      a: "Some cases may require legal action. Additional fees or costs may then apply. We explain the applicable terms and obtain your approval before proceeding.",
+      a: "If legal action is required, an additional 10% legal action fee applies, bringing our total fee to 30% including VAT. If a case involves exceptional third-party costs, we explain them and obtain your approval before proceeding.",
     },
   ];
 
