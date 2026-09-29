@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
-import { getLocale } from "next-intl/server";
 import { buildI18nMetadata } from "@/lib/seo";
-import { assertLocale } from "@/i18n/routing";
 
 const competitors = [
   {
@@ -33,18 +31,8 @@ const competitors = [
 ];
 
 export async function generateMetadata(): Promise<Metadata> {
-  const localeStr = await getLocale();
-  const locale = assertLocale(localeStr);
-
-  if (locale !== "en") {
-    return {
-      title: "FlightClaimly fees",
-      robots: { index: false, follow: true },
-    };
-  }
-
   return buildI18nMetadata({
-    locale,
+    locale: "en",
     path: "/fees",
     title: "FlightClaimly fees: 20% success fee, you keep 80%",
     description:
@@ -52,9 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-export default async function FeesPage() {
-  const localeStr = await getLocale();
-  const locale = assertLocale(localeStr);
+export default function FeesPage() {
 
   const faq = [
     {
@@ -98,29 +84,6 @@ export default async function FeesPage() {
       "FlightClaimly handles eligible flight compensation claims on a no-win, no-fee basis with a standard 20% service fee including VAT.",
     url: "https://www.flightclaimly.com/en/fees",
   };
-
-  if (locale !== "en") {
-    return (
-      <main className="min-h-screen bg-[#071126] text-white">
-        <div className="mx-auto max-w-3xl px-6 py-20">
-          <Link href="/" className="inline-flex items-center">
-            <Image src="/logo-flightclaimly.svg" alt="FlightClaimly" width={220} height={44} />
-          </Link>
-          <h1 className="mt-12 text-4xl font-extrabold">FlightClaimly fees</h1>
-          <p className="mt-5 text-white/70">
-            This pricing page is currently available in English.
-          </p>
-          <Link
-            href="/fees"
-            locale="en"
-            className="mt-8 inline-flex rounded-full bg-[#22E3A5] px-5 py-3 font-semibold text-[#071126]"
-          >
-            View English pricing
-          </Link>
-        </div>
-      </main>
-    );
-  }
 
   return (
     <>
