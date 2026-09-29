@@ -65,7 +65,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const comparisonEntries = locales.flatMap((locale) =>
-    ["refly", "airhelp"].map((competitor) => ({
+    ["refly", "airhelp", "airadvisor", "skyrefund"].map((competitor) => ({
       url: `${siteUrl}/${locale}/compare/${competitor}`,
       changeFrequency: "monthly" as const,
       priority: 0.8,
