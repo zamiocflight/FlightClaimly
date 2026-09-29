@@ -253,3 +253,20 @@ Do not claim "Europe's cheapest" or superiority in outcomes, legal reach, speed 
 
 ### Authority flywheel
 Owned facts -> external corroboration -> AI/search discovery -> traffic -> claims -> genuine reviews/case evidence -> stronger external authority -> more discovery.
+
+
+## 2026-09-29 — GROWTH OPERATOR HIRING IS AN IMMEDIATE PARALLEL TRACK
+
+Do not let authority/AEO work displace the planned hire.
+
+Immediate operational task for **today / tomorrow (29–30 Sep 2026)**:
+- recruit a remote part-time **Content & Growth Operator**, with the Philippines as the primary talent market
+- initial target around 10 hours/week
+- working compensation hypothesis: roughly USD 8–12/hour for a strong candidate; validate against actual candidates
+- sourcing channels to assess: OnlineJobs.ph and Upwork
+- desired capabilities: short-form content, social posting/distribution, Canva/CapCut, research, copy, basic Meta execution/analytics, creator/affiliate outreach, community work
+- candidate selection should use a small paid practical test rather than CV alone
+- example test: disrupted Lufthansa flight -> Reel/TikTok concept, X/social post, and concise distribution rationale
+- operator must not independently invent legal eligibility conclusions or publish generic AI content without factual review
+
+This hiring track runs **in parallel** with Evidence Pack -> external authority -> owned Otterly prompt-gap pages -> remeasurement. It is not a later optional idea.
