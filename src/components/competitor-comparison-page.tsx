@@ -21,7 +21,8 @@ const text = {
 
 export function ComparisonPage({ locale, competitor }: { locale: Locale; competitor: Competitor }) {
  const d=competitorData[competitor], t=text[locale];
- const theirKeep=600*(1-d.fee/100), diff=480-theirKeep, theirLegalKeep=600*(1-d.legal/100);
+ const money = (value: number) => Number(value.toFixed(2));
+ const theirKeep=money(600*(1-d.fee/100)), diff=money(480-theirKeep), theirLegalKeep=money(600*(1-d.legal/100));
  const faq=[
   {q:`${d.name} vs FlightClaimly: what is the standard fee?`,a:`FlightClaimly's standard fee is 20% including VAT. ${d.name}'s published standard fee is ${d.fee}% including VAT.`},
   {q:`How much do I keep from €600?`,a:`At the published standard rates, FlightClaimly leaves €480 and ${d.name} leaves €${theirKeep} from a €600 recovery.`},
