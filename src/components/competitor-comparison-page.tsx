@@ -1,11 +1,13 @@
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 
-type Competitor = "refly" | "airhelp";
+type Competitor = "refly" | "airhelp" | "airadvisor" | "skyrefund";
 
 const competitorData = {
   refly: { name:"ReFly", fee:33, legal:50, source:"https://www.refly.org/terms-and-conditions.html" },
   airhelp: { name:"AirHelp", fee:35, legal:50, source:"https://www.airhelp.com/en-int/our-fees/" },
+  airadvisor: { name:"AirAdvisor", fee:30, legal:50, source:"https://airadvisor.com/en/pricelist" },
+  skyrefund: { name:"SkyRefund", fee:35, legal:50, source:"https://skyrefund.com/en/price-policy" },
 } as const;
 
 const text = {
