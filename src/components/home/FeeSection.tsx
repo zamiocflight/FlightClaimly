@@ -1,11 +1,10 @@
 'use client';
 
 import { Link } from '@/i18n/navigation';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 export default function FeeSection() {
   const t = useTranslations('homeFee');
-  const locale = useLocale();
 
   return (
     <section className="relative overflow-hidden bg-[#071126]">
@@ -40,12 +39,10 @@ export default function FeeSection() {
             </div>
 
             <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
-              {locale === 'en' && (
-                <Link href="/fees" className="group inline-flex items-center gap-2 text-sm font-semibold text-[#22E3A5] transition-colors hover:text-[#44EDB5]">
-                  See full pricing & comparison
-                  <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-                </Link>
-              )}
+              <Link href="/fees" className="group inline-flex items-center gap-2 text-sm font-semibold text-[#22E3A5] transition-colors hover:text-[#44EDB5]">
+                {t('pricingLink')}
+                <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+              </Link>
               <Link href="/terms" className="group inline-flex items-center gap-2 text-sm font-semibold text-white/60 transition-colors hover:text-white">
                 {t('termsLink')}
                 <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
