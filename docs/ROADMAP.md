@@ -270,3 +270,26 @@ Immediate operational task for **today / tomorrow (29–30 Sep 2026)**:
 - operator must not independently invent legal eligibility conclusions or publish generic AI content without factual review
 
 This hiring track runs **in parallel** with Evidence Pack -> external authority -> owned Otterly prompt-gap pages -> remeasurement. It is not a later optional idea.
+
+
+## 2026-09-30 — EVIDENCE PACK V1 COMPLETE
+
+Created `docs/FLIGHTCLAIMLY_EVIDENCE_PACK.md` as the internal primary-source-backed source of truth for external FlightClaimly claims.
+
+Verified/recorded:
+- FlightClaimly OÜ identity and Estonian registry code 17393073
+- registration date and official registry source
+- 20% incl. VAT standard success fee
+- no-upfront / no-win-no-standard-fee model
+- customer-net arithmetic (€250/€400/€600)
+- EU261/UK261 service scope and representation wording
+- eight supported locales
+- digital claim-process wording
+- automation / modern-flight-data positioning
+- approved wording and explicit do-not-claim guardrails
+- reusable external verification packet
+- pending evidence slots for Trustpilot, claims handled, recovered compensation, case studies, media and proprietary statistics
+
+Important finding: current fees-page source states 30% total incl. VAT when legal action is required, while current EN Terms source uses broader separate-approval wording; an older web-indexed Terms copy is staler still. The Evidence Pack records this transparently and requires a live fees/terms/claim-flow consistency check before external verification use of the 30% legal figure.
+
+Immediate parallel next task remains Philippines Content & Growth Operator recruitment. External outreach still requires explicit approval.
