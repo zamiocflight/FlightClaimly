@@ -261,3 +261,14 @@ Do not claim "Europe's cheapest" or superiority in outcomes, legal reach, speed 
 
 ### Authority flywheel
 Owned facts -> external corroboration -> AI/search discovery -> traffic -> claims -> genuine reviews/case evidence -> stronger external authority -> more discovery.
+
+
+## 2026-09-30 — EVIDENCE PACK V1 COMPLETE
+
+`docs/FLIGHTCLAIMLY_EVIDENCE_PACK.md` is now the internal source of truth for externally reusable FlightClaimly facts. It includes verified company identity, pricing, customer-net arithmetic, service scope, eight-language footprint, process/technology wording, official URLs, proof inventory, approved wording and do-not-claim guardrails.
+
+Use it before publisher submissions, comparison-site verification, creator/affiliate briefs, press material and new AEO authority copy.
+
+Open consistency item: fees source states legal action = 30% total incl. VAT; current EN Terms source is broader and requires separate approval for additional legal fees/costs. Re-check live fees + terms + claim approval flow before using the fixed 30% legal figure in external verification.
+
+Current immediate parallel task: Philippines Content & Growth Operator recruitment. No external outreach without explicit approval.
