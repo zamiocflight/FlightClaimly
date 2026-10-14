@@ -32,24 +32,46 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Authority identity mismatch" }, { status: 403 });
     }
 
-    // Idempotent Continue/Back: a signed authority already attached to this
-    // authenticated claim is the result, not an error. Never overwrite it.
+    // Idempotent Continue/Back: check the actual stored file, not only its
+    // metadata. A prior upload can succeed even if the DB update fails.
+    // Never overwrite a customer's signed authority or regenerate its signature.
     const authorityPath = `claims/${claimId}/authority.pdf`;
     const { data: existingClaim, error: existingClaimError } = await supabase
       .from("claims").select("attachments").eq("received_at", claimId).single();
     if (existingClaimError) return NextResponse.json({ error: "Authority lookup failed" }, { status: 500 });
-    if (Array.isArray(existingClaim?.attachments) &&
-        existingClaim.attachments.some((item: { path?: string; type?: string }) =>
-          item?.path === authorityPath && item?.type === "authority")) {
-      const { data: existingPdf, error: existingPdfError } = await supabase.storage
+    const existingAttachments = Array.isArray(existingClaim?.attachments) ? existingClaim.attachments : [];
+    const hasAuthorityReference = existingAttachments.some((item: { path?: string; type?: string }) =>
+      item?.path === authorityPath && item?.type === "authority");
+
+    const serveStoredAuthority = async (): Promise<NextResponse | null> => {
+      const { data: storedPdf, error: storedError } = await supabase.storage
         .from("attachments").download(authorityPath);
-      if (existingPdfError || !existingPdf) {
-        return NextResponse.json({ error: "Existing authority could not be loaded" }, { status: 500 });
+      if (storedError || !storedPdf) return null;
+      // Repair only a missing reference to a file that actually exists.
+      if (!hasAuthorityReference) {
+        const { data: latestClaim, error: latestError } = await supabase
+          .from("claims").select("attachments").eq("received_at", claimId).single();
+        if (latestError) return NextResponse.json({ error: "Authority metadata lookup failed" }, { status: 500 });
+        const latest = Array.isArray(latestClaim?.attachments) ? latestClaim.attachments : [];
+        if (!latest.some((item: { path?: string }) => item?.path === authorityPath)) {
+          const { error: repairError } = await supabase.from("claims")
+            .update({ attachments: [...latest, { type: "authority", path: authorityPath }] })
+            .eq("received_at", claimId);
+          if (repairError) return NextResponse.json({ error: "Authority metadata repair failed" }, { status: 500 });
+        }
       }
-      return new NextResponse(await existingPdf.arrayBuffer(), {
+      return new NextResponse(await storedPdf.arrayBuffer(), {
         status: 200,
         headers: { "Content-Type": "application/pdf", "Content-Disposition": `inline; filename="authority-${claimId}.pdf"` },
       });
+    };
+
+    const storedAuthority = await serveStoredAuthority();
+    if (storedAuthority) return storedAuthority;
+    if (hasAuthorityReference) {
+      // The record claims a signed file exists but the object is missing.
+      // Do not silently replace signed evidence with a new document.
+      return NextResponse.json({ error: "Existing signed authority is missing; manual review required" }, { status: 409 });
     }
 
     // 1️⃣ Render HTML preview page → PDF using Puppeteer
@@ -153,6 +175,12 @@ h1 { font-size: 18px; margin: 0 0 18px; }
     });
 
     if (uploadError) {
+      // A concurrent signing request may have stored the same file first.
+      // Serve that exact signed file rather than returning a false failure.
+      if (String(uploadError.statusCode) === "409") {
+        const racedAuthority = await serveStoredAuthority();
+        if (racedAuthority) return racedAuthority;
+      }
       console.error("Authority storage failed", uploadError);
       return NextResponse.json({ error: "Authority already exists or storage failed" }, { status: 409 });
     }
