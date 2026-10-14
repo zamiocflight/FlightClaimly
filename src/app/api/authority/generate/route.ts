@@ -83,7 +83,11 @@ export async function POST(req: Request) {
     // 2️⃣ Load PDF into pdf-lib
     const pdfDoc = await PDFDocument.load(htmlPdfBuffer);
 
-    if (pdfDoc.getPageCount() !== 2) {\n      return NextResponse.json({ error: "Authority must render on exactly two pages" }, { status: 422 });\n    }\n\n    // Never discard a generated page: the signature block can flow onto page 3.
+    if (pdfDoc.getPageCount() !== 2) {
+      return NextResponse.json({ error: "Authority must render on exactly two pages" }, { status: 422 });
+    }
+
+    // Never discard a generated page: the signature block can flow onto page 3.
     const pages = pdfDoc.getPages();
     const page = pages[pages.length - 1];
 
