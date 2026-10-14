@@ -10,15 +10,16 @@ export async function POST(
 ) {
   try {
     const { id } = await context.params;
-    const { filename, contentType } = await req.json();
+    const { filename, contentType, viewerToken } = await req.json();
 
     if (!id || !filename || typeof filename !== 'string' || filename.length > 180 || !/^[0-9a-f-]{36}$/i.test(id)) {
       return NextResponse.json({ error: 'BAD_REQUEST' }, { status: 400 });
     }
 
     const sb = supabaseAdmin();
-    const { data: claim, error: claimError } = await sb.from('claims').select('received_at').eq('received_at', id).maybeSingle();
+    const { data: claim, error: claimError } = await sb.from('claims').select('received_at, viewer_token').eq('received_at', id).maybeSingle();
     if (claimError || !claim) return NextResponse.json({ error: 'NOT_FOUND' }, { status: 404 });
+    if (!claim.viewer_token || viewerToken !== claim.viewer_token) return NextResponse.json({ error: 'FORBIDDEN' }, { status: 403 });
 
     // Sanera filnamn — inga snedstreck eller konstiga tecken
     const clean = String(filename).replace(/[^A-Za-z0-9._-]/g, '_');
