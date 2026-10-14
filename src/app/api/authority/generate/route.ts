@@ -26,6 +26,11 @@ export async function POST(req: Request) {
       );
     }
 
+    const { data: owner, error: ownerError } = await supabase.from("claims").select("name, booking_number, viewer_token").eq("received_at", claimId).maybeSingle();
+    if (ownerError || !owner || owner.name !== fullName || owner.booking_number !== bookingReference) {
+      return NextResponse.json({ error: "Authority identity mismatch" }, { status: 403 });
+    }
+
     // 1️⃣ Render HTML preview page → PDF using Puppeteer
     const baseUrl =
       new URL(req.url).origin;
