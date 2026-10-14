@@ -28,7 +28,7 @@ export default async function ClaimDetailPage({
   // Never expose the service-role key to the browser.
   const documentLinks = await Promise.all(
     (Array.isArray(claim.attachments) ? claim.attachments : []).map(async (att: any) => {
-      if (typeof att?.path !== "string" || !att.path.startsWith("claims/")) return null;
+      if (typeof att?.path !== "string" || att.path.includes("..") || att.path.startsWith("/")) return null;
       const { data, error } = await supabaseAdmin()
         .storage.from("attachments").createSignedUrl(att.path, 60 * 5);
       return error ? null : (data?.signedUrl ?? null);
