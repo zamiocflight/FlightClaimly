@@ -111,7 +111,7 @@ const claim = await addClaim({
   locale
 );
 
-    console.log('✅ /api/claims – NYTT ärende skapat i Supabase:', claim);
+
 
     // (valfritt men nice för UI/debug)
     const base =
