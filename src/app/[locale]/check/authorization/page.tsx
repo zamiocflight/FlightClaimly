@@ -87,8 +87,7 @@ async function generateAuthorityAfterClaim(
   searchParams: URLSearchParams
 ) {
   const sig =
-    sessionStorage.getItem(`fc_signature_png_${claimId}`) ||
-    sessionStorage.getItem("fc_signature_png");
+    sessionStorage.getItem(`fc_signature_png_${claimId}`);
 
   if (!sig) {
     throw new Error("Missing signature");
@@ -213,7 +212,7 @@ export default function AuthorizationPage() {
     const claimId = searchParams.get("claimId");
     const stored = claimId
       ? sessionStorage.getItem(`fc_signature_png_${claimId}`)
-      : sessionStorage.getItem("fc_signature_png");
+      : null;
     if (!stored?.startsWith("data:image/png;base64,")) {
       setHasSigned(false);
       return;
@@ -282,7 +281,7 @@ function handleEnd() {
 
 try {
   // 🔥 alltid spara globalt först
-sessionStorage.setItem("fc_signature_png", dataUrl);
+sessionStorage.setItem("fc_signature_pending", dataUrl);
 
 const claimId = searchParams.get("claimId");
 
@@ -309,6 +308,7 @@ if (claimId) {
     const claimId = searchParams.get("claimId");
     if (claimId) sessionStorage.removeItem(`fc_signature_png_${claimId}`);
     sessionStorage.removeItem("fc_signature_png");
+    sessionStorage.removeItem("fc_signature_pending");
     updateQuery({
       authorizationValid: "",
     });
@@ -325,6 +325,11 @@ async function handleContinue() {
 
   try {
     const claimId = await createClaim(searchParams, locale);
+    const pendingSignature = sessionStorage.getItem("fc_signature_pending");
+    if (pendingSignature) {
+      sessionStorage.setItem(`fc_signature_png_${claimId}`, pendingSignature);
+      sessionStorage.removeItem("fc_signature_pending");
+    }
 
     const params = new URLSearchParams(searchParams.toString());
     params.set("claimId", claimId);
