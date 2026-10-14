@@ -86,10 +86,24 @@ const page = pages[pages.length - 1];
     // upload PDF to Supabase Storage
     const filePath = `claims/${claimId}/authority.pdf`;
 
-    await supabase.storage.from("attachments").upload(filePath, pdfBytes, {
+    const { error: uploadError } = await supabase.storage.from("attachments").upload(filePath, pdfBytes, {
       contentType: "application/pdf",
-      upsert: true,
+      upsert: false,
     });
+
+    if (uploadError) {
+      // Concurrent/repeated requests must not overwrite a signed authority.
+      const { data: existing, error: downloadError } = await supabase.storage
+        .from("attachments").download(filePath);
+      if (downloadError || !existing) {
+        console.error("Authority storage failed", uploadError);
+        return NextResponse.json({ error: "Authority storage failed" }, { status: 500 });
+      }
+      return new NextResponse(await existing.arrayBuffer(), {
+        status: 200,
+        headers: { "Content-Type": "application/pdf" },
+      });
+    }
 
     // save attachment reference in claims table
     const { data: claim } = await supabase
