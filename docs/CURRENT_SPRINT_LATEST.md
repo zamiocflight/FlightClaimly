@@ -272,3 +272,8 @@ Use it before publisher submissions, comparison-site verification, creator/affil
 Open consistency item: fees source states legal action = 30% total incl. VAT; current EN Terms source is broader and requires separate approval for additional legal fees/costs. Re-check live fees + terms + claim approval flow before using the fixed 30% legal figure in external verification.
 
 Current immediate parallel task: Philippines Content & Growth Operator recruitment. No external outreach without explicit approval.
+
+
+## 2026-10-14 — ACTIVE SPRINT OVERRIDE
+
+P0: Diagnose and fix preview flight lookup (live site works, preview cannot load flights), then E2E test customer onboarding and PR #11 security. Vercel preview environment metadata access returned 403; root cause is NOT established. Do not ask user to fabricate flight numbers. Preview ADMIN login, fullmakt PDF and Vanessa email attachment were tested. Supabase: 483 objects, 77 legacy paths, 20 dangling references in 20 claims; no files deleted. Production bucket remains public pending safe rollout. Growth 70/20/10 (acquisition/conversion/tech), goal 3–6 claims/day by Nov 30. Philippines KL/KT creator candidate $40 paid test, 72h. Full state, cautions and resume command: `docs/checkpoints/2026-10-14-critical-continuity.md`. Older pointers above are preserved as history.
