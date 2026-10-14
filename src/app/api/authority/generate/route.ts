@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import crypto from "crypto";
 import { renderAuthorityHtmlToPdf } from "@/lib/authority/renderHtmlToPdf";
+import { buildLoaDoc } from "@/lib/authority/loa";
 import { createClient } from "@supabase/supabase-js";
 
 
@@ -41,10 +42,23 @@ export async function POST(req: Request) {
       `&claimId=${encodeURIComponent(claimId)}` +
       `&final=true`;
 
-    const htmlPdfBuffer = await renderAuthorityHtmlToPdf(
-   previewUrl,
-   signatureDataUrl
-   );
+    // Render the same bilingual legal text locally. Preview deployments may
+    // redirect browser requests to /login under Vercel Deployment Protection.
+    const doc = buildLoaDoc({ fullName, bookingReference, claimId });
+    const escapeHtml = (v: string) => String(v).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] || c));
+    const lines = (items: string[]) => items.map(v => v.trim() ? `<p>${escapeHtml(v)}</p>` : "<div class='space'></div>").join("");
+    const html = `<!doctype html><html><head><meta charset="utf-8"><style>
+      @page{size:A4;margin:12mm}*{box-sizing:border-box}body{font-family:Arial,sans-serif;color:#1e293b;margin:0;font-size:9px;line-height:1.24}
+      header{background:#0f172a;color:white;padding:15px;font-size:15px;font-weight:bold}main{padding:14px}h1{font-size:16px;margin:0 0 12px}
+      .meta{margin-bottom:14px}.cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}.cols p{margin:2px 0}.cols h2{font-size:11px}.space{height:6px}
+      .sign{margin-top:18px;border-top:1px solid #cbd5e1;padding-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:25px}
+      #authority-signature-box{height:55px;border:1px solid #cbd5e1;padding:4px}.date{border:1px solid #cbd5e1;padding:12px}
+      </style></head><body><header>FLIGHTCLAIMLY — Authority Document</header><main>
+      <h1>${escapeHtml(doc.title)}</h1><div class="meta">${doc.metaLines.map(escapeHtml).join("<div></div>")}</div>
+      <div class="cols"><section><h2>English</h2>${lines(doc.bodyLinesEN)}</section><section><h2>Español</h2>${lines(doc.bodyLinesES)}</section></div>
+      <div class="sign"><section>Passenger Signature<div id="authority-signature-box"></div>${escapeHtml(fullName)}</section><section>Date<div class="date">${new Date().toISOString().slice(0,10)}</div></section></div>
+      </main></body></html>`;
+    const htmlPdfBuffer = await renderAuthorityHtmlToPdf(previewUrl, signatureDataUrl, html);
 
     // 2️⃣ Load PDF into pdf-lib
     const pdfDoc = await PDFDocument.load(htmlPdfBuffer);
