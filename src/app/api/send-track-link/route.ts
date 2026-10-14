@@ -34,7 +34,27 @@ export async function POST(req: Request) {
     }
 
     const claimId = latest.received_at as string;
-    const viewerToken = (latest.viewer_token as string) || null;
+    let viewerToken = (latest.viewer_token as string) || null;
+    if (!viewerToken) {
+      const generatedToken = crypto.randomUUID() + crypto.randomUUID();
+      const { data: tokenRow, error: tokenError } = await sb
+        .from('claims')
+        .update({ viewer_token: generatedToken, viewer_token_created_at: new Date().toISOString() })
+        .eq('received_at', claimId)
+        .is('viewer_token', null)
+        .select('viewer_token')
+        .maybeSingle();
+      if (tokenError) throw tokenError;
+      // Concurrent recovery requests may have already created the token.
+      if (tokenRow?.viewer_token) {
+        viewerToken = tokenRow.viewer_token;
+      } else {
+        const { data: existingTokenRow, error: existingTokenError } = await sb
+          .from('claims').select('viewer_token').eq('received_at', claimId).single();
+        if (existingTokenError || !existingTokenRow?.viewer_token) throw existingTokenError || new Error('TRACK_TOKEN_MISSING');
+        viewerToken = existingTokenRow.viewer_token;
+      }
+    }
 
     // 🔹 Locale: från claim → fallback en
     const locale = (latest.locale as string) || 'en';
