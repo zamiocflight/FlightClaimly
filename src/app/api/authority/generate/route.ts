@@ -68,7 +68,7 @@ export async function POST(req: Request) {
     const escapeHtml = (v: string) => String(v).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] || c));
     const lines = (items: string[]) => items.map(v => { const t = v.trim(); if (!t) return "<div class='space'></div>"; const safe = escapeHtml(t); return /^\d{1,2}\.\s/.test(t) ? `<p class="clause-heading"><strong>${safe}</strong></p>` : `<p>${safe}</p>`; }).join("");
     const html = `<!doctype html><html><head><meta charset="utf-8"><style>
-      @page{size:A4;margin:9mm}*{box-sizing:border-box}body{font-family:Arial,sans-serif;color:#1e293b;margin:0;font-size:8px;line-height:1.15}
+      @page{size:A4;margin:9mm}*{box-sizing:border-box}body{font-family:Arial,sans-serif;color:#1e293b;margin:0;font-size:8.5px;line-height:1.22}
       header{background:linear-gradient(90deg,#0f172a,#1e3a8a);color:white;padding:10px;font-size:14px;font-weight:bold;letter-spacing:.4px}main{padding:9px}h1{font-size:14px;margin:0 0 7px}
       .meta{margin-bottom:8px}.cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}.cols p{margin:1.35px 0} .cols .clause-heading{margin-top:5.5px;font-weight:700}.cols h2{font-size:11px}.space{height:3px}
       .sign{margin-top:9px;border-top:1px solid #cbd5e1;padding-top:7px;display:grid;grid-template-columns:1fr 1fr;gap:25px;break-inside:avoid;page-break-inside:avoid}
