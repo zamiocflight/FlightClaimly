@@ -114,10 +114,12 @@ const page = pages[pages.length - 1];
 
     const attachments = claim?.attachments || [];
 
-    attachments.push({
-      type: "authority",
-      path: filePath,
-    });
+    if (!attachments.some((item: { path?: string }) => item?.path === filePath)) {
+      attachments.push({
+        type: "authority",
+        path: filePath,
+      });
+    }
 
     const { error: metadataError } = await supabase
       .from("claims")
