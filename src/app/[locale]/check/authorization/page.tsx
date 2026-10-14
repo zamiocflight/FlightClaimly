@@ -123,7 +123,7 @@ async function generateAuthorityAfterClaim(
   });
 
   if (!res.ok) {
-    throw new Error("Failed to generate authority");
+    throw new Error(`PDF generation failed (HTTP ${res.status})`);
   }
 
   sessionStorage.setItem(`fc_authority_done_${claimId}`, "1");
@@ -349,7 +349,7 @@ async function handleContinue() {
     router.push(`/${locale}/check/uploads?${params.toString()}`);
   } catch (err) {
     console.error("Claim submission or authority generation failed:", err);
-    alert(createdClaimRef.current ? "Ärendet är registrerat, men fullmakten kunde inte skapas. Försök igen utan att skapa ett nytt ärende." : t("claimCreationError"));
+    alert(createdClaimRef.current ? `Ärendet är registrerat, men fullmakten kunde inte skapas (${err instanceof Error ? err.message : "okänt fel"}). Försök igen utan att skapa ett nytt ärende.` : t("claimCreationError"));
 
     window.dispatchEvent(new Event("flightclaimly-submit-failed"));
 
