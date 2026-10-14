@@ -51,8 +51,8 @@ export async function GET(
       (claim as any).viewerToken ??
       undefined;
 
-    if (claimToken && tokenParam && tokenParam !== claimToken) {
-      console.warn('[public-claim] Token mismatch', { id, tokenParam });
+    if (claimToken && tokenParam !== claimToken) {
+      console.warn('[public-claim] Invalid viewer token');
       return NextResponse.json({ error: 'Invalid token' }, { status: 400 });
     }
 
