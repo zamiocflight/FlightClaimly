@@ -214,7 +214,7 @@ export default function AuthorizationPage() {
   useEffect(() => {
     const claimId = searchParams.get("claimId");
     const stored = claimId
-      ? sessionStorage.getItem(`fc_signature_png_${claimId}`)
+      ? sessionStorage.getItem(`fc_signature_canvas_${claimId}`)
       : null;
     if (!stored?.startsWith("data:image/png;base64,")) {
       setHasSigned(false);
@@ -288,14 +288,13 @@ function handleEnd() {
 try {
   // 🔥 alltid spara globalt först
 sessionStorage.setItem("fc_signature_pending", dataUrl);
+sessionStorage.setItem("fc_signature_canvas_pending", signatureCanvas.getCanvas().toDataURL("image/png"));
 
 const claimId = searchParams.get("claimId");
 
 if (claimId) {
-  sessionStorage.setItem(
-    `fc_signature_png_${claimId}`,
-    dataUrl
-  );
+  sessionStorage.setItem(`fc_signature_png_${claimId}`, dataUrl);
+  sessionStorage.setItem(`fc_signature_canvas_${claimId}`, signatureCanvas.getCanvas().toDataURL("image/png"));
 }
 } catch {}
   } else {
@@ -312,9 +311,13 @@ if (claimId) {
     setHasSigned(false);
     setIsDrawing(false);
     const claimId = searchParams.get("claimId");
-    if (claimId) sessionStorage.removeItem(`fc_signature_png_${claimId}`);
+    if (claimId) {
+      sessionStorage.removeItem(`fc_signature_png_${claimId}`);
+      sessionStorage.removeItem(`fc_signature_canvas_${claimId}`);
+    }
     sessionStorage.removeItem("fc_signature_png");
     sessionStorage.removeItem("fc_signature_pending");
+    sessionStorage.removeItem("fc_signature_canvas_pending");
     updateQuery({
       authorizationValid: "",
     });
@@ -337,6 +340,9 @@ async function handleContinue() {
     if (pendingSignature) {
       sessionStorage.setItem(`fc_signature_png_${claimId}`, pendingSignature);
       sessionStorage.removeItem("fc_signature_pending");
+      const canvasImage = sessionStorage.getItem("fc_signature_canvas_pending");
+      if (canvasImage) sessionStorage.setItem(`fc_signature_canvas_${claimId}`, canvasImage);
+      sessionStorage.removeItem("fc_signature_canvas_pending");
     }
 
     const params = new URLSearchParams(searchParams.toString());
