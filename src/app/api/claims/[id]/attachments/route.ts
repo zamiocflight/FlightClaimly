@@ -31,7 +31,7 @@ export async function POST(
       return NextResponse.json({ error: 'Missing claim id' }, { status: 400 });
     }
 
-    console.log('UPLOAD CLAIM ID:', incomingId);
+
 
     const sb = supabaseAdmin();
 
@@ -135,7 +135,7 @@ if (!row) {
 }
 
 if (readErr || !row) {
-  console.error('Claim lookup failed', { incomingId, readErr, row });
+  console.error('Claim lookup failed', readErr);
   return NextResponse.json(
     { error: 'Claim not found for this id' },
     { status: 404 }
@@ -155,6 +155,9 @@ if (readErr || !row) {
 for (const [index, entry] of fileEntries.entries()) {
       if (!(entry instanceof File)) continue;
 
+      if (entry.size > 10 * 1024 * 1024 || entry.size === 0) {
+        return NextResponse.json({ error: 'File size must be between 1 byte and 10 MB' }, { status: 413 });
+      }
       const originalName = entry.name || "file";
 
 // 🔥 SANITIZE filename (kritisk fix)
@@ -223,7 +226,7 @@ const next = Array.from(map.values());
   } catch (e: any) {
     console.error('Attachments route error:', e);
     return NextResponse.json(
-      { error: 'Server error', details: String(e?.message ?? e) },
+      { error: 'Server error' },
       { status: 500 }
     );
   }
