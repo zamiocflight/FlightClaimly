@@ -51,7 +51,7 @@ export async function POST(req: Request) {
       @page{size:A4;margin:12mm}*{box-sizing:border-box}body{font-family:Arial,sans-serif;color:#1e293b;margin:0;font-size:9px;line-height:1.24}
       header{background:#0f172a;color:white;padding:15px;font-size:15px;font-weight:bold}main{padding:14px}h1{font-size:16px;margin:0 0 12px}
       .meta{margin-bottom:14px}.cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}.cols p{margin:2px 0}.cols h2{font-size:11px}.space{height:6px}
-      .sign{margin-top:18px;border-top:1px solid #cbd5e1;padding-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:25px}
+      .sign{margin-top:18px;border-top:1px solid #cbd5e1;padding-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:25px;break-inside:avoid;page-break-inside:avoid}
       #authority-signature-box{height:55px;border:1px solid #cbd5e1;padding:4px}.date{border:1px solid #cbd5e1;padding:12px}
       </style></head><body><header>FLIGHTCLAIMLY — Authority Document</header><main>
       <h1>${escapeHtml(doc.title)}</h1><div class="meta">${doc.metaLines.map(escapeHtml).join("<div></div>")}</div>
@@ -63,14 +63,9 @@ export async function POST(req: Request) {
     // 2️⃣ Load PDF into pdf-lib
     const pdfDoc = await PDFDocument.load(htmlPdfBuffer);
 
-    let pages = pdfDoc.getPages();
-
-if (pages.length === 3) {
-  pdfDoc.removePage(2);
-  pages = pdfDoc.getPages();
-}
-
-const page = pages[pages.length - 1];
+    // Never discard a generated page: the signature block can flow onto page 3.
+    const pages = pdfDoc.getPages();
+    const page = pages[pages.length - 1];
 
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
