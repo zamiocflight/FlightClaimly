@@ -58,10 +58,21 @@ export async function renderAuthorityHtmlToPdf(
       height: 1600,
     });
 
-    await page.goto(url, {
+    const response = await page.goto(url, {
       waitUntil: "networkidle0",
       timeout: 60000,
     });
+    const status = response?.status() ?? 0;
+    const finalUrl = page.url();
+    if (status !== 200) {
+      console.error("Authority template request failed", { status, host: new URL(finalUrl).host, pathname: new URL(finalUrl).pathname });
+      throw new Error(`Authority template HTTP ${status}`);
+    }
+    const hasSignatureBox = await page.locator("#authority-signature-box").count();
+    if (!hasSignatureBox) {
+      console.error("Authority template missing signature box", { host: new URL(finalUrl).host, pathname: new URL(finalUrl).pathname });
+      throw new Error("Authority template did not render");
+    }
 
    if (signatureDataUrl) {
   await page.evaluate(async (signature) => {
