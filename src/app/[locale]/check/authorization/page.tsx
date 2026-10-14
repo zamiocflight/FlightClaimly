@@ -343,8 +343,9 @@ async function handleContinue() {
     params.set("claimId", claimId);
     if (viewerToken) params.set("t", viewerToken);
 
-    // Persist the newly created claim ID before PDF generation, so a failed PDF retry never creates another claim.
-    if (searchParams.get("claimId") !== claimId) router.replace(`/${locale}/check/authorization?${params.toString()}`, { scroll: false });
+    // Do not replace the URL while the signature canvas is mounted. That
+    // remounts/restores a cropped PNG over the live pen strokes during Continue.
+    // Keep the claim identity in createdClaimRef until navigation succeeds.
 
     // The authority must be saved before the customer can proceed.
     await generateAuthorityAfterClaim(claimId, searchParams, viewerToken);
