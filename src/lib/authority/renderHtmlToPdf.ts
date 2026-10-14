@@ -18,7 +18,8 @@ function findLocalChromeExecutable() {
 
 export async function renderAuthorityHtmlToPdf(
   url: string,
-  signatureDataUrl?: string
+  signatureDataUrl?: string,
+  html?: string
 ) {
   const isProduction = process.env.NODE_ENV === "production";
 
@@ -58,6 +59,9 @@ export async function renderAuthorityHtmlToPdf(
       height: 1600,
     });
 
+    if (html) {
+      await page.setContent(html, { waitUntil: "load", timeout: 60000 });
+    } else {
     const response = await page.goto(url, {
       waitUntil: "networkidle0",
       timeout: 60000,
@@ -73,6 +77,7 @@ export async function renderAuthorityHtmlToPdf(
     if (status !== 200) {
       console.error("Authority template request failed", { status, host: new URL(finalUrl).host, pathname: new URL(finalUrl).pathname });
       throw new Error(`Authority template HTTP ${status}`);
+    }
     }
     const hasSignatureBox = await page.$("#authority-signature-box");
     if (!hasSignatureBox) {
