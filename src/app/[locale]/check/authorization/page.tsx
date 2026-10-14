@@ -218,8 +218,14 @@ export default function AuthorizationPage() {
       setHasSigned(false);
       return;
     }
-    sigRef.current?.fromDataURL(stored);
-    setHasSigned(!sigRef.current?.isEmpty());
+    const canvas = sigRef.current;
+    if (!canvas) return;
+    Promise.resolve(canvas.fromDataURL(stored)).then(() => {
+      setHasSigned(!canvas.isEmpty());
+    }).catch(() => {
+      setHasSigned(false);
+      updateQuery({ authorizationValid: "" });
+    });
   // Only restore when the claim identity changes.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams.get("claimId")]);
