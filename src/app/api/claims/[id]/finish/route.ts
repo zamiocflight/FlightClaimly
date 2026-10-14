@@ -21,6 +21,11 @@ export async function POST(
       return NextResponse.json({ error: "Claim not found" }, { status: 404 });
     }
 
+    if (!claim.viewerToken) {
+      console.error("Finish email blocked: missing viewer token", { claimId: claim.id });
+      return NextResponse.json({ error: "Tracking link is not ready" }, { status: 409 });
+    }
+
     if (!claim.email) {
       return NextResponse.json({ error: "Missing email" }, { status: 400 });
     }
@@ -34,6 +39,7 @@ export async function POST(
 
 const ok = await sendStatusEmail({
   id: claim.id,
+  publicToken: claim.viewerToken,
   email: String(claim.email).toLowerCase(),
   name: claim.name,
   status: "new",
