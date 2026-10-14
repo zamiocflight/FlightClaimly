@@ -89,8 +89,12 @@ const page = pages[pages.length - 1];
     });
 
     if (uploadError) {
-      console.error("Authority storage failed", uploadError);
-      return NextResponse.json({ error: "Authority already exists or storage failed" }, { status: 409 });
+      const { data: existing } = await supabase.storage.from("attachments").info(filePath);
+      if (!existing) {
+        console.error("Authority storage failed", uploadError);
+        return NextResponse.json({ error: "Authority storage failed" }, { status: 500 });
+      }
+      // An earlier attempt already wrote this claim-specific PDF. Never overwrite it.
     }
 
     // save attachment reference in claims table
