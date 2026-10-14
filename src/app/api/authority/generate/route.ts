@@ -46,13 +46,13 @@ export async function POST(req: Request) {
     // redirect browser requests to /login under Vercel Deployment Protection.
     const doc = buildLoaDoc({ fullName, bookingReference, claimId });
     const escapeHtml = (v: string) => String(v).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] || c));
-    const lines = (items: string[]) => items.map(v => v.trim() ? `<p>${escapeHtml(v)}</p>` : "<div class='space'></div>").join("");
+    const lines = (items: string[]) => items.map(v => { const t = v.trim(); if (!t) return "<div class='space'></div>"; const safe = escapeHtml(t); return /^\d{1,2}\.\s/.test(t) ? `<p class="clause-heading"><strong>${safe}</strong></p>` : `<p>${safe}</p>`; }).join("");
     const html = `<!doctype html><html><head><meta charset="utf-8"><style>
-      @page{size:A4;margin:12mm}*{box-sizing:border-box}body{font-family:Arial,sans-serif;color:#1e293b;margin:0;font-size:9px;line-height:1.24}
-      header{background:#0f172a;color:white;padding:15px;font-size:15px;font-weight:bold}main{padding:14px}h1{font-size:16px;margin:0 0 12px}
-      .meta{margin-bottom:14px}.cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}.cols p{margin:2px 0}.cols h2{font-size:11px}.space{height:6px}
-      .sign{margin-top:18px;border-top:1px solid #cbd5e1;padding-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:25px;break-inside:avoid;page-break-inside:avoid}
-      #authority-signature-box{height:55px;border:1px solid #cbd5e1;padding:4px}.date{border:1px solid #cbd5e1;padding:12px}
+      @page{size:A4;margin:9mm}*{box-sizing:border-box}body{font-family:Arial,sans-serif;color:#1e293b;margin:0;font-size:8px;line-height:1.15}
+      header{background:#0f172a;color:white;padding:10px;font-size:14px;font-weight:bold}main{padding:9px}h1{font-size:14px;margin:0 0 7px}
+      .meta{margin-bottom:8px}.cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}.cols p{margin:1px 0} .cols .clause-heading{margin-top:5px;font-weight:700}.cols h2{font-size:11px}.space{height:3px}
+      .sign{margin-top:9px;border-top:1px solid #cbd5e1;padding-top:7px;display:grid;grid-template-columns:1fr 1fr;gap:25px;break-inside:avoid;page-break-inside:avoid}
+      #authority-signature-box{height:45px;border:1px solid #cbd5e1;padding:4px}.date{border:1px solid #cbd5e1;padding:9px}
       </style></head><body><header>FLIGHTCLAIMLY — Authority Document</header><main>
       <h1>${escapeHtml(doc.title)}</h1><div class="meta">${doc.metaLines.map(escapeHtml).join("<div></div>")}</div>
       <div class="cols"><section><h2>English</h2>${lines(doc.bodyLinesEN)}</section><section><h2>Español</h2>${lines(doc.bodyLinesES)}</section></div>
