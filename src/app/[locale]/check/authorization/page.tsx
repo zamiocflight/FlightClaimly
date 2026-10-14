@@ -8,7 +8,18 @@ import { BadgeCheck, Eraser, PenLine } from "lucide-react";
 
 async function createClaim(searchParams: URLSearchParams, locale: string) {
   const existingId = searchParams.get("claimId");
-  if (existingId) return { id: existingId, viewerToken: searchParams.get("t") || "" };
+  if (existingId) {
+    const token = searchParams.get("t");
+    if (!token) throw new Error("Missing claim access token");
+    return { id: existingId, viewerToken: token };
+  }
+  // Opening a bare /check/authorization URL is not a valid continuation.
+  // Never create an incomplete duplicate claim from an empty link.
+  const required = ["firstName", "lastName", "email", "from", "to", "bookingRef"];
+  const missing = required.filter((key) => !searchParams.get(key));
+  if (missing.length) {
+    throw new Error(`Missing claim context: ${missing.join(", ")}. Return to the original claim flow.`);
+  }
 
  const choice = searchParams.get("choice") || "direct";
 
@@ -75,7 +86,8 @@ layovers: layoversRaw,
   });
 
   if (!res.ok) {
-    throw new Error("Failed to create claim");
+    const response = await res.json().catch(() => ({}));
+    throw new Error(`Claim creation HTTP ${res.status}: ${String(response.error || "unknown")}`);
   }
 
   const data = await res.json();
@@ -359,7 +371,7 @@ async function handleContinue() {
     router.push(`/${locale}/check/uploads?${params.toString()}`);
   } catch (err) {
     console.error("Claim submission or authority generation failed:", err);
-    alert(createdClaimRef.current ? `Ärendet är registrerat, men fullmakten kunde inte skapas (${err instanceof Error ? err.message : "okänt fel"}). Försök igen utan att skapa ett nytt ärende.` : t("claimCreationError"));
+    alert(createdClaimRef.current ? `Ärendet är registrerat, men fullmakten kunde inte skapas (${err instanceof Error ? err.message : "okänt fel"}). Försök igen utan att skapa ett nytt ärende.` : `Ärendet kunde inte skapas: ${err instanceof Error ? err.message : "okänt fel"}`);
 
     window.dispatchEvent(new Event("flightclaimly-submit-failed"));
 
