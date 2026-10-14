@@ -15,7 +15,7 @@ h1 { font-size: 18px; margin: 0 0 18px; }
 .cols p.clause-heading { margin-top: 8px; font-weight: bold; }
 .cols h2 { font-size: 11px; margin: 0 0 8px; }
 .space { height: 4px; }
-.sign { margin-top: 48px; padding-top: 16px; border-top: 1px solid #cbd5e1; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; break-inside: avoid; page-break-inside: avoid; font-size: 11px; }
+.sign { margin-top: 32px; padding-top: 16px; border-top: 1px solid #cbd5e1; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; break-inside: avoid; page-break-inside: avoid; font-size: 11px; }
 #authority-signature-box { height: 56px; border: 1px solid #cbd5e1; padding: 4px; background: #f8fafc; }
 .date { height: 40px; border: 1px solid #cbd5e1; padding: 10px; background: #f8fafc; }
 `;
