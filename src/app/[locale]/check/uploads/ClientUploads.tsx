@@ -312,7 +312,8 @@ async function uploadAndContinue() {
   }
 
   if (!hasFiles) {
-    goNext();
+    setError(t("errors.uploadFailed"));
+    stopLayoutProcessing();
     return;
   }
 
@@ -364,9 +365,7 @@ useEffect(() => {
   // If user lands here without claimId, still render clean + helpful
   const claimMissing = !claimId;
 
-useEffect(() => {
-  (window as any).fc_uploadAndContinue = uploadAndContinue;
-}, [uploadAndContinue]);
+
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-2 text-sky-900">
