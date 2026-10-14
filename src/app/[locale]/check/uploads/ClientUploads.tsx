@@ -268,6 +268,7 @@ async function uploadFileDirect(file: File) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       filename: file.name,
+      viewerToken: sp.get("t") || "",
       contentType: file.type || "application/octet-stream",
     }),
   });
