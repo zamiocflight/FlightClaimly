@@ -29,6 +29,7 @@ export default async function ClaimDetailPage({
   const documentLinks = await Promise.all(
     (Array.isArray(claim.attachments) ? claim.attachments : []).map(async (att: any) => {
       if (typeof att?.path !== "string" || att.path.includes("..") || att.path.startsWith("/")) return null;
+      if (att.path.startsWith("claims/") && !att.path.startsWith(`claims/${claim.id}/`)) return null;
       const { data, error } = await supabaseAdmin()
         .storage.from("attachments").createSignedUrl(att.path, 60 * 5);
       return error ? null : (data?.signedUrl ?? null);
