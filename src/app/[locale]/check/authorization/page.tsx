@@ -84,7 +84,8 @@ layovers: layoversRaw,
 
 async function generateAuthorityAfterClaim(
   claimId: string,
-  searchParams: URLSearchParams
+  searchParams: URLSearchParams,
+  viewerToken: string
 ) {
   const sig =
     sessionStorage.getItem(`fc_signature_png_${claimId}`);
@@ -116,6 +117,7 @@ async function generateAuthorityAfterClaim(
       claimId,
       fullName,
       bookingReference,
+      viewerToken,
       signatureDataUrl: sig,
     }),
   });
@@ -336,7 +338,7 @@ async function handleContinue() {
     if (viewerToken) params.set("t", viewerToken);
 
     // The authority must be saved before the customer can proceed.
-    await generateAuthorityAfterClaim(claimId, searchParams);
+    await generateAuthorityAfterClaim(claimId, searchParams, viewerToken);
 
     router.push(`/${locale}/check/uploads?${params.toString()}`);
   } catch (err) {
