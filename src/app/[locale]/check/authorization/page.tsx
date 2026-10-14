@@ -300,6 +300,9 @@ if (claimId) {
     sigRef.current?.clear();
     setHasSigned(false);
     setIsDrawing(false);
+    const claimId = searchParams.get("claimId");
+    if (claimId) sessionStorage.removeItem(`fc_signature_png_${claimId}`);
+    sessionStorage.removeItem("fc_signature_png");
     updateQuery({
       authorizationValid: "",
     });
