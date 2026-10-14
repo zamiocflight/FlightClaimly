@@ -34,6 +34,11 @@ export async function POST(
 
 
     const sb = supabaseAdmin();
+    const token = req.headers.get("x-claim-token");
+    const { data: authorizedClaim } = await sb.from("claims").select("viewer_token").eq("received_at", incomingId).maybeSingle();
+    if (!authorizedClaim?.viewer_token || authorizedClaim.viewer_token !== token) {
+      return NextResponse.json({ error: "FORBIDDEN" }, { status: 403 });
+    }
 
     const contentType = req.headers.get("content-type") || "";
 
