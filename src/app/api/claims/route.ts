@@ -78,9 +78,12 @@ if (!flightNumber || !date || !from || !to || !name) {
 
     // tracking-id (uuid)
     const id = crypto.randomUUID();
+    const viewerToken = crypto.randomUUID() + crypto.randomUUID();
     // Spara claim
 const claim = await addClaim({
   id,
+  viewerToken,
+  viewerTokenCreatedAt: new Date().toISOString(),
   flightNumber,
   date,
   from,
@@ -118,7 +121,7 @@ const claim = await addClaim({
       process.env.NEXT_PUBLIC_APP_URL ||
       req.headers.get('origin') ||
       'http://localhost:3000';
-    const trackingUrl = `${String(base).replace(/\/$/, '')}/${locale}/track/${claim.id}`;
+    const trackingUrl = `${String(base).replace(/\/$/, '')}/${locale}/track/${claim.id}?t=${encodeURIComponent(viewerToken)}`;
 
 await sendClaimNotificationEmail({
   claim,
