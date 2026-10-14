@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { supabaseAdmin } from "@/lib/supabase";
 import { getClaimById } from "@/lib/claims";
 import {
   claimToRightsAssessmentInput,
@@ -22,6 +23,17 @@ export default async function ClaimDetailPage({
   const claim = await getClaimById(id);
 
   if (!claim) return <div className="p-6">Claim not found</div>;
+
+  // Short-lived document links work with a private storage bucket.
+  // Never expose the service-role key to the browser.
+  const documentLinks = await Promise.all(
+    (Array.isArray(claim.attachments) ? claim.attachments : []).map(async (att: any) => {
+      if (typeof att?.path !== "string" || !att.path.startsWith("claims/")) return null;
+      const { data, error } = await supabaseAdmin()
+        .storage.from("attachments").createSignedUrl(att.path, 60 * 5);
+      return error ? null : (data?.signedUrl ?? null);
+    }),
+  );
 
   const assessmentInput = claimToRightsAssessmentInput(claim);
   const evidenceRegistry = createEvidenceRegistry(
@@ -259,7 +271,7 @@ export default async function ClaimDetailPage({
           let documentLabel = att.filename || att.path;
           if (isMainAuthority) documentLabel = `Authority document — ${claim.name}`;
           if (isPassengerAuthority) documentLabel = `Passenger authority — ${att.passengerName || "Additional passenger"}`;
-          return <li key={i} className="rounded-lg border border-slate-200 bg-white px-4 py-3"><div className="flex items-center justify-between gap-4"><div><div className="font-medium text-slate-900">{documentLabel}</div>{isPassengerAuthority && <div className="mt-1 text-sm text-emerald-700">Signed</div>}</div><a href={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/attachments/${att.path}`} target="_blank" rel="noopener noreferrer" className="text-sky-600 hover:underline">View document</a></div></li>;
+          return <li key={i} className="rounded-lg border border-slate-200 bg-white px-4 py-3"><div className="flex items-center justify-between gap-4"><div><div className="font-medium text-slate-900">{documentLabel}</div>{isPassengerAuthority && <div className="mt-1 text-sm text-emerald-700">Signed</div>}</div>{documentLinks[i] ? <a href={documentLinks[i]!} target="_blank" rel="noopener noreferrer" className="text-sky-600 hover:underline">View document</a> : <span className="text-slate-500">Document unavailable</span>}</div></li>;
         })}</ul> : <p>—</p>}
       </div>
 
