@@ -28,3 +28,10 @@ Append-only historical log.
 - Recorded legal-action pricing wording mismatch as an open consistency check rather than smoothing it over.
 - Trustpilot Technical Support request submitted after Sales redirected the activation issue.
 - FlightClaimly plane brand mark added as favicon and locally visually approved before merge.
+
+
+## 2026-10-13–14
+- Locked 70/20/10: 70% acquisition, 20% conversion, 10% technical/legal quality, except essential security. Goal 3–6 submitted claims/day by Nov 30.
+- Philippines creator-first candidate referred to as KL Dela Cruz previously and KT by user currently (verify exact name). Proposed paid test $40 fixed, 72h, ~2–3h, vertical 9:16 20–30s video with hook, captions, CTA, alternative hook, audience rationale and distribution/measurement plan. Fair starter kit and no required paid tools. Earlier $13/hour acceptance reported; exact sent correspondence not independently verified.
+- Preview flight lookup currently fails though production works, blocking new-claim test. Security PR #11 ongoing; production storage unchanged.
+- Full append-only handover: `docs/checkpoints/2026-10-14-critical-continuity.md`.
