@@ -59,20 +59,17 @@ export async function POST(req: Request) {
     // 🔹 Locale: från claim → fallback en
     const locale = (latest.locale as string) || 'en';
 
-    const origin =
-      process.env.NEXT_PUBLIC_APP_URL ||
-      req.headers.get('origin') ||
-      'http://localhost:3000';
+    const origin = process.env.NEXT_PUBLIC_APP_URL || 'https://www.flightclaimly.com';
 
     const base = origin.replace(/\/$/, '');
     const trackUrl = viewerToken
       ? `${base}/${locale}/track/${claimId}?t=${encodeURIComponent(viewerToken)}`
       : `${base}/${locale}/track/${claimId}`;
 
-    console.log('Skickar track-länk till', email, '=>', trackUrl);
+    // Never log claim tokens or customer tracking URLs.
 
-    await resend.emails.send({
-      from: 'FlightClaimly <onboarding@resend.dev>',
+    const { error: sendError } = await resend.emails.send({
+      from: 'FlightClaimly <info@flightclaimly.com>',
       to: email,
       subject: 'Följ ditt ärende hos FlightClaimly',
       html: `
@@ -83,6 +80,11 @@ export async function POST(req: Request) {
         <p>Vänliga hälsningar,<br/>FlightClaimly</p>
       `,
     });
+
+    if (sendError) {
+      console.error('Track link email delivery failed:', sendError.message);
+      return NextResponse.json({ error: 'EMAIL_DELIVERY_FAILED' }, { status: 502 });
+    }
 
     return NextResponse.json({
       ok: true,
