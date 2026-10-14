@@ -32,13 +32,23 @@ export async function renderAuthorityHtmlToPdf(
     );
   }
 
-  const browser = await puppeteer.launch({
-    args: isProduction
-      ? chromium.args
-      : ["--no-sandbox", "--disable-setuid-sandbox"],
-    executablePath,
-    headless: true,
-  });
+  // Chromium extraction on serverless can briefly race with another invocation.
+  // Retry only transient executable-busy failures; do not mask other launch errors.
+  let browser: Awaited<ReturnType<typeof puppeteer.launch>> | undefined;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      browser = await puppeteer.launch({
+        args: isProduction ? chromium.args : ["--no-sandbox", "--disable-setuid-sandbox"],
+        executablePath,
+        headless: true,
+      });
+      break;
+    } catch (error) {
+      if (!String(error).includes("ETXTBSY") || attempt === 2) throw error;
+      await new Promise((resolve) => setTimeout(resolve, 350 * (attempt + 1)));
+    }
+  }
+  if (!browser) throw new Error("Chromium launch failed");
 
   try {
     const page = await browser.newPage();
