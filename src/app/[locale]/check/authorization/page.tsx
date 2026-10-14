@@ -329,10 +329,8 @@ async function handleContinue() {
     const params = new URLSearchParams(searchParams.toString());
     params.set("claimId", claimId);
 
-    // Do not block the user while the authority PDF is generated.
-    generateAuthorityAfterClaim(claimId, searchParams).catch((err) => {
-      console.error("Background authority generation failed:", err);
-    });
+    // The authority must be saved before the customer can proceed.
+    await generateAuthorityAfterClaim(claimId, searchParams);
 
     router.push(`/${locale}/check/uploads?${params.toString()}`);
   } catch (err) {
