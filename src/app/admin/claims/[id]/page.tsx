@@ -1,3 +1,6 @@
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { validAdminSession } from "@/lib/adminSession";
 import Link from "next/link";
 import { supabaseAdmin } from "@/lib/supabase";
 import { getClaimById } from "@/lib/claims";
@@ -19,6 +22,8 @@ export default async function ClaimDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  const cookie = (await cookies()).get('admin_session')?.value;
+  if (!(await validAdminSession(cookie, process.env.ADMIN_PASSWORD))) redirect('/login');
   const { id } = await params;
   const claim = await getClaimById(id);
 
