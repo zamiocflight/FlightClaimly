@@ -206,6 +206,7 @@ export default function AuthorizationPage() {
   const sigRef = useRef<SignatureCanvas | null>(null);
 
   const continueRunningRef = useRef(false);
+  const createdClaimRef = useRef<{ id: string; viewerToken: string } | null>(null);
 
   const [hasSigned, setHasSigned] = useState(false);
 
@@ -326,7 +327,9 @@ async function handleContinue() {
   continueRunningRef.current = true;
 
   try {
-    const { id: claimId, viewerToken } = await createClaim(searchParams, locale);
+    const createdClaim = createdClaimRef.current || await createClaim(searchParams, locale);
+    createdClaimRef.current = createdClaim;
+    const { id: claimId, viewerToken } = createdClaim;
     const pendingSignature = sessionStorage.getItem("fc_signature_pending");
     if (pendingSignature) {
       sessionStorage.setItem(`fc_signature_png_${claimId}`, pendingSignature);
@@ -337,13 +340,16 @@ async function handleContinue() {
     params.set("claimId", claimId);
     if (viewerToken) params.set("t", viewerToken);
 
+    // Persist the newly created claim ID before PDF generation, so a failed PDF retry never creates another claim.
+    if (searchParams.get("claimId") !== claimId) router.replace(`/${locale}/check/authorization?${params.toString()}`, { scroll: false });
+
     // The authority must be saved before the customer can proceed.
     await generateAuthorityAfterClaim(claimId, searchParams, viewerToken);
 
     router.push(`/${locale}/check/uploads?${params.toString()}`);
   } catch (err) {
-    console.error("Claim creation failed:", err);
-    alert(t("claimCreationError"));
+    console.error("Claim submission or authority generation failed:", err);
+    alert(createdClaimRef.current ? "Ärendet är registrerat, men fullmakten kunde inte skapas. Försök igen utan att skapa ett nytt ärende." : t("claimCreationError"));
 
     window.dispatchEvent(new Event("flightclaimly-submit-failed"));
 
