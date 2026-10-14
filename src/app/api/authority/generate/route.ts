@@ -28,7 +28,7 @@ export async function POST(req: Request) {
 
     // 1️⃣ Render HTML preview page → PDF using Puppeteer
     const baseUrl =
-      process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+      new URL(req.url).origin;
 
     const previewUrl =
       `${baseUrl}/sv/power-of-attorney` +
