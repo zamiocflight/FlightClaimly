@@ -293,3 +293,8 @@ Verified/recorded:
 Important finding: current fees-page source states 30% total incl. VAT when legal action is required, while current EN Terms source uses broader separate-approval wording; an older web-indexed Terms copy is staler still. The Evidence Pack records this transparently and requires a live fees/terms/claim-flow consistency check before external verification use of the 30% legal figure.
 
 Immediate parallel next task remains Philippines Content & Growth Operator recruitment. External outreach still requires explicit approval.
+
+
+## 2026-10-14 — CURRENT PRIORITY / PRESERVE PRIOR ROADMAP
+
+P0: preview flight lookup failure vs working production; diagnose before E2E testing. Finish PR #11 secure claim flow, signed ADMIN document links including 77 legacy paths, token tracking and upload authorization. Production Supabase bucket stays public until verified safe migration (483 objects; 20 old dangling references; never delete). Next: 70% acquisition, 20% conversion, 10% tech/legal quality, with essential security non-negotiable; 3–6 submissions/day by Nov 30. Philippines KL/KT $40/72h creator test and launch distribution/creative experiments. Preserve Otterly 15-prompt baseline, Evidence Pack, comparison pages, SEO architecture and genuine Reijo/Vanessa claims. Premium UX, FR/IT/PT and longer-range data engines are deferred, not erased. Detailed current plan and resume command: `docs/checkpoints/2026-10-14-critical-continuity.md`.
