@@ -58,6 +58,16 @@ if (contentType.includes("application/json")) {
   const existing = Array.isArray(row.attachments) ? row.attachments : [];
   const now = new Date().toISOString();
 
+  const validFiles = incomingFiles.every((f: any) =>
+    f && typeof f.path === "string" &&
+    f.path.startsWith(`claims/${incomingId}/`) &&
+    !f.path.includes("..") &&
+    typeof f.filename === "string" &&
+    f.filename.length <= 255 &&
+    Number.isFinite(f.size) && f.size >= 0 && f.size <= 10 * 1024 * 1024
+  );
+  if (!validFiles) return NextResponse.json({ error: "Invalid attachment metadata" }, { status: 400 });
+
   const newFiles = incomingFiles.map((f: any) => ({
     path: f.path,
     filename: f.filename,
