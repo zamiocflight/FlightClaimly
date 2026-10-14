@@ -331,7 +331,7 @@ async function uploadAndContinue() {
 
     const metadataRes = await fetch(`/api/claims/${claimId}/attachments`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "x-claim-token": sp.get("t") || "" },
       body: JSON.stringify({ files: uploaded }),
     });
 
