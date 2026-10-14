@@ -64,6 +64,12 @@ export async function renderAuthorityHtmlToPdf(
     });
     const status = response?.status() ?? 0;
     const finalUrl = page.url();
+    const requested = new URL(url);
+    const landed = new URL(finalUrl);
+    if (landed.origin !== requested.origin || landed.pathname !== requested.pathname) {
+      console.error("Authority template redirected unexpectedly", { requestedPath: requested.pathname, finalPath: landed.pathname });
+      throw new Error("Authority template redirected unexpectedly");
+    }
     if (status !== 200) {
       console.error("Authority template request failed", { status, host: new URL(finalUrl).host, pathname: new URL(finalUrl).pathname });
       throw new Error(`Authority template HTTP ${status}`);
