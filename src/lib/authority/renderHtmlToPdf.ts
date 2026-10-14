@@ -68,7 +68,7 @@ export async function renderAuthorityHtmlToPdf(
       console.error("Authority template request failed", { status, host: new URL(finalUrl).host, pathname: new URL(finalUrl).pathname });
       throw new Error(`Authority template HTTP ${status}`);
     }
-    const hasSignatureBox = await page.locator("#authority-signature-box").count();
+    const hasSignatureBox = await page.$("#authority-signature-box");
     if (!hasSignatureBox) {
       console.error("Authority template missing signature box", { host: new URL(finalUrl).host, pathname: new URL(finalUrl).pathname });
       throw new Error("Authority template did not render");
