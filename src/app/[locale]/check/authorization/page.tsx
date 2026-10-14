@@ -290,7 +290,10 @@ if (claimId) {
   }
 
 async function handleContinue() {
-  if (!isValid) return;
+  if (!isValid) {
+    window.dispatchEvent(new Event("flightclaimly-submit-failed"));
+    return;
+  }
 
   if (continueRunningRef.current) return;
   continueRunningRef.current = true;
