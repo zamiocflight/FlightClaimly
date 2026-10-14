@@ -140,6 +140,7 @@ if (!sig) {
         fullName,
         bookingReference,
         claimId,
+        viewerToken: sp.get("t") || "",
         signatureDataUrl: sig,
       }),
     });
