@@ -1,3 +1,4 @@
+import { validAdminSession } from "@/lib/adminSession";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
@@ -40,7 +41,7 @@ function redirectDisabledLocale(req: NextRequest, locale: string) {
   return NextResponse.redirect(url);
 }
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Redirecta disabled locales till /sv innan övrig routing.
@@ -56,6 +57,13 @@ export function middleware(req: NextRequest) {
 
   // Tillåt admin-auth API
   if (pathname === "/api/admin/login" || pathname === "/api/admin/logout") {
+    return NextResponse.next();
+  }
+
+  if (pathname.startsWith("/api/admin/") || /^\/api\/claims\/[^/]+$/.test(pathname)) {
+    if (!await validAdminSession(req.cookies.get("admin_session")?.value, process.env.ADMIN_PASSWORD)) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     return NextResponse.next();
   }
 
@@ -97,7 +105,7 @@ export function middleware(req: NextRequest) {
     )
   ) {
     const sess = req.cookies.get("admin_session")?.value;
-    if (!sess) {
+    if (!await validAdminSession(sess, process.env.ADMIN_PASSWORD)) {
       const url = req.nextUrl.clone();
       url.pathname = "/login";
       return NextResponse.redirect(url);
