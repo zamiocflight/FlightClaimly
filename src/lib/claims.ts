@@ -324,7 +324,7 @@ const row = toInsert({
 }
 
 
-  console.log('🟦 addClaim – ska insertas i Supabase:', row);
+
 
   const { data, error } = await sb
     .from('claims')
@@ -337,7 +337,7 @@ const row = toInsert({
     throw error;
   }
 
-  console.log('✅ addClaim – insert ok, rad från Supabase:', data);
+
 
   return fromRow(data);
 }
