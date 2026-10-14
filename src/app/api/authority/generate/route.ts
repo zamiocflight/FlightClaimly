@@ -17,7 +17,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json().catch(() => ({}));
 
-    const { fullName, bookingReference, claimId, signatureDataUrl } = body || {};
+    const { fullName, bookingReference, claimId, signatureDataUrl, viewerToken } = body || {};
 
     if (!fullName || !bookingReference || !claimId || !signatureDataUrl) {
       return NextResponse.json(
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     }
 
     const { data: owner, error: ownerError } = await supabase.from("claims").select("name, booking_number, viewer_token").eq("received_at", claimId).maybeSingle();
-    if (ownerError || !owner || owner.name !== fullName || owner.booking_number !== bookingReference) {
+    if (ownerError || !owner || owner.name !== fullName || owner.booking_number !== bookingReference || !owner.viewer_token || owner.viewer_token !== viewerToken) {
       return NextResponse.json({ error: "Authority identity mismatch" }, { status: 403 });
     }
 
