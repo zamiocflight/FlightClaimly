@@ -141,6 +141,7 @@ await sendClaimNotificationEmail({
       id: claim.id,
       precheck,
       trackingUrl,
+      viewerToken,
       locale,
     });
   } catch (err) {
