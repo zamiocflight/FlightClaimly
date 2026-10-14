@@ -9,13 +9,6 @@ import { createClient } from "@supabase/supabase-js";
 
 
 export async function POST(req: Request) {
-  console.log("ENV CHECK");
-  console.log("SUPABASE_URL:", process.env.SUPABASE_URL);
-  console.log(
-    "SUPABASE_SERVICE_ROLE:",
-    process.env.SUPABASE_SERVICE_ROLE?.slice(0, 10)
-  );
-
   const supabase = createClient(
     process.env.SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE!
