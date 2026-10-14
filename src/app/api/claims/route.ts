@@ -139,6 +139,7 @@ await sendClaimNotificationEmail({
 
     return NextResponse.json({
       id: claim.id,
+      viewerToken,
       precheck,
       trackingUrl,
       viewerToken,
