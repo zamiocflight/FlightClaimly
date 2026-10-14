@@ -32,6 +32,26 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Authority identity mismatch" }, { status: 403 });
     }
 
+    // Idempotent Continue/Back: a signed authority already attached to this
+    // authenticated claim is the result, not an error. Never overwrite it.
+    const authorityPath = `claims/${claimId}/authority.pdf`;
+    const { data: existingClaim, error: existingClaimError } = await supabase
+      .from("claims").select("attachments").eq("received_at", claimId).single();
+    if (existingClaimError) return NextResponse.json({ error: "Authority lookup failed" }, { status: 500 });
+    if (Array.isArray(existingClaim?.attachments) &&
+        existingClaim.attachments.some((item: { path?: string; type?: string }) =>
+          item?.path === authorityPath && item?.type === "authority")) {
+      const { data: existingPdf, error: existingPdfError } = await supabase.storage
+        .from("attachments").download(authorityPath);
+      if (existingPdfError || !existingPdf) {
+        return NextResponse.json({ error: "Existing authority could not be loaded" }, { status: 500 });
+      }
+      return new NextResponse(await existingPdf.arrayBuffer(), {
+        status: 200,
+        headers: { "Content-Type": "application/pdf", "Content-Disposition": `inline; filename="authority-${claimId}.pdf"` },
+      });
+    }
+
     // 1️⃣ Render HTML preview page → PDF using Puppeteer
     const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : new URL(req.url).origin;
 
@@ -48,10 +68,10 @@ export async function POST(req: Request) {
     const escapeHtml = (v: string) => String(v).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] || c));
     const lines = (items: string[]) => items.map(v => { const t = v.trim(); if (!t) return "<div class='space'></div>"; const safe = escapeHtml(t); return /^\d{1,2}\.\s/.test(t) ? `<p class="clause-heading"><strong>${safe}</strong></p>` : `<p>${safe}</p>`; }).join("");
     const html = `<!doctype html><html><head><meta charset="utf-8"><style>
-      @page{size:A4;margin:9mm}*{box-sizing:border-box}body{font-family:Arial,sans-serif;color:#1e293b;margin:0;font-size:9px;line-height:1.18}
-      header{background:linear-gradient(90deg,#0f172a,#1e3a8a);color:white;padding:14px 15px;font-size:12px;font-weight:bold;letter-spacing:.4px}main{padding:12px}h1{font-size:15px;margin:0 0 11px}
-      .meta{margin-bottom:13px;line-height:1.3}.cols{display:grid;grid-template-columns:1fr 1fr;gap:19px}.cols p{margin:2px 0} .cols .clause-heading{margin-top:8px;font-weight:700}.cols h2{font-size:10px;margin:0 0 8px}.space{height:4px}
-      .sign{margin-top:15px;border-top:1px solid #cbd5e1;padding-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:25px;break-inside:avoid;page-break-inside:avoid}
+      @page{size:A4;margin:9mm}*{box-sizing:border-box}body{font-family:Arial,sans-serif;color:#1e293b;margin:0;font-size:8px;line-height:1.15}
+      header{background:linear-gradient(90deg,#0f172a,#1e3a8a);color:white;padding:10px;font-size:14px;font-weight:bold;letter-spacing:.4px}main{padding:9px}h1{font-size:14px;margin:0 0 7px}
+      .meta{margin-bottom:8px}.cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}.cols p{margin:1px 0} .cols .clause-heading{margin-top:5px;font-weight:700}.cols h2{font-size:11px}.space{height:3px}
+      .sign{margin-top:9px;border-top:1px solid #cbd5e1;padding-top:7px;display:grid;grid-template-columns:1fr 1fr;gap:25px;break-inside:avoid;page-break-inside:avoid}
       #authority-signature-box{height:45px;border:1px solid #cbd5e1;padding:4px;background:#f8fafc}.date{border:1px solid #cbd5e1;padding:9px;background:#f8fafc}
       </style></head><body><header>FLIGHTCLAIMLY — Authority Document</header><main>
       <h1>${escapeHtml(doc.title)}</h1><div class="meta">${doc.metaLines.map(escapeHtml).join("<div></div>")}</div>
