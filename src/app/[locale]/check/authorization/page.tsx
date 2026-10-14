@@ -8,7 +8,7 @@ import { BadgeCheck, Eraser, PenLine } from "lucide-react";
 
 async function createClaim(searchParams: URLSearchParams, locale: string) {
   const existingId = searchParams.get("claimId");
-  if (existingId) return existingId;
+  if (existingId) return { id: existingId, viewerToken: searchParams.get("t") || "" };
 
  const choice = searchParams.get("choice") || "direct";
 
@@ -79,7 +79,7 @@ layovers: layoversRaw,
   }
 
   const data = await res.json();
-  return data.id;
+  return { id: data.id as string, viewerToken: (data.viewerToken || "") as string };
 }
 
 async function generateAuthorityAfterClaim(
@@ -324,7 +324,7 @@ async function handleContinue() {
   continueRunningRef.current = true;
 
   try {
-    const claimId = await createClaim(searchParams, locale);
+    const { id: claimId, viewerToken } = await createClaim(searchParams, locale);
     const pendingSignature = sessionStorage.getItem("fc_signature_pending");
     if (pendingSignature) {
       sessionStorage.setItem(`fc_signature_png_${claimId}`, pendingSignature);
@@ -333,6 +333,7 @@ async function handleContinue() {
 
     const params = new URLSearchParams(searchParams.toString());
     params.set("claimId", claimId);
+    if (viewerToken) params.set("t", viewerToken);
 
     // The authority must be saved before the customer can proceed.
     await generateAuthorityAfterClaim(claimId, searchParams);
