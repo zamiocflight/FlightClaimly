@@ -222,7 +222,7 @@ export default function AuthorizationPage() {
     }
     const canvas = sigRef.current;
     if (!canvas) return;
-    Promise.resolve(canvas.fromDataURL(stored)).then(() => {
+    // The claim ID is added while the customer is still on this page.\n    // Never redraw the cropped saved PNG over a signature already on the canvas.\n    if (!canvas.isEmpty()) return;\n    Promise.resolve(canvas.fromDataURL(stored)).then(() => {
       setHasSigned(!canvas.isEmpty());
     }).catch(() => {
       setHasSigned(false);
