@@ -7,6 +7,7 @@ type Props = {
   }>;
   searchParams: Promise<{
     claimId?: string;
+    t?: string;
   }>;
 };
 
@@ -56,7 +57,7 @@ export default async function ThanksPage({
 
         {/* CTA */}
         <Link
-          href={`/${claimId ? locale : "sv"}/track/${claimId}`}
+          href={`/${locale}/track/${claimId}${sp.t ? `?t=${encodeURIComponent(sp.t)}` : ""}`}
           className="inline-block w-full bg-blue-600 hover:bg-blue-700 transition text-white font-medium py-3 rounded-lg"
         >
           {t("track")}
