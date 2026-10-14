@@ -207,6 +207,22 @@ export default function AuthorizationPage() {
   const continueRunningRef = useRef(false);
 
   const [hasSigned, setHasSigned] = useState(false);
+
+  // Restore the signature when the customer navigates Back from uploads.
+  useEffect(() => {
+    const claimId = searchParams.get("claimId");
+    const stored = claimId
+      ? sessionStorage.getItem(`fc_signature_png_${claimId}`)
+      : sessionStorage.getItem("fc_signature_png");
+    if (!stored?.startsWith("data:image/png;base64,")) {
+      setHasSigned(false);
+      return;
+    }
+    sigRef.current?.fromDataURL(stored);
+    setHasSigned(!sigRef.current?.isEmpty());
+  // Only restore when the claim identity changes.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams.get("claimId")]);
   const [isDrawing, setIsDrawing] = useState(false);
 
   const isValid = useMemo(() => {
