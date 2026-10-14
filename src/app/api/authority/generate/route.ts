@@ -119,10 +119,14 @@ const page = pages[pages.length - 1];
       path: filePath,
     });
 
-    await supabase
+    const { error: metadataError } = await supabase
       .from("claims")
       .update({ attachments })
       .eq("received_at", claimId);
+    if (metadataError) {
+      console.error("Authority metadata save failed", metadataError);
+      return NextResponse.json({ error: "Authority metadata save failed" }, { status: 500 });
+    }
 
     return new NextResponse(pdfBytes, {
       status: 200,
