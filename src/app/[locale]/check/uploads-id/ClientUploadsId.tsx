@@ -257,6 +257,7 @@ async function uploadAndContinue() {
 
     const res = await fetch(`/api/claims/${claimId}/attachments`, {
       method: "POST",
+      headers: { "x-claim-token": sp.get("t") || "" },
       body: formData,
     });
 
