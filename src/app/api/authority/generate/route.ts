@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     }
 
     // 1️⃣ Render HTML preview page → PDF using Puppeteer
-    const baseUrl = new URL(req.url).origin;
+    const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : new URL(req.url).origin;
 
     const previewUrl =
       `${baseUrl}/sv/power-of-attorney` +
