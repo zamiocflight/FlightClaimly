@@ -177,7 +177,7 @@ h1 { font-size: 18px; margin: 0 0 18px; }
     if (uploadError) {
       // A concurrent signing request may have stored the same file first.
       // Serve that exact signed file rather than returning a false failure.
-      if (String(uploadError.statusCode) === "409") {
+      if (uploadError.message?.toLowerCase().includes("already exists")) {
         const racedAuthority = await serveStoredAuthority();
         if (racedAuthority) return racedAuthority;
       }
