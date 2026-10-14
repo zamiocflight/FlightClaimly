@@ -89,17 +89,11 @@ export default function ClientUploads() {
   async function ensureAuthority() {
   if (ensureAuthorityRanRef.current) return;
 
-    console.log("🧪 DEBUG SIGNATURE", {
-  claimId,
-  claimKey: `fc_signature_png_${claimId}`,
-  claimSig: sessionStorage.getItem(`fc_signature_png_${claimId}`),
-  globalSig: sessionStorage.getItem("fc_signature_png"),
-});
 
     if (authorityRunningRef.current) return;
     authorityRunningRef.current = true;
-console.log("🧪 ensureAuthority TRIGGER");
-    console.log("🚀 ensureAuthority RUN", claimId);
+
+    
 
     if (!claimId) return;
 
@@ -107,7 +101,7 @@ console.log("🧪 ensureAuthority TRIGGER");
 
   // undvik att köra flera gånger
   if (sessionStorage.getItem(`fc_authority_done_${claimId}`) === "1") {
-    console.log("🚀 ensureAuthority RUN", claimId);
+    
     setAuthorityReady(true);
     return;
   }
