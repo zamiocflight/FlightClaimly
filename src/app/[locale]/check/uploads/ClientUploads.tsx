@@ -110,8 +110,7 @@ export default function ClientUploads() {
   if (authorityReady) return;
 
    let sig =
-  sessionStorage.getItem(`fc_signature_png_${claimId}`) ||
-  sessionStorage.getItem("fc_signature_png");
+  sessionStorage.getItem(`fc_signature_png_${claimId}`);
 
 // 🔥 OM fallback användes → migrera till rätt key
 if (sig && !sessionStorage.getItem(`fc_signature_png_${claimId}`)) {
