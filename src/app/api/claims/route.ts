@@ -78,13 +78,6 @@ if (!flightNumber || !date || !from || !to || !name) {
 
     // tracking-id (uuid)
     const id = crypto.randomUUID();
-console.log("DEBUG BEFORE ADDCLAIM:", {
-  address,
-  city,
-  postalCode,
-  country,
-  phone,
-});
     // Spara claim
 const claim = await addClaim({
   id,
