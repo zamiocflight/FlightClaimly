@@ -108,3 +108,14 @@ Read (on branch): `docs/FLIGHTCLAIMLY_HANDOFF.MD`, `docs/ROADMAP.md`, `docs/CURR
 - CRITICAL production RLS exposure: public.claims RLS is enabled but anon SELECT USING(true), UPDATE USING(true) WITH CHECK(true), INSERT WITH CHECK(true). Public anon key can access/modify claims through direct Supabase APIs independent of Next.js auth. No production change made. A reviewed, gated migration is drafted at docs/security/claims-rls-remediation-2026-10-14.sql; **must confirm no direct client usage and get explicit production approval before applying**. Supabase security advisors also flagged GraphQL anon/authenticated table discoverability.
 - Storage bucket still public; do not privatize until secure production access deployed and verified. Do not merge PR without approval.
 - Need review any browser direct Supabase access, legacy tokenless claims, 45 unlinked objects and document download compatibility, then get explicit authorization for production RLS/storage changes. No new customer test yet.
+
+
+## 2026-10-14 — Production security remediation authorized and applied
+
+- User explicitly approved necessary Supabase production security changes, but prior separate permission requirement for PR merge/production website deploy still stands. No file deletion or storage privacy flip.
+- Supabase production migrations successfully applied:
+  1. `secure_claims_revoke_public_access_20261014`: dropped permissive anon SELECT/UPDATE/INSERT policies on public.claims and revoked SELECT/UPDATE/INSERT/DELETE from anon and authenticated.
+  2. `revoke_public_access_to_claim_evidence_and_passenger_authorizations_20261014`: revoked public roles' DML on claim_research_evidence, claim_research_evidence_reviews, passenger_authorizations.
+- **VERIFIED** post-migration: anon and authenticated cannot SELECT/UPDATE/INSERT claims; service_role still can. Supabase security advisor now has no GraphQL public-access warnings, only 4 informational 'RLS enabled no policy' notices (expected for server-only tables). Production counts remain 292 claims, 496 objects; bucket remains public.
+- Code branch fixes: `src/app/api/send-track-link/route.ts` now issues viewer token to legacy claim if missing when customer requests link to their email; `src/app/api/submit/route.ts` legacy claim creation now issues viewer token, uses correct claim.id, avoids returning full claim object. Neither is production deployed.
+- **Next critical work:** verify website production flows after RLS change (server uses supabaseAdmin/service_role); check all browser-direct Supabase access. Preview Vercel build check. Document bucket still PUBLIC and cannot be flipped before secure document access is deployed to production and verified. Legacy previously emailed tokenless tracking URLs require recovery-link flow; user should be told before deploy. Do not claim audit complete.
