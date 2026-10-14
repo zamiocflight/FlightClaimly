@@ -81,7 +81,7 @@ export async function renderAuthorityHtmlToPdf(
     }
     const hasSignatureBox = await page.$("#authority-signature-box");
     if (!hasSignatureBox) {
-      console.error("Authority template missing signature box", { host: new URL(finalUrl).host, pathname: new URL(finalUrl).pathname });
+      console.error("Authority template missing signature box");
       throw new Error("Authority template did not render");
     }
 
