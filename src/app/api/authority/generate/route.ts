@@ -85,17 +85,8 @@ const page = pages[pages.length - 1];
     });
 
     if (uploadError) {
-      // Concurrent/repeated requests must not overwrite a signed authority.
-      const { data: existing, error: downloadError } = await supabase.storage
-        .from("attachments").download(filePath);
-      if (downloadError || !existing) {
-        console.error("Authority storage failed", uploadError);
-        return NextResponse.json({ error: "Authority storage failed" }, { status: 500 });
-      }
-      return new NextResponse(await existing.arrayBuffer(), {
-        status: 200,
-        headers: { "Content-Type": "application/pdf" },
-      });
+      console.error("Authority storage failed", uploadError);
+      return NextResponse.json({ error: "Authority already exists or storage failed" }, { status: 409 });
     }
 
     // save attachment reference in claims table
