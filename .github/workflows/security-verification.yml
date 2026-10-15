@@ -22,11 +22,6 @@ jobs:
           node-version: '22'
       - name: Verify pure signing-recovery cases
         run: npm run test:security
-      - name: Probe Preview API (read-only negative cases)
-        env:
-          FLIGHTCLAIMLY_PREVIEW_URL: https://flightclaimly-o4om1dhq0-davids-projects-578282d7.vercel.app
-          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
-        run: npm run test:security:preview
   preview-negative-path:
     runs-on: ubuntu-latest
     timeout-minutes: 10
