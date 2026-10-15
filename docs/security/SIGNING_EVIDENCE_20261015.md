@@ -66,3 +66,12 @@
 - Re-ran eight recovery cases locally under Node.js v22.16.0 using the TypeScript test file: **8 pass, 0 fail**.
 - Retried HTTPS connectivity to the immutable preview hostname, preview branch alias, and public flightclaimly.com from execution container: all failed DNS resolution. This is an execution-environment network restriction, not evidence of a Vercel application failure.
 - **Integration/fault-injection gate still OPEN**: cannot claim to have exercised POST /api/authority/generate, attachment metadata registration, admin verification, or their retry paths via HTTP. A READY build and pure unit tests do not replace these checks.
+
+## GitHub Actions verification harness
+
+- Added `.github/workflows/security-verification.yml`: Node 22 unit test job on pushes and PRs; opt-in Preview API smoke job on manual `workflow_dispatch`.
+- Added `tests/security/preview-smoke.test.ts`: three **nonmutating negative-path** checks (missing signing fields, invalid presign claim ID, and unauthorized attachment registration).
+- To run Preview checks: GitHub → Actions → **Security verification** → **Run workflow** → choose branch `fix/id-pass-skip-for-now-20261014` → supply `https://flightclaimly-o4om1dhq0-davids-projects-578282d7.vercel.app` (deployment commit `7022a45d`).
+- If Vercel Deployment Protection blocks access, configure repository Actions secret `VERCEL_AUTOMATION_BYPASS_SECRET` using a dedicated Vercel protection-bypass token; never commit the token.
+- Smoke tests do not create or modify customer data. They **do not** verify successful signing, retry-after-write, fault injection, or PDF layout. Those still require an isolated test Supabase project/fixtures and a controlled integration harness.
+- Workflow added but its execution status has not yet been confirmed; do not mark CI passed without a successful run.
