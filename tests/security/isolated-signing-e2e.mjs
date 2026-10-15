@@ -34,6 +34,7 @@ assert.deepEqual(second.bytes, first.bytes, "Retry must return exactly the origi
 const digest = createHash("sha256").update(first.bytes).digest("hex");
 console.log(JSON.stringify({ test: "synthetic-signing", result: "PASS", claimId, pdfBytes: first.bytes.length, sha256: digest, retry: "byte-identical", pdfPages: parsed.getPageCount(), wrongToken: "403" }));
 
+// Final authenticated verifier check on isolated Preview.
 const verifier = base + "/api/admin/authority-verify?claimId=" + claimId;
 const unauthorized = await fetch(verifier);
 assert.equal(unauthorized.status, 401, "Admin verifier must reject missing session");
