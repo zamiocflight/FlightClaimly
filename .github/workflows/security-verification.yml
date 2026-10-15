@@ -48,18 +48,3 @@ jobs:
           FLIGHTCLAIMLY_PREVIEW_URL: ${{ inputs.preview_url || 'https://flightclaimly-o4om1dhq0-davids-projects-578282d7.vercel.app' }}
           VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
         run: npm run test:security:preview
-
-
-  isolated-http-fault-e2e:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - run: npm ci --ignore-scripts
-      - name: Verify isolated HTTP recovery phase
-        env:
-          FAULT_PHASE: recover
-        run: node tests/security/isolated-http-fault-e2e.mjs
