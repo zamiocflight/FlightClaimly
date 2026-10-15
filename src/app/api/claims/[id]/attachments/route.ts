@@ -73,6 +73,24 @@ if (contentType.includes("application/json")) {
   );
   if (!validFiles) return NextResponse.json({ error: "Invalid attachment metadata" }, { status: 400 });
 
+  // Only register objects that actually exist in this claim's private folder.
+  // Reject reserved authority.pdf: it is created exclusively by the signing flow.
+  const paths = new Set<string>();
+  for (const file of incomingFiles) {
+    if (file.path === `claims/${incomingId}/authority.pdf` || paths.has(file.path)) {
+      return NextResponse.json({ error: "Duplicate or reserved attachment path" }, { status: 400 });
+    }
+    paths.add(file.path);
+    const filename = file.path.slice(`claims/${incomingId}/`.length);
+    if (!filename || filename.includes("/") || filename.includes("\\\\")) {
+      return NextResponse.json({ error: "Invalid attachment path" }, { status: 400 });
+    }
+    const { data: objects, error: listError } = await sb.storage.from("attachments").list(`claims/${incomingId}`, { search: filename, limit: 100 });
+    if (listError || !objects?.some((obj) => obj.name === filename && Number(obj.metadata?.size) === file.size)) {
+      return NextResponse.json({ error: "Attachment object missing or size mismatch" }, { status: 409 });
+    }
+  }
+
   const newFiles = incomingFiles.map((f: any) => ({
     path: f.path,
     filename: f.filename,
