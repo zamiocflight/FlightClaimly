@@ -25,7 +25,7 @@ jobs:
   preview-negative-path:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    if: ${{ github.event_name == 'workflow_dispatch' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -33,13 +33,13 @@ jobs:
           node-version: '22'
       - name: Require explicit preview target
         env:
-          PREVIEW_URL: ${{ inputs.preview_url }}
+          PREVIEW_URL: ${{ inputs.preview_url || 'https://flightclaimly-o4om1dhq0-davids-projects-578282d7.vercel.app' }}
         run: |
           if [[ ! "$PREVIEW_URL" =~ ^https://[a-zA-Z0-9.-]+\.vercel\.app/?$ ]]; then
             echo "Provide an explicit https://*.vercel.app preview URL"; exit 1
           fi
       - name: Read-only negative-path API smoke tests
         env:
-          FLIGHTCLAIMLY_PREVIEW_URL: ${{ inputs.preview_url }}
+          FLIGHTCLAIMLY_PREVIEW_URL: ${{ inputs.preview_url || 'https://flightclaimly-o4om1dhq0-davids-projects-578282d7.vercel.app' }}
           VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
         run: npm run test:security:preview
