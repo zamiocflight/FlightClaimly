@@ -45,3 +45,12 @@
 10. Admin verification endpoint rejects unauthenticated access; valid admin sees verified/mismatch/legacy states.
 
 **Release gate:** Keep PR #11 draft and do not promote until the above targeted checks have been executed and recorded, including error-path tests using controlled noncustomer fixtures.
+
+## Automated regression tests added
+
+- Pure recovery decision function: `src/lib/authority/evidenceDecision.ts` (called by signing route).
+- Regression suite: `tests/security/authority-evidence.test.ts`.
+- Command: `npm run test:security` (Node.js 22+ required for TypeScript stripping).
+- Eight combinations of audit record, claim reference, and hash match were executed locally using Node.js 22; **8 passed, 0 failed**.
+- These are **unit tests** of the decision function, not API integration, storage, or signing end-to-end tests.
+- Direct preview HTTP request was retried and still failed DNS resolution from the execution container. Production data and documents were not modified by these tests.
