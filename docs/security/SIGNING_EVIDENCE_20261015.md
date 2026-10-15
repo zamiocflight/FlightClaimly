@@ -75,3 +75,12 @@
 - If Vercel Deployment Protection blocks access, configure repository Actions secret `VERCEL_AUTOMATION_BYPASS_SECRET` using a dedicated Vercel protection-bypass token; never commit the token.
 - Smoke tests do not create or modify customer data. They **do not** verify successful signing, retry-after-write, fault injection, or PDF layout. Those still require an isolated test Supabase project/fixtures and a controlled integration harness.
 - Workflow added but its execution status has not yet been confirmed; do not mark CI passed without a successful run.
+
+## Confirmed CI result — 2026-10-15
+
+- Initial GitHub Actions security-unit run failed because the offline test command accidentally included Preview HTTP tests without a configured target. This was a **test harness configuration issue**, not a signing application regression.
+- Fixed `package.json`: `npm run test:security` runs only eight offline recovery tests; `npm run test:security:preview` runs three opt-in HTTP negative-path checks.
+- Updated GitHub Actions to call the explicit Preview command only during manually dispatched Preview runs.
+- GitHub Actions run [38713088297](https://github.com/zamiocflight/FlightClaimly/actions/runs/38713088297), commit `cc53864248db7aca7c6de156978fccb53964a476`: **completed / success** for offline security verification.
+- The preview-negative-path job was intentionally not executed by the push workflow. Do not count it as passed.
+- Still outstanding before production approval: controlled Preview HTTP checks, full signing and fault-injection cases, final user-flow/PDF review.
