@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { createHash, createHmac } from "node:crypto";
 import { PDFDocument } from "pdf-lib";
 
-const base = "https://flightclaimly-signing-isolated-e2e-miqdds2bp.vercel.app";
+const base = "https://flightclaimly-signing-isolated-e2e-1zu39ep4g.vercel.app";
 const claimId = "a1111111-1111-4111-8111-111111111111";
 const payload = {
   claimId,
