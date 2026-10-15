@@ -48,3 +48,15 @@ jobs:
           FLIGHTCLAIMLY_PREVIEW_URL: ${{ inputs.preview_url || 'https://flightclaimly-o4om1dhq0-davids-projects-578282d7.vercel.app' }}
           VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
         run: npm run test:security:preview
+
+  isolated-signing-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: ${{ github.event_name == 'push' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Synthetic signing, exact PDF retry, and rejected invalid viewer token
+        run: node tests/security/isolated-signing-e2e.mjs
