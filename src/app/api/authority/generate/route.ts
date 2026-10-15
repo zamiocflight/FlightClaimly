@@ -53,15 +53,17 @@ export async function POST(req: Request) {
       // Old authorities remain accessible, but they are not retroactively stamped as signed.
       const { data: existingEvidence, error: evidenceReadError } = await supabase
         .from("authority_signing_evidence")
-        .select("pdf_sha256")
+        .select("pdf_sha256,pdf_size_bytes")
         .eq("claim_id", claimId)
         .eq("storage_path", authorityPath)
         .maybeSingle();
       if (evidenceReadError) return NextResponse.json({ error: "Authority evidence lookup failed" }, { status: 500 });
-      const actualHash = existingEvidence
-        ? crypto.createHash("sha256").update(Buffer.from(await storedPdf.arrayBuffer())).digest("hex")
-        : null;
-      const decision = decideStoredAuthority(Boolean(existingEvidence), hasAuthorityReference, actualHash === existingEvidence?.pdf_sha256);
+      const storedBytes = existingEvidence ? Buffer.from(await storedPdf.arrayBuffer()) : null;
+      const actualHash = storedBytes ? crypto.createHash("sha256").update(storedBytes).digest("hex") : null;
+      const integrityMatches = Boolean(existingEvidence && storedBytes &&
+        actualHash === existingEvidence.pdf_sha256 &&
+        storedBytes.byteLength === Number(existingEvidence.pdf_size_bytes));
+      const decision = decideStoredAuthority(Boolean(existingEvidence), hasAuthorityReference, integrityMatches);
       if (decision === "manual_review") {
         return NextResponse.json({ error: "Stored authority lacks signing evidence; manual review required" }, { status: 409 });
       }
