@@ -57,6 +57,11 @@ export async function POST(req: Request) {
         .eq("storage_path", authorityPath)
         .maybeSingle();
       if (evidenceReadError) return NextResponse.json({ error: "Authority evidence lookup failed" }, { status: 500 });
+      if (!existingEvidence && !hasAuthorityReference) {
+        // Storage exists but the claim has no reference and no signing audit.
+        // This may be a partial write. Do not certify it or silently invent evidence.
+        return NextResponse.json({ error: "Stored authority lacks signing evidence; manual review required" }, { status: 409 });
+      }
       if (existingEvidence) {
         const actualHash = crypto.createHash("sha256").update(Buffer.from(await storedPdf.arrayBuffer())).digest("hex");
         if (actualHash !== existingEvidence.pdf_sha256) {
