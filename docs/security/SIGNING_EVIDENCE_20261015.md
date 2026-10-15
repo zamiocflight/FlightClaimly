@@ -59,3 +59,10 @@
 
 - Exercised `public.reject_authority_evidence_mutation()` against a **temporary** test table with one synthetic row; both UPDATE and DELETE were caught and the original value remained unchanged. No production customer row was touched.
 - This verifies the trigger function's behavior, in addition to checking that the real evidence table has UPDATE and DELETE triggers installed.
+
+## Follow-up verification — latest preview
+
+- Deployment `dpl_2hH6kSiYXa2QJZENv1JS69EuRWFx`, commit `7022a45d955f506f5e99efa4bbea43440b8c4078`, confirmed **READY** via Vercel deployment API; build events available.
+- Re-ran eight recovery cases locally under Node.js v22.16.0 using the TypeScript test file: **8 pass, 0 fail**.
+- Retried HTTPS connectivity to the immutable preview hostname, preview branch alias, and public flightclaimly.com from execution container: all failed DNS resolution. This is an execution-environment network restriction, not evidence of a Vercel application failure.
+- **Integration/fault-injection gate still OPEN**: cannot claim to have exercised POST /api/authority/generate, attachment metadata registration, admin verification, or their retry paths via HTTP. A READY build and pure unit tests do not replace these checks.
