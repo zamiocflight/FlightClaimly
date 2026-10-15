@@ -58,3 +58,13 @@ test("Attachment presign rejects nonexistent synthetic claim without issuing upl
   });
   assert.equal(result.status, 404, result.text.slice(0, 250));
 });
+
+test("Admin evidence verification rejects unauthenticated requests", async () => {
+  assert.ok(base, "Preview URL required");
+  const response = await fetch(new URL("/api/admin/authority-verify?claimId=00000000-0000-0000-0000-000000000000", base), {
+    headers: bypass ? { "x-vercel-protection-bypass": bypass } : {},
+    redirect: "manual",
+    signal: AbortSignal.timeout(20000),
+  });
+  assert.equal(response.status, 401);
+});
