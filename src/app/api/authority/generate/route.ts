@@ -6,6 +6,7 @@ import crypto from "crypto";
 import { isIP } from "node:net";
 import { renderAuthorityHtmlToPdf } from "@/lib/authority/renderHtmlToPdf";
 import { buildLoaDoc } from "@/lib/authority/loa";
+import { decideStoredAuthority } from "@/lib/authority/evidenceDecision";
 import { createClient } from "@supabase/supabase-js";
 
 
@@ -57,16 +58,15 @@ export async function POST(req: Request) {
         .eq("storage_path", authorityPath)
         .maybeSingle();
       if (evidenceReadError) return NextResponse.json({ error: "Authority evidence lookup failed" }, { status: 500 });
-      if (!existingEvidence && !hasAuthorityReference) {
-        // Storage exists but the claim has no reference and no signing audit.
-        // This may be a partial write. Do not certify it or silently invent evidence.
+      const actualHash = existingEvidence
+        ? crypto.createHash("sha256").update(Buffer.from(await storedPdf.arrayBuffer())).digest("hex")
+        : null;
+      const decision = decideStoredAuthority(Boolean(existingEvidence), hasAuthorityReference, actualHash === existingEvidence?.pdf_sha256);
+      if (decision === "manual_review") {
         return NextResponse.json({ error: "Stored authority lacks signing evidence; manual review required" }, { status: 409 });
       }
-      if (existingEvidence) {
-        const actualHash = crypto.createHash("sha256").update(Buffer.from(await storedPdf.arrayBuffer())).digest("hex");
-        if (actualHash !== existingEvidence.pdf_sha256) {
-          return NextResponse.json({ error: "Signed authority integrity mismatch; manual review required" }, { status: 409 });
-        }
+      if (decision === "integrity_mismatch") {
+        return NextResponse.json({ error: "Signed authority integrity mismatch; manual review required" }, { status: 409 });
       }
       // Repair only a missing reference to a file that actually exists.
       if (!hasAuthorityReference) {
