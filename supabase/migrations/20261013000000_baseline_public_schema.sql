@@ -135,3 +135,9 @@ revoke select, insert, update, delete on public.claim_research_evidence_reviews 
 
 -- Bucket is private from creation. Never seed production customer files.
 insert into storage.buckets (id,name,public) values ('attachments','attachments',false) on conflict (id) do update set public=false;
+
+-- Server CRUD grants, required by application APIs
+grant select, insert, update, delete on public.claims to service_role;
+grant select, insert, update, delete on public.passenger_authorizations to service_role;
+grant select, insert, update, delete on public.claim_research_evidence to service_role;
+grant select, insert, update, delete on public.claim_research_evidence_reviews to service_role;
