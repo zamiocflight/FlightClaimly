@@ -54,3 +54,8 @@
 - Eight combinations of audit record, claim reference, and hash match were executed locally using Node.js 22; **8 passed, 0 failed**.
 - These are **unit tests** of the decision function, not API integration, storage, or signing end-to-end tests.
 - Direct preview HTTP request was retried and still failed DNS resolution from the execution container. Production data and documents were not modified by these tests.
+
+## Database trigger behavior check
+
+- Exercised `public.reject_authority_evidence_mutation()` against a **temporary** test table with one synthetic row; both UPDATE and DELETE were caught and the original value remained unchanged. No production customer row was touched.
+- This verifies the trigger function's behavior, in addition to checking that the real evidence table has UPDATE and DELETE triggers installed.
