@@ -23,7 +23,6 @@ jobs:
       - name: Verify pure signing-recovery cases
         run: npm run test:security
       - name: Probe Preview API (read-only negative cases)
-        if: ${{ github.event_name == 'push' }}
         env:
           FLIGHTCLAIMLY_PREVIEW_URL: https://flightclaimly-o4om1dhq0-davids-projects-578282d7.vercel.app
           VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
