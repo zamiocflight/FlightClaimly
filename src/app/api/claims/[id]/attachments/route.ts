@@ -69,7 +69,7 @@ if (contentType.includes("application/json")) {
     !f.path.includes("..") &&
     typeof f.filename === "string" &&
     f.filename.length <= 255 &&
-    Number.isFinite(f.size) && f.size >= 0 && f.size <= 10 * 1024 * 1024
+    Number.isFinite(f.size) && f.size > 0 && f.size <= 10 * 1024 * 1024
   );
   if (!validFiles) return NextResponse.json({ error: "Invalid attachment metadata" }, { status: 400 });
 
@@ -86,7 +86,7 @@ if (contentType.includes("application/json")) {
     }
     paths.add(file.path);
     const filename = file.path.slice(`claims/${incomingId}/`.length);
-    if (!filename || filename.includes("/") || filename.includes("\\\\")) {
+    if (!filename || filename.includes("/") || filename.includes("\\")) {
       return NextResponse.json({ error: "Invalid attachment path" }, { status: 400 });
     }
     const { data: objects, error: listError } = await sb.storage.from("attachments").list(`claims/${incomingId}`, { search: filename, limit: 100 });
