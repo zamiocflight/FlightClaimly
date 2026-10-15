@@ -59,7 +59,7 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci --ignore-scripts
-      - name: Verify isolated HTTP fault phase
+      - name: Verify isolated HTTP recovery phase
         env:
-          FAULT_PHASE: inject
+          FAULT_PHASE: recover
         run: node tests/security/isolated-http-fault-e2e.mjs
