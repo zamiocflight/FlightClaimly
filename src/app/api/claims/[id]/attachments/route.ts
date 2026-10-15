@@ -77,8 +77,12 @@ if (contentType.includes("application/json")) {
   // Reject reserved authority.pdf: it is created exclusively by the signing flow.
   const paths = new Set<string>();
   for (const file of incomingFiles) {
-    if (file.path === `claims/${incomingId}/authority.pdf` || paths.has(file.path) || existing.some((item: any) => item?.path === file.path)) {
+    if (file.path === `claims/${incomingId}/authority.pdf` || paths.has(file.path)) {
       return NextResponse.json({ error: "Duplicate or reserved attachment path" }, { status: 400 });
+    }
+    const previous = existing.find((item: any) => item?.path === file.path);
+    if (previous && (previous.filename !== file.filename || Number(previous.size) !== file.size)) {
+      return NextResponse.json({ error: "Existing attachment metadata cannot be changed" }, { status: 409 });
     }
     paths.add(file.path);
     const filename = file.path.slice(`claims/${incomingId}/`.length);
