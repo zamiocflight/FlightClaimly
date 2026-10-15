@@ -38,3 +38,23 @@ test("Attachment metadata endpoint rejects invalid claim/token without writing",
   const result = await post("/api/claims/00000000-0000-0000-0000-000000000000/attachments", { files: [] });
   assert.equal(result.status, 403, result.text.slice(0, 250));
 });
+
+test("Signing refuses an unknown synthetic claim before PDF generation", async () => {
+  const result = await post("/api/authority/generate", {
+    claimId: "00000000-0000-0000-0000-000000000000",
+    fullName: "Synthetic Security Test",
+    bookingReference: "TEST00",
+    signatureDataUrl: "data:image/png;base64,iVBORw0KGgo=",
+    viewerToken: "not-a-real-token",
+  });
+  assert.equal(result.status, 403, result.text.slice(0, 250));
+});
+
+test("Attachment presign rejects nonexistent synthetic claim without issuing upload URL", async () => {
+  const result = await post("/api/claims/00000000-0000-0000-0000-000000000000/attachments/presign", {
+    filename: "synthetic.pdf",
+    contentType: "application/pdf",
+    viewerToken: "not-a-real-token",
+  });
+  assert.equal(result.status, 404, result.text.slice(0, 250));
+});
