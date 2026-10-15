@@ -49,4 +49,4 @@ assert.equal(verify.actualSha256, digest);
 assert.equal(verify.storedSha256, digest);
 assert.equal(verify.pdfSizeBytes, first.bytes.length);
 console.log(JSON.stringify({test:"admin-integrity-verifier",result:"PASS",status:verify.status}));
-} else { console.log("Authenticated admin check pending GitHub isolated test secret"); }
+} else { throw new Error("Isolated GitHub admin test secret missing"); }
