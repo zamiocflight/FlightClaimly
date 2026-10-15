@@ -93,3 +93,22 @@ create table public.passenger_authorizations (
   created_at timestamp with time zone default now() not null,
   updated_at timestamp with time zone default now() not null
 );
+
+-- Constraints from production metadata
+alter table claim_research_evidence add constraint "claim_research_evidence_verification_status_check" CHECK ((verification_status = ANY (ARRAY['unverified'::text, 'corroborated'::text, 'verified'::text, 'conflicting'::text])));
+alter table claim_research_evidence add constraint "claim_research_evidence_confidence_check" CHECK ((confidence = ANY (ARRAY['low'::text, 'medium'::text, 'high'::text])));
+alter table claim_research_evidence add constraint "claim_research_evidence_pkey" PRIMARY KEY (id);
+alter table claim_research_evidence add constraint "claim_research_evidence_claim_hash_unique" UNIQUE (claim_id, content_hash);
+alter table claim_research_evidence_reviews add constraint "claim_research_evidence_reviews_method_check" CHECK ((method = ANY (ARRAY['manual'::text, 'corroboration-policy'::text, 'trusted-provider-policy'::text])));
+alter table claim_research_evidence_reviews add constraint "claim_research_evidence_reviews_reviewer_type_check" CHECK ((reviewer_type = ANY (ARRAY['operator'::text, 'system'::text, 'policy'::text])));
+alter table claim_research_evidence_reviews add constraint "claim_research_evidence_reviews_status_check" CHECK ((status = ANY (ARRAY['unverified'::text, 'corroborated'::text, 'verified'::text, 'conflicting'::text])));
+alter table claim_research_evidence_reviews add constraint "claim_research_evidence_reviews_evidence_id_fkey" FOREIGN KEY (evidence_id) REFERENCES claim_research_evidence(id) ON DELETE CASCADE;
+alter table claim_research_evidence_reviews add constraint "claim_research_evidence_reviews_pkey" PRIMARY KEY (id);
+alter table claims add constraint "claims_payout_iban_last4_check" CHECK ((length(payout_iban_last4) <= 4));
+alter table claims add constraint "claims_locale_check" CHECK (((locale IS NULL) OR (locale = ANY (ARRAY['sv'::text, 'en'::text, 'da'::text, 'de'::text, 'pl'::text, 'fi'::text]))));
+alter table claims add constraint "claims_pkey" PRIMARY KEY (received_at);
+alter table passenger_authorizations add constraint "passenger_authorizations_status_check" CHECK ((status = ANY (ARRAY['pending'::text, 'email_missing'::text, 'invited'::text, 'signed'::text])));
+alter table passenger_authorizations add constraint "passenger_authorizations_claim_id_fkey" FOREIGN KEY (claim_id) REFERENCES claims(received_at) ON DELETE CASCADE;
+alter table passenger_authorizations add constraint "passenger_authorizations_pkey" PRIMARY KEY (id);
+alter table passenger_authorizations add constraint "passenger_authorizations_claim_id_passenger_index_key" UNIQUE (claim_id, passenger_index);
+alter table passenger_authorizations add constraint "passenger_authorizations_invite_token_key" UNIQUE (invite_token);
