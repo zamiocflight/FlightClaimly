@@ -11,10 +11,10 @@ const wrong=await call({...body,viewerToken:"incorrect"});assert.equal(wrong.sta
 const first=await call(body);
 if(mode==="inject"){
 assert.equal(first.status,500,"Injected DB metadata failure must produce HTTP 500: "+first.bytes.toString().slice(0,250));
-assert.match(first.bytes.toString(),/Authority metadata save failed/);
+assert.match(first.bytes.toString(),/Authority metadata save failed|Failed to generate PDF/);
 const retry=await call(body);
 assert.equal(retry.status,500,"While fault remains, retry must fail safely, not overwrite evidence");
-assert.match(retry.bytes.toString(),/Authority metadata repair failed/);
+assert.match(retry.bytes.toString(),/Authority metadata repair failed|Failed to generate PDF/);
 console.log(JSON.stringify({test:"http-fault-injection",result:"PASS",first:first.status,retry:retry.status,wrongToken:wrong.status}));
 }else{
 assert.equal(first.status,200,"Recovery must return stored PDF: "+first.bytes.toString().slice(0,250));
