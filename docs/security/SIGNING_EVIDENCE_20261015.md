@@ -84,3 +84,12 @@
 - GitHub Actions run [38713088297](https://github.com/zamiocflight/FlightClaimly/actions/runs/38713088297), commit `cc53864248db7aca7c6de156978fccb53964a476`: **completed / success** for offline security verification.
 - The preview-negative-path job was intentionally not executed by the push workflow. Do not count it as passed.
 - Still outstanding before production approval: controlled Preview HTTP checks, full signing and fault-injection cases, final user-flow/PDF review.
+
+## Preview API access diagnosis — 2026-10-15
+
+- GitHub Actions run [38713631048](https://github.com/zamiocflight/FlightClaimly/actions/runs/38713631048) reached the Vercel Preview host, but **all three nonmutating API probes returned HTTP 401 from Deployment Protection**. The eight offline unit tests in that run passed.
+- Thus DNS/connectivity is resolved from GitHub-hosted runners; the remaining access blocker is Vercel Authentication. This is **not** an application API failure and not a successful endpoint test.
+- Restored default CI to offline unit tests so the known protection barrier does not cause unrelated PR checks to fail. The manual Preview smoke job remains available.
+- Required setup: create an automation bypass secret in Vercel Project → Settings → Deployment Protection → Protection Bypass for Automation, then add the exact value as GitHub repository Actions secret `VERCEL_AUTOMATION_BYPASS_SECRET`. Never put the value in repository code, logs, or chat.
+- After secret is configured, manually dispatch **Security verification** on branch `fix/id-pass-skip-for-now-20261014` with `preview_url=https://flightclaimly-o4om1dhq0-davids-projects-578282d7.vercel.app`.
+- Full successful signing, retry/fault-injection, and PDF-layout tests still require an isolated database/storage environment. Do not use real customer claims as test fixtures.
