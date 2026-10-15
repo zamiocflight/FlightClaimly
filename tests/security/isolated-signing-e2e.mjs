@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
+import { PDFDocument } from "pdf-lib";
 
 const base = "https://flightclaimly-signing-isolated-e2e-4nbet05cy.vercel.app";
 const claimId = "a1111111-1111-4111-8111-111111111111";
@@ -25,8 +26,10 @@ assert.equal(invalid.status, 403, "Incorrect viewer token must be rejected");
 const first = await sign(payload);
 assert.equal(first.status, 200, "Synthetic signing must succeed: " + first.bytes.toString("utf8").slice(0, 300));
 assert.equal(first.bytes.subarray(0, 5).toString(), "%PDF-", "Signed response must be PDF");
+const parsed = await PDFDocument.load(first.bytes);
+assert.equal(parsed.getPageCount(), 2, "Signed PDF must contain exactly two pages");
 const second = await sign(payload);
 assert.equal(second.status, 200, "Retry must return stored PDF");
 assert.deepEqual(second.bytes, first.bytes, "Retry must return exactly the original PDF bytes");
 const digest = createHash("sha256").update(first.bytes).digest("hex");
-console.log(JSON.stringify({ test: "synthetic-signing", result: "PASS", claimId, pdfBytes: first.bytes.length, sha256: digest, retry: "byte-identical", wrongToken: "403" }));
+console.log(JSON.stringify({ test: "synthetic-signing", result: "PASS", claimId, pdfBytes: first.bytes.length, sha256: digest, retry: "byte-identical", pdfPages: parsed.getPageCount(), wrongToken: "403" }));
