@@ -23,6 +23,9 @@ export async function POST(
 
     // Sanera filnamn — inga snedstreck eller konstiga tecken
     const clean = String(filename).replace(/[^A-Za-z0-9._-]/g, '_');
+    if (!clean || clean === "." || clean === ".." || !["application/pdf","image/jpeg","image/png"].includes(contentType)) {
+      return NextResponse.json({ error: 'UNSUPPORTED_FILE_TYPE' }, { status: 400 });
+    }
     const path = `claims/${id}/${Date.now()}-${crypto.randomUUID()}-${clean}`;
 
     const { data, error } = await sb.storage
