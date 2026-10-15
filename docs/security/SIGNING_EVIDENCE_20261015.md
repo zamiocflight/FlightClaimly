@@ -93,3 +93,9 @@
 - Required setup: create an automation bypass secret in Vercel Project → Settings → Deployment Protection → Protection Bypass for Automation, then add the exact value as GitHub repository Actions secret `VERCEL_AUTOMATION_BYPASS_SECRET`. Never put the value in repository code, logs, or chat.
 - After secret is configured, manually dispatch **Security verification** on branch `fix/id-pass-skip-for-now-20261014` with `preview_url=https://flightclaimly-o4om1dhq0-davids-projects-578282d7.vercel.app`.
 - Full successful signing, retry/fault-injection, and PDF-layout tests still require an isolated database/storage environment. Do not use real customer claims as test fixtures.
+
+## Protected Preview API verification — PASS
+
+- GitHub Actions run [38715151531](https://github.com/zamiocflight/FlightClaimly/actions/runs/38715151531), commit `f8b052eae6c2e3c604882d8763db103b9744b184`, completed **success**.
+- Confirmed job steps: eight pure signing-recovery unit tests **passed**; three nonmutating Preview negative-path HTTP tests **passed** using the GitHub Actions Vercel bypass secret. Secret value was never included in source.
+- Remaining release blockers: isolated end-to-end successful signing, interrupted database/storage write and retry recovery, PDF visual/byte-integrity verification, and final review of PR #11. Negative-path smoke tests alone do not demonstrate full signing behavior.
