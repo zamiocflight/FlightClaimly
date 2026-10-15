@@ -99,3 +99,11 @@
 - GitHub Actions run [38715151531](https://github.com/zamiocflight/FlightClaimly/actions/runs/38715151531), commit `f8b052eae6c2e3c604882d8763db103b9744b184`, completed **success**.
 - Confirmed job steps: eight pure signing-recovery unit tests **passed**; three nonmutating Preview negative-path HTTP tests **passed** using the GitHub Actions Vercel bypass secret. Secret value was never included in source.
 - Remaining release blockers: isolated end-to-end successful signing, interrupted database/storage write and retry recovery, PDF visual/byte-integrity verification, and final review of PR #11. Negative-path smoke tests alone do not demonstrate full signing behavior.
+
+## Final-gate review — 2026-10-15
+
+- GitHub Actions run [38716207482](https://github.com/zamiocflight/FlightClaimly/actions/runs/38716207482), commit `805e705883c37d67109e566b87d66ac5e1d7bf12`: **success**, eight offline recovery cases plus **five** protected Preview API negative-path checks.
+- Newly added negative paths: synthetic unknown claim cannot sign (403); nonexistent synthetic claim cannot request upload URL (404). Neither creates a customer claim or document.
+- Code review of `src/app/api/authority/generate/route.ts` confirms readback hash, append-only evidence insert, metadata repair and no-overwrite logic are present, but their success/fault branches have **not** been exercised end-to-end.
+- Additional review finding: `src/app/api/claims/[id]/attachments/route.ts` rebuilds existing JSON metadata entries with a fresh `uploadedAt` on repeat registration; should preserve original metadata for idempotent retries. This is a separate correctness hardening item, not a proven exploit.
+- Release status: **NOT YET APPROVED**. Requires a genuinely isolated Supabase database/storage fixture or project and a controlled full-signing success/interrupt/retry run, with signed PDF hash and visual two-page layout inspection. Never create synthetic claims in live customer data by default.
