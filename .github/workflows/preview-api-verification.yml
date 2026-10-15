@@ -1,0 +1,21 @@
+name: Preview API verification
+on:
+  push:
+    branches: [fix/id-pass-skip-for-now-20261014]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preview-api:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Probe known READY Preview with nonmutating negative cases
+        env:
+          FLIGHTCLAIMLY_PREVIEW_URL: https://flightclaimly-o4om1dhq0-davids-projects-578282d7.vercel.app
+          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+        run: npm run test:security:preview
