@@ -32,7 +32,8 @@
     "build:airport-registry": "tsx scripts/generate-airport-registry.ts",
     "typecheck": "tsc --noEmit",
     "publish:flight-numbers": "npm run sanitize:flight-number-seeds && npm run build:flight-numbers && npm run audit:flight-numbers && npm run typecheck && npm run build",
-    "publish": "npm run build:flight-numbers && npm run typecheck && npm run build"
+    "publish": "npm run build:flight-numbers && npm run typecheck && npm run build",
+    "test:security": "node --experimental-strip-types --test tests/security/*.test.ts"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",
