@@ -24,3 +24,24 @@
 - If audit exists but claim metadata was not saved, a retry verifies the stored PDF hash and repairs the missing attachment reference.
 - Legacy PDFs with existing claim attachment references but no audit record remain accessible, **without** any assertion of contemporaneous audit evidence.
 - A crash between upload and audit insert remains a manual exception; a robust automated recovery would need a pre-upload signing intent and state machine, not retrospective fabrication.
+
+## Verification record — 2026-10-15
+
+- Vercel preview deployment `dpl_9XmMcu11GoniQr7HqSPZtKqeGAFr` at commit `4fd7b5e` reported **READY**.
+- Supabase: audit table has RLS enabled; anon/authenticated have no SELECT grant; service role has INSERT; immutable trigger is installed for UPDATE and DELETE.
+- No live signing or synthetic customer document was generated in the production Supabase project.
+- Direct HTTP test from the execution environment was **not possible** (DNS resolution of Vercel preview hostname failed); no end-to-end or fault-injection test should be marked passed.
+
+### Required targeted acceptance cases (not yet executed)
+1. Fresh signing with valid claim viewer token: one original PDF, one audit row, matching final-byte SHA-256, UTC timestamp, IP where available; same PDF layout.
+2. Repeat valid request: returns original bytes, no replacement and no extra evidence row.
+3. Invalid token/claim: HTTP 403; no storage or audit writes.
+4. Storage upload succeeds, audit INSERT fails: return error; retain original; retry must fail closed (409) rather than fabricate a timestamp or overwrite.
+5. Audit exists but attachment metadata update fails: retry verifies hash and repairs only missing reference.
+6. Existing PDF changed or missing: HTTP 409 and no replacement.
+7. Attachment metadata references nonexistent object or mismatched size: HTTP 409; no metadata change.
+8. Attempt to register another claim's object or authority.pdf: rejected.
+9. Legacy authority with an existing reference and no audit row: still accessible, explicitly unverified by new audit.
+10. Admin verification endpoint rejects unauthenticated access; valid admin sees verified/mismatch/legacy states.
+
+**Release gate:** Keep PR #11 draft and do not promote until the above targeted checks have been executed and recorded, including error-path tests using controlled noncustomer fixtures.
