@@ -3,6 +3,7 @@ export const runtime = "nodejs";
 import { NextResponse } from "next/server";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import crypto from "crypto";
+import { isIP } from "node:net";
 import { renderAuthorityHtmlToPdf } from "@/lib/authority/renderHtmlToPdf";
 import { buildLoaDoc } from "@/lib/authority/loa";
 import { createClient } from "@supabase/supabase-js";
@@ -184,7 +185,8 @@ h1 { font-size: 18px; margin: 0 0 18px; }
     const pdfSha256 = crypto.createHash("sha256").update(pdfBytes).digest("hex");
     const signedAtUtc = new Date().toISOString();
     const forwarded = req.headers.get("x-forwarded-for");
-    const signingIp = (forwarded?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || null);
+    const ipCandidate = forwarded?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "";
+    const signingIp = isIP(ipCandidate) ? ipCandidate : null;
     const signingUserAgent = req.headers.get("user-agent")?.slice(0, 1024) || null;
 
     // upload PDF to Supabase Storage
@@ -205,6 +207,12 @@ h1 { font-size: 18px; margin: 0 0 18px; }
       console.error("Authority storage failed", uploadError);
       return NextResponse.json({ error: "Authority already exists or storage failed" }, { status: 409 });
     }
+
+    // Read back the stored object before certifying its exact contents.
+    const { data: persistedPdf, error: readBackError } = await supabase.storage.from("attachments").download(filePath);
+    if (readBackError || !persistedPdf) return NextResponse.json({ error: "Authority storage verification failed" }, { status: 500 });
+    const persistedHash = crypto.createHash("sha256").update(Buffer.from(await persistedPdf.arrayBuffer())).digest("hex");
+    if (persistedHash !== pdfSha256) return NextResponse.json({ error: "Authority storage integrity verification failed" }, { status: 500 });
 
     // An append-only audit event must be durable before reporting success.
     // A failed insert leaves the original object intact; a retry cannot overwrite it.
