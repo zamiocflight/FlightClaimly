@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+// @ts-ignore Node.js 22 strip-types requires explicit .ts extension in this test.
 import { decideStoredAuthority } from "../../src/lib/authority/evidenceDecision.ts";
 
 const cases = [
