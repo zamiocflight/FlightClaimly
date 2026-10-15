@@ -165,6 +165,12 @@ h1 { font-size: 18px; margin: 0 0 18px; }
     });
 
     const pdfBytes = await pdfDoc.save();
+    // Fingerprint the FINAL signed PDF bytes, never the claim metadata.
+    const pdfSha256 = crypto.createHash("sha256").update(pdfBytes).digest("hex");
+    const signedAtUtc = new Date().toISOString();
+    const forwarded = req.headers.get("x-forwarded-for");
+    const signingIp = (forwarded?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || null);
+    const signingUserAgent = req.headers.get("user-agent")?.slice(0, 1024) || null;
 
     // upload PDF to Supabase Storage
     const filePath = `claims/${claimId}/authority.pdf`;
@@ -183,6 +189,23 @@ h1 { font-size: 18px; margin: 0 0 18px; }
       }
       console.error("Authority storage failed", uploadError);
       return NextResponse.json({ error: "Authority already exists or storage failed" }, { status: 409 });
+    }
+
+    // An append-only audit event must be durable before reporting success.
+    // A failed insert leaves the original object intact; a retry cannot overwrite it.
+    const { error: evidenceError } = await supabase.from("authority_signing_evidence").insert({
+      claim_id: claimId,
+      storage_path: filePath,
+      pdf_sha256: pdfSha256,
+      signed_at_utc: signedAtUtc,
+      signing_ip: signingIp,
+      signing_user_agent: signingUserAgent,
+      event_type: "signed_pdf_stored",
+      pdf_size_bytes: pdfBytes.byteLength,
+    });
+    if (evidenceError) {
+      console.error("Authority evidence persistence failed", { code: evidenceError.code });
+      return NextResponse.json({ error: "Authority evidence save failed; original PDF preserved" }, { status: 500 });
     }
 
     // save attachment reference in claims table
