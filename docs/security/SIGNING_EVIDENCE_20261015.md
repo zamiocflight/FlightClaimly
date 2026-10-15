@@ -18,3 +18,9 @@
 - A request IP is supportive evidence, not proof of identity. Proxy trust and IP provenance should be documented.
 - SHA-256 proves equality with the saved reference hash; protection of the audit record is also necessary.
 - Not a qualified eIDAS signature.
+
+## Partial-write recovery rule (2026-10-15)
+- If authority.pdf exists without both an audit record and claim attachment reference, the signing endpoint now returns HTTP 409 for manual review; it must not silently certify the PDF or overwrite it.
+- If audit exists but claim metadata was not saved, a retry verifies the stored PDF hash and repairs the missing attachment reference.
+- Legacy PDFs with existing claim attachment references but no audit record remain accessible, **without** any assertion of contemporaneous audit evidence.
+- A crash between upload and audit insert remains a manual exception; a robust automated recovery would need a pre-upload signing intent and state machine, not retrospective fabrication.
