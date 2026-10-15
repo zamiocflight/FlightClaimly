@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
-import { createHash } from "node:crypto";
+import { createHash, createHmac } from "node:crypto";
 import { PDFDocument } from "pdf-lib";
 
-const base = "https://flightclaimly-signing-isolated-e2e-4nbet05cy.vercel.app";
+const base = "https://flightclaimly-signing-isolated-e2e-miqdds2bp.vercel.app";
 const claimId = "a1111111-1111-4111-8111-111111111111";
 const payload = {
   claimId,
@@ -33,3 +33,18 @@ assert.equal(second.status, 200, "Retry must return stored PDF");
 assert.deepEqual(second.bytes, first.bytes, "Retry must return exactly the original PDF bytes");
 const digest = createHash("sha256").update(first.bytes).digest("hex");
 console.log(JSON.stringify({ test: "synthetic-signing", result: "PASS", claimId, pdfBytes: first.bytes.length, sha256: digest, retry: "byte-identical", pdfPages: parsed.getPageCount(), wrongToken: "403" }));
+
+const verifier = base + "/api/admin/authority-verify?claimId=" + claimId;
+const unauthorized = await fetch(verifier);
+assert.equal(unauthorized.status, 401, "Admin verifier must reject missing session");
+const expiry = String(Math.floor(Date.now()/1000) + 3600);
+const mac = createHmac("sha256", process.env.TEST_ADMIN_PASSWORD).update(expiry).digest("hex");
+const verifiedResponse = await fetch(verifier, {headers:{cookie:"admin_session="+expiry+"."+mac}});
+const verifiedBody = await verifiedResponse.text();
+assert.equal(verifiedResponse.status, 200, "Authenticated admin verification must succeed: " + verifiedBody.slice(0,300));
+const verify = JSON.parse(verifiedBody);
+assert.equal(verify.status, "verified");
+assert.equal(verify.actualSha256, digest);
+assert.equal(verify.storedSha256, digest);
+assert.equal(verify.pdfSizeBytes, first.bytes.length);
+console.log(JSON.stringify({test:"admin-integrity-verifier",result:"PASS",status:verify.status}));
