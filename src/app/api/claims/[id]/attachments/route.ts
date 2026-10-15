@@ -105,8 +105,9 @@ if (contentType.includes("application/json")) {
 
   const map = new Map();
 
+  // Preserve the original metadata for idempotent retries; do not rewrite uploadedAt.
   [...existing, ...newFiles].forEach((f) => {
-    map.set(f.path, f);
+    if (!map.has(f.path)) map.set(f.path, f);
   });
 
   const next = Array.from(map.values());
