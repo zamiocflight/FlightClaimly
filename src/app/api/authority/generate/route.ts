@@ -47,6 +47,21 @@ export async function POST(req: Request) {
       const { data: storedPdf, error: storedError } = await supabase.storage
         .from("attachments").download(authorityPath);
       if (storedError || !storedPdf) return null;
+      // Never present an unsigned-audit legacy object as newly verified evidence.
+      // Old authorities remain accessible, but they are not retroactively stamped as signed.
+      const { data: existingEvidence, error: evidenceReadError } = await supabase
+        .from("authority_signing_evidence")
+        .select("pdf_sha256")
+        .eq("claim_id", claimId)
+        .eq("storage_path", authorityPath)
+        .maybeSingle();
+      if (evidenceReadError) return NextResponse.json({ error: "Authority evidence lookup failed" }, { status: 500 });
+      if (existingEvidence) {
+        const actualHash = crypto.createHash("sha256").update(Buffer.from(await storedPdf.arrayBuffer())).digest("hex");
+        if (actualHash !== existingEvidence.pdf_sha256) {
+          return NextResponse.json({ error: "Signed authority integrity mismatch; manual review required" }, { status: 409 });
+        }
+      }
       // Repair only a missing reference to a file that actually exists.
       if (!hasAuthorityReference) {
         const { data: latestClaim, error: latestError } = await supabase
