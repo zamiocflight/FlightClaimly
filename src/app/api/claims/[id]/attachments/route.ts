@@ -77,7 +77,7 @@ if (contentType.includes("application/json")) {
   // Reject reserved authority.pdf: it is created exclusively by the signing flow.
   const paths = new Set<string>();
   for (const file of incomingFiles) {
-    if (file.path === `claims/${incomingId}/authority.pdf` || paths.has(file.path)) {
+    if (file.path === `claims/${incomingId}/authority.pdf` || paths.has(file.path) || existing.some((item: any) => item?.path === file.path)) {
       return NextResponse.json({ error: "Duplicate or reserved attachment path" }, { status: 400 });
     }
     paths.add(file.path);
