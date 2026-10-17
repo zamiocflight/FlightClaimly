@@ -8,7 +8,18 @@ import { BadgeCheck, Eraser, PenLine } from "lucide-react";
 
 async function createClaim(searchParams: URLSearchParams, locale: string) {
   const existingId = searchParams.get("claimId");
-  if (existingId) return existingId;
+  if (existingId) {
+    const token = searchParams.get("t");
+    if (!token) throw new Error("Missing claim access token");
+    return { id: existingId, viewerToken: token };
+  }
+  // Opening a bare /check/authorization URL is not a valid continuation.
+  // Never create an incomplete duplicate claim from an empty link.
+  const required = ["firstName", "lastName", "email", "from", "to", "bookingRef"];
+  const missing = required.filter((key) => !searchParams.get(key));
+  if (missing.length) {
+    throw new Error(`Missing claim context: ${missing.join(", ")}. Return to the original claim flow.`);
+  }
 
  const choice = searchParams.get("choice") || "direct";
 
@@ -75,20 +86,21 @@ layovers: layoversRaw,
   });
 
   if (!res.ok) {
-    throw new Error("Failed to create claim");
+    const response = await res.json().catch(() => ({}));
+    throw new Error(`Claim creation HTTP ${res.status}: ${String(response.error || "unknown")}`);
   }
 
   const data = await res.json();
-  return data.id;
+  return { id: data.id as string, viewerToken: (data.viewerToken || "") as string };
 }
 
 async function generateAuthorityAfterClaim(
   claimId: string,
-  searchParams: URLSearchParams
+  searchParams: URLSearchParams,
+  viewerToken: string
 ) {
   const sig =
-    sessionStorage.getItem(`fc_signature_png_${claimId}`) ||
-    sessionStorage.getItem("fc_signature_png");
+    sessionStorage.getItem(`fc_signature_png_${claimId}`);
 
   if (!sig) {
     throw new Error("Missing signature");
@@ -117,12 +129,13 @@ async function generateAuthorityAfterClaim(
       claimId,
       fullName,
       bookingReference,
+      viewerToken,
       signatureDataUrl: sig,
     }),
   });
 
   if (!res.ok) {
-    throw new Error("Failed to generate authority");
+    throw new Error(`PDF generation failed (HTTP ${res.status})`);
   }
 
   sessionStorage.setItem(`fc_authority_done_${claimId}`, "1");
@@ -205,8 +218,34 @@ export default function AuthorizationPage() {
   const sigRef = useRef<SignatureCanvas | null>(null);
 
   const continueRunningRef = useRef(false);
+  const createdClaimRef = useRef<{ id: string; viewerToken: string } | null>(null);
 
   const [hasSigned, setHasSigned] = useState(false);
+
+  // Restore the signature when the customer navigates Back from uploads.
+  useEffect(() => {
+    const claimId = searchParams.get("claimId");
+    const stored = claimId
+      ? sessionStorage.getItem(`fc_signature_canvas_${claimId}`)
+      : null;
+    if (!stored?.startsWith("data:image/png;base64,")) {
+      setHasSigned(false);
+      return;
+    }
+    const canvas = sigRef.current;
+    if (!canvas) return;
+    // The claim ID is added while the customer is still on this page.
+    // Never redraw the cropped saved PNG over a signature already on the canvas.
+    if (!canvas.isEmpty()) return;
+    Promise.resolve(canvas.fromDataURL(stored)).then(() => {
+      setHasSigned(!canvas.isEmpty());
+    }).catch(() => {
+      setHasSigned(false);
+      updateQuery({ authorizationValid: "" });
+    });
+  // Only restore when the claim identity changes.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams.get("claimId")]);
   const [isDrawing, setIsDrawing] = useState(false);
 
   const isValid = useMemo(() => {
@@ -260,15 +299,14 @@ function handleEnd() {
 
 try {
   // 🔥 alltid spara globalt först
-sessionStorage.setItem("fc_signature_png", dataUrl);
+sessionStorage.setItem("fc_signature_pending", dataUrl);
+sessionStorage.setItem("fc_signature_canvas_pending", signatureCanvas.getCanvas().toDataURL("image/png"));
 
 const claimId = searchParams.get("claimId");
 
 if (claimId) {
-  sessionStorage.setItem(
-    `fc_signature_png_${claimId}`,
-    dataUrl
-  );
+  sessionStorage.setItem(`fc_signature_png_${claimId}`, dataUrl);
+  sessionStorage.setItem(`fc_signature_canvas_${claimId}`, signatureCanvas.getCanvas().toDataURL("image/png"));
 }
 } catch {}
   } else {
@@ -284,32 +322,56 @@ if (claimId) {
     sigRef.current?.clear();
     setHasSigned(false);
     setIsDrawing(false);
+    const claimId = searchParams.get("claimId");
+    if (claimId) {
+      sessionStorage.removeItem(`fc_signature_png_${claimId}`);
+      sessionStorage.removeItem(`fc_signature_canvas_${claimId}`);
+    }
+    sessionStorage.removeItem("fc_signature_png");
+    sessionStorage.removeItem("fc_signature_pending");
+    sessionStorage.removeItem("fc_signature_canvas_pending");
     updateQuery({
       authorizationValid: "",
     });
   }
 
 async function handleContinue() {
-  if (!isValid) return;
+  if (!isValid) {
+    window.dispatchEvent(new Event("flightclaimly-submit-failed"));
+    return;
+  }
 
   if (continueRunningRef.current) return;
   continueRunningRef.current = true;
 
   try {
-    const claimId = await createClaim(searchParams, locale);
+    const createdClaim = createdClaimRef.current || await createClaim(searchParams, locale);
+    createdClaimRef.current = createdClaim;
+    const { id: claimId, viewerToken } = createdClaim;
+    const pendingSignature = sessionStorage.getItem("fc_signature_pending");
+    if (pendingSignature) {
+      sessionStorage.setItem(`fc_signature_png_${claimId}`, pendingSignature);
+      sessionStorage.removeItem("fc_signature_pending");
+      const canvasImage = sessionStorage.getItem("fc_signature_canvas_pending");
+      if (canvasImage) sessionStorage.setItem(`fc_signature_canvas_${claimId}`, canvasImage);
+      sessionStorage.removeItem("fc_signature_canvas_pending");
+    }
 
     const params = new URLSearchParams(searchParams.toString());
     params.set("claimId", claimId);
+    if (viewerToken) params.set("t", viewerToken);
 
-    // Do not block the user while the authority PDF is generated.
-    generateAuthorityAfterClaim(claimId, searchParams).catch((err) => {
-      console.error("Background authority generation failed:", err);
-    });
+    // Do not replace the URL while the signature canvas is mounted. That
+    // remounts/restores a cropped PNG over the live pen strokes during Continue.
+    // Keep the claim identity in createdClaimRef until navigation succeeds.
+
+    // The authority must be saved before the customer can proceed.
+    await generateAuthorityAfterClaim(claimId, searchParams, viewerToken);
 
     router.push(`/${locale}/check/uploads?${params.toString()}`);
   } catch (err) {
-    console.error("Claim creation failed:", err);
-    alert(t("claimCreationError"));
+    console.error("Claim submission or authority generation failed:", err);
+    alert(createdClaimRef.current ? `Ärendet är registrerat, men fullmakten kunde inte skapas (${err instanceof Error ? err.message : "okänt fel"}). Försök igen utan att skapa ett nytt ärende.` : `Ärendet kunde inte skapas: ${err instanceof Error ? err.message : "okänt fel"}`);
 
     window.dispatchEvent(new Event("flightclaimly-submit-failed"));
 

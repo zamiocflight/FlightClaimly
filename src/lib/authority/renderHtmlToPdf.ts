@@ -18,7 +18,8 @@ function findLocalChromeExecutable() {
 
 export async function renderAuthorityHtmlToPdf(
   url: string,
-  signatureDataUrl?: string
+  signatureDataUrl?: string,
+  html?: string
 ) {
   const isProduction = process.env.NODE_ENV === "production";
 
@@ -32,13 +33,23 @@ export async function renderAuthorityHtmlToPdf(
     );
   }
 
-  const browser = await puppeteer.launch({
-    args: isProduction
-      ? chromium.args
-      : ["--no-sandbox", "--disable-setuid-sandbox"],
-    executablePath,
-    headless: true,
-  });
+  // Chromium extraction on serverless can briefly race with another invocation.
+  // Retry only transient executable-busy failures; do not mask other launch errors.
+  let browser: Awaited<ReturnType<typeof puppeteer.launch>> | undefined;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      browser = await puppeteer.launch({
+        args: isProduction ? chromium.args : ["--no-sandbox", "--disable-setuid-sandbox"],
+        executablePath,
+        headless: true,
+      });
+      break;
+    } catch (error) {
+      if (!String(error).includes("ETXTBSY") || attempt === 2) throw error;
+      await new Promise((resolve) => setTimeout(resolve, 350 * (attempt + 1)));
+    }
+  }
+  if (!browser) throw new Error("Chromium launch failed");
 
   try {
     const page = await browser.newPage();
@@ -48,10 +59,31 @@ export async function renderAuthorityHtmlToPdf(
       height: 1600,
     });
 
-    await page.goto(url, {
+    if (html) {
+      await page.setContent(html, { waitUntil: "load", timeout: 60000 });
+    } else {
+    const response = await page.goto(url, {
       waitUntil: "networkidle0",
       timeout: 60000,
     });
+    const status = response?.status() ?? 0;
+    const finalUrl = page.url();
+    const requested = new URL(url);
+    const landed = new URL(finalUrl);
+    if (landed.origin !== requested.origin || landed.pathname !== requested.pathname) {
+      console.error("Authority template redirected unexpectedly", { requestedPath: requested.pathname, finalPath: landed.pathname });
+      throw new Error("Authority template redirected unexpectedly");
+    }
+    if (status !== 200) {
+      console.error("Authority template request failed", { status, host: new URL(finalUrl).host, pathname: new URL(finalUrl).pathname });
+      throw new Error(`Authority template HTTP ${status}`);
+    }
+    }
+    const hasSignatureBox = await page.$("#authority-signature-box");
+    if (!hasSignatureBox) {
+      console.error("Authority template missing signature box");
+      throw new Error("Authority template did not render");
+    }
 
    if (signatureDataUrl) {
   await page.evaluate(async (signature) => {

@@ -38,7 +38,10 @@ export async function POST(req: Request) {
     const locale = parsed.data.locale ?? 'en';
 
     // 🔹 Skapa claim (oförändrad addClaim-signatur)
+    const viewerToken = crypto.randomUUID() + crypto.randomUUID();
     const claim = await addClaim({
+  viewerToken,
+  viewerTokenCreatedAt: new Date().toISOString(),
   ...parsed.data,
   address: body.address,
   postalCode: body.postalCode,
@@ -48,7 +51,7 @@ export async function POST(req: Request) {
 });
 
     // 🔹 Läs tracking-id säkert (utan TS-antaganden)
-    const claimId = (claim as any).received_at;
+    const claimId = claim.id;
 
     if (!claimId) {
       throw new Error('Missing claim id (received_at)');
@@ -59,7 +62,7 @@ export async function POST(req: Request) {
       req.headers.get('origin') ||
       'http://localhost:3000';
 
-    const trackingUrl = `${base.replace(/\/$/, '')}/${locale}/track/${claimId}`;
+    const trackingUrl = `${base.replace(/\/$/, '')}/${locale}/track/${claimId}?t=${encodeURIComponent(viewerToken)}`;
 
     // 🔹 Skicka första mail direkt
     await resend.emails.send({
@@ -75,7 +78,7 @@ export async function POST(req: Request) {
       `,
     });
 
-    return NextResponse.json({ ok: true, claim }, { status: 201 });
+    return NextResponse.json({ ok: true, id: claimId, viewerToken, trackingUrl }, { status: 201 });
   } catch (e) {
     console.error('submit route error', e);
     return NextResponse.json({ error: 'Serverfel' }, { status: 500 });

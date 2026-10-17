@@ -10,6 +10,7 @@ import {
   ArrowRight,
   CheckCircle2,
   AlertTriangle,
+  SkipForward,
 } from "lucide-react";
 
 const ACCEPTED_EXT = ["pdf", "jpg", "jpeg", "png"];
@@ -41,6 +42,7 @@ function getExt(name: string) {
 
 export default function ClientUploadsId() {
   const t = useTranslations("check.uploadsId");
+  const tAdditional = useTranslations("check.additional");
   const router = useRouter();
   const sp = useSearchParams();
 
@@ -207,6 +209,16 @@ export default function ClientUploadsId() {
     setDragActive(false);
   }
 
+function skipForNow() {
+  if (!claimId) {
+    setError(t("errors.missingClaim"));
+    return;
+  }
+  const params = new URLSearchParams(sp.toString());
+  params.delete("uploadsIdValid");
+  router.push(`/${locale}/check/additional?${params.toString()}`);
+}
+
 function goNext() {
   const params = new URLSearchParams(sp.toString());
   params.set("uploadsIdValid", "1");
@@ -245,6 +257,7 @@ async function uploadAndContinue() {
 
     const res = await fetch(`/api/claims/${claimId}/attachments`, {
       method: "POST",
+      headers: { "x-claim-token": sp.get("t") || "" },
       body: formData,
     });
 
@@ -429,6 +442,18 @@ async function uploadAndContinue() {
             </div>
           </div>
         )}
+
+        {/* Same placement and styling as the Additional Documents skip action. */}
+        <div className="mt-8 flex items-center justify-between">
+          <button
+            type="button"
+            onClick={skipForNow}
+            className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-800 transition"
+          >
+            <SkipForward className="h-4 w-4" />
+            {tAdditional("skip")}
+          </button>
+        </div>
 
         {error && (
           <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">

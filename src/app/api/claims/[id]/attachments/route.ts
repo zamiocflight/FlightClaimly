@@ -31,9 +31,14 @@ export async function POST(
       return NextResponse.json({ error: 'Missing claim id' }, { status: 400 });
     }
 
-    console.log('UPLOAD CLAIM ID:', incomingId);
+
 
     const sb = supabaseAdmin();
+    const token = req.headers.get("x-claim-token");
+    const { data: authorizedClaim } = await sb.from("claims").select("viewer_token").eq("received_at", incomingId).maybeSingle();
+    if (!authorizedClaim?.viewer_token || authorizedClaim.viewer_token !== token) {
+      return NextResponse.json({ error: "FORBIDDEN" }, { status: 403 });
+    }
 
     const contentType = req.headers.get("content-type") || "";
 
@@ -58,6 +63,38 @@ if (contentType.includes("application/json")) {
   const existing = Array.isArray(row.attachments) ? row.attachments : [];
   const now = new Date().toISOString();
 
+  const validFiles = incomingFiles.every((f: any) =>
+    f && typeof f.path === "string" &&
+    f.path.startsWith(`claims/${incomingId}/`) &&
+    !f.path.includes("..") &&
+    typeof f.filename === "string" &&
+    f.filename.length <= 255 &&
+    Number.isFinite(f.size) && f.size > 0 && f.size <= 10 * 1024 * 1024
+  );
+  if (!validFiles) return NextResponse.json({ error: "Invalid attachment metadata" }, { status: 400 });
+
+  // Only register objects that actually exist in this claim's private folder.
+  // Reject reserved authority.pdf: it is created exclusively by the signing flow.
+  const paths = new Set<string>();
+  for (const file of incomingFiles) {
+    if (file.path === `claims/${incomingId}/authority.pdf` || paths.has(file.path)) {
+      return NextResponse.json({ error: "Duplicate or reserved attachment path" }, { status: 400 });
+    }
+    const previous = existing.find((item: any) => item?.path === file.path);
+    if (previous && (previous.filename !== file.filename || Number(previous.size) !== file.size)) {
+      return NextResponse.json({ error: "Existing attachment metadata cannot be changed" }, { status: 409 });
+    }
+    paths.add(file.path);
+    const filename = file.path.slice(`claims/${incomingId}/`.length);
+    if (!filename || filename.includes("/") || filename.includes("\\")) {
+      return NextResponse.json({ error: "Invalid attachment path" }, { status: 400 });
+    }
+    const { data: objects, error: listError } = await sb.storage.from("attachments").list(`claims/${incomingId}`, { search: filename, limit: 100 });
+    if (listError || !objects?.some((obj) => obj.name === filename && Number(obj.metadata?.size) === file.size)) {
+      return NextResponse.json({ error: "Attachment object missing or size mismatch" }, { status: 409 });
+    }
+  }
+
   const newFiles = incomingFiles.map((f: any) => ({
     path: f.path,
     filename: f.filename,
@@ -68,8 +105,9 @@ if (contentType.includes("application/json")) {
 
   const map = new Map();
 
+  // Preserve the original metadata for idempotent retries; do not rewrite uploadedAt.
   [...existing, ...newFiles].forEach((f) => {
-    map.set(f.path, f);
+    if (!map.has(f.path)) map.set(f.path, f);
   });
 
   const next = Array.from(map.values());
@@ -125,7 +163,7 @@ if (!row) {
 }
 
 if (readErr || !row) {
-  console.error('Claim lookup failed', { incomingId, readErr, row });
+  console.error('Claim lookup failed', readErr);
   return NextResponse.json(
     { error: 'Claim not found for this id' },
     { status: 404 }
@@ -145,6 +183,9 @@ if (readErr || !row) {
 for (const [index, entry] of fileEntries.entries()) {
       if (!(entry instanceof File)) continue;
 
+      if (entry.size > 10 * 1024 * 1024 || entry.size === 0) {
+        return NextResponse.json({ error: 'File size must be between 1 byte and 10 MB' }, { status: 413 });
+      }
       const originalName = entry.name || "file";
 
 // 🔥 SANITIZE filename (kritisk fix)
@@ -213,7 +254,7 @@ const next = Array.from(map.values());
   } catch (e: any) {
     console.error('Attachments route error:', e);
     return NextResponse.json(
-      { error: 'Server error', details: String(e?.message ?? e) },
+      { error: 'Server error' },
       { status: 500 }
     );
   }

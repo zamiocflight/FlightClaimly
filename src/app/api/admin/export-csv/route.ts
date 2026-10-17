@@ -1,3 +1,5 @@
+import { cookies } from 'next/headers';
+import { validAdminSession } from '@/lib/adminSession';
 import { NextResponse } from 'next/server';
 import { getClaims } from '@/lib/claims';
 
@@ -15,6 +17,10 @@ function toCsvRow(values: (string | number | null | undefined)[]) {
 }
 
 export async function GET() {
+  const cookie = (await cookies()).get('admin_session')?.value;
+  if (!(await validAdminSession(cookie, process.env.ADMIN_PASSWORD))) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
   try {
     const claims = await getClaims();
 

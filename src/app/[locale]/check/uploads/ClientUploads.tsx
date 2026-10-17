@@ -89,17 +89,11 @@ export default function ClientUploads() {
   async function ensureAuthority() {
   if (ensureAuthorityRanRef.current) return;
 
-    console.log("🧪 DEBUG SIGNATURE", {
-  claimId,
-  claimKey: `fc_signature_png_${claimId}`,
-  claimSig: sessionStorage.getItem(`fc_signature_png_${claimId}`),
-  globalSig: sessionStorage.getItem("fc_signature_png"),
-});
 
     if (authorityRunningRef.current) return;
     authorityRunningRef.current = true;
-console.log("🧪 ensureAuthority TRIGGER");
-    console.log("🚀 ensureAuthority RUN", claimId);
+
+    
 
     if (!claimId) return;
 
@@ -107,7 +101,7 @@ console.log("🧪 ensureAuthority TRIGGER");
 
   // undvik att köra flera gånger
   if (sessionStorage.getItem(`fc_authority_done_${claimId}`) === "1") {
-    console.log("🚀 ensureAuthority RUN", claimId);
+    
     setAuthorityReady(true);
     return;
   }
@@ -116,8 +110,7 @@ console.log("🧪 ensureAuthority TRIGGER");
   if (authorityReady) return;
 
    let sig =
-  sessionStorage.getItem(`fc_signature_png_${claimId}`) ||
-  sessionStorage.getItem("fc_signature_png");
+  sessionStorage.getItem(`fc_signature_png_${claimId}`);
 
 // 🔥 OM fallback användes → migrera till rätt key
 if (sig && !sessionStorage.getItem(`fc_signature_png_${claimId}`)) {
@@ -147,6 +140,7 @@ if (!sig) {
         fullName,
         bookingReference,
         claimId,
+        viewerToken: sp.get("t") || "",
         signatureDataUrl: sig,
       }),
     });
@@ -274,6 +268,7 @@ async function uploadFileDirect(file: File) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       filename: file.name,
+      viewerToken: sp.get("t") || "",
       contentType: file.type || "application/octet-stream",
     }),
   });
@@ -312,7 +307,8 @@ async function uploadAndContinue() {
   }
 
   if (!hasFiles) {
-    goNext();
+    setError(t("errors.uploadFailed"));
+    stopLayoutProcessing();
     return;
   }
 
@@ -335,7 +331,7 @@ async function uploadAndContinue() {
 
     const metadataRes = await fetch(`/api/claims/${claimId}/attachments`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "x-claim-token": sp.get("t") || "" },
       body: JSON.stringify({ files: uploaded }),
     });
 
@@ -364,9 +360,7 @@ useEffect(() => {
   // If user lands here without claimId, still render clean + helpful
   const claimMissing = !claimId;
 
-useEffect(() => {
-  (window as any).fc_uploadAndContinue = uploadAndContinue;
-}, [uploadAndContinue]);
+
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-2 text-sky-900">

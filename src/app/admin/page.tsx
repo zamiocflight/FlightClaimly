@@ -1,7 +1,7 @@
 // src/app/admin/page.tsx
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from "next/navigation";
 
 const ENABLE_QUICK_STATUS = false;
@@ -46,10 +46,31 @@ export default function AdminPage() {
   const [emailInfoId, setEmailInfoId] = useState<string | null>(null);
   const [search, setSearch] = useState('');
   const [showArchived, setShowArchived] = useState(false);
+  const restorePending = useRef(true);
+  const [viewRestored, setViewRestored] = useState(false);
 
   const [filter, setFilter] = useState<'all' | 'inbox' | 'active' | 'waiting_iban' | 'done'>('all');
 
   const router = useRouter();
+
+  const rememberPosition = (id: string) => {
+    try {
+      sessionStorage.setItem('flightclaimly-admin-return', JSON.stringify({ id, search, filter, showArchived, scrollY: window.scrollY }));
+    } catch { /* Storage may be disabled. */ }
+  };
+
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem('flightclaimly-admin-return');
+      if (saved) {
+        const state = JSON.parse(saved);
+        if (typeof state.search === 'string') setSearch(state.search);
+        if (['all', 'inbox', 'active', 'waiting_iban', 'done'].includes(state.filter)) setFilter(state.filter);
+        if (typeof state.showArchived === 'boolean') setShowArchived(state.showArchived);
+      }
+    } catch { /* Use default view. */ }
+    setViewRestored(true);
+  }, []);
 
   useEffect(() => {
   const load = async () => {
@@ -81,8 +102,25 @@ setClaims(normalized);
     }
   };
 
-  load();
-}, [showArchived]);
+  if (viewRestored) load();
+}, [showArchived, viewRestored]);
+
+  useEffect(() => {
+    if (loading || !viewRestored || !restorePending.current) return;
+    restorePending.current = false;
+    try {
+      const saved = sessionStorage.getItem('flightclaimly-admin-return');
+      if (!saved) return;
+      const state = JSON.parse(saved);
+      sessionStorage.removeItem('flightclaimly-admin-return');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        const row = Array.from(document.querySelectorAll<HTMLTableRowElement>('tr[data-claim-id]'))
+          .find(el => el.dataset.claimId === state.id);
+        if (row) row.scrollIntoView({ block: 'center', behavior: 'instant' });
+        else if (typeof state.scrollY === 'number') window.scrollTo({ top: state.scrollY, behavior: 'instant' });
+      }));
+    } catch { /* Normal navigation fallback. */ }
+  }, [loading, viewRestored, claims, search, filter, showArchived]);
 
 const handleDownloadCsv = () => {
   window.open('/api/admin/export-csv', '_blank', 'noopener,noreferrer');
@@ -434,8 +472,9 @@ const connectionsText =
 
                 return (
              <tr
-  key={`${c.receivedAt}-${rowIdx}`}
-  onClick={() => router.push(`/admin/claims/${c.id}`)}
+  key={c.id}
+  data-claim-id={c.id}
+  onClick={() => { rememberPosition(c.id); router.push(`/admin/claims/${encodeURIComponent(c.id)}`); }}
   className={
     (rowIdx % 2 === 0
       ? 'bg-slate-950/40 hover:bg-slate-900/60'
@@ -529,7 +568,8 @@ const connectionsText =
       return (
         <a
           key={i}
-          href={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/attachments/${a.path}`}
+          href={`/api/admin/document?id=${encodeURIComponent(c.id)}&path=${encodeURIComponent(a.path || '')}`}
+          onClick={(event) => { event.stopPropagation(); rememberPosition(c.id); }}
           target="_blank"
           rel="noopener noreferrer"
           className="text-[11px] text-sky-400 hover:underline"

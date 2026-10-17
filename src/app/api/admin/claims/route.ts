@@ -1,3 +1,5 @@
+import { cookies } from 'next/headers';
+import { validAdminSession } from '@/lib/adminSession';
 // src/app/api/admin/claims/route.ts
 import { NextResponse } from 'next/server';
 import { getClaims } from '@/lib/claims';
@@ -40,6 +42,10 @@ attachmentsCount: number;
 };
 
 export async function GET() {
+  const cookie = (await cookies()).get('admin_session')?.value;
+  if (!(await validAdminSession(cookie, process.env.ADMIN_PASSWORD))) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
   try {
     // 🔑 Läs alltid från samma källa som resten av systemet
     const claims = (await getClaims()) as ClaimRaw[];

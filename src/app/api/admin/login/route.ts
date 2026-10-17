@@ -1,5 +1,6 @@
 // src/app/api/admin/login/route.ts
 import { NextResponse } from 'next/server';
+import { signAdminSession } from '@/lib/adminSession';
 
 export async function POST(req: Request) {
   let password: string | null = null;
@@ -14,27 +15,16 @@ export async function POST(req: Request) {
     password = form.get('password') as string | null;
   }
   
-if (!password || password.trim() !== (process.env.ADMIN_PASSWORD ?? "").trim()) {
-  return NextResponse.json(
-    {
-      error: "Unauthorized",
-      debug: {
-        hasPassword: !!password,
-        passwordLen: password?.length ?? 0,
-        hasEnv: !!process.env.ADMIN_PASSWORD,
-        envLen: process.env.ADMIN_PASSWORD?.length ?? 0,
-      },
-    },
-    { status: 401 }
-  );
+if (!process.env.ADMIN_PASSWORD || !password || password.trim() !== process.env.ADMIN_PASSWORD.trim()) {
+  return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 }
 
 
   const res = NextResponse.json({ ok: true });
-  res.cookies.set('admin_session', 'ok', {
+  res.cookies.set('admin_session', await signAdminSession(process.env.ADMIN_PASSWORD), {
     httpOnly: true,
     sameSite: 'lax',
-    secure: false, // 👈 viktigt lokalt, se not nedan
+    secure: process.env.NODE_ENV === 'production',
     path: '/',
     maxAge: 60 * 60 * 12,
   });

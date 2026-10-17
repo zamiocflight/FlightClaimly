@@ -287,3 +287,8 @@ Do not claim "Europe's cheapest" or superiority in outcomes, legal reach, speed 
 
 ### Authority flywheel
 Owned facts -> external corroboration -> AI/search discovery -> traffic -> claims -> genuine reviews/case evidence -> stronger external authority -> more discovery.
+
+
+## 2026-10-14 — CRITICAL CURRENT HANDOVER
+
+Read `docs/checkpoints/2026-10-14-critical-continuity.md` FIRST. It preserves the exact PR #11 security work, production vs preview flight-lookup failure, Supabase audit, 70/20/10 method, customer acquisition priorities and KL/KT paid creative test. This dated pointer supersedes historical 'immediate next' sections above; no history was deleted. Do not privatize production bucket until all legacy document links and onboarding are validated.

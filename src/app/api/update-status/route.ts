@@ -1,3 +1,5 @@
+import { cookies } from 'next/headers';
+import { validAdminSession } from '@/lib/adminSession';
 import { NextResponse } from 'next/server';
 import { getClaimById, updateClaimStatus, type Claim } from '@/lib/claims';
 import { sendStatusEmail } from '@/lib/statusEmail';
@@ -13,6 +15,8 @@ type AllowedStatus =
   | 'rejected';
 
 export async function POST(req: Request) {
+  const cookie = (await cookies()).get('admin_session')?.value;
+  if (!(await validAdminSession(cookie, process.env.ADMIN_PASSWORD))) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   try {
     const body = await req.json();
     const { id, status } = body as { id?: string; status?: string };

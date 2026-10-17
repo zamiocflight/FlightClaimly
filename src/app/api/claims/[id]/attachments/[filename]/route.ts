@@ -1,3 +1,5 @@
+import { cookies } from 'next/headers';
+import { validAdminSession } from '@/lib/adminSession';
 // src/app/api/claims/[id]/attachments/[filename]/route.ts
 export const runtime = 'nodejs';
 
@@ -11,6 +13,8 @@ export async function GET(
   _req: Request,
   ctx: { params: Promise<{ id: string; filename: string }> }
 ) {
+  const cookie = (await cookies()).get('admin_session')?.value;
+  if (!(await validAdminSession(cookie, process.env.ADMIN_PASSWORD))) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   try {
     const { id, filename } = await ctx.params;
     const claims = await getClaims();

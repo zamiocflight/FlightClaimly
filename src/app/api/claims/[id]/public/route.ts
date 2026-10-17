@@ -45,14 +45,14 @@ export async function GET(
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
 
-    // Token är frivillig – men om båda finns, verifiera
+    // Public claim data is private: a valid viewer token is mandatory.
     const claimToken =
       (claim as any).publicToken ??
       (claim as any).viewerToken ??
       undefined;
 
-    if (claimToken && tokenParam && tokenParam !== claimToken) {
-      console.warn('[public-claim] Token mismatch', { id, tokenParam });
+    if (!claimToken || !tokenParam || tokenParam !== claimToken) {
+      console.warn('[public-claim] Invalid viewer token');
       return NextResponse.json({ error: 'Invalid token' }, { status: 400 });
     }
 

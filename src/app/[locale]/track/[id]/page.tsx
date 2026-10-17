@@ -158,6 +158,22 @@ export default function TrackPage({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [claim, setClaim] = useState<PublicClaim | null>(null);
+  const [recoveryEmail, setRecoveryEmail] = useState('');
+  const [recoveryState, setRecoveryState] = useState<'idle' | 'sending' | 'sent' | 'failed'>('idle');
+  const requestNewLink = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!recoveryEmail.trim() || recoveryState === 'sending') return;
+    setRecoveryState('sending');
+    try {
+      const response = await fetch('/api/send-track-link', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: recoveryEmail.trim() }),
+      });
+      setRecoveryState(response.ok ? 'sent' : 'failed');
+    } catch {
+      setRecoveryState('failed');
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -219,6 +235,16 @@ export default function TrackPage({
             {error ?? t.errorGeneric}
           </p>
           <p className="text-xs text-slate-500 mb-4">{t.errorHelpText}</p>
+          <div className="mb-5 rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <p className="text-sm font-medium text-slate-900 mb-2">{lang === 'sv' ? 'Få en ny säker spårningslänk' : 'Get a new secure tracking link'}</p>
+            <p className="text-xs text-slate-600 mb-3">{lang === 'sv' ? 'Ange e-postadressen som användes för ärendet. Om vi hittar ett ärende skickar vi en ny länk dit.' : 'Enter the email address used for your claim. If we find a matching claim, we will email you a new link.'}</p>
+            <form onSubmit={requestNewLink} className="space-y-2">
+              <input type="email" required autoComplete="email" value={recoveryEmail} onChange={e => setRecoveryEmail(e.target.value)} placeholder={lang === 'sv' ? 'Din e-postadress' : 'Your email address'} className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900" />
+              <button type="submit" disabled={recoveryState === 'sending' || recoveryState === 'sent'} className="w-full rounded-md bg-slate-900 px-3 py-2 text-sm font-semibold text-white disabled:opacity-60">{recoveryState === 'sending' ? (lang === 'sv' ? 'Skickar…' : 'Sending…') : (lang === 'sv' ? 'Skicka säker länk' : 'Email secure link')}</button>
+            </form>
+            {recoveryState === 'sent' && <p role="status" className="mt-2 text-xs text-slate-700">{lang === 'sv' ? 'Om adressen matchar ett ärende kommer en länk via e-post.' : 'If the address matches a claim, a link will arrive by email.'}</p>}
+            {recoveryState === 'failed' && <p role="alert" className="mt-2 text-xs text-red-700">{lang === 'sv' ? 'Kunde inte skicka just nu. Försök igen senare.' : 'Unable to send right now. Please try again later.'}</p>}
+          </div>
           <Link
             href="/"
             className="inline-flex items-center justify-center rounded-md bg-slate-900 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-slate-800"

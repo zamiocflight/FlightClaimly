@@ -1,3 +1,5 @@
+import { cookies } from 'next/headers';
+import { validAdminSession } from '@/lib/adminSession';
 // src/app/api/claims/[id]/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { getClaimById, updateClaimStatus, type Claim } from '@/lib/claims';
@@ -24,6 +26,8 @@ export async function GET(
   _req: NextRequest,
   context: { params: Promise<{ id: string }> },
 ) {
+  const cookie = (await cookies()).get('admin_session')?.value;
+  if (!(await validAdminSession(cookie, process.env.ADMIN_PASSWORD))) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   try {
     const { id: rawId } = await context.params;
     const id = decodeURIComponent(rawId);
@@ -46,6 +50,8 @@ export async function PATCH(
   req: NextRequest,
   context: { params: Promise<{ id: string }> },
 ) {
+  const cookie = (await cookies()).get('admin_session')?.value;
+  if (!(await validAdminSession(cookie, process.env.ADMIN_PASSWORD))) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   try {
     const { id: rawId } = await context.params;
     const id = decodeURIComponent(rawId);

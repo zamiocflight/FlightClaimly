@@ -34,25 +34,42 @@ export async function POST(req: Request) {
     }
 
     const claimId = latest.received_at as string;
-    const viewerToken = (latest.viewer_token as string) || null;
+    let viewerToken = (latest.viewer_token as string) || null;
+    if (!viewerToken) {
+      const generatedToken = crypto.randomUUID() + crypto.randomUUID();
+      const { data: tokenRow, error: tokenError } = await sb
+        .from('claims')
+        .update({ viewer_token: generatedToken, viewer_token_created_at: new Date().toISOString() })
+        .eq('received_at', claimId)
+        .is('viewer_token', null)
+        .select('viewer_token')
+        .maybeSingle();
+      if (tokenError) throw tokenError;
+      // Concurrent recovery requests may have already created the token.
+      if (tokenRow?.viewer_token) {
+        viewerToken = tokenRow.viewer_token;
+      } else {
+        const { data: existingTokenRow, error: existingTokenError } = await sb
+          .from('claims').select('viewer_token').eq('received_at', claimId).single();
+        if (existingTokenError || !existingTokenRow?.viewer_token) throw existingTokenError || new Error('TRACK_TOKEN_MISSING');
+        viewerToken = existingTokenRow.viewer_token;
+      }
+    }
 
     // 🔹 Locale: från claim → fallback en
     const locale = (latest.locale as string) || 'en';
 
-    const origin =
-      process.env.NEXT_PUBLIC_APP_URL ||
-      req.headers.get('origin') ||
-      'http://localhost:3000';
+    const origin = process.env.NEXT_PUBLIC_APP_URL || 'https://www.flightclaimly.com';
 
     const base = origin.replace(/\/$/, '');
     const trackUrl = viewerToken
       ? `${base}/${locale}/track/${claimId}?t=${encodeURIComponent(viewerToken)}`
       : `${base}/${locale}/track/${claimId}`;
 
-    console.log('Skickar track-länk till', email, '=>', trackUrl);
+    // Never log claim tokens or customer tracking URLs.
 
-    await resend.emails.send({
-      from: 'FlightClaimly <onboarding@resend.dev>',
+    const { error: sendError } = await resend.emails.send({
+      from: 'FlightClaimly <info@flightclaimly.com>',
       to: email,
       subject: 'Följ ditt ärende hos FlightClaimly',
       html: `
@@ -63,6 +80,11 @@ export async function POST(req: Request) {
         <p>Vänliga hälsningar,<br/>FlightClaimly</p>
       `,
     });
+
+    if (sendError) {
+      console.error('Track link email delivery failed:', sendError.message);
+      return NextResponse.json({ error: 'EMAIL_DELIVERY_FAILED' }, { status: 502 });
+    }
 
     return NextResponse.json({
       ok: true,

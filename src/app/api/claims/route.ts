@@ -78,16 +78,12 @@ if (!flightNumber || !date || !from || !to || !name) {
 
     // tracking-id (uuid)
     const id = crypto.randomUUID();
-console.log("DEBUG BEFORE ADDCLAIM:", {
-  address,
-  city,
-  postalCode,
-  country,
-  phone,
-});
+    const viewerToken = crypto.randomUUID() + crypto.randomUUID();
     // Spara claim
 const claim = await addClaim({
   id,
+  viewerToken,
+  viewerTokenCreatedAt: new Date().toISOString(),
   flightNumber,
   date,
   from,
@@ -118,14 +114,14 @@ const claim = await addClaim({
   locale
 );
 
-    console.log('✅ /api/claims – NYTT ärende skapat i Supabase:', claim);
+
 
     // (valfritt men nice för UI/debug)
     const base =
       process.env.NEXT_PUBLIC_APP_URL ||
       req.headers.get('origin') ||
       'http://localhost:3000';
-    const trackingUrl = `${String(base).replace(/\/$/, '')}/${locale}/track/${claim.id}`;
+    const trackingUrl = `${String(base).replace(/\/$/, '')}/${locale}/track/${claim.id}?t=${encodeURIComponent(viewerToken)}`;
 
 await sendClaimNotificationEmail({
   claim,
@@ -143,6 +139,7 @@ await sendClaimNotificationEmail({
 
     return NextResponse.json({
       id: claim.id,
+      viewerToken,
       precheck,
       trackingUrl,
       locale,
