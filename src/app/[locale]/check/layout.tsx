@@ -497,7 +497,7 @@ if (isFinish) {
     const previous = previousContinueState.current;
     previousContinueState.current = { pathname, enabled: canContinue };
     if (!previous || previous.pathname !== pathname || previous.enabled || !canContinue) return;
-    if (!isDirect && !isVerify) return;
+    if (!isVerify) return;
 
     const frame = window.requestAnimationFrame(() => {
       const button = continueButtonRef.current;
@@ -609,6 +609,7 @@ if (isFinish) {
 
               <button
                 ref={continueButtonRef}
+                data-flightclaimly-continue="desktop"
                 type="button"
                 disabled={!canContinue || isSubmitting}
 onClick={async () => {
