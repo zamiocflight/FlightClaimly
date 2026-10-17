@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -419,6 +419,9 @@ if (isFinish) {
   })();
 
   // --- canContinue mapping (requires nextHref) ---
+  const continueButtonRef = useRef<HTMLButtonElement>(null);
+  const previousContinueState = useRef<{ pathname: string; enabled: boolean } | null>(null);
+
   const canContinue = Boolean(nextHref) && (() => {
     if (isDirectOrLayover) {
       return choice === "direct" || (choice === "itinerary" && layoversValid);
@@ -489,6 +492,25 @@ if (isFinish) {
   })();
 
   
+  // Keep the button in view only when a choice enables it, not on page load.
+  useEffect(() => {
+    const previous = previousContinueState.current;
+    previousContinueState.current = { pathname, enabled: canContinue };
+    if (!previous || previous.pathname !== pathname || previous.enabled || !canContinue) return;
+    if (!isVerify) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      const button = continueButtonRef.current;
+      if (!button) return;
+      const rect = button.getBoundingClientRect();
+      const margin = 24;
+      if (rect.top >= margin && rect.bottom <= window.innerHeight - margin) return;
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      button.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "nearest" });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [canContinue, pathname, isDirect, isVerify]);
+
   return (
   <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-[#F4F5F7] via-[#F1F3F6] to-[#ECEFF3]">
       <div className="relative h-screen md:flex">
@@ -586,6 +608,8 @@ if (isFinish) {
               </button>
 
               <button
+                ref={continueButtonRef}
+                data-flightclaimly-continue="desktop"
                 type="button"
                 disabled={!canContinue || isSubmitting}
 onClick={async () => {

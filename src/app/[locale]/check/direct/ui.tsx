@@ -265,6 +265,21 @@ function getSelectedFlightNumber() {
     (selectedFlightId !== MANUAL_ID || manualFlightNumber.trim())
 );
 
+const previousValid = useRef(false);
+useEffect(() => {
+  const becameValid = directValid && !previousValid.current;
+  previousValid.current = directValid;
+  if (!becameValid) return;
+  const timer = window.setTimeout(() => {
+    const button = document.querySelector('[data-flightclaimly-continue="desktop"]');
+    if (!button || window.innerWidth < 768) return;
+    const bottom = button.getBoundingClientRect().bottom;
+    const delta = bottom - (window.innerHeight - 110);
+    if (delta > 0) window.scrollBy({ top: delta, behavior: "smooth" });
+  }, 150);
+  return () => window.clearTimeout(timer);
+}, [directValid]);
+
 useEffect(() => {
   const qs = new URLSearchParams(sp.toString());
 
