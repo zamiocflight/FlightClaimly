@@ -433,7 +433,6 @@ const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
             type="button"
             onClick={() => {
               setConfirm('yes');
-              window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
             }}
             className={[
               "w-full rounded-lg border px-4 py-4 text-left transition",
@@ -464,7 +463,6 @@ const actualArrival = result?.actualArrival || result?.scheduledArrival || "";
             type="button"
             onClick={() => {
               setConfirm('no');
-              window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
             }}
             className={[
               "w-full rounded-lg border px-4 py-4 text-left transition",
